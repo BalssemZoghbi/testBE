@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ProjetController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,3 +17,16 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/users', UserController::class.'@index');
+Route::post('/user/create', UserController::class.'@store')->name('user.store');
+Route::put('/user/update/{id}', UserController::class.'@updatesore')->name('user.updatestore');
+Route::get('/user/{id}', UserController::class.'@show')->name('user.show');
+Route::delete('/user/delete/{id}', UserController::class.'@delete')->name('user.delete');
+
+
+Route::get('/projets',[ProjetController::class ,'getProjets']);
+Route::post('/projets/create',[ProjetController::class ,'storeProjet']);
+Route::get('/projets/{id}', [ProjetController::class ,'showProjet']);
+Route::put('/projets/edit/{id}', [ProjetController::class ,'editProjet']);
+Route::delete('/projets/delete/{id}', [ProjetController::class ,'deleteProjet']);
