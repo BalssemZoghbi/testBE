@@ -8,21 +8,26 @@ const apiClient = axios.create({
   },
 });
 
-
 export default {
   getProjets() {
     return apiClient.get("/projets");
   },
+  getProjetspaginate() {
+    return apiClient.get("/projets/pagination");
+  },
   getProjetById(id) {
-    return apiClient.get("/projets/"+id);
+    return apiClient.get("/projets/" + id);
   },
   deleteProjet(id) {
-    return apiClient.delete("/projets/delete/"+id);
+    return apiClient.delete("/projets/delete/" + id);
   },
   createProjet(data) {
-    return apiClient.post("/projets/create",data);
+    return apiClient.post("/projets/create", data);
   },
-  updateProjet(id,data) {
-    return apiClient.put("/projets/edit/"+id,data);
+  updateProjet(id, data) {
+    return apiClient.put("/projets/edit/" + id, data);
+  },
+  searchProjet(query) {
+    return apiClient.get("/projets/search/" + query);
   },
 };

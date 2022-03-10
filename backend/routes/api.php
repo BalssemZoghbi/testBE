@@ -24,8 +24,9 @@ Route::put('/user/update/{id}', UserController::class.'@updatesore')->name('user
 Route::get('/user/{id}', UserController::class.'@show')->name('user.show');
 Route::delete('/user/delete/{id}', UserController::class.'@delete')->name('user.delete');
 
-
 Route::get('/projets',[ProjetController::class ,'getProjets']);
+Route::get('/projets/search/{query}',[ProjetController::class ,'getsearch']);
+Route::get('/projets/pagination',[ProjetController::class ,'paginateProjets']);
 Route::post('/projets/create',[ProjetController::class ,'storeProjet']);
 Route::get('/projets/{id}', [ProjetController::class ,'showProjet']);
 Route::put('/projets/edit/{id}', [ProjetController::class ,'editProjet']);

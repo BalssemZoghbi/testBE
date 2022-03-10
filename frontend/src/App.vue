@@ -1,22 +1,5 @@
 <template>
   <div>
-    <nav class="nav justify-content-center" style="background-color: #c6deed">
-      <ul class="nav">
-        <img src="./assets/sacem.png" />
-
-        <li class="nav-item">
-          <router-link class="nav-link active" aria-current="page" to="/"
-            >Projet</router-link
-          >
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" to="/about">Crée</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" to="/about">Importer</router-link>
-        </li>
-      </ul>
-    </nav>
     <router-view />
   </div>
 </template>
@@ -42,9 +25,4 @@
 #nav a.router-link-exact-active {
   color: #42b983;
 } */
-img {
-  position: relative;
-  margin-bottom: 5%;
-  right: 130%;
-}
 </style>
