@@ -12,17 +12,10 @@ class ProjetController extends Controller
     {
         $projets =Projet::all();
         return ProjetResource::collection($projets);
-
     }
+
     public function storeProjet(Request $request){
-        // request()->validate([
-        //     'appareil'=>'required',
-        //     'reference'=>'required',
-        //     'elaborateur'=>'required',
-        //     'client'=>'required',
-        //     'refClient'=>'required'
-        // ]);
-        // dd($request->appareil);
+
            $projet= Projet::create([
                 'appareil' => $request->appareil,
                 'reference' =>$request->reference,
@@ -65,5 +58,16 @@ class ProjetController extends Controller
         if($projet->delete()){
             return new ProjetResource($projet);
         }
+    }
+    public function paginateProjets()
+    {
+        $projets =Projet::paginate(10);
+        return ProjetResource::collection($projets);
+    }
+    public function getsearch($query)
+    {
+        // $projets =Projet::where('reference',$query)->get();
+        $projets =Projet::where('reference','LIKE','%'.$query.'%')->get();
+        return ProjetResource::collection($projets);
     }
 }
