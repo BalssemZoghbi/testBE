@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProjetController;
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +32,11 @@ Route::post('/projets/create',[ProjetController::class ,'storeProjet']);
 Route::get('/projets/{id}', [ProjetController::class ,'showProjet']);
 Route::put('/projets/edit/{id}', [ProjetController::class ,'editProjet']);
 Route::delete('/projets/delete/{id}', [ProjetController::class ,'deleteProjet']);
+
+Route::group(['middleware' => 'auth:sanctum'], function(){
+    //All secure URL's
+
+    });
+
+
+Route::post("login",[UserController::class,'index']);
