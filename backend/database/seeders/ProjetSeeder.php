@@ -4,15 +4,15 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Projet;
-class DatabaseSeeder extends Seeder
+class ProjetSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      *
      * @return void
      */
     public function run()
     {
-       Projet::factory(10)->create();
+       Projet::factory()->count(10)->create();
     }
 }

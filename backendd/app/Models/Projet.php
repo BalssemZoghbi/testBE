@@ -11,7 +11,6 @@ class Projet extends Model
     protected $fillable=
     ['appareil',
     'reference',
-    'elaborateur',
     'client',
     'refClient',
     'temperatureMax',

@@ -19,9 +19,18 @@ class ProjetController extends Controller
            $projet= Projet::create([
                 'appareil' => $request->appareil,
                 'reference' =>$request->reference,
-                'elaborateur' =>$request->elaborateur,
                 'client' =>$request->client,
-                'refClient' =>$request->refClient
+                'refClient' =>$request->refClient,
+                'temperatureMax' => $request->temperatureMax,
+                'attitudeMax' =>$request->attitudeMax,
+                'type' =>$request->type,
+                'remplissage' => $request->remplissage,
+                'installation' =>$request->installation,
+                'echangeurs' =>$request->echangeurs,
+                'dielectrique' =>$request->dielectrique,
+                'fonctionnement' =>$request->fonctionnement,
+                'refroidissement' =>$request->refroidissement
+                
             ]);
 
             if($projet->save()){
@@ -35,19 +44,27 @@ class ProjetController extends Controller
     }
     public function editProjet($id, Request $request){
         $projet= Projet::FindOrFail($id);
-        request()->validate([
-            'appareil'=>'required',
-            'reference'=>'required',
-            'elaborateur'=>'required',
-            'client'=>'required',
-            'refClient'=>'required'
-        ]);
+        // request()->validate([
+        //     'appareil'=>'required',
+        //     'reference'=>'required',
+        //     'elaborateur'=>'required',
+        //     'client'=>'required',
+        //     'refClient'=>'required'
+        // ]);
         $projet->update([
             'appareil' => $request->appareil,
             'reference' =>$request->reference,
             'client' =>$request->client,
-            'elaborateur' =>$request->elaborateur,
-            'refClient' =>$request->refClient
+            'refClient' =>$request->refClient,
+            'temperatureMax' => $request->temperatureMax,
+            'attitudeMax' =>$request->attitudeMax,
+            'type' =>$request->type,
+            'remplissage' => $request->remplissage,
+            'installation' =>$request->installation,
+            'echangeurs' =>$request->echangeurs,
+            'dielectrique' =>$request->dielectrique,
+            'fonctionnement' =>$request->fonctionnement,
+            'refroidissement' =>$request->refroidissement
         ]);
         if($projet->save()){
             return new ProjetResource($projet);

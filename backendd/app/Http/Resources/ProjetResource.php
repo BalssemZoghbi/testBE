@@ -18,7 +18,6 @@ class ProjetResource extends JsonResource
             'id' => $this->id,
             'appareil' => $this->appareil,
             'reference' => $this->reference,
-            'elaborateur' => $this->elaborateur,
             'client' => $this->client,
             'refClient' => $this->refClient,
             'temperatureMax'=> $this->temperatureMax,

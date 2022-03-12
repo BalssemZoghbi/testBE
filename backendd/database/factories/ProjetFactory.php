@@ -15,18 +15,18 @@ class ProjetFactory extends Factory
     public function definition()
     {
         return [
-            'appreil' => $this->faker->word,
+            'appareil' => $this->faker->word,
             'reference' => $this->faker->word,
             'temperatureMax' => $this->faker->randomDigit,
             'attitudeMax' => $this->faker->randomDigit,
-            'type' => $faker-> randomElement(),
-            'remplissage' => $faker-> randomElement(),
-            'installation' => $faker-> randomElement(),
-            'montage' => $faker-> randomElement(),
-            'echangeurs' => $faker-> randomElement(),
-            'dielectrique' => $faker-> randomElement(),
-            'fonctionnement' => $faker-> randomElement(),
-            'refroidissement' => $faker-> randomElement(),
+            'type' => $this->faker-> randomElement(['cabine','poteau','h61','h59','sec']),
+            'remplissage' => $this->faker-> randomElement(['à matelas d`air','integral','respirant']),
+            'installation' => $this->faker-> randomElement(['interieure', 'exterieure','interieur&exterieure']),
+            'montage' => $this->faker-> randomElement( ['sur galets','sur pieds']),
+            'echangeurs' => $this->faker-> randomElement(['ondes','radiateurs','parois']),
+            'dielectrique' => $this->faker-> randomElement(['huile biodegradable','huile minerale inhibée','huile siliconne','huile minerale non inhibée']),
+            'fonctionnement' => $this->faker-> randomElement(['abaisseur','elevateur','isolement']),
+            'refroidissement' => $this->faker-> randomElement(['onan','onaf']),
             'client' => $this->faker->word,
             'refClient' => $this->faker->word,
             'created_at' => now()

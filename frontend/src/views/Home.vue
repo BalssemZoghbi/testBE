@@ -3,7 +3,7 @@
     <navbarHome />
     <div class="home">
       <div class="container event py-5" style="margin-left: 10%">
-        <form class="d-flex" style="maring-left:-6%" >
+        <form class="d-flex" style="maring-left: -6%">
           <input
             class="form-control me-2"
             type="search"
@@ -18,14 +18,13 @@
             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
           </svg></span> -->
         </form>
-        <div v-for="projet in filtered " :key="projet.id" :projet="projet">
-          <div class="projet-card card" >
+        <div v-for="projet in filtered" :key="projet.id" :projet="projet">
+          <div class="projet-card card">
             <div class="card-body">
               <router-link class="nav-link" :to="'/projet/' + projet.id">
                 {{ projet.reference }}
-                
               </router-link>
-              
+
               <div class="button" style="margin-top: -7%">
                 <button class="btn" v-on:click="deleteprojet(projet.id)">
                   <svg
@@ -70,19 +69,25 @@
         </div>
         <br />
 
-        <nav aria-label="Page navigation example" >
-          <ul class="pagination"  >
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
             <li class="page-item">
               <a class="page-link" href="#" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
-                <span class="sr-only" >Previous</span>
+                <span class="sr-only">Previous</span>
               </a>
             </li>
-              <!-- <jw-pagination :pageSize=20 :items="exampleItems" @changePage="onChangePage"> -->
-            <li class="page-item"> <a class="page-link" href="#" @page-change="onPageChange(1)">1</a></li>
-            <li class="page-item"><a class="page-link" href="#" @page-change="onPageChange(2)">2</a></li>
-            <li class="page-item"><a class="page-link" href="#" @page-change="onPageChange(3)">3</a></li>
-             <!-- </jw-pagination> -->
+            <!-- <jw-pagination :pageSize=20 :items="exampleItems" @changePage="onChangePage"> -->
+            <li class="page-item">
+              <a class="page-link" href="#" @page-change="onPageChange(1)">1</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#" @page-change="onPageChange(2)">2</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#" @page-change="onPageChange(3)">3</a>
+            </li>
+            <!-- </jw-pagination> -->
             <li class="page-item">
               <a class="page-link" href="#" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
@@ -90,7 +95,7 @@
               </a>
             </li>
           </ul>
-          </nav> 
+        </nav>
       </div>
     </div>
   </div>
@@ -110,7 +115,7 @@ export default {
       projets: {},
       // exampleItems,
       // pageOfItems: [],
-      query:"",
+      query: "",
       // currentPage: 1,
       // rows: 200,
       // perPage:15,
@@ -120,11 +125,12 @@ export default {
     this.getprojet();
   },
   computed: {
-  filtered() {
-    return this.projets.filter(projet => projet.reference.includes(this.query));
-  }
-  
-},
+    filtered() {
+      return this.projets.filter((projet) =>
+        projet.reference.includes(this.query)
+      );
+    },
+  },
 
   methods: {
     deleteprojet(id) {
@@ -138,8 +144,9 @@ export default {
     //   });
     // },
     getprojet() {
-      ProjetService.getProjetspaginate().then((resp) => {
+      ProjetService.getProjets().then((resp) => {
         this.projets = resp.data.data;
+        console.log(resp);
       });
     },
     // onChangePage(pageOfItems) {
@@ -162,7 +169,7 @@ export default {
   cursor: pointer;
   border: 1px solid #c6deed;
   background: #ffffff;
-    /* background: #c6deed; */
+  /* background: #c6deed; */
 
   box-shadow: 0px 1px 19px rgba(198, 222, 237, 0.25);
   border-radius: 12px;
