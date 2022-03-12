@@ -22,8 +22,10 @@
           <div class="projet-card card" >
             <div class="card-body">
               <router-link class="nav-link" :to="'/projet/' + projet.id">
-                <p style="margin-top: -4%">{{ projet.reference }}</p>
+                {{ projet.reference }}
+                
               </router-link>
+              
               <div class="button" style="margin-top: -7%">
                 <button class="btn" v-on:click="deleteprojet(projet.id)">
                   <svg
@@ -156,13 +158,15 @@ export default {
 }
 .projet-card {
   margin-top: 20px;
-  padding: 20px;
+  margin-left: 70px;
   cursor: pointer;
-  border: 1px solid black;
+  border: 1px solid #c6deed;
   background: #ffffff;
+    /* background: #c6deed; */
+
   box-shadow: 0px 1px 19px rgba(198, 222, 237, 0.25);
-  border-radius: 40px;
-  width: 90%;
+  border-radius: 12px;
+  width: 80%;
   /* left: 175px; */
   /* top: 12%; */
   height: 50px;
