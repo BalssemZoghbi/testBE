@@ -4,26 +4,46 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+use App\Models\Projet;
 class UserController extends Controller
 {
-    function index(Request $request)
+    public function index()
     {
-        $user= User::where('email', $request->email)->first();
-        // print_r($data);
-            if (!$user || !Hash::check($request->password, $user->password)) {
-                return response([
-                    'message' => ['These credentials do not match our records.']
-                ], 404);
-            }
+        $users = User::all();
+        return response()->json($users);
+    }
+    public function show($id)
+    {
+         $users=User::find($id);
+        //  $projets=DB::table('projets')->where ('user_id' , $id)->get();
+        //  $projets=Projet::find($id,'user_id')->get();
+        return response()->json($users);
+    }
 
-             $token = $user->createToken('my-app-token')->plainTextToken;
+    public function store(Request $request){
+       $user= User::create([
+            'name' => $request->name,
+            'email' =>$request->email,
+            'password' =>$request->password
+        ]);
+        if($user->save){
+        return response()->json($user);}
+    }
 
-            $response = [
-                'user' => $user,
-                'token' => $token
-            ];
+    public function updatestore($id,Request $request){
+    $user=User::find($id);
+        $user->update([
+            'name' => $request->name,
+            'email' =>$request->email,
+            'password' =>$request->password
+        ]);
+        return response()->json($user);
+    }
 
-             return response($response, 201);
+    public function delete($id){
+        $user=User::find($id);
+        $user->delete();
+        return response()->json();
     }
 }
