@@ -44,9 +44,6 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
     Route::get('/user/delete/{id}', UserController::class.'@delete');
 
     });
-    Route::post('/user/create', UserController::class.'@store');
-    Route::put('/user/update/{id}', UserController::class.'@updatesore');
-    Route::get('/user/{id}', UserController::class.'@show');
-    Route::get('/user/delete/{id}', UserController::class.'@delete');
-Route::post("login",[AuthController::class,'index']);
-Route::post("register",[AuthController::class,'register']);
+
+Route::post("/register",[AuthController::class,'register']);
+Route::post("/login",[AuthController::class,'index']);

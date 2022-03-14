@@ -97,6 +97,8 @@
 <script>
 import ProjetService from "@/services/ProjetService.js";
 import navbarHome from "@/components/navbarHome";
+import {mapState} from 'vuex';
+
 // const exampleItems = [...Array(150).keys()].map(i => ({ id: (i+1), name: 'Item ' + (i+1) }));
 export default {
   name: "Home",
@@ -113,16 +115,25 @@ export default {
       // rows: 200,
       // perPage:15,
     };
+  }, 
+  computed: {
+  filtered() {
+    return this.projets.filter(projet => projet.reference.includes(this.query));
+  },
+    ...mapState({
+         user:'userInfos'
+       })
+},
+ mounted:function(){
+    console.log(this.$store.state.user);
+    if(this.$store.state.user.id==-1){
+      this.$router.push('/login');
+      return;
+    }
   },
   created() {
     this.getprojet();
   },
-  computed: {
-  filtered() {
-    return this.projets.filter(projet => projet.reference.includes(this.query));
-  }
-  
-},
 
   methods: {
     deleteprojet(id) {

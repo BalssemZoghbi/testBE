@@ -33,12 +33,12 @@
       />
     </div>
    
-    <button type="submit" class="btn btn-primary mb-3">login</button>
+    <button type="submit" @click="createAccount()" class="btn btn-primary mb-3" :class="{'disabled': !validateFields}" >register</button>
   </form>
 </template>
 
 <script>
-import AuthService from "@/services/AuthService.js";
+// import AuthService from "@/services/AuthService.js";
 export default {
   data() {
     return {
@@ -47,17 +47,31 @@ export default {
       password: ""
     };
   },
+  computed:{
+    validateFields:function(){
+      if(this.email!="" && this.name!="" && this.password!=""){
+        return true;
+      }else{
+        return false;
+      }
+    }
+  },
   methods: {
-    register() {
-      const user = {
-        id: undefined,
-        name: this.name,
-        password: this.password
-      };
-      AuthService.register(user).then(
-        (response) => (this.id = response.data.id)
-      );
-    //   this.$router.push({ name: "Home" });
+    createAccount() {
+      const self=this;
+      this.$store.dispatch('createAccount',{
+        name:this.name,
+        email:this.email,
+        password:this.password
+      })
+      .then(function(response){
+        console.log(response);
+         self.$router.push('/login');
+      })
+      .error(function(error){
+        console.log(error);
+      })
+      
     },
   },
 };

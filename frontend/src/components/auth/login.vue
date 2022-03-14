@@ -1,17 +1,8 @@
 <template>
-  <form v-on:submit.prevent="login">
+  <form v-on:submit.prevent="loginn">
     <h1>login</h1>
     <br />
-    <div class="mb-3">
-      <label for="name" class="form-label">name</label>
-      <input
-        class="form-control"
-        type="text"
-        placeholder="Appareil"
-        id="name"
-        v-model="name"
-      />
-    </div>
+
     <div class="mb-3">
       <label for="email" class="form-label">email</label>
       <input
@@ -33,31 +24,49 @@
       />
     </div>
    
-    <button type="submit" class="btn btn-primary mb-3">login</button>
+    <button type="submit" @click="login()" class="btn btn-primary mb-3" :class="{'disabled': !validateFields}" >
+      <span v-if="status=='loading'"> connexion en cours ..</span>
+      <span v-else> connexion</span>
+    </button>
   </form>
 </template>
 
 <script>
-import AuthService from "@/services/AuthService.js";
+import {mapState} from 'vuex';
 export default {
   data() {
     return {
-      name: "",
       email: "",
       password: ""
     };
   },
+  computed:{
+    validateFields:function(){
+      if(this.email!="" && this.password!=""){
+        return true;
+      }else{
+        return false;
+      }
+    },
+    ...mapState(['status'])
+
+  },
+ 
   methods: {
     login() {
-      const user = {
-        id: undefined,
-        name: this.name,
-        password: this.password
-      };
-      AuthService.login(user).then(
-        (response) => (this.id = response.data.id)
-      );
-      this.$router.push({ name: "Home" });
+      let self = this
+      this.$store.dispatch('login',{
+        email:this.email,
+        password:this.password
+      })
+      .then(function(response){
+        console.log(response);
+         self.$router.push('/');
+      })
+      .error(function(error){
+        console.log(error);
+      })
+      
     },
   },
 };
