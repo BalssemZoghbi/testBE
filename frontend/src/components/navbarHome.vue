@@ -20,12 +20,21 @@
       <li class="nav-item">
         <router-link class="nav-link" to="/about">Importer</router-link>
       </li>
+      <li class="nav-item">
+        <router-link class="nav-link" to="/login"> <button @click="logout()">logout</button> </router-link>
+      </li>
     </ul>
   </nav>
 </template>
 <script>
 export default {
   name: "navbarHome",
+  methods:{
+    logout:function(){
+      this.$store.commit('logout');
+      this.$router.push('/login');
+    }
+  }
 };
 </script>
 <style scoped>
