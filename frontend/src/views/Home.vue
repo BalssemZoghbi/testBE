@@ -1,7 +1,7 @@
 <template>
   <div>
     <navbarHome />
-        <div class="food">
+        <div class="projet">
          <div class="container">
             <div class="row">
                <div class="col-md-12">
@@ -14,11 +14,11 @@
             </div>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                <div class="col" v-for="projet in filtered" :key="projet.id" :projet="projet">
-                  <div class="food_box">
+                  <div class="projet_box">
                      <i><img src="../assets/trans.png" alt="#"/></i>
                      <router-link class="nav-link" :to="'/projet/' + projet.id"><h4>{{ projet.reference }}</h4> </router-link>
                      <br>
-                      <!-- <button class="btn">
+                      <button class="btn">
                   <router-link
                     class="nav-link"
                     :to="'/projet/update/' + projet.id"
@@ -40,10 +40,10 @@
                       />
                     </svg>
                   </router-link>
-                </button> -->
-                     <button class="btn btn-outline-light"  ><router-link :to="'/projet/update/' + projet.id" >edit</router-link></button>
-                     <button class="btn btn-outline-light" v-on:click="deleteprojet(projet.id)">delete</button> 
-                <!-- <button class="btn" v-on:click="deleteprojet(projet.id)">
+                </button>
+                     <!-- <button class="btn btn-outline-light"  ><router-link :to="'/projet/update/' + projet.id" >edit</router-link></button>
+                     <button class="btn btn-outline-light" v-on:click="deleteprojet(projet.id)">delete</button>  -->
+                <button class="btn" v-on:click="deleteprojet(projet.id)">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="35"
@@ -56,8 +56,8 @@
                       d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
                     />
                   </svg>
-                </button> -->
-                
+                </button>
+                 <!-- <button class="btn"><i class="fa-solid fa-file-import"></i> </button> -->
                   </div>
                </div>
             </div>
@@ -91,8 +91,7 @@
             </li>
           </ul>
         </nav>
-      <!-- end food -->
-      <!-- works -->
+      <!-- end projet -->
       <footer>
          <div class="footer">
             <div class="container">
@@ -106,7 +105,7 @@
                <div class="container">
                   <div class="row">
                      <div class="col-md-12">
-                        <p>Copyright 2019 All Right Reserved By <a href="https://html.design/"> Free Html Templates</a></p>
+                        <p> <a href="https://html.design/"> </a></p>
                      </div>
                   </div>
                </div>
@@ -179,7 +178,169 @@ export default {
   box-shadow: 0px 7px 4px rgba(58, 103, 218, 0.25);
   border-radius: 37px;
   width: 70%;
-  margin-left: 12%;
+  margin-left: 15%;
 }
+.form-control:focus {
+     border-color: #ffffff !important;
+     box-shadow: 0 0 0 .2rem rgba(255, 255, 255, .25);
+}
+
+.titlepage {
+     text-align: center;
+     padding-bottom: 60px;
+}
+
+.titlepage h2 {
+     font-size: 45px;
+     color: #5a2f27;
+     line-height: 55px;
+     font-weight: bold;
+     padding-bottom: 20px;
+}
+.yellow {
+     color: #3e93c3;
+     font-weight: bold;
+}
+
+.projet {
+     background: #fff;
+     margin: 90px 0;
+}
+
+.projet .titlepage span {
+     font-size: 17px;
+     line-height: 30px;
+     color: #000000;
+     font-weight: 501;
+     display: block;
+     padding: 0px 49px;
+}
+
+.projet .projet_box {
+     text-align: center;
+     background: rgb(35 133 235);
+     margin-bottom: 30px;
+     margin-top: 116px;
+     padding: 0px 30px 30px 30px;
+}
+
+.projet .projet_box:hover {
+     background: #3156fd !important;
+}
+
+.projet_box i img {
+     margin-top: -120px;
+}
+
+.projet .projet_box h4 {
+     font-family: 'Noto Serif', serif;
+     font-size: 20px;
+     line-height: 30px;
+     font-weight: 501;
+     padding-top: 30px;
+     padding-bottom: 0;
+     color: #fff;
+     padding-bottom: 10px;
+}
+
+.projet .projet_box p {
+     color: #fff;
+     font-size: 17px;
+     line-height: 33px;
+}
+.d_flex {
+     display: flex;
+     align-items: center;
+     flex-wrap: wrap;
+}
+ /* .titlepage h2 {
+     padding-bottom: 0;
+}
+.titlepage span {
+     font-size: 17px;
+     line-height: 30px;
+     color: #b3b1a6;
+     font-weight: 501;
+     display: block;
+} */
+
+.footer {
+     background: #fff;
+     padding-top: 85px;
+     text-align: center;
+}
+
+.footer .titlepage {
+     text-align: left;
+     padding-bottom: 10px;
+}
+
+.footer .titlepage h2 {
+     color: #e95d49;
+}
+
+.cont {
+     text-align: center;
+}
+
+.cont h3 {
+     color: #0e0d0d;
+     font-size: 45px;
+     line-height: 66px;
+     font-weight: 600;
+}
+
+.cont p {
+     color: #eda911;
+     font-size: 20px;
+     line-height: 30px;
+     padding-top: 10px;
+     font-weight: 501;
+     padding-bottom: 35px;
+}
+
+.sub_btn {
+     font-size: 17px;
+     transition: ease-in all 0.5s;
+     background-color: #000;
+     color: #fff;
+     width: 100%;
+     display: block;
+     font-weight: 500;
+     border-radius: 35px;
+     border: #fff solid 4px;
+     padding: 13px 0px;
+     max-width: 200px;
+     margin: 0 auto;
+}
+
+.sub_btn:hover {
+     background-color: #eda911;
+     transition: ease-in all 0.5s;
+     color: #fff;
+}
+
+.copyright {
+     margin-top: 90px;
+     padding: 20px 0px;
+     background-color: #3e93c3;
+}
+
+.copyright p {
+     color: #fff;
+     font-size: 18px;
+     line-height: 22px;
+     text-align: center;
+}
+
+.copyright a {
+     color: #fff;
+}
+
+.copyright a:hover {
+     color: #eda911;
+}
+
+
 
 </style>
