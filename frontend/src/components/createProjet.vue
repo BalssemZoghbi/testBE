@@ -1,4 +1,7 @@
 <template>
+<div>
+ <navbar2 />
+ <br>
   <form v-on:submit.prevent="storeprojet">
     <h1>Créer un nouveau projet</h1>
     <br />
@@ -54,11 +57,17 @@
     </div>
     <button type="submit" class="btn btn-primary mb-3">Créer</button>
   </form>
+  </div>
 </template>
 
 <script>
 import ProjetService from "@/services/ProjetService.js";
+import navbar2 from "@/components/navbar2";
 export default {
+  name: "createProjet",
+  components: {
+    navbar2,
+  },
   data() {
     return {
       appareil: "",
