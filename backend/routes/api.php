@@ -20,11 +20,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/users', UserController::class.'@index');
-Route::post('/user/create', UserController::class.'@store')->name('user.store');
-Route::put('/user/update/{id}', UserController::class.'@updatesore')->name('user.updatestore');
-Route::get('/user/{id}', UserController::class.'@show')->name('user.show');
-Route::delete('/user/delete/{id}', UserController::class.'@delete')->name('user.delete');
+Route::get('/users', [UserController::class,'index']);
+Route::post('/user/create', [UserController::class,'store']);
+Route::put('/user/update/{id}', [UserController::class,'updatestore']);
+Route::get('/user/{id}', [UserController::class,'show']);
+Route::delete('/user/delete/{id}', [UserController::class,'delete']);
 
 Route::get('/projets',[ProjetController::class ,'getProjets']);
 Route::get('/projets/search/{query}',[ProjetController::class ,'getsearch']);
@@ -37,11 +37,7 @@ Route::delete('/projets/delete/{id}', [ProjetController::class ,'deleteProjet'])
 Route::group(['middleware' => 'auth:sanctum'], function(){
     // Route::get('/projets',[ProjetController::class ,'getProjets']);
     Route::post('/logout',[AuthController::class ,'logout']);
-    Route::get('/users', UserController::class.'@index');
-    Route::post('/user/create', UserController::class.'@store');
-    Route::put('/user/update/{id}', UserController::class.'@updatesore');
-    Route::get('/user/{id}', UserController::class.'@show');
-    Route::get('/user/delete/{id}', UserController::class.'@delete');
+
 
     });
 
