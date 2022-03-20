@@ -17,9 +17,19 @@ class CreateProjetsTable extends Migration
             $table->id();
             $table->string('appareil');
             $table->string('reference');
-            $table->string('elaborateur');
             $table->string('client');
             $table->string('refClient');
+            $table->string('temperatureMax');
+            $table->string('attitudeMax');
+            $table->string('type');
+            $table->string('remplissage');
+            $table->string('installation');
+            $table->string('montage');
+            $table->string('echangeurs');
+            $table->string('dielectrique');
+            $table->string('fonctionnement');
+            $table->string('refroidissement');
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }

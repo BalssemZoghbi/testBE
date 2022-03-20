@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Projet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Resources\UserResource;
 use App\Http\Resources\ProjetResource;
 
 class ProjetController extends Controller
@@ -26,10 +28,12 @@ class ProjetController extends Controller
              'type' =>$request->type,
              'remplissage' => $request->remplissage,
              'installation' =>$request->installation,
+             'montage' =>$request->montage,
              'echangeurs' =>$request->echangeurs,
              'dielectrique' =>$request->dielectrique,
              'fonctionnement' =>$request->fonctionnement,
-             'refroidissement' =>$request->refroidissement
+             'refroidissement' =>$request->refroidissement,
+             'user_id' =>$request->user_id
          ]);
 
          if($projet->save()){
@@ -43,6 +47,7 @@ class ProjetController extends Controller
  }
  public function editProjet($id, Request $request){
      $projet= Projet::FindOrFail($id);
+
      // request()->validate([
      //     'appareil'=>'required',
      //     'reference'=>'required',
@@ -60,13 +65,24 @@ class ProjetController extends Controller
          'type' =>$request->type,
          'remplissage' => $request->remplissage,
          'installation' =>$request->installation,
+         'montage' =>$request->montage,
          'echangeurs' =>$request->echangeurs,
          'dielectrique' =>$request->dielectrique,
          'fonctionnement' =>$request->fonctionnement,
-         'refroidissement' =>$request->refroidissement
+         'refroidissement' =>$request->refroidissement,
+         'user_id' =>$request->user_id,
+
      ]);
+    //  $userid=DB::table('users')->id;
+    //  $user=DB::table('users')->where ($userid,'user_id')->get();
+
      if($projet->save()){
-         return new ProjetResource($projet);
+         return
+         new ProjetResource($projet);
+        //   [
+        //      new ProjetResource($projet),
+        //      new UserResource($user),
+        //     ];
      }
  }
     public function deleteProjet($id){
