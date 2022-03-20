@@ -29,6 +29,7 @@ class ProjetFactory extends Factory
             'refroidissement' => $this->faker-> randomElement(['onan','onaf']),
             'client' => $this->faker->word,
             'refClient' => $this->faker->word,
+            'user_id' => $this->faker->randomDigit(4,5),
             'created_at' => now()
         ];
     }
