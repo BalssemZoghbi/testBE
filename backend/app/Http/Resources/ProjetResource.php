@@ -18,9 +18,17 @@ class ProjetResource extends JsonResource
             'id' => $this->id,
             'appareil' => $this->appareil,
             'reference' => $this->reference,
-            'elaborateur' => $this->elaborateur,
             'client' => $this->client,
-            'refClient' => $this->refClient
+            'refClient' => $this->refClient,
+            'temperatureMax'=> $this->temperatureMax,
+            'attitudeMax'=> $this->attitudeMax,
+            'type'=> $this->type,
+            'remplissage'=> $this->remplissage,
+            'installation'=> $this->installation,
+            'echangeurs'=> $this->echangeurs,
+            'dielectrique'=> $this->dielectrique,
+            'fonctionnement'=> $this->fonctionnement,
+            'refroidissement'=> $this->refroidissement,
         ];
     }
 }

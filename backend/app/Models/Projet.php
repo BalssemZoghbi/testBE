@@ -8,5 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class Projet extends Model
 {
     use HasFactory;
-    protected $fillable=['appareil','reference','elaborateur','client','refClient'];
+    protected $fillable= [
+    'appareil',
+    'reference',
+    'client',
+    'refClient',
+    'temperatureMax',
+    'attitudeMax',
+    'type',
+    'remplissage',
+    'installation',
+    'echangeurs',
+    'dielectrique',
+    'fonctionnement',
+    'refroidissement',
+];
+
 }

@@ -32,16 +32,7 @@
         v-model="projet.client"
       />
     </div>
-    <div class="mb-3">
-      <label for="elaborateur" class="form-label">elaborateur</label>
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Elaborateur"
-        id="elaborateur"
-        v-model="projet.elaborateur"
-      />
-    </div>
+
     <div class="mb-3">
       <label for="refClient" class="form-label">refClient</label>
       <input
@@ -52,6 +43,97 @@
         v-model="projet.refClient"
       />
     </div>
+      <div class="mb-3">
+      <label for="temperatureMax" class="form-label">temperatureMax</label>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="temperatureMax"
+        id="temperatureMax"
+        v-model="projet.temperatureMax"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="attitudeMax" class="form-label">attitudeMax</label>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="attitudeMax"
+        id="attitudeMax"
+        v-model="projet.attitudeMax"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="type" class="form-label">type</label>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="type"
+        id="type"
+        v-model="projet.type"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="remplissage" class="form-label">remplissage</label>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="remplissage"
+        id="remplissage"
+        v-model="projet.remplissage"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="installation" class="form-label">installation</label>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="installation"
+        id="installation"
+        v-model="projet.installation"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="echangeurs" class="form-label">echangeurs</label>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="echangeurs"
+        id="echangeurs"
+        v-model="projet.echangeurs"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="dielectrique" class="form-label">dielectrique</label>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="dielectrique"
+        id="dielectrique"
+        v-model="projet.dielectrique"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="fonctionnement" class="form-label">fonctionnement</label>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="fonctionnement"
+        id="fonctionnement"
+        v-model="projet.fonctionnement"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="refroidissement" class="form-label">refroidissement</label>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="refroidissement"
+        id="refroidissement"
+        v-model="projet.refroidissement"
+      />
+    </div>
+
     <button type="submit" class="btn btn-primary mb-3">Changer</button>
   </form>
 </template>
@@ -64,11 +146,19 @@ export default {
   data() {
     return {
       projet: {
-        appareil: "",
-        reference: "",
-        client: "",
-        elaborateur: "",
-        refClient: "",
+      appareil: "",
+      reference: "",
+      client: "",
+      refClient: "",
+      temperatureMax: "",
+      attitudeMax: "",
+      type: "",
+      remplissage: "",
+      installation: "",
+      echangeurs: "",
+      dielectrique: "",
+      fonctionnement: "",
+      refroidissement: "",
       },
     };
   },
@@ -79,19 +169,30 @@ export default {
         appareil: this.projet.appareil,
         reference: this.projet.reference,
         client: this.projet.client,
-        elaborateur: this.projet.elaborateur,
         refClient: this.projet.refClient,
+        temperatureMax:this.projet.temperatureMax,
+        attitudeMax: this.projet.attitudeMax,
+        type: this.projet.type,
+        remplissage: this.projet.remplissage,
+        installation: this.projet.installation,
+        echangeurs: this.projet.echangeurs,
+        dielectrique: this.projet.dielectrique,
+        fonctionnement: this.projet.fonctionnement,
+        refroidissement: this.projet.refroidissement,
       };
       console.log(projets);
       ProjetService.updateProjet(this.$route.params.id, projets).then(
-        (response) => (this.id = response.data.id)
+        (response) => (this.id = response.data.id, console.log(response))
+       
       );
+       console.log(this.projets);
       this.$router.push({ name: "Home" });
     },
   },
   async mounted() {
     const result = await ProjetService.getProjetById(this.$route.params.id);
     this.projet = result.data.data;
+    console.log(this.projet);
   },
 };
 </script>
