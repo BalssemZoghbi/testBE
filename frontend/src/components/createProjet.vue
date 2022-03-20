@@ -95,6 +95,16 @@
       />
     </div>
     <div class="mb-3">
+      <label for="montage" class="form-label">montage</label>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="montage"
+        id="montage"
+        v-model="montage"
+      />
+    </div>
+    <div class="mb-3">
       <label for="echangeurs" class="form-label">echangeurs</label>
       <input
         class="form-control"
@@ -134,6 +144,16 @@
         v-model="refroidissement"
       />
     </div>
+    <div class="mb-3">
+      <label for="user_id" class="form-label">user_id</label>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="user_id"
+        id="user_id"
+        v-model="user_id"
+      />
+    </div>
 
     <button type="submit" class="btn btn-primary mb-3">Créer</button>
   </form>
@@ -153,10 +173,12 @@ export default {
       type: "",
       remplissage: "",
       installation: "",
+      montage: "",
       echangeurs: "",
       dielectrique: "",
       fonctionnement: "",
       refroidissement: "",
+      user_id: "",
     };
   },
   methods: {
@@ -172,10 +194,12 @@ export default {
         type: this.type,
         remplissage: this.remplissage,
         installation: this.installation,
+        montage: this.montage,
         echangeurs: this.echangeurs,
         dielectrique: this.dielectrique,
         fonctionnement: this.fonctionnement,
         refroidissement: this.refroidissement,
+        user_id: this.user_id,
       };
       ProjetService.createProjet(projet).then(
         (response) => (this.id = response.data.id)

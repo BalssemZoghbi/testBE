@@ -25,6 +25,7 @@ class ProjetResource extends JsonResource
             'type'=> $this->type,
             'remplissage'=> $this->remplissage,
             'installation'=> $this->installation,
+            'montage'=> $this->montage,
             'echangeurs'=> $this->echangeurs,
             'dielectrique'=> $this->dielectrique,
             'fonctionnement'=> $this->fonctionnement,

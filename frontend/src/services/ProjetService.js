@@ -25,6 +25,7 @@ export default {
     return apiClient.post("/projets/create", data);
   },
   updateProjet(id, data) {
+    // console.log(id);
     return apiClient.put("/projets/edit/" + id, data);
   },
   searchProjet(query) {

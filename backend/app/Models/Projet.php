@@ -18,6 +18,7 @@ class Projet extends Model
     'type',
     'remplissage',
     'installation',
+    'montage',
     'echangeurs',
     'dielectrique',
     'fonctionnement',

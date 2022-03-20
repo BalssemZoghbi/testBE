@@ -94,6 +94,16 @@
       />
     </div>
     <div class="mb-3">
+      <label for="montage" class="form-label">montage</label>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="montage"
+        id="montage"
+        v-model="projet.montage"
+      />
+    </div>
+    <div class="mb-3">
       <label for="echangeurs" class="form-label">echangeurs</label>
       <input
         class="form-control"
@@ -133,6 +143,16 @@
         v-model="projet.refroidissement"
       />
     </div>
+    <div class="mb-3">
+      <label for="user_id" class="form-label">user_id</label>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="user_id"
+        id="user_id"
+        v-model="projet.user_id"
+      />
+    </div>
 
     <button type="submit" class="btn btn-primary mb-3">Changer</button>
   </form>
@@ -155,10 +175,12 @@ export default {
       type: "",
       remplissage: "",
       installation: "",
+      montage: "",
       echangeurs: "",
       dielectrique: "",
       fonctionnement: "",
       refroidissement: "",
+      user_id: "",
       },
     };
   },
@@ -175,24 +197,23 @@ export default {
         type: this.projet.type,
         remplissage: this.projet.remplissage,
         installation: this.projet.installation,
+        montage: this.projet.montage,
         echangeurs: this.projet.echangeurs,
         dielectrique: this.projet.dielectrique,
         fonctionnement: this.projet.fonctionnement,
         refroidissement: this.projet.refroidissement,
+        user_id: this.projet.user_id,
       };
-      console.log(projets);
       ProjetService.updateProjet(this.$route.params.id, projets).then(
-        (response) => (this.id = response.data.id, console.log(response))
-       
+        (response) => (this.id = response.data.id, console.log(response.data))
+        
       );
-       console.log(this.projets);
       this.$router.push({ name: "Home" });
     },
   },
   async mounted() {
     const result = await ProjetService.getProjetById(this.$route.params.id);
     this.projet = result.data.data;
-    console.log(this.projet);
   },
 };
 </script>
