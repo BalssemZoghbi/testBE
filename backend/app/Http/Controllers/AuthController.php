@@ -26,15 +26,16 @@ class AuthController extends Controller
         // }
     }
     function logout(Request $request){
-        dd($request->user());
+        // dd($request->user());
        return $request->user()->currentAccessToken()->delete();
     }
     function register(Request $request){
         // if(strpos($request->email, '@sacemindustries.com'){
         $request->validate([
             'name' => 'required',
-            'email' => 'required|unique:users',
+            'email' => 'required|email|regex:/(.*)@sacemindustries.com/i|unique:users',
             'password' => 'required',
+            'password_confirm'=>'required|same:password',
         ]);
         $name = $request->name;
         $email    = $request->email;
