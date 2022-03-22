@@ -44,9 +44,7 @@
                     >
                   </li>
                   <li class="nav-item">
-                    <router-link class="nav-link" to="/about"
-                      >Importer</router-link
-                    >
+                    <router-link class="nav-link" to="/about">Importer</router-link>
                   </li>
                 </ul>
                 <div class="Call">
