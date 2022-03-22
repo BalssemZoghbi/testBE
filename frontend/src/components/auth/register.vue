@@ -104,7 +104,7 @@ h1{
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 450px;
+  width: 480px;
   background: #3895d3;
   border-radius: 10px;
   box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
