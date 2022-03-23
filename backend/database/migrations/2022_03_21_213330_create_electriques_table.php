@@ -15,19 +15,25 @@ class CreateElectriquesTable extends Migration
     {
         Schema::create('electriques', function (Blueprint $table) {
             $table->id();
-            $table->enum('frequence', [30,40,50,60]);
+            $table->enum('colonnes',['3','4']);
+            $table->enum('frequence', ['50','60']);
             $table->integer('pn');
             $table->integer('u1n');
             $table->integer('u2o');
-            $table->string('couplagePrimaire');
-            $table->string('couplageSecondaire');
-            $table->enum('indiceHoraire', [0,6]);
+            $table->enum('couplagePrimaire',['YN','Y','D']);
+            $table->enum('couplageSecondaire',['d','zn','z','yn','y']);
+            $table->enum('indiceHoraire', ['0','1','2','3','4','5','6','7','8','9','10','11']);
             $table->string('couplage');
-            $table->integer('priseSoustractive');
-            $table->integer('priseAdditive');
-            $table->float('echelonSousctractive');
-            $table->float('echelonAdditive');
-            $table->string('variation');
+            $table->integer('classeU1');
+            $table->integer('tenueFr1');
+            $table->integer('tenueChoc1');
+            $table->integer('classeU2');
+            $table->integer('tenueFr2');
+            $table->integer('tenueChoc2');
+            $table->integer('priseSoustractive')->default(2);
+            $table->integer('priseAdditive')->default(2);
+            $table->float('echelonSousctractive')->default(2.5);
+            $table->float('echelonAdditive')->default(2.5);
             $table->integer('puissance');
             $table->integer('PrimaireUligne');
             $table->integer('PrimaireUPhase');
@@ -37,6 +43,7 @@ class CreateElectriquesTable extends Migration
             $table->integer('secondaireUPhase');
             $table->integer('secondaireIligne');
             $table->integer('secondaireIPhase');
+            $table->integer('nbrePosition');
             $table->timestamps();
         });
     }

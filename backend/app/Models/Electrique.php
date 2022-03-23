@@ -8,7 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Electrique extends Model
 {
     use HasFactory;
+    protected $table="electriques";
+
     protected $fillable= [
+        'colonnes',
         'frequence',
         'pn',
         'u1n',
@@ -17,11 +20,17 @@ class Electrique extends Model
         'couplageSecondaire',
         'indiceHoraire',
         'couplage',
+        'classeU1',
+        'tenueFr1',
+        'tenueChoc1',
+        'classeU2',
+        'tenueFr2',
+        'tenueChoc2',
         'priseSoustractive',
         'priseAdditive',
         'echelonSousctractive',
         'echelonAdditive',
-        'variation',
+        // 'variation',
         'puissance',
         'PrimaireUligne',
         'PrimaireUPhase',
@@ -31,5 +40,11 @@ class Electrique extends Model
         'secondaireUPhase',
         'secondaireIligne',
         'secondaireIPhase',
+        'nbrePosition',
     ];
+
+    public function tensionElectriques()
+    {
+        return $this->belongsToMany(TensionElectrique::class,'electrique_tension_elecs');
+    }
 }

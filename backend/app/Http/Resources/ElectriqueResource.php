@@ -16,6 +16,7 @@ class ElectriqueResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'colonnes' => $this->colonnes,
             'frequence' => $this->frequence,
             'pn' => $this->pn,
             'u1n' => $this->u1n,
@@ -28,16 +29,24 @@ class ElectriqueResource extends JsonResource
             'priseAdditive'=> $this->priseAdditive,
             'echelonSousctractive'=> $this->echelonSousctractive,
             'echelonAdditive'=> $this->echelonAdditive,
-            'variation'=> $this->variation,
+            // 'variation'=> $this->variation,
+            'classeU1' =>$this->classeU1,
+            'tenueFr1' =>$this->tenueFr1,
+            'tenueChoc1' =>$this->tenueChoc1,
+            'classeU2' =>$this->classeU2,
+            'tenueFr2' =>$this->tenueFr2,
+            'tenueChoc2' =>$this->tenueChoc2,
             'puissance'=> $this->puissance,
             'PrimaireUligne'=> $this->PrimaireUligne,
             'PrimaireUPhase'=> $this->PrimaireUPhase,
             'PrimaireIligne'=> $this->PrimaireIligne,
-            'PrimaireIligne'=> $this->PrimaireIligne,
+            'PrimaireIPhase'=> $this->PrimaireIPhase,
             'secondaireUligne'=> $this->secondaireUligne,
             'secondaireUPhase'=> $this->secondaireUPhase,
             'secondaireIligne'=> $this->secondaireIligne,
             'secondaireIPhase'=> $this->secondaireIPhase,
+            'nbrePosition'=> $this->nbrePosition,
+            // 'tensionElectrique_id'=> $this->tensionElectrique_id,
         ];
     }
 }

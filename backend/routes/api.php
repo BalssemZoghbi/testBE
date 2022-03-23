@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProjetController;
 use App\Http\Controllers\ElectriqueController;
+use App\Http\Controllers\TensionElectriqueController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -46,4 +47,5 @@ Route::post("/register",[AuthController::class,'register']);
 Route::post("/login",[AuthController::class,'index']);
 Route::get('/electrique/{id}',[ElectriqueController::class ,'getoneelec']);
 Route::get('/electrique',[ElectriqueController::class ,'index']);
-// Route::get('/electrique/{id}',[ElectriqueController::class ,'getoneelec']);
+Route::post('/tensionelectrique',[TensionElectriqueController::class ,'add']);
+Route::post('/electrique/add',[ElectriqueController::class ,'store']);
