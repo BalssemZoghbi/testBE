@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProjetController;
+use App\Http\Controllers\ElectriqueController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -43,3 +44,6 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
 
 Route::post("/register",[AuthController::class,'register']);
 Route::post("/login",[AuthController::class,'index']);
+Route::get('/electrique/{id}',[ElectriqueController::class ,'getoneelec']);
+Route::get('/electrique',[ElectriqueController::class ,'index']);
+// Route::get('/electrique/{id}',[ElectriqueController::class ,'getoneelec']);
