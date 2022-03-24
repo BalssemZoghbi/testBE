@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Mail\User as MailUser;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+
 class AuthController extends Controller
 {
     function index(Request $request)
@@ -15,7 +19,6 @@ class AuthController extends Controller
                     'message' => ['These credentials do not match our records.']
                 ], 404);
             }
-        // else if(strpos($request->email, '@sacemindustries.com'){
             $token = $user->createToken('my-app-token')->plainTextToken;
             $response = [
                 'user' => $user,
@@ -23,14 +26,11 @@ class AuthController extends Controller
             ];
 
              return response($response, 201);
-        // }
     }
     function logout(Request $request){
-        // dd($request->user());
        return $request->user()->currentAccessToken()->delete();
     }
     function register(Request $request){
-        // if(strpos($request->email, '@sacemindustries.com'){
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|regex:/(.*)@sacemindustries.com/i|unique:users',
@@ -49,6 +49,19 @@ class AuthController extends Controller
     {
        $user=User::FindOrFail($id);
        $user->update([ 'type'=>'employe']);
-        return ;
+       Mail::to($user->email)->send(new MailUser($user->email));
+        return new JsonResponse(
+            [
+                'success' => true,
+            ],
+            200
+        );
+    }
+    public function decline($id)
+    {
+        $user=User::FindOrFail($id);
+        if($user->delete()) {
+            return 'user deleted';
+           }
     }
 }

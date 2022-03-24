@@ -24,7 +24,8 @@ class UserController extends Controller
        $user= User::create([
             'name' => $request->name,
             'email' =>$request->email,
-            'password' =>$request->password
+            'password' =>$request->password,
+            'type' =>$request->type
         ]);
         if($user->save){
         return UserResource::collection($user);}
@@ -35,7 +36,8 @@ class UserController extends Controller
         $user->update([
             'name' => $request->name,
             'email' =>$request->email,
-            'password' =>$request->password
+            'password' =>$request->password,
+            'type' =>$request->type
         ]);
         if($user->save()){
             return UserResource::collection($user);
