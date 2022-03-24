@@ -40,8 +40,15 @@ class AuthController extends Controller
         $name = $request->name;
         $email    = $request->email;
         $password = $request->password;
-        $user     = User::create(['name' => $name, 'email' => $email, 'password' => Hash::make($password)]);
-        // }
+        $user     = User::create(['name' => $name, 'email' => $email,'type'=>'pending', 'password' => Hash::make($password)]);
+        dd($user);
         return response()->json($user);
+    }
+
+    public function accept($id)
+    {
+       $user=User::FindOrFail($id);
+       $user->update([ 'type'=>'employe']);
+        return ;
     }
 }

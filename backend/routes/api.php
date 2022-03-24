@@ -51,3 +51,4 @@ Route::post('/tensionelectrique',[TensionElectriqueController::class ,'add']);
 Route::post('/electrique/add',[ElectriqueController::class ,'store']);
 Route::put('/electrique/edit/{id}',[ElectriqueController::class ,'edit']);
 Route::delete('/electrique/delete/{id}',[ElectriqueController::class ,'delete']);
+Route::put('/user/accept/{id}',[AuthController::class ,'accept']);
