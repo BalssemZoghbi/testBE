@@ -29,7 +29,6 @@ class ElectriqueResource extends JsonResource
             'priseAdditive'=> $this->priseAdditive,
             'echelonSousctractive'=> $this->echelonSousctractive,
             'echelonAdditive'=> $this->echelonAdditive,
-            // 'variation'=> $this->variation,
             'classeU1' =>$this->classeU1,
             'tenueFr1' =>$this->tenueFr1,
             'tenueChoc1' =>$this->tenueChoc1,
@@ -45,8 +44,8 @@ class ElectriqueResource extends JsonResource
             'secondaireUPhase'=> $this->secondaireUPhase,
             'secondaireIligne'=> $this->secondaireIligne,
             'secondaireIPhase'=> $this->secondaireIPhase,
+            'Uz'=> $this->Uz,
             'nbrePosition'=> $this->nbrePosition,
-            // 'tensionElectrique_id'=> $this->tensionElectrique_id,
         ];
     }
 }

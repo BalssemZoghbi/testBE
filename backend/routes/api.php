@@ -49,3 +49,5 @@ Route::get('/electrique/{id}',[ElectriqueController::class ,'getoneelec']);
 Route::get('/electrique',[ElectriqueController::class ,'index']);
 Route::post('/tensionelectrique',[TensionElectriqueController::class ,'add']);
 Route::post('/electrique/add',[ElectriqueController::class ,'store']);
+Route::put('/electrique/edit/{id}',[ElectriqueController::class ,'edit']);
+Route::delete('/electrique/delete/{id}',[ElectriqueController::class ,'delete']);

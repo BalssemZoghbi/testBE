@@ -30,7 +30,6 @@ class Electrique extends Model
         'priseAdditive',
         'echelonSousctractive',
         'echelonAdditive',
-        // 'variation',
         'puissance',
         'PrimaireUligne',
         'PrimaireUPhase',
@@ -40,6 +39,7 @@ class Electrique extends Model
         'secondaireUPhase',
         'secondaireIligne',
         'secondaireIPhase',
+        'Uz',
         'nbrePosition',
     ];
 
