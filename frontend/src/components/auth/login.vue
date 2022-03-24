@@ -48,9 +48,9 @@ export default {
   },
  
   methods: {
-    login() {
+ async login() {
       let self = this
-      this.$store.dispatch('login',{
+    await this.$store.dispatch('login',{
         email:this.email,
         password:this.password
       })
@@ -58,7 +58,7 @@ export default {
         console.log(response);
          self.$router.push('/');
       })
-      .error(function(error){
+      .catch(function(error){
         console.log(error);
       })
       

@@ -52,14 +52,14 @@ export default createStore({
     }
   },
   actions: { 
-    login:({commit},userInfos) => {
+    login:async({commit},userInfos) => {
       commit;
       commit('setStatus','loading');
-      instance.post('/login', userInfos)
+     await instance.post('/login', userInfos)
       .then(function (response) {
         commit('setStatus','');
         commit('logUser', response.data);
-        console.log(response);
+        return response.data;
       })
       .catch(function (error) {
         commit('setStatus','error_login');
