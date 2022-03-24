@@ -1,7 +1,7 @@
 <template>
 <div>
 <navbar2/>
-<div class="body">
+<br>
 <div class="container">
     <div class="title">Données Generale</div>
     <div class="content">
@@ -116,7 +116,6 @@
     </div>
   </div>
 </div>
-</div>
 </template>
 
 <script>
@@ -175,11 +174,31 @@ export default {
 <style scoped>
 /* Googlefont Poppins CDN Link */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+/*===== GOOGLE FONTS =====*/
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
-.body{
+/*===== VARIABLES CSS =====*/
+:root{
+  /*===== Colores =====*/
+  --first-color: #4797d1;
+  --input-color: #80868B;
+  --border-color: #DADCE0;
+
+  /*===== Fuente y tipografia =====*/
+  --body-font: 'Roboto', sans-serif;
+  --normal-font-size: 1rem;
+  --small-font-size: .75rem;
+}
+  
+/*===== BASE =====*/
+*,::before,::after{
+  box-sizing: border-box;
+}
+body{
   margin: 0;
   padding: 0;
-  font-size: 1rem;
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
 }
 h1{
   margin: 0;
@@ -213,8 +232,8 @@ h1{
   left: 0;
   width: 100%;
   height: 100%;
-  font-size: 1rem;
-  border: 1px solid #DADCE0;
+  font-size: var(--normal-font-size);
+  border: 1px solid var(--border-color);
   border-radius: .5rem;
   outline: none;
   padding: 1rem;
@@ -228,7 +247,7 @@ h1{
   padding: 0 .25rem;
   background-color: #fff;
   color: #000000ad;
-  font-size: 1rem;
+  font-size: var(--normal-font-size);
   transition: .3s;
 }
 .form__button{
@@ -237,9 +256,9 @@ h1{
   padding: .75rem 2rem;
   outline: none;
   border: none;
-  background-color: #4797d1;
+  background-color: var(--first-color);
   color: #fff;
-  font-size: 1rem;
+  font-size: var(--normal-font-size);
   border-radius: .5rem;
   cursor: pointer;
   transition: .3s;
@@ -252,8 +271,8 @@ h1{
 .form__input:focus + .form__label{
   top: -.5rem;
   left: .8rem;
-  color: #4797d1;
-  font-size: .75rem;
+  color: var(--first-color);
+  font-size: var(--small-font-size);
   font-weight: 500;
   z-index: 10;
 }
@@ -262,14 +281,14 @@ h1{
 .form__input:not(:placeholder-shown).form__input:not(:focus)+ .form__label{
   top: -.5rem;
   left: .8rem;
-  font-size: .75rem;
+  font-size: var(--small-font-size);
   font-weight: 500;
   z-index: 10;
 }
 
 /*Input focus*/
 .form__input:focus{
-  border: 1.5px solid #4797d1;
+  border: 1.5px solid var(--first-color);
 }
 
 
@@ -282,7 +301,7 @@ h1{
   font-family: 'Poppins',sans-serif;
 }
 
-.body{
+body{
   height: 100%;
   display: flex;
   justify-content: center;
@@ -293,7 +312,7 @@ h1{
 .container{
   max-width: 98%;
   height: 80%;
-  /* margin-top: 5%; */
+  margin-top: 5%;
   width: 100%;
   background-color: #fff;
   padding: 25px 30px;
@@ -380,7 +399,7 @@ form .input-box span.details{
  }
  form .button{
    height: 45px;
-   margin-top: 10px ;
+   margin-top: 45px ;
    margin-left: 80%;
  }
  form .button input{

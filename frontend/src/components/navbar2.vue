@@ -85,9 +85,7 @@
     </header>
 </template>
 <script>
-export default {
-  name: "navbar2",
-};
+
 </script>
 <style scoped>
 
