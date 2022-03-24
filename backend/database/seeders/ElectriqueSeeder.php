@@ -2,21 +2,18 @@
 
 namespace Database\Seeders;
 
-use App\Models\Projet;
 use App\Models\Electrique;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class ElectriqueSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      *
      * @return void
      */
     public function run()
     {
-        \App\Models\User::factory(10)->create();
         Electrique::factory()->count(10)->create();
-        Projet::factory()->count(10)->create();
     }
 }

@@ -4,6 +4,8 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Projet;
+use App\Models\User;
+
 class ProjetFactory extends Factory
 {
     protected $model = Projet::class;
@@ -29,7 +31,7 @@ class ProjetFactory extends Factory
             'refroidissement' => $this->faker-> randomElement(['onan','onaf']),
             'client' => $this->faker->word,
             'refClient' => $this->faker->word,
-            'user_id' => '1',
+            'user_id' =>User::get('id')->random(),
             'created_at' => now()
         ];
     }
