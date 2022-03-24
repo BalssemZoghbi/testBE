@@ -17,7 +17,6 @@ class CreateElectriquesTable extends Migration
             $table->id();
             $table->enum('colonnes',['3','4']);
             $table->enum('frequence', ['50','60']);
-            $table->integer('pn');
             $table->integer('u1n');
             $table->integer('u2o');
             $table->enum('couplagePrimaire',['YN','Y','D']);

@@ -13,7 +13,6 @@ class Electrique extends Model
     protected $fillable= [
         'colonnes',
         'frequence',
-        'pn',
         'u1n',
         'u2o',
         'couplagePrimaire',

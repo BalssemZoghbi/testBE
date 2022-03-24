@@ -18,7 +18,6 @@ class ElectriqueResource extends JsonResource
             'id' => $this->id,
             'colonnes' => $this->colonnes,
             'frequence' => $this->frequence,
-            'pn' => $this->pn,
             'u1n' => $this->u1n,
             'u2o' => $this->u2o,
             'couplagePrimaire'=> $this->couplagePrimaire,
