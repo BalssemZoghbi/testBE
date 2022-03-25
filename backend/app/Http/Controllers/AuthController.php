@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\User as MailUser;
+use App\Mail\Userdecline;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -33,7 +34,7 @@ class AuthController extends Controller
     function register(Request $request){
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|regex:/(.*)@sacemindustries.com/i|unique:users',
+            'email' => 'required|email|unique:users',
             'password' => 'required',
             'password_confirm'=>'required|same:password',
         ]);
@@ -41,7 +42,6 @@ class AuthController extends Controller
         $email    = $request->email;
         $password = $request->password;
         $user     = User::create(['name' => $name, 'email' => $email,'type'=>'pending', 'password' => Hash::make($password)]);
-        dd($user);
         return response()->json($user);
     }
 
@@ -60,6 +60,13 @@ class AuthController extends Controller
     public function decline($id)
     {
         $user=User::FindOrFail($id);
+        Mail::to($user->email)->send(new Userdecline($user->email));
+        // return new JsonResponse(
+        //     [
+        //         'success mail' => true,
+        //     ],
+        //     200
+        // );
         if($user->delete()) {
             return 'user deleted';
            }

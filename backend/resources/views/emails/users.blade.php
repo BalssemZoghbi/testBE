@@ -7,6 +7,6 @@ On vous informe que vous etes accepté, veuillez vous connecter a notre platefor
 SACEM
 @endcomponent
 
-merci,<br>
+Merci,<br>
 {{ config('app.name') }}
 @endcomponent
