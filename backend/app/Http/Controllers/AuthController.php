@@ -61,12 +61,6 @@ class AuthController extends Controller
     {
         $user=User::FindOrFail($id);
         Mail::to($user->email)->send(new Userdecline($user->email));
-        // return new JsonResponse(
-        //     [
-        //         'success mail' => true,
-        //     ],
-        //     200
-        // );
         if($user->delete()) {
             return 'user deleted';
            }
