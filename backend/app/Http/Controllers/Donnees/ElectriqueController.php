@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
-
-use App\Http\Resources\ElectriqueResource;
-use App\Models\Electrique;
-use App\Models\TensionElectrique;
+namespace App\Http\Controllers\Donnees;
+use App\Http\Controllers\Controller;
+use App\Models\Donnees\Electrique;
+use App\Models\Donnees\TensionElectrique;
 use Illuminate\Http\Request;
+use App\Http\Resources\ElectriqueResource;
 use phpDocumentor\Reflection\Types\Boolean;
 
 class ElectriqueController extends Controller

@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Donnees;
 
-use App\Models\Projet;
+// use App\Models\Projet;
+
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\UserResource;
 use App\Http\Resources\ProjetResource;
+use App\Models\Donnees\Projet ;
 
 class ProjetController extends Controller
 {

@@ -1,8 +1,8 @@
 <?php
+namespace App\Http\Controllers\Donnees;
+use App\Http\Controllers\Controller;
 
-namespace App\Http\Controllers;
-
-use App\Models\TensionElectrique;
+use App\Models\Donnees\TensionElectrique;
 use Illuminate\Http\Request;
 
 class TensionElectriqueController extends Controller
