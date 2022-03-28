@@ -1,9 +1,9 @@
 <template>
-  <form v-on:submit.prevent="updateprojet">
+<form v-on:submit.prevent="updateprojet">
     <h1>changer le projet n° {{ projet.id }}</h1>
     <br />
     <div class="mb-3">
-      <label for="appareil" class="form-label">appareil</label>
+      <label for="appareil" class="form-label">appareil:  </label>
       <input
         type="text"
         class="form-control"
@@ -13,7 +13,7 @@
       />
     </div>
     <div class="mb-3">
-      <label for="reference" class="form-label">reference</label>
+      <label for="reference" class="form-label">reference   </label>
       <input
         type="text"
         class="form-control"
@@ -23,7 +23,7 @@
       />
     </div>
     <div class="mb-3">
-      <label for="client" class="form-label">client</label>
+      <label for="client" class="form-label">client  </label>
       <input
         type="text"
         class="form-control"
@@ -34,7 +34,7 @@
     </div>
 
     <div class="mb-3">
-      <label for="refClient" class="form-label">refClient</label>
+      <label for="refClient" class="form-label">refClient  </label>
       <input
         type="text"
         class="form-control"
@@ -44,7 +44,7 @@
       />
     </div>
       <div class="mb-3">
-      <label for="temperatureMax" class="form-label">temperatureMax</label>
+      <label for="temperatureMax" class="form-label">temperatureMax  </label>
       <input
         class="form-control"
         type="text"
@@ -54,7 +54,7 @@
       />
     </div>
     <div class="mb-3">
-      <label for="attitudeMax" class="form-label">attitudeMax</label>
+      <label for="attitudeMax" class="form-label">attitudeMax  </label>
       <input
         class="form-control"
         type="text"
@@ -64,7 +64,7 @@
       />
     </div>
     <div class="mb-3">
-      <label for="type" class="form-label">type</label>
+      <label for="type" class="form-label">type  </label>
       <input
         class="form-control"
         type="text"
@@ -74,7 +74,7 @@
       />
     </div>
     <div class="mb-3">
-      <label for="remplissage" class="form-label">remplissage</label>
+      <label for="remplissage" class="form-label">remplissage  </label>
       <input
         class="form-control"
         type="text"
@@ -84,7 +84,7 @@
       />
     </div>
     <div class="mb-3">
-      <label for="installation" class="form-label">installation</label>
+      <label for="installation" class="form-label">installation  </label>
       <input
         class="form-control"
         type="text"
@@ -94,7 +94,7 @@
       />
     </div>
     <div class="mb-3">
-      <label for="montage" class="form-label">montage</label>
+      <label for="montage" class="form-label">montage  </label>
       <input
         class="form-control"
         type="text"
@@ -104,7 +104,7 @@
       />
     </div>
     <div class="mb-3">
-      <label for="echangeurs" class="form-label">echangeurs</label>
+      <label for="echangeurs" class="form-label">echangeurs  </label>
       <input
         class="form-control"
         type="text"
@@ -114,7 +114,7 @@
       />
     </div>
     <div class="mb-3">
-      <label for="dielectrique" class="form-label">dielectrique</label>
+      <label for="dielectrique" class="form-label">dielectrique  </label>
       <input
         class="form-control"
         type="text"
@@ -124,7 +124,7 @@
       />
     </div>
     <div class="mb-3">
-      <label for="fonctionnement" class="form-label">fonctionnement</label>
+      <label for="fonctionnement" class="form-label">fonctionnement  </label>
       <input
         class="form-control"
         type="text"
@@ -134,7 +134,7 @@
       />
     </div>
     <div class="mb-3">
-      <label for="refroidissement" class="form-label">refroidissement</label>
+      <label for="refroidissement" class="form-label">refroidissement  </label>
       <input
         class="form-control"
         type="text"
@@ -144,7 +144,7 @@
       />
     </div>
     <div class="mb-3">
-      <label for="user_id" class="form-label">user_id</label>
+      <label for="user_id" class="form-label">elaborateur  </label>
       <input
         class="form-control"
         type="text"
@@ -159,9 +159,8 @@
 </template>
 
 <script>
-import ProjetService from "@/services/ProjetService.js";
 // import { reactive } from "vue";
-// import axios from "axios";
+import axios from "axios";
 export default {
   data() {
     return {
@@ -204,7 +203,7 @@ export default {
         refroidissement: this.projet.refroidissement,
         user_id: this.projet.user_id,
       };
-      ProjetService.updateProjet(this.$route.params.id, projets).then(
+      axios.put('projets/edit/'+this.$route.params.id, projets).then(
         (response) => (this.id = response.data.id, console.log(response.data))
         
       );
@@ -212,7 +211,7 @@ export default {
     },
   },
   async mounted() {
-    const result = await ProjetService.getProjetById(this.$route.params.id);
+    const result = await axios.get('projets/'+this.$route.params.id);
     this.projet = result.data.data;
   },
 };

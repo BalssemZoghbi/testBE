@@ -1,12 +1,25 @@
-import { createRouter, createWebHistory } from "vue-router";
+import Vue from "vue";
+import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import Login from "../components/auth/login.vue";
-import Register from "../components/auth/register.vue";
-import createProjet from "../components/createProjet.vue";
-import updateProjet from "../components/updateProjet.vue";
+import Dashboard from "../views/Dashboard.vue";
+import Login from "../views/Login.vue";
+import Register from "../views/Register.vue";
 import about from "../views/About.vue";
+import createProjet from "../components/donnees/generale/create.vue";
+import updateProjet from "../components/donnees/generale/update.vue";
+Vue.use(VueRouter);
 
 const routes = [
+  {
+    path: "/",
+    name: "home",
+    component: Home,
+  },
+  {
+    path: "/dashboard",
+    name: "dashboard",
+    component: Dashboard,
+  },
   {
     path: "/",
     name: "Home",
@@ -23,14 +36,14 @@ const routes = [
     component: Register,
   },
   {
-    path: "/projet/:id",
-    name: "projet.about",
-    component: about,
-  },
-  {
     path: "/projet/create",
     name: "projet.create",
     component: createProjet,
+  },
+  {
+    path: "/projet/:id",
+    name: "projet.about",
+    component: about,
   },
   {
     path: "/projet/update/:id",
@@ -39,8 +52,7 @@ const routes = [
   },
 ];
 
-const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+const router = new VueRouter({
   routes,
 });
 

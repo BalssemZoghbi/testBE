@@ -1,10 +1,17 @@
-import { createApp } from "vue";
+import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap";
-// import jwtPagination from 'jw-vue-pagination'
-// import Vue from 'vue'
-// Vue.use(jwtPagination)
-createApp(App).use(store).use(router).mount("#app");
+import vuetify from "./plugins/vuetify";
+import axios from "axios";
+axios.defaults.baseURL = "http://127.0.0.1:8000/api";
+axios.defaults.headers.get["Accept"] = "application/json";
+
+Vue.config.productionTip = false;
+
+new Vue({
+  router,
+  store,
+  vuetify,
+  render: (h) => h(App),
+}).$mount("#app");

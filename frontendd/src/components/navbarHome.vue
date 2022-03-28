@@ -8,12 +8,12 @@
             <div class="full">
               <div class="center-desk">
                 <div class="logo">
-                  <a href="sacemindustries.com"
+                  <!-- <a href="sacemindustries.com"
                     ><img
                       src="../assets/sacem.png"
                       width="100px"
                       alt="sacemindustries"
-                  /></a>
+                  /></a> -->
                 </div>
               </div>
             </div>
@@ -46,9 +46,11 @@
                   <li class="nav-item">
                     <router-link class="nav-link" to="/about">Importer</router-link>
                   </li>
+                  <li class="nav-item">
+                  <router-link class="nav-link" to="/login" @v-on:click="logout"> <span>logout</span></router-link>
+                  </li>
                 </ul>
                 <div class="Call">
-                  <router-link class="nav-link" to="/login" @click="logout()"> <span class="yellow">logout</span></router-link>
                 </div>
               </div>
             </nav>
@@ -62,9 +64,13 @@
  export default {
   name: "navbarHome",
   methods:{
-    logout:function(){
-      this.$store.commit('logout');
-      this.$router.push('/login');
+    logout(){
+      console.warn('before logout');
+      // this.$store.commit('logout');
+      localStorage.clear();
+            console.log('after logout')
+
+      // this.$router.push('/login');
     }
   }
 };

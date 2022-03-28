@@ -1,6 +1,6 @@
 <template>
 <div>
-<navbar2/>
+<!-- <navbar2/> -->
 <div class="body">
 <div class="container">
     <div class="title">Données Generale</div>
@@ -120,10 +120,11 @@
 </template>
 
 <script>
-import ProjetService from "@/services/ProjetService.js";
-import navbar2 from './navbar2.vue';
+
+import axios from "axios";
+// import navbar2 from './navbar2.vue';
 export default {
-  components: { navbar2 },
+  // components: { navbar2 },
   data() {
     return {
       appareil: "",
@@ -163,8 +164,11 @@ export default {
         refroidissement: this.refroidissement,
         user_id: this.user_id,
       };
-      ProjetService.createProjet(projet).then(
-        (response) => (this.id = response.data.id)
+      // console.log(projet)
+      axios.post('projets/create',projet).then(
+        (response) => (
+          console.log(response.data.id),
+          this.id = response.data.id)
       );
       this.$router.push({ name: "Home" });
     },

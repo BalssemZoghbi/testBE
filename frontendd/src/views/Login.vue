@@ -1,7 +1,7 @@
 <template>
 <div class="body">
     <div class="center">
-      <img src="../../assets/ava.svg">
+      <!-- <img src="../../assets/ava.svg"> -->
       <h1>WELCOME</h1>
       <form v-on:submit.prevent="loginn" method="post">
         <div class="txt_field">
