@@ -47,7 +47,7 @@
                     <router-link class="nav-link" to="/about">Importer</router-link>
                   </li>
                   <li class="nav-item">
-                  <router-link class="nav-link" to="/login" @v-on:click="logout"> <span>logout</span></router-link>
+                  <button class="nav-link"  v-on:click="logout"> <span>logout</span></button>
                   </li>
                 </ul>
                 <div class="Call">
@@ -65,13 +65,10 @@
   name: "navbarHome",
   methods:{
     logout(){
-      console.warn('before logout');
-      // this.$store.commit('logout');
       localStorage.clear();
-            console.log('after logout')
-
-      // this.$router.push('/login');
+      this.$router.push('/login');
     }
+  
   }
 };
 </script>

@@ -8,7 +8,7 @@
           <input type="email" id="email"
         v-model="email" required>
           <span></span>
-          <label>Username</label>
+          <label>Email</label>
         </div>
         <div class="txt_field">
           <input type="password" id="password"
@@ -28,6 +28,8 @@
 
 <script>
 import {mapState} from 'vuex';
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -46,25 +48,38 @@ export default {
     ...mapState(['status'])
 
   },
- 
+//  mounted(){
+//    let user= localStorage.getItem(userInfos)
+//    if(user){
+//      this.$router.push('/');
+//    }
+//  },
   methods: {
  async login() {
-      let self = this
-    await this.$store.dispatch('login',{
-        email:this.email,
-        password:this.password
-      })
-      .then(function(response){
-        console.log(response);
-         self.$router.push('/');
-      })
-      .catch(function(error){
-        console.log(error);
-      })
+    let self = this
+    let result= await axios.post(`/login?email=${this.email}&password=${this.password}`);
+      localStorage.setItem("user",JSON.stringify(result.data))
+      if(result.status==200 ){
+        console.log('login done');
+      }
+      self.$router.push('/');
+
+    //   let self = this
+    // await this.$store.dispatch('login',{
+    //     email:this.email,
+    //     password:this.password
+    //   })
+    //   .then(function(response){
+    //     console.log(response);
+    //      self.$router.push('/');
+    //   })
+    //   .catch(function(error){
+    //     console.log(error);
+    //   })
       
-    },
-  },
-};
+    // },
+  }
+},}
 </script>
 
 <style scoped>

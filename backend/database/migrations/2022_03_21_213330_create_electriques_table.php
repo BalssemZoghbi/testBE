@@ -44,6 +44,7 @@ class CreateElectriquesTable extends Migration
             $table->float('secondaireIPhase');
             $table->float('Uz')->nullable();
             $table->integer('nbrePosition');
+            // $table->foreignId('projet_id')->constrained();
             $table->timestamps();
         });
     }

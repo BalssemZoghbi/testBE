@@ -3,7 +3,7 @@
     <div class="center">
       <!-- <img src="../../assets/ava.svg"> -->
       <h1>WELCOME</h1>
-      <form v-on:submit.prevent="register" method="post">
+      <form v-on:submit.prevent="createAccount" method="post">
            <div class="txt_field">
           <input type="text" id="name"
         v-model="name" required>
@@ -39,7 +39,7 @@
 </template>
 
 <script>
-// import AuthService from "@/services/AuthService.js";
+import axios from "axios";
 export default {
   data() {
     return {
@@ -47,6 +47,7 @@ export default {
       email: "",
       password: "",
       password_confirm:""
+      
     };
   },
   computed:{
@@ -59,21 +60,33 @@ export default {
     }
   },
   methods: {
-    createAccount() {
-      const self=this;
-      this.$store.dispatch('createAccount',{
-        name:this.name,
+    async createAccount() {
+      let self = this
+      let result= await axios.post("/register",{
         email:this.email,
+        name:this.name,
         password:this.password,
-        password_confirm:this.password_confirm
-      })
-      .then(function(response){
-        console.log(response);
-         self.$router.push('/login');
-      })
-      .error(function(error){
-        console.log(error);
-      })
+        password_confirm:this.password_confirm,
+      });
+      console.log(result);
+      if(result.status==200){
+        self.$router.push('/login');
+      }
+
+      // const self=this;
+      // this.$store.dispatch('createAccount',{
+      //   name:this.name,
+      //   email:this.email,
+      //   password:this.password,
+      //   password_confirm:this.password_confirm
+      // })
+      // .then(function(response){
+      //   console.log(response);
+      //    self.$router.push('/login');
+      // })
+      // .error(function(error){
+      //   console.log(error);
+      // })
       
     },
   },
