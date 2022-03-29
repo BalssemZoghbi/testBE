@@ -1,6 +1,6 @@
 <template>
 <div>
-   <navbarHome /> 
+   <!-- <navbarHome />  -->
   <v-card>
     <v-card-title>
       <v-text-field
@@ -22,11 +22,11 @@
 
 <script>
 import axios from "axios";
-import navbarHome from "../components/navbarHome.vue";
+// import navbarHome from "../components/navbarHome.vue";
   export default {
     components: {
-    navbarHome,
-    
+    // navbarHome,
+
   },
     data () {
       return {
