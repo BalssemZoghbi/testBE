@@ -1,6 +1,6 @@
 <template>
 <div>
-    <navbarHome />  
+    <!-- <navbarHome />   -->
     <form  style="maring-left: -6%">
       <input type="search" placeholder="Search" id="search" v-model="query" />
     </form>
@@ -22,12 +22,12 @@
 <script>
 import axios from "axios";
 
-import navbarHome from "components/navbarHome";
+// import navbarHome from "../components/NavbarHome.vue";
 
 export default {
   name: "Home",
   components: {
-    navbarHome,
+    // navbarHome,
   },
   data: () => ({
      projets: {},
