@@ -2,8 +2,9 @@
 
 namespace App\Models\Donnees;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Donnees\Projet;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Electrique extends Model
 {
@@ -46,4 +47,13 @@ class Electrique extends Model
     {
         return $this->belongsToMany(TensionElectrique::class,'electrique_tension_elecs');
     }
+    // public function projet()
+    // {
+    //     return $this->hasOne(Projet::class);
+    //     // return $this->hasOne(Projet::class,'projet_id','id');
+    // }
+    
+    // public function projets(){
+    //     return $this->hasMany(Projet::class);
+    // }
 }

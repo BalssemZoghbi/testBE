@@ -16,8 +16,8 @@ class ElectriqueController extends Controller
     }
     public function index()
     {
-        // $this->nbrePosition=$this->nbrePosition();
         $electriques =Electrique::all();
+
         return ElectriqueResource::collection($electriques);
     }
     public function getoneelec($id)

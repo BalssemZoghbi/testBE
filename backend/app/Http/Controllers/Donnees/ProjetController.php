@@ -36,7 +36,8 @@ class ProjetController extends Controller
              'dielectrique' =>$request->dielectrique,
              'fonctionnement' =>$request->fonctionnement,
              'refroidissement' =>$request->refroidissement,
-             'user_id' =>$request->user_id
+             'user_id' =>$request->user_id,
+            //  'electrique_id' =>$request->electrique_id
          ]);
 
          if($projet->save()){
@@ -74,6 +75,7 @@ class ProjetController extends Controller
          'fonctionnement' =>$request->fonctionnement,
          'refroidissement' =>$request->refroidissement,
          'user_id' =>$request->user_id,
+        //  'electrique_id' =>$request->electrique_id,
 
      ]);
     //  $userid=DB::table('users')->id;

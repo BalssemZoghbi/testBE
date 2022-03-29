@@ -2,8 +2,9 @@
 
 namespace App\Models\Donnees;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Donnees\Electrique;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Projet extends Model
 {
@@ -24,10 +25,15 @@ class Projet extends Model
     'fonctionnement',
     'refroidissement',
     'user_id',
+    // 'projet_id',
 ];
 
      public function user(){
         return $this->belongsTo(User::class);
     }
+    // public function electrique()
+    // {
+    //     return $this->belongsTo(Electrique::class);
+    // }
 
 }
