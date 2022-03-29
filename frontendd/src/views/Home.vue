@@ -1,83 +1,62 @@
 <template>
 <div>
-   <!-- <v-data-iterator
+   <navbarHome /> 
+  <v-card>
+    <v-card-title>
+      <v-text-field
+        v-model="search"
+        append-icon="mdi-magnify"
+        label="Search"
+        single-line
+        hide-details
+      ></v-text-field>
+    </v-card-title>
+    <v-data-table
+      :headers="headers"
       :items="projets"
       :search="search"
-    >
-    <navbarHome />  
-    <form  style="maring-left: -6%">
-      <input type="search" placeholder="Search" id="search" v-model="search" />
-    </form>
-    <div v-for="projet in projets" :key="projet.id" :projet="projet">
-      <router-link :to="'/projet/' + projet.id">
-        <h4>{{ projet.reference }}</h4>
-      </router-link>
-              
-      <button type="button" v-on:click="deleteprojet(projet.id)">
-        supprimer
-      </button>
-           
-      <router-link class="nav-link" :to="'/projet/update/' + projet.id"
-                >edit</router-link>
-     </div>
-      </v-data-iterator> -->
-</div>
+    ></v-data-table>
+  </v-card>
+  </div>
 </template>
 
 <script>
-// import axios from "axios";
-
-// import navbarHome from "../components/NavbarHome.vue";
-
-// export default {
-//   name: "Home",
-//   components: {
-//     navbarHome,
-//   },
-//   data: () => ({
-//      projets: {},
-//       query:"",
-//       search: '',
-//       filter: {},
-//        keys: [
-//           'reference',
-//         ],
-//   }),
-//   computed: {
-//   filtered() {
-//       return this.projets.filter((projet) =>
-//         projet.reference.includes(this.query)
-//       );
-//   },
-//    filteredKeys () {
-//         return this.keys.filter(key => key !== 'reference')
-//       },
-//    // ...mapState({
-//     //      user:'userInfos'
-//     //    })
-// },
-// //  mounted:function(){
-// //     // console.log(this.$store.state.user);
-// //     if(this.$store.state.user.id==-1){
-// //       this.$router.push('/login');
-// //       return;
-// //     }
-// //   },
-//   created() {
-//     this.getprojet();
-//   },
-//   methods: {
-//     deleteprojet(id) {
-//       axios.delete('projets/delete/'+id).then(() => {
-//         this.getprojet();
-//       });
-//     },
-//     getprojet() {
-//       axios.get('/projets').then((resp) => {
-//         this.projets = resp.data.data;
-//       });
-//     },
+import axios from "axios";
+import navbarHome from "../components/navbarHome.vue";
+  export default {
+    components: {
+    navbarHome,
     
-//   },
-// };
+  },
+    data () {
+      return {
+        search: '',
+        headers: [
+          {
+            text: 'Puissance',
+            align: 'start',
+            filterable: true,
+            value: 'puissance',
+          },
+          // { text: 'Appareil', value: 'appareil' },
+          { text: 'Tension Primaire', value: 'u1n' },
+          { text: 'Tension Secondaire', value: 'u2o' },
+          { text: 'Couplage', value: 'couplage' },
+          { text: 'Frequence', value: 'frequence' },
+        ],
+        projets: [],
+      }
+    },
+    created() {
+    this.getprojet();
+  },
+
+    methods:{
+       getprojet() {
+      axios.get('/electrique').then((resp) => {
+        this.projets = resp.data.data;
+      });
+    },
+    },
+  }
 </script>

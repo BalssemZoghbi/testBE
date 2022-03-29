@@ -63,21 +63,6 @@ export default {
         console.log('login done');
       }
       self.$router.push('/');
-
-    //   let self = this
-    // await this.$store.dispatch('login',{
-    //     email:this.email,
-    //     password:this.password
-    //   })
-    //   .then(function(response){
-    //     console.log(response);
-    //      self.$router.push('/');
-    //   })
-    //   .catch(function(error){
-    //     console.log(error);
-    //   })
-      
-    // },
   }
 },}
 </script>

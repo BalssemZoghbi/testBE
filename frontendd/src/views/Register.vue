@@ -73,21 +73,6 @@ export default {
         self.$router.push('/login');
       }
 
-      // const self=this;
-      // this.$store.dispatch('createAccount',{
-      //   name:this.name,
-      //   email:this.email,
-      //   password:this.password,
-      //   password_confirm:this.password_confirm
-      // })
-      // .then(function(response){
-      //   console.log(response);
-      //    self.$router.push('/login');
-      // })
-      // .error(function(error){
-      //   console.log(error);
-      // })
-      
     },
   },
 };
