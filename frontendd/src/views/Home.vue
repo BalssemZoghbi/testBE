@@ -22,7 +22,7 @@
 <script>
 import axios from "axios";
 
-import navbarHome from "../components/NavbarHome.vue";
+import navbarHome from "components/navbarHome";
 
 export default {
   name: "Home",
