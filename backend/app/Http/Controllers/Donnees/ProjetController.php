@@ -15,8 +15,12 @@ class ProjetController extends Controller
 {
     public function getProjets()
     {
-        $projets =Projet::all();
-        return ProjetResource::collection($projets);
+        $projets = DB::table('projets')
+        ->join('electriques', 'electriques.id', '=', 'projets.electrique_id')
+        ->get();
+        // $projets =Projet::all()->electrique;
+        return response()->json($projets);
+        //  ProjetResource::collection($projets);
     }
 
     public function storeProjet(Request $request){
@@ -37,7 +41,7 @@ class ProjetController extends Controller
              'fonctionnement' =>$request->fonctionnement,
              'refroidissement' =>$request->refroidissement,
              'user_id' =>$request->user_id,
-            //  'electrique_id' =>$request->electrique_id
+             'electrique_id' =>$request->electrique_id
          ]);
 
          if($projet->save()){
@@ -47,11 +51,15 @@ class ProjetController extends Controller
      }
  public function showProjet($id){
      $projet= Projet::FindOrFail($id);
+
+    //  $projet = DB::table('projets')
+    //  ->join('electriques', 'electriques.id', '=', 'projets.electrique_id')
+    //  ->where('projets.id',$id)
+    //  ->get();
      return new ProjetResource($projet);
  }
  public function editProjet($id, Request $request){
      $projet= Projet::FindOrFail($id);
-
      // request()->validate([
      //     'appareil'=>'required',
      //     'reference'=>'required',
@@ -75,7 +83,7 @@ class ProjetController extends Controller
          'fonctionnement' =>$request->fonctionnement,
          'refroidissement' =>$request->refroidissement,
          'user_id' =>$request->user_id,
-        //  'electrique_id' =>$request->electrique_id,
+         'electrique_id' =>$request->electrique_id,
 
      ]);
     //  $userid=DB::table('users')->id;

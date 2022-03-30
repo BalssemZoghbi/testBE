@@ -52,8 +52,8 @@ class Electrique extends Model
     //     return $this->hasOne(Projet::class);
     //     // return $this->hasOne(Projet::class,'projet_id','id');
     // }
-    
-    // public function projets(){
-    //     return $this->hasMany(Projet::class);
-    // }
+
+    public function projets(){
+        return $this->hasMany(Projet::class);
+    }
 }

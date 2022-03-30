@@ -25,15 +25,15 @@ class Projet extends Model
     'fonctionnement',
     'refroidissement',
     'user_id',
-    // 'projet_id',
+    'electrique_id',
 ];
 
      public function user(){
         return $this->belongsTo(User::class);
     }
-    // public function electrique()
-    // {
-    //     return $this->belongsTo(Electrique::class);
-    // }
+    public function electrique()
+    {
+        return $this->belongsTo(Electrique::class);
+    }
 
 }

@@ -1,5 +1,5 @@
 <template>
-  <header>
+<header>
     <!-- header inner -->
     <div class="header">
       <div class="container">
@@ -47,7 +47,7 @@
                     <router-link class="nav-link" to="/about">Importer</router-link>
                   </li>
                   <li class="nav-item">
-                  <button class="nav-link"  v-on:click="logout"> <span>logout</span></button>
+                  <router-link class="nav-link" to="/login" @click="logout()"> <span>logout</span></router-link>
                   </li>
                 </ul>
                 <div class="Call">
@@ -59,6 +59,7 @@
       </div>
     </div>
   </header>
+ 
 </template>
 <script>
  export default {
@@ -68,13 +69,13 @@
       localStorage.clear();
       this.$router.push('/login');
     }
-  
   }
 };
 </script>
 <style scoped>
 .header {
   width: 100%;
+  
   background: #eae9e4;
   padding: 20px 30px;
 }

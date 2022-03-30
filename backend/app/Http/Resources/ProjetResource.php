@@ -31,7 +31,7 @@ class ProjetResource extends JsonResource
             'fonctionnement'=> $this->fonctionnement,
             'refroidissement'=> $this->refroidissement,
             'user_id'=> $this->user_id,
-            // 'electrique_id'=> $this->electrique_id,
+            'electrique_id'=> $this->electrique_id,
         ];
     }
 }
