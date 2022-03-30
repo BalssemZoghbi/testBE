@@ -2,11 +2,14 @@
 <div>
    <!-- <navbarHome />  -->
    <div class="body">
+     
   <v-data-table
     :headers="headers"
     :items="projets"
     sort-by="calories"
     class="elevation-1"
+    :search="search"
+    :custom-filter="filterOnlyCapsText"
   >
     <template v-slot:top>
       <v-toolbar
@@ -77,11 +80,12 @@
         class="mr-2"
         @click="editItem(item)"
       >
+      
         mdi-pencil
       </v-icon>
       <v-icon
         small
-        @click="deleteItem(item)"
+        v-on:click="deleteprojet(item.id)"
       >
         mdi-delete
       </v-icon>
@@ -93,23 +97,25 @@
 </template>
 <script>
 import axios from "axios";
+// import navbarHome from "@/component/navbarHome.vue"
   export default {
     data: () => ({
       search:"",
       dialog: false,
       dialogDelete: false,
       headers: [
-        {
+          {
           text: 'Reference Transformateur',
+          value: 'reference',
           align: 'start',
-          sortable: false,
-          value: 'couplage',
+          sortable: true
         },
         { text: 'Puissance', value: 'puissance' },
+        { text: 'Appareil', value: 'appareil' },
+        { text: 'Puissance', value: 'puissance'},
         { text: 'Tension Primaire', value: 'u1n' },
           { text: 'Tension Secondaire', value: 'u2o' },
           { text: 'Couplage', value: 'couplage' },
-          { text: 'Frequence', value: 'frequence' },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
        projets: [],
@@ -152,9 +158,10 @@ import axios from "axios";
 
 
     methods: {
-            getprojet() {
-      axios.get('/electrique').then((resp) => {
-        this.projets = resp.data.data;
+      getprojet() {
+      axios.get('/projets').then((resp) => {
+        this.projets = resp.data;
+        console.log(this.projets);
       });
     },
 
@@ -199,6 +206,18 @@ import axios from "axios";
         }
         this.close()
       },
+        filterOnlyCapsText (value, search) {
+        return value != null &&
+          search != null &&
+          typeof value === 'string' &&
+          value.toString().indexOf(search) !== -1
+      },
+      deleteprojet(id) {
+        console.log(id)
+      axios.delete('projets/delete/'+id).then(() => {
+        this.getprojet();
+      });
+    },
     },
   }
 </script>
@@ -222,10 +241,9 @@ import axios from "axios";
     align-items: flex-start;
     display: flex;
     flex: 1 1 auto;
-    font-size: 58px;
+    font-size: 17px;
     letter-spacing: normal;
-    max-width:50%;
-    margin-left: 50%;
+   width:340px;
     text-align: right;
 }
 .v-card > *:last-child:not(.v-btn):not(.v-chip):not(.v-avatar) {

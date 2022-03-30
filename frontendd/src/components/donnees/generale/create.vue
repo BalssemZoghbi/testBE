@@ -149,6 +149,7 @@
           </div>
           </div>
         </div>
+         
       </form>
     </div>
 </div>
@@ -251,6 +252,7 @@ export default {
       fonctionnement: "",
       refroidissement: "",
       user_id: "",
+      electrique_id: "1",
     };
   },
   methods: {
@@ -272,14 +274,15 @@ export default {
         fonctionnement: this.fonctionnement,
         refroidissement: this.refroidissement,
         user_id: this.user_id,
+        electrique_id:"2",
       };
       // console.log(projet)
       axios.post('projets/create',projet).then(
         (response) => (
-          console.log(response.data.id),
+          console.log(projet),
           this.id = response.data.id)
       );
-      this.$router.push({ name: "Home" });
+      this.$router.push("/");
     },
   },
 };

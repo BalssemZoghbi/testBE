@@ -4,12 +4,13 @@ namespace App\Http\Controllers\Donnees;
 
 // use App\Models\Projet;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Http\Resources\UserResource;
-use App\Http\Resources\ProjetResource;
 use App\Models\Donnees\Projet ;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\ProjetResource;
 
 class ProjetController extends Controller
 {
@@ -24,7 +25,7 @@ class ProjetController extends Controller
     }
 
     public function storeProjet(Request $request){
-
+        // $user=Auth::user();
         $projet= Projet::create([
              'appareil' => $request->appareil,
              'reference' =>$request->reference,
@@ -41,6 +42,8 @@ class ProjetController extends Controller
              'fonctionnement' =>$request->fonctionnement,
              'refroidissement' =>$request->refroidissement,
              'user_id' =>$request->user_id,
+            //  'user_id' =>$user->id,
+            //  'elaborateur' =>$user->name,
              'electrique_id' =>$request->electrique_id
          ]);
 
