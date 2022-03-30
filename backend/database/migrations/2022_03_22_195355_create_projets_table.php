@@ -29,10 +29,8 @@ class CreateProjetsTable extends Migration
             $table->enum('dielectrique',['huile biodegradable','huile minerale inhibée','huile siliconne','huile minerale non inhibée']);
             $table->enum('fonctionnement',['abaisseur','elevateur','isolement']);
             $table->enum('refroidissement',['onan','onaf']);
-            // $table->bigInteger('electrique_id');
             $table->foreignId('user_id')->constrained();
-            // $table->foreign('electrique_id')->references('id')->on('electriques')->onDelete('cascade');
-            // $table->foreignId('electrique_id')->constrained();
+            $table->foreignId('electrique_id')->constrained();
             $table->timestamps();
         });
     }
