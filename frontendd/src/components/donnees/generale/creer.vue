@@ -1,117 +1,58 @@
 <template>
 <div>
-<!-- <navbarHome/> -->
-  <v-stepper v-model="e1">
-    <v-stepper-header>
-      <v-stepper-step
-        :complete="e1 > 1"
-        step="1"
-      >
-        Name of step 1
-      </v-stepper-step>
-
-      <v-divider></v-divider>
-
-      <v-stepper-step
-        :complete="e1 > 2"
-        step="2"
-      >
-        Name of step 2
-      </v-stepper-step>
-
-      <v-divider></v-divider>
-
-      <v-stepper-step step="3">
-        Name of step 3
-      </v-stepper-step>
-    </v-stepper-header>
-
-    <v-stepper-items>
-      <v-stepper-content step="1">
-        <v-card
-          class="mb-12"
-          color="grey lighten-1"
-          height="450px"
-        >
-        <div class="body">
+<!-- <navbar2/> -->
+<div class="body">
 <div class="container">
     <div class="title">Données Generale</div>
     <div class="content">
       <form v-on:submit.prevent="storeprojet">
+        
         <div class="user-details">
-           <div class="input-box">
+          
+          <div class="input-box">
                <div class="form__div">
                     <input type="text" class="form__input" placeholder=" " id="appareil" v-model="appareil">
                     <label for="" class="form__label">Appareil</label>
                 </div>
           </div>
-           <div class="input-box">
+          <div class="input-box">
             <div class="form__div">
               <input type="text" class="form__input" placeholder=" " id="reference" v-model="reference">
               <label for="" class="form__label">Reference</label>
           </div>
           </div>
-           <div class="input-box">
+          <div class="input-box">
             <div class="form__div">
               <input type="text" class="form__input" placeholder=" " id="client" v-model="client">
               <label for="" class="form__label">Client</label>
           </div>
           </div>
-            <div class="input-box">
+          <div class="input-box">
             <div class="form__div">
               <input type="text" class="form__input" placeholder=" " id="refClient" v-model="refClient">
               <label for="" class="form__label">Reference Client</label>
           </div>
           </div>
-       
-          
-            <div class="input-box">
+          <div class="input-box">
             <div class="form__div">
-              <input type="text" class="form__input" placeholder=" "  id="user_id"
-        v-model="user_id">
-              <label for="" class="form__label">Elaboré par</label>
+              <input type="text" class="form__input" placeholder=" " id="temperatureMax" v-model="temperatureMax">
+              <label for="" class="form__label">TemperatureMax</label>
           </div>
           </div>
-        </div>
-      </form>
-    </div>
-</div>
-        </div>
-
-  </v-card>
-
-        <v-btn
-          color="primary"
-          @click="e1 = 2"
-        >
-          Continue
-        </v-btn>
-
-        <v-btn text>
-          Cancel
-        </v-btn>
-      </v-stepper-content>
-
-      <v-stepper-content step="2">
-        <v-card
-          class="mb-12"
-          color="grey lighten-1"
-          height="450px"
-        >
-            <div class="body">
-<div class="container">
-    <div class="title">Données Generale</div>
-    <div class="content">
-      <form v-on:submit.prevent="storeprojet">
-        <div class="user-details">
-             <div class="input-box">
+          <div class="input-box">
+            <div class="form__div">
+              <input type="text" class="form__input" placeholder=" " id="attitudeMax" v-model="attitudeMax">
+              <label for="" class="form__label">attitudeMax</label>
+          </div>
+          </div>
+                 <div class="input-box">
             <div class="form__div">
               <input type="text" class="form__input" placeholder=" " id="type"
         v-model="type">
               <label for="" class="form__label">type</label>
           </div>
           </div>
-            <div class="input-box">
+                 <div class="input-box">
             <div class="form__div">
               <input type="text" class="form__input" placeholder=" " id="remplissage"
         v-model="remplissage">
@@ -132,110 +73,60 @@
               <label for="" class="form__label">Montage</label>
           </div>
           </div>
-       
-           <div class="input-box">
-            <div class="form__div">
-              <input type="text" class="form__input" placeholder=" " id="dielectrique"
-        v-model="dielectrique">
-              <label for="" class="form__label">Dielectrique</label>
-          </div>
-          
-          </div>
-               <div class="input-box">
-            <div class="form__div">
-              <input type="text" class="form__input" placeholder=" " id="fonctionnement"
-        v-model="fonctionnement">
-              <label for="" class="form__label">Fonctionnement</label>
-          </div>
-          </div>
-        </div>
-      </form>
-    </div>
-</div>
-        </div>
-        </v-card>
-
-        <v-btn
-          color="primary"
-          @click="e1 = 3"
-        >
-          Continue
-        </v-btn>
-
-        <v-btn text>
-          Cancel
-        </v-btn>
-      </v-stepper-content>
-
-      <v-stepper-content step="3">
-        <v-card
-          class="mb-12"
-          color="grey lighten-1"
-          height="340px"
-        >
-           <div class="body">
-<div class="container">
-    <div class="title">Données Generale</div>
-    <div class="content">
-      <form v-on:submit.prevent="storeprojet">
-        <div class="user-details">
-              <div class="input-box">
+          <div class="input-box">
             <div class="form__div">
               <input type="text" class="form__input" placeholder=" " id="echangeurs"
         v-model="echangeurs">
               <label for="" class="form__label">Echangeurs</label>
           </div>
           </div>
-                <div class="input-box">
+          <div class="input-box">
             <div class="form__div">
-              <input type="text" class="form__input" placeholder=" " id="temperatureMax" v-model="temperatureMax">
-              <label for="" class="form__label">TemperatureMax</label>
+              <input type="text" class="form__input" placeholder=" " id="dielectrique"
+        v-model="dielectrique">
+              <label for="" class="form__label">Dielectrique</label>
           </div>
           </div>
           <div class="input-box">
             <div class="form__div">
-              <input type="text" class="form__input" placeholder=" " id="attitudeMax" v-model="attitudeMax">
-              <label for="" class="form__label">attitudeMax</label>
+              <input type="text" class="form__input" placeholder=" " id="fonctionnement"
+        v-model="fonctionnement">
+              <label for="" class="form__label">Fonctionnement</label>
           </div>
           </div>
-            <div class="input-box">
+          <div class="input-box">
             <div class="form__div">
               <input type="text" class="form__input" placeholder=" " id="refroidissement"
         v-model="refroidissement">
               <label for="" class="form__label">Refroidissement</label>
           </div>
           </div>
+          <div class="input-box">
+            <div class="form__div">
+              <input type="text" class="form__input" placeholder=" "  id="user_id"
+        v-model="user_id">
+              <label for="" class="form__label">Elaboré par</label>
+          </div>
+          </div>
+        </div>
+        <div class="button">
+          <input type="submit" value="Crée">
         </div>
       </form>
     </div>
+  </div>
 </div>
-        </div>
-
-        </v-card>
-
-        <v-btn
-          color="primary"
-          @click="e1 = 1"
-        >
-          Continue
-        </v-btn>
-
-        <v-btn  @click="storeprojet">
-          Crée
-        </v-btn>
-      </v-stepper-content>
-    </v-stepper-items>
-  </v-stepper>
 </div>
 </template>
+
 <script>
-// import navbarHome from '../../components/navbarHome.vue';
+
 import axios from "axios";
+// import navbar2 from './navbar2.vue';
 export default {
-  // components: { navbarHome },
-   data() {
+  // components: { navbar2 },
+  data() {
     return {
-        e1: 1,
       appareil: "",
       reference: "",
       client: "",
@@ -283,7 +174,6 @@ export default {
     },
   },
 };
-  
 </script>
 
 <style scoped>

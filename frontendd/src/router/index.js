@@ -7,6 +7,8 @@ import Register from "../views/Register.vue";
 import about from "../views/About.vue";
 import createProjet from "../components/donnees/generale/create.vue";
 import updateProjet from "../components/donnees/generale/update.vue";
+import Uni from "../views/Untitled-1.vue";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -21,9 +23,9 @@ const routes = [
     component: Dashboard,
   },
   {
-    path: "/",
-    name: "Home",
-    component: Home,
+    path: "/uni",
+    name: "Uni",
+    component: Uni,
   },
   {
     path: "/login",
