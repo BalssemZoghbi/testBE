@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Electrique;
+use App\Models\Donnees\Electrique;
 use Illuminate\Database\Seeder;
 
 class ElectriqueSeeder extends Seeder

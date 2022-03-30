@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Projet;
+use App\Models\Donnees\Projet;
 use App\Models\User;
 
 class ProjetFactory extends Factory

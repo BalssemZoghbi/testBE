@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\Electrique;
-use App\Models\TensionElectrique;
+use App\Models\Donnees\Electrique;
+use App\Models\Donnees\TensionElectrique;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ElectriqueFactory extends Factory
