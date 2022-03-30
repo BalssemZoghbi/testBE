@@ -7,7 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Donnees\ProjetController;
 use App\Http\Controllers\Donnees\ElectriqueController;
 use App\Http\Controllers\Donnees\TensionElectriqueController;
-// use App\Http\Controllers\ProjetController;
+use App\Http\Controllers\ForgotController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,3 +55,6 @@ Route::put('/electrique/edit/{id}',[ElectriqueController::class ,'edit']);
 Route::delete('/electrique/delete/{id}',[ElectriqueController::class ,'delete']);
 Route::put('/user/accept/{id}',[AuthController::class ,'accept']);
 Route::delete('/user/decline/{id}',[AuthController::class ,'decline']);
+
+Route::post('/forgot', [ForgotController::class,'forgot']);
+Route::post('/reset', [ForgotController::class,'reset']);
