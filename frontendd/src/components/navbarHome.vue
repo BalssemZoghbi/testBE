@@ -8,12 +8,12 @@
             <div class="full">
               <div class="center-desk">
                 <div class="logo">
-                  <!-- <a href="sacemindustries.com"
+                  <a href="sacemindustries.com"
                     ><img
                       src="../assets/sacem.png"
                       width="100px"
                       alt="sacemindustries"
-                  /></a> -->
+                  /></a>
                 </div>
               </div>
             </div>
@@ -163,7 +163,7 @@ img {
 
 .navbar-dark .navbar-nav .nav-link:focus,
 .navbar-dark .navbar-nav .nav-link:hover {
-  color: #5a2f27 !important;
+  color: #37a0dd !important;
 }
 
 .navbar-expand-md .navbar-nav {
@@ -173,7 +173,7 @@ img {
 .Call a {
   display: inline-block;
   padding: 7px 0;
-  color: #5a2f27;
+  color: #169deb;
   font-size: 20px;
 }
 .yellow {

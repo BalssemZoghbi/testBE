@@ -1,6 +1,6 @@
 <template>
 <div>
-<!-- <navbarHome/> -->
+<navbarcreate/>
   <v-stepper v-model="e1">
     <v-stepper-header>
       <v-stepper-step
@@ -230,10 +230,10 @@
 </div>
 </template>
 <script>
-// import navbarHome from '../../components/navbarHome.vue';
+import navbarcreate from '../../navbarcreate';
 import axios from "axios";
 export default {
-  // components: { navbarHome },
+  components: { navbarcreate },
    data() {
     return {
         e1: 1,

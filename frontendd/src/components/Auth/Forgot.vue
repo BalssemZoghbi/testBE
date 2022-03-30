@@ -1,25 +1,24 @@
 <template>
 <div class="body">
-    <div class="center">
+    <div class="center"> 
+     
       <!-- <img src="../../assets/ava.svg"> -->
-      <h1>WELCOME</h1>
-      <form v-on:submit.prevent="loginn" method="post">
+      <h1>Forgot Password</h1>
+      <form @submit.prevent="handleSubmit" >
+         <!-- <div v-if="message" class="alert alert-succes" role="alert">
+        {{error}}
+    </div>
+      <error v-if="error" :error="error"/> -->
         <div class="txt_field">
           <input type="email" id="email"
         v-model="email" required>
           <span></span>
           <label>Email</label>
         </div>
-        <div class="txt_field">
-          <input type="password" id="password"
-        v-model="password" required>
-          <span></span>
-          <label>Password</label>
-        </div>
-        <div class="pass"><router-link class="nav-link"  to="/forgot">Forgot Password?</router-link></div>
-        <input type="submit" @click="login()" :class="{'disabled': !validateFields}" value="Login">
+      
+        <!-- <div class="pass"> <router-link class="nav-link"  to="/forgot">Forgot Password?</router-link></div> -->
+        <input type="submit" value="Envoyer">
         <div class="signup_link">
-          Not a member? <router-link  to="/register">Signup</router-link>
         </div>
       </form>
     </div>
@@ -27,44 +26,33 @@
 </template>
 
 <script>
-import {mapState} from 'vuex';
-import axios from "axios";
-
+import axios from 'axios';
+// import Error from '../components/Error.vue';
 export default {
+    name:"Forgot",
+    // components:{
+    //   Error
+    // },
   data() {
     return {
       email: "",
-      password: ""
+      message:''
     };
   },
-  computed:{
-    validateFields:function(){
-      if(this.email!="" && this.password!=""){
-        return true;
-      }else{
-        return false;
-      }
-    },
-    ...mapState(['status'])
-
-  },
-//  mounted(){
-//    let user= localStorage.getItem(userInfos)
-//    if(user){
-//      this.$router.push('/');
-//    }
-//  },
   methods: {
- async login() {
-    let self = this
-    let result= await axios.post(`/login?email=${this.email}&password=${this.password}`);
-      localStorage.setItem("user",JSON.stringify(result.data))
-      if(result.status==200 ){
-        console.log('login done');
-      }
-      self.$router.push('/');
-  }
-},}
+async handleSubmit(){
+  // try{
+ const response= await axios.post('/forgot',{
+  email:this.email
+});
+console.log(response);
+// this.message='The email was sent'
+  // }catch(e){
+    // this.error='Error occurred';
+  // }
+}
+  },
+};
 </script>
 
 <style scoped>
@@ -76,7 +64,7 @@ img{
 h1{
 	color: #333;
 	text-transform: uppercase;
-	font-size: 2.9rem;
+	font-size: 2rem;
 }
 .body{
   margin: 0;
