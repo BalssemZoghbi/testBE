@@ -3,6 +3,8 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Dashboard from "../views/Dashboard.vue";
 import Login from "../views/Login.vue";
+import Forgot from "../views/Forgot.vue";
+import Reset from "../views/Reset.vue";
 import Register from "../views/Register.vue";
 import about from "../views/About.vue";
 import createProjet from "../components/donnees/generale/create.vue";
@@ -29,6 +31,16 @@ const routes = [
     path: "/login",
     name: "Login",
     component: Login,
+  },
+  {
+    path: "/reset/:token",
+    name: "Reset",
+    component: Reset,
+  },
+  {
+    path: "/forgot",
+    name: "Forgot",
+    component: Forgot,
   },
   {
     path: "/Register",
