@@ -3,7 +3,7 @@
     <div class="center">
       <!-- <img src="../../assets/ava.svg"> -->
       <h1>WELCOME</h1>
-      <form v-on:submit.prevent="createAccount" method="post">
+      <form v-on:submit.prevent="register" method="post">
            <div class="txt_field">
           <input type="text" id="name"
         v-model="name" required>
@@ -77,7 +77,6 @@ export default {
   },
 };
 </script>
-
 <style scoped>
 
 img{
