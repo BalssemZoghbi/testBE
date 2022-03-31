@@ -1,6 +1,6 @@
 <template>
 <div>
-   <!-- <navbarHome />  -->
+   <!-- <nav />  -->
    <div class="body">
      
   <v-data-table
@@ -96,9 +96,12 @@
 </div>
 </template>
 <script>
-import axios from "axios";
-// import navbarHome from "@/component/navbarHome.vue"
+import axios from "axios"; 
+// import nav from "../../components/nav.vue";
   export default {
+    components: {
+    // nav,
+  },
     data: () => ({
       search:"",
       dialog: false,
@@ -110,12 +113,12 @@ import axios from "axios";
           align: 'start',
           sortable: true
         },
-        { text: 'Puissance', value: 'puissance' },
         { text: 'Appareil', value: 'appareil' },
-        { text: 'Puissance', value: 'puissance'},
+        { text: 'Puissance', value: 'puissance' },
         { text: 'Tension Primaire', value: 'u1n' },
           { text: 'Tension Secondaire', value: 'u2o' },
           { text: 'Couplage', value: 'couplage' },
+          { text: 'Frequence', value: 'frequence' },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
        projets: [],
@@ -158,13 +161,17 @@ import axios from "axios";
 
 
     methods: {
-      getprojet() {
-      axios.get('/projets').then((resp) => {
-        this.projets = resp.data;
-        console.log(this.projets);
+    //   getprojet() {
+    //   axios.get('/projets').then((resp) => {
+    //     this.projets = resp.data;
+    //     console.log(this.projets);
+    //   });
+    // },
+         getprojet() {
+      axios.get('/electrique').then((resp) => {
+        this.projets = resp.data.data;
       });
     },
-
       editItem (item) {
         this.editedIndex = this.desserts.indexOf(item)
         this.editedItem = Object.assign({}, item)
@@ -223,7 +230,9 @@ import axios from "axios";
 </script>
 <style scoped>
 .body{
+  background-color: rgb(187, 185, 185);
   padding:80px;
+  margin: 10%;
 }
 .v-card {
   margin-left: 85%;
