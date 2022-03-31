@@ -97,7 +97,8 @@
 </template>
 <script>
 import axios from "axios"; 
- import navbar from "../components/nav.vue";
+//  import navbar from "../components/nav.vue";
+import navbar from "../components/navbar.vue";
   export default {
     components: {
     navbar,

@@ -15,8 +15,6 @@
           <span></span>
           <label>Email</label>
         </div>
-      
-        <!-- <div class="pass"> <router-link class="nav-link"  to="/forgot">Forgot Password?</router-link></div> -->
         <input type="submit" value="Envoyer">
         <div class="signup_link">
         </div>

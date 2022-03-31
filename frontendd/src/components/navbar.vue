@@ -11,17 +11,27 @@
         <i class="fas fa-bars"></i>
       </label>
       <ul>
-        <li><a class="active" href="#">Accueil</a></li>
-        <li><a href="#">Creer</a></li>
-        <li><a href="#">Importer</a></li>
-        <li><a href="#">Deconnexion</a></li>
+        <li><router-link class="nav-link active" to="/">Accueil</router-link></li>
+        <li><router-link class="nav-link" to="/projet/create">Crée</router-link></li>
+		 <li><router-link class="nav-link" to="/dashboard">Tableau de bord</router-link></li>
+        <li><router-link class="nav-link" to="">Importer</router-link></li>
+        <li><router-link class="nav-link" to="/login" @click="logout()">Deconnexion</router-link></li>
       </ul>
     </nav>
 </template>
-
-
-
+<script>
+ export default {
+  name: "navbar",
+  methods:{
+    logout(){
+      localStorage.clear();
+      this.$router.push('/login');
+    }
+  }
+};
+</script>
 <style scoped>
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 
 nav{
   display: flex;
@@ -46,8 +56,8 @@ nav ul{
 nav ul li{
   margin: 0 5px;
 }
-nav ul li a{
-  color: #f2f2f2;
+nav ul li .nav-link{
+  color: rgb(234, 243, 246);
   text-decoration: none;
   font-size: 18px;
   font-weight: 500;
@@ -56,8 +66,8 @@ nav ul li a{
   letter-spacing: 1px;
   transition: all 0.3s ease;
 }
-nav ul li a.active,
-nav ul li a:hover{
+nav ul li .nav-link.active,
+nav ul li .nav-link:hover{
   color: #366ca8;
   background: #fff;
 }
@@ -70,17 +80,18 @@ nav .menu-btn i{
 input[type="checkbox"]{
   display: none;
 }
-@media (max-width: 700px){
+@media (max-width: 1000px){
   nav{
     padding: 0 40px 0 50px;
   }
 }
-@media (max: width 700px) {
+@media (max: width 1000px) {
   nav .menu-btn i{
     display: block;
   }
   #click:checked ~ .menu-btn i:before{
     content: "\f00d";
+	/* content: icon; */
   }
   nav ul{
     position: fixed;
