@@ -1,7 +1,7 @@
 <template>
 <div class="body">
     <div class="center">
-      <!-- <img src="../../assets/ava.svg"> -->
+      <img src="../../assets/ava.svg">
       <h1>WELCOME</h1>
       <form v-on:submit.prevent="register" method="post">
            <div class="txt_field">
@@ -77,22 +77,22 @@ export default {
   },
 };
 </script>
-<style scoped>
 
+<style scoped>
 img{
   width: 455px;
   height: 100px;
   margin-top: 20px;
 }
 h1{
-	color: #fff;
+	color: #333;
 	text-transform: uppercase;
 	font-size: 2.9rem;
 }
 .body{
   margin: 0;
   padding: 0;
-  background: white;
+  background: linear-gradient(120deg,#2980b9, #449dad);
   height: 100vh;
   overflow: hidden;
 }
@@ -101,15 +101,15 @@ h1{
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 480px;
-  background: #3895d3;
+  width: 450px;
+  background: white;
   border-radius: 10px;
   box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
 }
 .center h1{
   text-align: center;
   padding: 20px 0;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid silver;
 }
 .center form{
   padding: 0 40px;
@@ -117,7 +117,7 @@ h1{
 }
 form .txt_field{
   position: relative;
-  border-bottom: 2px solid white;
+  border-bottom: 2px solid #adadad;
   margin: 30px 0;
 }
 .txt_field input{
@@ -133,7 +133,7 @@ form .txt_field{
   position: absolute;
   top: 50%;
   left: 5px;
-  color: white;
+  color: #adadad;
   transform: translateY(-50%);
   font-size: 16px;
   pointer-events: none;
@@ -146,13 +146,13 @@ form .txt_field{
   left: 0;
   width: 0%;
   height: 2px;
-  background: white;
+  background: #2691d9;
   transition: .5s;
 }
 .txt_field input:focus ~ label,
 .txt_field input:valid ~ label{
   top: -5px;
-  color: white;
+  color: #2691d9;
 }
 .txt_field input:focus ~ span::before,
 .txt_field input:valid ~ span::before{
@@ -160,7 +160,7 @@ form .txt_field{
 }
 .pass{
   margin: -5px 0 20px 5px;
-  color: white;
+  color: #a6a6a6;
   cursor: pointer;
 }
 .pass:hover{
@@ -170,29 +170,30 @@ input[type="submit"]{
   width: 100%;
   height: 50px;
   border: 1px solid;
-  background: white;
+  background: #2691d9;
   border-radius: 25px;
   font-size: 18px;
-  color: #3895d3;
+  color: #e9f4fb;
   font-weight: 700;
   cursor: pointer;
   outline: none;
 }
 input[type="submit"]:hover{
-  border-color: white;
+  border-color: #2691d9;
   transition: .5s;
 }
 .signup_link{
   margin: 30px 0;
   text-align: center;
   font-size: 16px;
-  color: #242121;
+  color: #666666;
 }
 .signup_link a{
-  color: white;
+  color: #2691d9;
   text-decoration: none;
 }
 .signup_link a:hover{
   text-decoration: underline;
 }
+
 </style>

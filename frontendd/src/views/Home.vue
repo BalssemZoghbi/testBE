@@ -1,6 +1,6 @@
 <template>
 <div>
-   <!-- <nav />  -->
+   <navbar /> 
    <div class="body">
      
   <v-data-table
@@ -93,14 +93,19 @@
 
   </v-data-table>
    </div>
+    <Footer/> 
 </div>
 </template>
 <script>
 import axios from "axios"; 
-// import nav from "../../components/nav.vue";
+//  import navbar from "../components/nav.vue";
+import Footer from '@/components/Footer'
+
+import navbar from "../components/navbar.vue";
   export default {
     components: {
-    // nav,
+    navbar,
+    Footer
   },
     data: () => ({
       search:"",
@@ -230,12 +235,12 @@ import axios from "axios";
 </script>
 <style scoped>
 .body{
-  background-color: rgb(187, 185, 185);
-  padding:80px;
-  margin: 10%;
+  background-color: #a2c7ff77;
+  padding:70px;
+  margin: 1.3%;
 }
 .v-card {
-  margin-left: 85%;
+  /* margin-left: 85%; */
     border-width: thin;
     display: block;
     max-width: 100%;
@@ -261,8 +266,8 @@ import axios from "axios";
     border-top: thin solid rgba(0, 0, 0, 0.12);}
 .v-data-table {
     /* line-height: 1.5; */
-    max-width: 88%;
-      margin-left: 5%;
+    max-width: 1800px;
+      /* margin-left: 3%; */
 
 }
 .theme--light.v-icon {
