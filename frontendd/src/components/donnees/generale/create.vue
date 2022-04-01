@@ -1,6 +1,7 @@
 <template>
 <div>
 <navbarcreate/>
+<div class="body">
   <v-stepper v-model="e1">
     <v-stepper-header>
       <v-stepper-step
@@ -172,7 +173,7 @@
         <v-card
           class="mb-12"
           color="grey lighten-1"
-          height="340px"
+          height="450px"
         >
            <div class="body">
 <div class="container">
@@ -213,20 +214,13 @@
         </div>
 
         </v-card>
-
-        <v-btn
-          color="primary"
-          @click="e1 = 1"
-        >
-          Continue
-        </v-btn>
-
-        <v-btn  @click="storeprojet">
+        <v-btn color="primary" @click="storeprojet">
           Crée
         </v-btn>
       </v-stepper-content>
     </v-stepper-items>
   </v-stepper>
+</div>
 </div>
 </template>
 <script>
@@ -293,11 +287,7 @@ export default {
 /* Googlefont Poppins CDN Link */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
-.body{
-  margin: 0;
-  padding: 0;
-  font-size: 1rem;
-}
+
 h1{
   margin: 0;
 }
@@ -392,25 +382,28 @@ h1{
 
 
 
-*{
+/* *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins',sans-serif;
-}
+} */
 
 .body{
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
+  /* display: flex; */
+  /* justify-content: center;
+  align-items: center; */
+  padding: 20px;
+        max-height: calc(100vh - 50px);
+
+  /* margin: 0.5%; */
   background: linear-gradient(135deg,#71b7e675, #71b7e675);
 }
 .container{
   max-width: 98%;
-  height: 80%;
-  /* margin-top: 5%; */
+  /* height: 80%; */
+  margin-top: 2%;
   width: 100%;
   background-color: #fff;
   padding: 25px 30px;
