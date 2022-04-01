@@ -15,7 +15,8 @@
         <li><router-link class="nav-link" to="/projet/create">Crée</router-link></li>
 		 <li><router-link class="nav-link" to="/dashboard">Tableau de bord</router-link></li>
         <li><router-link class="nav-link" to="">Importer</router-link></li>
-        <li><router-link class="nav-link" to="/login" @click="logout()">Deconnexion</router-link></li>
+        <li><router-link class="nav-link " to="/login" @click="logout()"><v-icon >fas fa-sign-out-alt</v-icon>
+</router-link></li>
       </ul>
     </nav>
 </template>

@@ -93,15 +93,19 @@
 
   </v-data-table>
    </div>
+    <Footer/> 
 </div>
 </template>
 <script>
 import axios from "axios"; 
 //  import navbar from "../components/nav.vue";
+import Footer from '@/components/Footer'
+
 import navbar from "../components/navbar.vue";
   export default {
     components: {
     navbar,
+    Footer
   },
     data: () => ({
       search:"",
