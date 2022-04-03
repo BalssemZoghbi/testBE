@@ -24,6 +24,7 @@ class Projet extends Model
     'dielectrique',
     'fonctionnement',
     'refroidissement',
+    'elaborateur',
     'user_id',
     'electrique_id',
 ];

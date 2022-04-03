@@ -9,6 +9,8 @@ import Forgot from "../components/Auth/Forgot.vue";
 import Reset from "../components/Auth/Reset.vue";
 import createProjet from "../components/donnees/generale/create.vue";
 import updateProjet from "../components/donnees/generale/update.vue";
+import updateElec from "../components/donnees/electrique/update.vue";
+import createElec from "../components/donnees/electrique/create.vue";
 import Uni from "../views/Untitled-1.vue";
 
 Vue.use(VueRouter);
@@ -63,6 +65,16 @@ const routes = [
     path: "/projet/update/:id",
     name: "projet.update",
     component: updateProjet,
+  },
+  {
+    path: "/electrique/update/:id/:elec_id",
+    name: "electrique.update",
+    component: updateElec,
+  },
+  {
+    path: "/electrique/create/:id",
+    name: "electrique.create",
+    component: createElec,
   },
 ];
 

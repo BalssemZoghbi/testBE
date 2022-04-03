@@ -1,6 +1,6 @@
 <template>
 <div>
-<navbarcreate/>
+<navbarcreate :projet_id='this.id'/>
 <div class="body">
   <v-stepper v-model="e1">
     <v-stepper-header>
@@ -214,9 +214,9 @@
         </div>
 
         </v-card>
-        <v-btn color="primary" @click="storeprojet">
+        <router-link class="nav-link" :to="'/electrique/create/' + this.id"><v-btn color="primary" @click="storeprojet">
           Crée
-        </v-btn>
+        </v-btn></router-link>
       </v-stepper-content>
     </v-stepper-items>
   </v-stepper>
@@ -268,15 +268,16 @@ export default {
         fonctionnement: this.fonctionnement,
         refroidissement: this.refroidissement,
         user_id: this.user_id,
-        electrique_id:"2",
+        electrique_id:"1",
       };
       // console.log(projet)
       axios.post('projets/create',projet).then(
         (response) => (
-          console.log(projet),
-          this.id = response.data.id)
+          this.id = response.data.id),
+          console.log( this.id ),
+
       );
-      this.$router.push("/");
+      // this.$router.push("/");
     },
   },
 };

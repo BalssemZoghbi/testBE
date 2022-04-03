@@ -13,10 +13,10 @@
                             <div class="dropdown">
                                 <ul>
                                     <li class="dropdown-link">
-                                            <router-link to="/projet/create">  <a href="#" >Generale</a></router-link>
+                                            <router-link :to="'/projet/update/'+id">  <a href="#" >Generale</a></router-link>
                                     </li>
                                     <li class="dropdown-link">
-                                            <router-link :to="'/electrique/create/'+ projet_id ">  <a href="#" >Electriques</a></router-link>
+                                            <router-link :to="'/electrique/update/'+ id+'/'+elec_id ">  <a href="#" >Electriques</a></router-link>
                                     </li>
                                     <li class="dropdown-link">
                                         <a href="#">Bobinages<i class="fas fa-caret-down"></i></a>
@@ -90,7 +90,7 @@
 <script>
 export default {
   name: "navbarcreate",
-  props: ['projet_id']
+  props: ['id','elec_id']
 };
 </script>
 <style scoped>
