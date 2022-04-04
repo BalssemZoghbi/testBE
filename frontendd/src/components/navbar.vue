@@ -13,11 +13,11 @@
       <ul>
         <li><router-link class="nav-link active" to="/">Accueil</router-link></li>
          <!-- :to="'/projet/update/'+this.createprojet.id" -->
-        <li><router-link class="nav-link" :to="'/projet/update/'+this.createprojet.id"  @click="create()" >Crée</router-link></li>
+        <li><button class="nav-link" @click="create()" >Crée</button></li>
 		 <li><router-link class="nav-link" to="/dashboard">Tableau de bord</router-link></li>
         <li><router-link class="nav-link" to="">Importer</router-link></li>
-        <li><router-link class="nav-link " to="/login" @click="logout()"><v-icon >fas fa-sign-out-alt</v-icon>
-</router-link></li>
+        <li><button class="nav-link "  @click="logout()"><v-icon >fas fa-sign-out-alt</v-icon>
+</button></li>
       </ul>
     </nav>
 </template>
@@ -38,11 +38,12 @@ import axios from "axios";
       console.log('aa');
        axios.post('projets/create').then(
         (response) => (
-          this.createprojet = response.data),
-    console.log(this.createprojet)
-
+          this.createprojet = response.data,
+          console.log(response.data),
+          this.$router.push('/projet/update/'+response.data.id))
       );
-     
+      
+
     }
   }
 };

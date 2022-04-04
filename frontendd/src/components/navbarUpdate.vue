@@ -90,6 +90,9 @@
 <script>
 export default {
   name: "navbarcreate",
+  data: () => ({
+    id:undefined,
+   }),
   props: ['id','elec_id']
 };
 </script>

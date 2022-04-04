@@ -172,11 +172,9 @@ import navbar from "../components/navbar.vue";
       getprojet() {
       axios.get('/projets').then((resp) => {
         this.projets = resp.data;
-        console.log(this.projets);
       });
     },
     deleteprojet(id) {
-      console.log(id)
       axios.delete('projets/delete/'+id).then(() => {
        this.getprojet();
       });

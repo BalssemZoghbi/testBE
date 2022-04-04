@@ -69,7 +69,7 @@
             <div class="input-box">
             <div class="form__div">
               <input type="text" class="form__input" placeholder=" "  id="user_id"
-        v-model="projet.elaborateur">
+        v-model="projet.elaborateur" >
               <label for="" class="form__label">Elaboré par</label>
           </div>
           </div>
@@ -214,8 +214,8 @@
         </div>
 
         </v-card>
-        <router-link class="nav-link" :to="'/electrique/create/' + this.id"><v-btn color="primary" @click="updateprojet">
-          Crée
+        <router-link class="nav-link" :to="'/electrique/update/' + projet.id+'/'+ projet.electrique_id"><v-btn color="primary" @click="updateprojet">
+          Modifier
         </v-btn></router-link>
       </v-stepper-content>
     </v-stepper-items>
@@ -251,6 +251,7 @@ export default {
       elaborateur:"",
       user_id: "",
       },
+      e1:1
     };
   },
   methods: {
@@ -273,18 +274,22 @@ export default {
         refroidissement: this.projet.refroidissement,
         user_id: this.projet.user_id,
         elaborateur: this.projet.elaborateur,
+        
       };
       axios.put('projets/edit/'+this.$route.params.id, projets).then(
         (response) => (this.id = response.data.id, console.log(response.data))
         
       );
-      this.$router.push({ name: "Home" });
     },
   },
   async mounted() {
     const result = await axios.get('projets/'+this.$route.params.id);
     this.projet = result.data;
+    // this.updateprojet();
   },
+  created(){
+        // this.updateprojet();
+  }
 };
 </script>
 <style scoped>

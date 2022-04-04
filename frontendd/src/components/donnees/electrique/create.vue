@@ -319,6 +319,7 @@ export default {
   data() {
     return {
       projet: {
+        id:undefined,
       nbrePosition: "",
       colonnes: "",
       frequence: "",
@@ -349,6 +350,7 @@ export default {
       tenueChoc1: "",
       classeU1: "",
       tenueFr1: "",
+      e1:1
       },
     };
   },

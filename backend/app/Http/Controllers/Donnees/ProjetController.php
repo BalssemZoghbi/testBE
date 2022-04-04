@@ -29,7 +29,7 @@ class ProjetController extends Controller
     public function storeProjet(){
         // $user=Auth::user();
         $elec=Electrique::create([
-            "colonnes"=>  "3",
+            "colonnes"=>  '4',
             "frequence"=> "60",
             "u1n"=> 3000,
             "u2o"=> 50000,
@@ -43,7 +43,7 @@ class ProjetController extends Controller
             "classeU1"=> 5,
             "classeU2"=>8,
             "puissance"=> 800,
-            "couplage"=> "YN",
+            "couplage"=> "Yz",
             "tenueFr1"=> 133,
             "tenueChoc1"=> 456,
             "tenueFr2"=> 235,
@@ -76,12 +76,11 @@ class ProjetController extends Controller
              'fonctionnement' =>'abaisseur',
              'refroidissement' =>'onaf',
              'user_id' =>'1',
-            // dd(Auth::id()),
-            //  'user_id' =>'Auth::id()',
+            // dd(Auth::user()),
+            //  'user_id' =>Auth::id(),
             //  'elaborateur' =>Auth::user()->name,
              'elaborateur' =>'Ali Ben Aouicha',
              'electrique_id' =>$elec->id
-
          ]);
 
          if($projet->save()){

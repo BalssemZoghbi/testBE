@@ -269,6 +269,7 @@ export default {
         refroidissement: this.refroidissement,
         user_id: this.user_id,
         electrique_id:"1",
+        e1:1,
       };
       // console.log(projet)
       axios.post('projets/create',projet).then(
