@@ -233,17 +233,7 @@
                             >
                           </div>
                         </div>
-                        <div class="input-box">
-                          <div class="form__div">
-                            <input
-                              type="text"
-                              class="form__input"
-                              placeholder=" "
-                              disabled
-                            />
-                            <label for="" class="form__label">Varionnes</label>
-                          </div>
-                        </div>
+                     
                       </div>
                     </form>
                   </div>
@@ -382,19 +372,7 @@
                             <label for="" class="form__label">IPhase</label>
                           </div>
                         </div>
-                        <div class="input-box">
-                          <div class="form__div">
-                            <input
-                              type="text"
-                              class="form__input"
-                              placeholder=" "
-                              id="Uz"
-                              readonly
-                              v-model="projet.Uz"
-                            />
-                            <label for="" class="form__label">Uz</label>
-                          </div>
-                        </div>
+                      
                       </div>
                     </form>
                   </div>
@@ -775,10 +753,7 @@ form .input-box span.details {
   /* border-bottom-width: 2px; */
   transition: all 0.3s ease;
 }
-.user-details .input-box input:focus,
-.user-details .input-box input:valid {
-  /* border-color: #000; */
-}
+
 form .gender-details .gender-title {
   font-size: 20px;
   font-weight: 500;

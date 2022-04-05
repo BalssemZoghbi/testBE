@@ -103,7 +103,7 @@
 import axios from "axios"; 
 //  import navbar from "../components/nav.vue";
 import Footer from '@/components/Footer'
-
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 import navbar from "../components/navbar.vue";
   export default {
     components: {
@@ -175,9 +175,29 @@ import navbar from "../components/navbar.vue";
       });
     },
     deleteprojet(id) {
-      axios.delete('projets/delete/'+id).then(() => {
-       this.getprojet();
+       Swal.fire({
+      title: 'Supprimer',
+      text: "Vous êtes sure de supprimer ce projet?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Supprimer'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Supprimé!',
+          'Ce projet a été supprimé',
+          'success'
+        )
+         axios.delete('projets/delete/'+id).then(() => {
+        this.getprojet();
       });
+      }
+    })
+      // axios.delete('projets/delete/'+id).then(() => {
+      //  this.getprojet();
+      // });
       // axios.delete('electrique/delete/'+this.projets.electrique_id).then(() => {
       //   this.getprojet();
       // });

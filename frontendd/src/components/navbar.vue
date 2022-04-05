@@ -79,6 +79,7 @@ nav ul li .nav-link{
   text-decoration: none;
   font-size: 18px;
   font-weight: 500;
+  margin-top: -14%;
   padding: 8px 15px;
   border-radius: 5px;
   letter-spacing: 1px;

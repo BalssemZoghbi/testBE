@@ -45,6 +45,7 @@ export default {
    // ...mapState({
     //      user:'userInfos'
     //    })
+    
 },
  mounted:function(){
     console.log(this.$store.state.user);
@@ -58,9 +59,27 @@ export default {
   },
   methods: {
     deleteprojet(id) {
-      axios.delete('projets/delete/'+id).then(() => {
+          Swal.fire({
+      title: 'Vous êtes sure de supprimer ce projet?',
+      text: "",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Supprimer!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Supprimé!',
+          'Ce projet a été supprimé',
+          'success'
+        )
+         axios.delete('projets/delete/'+id).then(() => {
         this.getprojet();
       });
+      }
+    })
+     
     },
     getprojet() {
       axios.get('/projets').then((resp) => {
