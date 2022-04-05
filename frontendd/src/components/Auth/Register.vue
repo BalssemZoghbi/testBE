@@ -1,36 +1,36 @@
 <template>
 <div class="body">
     <div class="center">
-      <img src="../../assets/ava.svg">
-      <h1>WELCOME</h1>
+      <img src="../../assets/sacem.png">
+      <h1>Bienvenue</h1>
       <form v-on:submit.prevent="register" method="post">
            <div class="txt_field">
           <input type="text" id="name"
         v-model="name" required>
           <span></span>
-          <label>Name</label>
+          <label>Nom</label>
         </div>
         <div class="txt_field">
           <input type="email" id="email"
         v-model="email" required>
           <span></span>
-          <label>Username</label>
+          <label>Email</label>
         </div>
         <div class="txt_field">
           <input type="password" id="password"
         v-model="password" required>
           <span></span>
-          <label>Password</label>
+          <label>Mot de passe</label>
         </div>
          <div class="txt_field">
           <input type="password" id="password_confirm"
         v-model="password_confirm" required>
           <span></span>
-          <label>Confirmed Password</label>
+          <label>Confirmé le mot de passe</label>
         </div>
-        <input type="submit" @click="createAccount()" :class="{'disabled': !validateFields}" value="Register">
+        <input type="submit" @click="createAccount()" :class="{'disabled': !validateFields}" value="Inscription">
         <div class="signup_link">
-          already have an account! <router-link  to="/login">Login</router-link>
+          Vous avez deja un compte! <router-link  to="/login">Connecter</router-link>
 
         </div>
       </form>
@@ -80,9 +80,11 @@ export default {
 
 <style scoped>
 img{
-  width: 455px;
-  height: 100px;
-  margin-top: 20px;
+     width: 32%;
+    /* height: 23%; */
+    margin-left: 30%;
+    margin-top: 11px;
+    margin-bottom: -5%;
 }
 h1{
 	color: #333;

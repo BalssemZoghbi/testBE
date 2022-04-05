@@ -1,8 +1,8 @@
 <template>
 <div class="body">
     <div class="center">
-      <img src="../assets/ava.svg">
-      <h1>WELCOME</h1>
+      <img src="../assets/sacem.png">
+      <h1>Bienvenue</h1>
       <form v-on:submit.prevent="loginn" method="post">
         <div class="txt_field">
           <input type="email" id="email"
@@ -14,12 +14,12 @@
           <input type="password" id="password"
         v-model="password" required>
           <span></span>
-          <label>Password</label>
+          <label>Mot de passe</label>
         </div>
-        <div class="pass"><router-link class="nav-link"  to="/forgot">Forgot Password?</router-link></div>
-        <input type="submit" @click="login()" :class="{'disabled': !validateFields}" value="Login">
+        <div class="pass"><router-link class="nav-link"  to="/forgot">Mot de passe oublié ?</router-link></div>
+        <input type="submit" @click="login()" :class="{'disabled': !validateFields}" value="Connexion">
         <div class="signup_link">
-          Not a member? <router-link  to="/register">Signup</router-link>
+          Vous n'etes pas un membre? <router-link  to="/register">Inscription</router-link>
         </div>
       </form>
     </div>
@@ -69,9 +69,11 @@ export default {
 
 <style scoped>
 img{
-  width: 455px;
-  height: 100px;
-  margin-top: 20px;
+      width: 32%;
+    /* height: 23%; */
+    margin-left: 30%;
+    margin-top: 11px;
+    margin-bottom: -5%;
 }
 h1{
 	color: #333;
