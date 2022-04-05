@@ -13,11 +13,11 @@
           </v-stepper-step>
           <v-divider></v-divider>
           <v-stepper-step :complete="e1 > 4" step="4">
-            puissance de dimentionnement
+            puissance de dimensionnement
           </v-stepper-step>
           <v-divider></v-divider>
           <v-stepper-step step="5">
-            puissance de dimentionnement
+            puissance de dimensionnement
           </v-stepper-step>
         </v-stepper-header>
 
@@ -380,7 +380,7 @@
               </div>
             </v-card>
             <v-btn @click="e1 = 3"> précédente </v-btn>
-            <v-btn color="primary" @click="e1 = 5"> Continue </v-btn>
+            <v-btn color="primary" @click="e1 = 5" > Continue </v-btn>
 
             <!-- <v-btn color="primary" @click="updateprojet">
           Crée
