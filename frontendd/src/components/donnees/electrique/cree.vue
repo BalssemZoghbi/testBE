@@ -1,6 +1,6 @@
 <template>
 <div>
-<navbarUpdate/>
+<navbarcreate/>
 <div class="body">
   <v-stepper v-model="e1">
     <v-stepper-header>
@@ -63,7 +63,7 @@
                 </div>
           </div>
             <div class="form__div framei">
-              <input type="number" class="form__input" placeholder=" " id="pn" v-model="projet.puissance">
+              <input type="number" class="form__input" placeholder=" " id="pn" v-model="client">
               <label for="" class="form__label">pn</label>
           </div>
          
@@ -77,15 +77,15 @@
               <label for="" class="form__label">u1n</label>
           </div>
             <div class="form__div framei">
-              <input type="number" class="form__input" placeholder=" " id="classeU1" v-model="projet.classeU1" >
+              <input type="number" class="form__input" placeholder=" " id="classeU1" v-model="projet.classeU1">
               <label for="" class="form__label">classeU1</label>
           </div>
             <div class="form__div framei">
-              <input type="number" class="form__input" placeholder=" " id="tenueFr1" v-model="projet.tenueFr1" >
+              <input type="number" class="form__input" placeholder=" " id="tenueFr1" v-model="projet.tenueFr1">
               <label for="" class="form__label">tenueFr1</label>
           </div>
             <div class="form__div framei">
-              <input type="number" class="form__input" placeholder=" " id="tenueChoc1" v-model="projet.tenueChoc1" >
+              <input type="number" class="form__input" placeholder=" " id="tenueChoc1" v-model="projet.tenueChoc1">
               <label for="" class="form__label">tenueChoc1</label>
           </div> 
             <div class="form__div framei">
@@ -93,15 +93,15 @@
               <label for="" class="form__label">u2o</label>
           </div>
             <div class="form__div framei">
-              <input type="number" class="form__input" placeholder=" " id="classeU2" v-model="projet.classeU2" >
+              <input type="number" class="form__input" placeholder=" " id="classeU2" v-model="projet.classeU2">
               <label for="" class="form__label">classeU2</label>
           </div>
             <div class="form__div framei">
-              <input type="number" class="form__input" placeholder=" " id="tenueFr2" v-model="projet.tenueFr2" >
+              <input type="number" class="form__input" placeholder=" " id="tenueFr2" v-model="projet.tenueFr2">
               <label for="" class="form__label">tenueFr2</label>
           </div>
             <div class="form__div framei">
-              <input type="number" class="form__input" placeholder=" " id="tenueChoc2" v-model="projet.tenueChoc2" >
+              <input type="number" class="form__input" placeholder=" " id="tenueChoc2" v-model="projet.tenueChoc2">
               <label for="" class="form__label">tenueChoc2</label>
          
           </div> 
@@ -113,7 +113,7 @@
 
   </v-card>
 
-       <v-btn
+        <v-btn
           color="primary"
           @click="e1 = 2"
         >
@@ -220,9 +220,8 @@
         sm="6"
       >
         <v-select
-          :items="projet.couplagePrimaire"
+          :items="couplagePrimaire"
           label="couplage Primaire"
-          v-model="projet.couplagePrimaire"
           outlined
         ></v-select>
       </v-col>
@@ -233,9 +232,8 @@
         sm="6"
       >
         <v-select
-          :items="projet.couplageSecondaire"
+          :items="couplageSecondaire"
           label="couplage Secondaire"
-          v-model="projet.couplageSecondaire"
           outlined
         ></v-select>
       </v-col>
@@ -246,9 +244,9 @@
         sm="6"
       >
         <v-select
-          :items="projet.indiceHoraire"
+          :items="indiceHoraire"
           label="indice Horaire"
-           v-model="projet.indiceHoraire"
+          
           outlined
         ></v-select>
       </v-col>
@@ -260,8 +258,7 @@
      <v-text-field
             label="Couplage"
             id="couplage"
-            v-model="projet.couplage"
-            readonly
+            v-model="couplage"
             outlined
           ></v-text-field>
       </v-col>
@@ -314,20 +311,20 @@
             <!-- <div class="input-box"> -->
             <div class="form__div frameii">
               <input type="text" class="form__input"  id="puissance"
-        v-model="projet.puissance" readonly>
+        v-model="projet.puissance">
               <label for="" class="form__label">Puissance de dimentionnement</label>
           <!-- </div> -->
           </div>
               <div class="input-box">
             <div class="form__div">
-              <input type="text" class="form__input" placeholder=" " readonly id="PrimaireUligne"
+              <input type="text" class="form__input" placeholder=" " id="PrimaireUligne"
         v-model="projet.PrimaireUligne">
               <label for="" class="form__label">Uligne</label>
           </div>
           </div>
                 <div class="input-box">
             <div class="form__div">
-              <input type="text" class="form__input" readonly placeholder=" " id="PrimaireUPhase" v-model="projet.PrimaireUPhase">
+              <input type="text" class="form__input" placeholder=" " id="PrimaireUPhase" v-model="projet.PrimaireUPhase">
               <label for="" class="form__label">UPhase</label>
           </div>
           </div>
@@ -340,7 +337,7 @@
             <div class="input-box">
             <div class="form__div">
               <input type="text" class="form__input" placeholder=" " id="PrimaireIPhase"
-        v-model="projet.PrimaireIPhase" readonly>
+        v-model="projet.PrimaireIPhase">
               <label for="" class="form__label">IPhase</label>
           </div>
           </div>
@@ -383,32 +380,32 @@
             <!-- <div class="input-box"> -->
             <div class="form__div frameii">
               <input type="text" class="form__input"  id="puissance"
-        v-model="projet.puissance" readonly>
+        v-model="projet.puissance">
               <label for="" class="form__label">Puissance de dimentionnement</label>
           <!-- </div> -->
           </div>
               <div class="input-box">
             <div class="form__div">
-              <input type="text" class="form__input" placeholder=" " id="secondaireUligne" readonly
+              <input type="text" class="form__input" placeholder=" " id="secondaireUligne"
         v-model="projet.secondaireUligne">
               <label for="" class="form__label">Uligne</label>
           </div>
           </div>
                 <div class="input-box">
             <div class="form__div">
-              <input type="text" class="form__input" placeholder=" " id="secondaireUPhase" readonly v-model="projet.secondaireUPhase">
+              <input type="text" class="form__input" placeholder=" " id="secondaireUPhase" v-model="projet.secondaireUPhase">
               <label for="" class="form__label">UPhase</label>
           </div>
           </div>
           <div class="input-box">
             <div class="form__div">
-              <input type="text" class="form__input" placeholder=" " id="secondaireIligne"  readonly v-model="projet.secondaireIligne">
+              <input type="text" class="form__input" placeholder=" " id="secondaireIligne" v-model="projet.secondaireIligne">
               <label for="" class="form__label">Iligne</label>
           </div>
           </div>
             <div class="input-box">
             <div class="form__div">
-              <input type="text" class="form__input" placeholder=" " id="secondaireIPhase" readonly
+              <input type="text" class="form__input" placeholder=" " id="secondaireIPhase"
         v-model="projet.secondaireIPhase">
               <label for="" class="form__label">IPhase</label>
           </div>
@@ -437,11 +434,11 @@
 
 <script>
 // import { reactive } from "vue";
-import navbarUpdate from '../../navbarUpdate.vue';
+import navbarcreate from '../../navbarcreate.vue';
 
 import axios from "axios";
 export default {
-    components: { navbarUpdate },
+    components: { navbarcreate },
   data() {
     return {
       projet: {
@@ -450,11 +447,11 @@ export default {
       colonnes: "",
       frequence: "",
       u1n: "",
-      u2o: "", 
-      couplagePrimaire: ['YN','Y','D'],
+      u2o: "",
+     couplagePrimaire: ['YN','Y','D'],
        couplageSecondaire:  ['d','zn','z','yn','y'],
-     indiceHoraire: ['0','1','2','3','4','5','6','7','8','9','10','11'],
-      priseSoustractive: "",
+ indiceHoraire: ['0','1','2','3','4','5','6','7','8','9','10','11'],   
+    priseSoustractive: "",
       priseAdditive: "",
       echelonSousctractive: "",
       echelonAdditive: "",
@@ -476,8 +473,8 @@ export default {
       tenueChoc1: "",
       classeU1: "",
       tenueFr1: "",
-      },
       e1:1
+      },
     };
   },
   methods: {
