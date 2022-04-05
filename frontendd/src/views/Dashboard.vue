@@ -112,4 +112,7 @@ import Footer from '@/components/Footer'
   border-bottom:0px ;
   padding: .8125rem .5rem 0rem .5rem
 }
+.theme--dark.v-navigation-drawer {
+    background-color: #366ca8;
+}
 </style>
