@@ -74,15 +74,18 @@
         </v-dialog> -->
       </v-toolbar>
     </template>
+      <!-- <router-link class="nav-link" :to="'/projet/update/' + projet.id">edit -->
+
     <template v-slot:[`item.actions`]="{ item }">
+      <router-link :to="'/projet/update/' + item.id">
       <v-icon
         small
         class="mr-2"
-        @click="editItem(item)"
       >
       
         mdi-pencil
       </v-icon>
+      </router-link>
       <v-icon
         small
         v-on:click="deleteprojet(item.id)"
@@ -166,16 +169,19 @@ import navbar from "../components/navbar.vue";
 
 
     methods: {
-    //   getprojet() {
-    //   axios.get('/projets').then((resp) => {
-    //     this.projets = resp.data;
-    //     console.log(this.projets);
-    //   });
-    // },
-         getprojet() {
-      axios.get('/electrique').then((resp) => {
-        this.projets = resp.data.data;
+      getprojet() {
+      axios.get('/projets').then((resp) => {
+        this.projets = resp.data;
       });
+    },
+    deleteprojet(id) {
+      axios.delete('projets/delete/'+id).then(() => {
+       this.getprojet();
+      });
+      // axios.delete('electrique/delete/'+this.projets.electrique_id).then(() => {
+      //   this.getprojet();
+      // });
+    },
     },
       editItem (item) {
         this.editedIndex = this.desserts.indexOf(item)
@@ -224,13 +230,8 @@ import navbar from "../components/navbar.vue";
           typeof value === 'string' &&
           value.toString().indexOf(search) !== -1
       },
-      deleteprojet(id) {
-        console.log(id)
-      axios.delete('projets/delete/'+id).then(() => {
-        this.getprojet();
-      });
-    },
-    },
+      
+    // },
   }
 </script>
 <style scoped>

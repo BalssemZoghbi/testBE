@@ -1,6 +1,6 @@
 <template>
    <div>
-<navbarcreate />
+<navbarUpdate />
 <div class="body">
   <v-stepper v-model="e1">
     <v-stepper-header>
@@ -46,22 +46,28 @@
                     <label for="" class="form__label">Colonnes</label>
                 </div>
           </div>
+          <div class="input-box">
+            <div class="form__div">
+              <input type="text" class="form__input" placeholder=" " id="puissance" v-model="projet.puissance">
+              <label for="" class="form__label">Puissance</label>
+          </div>
+          </div>
            <div class="input-box">
             <div class="form__div">
               <input type="text" class="form__input" placeholder=" " id="frequence" v-model="projet.frequence">
-              <label for="" class="form__label">frequence</label>
+              <label for="" class="form__label">Frequence</label>
           </div>
           </div>
            <div class="input-box">
             <div class="form__div">
               <input type="text" class="form__input" placeholder=" " id="u1n" v-model="projet.u1n">
-              <label for="" class="form__label">u1n</label>
+              <label for="" class="form__label">U1n</label>
           </div>
           </div>
             <div class="input-box">
             <div class="form__div">
               <input type="text" class="form__input" placeholder=" " id="u2o" v-model="projet.u2o">
-              <label for="" class="form__label"> u2o</label>
+              <label for="" class="form__label"> U2o</label>
           </div>
           </div>
        
@@ -70,28 +76,28 @@
             <div class="form__div">
               <input type="text" class="form__input" placeholder=" "  id="couplagePrimaire"
         v-model="projet.couplagePrimaire">
-              <label for="" class="form__label">couplagePrimaire</label>
+              <label for="" class="form__label">Couplage Primaire</label>
           </div>
           </div>
             <div class="input-box">
             <div class="form__div">
               <input type="text" class="form__input" placeholder=" "  id="couplageSecondaire"
         v-model="projet.couplageSecondaire">
-              <label for="" class="form__label">couplageSecondaire</label>
+              <label for="" class="form__label">Couplage Secondaire</label>
           </div>
           </div>
             <div class="input-box">
             <div class="form__div">
               <input type="text" class="form__input" placeholder=" "  id="couplage" 
-        v-model="projet.couplage">
-              <label for="" class="form__label">couplage</label>
+        v-model="projet.couplage" readonly>
+              <label for="" class="form__label">Couplage</label>
           </div>
           </div>
             <div class="input-box">
             <div class="form__div">
               <input type="text" class="form__input" placeholder=" "  id="indiceHoraire"
         v-model="projet.indiceHoraire">
-              <label for="" class="form__label">indiceHoraire</label>
+              <label for="" class="form__label">Indice Horaire</label>
           </div>
           </div>
         </div>
@@ -130,28 +136,35 @@
             <div class="form__div">
               <input type="text" class="form__input" placeholder=" " id="priseSoustractive"
         v-model="projet.priseSoustractive">
-              <label for="" class="form__label">priseSoustractive</label>
+              <label for="" class="form__label">Prise Soustractive</label>
           </div>
           </div>
             <div class="input-box">
             <div class="form__div">
               <input type="text" class="form__input" placeholder=" " id="priseAdditive"
         v-model="projet.priseAdditive">
-              <label for="" class="form__label">priseAdditive</label>
+              <label for="" class="form__label">Prise Additive</label>
+          </div>
+          </div>
+           <div class="input-box">
+            <div class="form__div">
+              <input type="text" class="form__input" placeholder=" " id="nbrePosition"
+        v-model="projet.nbrePosition">
+              <label for="" class="form__label" readonly>Nbre Position</label>
           </div>
           </div>
           <div class="input-box">
             <div class="form__div">
               <input type="text" class="form__input" placeholder=" "  id="echelonSousctractive"
         v-model="projet.echelonSousctractive">
-              <label for="" class="form__label">echelonSousctractive</label>
+              <label for="" class="form__label">Echelon Sousctractive</label>
           </div>
           </div>
           <div class="input-box">
             <div class="form__div">
               <input type="text" class="form__input" placeholder=" " id="echelonAdditive"
         v-model="projet.echelonAdditive">
-              <label for="" class="form__label">echelonAdditive</label>
+              <label for="" class="form__label">Echelon Additive</label>
           </div>
           </div>
        
@@ -159,7 +172,7 @@
             <div class="form__div">
               <input type="text" class="form__input" placeholder=" " id="classeU1"
         v-model="projet.classeU1">
-              <label for="" class="form__label">classeU1</label>
+              <label for="" class="form__label">Classe U1</label>
           </div>
           
           </div>
@@ -167,14 +180,36 @@
             <div class="form__div">
               <input type="text" class="form__input" placeholder=" " id="tenueFr1"
         v-model="projet.tenueFr1">
-              <label for="" class="form__label">tenueFr1</label>
+              <label for="" class="form__label" readonly>Tenue Fr1</label>
           </div>
           </div>
                <div class="input-box">
             <div class="form__div">
               <input type="text" class="form__input" placeholder=" " id="tenueChoc1"
         v-model="projet.tenueChoc1">
-              <label for="" class="form__label">tenueChoc1</label>
+              <label for="" class="form__label" readonly>Tenue Choc1</label>
+          </div>
+          </div>
+           <div class="input-box">
+            <div class="form__div">
+              <input type="text" class="form__input" placeholder=" " id="classeU1"
+        v-model="projet.classeU2">
+              <label for="" class="form__label">Classe U2</label>
+          </div>
+          
+          </div>
+               <div class="input-box">
+            <div class="form__div">
+              <input type="text" class="form__input" placeholder=" " id="tenueFr1"
+        v-model="projet.tenueFr2">
+              <label for="" class="form__label" readonly>Tenue Fr2</label>
+          </div>
+          </div>
+               <div class="input-box">
+            <div class="form__div">
+              <input type="text" class="form__input" placeholder=" " id="tenueChoc1"
+        v-model="projet.tenueChoc2">
+              <label for="" class="form__label" readonly>Tenue Choc2</label>
           </div>
           </div>
              
@@ -210,88 +245,76 @@
     <div class="content">
       <form v-on:submit.prevent="updateprojet">
         <div class="user-details">
-              <div class="input-box">
-            <div class="form__div">
-              <input type="text" class="form__input" placeholder=" " id="puissance"
-        v-model="projet.puissance">
-              <label for="" class="form__label">puissance</label>
-          </div>
-          </div>
+              
                 <div class="input-box">
             <div class="form__div">
-              <input type="text" class="form__input" placeholder=" " id="PrimaireUligne" v-model="projet.PrimaireUligne">
-              <label for="" class="form__label">PrimaireUligne</label>
+              <input type="text" class="form__input" placeholder=" " id="PrimaireUligne" readonly v-model="projet.PrimaireUligne">
+              <label for="" class="form__label">Primaire Uligne</label>
           </div>
           </div>
           <div class="input-box">
             <div class="form__div">
-              <input type="text" class="form__input" placeholder=" " id="PrimaireUPhase" v-model="projet.PrimaireUPhase">
-              <label for="" class="form__label">PrimaireUPhase</label>
+              <input type="text" class="form__input" placeholder=" " id="PrimaireUPhase" v-model="projet.PrimaireUPhase" readonly>
+              <label for="" class="form__label">Primaire UPhase</label>
           </div>
           </div>
             <div class="input-box">
             <div class="form__div">
-              <input type="text" class="form__input" placeholder=" " id="PrimaireIligne"
+              <input type="text" class="form__input" placeholder=" " id="PrimaireIligne" readonly
         v-model="projet.PrimaireIligne">
-              <label for="" class="form__label">PrimaireIligne</label>
+              <label for="" class="form__label">Primaire Iligne</label>
           </div>
           </div>
             <div class="input-box">
             <div class="form__div">
-              <input type="text" class="form__input" placeholder=" " id="PrimaireIPhase"
+              <input type="text" class="form__input" placeholder=" " id="PrimaireIPhase" readonly
         v-model="projet.PrimaireIPhase">
-              <label for="" class="form__label">PrimaireIPhase</label>
+              <label for="" class="form__label">Primaire IPhase</label>
           </div>
           </div>
             <div class="input-box">
             <div class="form__div">
-              <input type="text" class="form__input" placeholder=" " id="secondaireUligne"
+              <input type="text" class="form__input" placeholder=" " id="secondaireUligne" readonly
         v-model="projet.secondaireUligne">
-              <label for="" class="form__label">secondaireUligne</label>
+              <label for="" class="form__label">secondaire Uligne</label>
           </div>
           </div>
             <div class="input-box">
             <div class="form__div">
-              <input type="text" class="form__input" placeholder=" " id="PrimaireIligne"
+              <input type="text" class="form__input" placeholder=" " id="PrimaireIligne" readonly
         v-model="projet.PrimaireIligne">
-              <label for="" class="form__label">PrimaireIligne</label>
+              <label for="" class="form__label">Primaire Iligne</label>
           </div>
           </div>
             <div class="input-box">
             <div class="form__div">
-              <input type="text" class="form__input" placeholder=" " id="secondaireUPhase"
+              <input type="text" class="form__input" placeholder=" " id="secondaireUPhase" readonly
         v-model="projet.secondaireUPhase">
-              <label for="" class="form__label">secondaireUPhase</label>
+              <label for="" class="form__label">secondaire UPhase</label>
           </div>
           </div>
             <div class="input-box">
             <div class="form__div">
-              <input type="text" class="form__input" placeholder=" " id="secondaireIligne"
+              <input type="text" class="form__input" placeholder=" " id="secondaireIligne" readonly
         v-model="projet.secondaireIligne">
-              <label for="" class="form__label">secondaireIligne</label>
+              <label for="" class="form__label">secondaire Iligne</label>
           </div>
           </div>
             <div class="input-box">
             <div class="form__div">
-              <input type="text" class="form__input" placeholder=" " id="secondaireIPhase"
+              <input type="text" class="form__input" placeholder=" " id="secondaireIPhase" readonly
         v-model="projet.secondaireIPhase">
-              <label for="" class="form__label">secondaireIPhase</label>
+              <label for="" class="form__label">secondaire IPhase</label>
           </div>
           </div>
             <div class="input-box">
             <div class="form__div">
-              <input type="text" class="form__input" placeholder=" " id="Uz"
+              <input type="text" class="form__input" placeholder=" " id="Uz" readonly
         v-model="projet.Uz">
               <label for="" class="form__label">Uz</label>
           </div>
           </div>
-            <div class="input-box">
-            <div class="form__div">
-              <input type="text" class="form__input" placeholder=" " id="nbrePosition"
-        v-model="projet.nbrePosition">
-              <label for="" class="form__label">nbrePosition</label>
-          </div>
-          </div>
+           
         </div>
       </form>
     </div>
@@ -300,7 +323,7 @@
 
         </v-card>
         <v-btn color="primary" @click="updateprojet">
-          Ajouter
+          Changer
         </v-btn>
       </v-stepper-content>
     </v-stepper-items>
@@ -311,11 +334,11 @@
 
 <script>
 // import { reactive } from "vue";
-import navbarcreate from '../../navbarcreate.vue';
+import navbarUpdate from '../../navbarUpdate.vue';
 
 import axios from "axios";
 export default {
-    components: { navbarcreate },
+    components: { navbarUpdate },
   data() {
     return {
       projet: {
@@ -350,8 +373,8 @@ export default {
       tenueChoc1: "",
       classeU1: "",
       tenueFr1: "",
-      e1:1
       },
+      e1:1
     };
   },
   methods: {
@@ -401,6 +424,7 @@ export default {
 };
 </script>
 <style scoped>
+
 /* Googlefont Poppins CDN Link */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");

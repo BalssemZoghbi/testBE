@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\Donnees;
-use App\Http\Controllers\Controller;
-use App\Models\Donnees\Electrique;
-use App\Models\Donnees\TensionElectrique;
 use Illuminate\Http\Request;
+use App\Models\Donnees\Electrique;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Models\Donnees\TensionElectrique;
 use App\Http\Resources\ElectriqueResource;
 use phpDocumentor\Reflection\Types\Boolean;
 
@@ -22,6 +23,7 @@ class ElectriqueController extends Controller
     }
     public function getoneelec($id)
     {
+
         $electrique =Electrique::FindOrFail($id);
         return new ElectriqueResource($electrique);
     }
@@ -144,6 +146,7 @@ class ElectriqueController extends Controller
         return $indice;
     }
     public function store(Request $request){
+
          $u1nRange=$request->u1n/1000;
          $u2nRange=$request->u2o/1000;
          $tension=$this->tension($u1nRange);
@@ -152,7 +155,7 @@ class ElectriqueController extends Controller
          list($SecondaireuLigne,$SecondaireuPhase,$SecondaireiLigne,$SecondaireiPhase,$Uz)=$this->couplage($request->couplageSecondaire,$request->u2o,$request->puissance);
          $couplage=$request->couplagePrimaire.$request->couplageSecondaire;
          $indice=$this->indice($couplage);
-         if(in_array($request->indiceHoraire, $indice)  ){
+         if(in_array($request->indiceHoraire, $indice)){
             $electrique= Electrique::create([
                 'colonnes' => $request->colonnes,
                 'frequence' =>$request->frequence,

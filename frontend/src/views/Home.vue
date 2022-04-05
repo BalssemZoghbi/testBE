@@ -20,10 +20,7 @@
               
             <button type="button" v-on:click="deleteprojet(projet.id)" >supprimer</button>
            
-            <router-link
-                  class="nav-link"
-                  :to="'/projet/update/' + projet.id"
-                >edit</router-link>
+            <router-link class="nav-link" :to="'/projet/update/' + projet.id">edit</router-link>
      </div>
 </div>
 </template>

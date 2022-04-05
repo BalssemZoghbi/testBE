@@ -12,21 +12,38 @@
       </label>
       <ul>
         <li><router-link class="nav-link active" to="/">Accueil</router-link></li>
-        <li><router-link class="nav-link" to="/projet/create">Crée</router-link></li>
+         <!-- :to="'/projet/update/'+this.createprojet.id" -->
+        <li><button class="nav-link" @click="create()" >Crée</button></li>
 		 <li><router-link class="nav-link" to="/dashboard">Tableau de bord</router-link></li>
         <li><router-link class="nav-link" to="">Importer</router-link></li>
-        <li><router-link class="nav-link " to="/login" @click="logout()"><v-icon >fas fa-sign-out-alt</v-icon>
-</router-link></li>
+        <li><button class="nav-link "  @click="logout()"><v-icon >fas fa-sign-out-alt</v-icon>
+</button></li>
       </ul>
     </nav>
 </template>
 <script>
+import axios from "axios"; 
+
  export default {
   name: "navbar",
+   data: () => ({
+    createprojet:{}
+   }),
   methods:{
     logout(){
       localStorage.clear();
       this.$router.push('/login');
+    },
+    create(){
+      console.log('aa');
+       axios.post('projets/create').then(
+        (response) => (
+          this.createprojet = response.data,
+          console.log(response.data),
+          this.$router.push('/projet/update/'+response.data.id))
+      );
+      
+
     }
   }
 };
