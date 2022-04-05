@@ -98,7 +98,6 @@
         >
             <div class="body">
 <div class="container">
-    <div class="title">Données Generale</div>
     <div class="content">
       <form  v-on:submit.prevent="updateprojet">
         <div class="user-details">
@@ -171,10 +170,9 @@
           height="450px"
         >
            <div class="body">
-<div class="container">
-    <div class="title">Données Generale</div>
+<div class="container" >
     <div class="content">
-      <form v-on:submit.prevent="updateprojet">
+      <form v-on:submit.prevent="updateprojet" style="padding: 30px;">
         <div class="user-details">
               <div class="input-box">
             <div class="form__div">
