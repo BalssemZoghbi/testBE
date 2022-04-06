@@ -6,14 +6,14 @@
                 <div class="nav-links">
                     <ul>
                         <li class="nav-link" style="--i: .6s">
-                            <a href="#" style="color:white">  <router-link to="/"> Page D'accueil</router-link></a>
+                            <a href="#" style="color:white!important">  <router-link to="/"> Page D'accueil</router-link></a>
                         </li>
                         <li class="nav-link" style="--i: .85s">
                             <a href="#">Données <i class="fas fa-caret-down"></i></a>
                             <div class="dropdown">
                                 <ul>
                                     <li class="dropdown-link">
-                                            <router-link :to="'/projet/update/'+id">  <a href="#" >Generale</a></router-link>
+                                            <router-link :to="'/projet/update/'+this.$route.params.id">  <a href="#" >Generale</a></router-link>
                                     </li>
                                     <li class="dropdown-link">
                                             <router-link :to="'/electrique/update/'+ id+'/'+elec_id ">  <a href="#" >Electriques</a></router-link>
@@ -93,7 +93,7 @@ export default {
   data: () => ({
     id:undefined,
    }),
-  props: ['id','elec_id']
+  props: ['id','elec_id',]
 };
 </script>
 <style scoped>
@@ -108,6 +108,7 @@ ul{
 
 a{
     text-decoration: none;
+    color: white;
 }
 
 header{

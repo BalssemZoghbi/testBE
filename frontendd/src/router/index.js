@@ -12,10 +12,17 @@ import updateProjet from "../components/donnees/generale/update.vue";
 import updateElec from "../components/donnees/electrique/update.vue";
 import createElec from "../components/donnees/electrique/create.vue";
 import Uni from "../views/Untitled-1.vue";
+import notFound from "../components/NotFound.vue";
+import loginn from "../components/Auth/loginn.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
+  {
+    path: "*",
+    name: "NotFound",
+    component: notFound,
+  },
   {
     path: "/",
     name: "Home",
@@ -25,6 +32,11 @@ const routes = [
     path: "/dashboard",
     name: "dashboard",
     component: Dashboard,
+  },
+  {
+    path: "/loginn",
+    name: "loginn",
+    component: loginn,
   },
   {
     path: "/reset/:token",

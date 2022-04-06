@@ -1,7 +1,7 @@
 <template>
 <div>
    <navbar /> 
-   <div class="body">
+   <div class="body panel left-panel">
      
   <v-data-table
     :headers="headers"
@@ -157,6 +157,12 @@ import navbar from "../components/navbar.vue";
         return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
       },
     },
+    mounted(){
+    let user=localStorage.getItem('user');
+    if(!user){
+    this.$router.push('/loginn');
+      }
+    },
 
     watch: {
       dialog (val) {
@@ -195,12 +201,6 @@ import navbar from "../components/navbar.vue";
       });
       }
     })
-      // axios.delete('projets/delete/'+id).then(() => {
-      //  this.getprojet();
-      // });
-      // axios.delete('electrique/delete/'+this.projets.electrique_id).then(() => {
-      //   this.getprojet();
-      // });
     },
     },
       editItem (item) {

@@ -317,7 +317,7 @@
                               readonly
                             />
                             <label for="" class="form__label"
-                              >Puissance de dimentionnement</label
+                              >Puissance de dimensionnement</label
                             >
                           </div>
                         </div>
@@ -404,7 +404,7 @@
                               readonly
                             />
                             <label for="" class="form__label"
-                              >Puissance de dimentionnement</label
+                              >Puissance de dimensionnement</label
                             >
                           </div>
                         </div>
@@ -480,7 +480,7 @@
               </div>
             </v-card>
             <v-btn @click="e1 = 4"> précédente </v-btn>
-            <v-btn color="primary" @click="updateprojet"> Crée </v-btn>
+            <v-btn color="primary" @click="updateprojet"> Modifier </v-btn>
           </v-stepper-content>
         </v-stepper-items>
       </v-stepper>
@@ -583,7 +583,7 @@ export default {
         .put("electrique/edit/" + this.$route.params.elec_id, projets)
         .then(
           (response) => (
-            (this.id = response.data.id), console.log(response.data)
+            (this.id = response.data.id), console.log(response.data.id)
           )
         );
       this.$router.push({ name: "Home" });

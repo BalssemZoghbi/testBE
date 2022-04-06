@@ -444,10 +444,7 @@ form .input-box span.details {
   /* border-bottom-width: 2px; */
   transition: all 0.3s ease;
 }
-.user-details .input-box input:focus,
-.user-details .input-box input:valid {
-  /* border-color: #000; */
-}
+
 form .gender-details .gender-title {
   font-size: 20px;
   font-weight: 500;

@@ -32,7 +32,7 @@ import axios from "axios";
   methods:{
     logout(){
       localStorage.clear();
-      this.$router.push('/login');
+      this.$router.push('/loginn');
     },
     create(){
       console.log('aa');

@@ -1,7 +1,7 @@
 <template>
 <div class="body">
     <div class="center">
-      <img src="../../assets/sacem.png">
+      <img src="../../assets/sacem1.jpg">
       <h1>Bienvenue</h1>
       <form v-on:submit.prevent="register" method="post">
            <div class="txt_field">
@@ -80,11 +80,11 @@ export default {
 
 <style scoped>
 img{
-     width: 32%;
+      width: 25%;
     /* height: 23%; */
-    margin-left: 30%;
-    margin-top: 11px;
-    margin-bottom: -5%;
+    margin-left: 37%;
+    margin-top: 1px;
+    margin-bottom: -8%;
 }
 h1{
 	color: #333;
