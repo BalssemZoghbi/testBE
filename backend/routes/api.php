@@ -62,6 +62,8 @@ Route::post('/reset', [ForgotController::class,'reset']);
 
 Route::post('/garantie36',[GarantieController::class ,'garantie36']);
 
+Route::put('/bobine/update/{id}',[BobinageController::class ,'updateBobinage']);
+Route::delete('/bobine/delete/{id}',[BobinageController::class ,'deleteBobinage']);
 Route::get('/bobines',[BobinageController::class ,'getAllBobine']);
 Route::post('/bobine/add',[BobinageController::class ,'storeBobinage']);
 Route::get('/bobine/{id}',[BobinageController::class ,'getOneBobine']);
