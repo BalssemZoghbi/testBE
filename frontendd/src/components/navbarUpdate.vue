@@ -21,6 +21,7 @@
                                     <li class="dropdown-link">
                                             <router-link :to="'/garantie/'+ this.$route.params.id">  <a href="#" >Garantie</a></router-link>
                                     </li>
+                                    
                                     <li class="dropdown-link">
                                         <a href="#">Bobinages<i class="fas fa-caret-down"></i></a>
                                         <div class="dropdown second">

@@ -67,18 +67,18 @@ class ProjetController extends Controller
         ]);
         $garantie=Garantie::create([
             "option"=>  'StandardTri24KV',
-            'Pog' => 700,
-            'log'=> 700,
-            'Pccg'=> 700,
-            'Uccg'=> 700,
-            'Ptot'=> 700,
-            'Poglimit'=> 700,
-            'loglimit'=> 700,
-            'Pccglimit'=> 700,
-            'Uccglimit'=> 700,
-            'Ptotlimit'=> 700,
-            'echauffementHuile'=> 700,
-            'echauffementEnroulement'=> 700,
+            'Pog' => 1320,
+            'log'=> 1.8,
+            'Pccg'=> 7900,
+            'Uccg'=> 4,
+            'Ptot'=> 9220,
+            'Poglimit'=> 198,
+            'loglimit'=> 2.34,
+            'Pccglimit'=> 9085,
+            'Uccglimit'=> 4.4,
+            'Ptotlimit'=> 10142,
+            'echauffementHuile'=> 40,
+            'echauffementEnroulement'=> 45,
         ]);
         // dd($garantie->id);
         $Bobinage=Bobinage::create([
@@ -116,12 +116,13 @@ class ProjetController extends Controller
      }
  public function showProjet($id){
     //  $projet= Projet::FindOrFail($id);
-     $projet = DB::table('projets')
+        $projet = DB::table('projets')
         ->join('electriques', 'electriques.id', '=', 'projets.electrique_id')
+        ->join('garanties', 'garanties.id', '=', 'projets.garantie_id')
         ->where('projets.id',$id)
-        ->select('electriques.*','electriques.id as elec_id', 'projets.*')
+        ->select('electriques.*','electriques.id as elec_id','garanties.*','garanties.id as garenti_id', 'projets.*')
         ->get()->first();
-     return response()->json($projet);
+    return response()->json($projet);
  }
  public function editProjet($id, Request $request){
     //  $projet= Projet::FindOrFail($id);
