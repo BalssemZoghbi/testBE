@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\ProjetResource;
+use App\Models\Donnees\garantie\Garantie;
 use Laravel\Sanctum\PersonalAccessToken;
 
 class ProjetController extends Controller
@@ -31,7 +32,6 @@ class ProjetController extends Controller
         $header = $request->header('Authorization');
         $token = PersonalAccessToken::findToken($header);
         $user = $token->tokenable;
-        // dd($user);
         $elec=Electrique::create([
             "colonnes"=>  '4',
             "frequence"=> "50",
@@ -64,7 +64,21 @@ class ProjetController extends Controller
             "nbrePosition"=> 11
 
         ]);
-
+        $garantie=Garantie::create([
+            "option"=>  'StandardTri24KV',
+            'Pog' => 700,
+            'log'=> 700,
+            'Pccg'=> 700,
+            'Uccg'=> 700,
+            'Ptot'=> 700,
+            'Poglimit'=> 700,
+            'loglimit'=> 700,
+            'Pccglimit'=> 700,
+            'Uccglimit'=> 700,
+            'Ptotlimit'=> 700,
+            'echauffementHuile'=> 700,
+            'echauffementEnroulement'=> 700,
+        ]);
         $projet= Projet::create([
              'appareil' => 'Defaut',
              'reference' =>'25/2022',
@@ -82,7 +96,8 @@ class ProjetController extends Controller
              'refroidissement' =>'onaf',
              'user_id' =>$user->id,
              'elaborateur' =>$user->name,
-             'electrique_id' =>$elec->id
+             'electrique_id' =>$elec->id,
+             'garantie_id' =>$garantie->id
          ]);
 
          if($projet->save()){

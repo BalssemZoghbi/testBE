@@ -147,13 +147,13 @@ class ElectriqueController extends Controller
     }
     public function store(Request $request){
 
-         $u1nRange=$request->u1n/1000;
+         $u1=$request->u1n/1000;
          $u2nRange=$request->u2o/1000;
-         $tension=$this->tension($u1nRange);
+         $tension=$this->tension($u1);
          $tension2=$this->tension($u2nRange);
          list($PrimaireuLigne,$PrimaireuPhase,$PrimaireiLigne,$PrimaireiPhase)=$this->couplage($request->couplagePrimaire,$request->u1n,$request->puissance);
          list($SecondaireuLigne,$SecondaireuPhase,$SecondaireiLigne,$SecondaireiPhase,$Uz)=$this->couplage($request->couplageSecondaire,$request->u2o,$request->puissance);
-         $couplage=$request->couplagePrimaire.$request->couplageSecondaire;
+         $couplage=$request->couplagePrimaire.$request->couplageSecondaire.$request->indiceHoraire;
          $indice=$this->indice($couplage);
          if(in_array($request->indiceHoraire, $indice)){
             $electrique= Electrique::create([
