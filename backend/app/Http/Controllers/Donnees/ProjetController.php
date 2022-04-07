@@ -107,7 +107,7 @@ class ProjetController extends Controller
              'elaborateur' =>$user->name,
              'electrique_id' =>$elec->id,
              'garantie_id' =>$garantie->id,
-             'bobinage_id'=>$bobine->id
+             'bobinage_id'=>$Bobinage->id
          ]);
 
          if($projet->save()){
