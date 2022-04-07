@@ -20,4 +20,22 @@
    
   </body>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    const sign_in_btn = document.querySelector("#sign-in-btn");
+const sign_up_btn = document.querySelector("#sign-up-btn");
+const sign_in_btnn = document.querySelector("#sign_in_btnn");
+const container = document.querySelector(".containerlogin");
+
+sign_up_btn.addEventListener("click", () => {
+  container.classList.add("sign-up-mode");
+});
+
+sign_in_btn.addEventListener("click", () => {
+  container.classList.remove("sign-up-mode");
+});
+sign_in_btnn.addEventListener("click", () => {
+  container.classList.remove("sign-up-mode");
+});
+
+  </script>
 </html>

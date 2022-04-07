@@ -1,7 +1,7 @@
 <template>
 <div class="body">
     <div class="center">
-      <img src="../assets/sacem.png">
+      <img src="../assets/sacem1.jpg">
       <h1>Bienvenue</h1>
       <form v-on:submit.prevent="loginn" method="post">
         <div class="txt_field">
@@ -60,20 +60,27 @@ export default {
     let result= await axios.post(`/login?email=${this.email}&password=${this.password}`);
       localStorage.setItem("user",JSON.stringify(result.data))
       if(result.status==200 ){
-        console.log('login done');
+        console.log('login done')
       }
       self.$router.push('/');
   }
-},}
+},
+mounted(){
+  let user=localStorage.getItem('user');
+  if(user){
+this.$router.push('/');
+  }
+}
+}
 </script>
 
 <style scoped>
 img{
-      width: 32%;
+     width: 25%;
     /* height: 23%; */
-    margin-left: 30%;
+    margin-left: 37%;
     margin-top: 11px;
-    margin-bottom: -5%;
+    margin-bottom: -8%;
 }
 h1{
 	color: #333;

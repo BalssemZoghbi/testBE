@@ -32,14 +32,17 @@ import axios from "axios";
   methods:{
     logout(){
       localStorage.clear();
-      this.$router.push('/login');
+      this.$router.push('/loginn');
     },
     create(){
-      console.log('aa');
-       axios.post('projets/create').then(
+     let token= localStorage.getItem('token')
+       axios.post('projets/create',{}, {
+    headers: {
+    'Authorization': token
+    }
+  }).then(
         (response) => (
           this.createprojet = response.data,
-          console.log(response.data),
           this.$router.push('/projet/update/'+response.data.id))
       );
       

@@ -91,6 +91,12 @@ import Footer from '@/components/Footer'
     ]
   }
 },
+    mounted(){
+    let user=localStorage.getItem('user');
+    if(!user){
+    this.$router.push('/login');
+      }
+    },
   }
 </script>
 

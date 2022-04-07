@@ -6,12 +6,13 @@ namespace App\Http\Controllers\Donnees;
 
 use Illuminate\Http\Request;
 use App\Models\Donnees\Projet ;
+use App\Models\Donnees\Electrique;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\ProjetResource;
-use App\Models\Donnees\Electrique;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class ProjetController extends Controller
 {
@@ -26,8 +27,11 @@ class ProjetController extends Controller
         //  ProjetResource::collection($projets);
     }
 
-    public function storeProjet(){
-        // $user=Auth::user();
+    public function storeProjet(Request $request){
+        $header = $request->header('Authorization');
+        $token = PersonalAccessToken::findToken($header);
+        $user = $token->tokenable;
+        // dd($user);
         $elec=Electrique::create([
             "colonnes"=>  '4',
             "frequence"=> "50",
@@ -60,6 +64,7 @@ class ProjetController extends Controller
             "nbrePosition"=> 11
 
         ]);
+
         $projet= Projet::create([
              'appareil' => 'Defaut',
              'reference' =>'25/2022',
@@ -75,11 +80,8 @@ class ProjetController extends Controller
              'dielectrique' =>'huile minerale inhibée',
              'fonctionnement' =>'abaisseur',
              'refroidissement' =>'onaf',
-             'user_id' =>'1',
-            // dd(Auth::user()),
-            //  'user_id' =>Auth::id(),
-            //  'elaborateur' =>Auth::user()->name,
-             'elaborateur' =>'Ali Ben Aouicha',
+             'user_id' =>$user->id,
+             'elaborateur' =>$user->name,
              'electrique_id' =>$elec->id
          ]);
 
