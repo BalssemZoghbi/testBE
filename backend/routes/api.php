@@ -8,7 +8,8 @@ use App\Http\Controllers\Donnees\ProjetController;
 use App\Http\Controllers\Donnees\ElectriqueController;
 use App\Http\Controllers\Donnees\TensionElectriqueController;
 use App\Http\Controllers\ForgotController;
-
+use App\Http\Controllers\BobinageController;
+use App\Http\Controllers\Garantie24Controller;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -58,3 +59,7 @@ Route::delete('/user/decline/{id}',[AuthController::class ,'decline']);
 
 Route::post('/forgot', [ForgotController::class,'forgot']);
 Route::post('/reset', [ForgotController::class,'reset']);
+Route::get('/bobines',[BobinageController::class ,'getAllBobine']);
+Route::post('/bobine/add',[BobinageController::class ,'storeBobinage']);
+Route::get('/bobine/{id}',[BobinageController::class ,'getOneBobine']);
+Route::post('/garantie24',[Garantie24Controller::class ,'add']);
