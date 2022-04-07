@@ -33,6 +33,8 @@ class CreateProjetsTable extends Migration
             $table->foreignId('user_id')->constrained()->nullable();
             $table->foreignId('electrique_id')->constrained()->onDelete('cascade');
             $table->foreignId('garantie_id')->constrained()->onDelete('cascade');
+            $table->foreignId('bobinage_id')->constrained()->onDelete('cascade');
+
             $table->timestamps();
         });
     }

@@ -480,7 +480,7 @@
               </div>
             </v-card>
             <v-btn @click="e1 = 4"> précédente </v-btn>
-            <v-btn color="primary" @click="updateprojet"> Modifier </v-btn>
+            <v-btn color="primary" @click="updateprojet"> Valider </v-btn>
           </v-stepper-content>
         </v-stepper-items>
       </v-stepper>

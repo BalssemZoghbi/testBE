@@ -34,11 +34,28 @@ class BobinageController extends Controller
          }
 
      }
-        public function updateBobinage(Request $request, $id){
-            $Bobinage = Bobinage::FindOrFail($id);
-            $Bobinage->update($request->all());
-            return response()->json($Bobinage);
-        }
+        // public function updateBobinage(Request $request, $id){
+        //     $Bobinage = Bobinage::FindOrFail($id);
+        //     $Bobinage->update($request->all());
+        //     return response()->json($Bobinage);
+        // }
+
+        public function updateBobinage($id, Request $request){
+
+            $projet = DB::table('projets')
+            ->join('bobinages', 'bobinages.id', '=', 'projets.bobinage_id')
+            ->where('projets.id',$id)
+            ->select('bobinages.*','bobinages.id as bobine_id', 'projets.*')
+            ->get()->first();
+            $Bobinage=Bobinage::FindOrFail($projet->bobine_id );
+            $Bobinage->update([
+                'materiau'=> $request->materiau,
+            'conducteur'=> $request->conducteur,
+             ]);
+    
+                 return response()->json($Bobinage);
+         }
+
         public function deleteBobinage($id){
             $Bobinage = Bobinage::FindOrFail($id);
             $Bobinage->delete();

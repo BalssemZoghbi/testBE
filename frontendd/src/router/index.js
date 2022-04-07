@@ -15,6 +15,8 @@ import Uni from "../views/Untitled-1.vue";
 import notFound from "../components/NotFound.vue";
 import loginn from "../components/Auth/loginn.vue";
 import updateGarantie from "../components/donnees/garantie/update.vue";
+import Bobine from "../components/donnees/bobinage/update.vue";
+
 
 Vue.use(VueRouter);
 
@@ -93,6 +95,11 @@ const routes = [
     path: "/garantie/:id",
     name: "garantie.update",
     component: updateGarantie,
+  },
+  {
+    path: "/bobine/:id",
+    name: "bobine.update",
+    component: Bobine,
   },
 ];
 
