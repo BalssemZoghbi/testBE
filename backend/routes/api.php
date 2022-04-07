@@ -2,12 +2,13 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ForgotController;
 use App\Http\Controllers\Donnees\ProjetController;
+use App\Http\Controllers\Donnees\GarantieController;
 use App\Http\Controllers\Donnees\ElectriqueController;
 use App\Http\Controllers\Donnees\TensionElectriqueController;
-use App\Http\Controllers\ForgotController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,3 +59,5 @@ Route::delete('/user/decline/{id}',[AuthController::class ,'decline']);
 
 Route::post('/forgot', [ForgotController::class,'forgot']);
 Route::post('/reset', [ForgotController::class,'reset']);
+
+Route::post('/garantie36',[GarantieController::class ,'add']);

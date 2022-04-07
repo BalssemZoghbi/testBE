@@ -36,5 +36,9 @@ class Projet extends Model
     {
         return $this->belongsTo(Electrique::class);
     }
+    public function garantie()
+    {
+        return $this->belongsTo(Garantie::class);
+    }
 
 }
