@@ -30,6 +30,7 @@ class Projet extends Model
     'user_id',
     'electrique_id',
     'garantie_id',
+    'bobinage_id',
 ];
 
      public function user(){

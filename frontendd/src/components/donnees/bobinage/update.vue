@@ -8,7 +8,7 @@
         :complete="e1 > 1"
         step="1"
       >
-        Name of step 1
+        Bobinage
       </v-stepper-step>
 
     </v-stepper-header>
@@ -21,12 +21,20 @@
           height="450px"
         >
         <div class="body">
+          
 <div class="container">
-    <div class="title">bobine primaire</div>
+  
     <div class="content">
       <form  v-on:submit.prevent="updateprojet">
         <div class="user-details">
-           <div class="input-box">
+           <div class="input-box">  <div class="title">bobine primaire</div>
+               <div class="form__div">
+                    <input type="text" class="form__input" placeholder=" " id="materiau" v-model="projet.materiau">
+                    <label for="" class="form__label">materiau</label>
+                </div>
+          </div>
+           
+           <div class="input-box"><div class="title">bobine secondaire</div>
                <div class="form__div">
                     <input type="text" class="form__input" placeholder=" " id="materiau" v-model="projet.materiau">
                     <label for="" class="form__label">materiau</label>
@@ -39,11 +47,17 @@
               <label for="" class="form__label">conducteur</label>
           </div>
           </div>
-          
+             <div class="input-box">
+            <div class="form__div">
+              <input type="text" class="form__input" placeholder=" " id="conducteur" v-model="projet.conducteur">
+              <label for="" class="form__label">conducteur</label>
+          </div>
+          </div>
         </div>
       </form>
     </div>
 </div>
+
         </div>
 
   </v-card>
@@ -219,16 +233,18 @@ h1 {
   font-size: 25px;
   font-weight: 500;
   position: relative;
+  color: #56a5da;
 }
 .container .title::before {
   content: "";
   position: absolute;
   left: 0;
-  bottom: -5px;
+  bottom: -2px;
   height: 3px;
   width: 250px;
   border-radius: 5px;
-  background: linear-gradient(135deg, #71b7e6, #71b7e6);
+/* margin-bottom: 5%; */
+  /* background: linear-gradient(135deg, #71b7e6, #71b7e6); */
 }
 .content form .user-details {
   display: flex;

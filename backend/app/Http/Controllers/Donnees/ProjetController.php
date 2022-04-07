@@ -82,7 +82,7 @@ class ProjetController extends Controller
         ]);
         // dd($garantie->id);
         $Bobinage=Bobinage::create([
-            'materiau'=> 'cuivre',
+            'materiau'=> 'Aluminium',
             'conducteur'=> 'feuillard',
             // 'electrique_id'=> $elec->id,
             // 'garantie_id'=> $garantie->id,
@@ -120,9 +120,12 @@ class ProjetController extends Controller
         $projet = DB::table('projets')
         ->join('electriques', 'electriques.id', '=', 'projets.electrique_id')
         ->join('garanties', 'garanties.id', '=', 'projets.garantie_id')
+        ->join('bobinages', 'bobinages.id', '=', 'projets.bobinage_id')
         ->where('projets.id',$id)
-        ->select('electriques.*','electriques.id as elec_id','garanties.*','garanties.id as garenti_id', 'projets.*')
+        ->select('electriques.*','electriques.id as elec_id','garanties.*','garanties.id as garenti_id','bobinages.*','bobinages.id as bobine_id', 'projets.*')
         ->get()->first();
+
+      
     return response()->json($projet);
  }
  public function editProjet($id, Request $request){

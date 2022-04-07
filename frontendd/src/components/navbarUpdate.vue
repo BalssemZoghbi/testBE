@@ -6,20 +6,19 @@
                 <div class="nav-links">
                     <ul>
                         <li class="nav-link" style="--i: .6s">
-                            <a href="#" style="color:white!important">  <router-link to="/"> Page D'accueil</router-link></a>
-                        </li>
+                              <router-link to="/"> Page D'accueil</router-link>
                         <li class="nav-link" style="--i: .85s">
                             <a href="#">Données <i class="fas fa-caret-down"></i></a>
                             <div class="dropdown">
                                 <ul>
                                     <li class="dropdown-link">
-                                            <router-link :to="'/projet/update/'+this.$route.params.id">  <a href="#" >Generale</a></router-link>
+                                            <router-link :to="'/projet/update/'+this.$route.params.id">  Generale</router-link>
                                     </li>
                                     <li class="dropdown-link">
-                                            <router-link :to="'/electrique/update/'+ this.$route.params.id+'/'+elec_id ">  <a href="#" >Electriques</a></router-link>
+                                            <router-link :to="'/electrique/update/'+ this.$route.params.id+'/'+elec_id ">  Electriques</router-link>
                                     </li>
                                     <li class="dropdown-link">
-                                            <router-link :to="'/garantie/'+ this.$route.params.id">  <a href="#" >Garantie</a></router-link>
+                                            <router-link :to="'/garantie/'+ this.$route.params.id">  Garantie</router-link>
                                     </li>
                                     
                                     <li class="dropdown-link">
@@ -27,7 +26,7 @@
                                         <div class="dropdown second">
                                             <ul>
                                                 <li class="dropdown-link">
-                                                    <a href="#">Bobinage Primaire</a>
+                                                <router-link :to="'/bobine/'+ this.$route.params.id">Bobinage Primaire</router-link>
                                                 </li>
                                                 <li class="dropdown-link">
                                                     <a href="#">Bobinage Secondaire</a>
