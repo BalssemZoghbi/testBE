@@ -13,6 +13,7 @@ use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\ProjetResource;
 use App\Models\Donnees\garantie\Garantie;
+use App\Models\Bobinage;
 use Laravel\Sanctum\PersonalAccessToken;
 
 class ProjetController extends Controller
@@ -80,6 +81,13 @@ class ProjetController extends Controller
             'echauffementEnroulement'=> 700,
         ]);
         // dd($garantie->id);
+        $Bobinage=Bobinage::create([
+            'materiau'=> 'cuivre',
+            'conducteur'=> 'feuillard',
+            // 'electrique_id'=> $elec->id,
+            // 'garantie_id'=> $garantie->id,
+            // 'user_id'=> $user->id,
+        ]);
         $projet= Projet::create([
              'appareil' => 'Defaut',
              'reference' =>'25/2022',

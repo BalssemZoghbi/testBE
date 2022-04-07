@@ -34,4 +34,14 @@ class BobinageController extends Controller
          }
 
      }
+        public function updateBobinage(Request $request, $id){
+            $Bobinage = Bobinage::FindOrFail($id);
+            $Bobinage->update($request->all());
+            return response()->json($Bobinage);
+        }
+        public function deleteBobinage($id){
+            $Bobinage = Bobinage::FindOrFail($id);
+            $Bobinage->delete();
+            return response()->json('deleted');
+        }
 }
