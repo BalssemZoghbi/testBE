@@ -83,7 +83,7 @@
 
         <v-btn
           color="primary"
-          @click="e1 = 2"
+          @click="e1=2"
         >
           Continue
         </v-btn>
@@ -271,10 +271,11 @@ export default {
         
       };
       axios.put('projets/edit/'+this.$route.params.id, projets).then(
-        (response) => (this.id = response.data.id, console.log(response.data))
+        (response) => (this.id = response.data.id)
         
       );
     },
+  
   },
   async mounted() {
     const result = await axios.get('projets/'+this.$route.params.id);

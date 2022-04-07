@@ -4,14 +4,26 @@
         <div class="signin-signup">
           <form action="#" class="sign-in-form">
             <h2 class="title">Connexion</h2>
-            <div class="input-field">
+            <!-- <div class="input-field">
               <i class="fas fa-user"></i>
               <input  type="email" id="email" v-model="email" placeholder="Email" />
             </div>
             <div class="input-field">
               <i class="fas fa-lock"></i>
               <input type="password" id="password"  v-model="password" placeholder="Mot de passe" />
-            </div>
+            </div> -->
+             <div class="input-field input-box">
+               <div class="form__div">
+                    <input class="form__input" placeholder=" " type="email" id="email" v-model="email" >
+                    <label for="" class="form__label">Email</label>
+                </div>
+          </div>
+             <div class="input-field input-box">
+               <div class="form__div">
+                    <input class="form__input" placeholder=" " type="password" id="password"  v-model="password" >
+                    <label for="" class="form__label">Mot de passe</label>
+                </div>
+          </div>
             <input type="submit" value="Login"  @click="login()" :class="{'disabled': !validateFields}"  class="btn solid" />
             <p class="social-text">Voici les reseaux sociaux de SACEM INDUSTRIES</p>
             <div class="social-media">
@@ -31,22 +43,38 @@
           </form>
           <form action="#" class="sign-up-form">
             <h2 class="title">Inscription</h2>
-            <div class="input-field">
+            <!-- <div class="input-field">
               <i class="fas fa-user"></i>
               <input type="text" placeholder="Nom" v-model="name" />
-            </div>
-            <div class="input-field">
-              <i class="fas fa-envelope"></i>
-              <input type="email" placeholder="Email" v-model="email"/>
-            </div>
-            <div class="input-field">
-              <i class="fas fa-lock"></i>
-              <input type="password" placeholder="Mot de passe" v-model="password"  />
-            </div>
-            <div class="input-field">
+            </div> -->
+            <div class="input-field input-box">
+               <div class="form__div">
+                    <input class="form__input" placeholder=" " type="text" id="" v-model="name" >
+                    <label for="" class="form__label">Nom</label>
+                </div>
+          </div>
+            <div class="input-field input-box">
+               <div class="form__div">
+                    <input class="form__input" placeholder=" " type="email" id="email" v-model="email" >
+                    <label for="" class="form__label">Email</label>
+                </div>
+          </div>
+             <div class="input-field input-box">
+               <div class="form__div">
+                    <input class="form__input" placeholder=" " type="password" id="password"  v-model="password" >
+                    <label for="" class="form__label">Mot de passe</label>
+                </div>
+          </div>
+          <div class="input-field input-box">
+               <div class="form__div">
+                    <input class="form__input" placeholder=" " type="password"  v-model="password_confirm" >
+                    <label for="" class="form__label">Confirmer le mot de passe</label>
+                </div>
+          </div>
+            <!-- <div class="input-field">
               <i class="fas fa-lock"></i>
               <input type="password" placeholder="Confirmer le mot de passe" v-model="password_confirm"    />
-            </div>
+            </div> -->
             <input type="submit" class="btn" @click="createAccount()" id="sign-in-btnn" value="Inscription" />
             <p class="social-text">Voici les reseaux sociaux de SACEM INDUSTRIES</p>
             <div class="social-media">
@@ -141,7 +169,8 @@ export default {
  async login() {
     let self = this
     let result= await axios.post(`/login?email=${this.email}&password=${this.password}`);
-      localStorage.setItem("user",JSON.stringify(result.data))
+      localStorage.setItem("user",JSON.stringify(result.data.user))
+      localStorage.setItem("token",result.data.token)
       if(result.status==200 ){
         console.log('login done')
       }
@@ -256,6 +285,77 @@ form.sign-in-form {
   font-size: 1.1rem;
   color: #333;
 }
+
+/*Input focus move up label*/
+.form__input:focus + .form__label {
+  top: -0.5rem;
+  left: 0.8rem;
+  color: #4797d1;
+  font-size: 0.75rem;
+  font-weight: 500;
+  z-index: 10;
+}
+
+/*Input focus sticky top label*/
+.form__input:not(:placeholder-shown).form__input:not(:focus) + .form__label {
+  top: -0.5rem;
+  left: 0.8rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  z-index: 10;
+}
+
+/*Input focus*/
+.form__input:focus {
+  border: 1.5px solid #4797d1;
+}
+
+
+
+
+.form__input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 1rem;
+  border: 1px solid #dadce0;
+  /* border-radius: 0.5rem; */
+  border-radius: 55px;
+  outline: none;
+  padding: 1rem;
+  background: none;
+  z-index: 1;
+}
+
+.form__label {
+  position: absolute;
+  left: 1rem;
+  top: 0.7rem;
+  padding: 0 0.25rem;
+  background-color: #f0f0f0d5;
+  color: #000000ad;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+.form__button {
+  display: block;
+  margin-left: auto;
+  padding: 0.75rem 2rem;
+  outline: none;
+  border: none;
+  background-color: #4797d1;
+  color: #fff;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+
+
+
 
 .input-field input::placeholder {
   color: #aaa;
