@@ -586,7 +586,7 @@ export default {
             (this.id = response.data.id), console.log(response.data.id)
           )
         );
-      this.$router.push({ name: "Home" });
+      this.$router.push('/garantie/'+this.$route.params.id);
     },
   },
   async mounted() {

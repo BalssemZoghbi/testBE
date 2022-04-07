@@ -14,6 +14,7 @@ import createElec from "../components/donnees/electrique/create.vue";
 import Uni from "../views/Untitled-1.vue";
 import notFound from "../components/NotFound.vue";
 import loginn from "../components/Auth/loginn.vue";
+import updateGarantie from "../components/donnees/garantie/update.vue";
 
 Vue.use(VueRouter);
 
@@ -87,6 +88,11 @@ const routes = [
     path: "/electrique/create/:id",
     name: "electrique.create",
     component: createElec,
+  },
+  {
+    path: "/garantie/:id",
+    name: "garantie.update",
+    component: updateGarantie,
   },
 ];
 
