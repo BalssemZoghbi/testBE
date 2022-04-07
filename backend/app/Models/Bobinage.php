@@ -14,5 +14,7 @@ class Bobinage extends Model
         'materiau',
         'conducteur',
     ];
-
+    public function projets(){
+        return $this->hasMany(Projet::class);
+    }
 }

@@ -43,12 +43,11 @@ class BobinageController extends Controller
         public function updateBobinage($id, Request $request){
 
             $projet = DB::table('projets')
-            
             ->join('bobinages', 'bobinages.id', '=', 'projets.bobinage_id')
             ->where('projets.id',$id)
             ->select('bobinages.*','bobinages.id as bobine_id', 'projets.*')
             ->get()->first();
-            $Bobinage=Bobinages::FindOrFail($projet->bobinage_id);
+            $Bobinage=Bobinage::FindOrFail($projet->bobine_id );
             $Bobinage->update([
                 'materiau'=> $request->materiau,
             'conducteur'=> $request->conducteur,

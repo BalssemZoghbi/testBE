@@ -3,6 +3,8 @@
 namespace App\Models\Donnees;
 
 use App\Models\Donnees\Electrique;
+use App\Models\Bobinage;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -40,6 +42,10 @@ class Projet extends Model
     public function garantie()
     {
         return $this->belongsTo(Garantie::class);
+    }
+    public function bobine()
+    {
+        return $this->belongsTo(Bobinage::class);
     }
 
 }
