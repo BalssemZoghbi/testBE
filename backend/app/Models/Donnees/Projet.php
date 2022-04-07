@@ -27,6 +27,7 @@ class Projet extends Model
     'elaborateur',
     'user_id',
     'electrique_id',
+    'garantie_id',
 ];
 
      public function user(){

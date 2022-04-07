@@ -11,48 +11,52 @@ use App\Models\Donnees\garantie\Garantie36;
 
 class GarantieController extends Controller
 {
-    // public function calcul24($puissance){
-    //     // switch ($puissance) {
-    //     //     case $puissance<1.1 :
-    //         for(i=0;i<)
-    //             $garantie24=Garantie24::where('Pn',$puissance)->get()->first();
-    //             // break;
-    //             // default:
-    //             // break;
-
-    //     // }
-    //     return $garantie24;
-    // }
+    public function calcul24($puissance){
+                $garantie24=Garantie24::where('Pn',$puissance)->get()->first();
+        return $garantie24;
+    }
+    public function calcul36($puissance){
+                $garantie36=Garantie36::where('Pn',$puissance)->get()->first();
+        return $garantie36;
+    }
     public function edit($id, Request $request){
-        // $garantie= Garantie::FindOrFail($id);
+
         $projet = DB::table('projets')
         ->join('electriques', 'electriques.id', '=', 'projets.electrique_id')
         ->join('garanties', 'garanties.id', '=', 'projets.garantie_id')
         ->where('projets.id',$id)
-        ->select('electriques.puissance','electriques.u1n', 'electriques.u2o')
+        ->select('projets.garantie_id','electriques.puissance','electriques.u1n', 'electriques.u2o','projets.temperatureMax')
         ->get()->first();
-        dd($projet);
-         $projet->update
-         ([
-             'option' => $request->option,
-             'Pog' =>$request->Pog,
-             'log' =>$request->log,
-             'Pccg' =>$request->Pccg,
-             'Uccg' => $request->Uccg,
-             'Ptot' =>$request->Ptot,
-             'Poglimit' =>$request->type,
-             'loglimit' => $request->remplissage,
-             'Pccglimit' =>$request->installation,
-             'Uccglimit' =>$request->montage,
-             'Ptotlimit' =>$request->echangeurs,
-             'echauffementHuile' =>$request->echauffementHuile,
-             'echauffementEnroulement' =>$request->echauffementEnroulement,
-             'garantie36_id' =>$request->garantie36_id,
-             'garantie24_id' =>$request->garantie24_id,
-
+        if($projet->u1n>$projet->u2o){
+            $max=$projet->u1n;
+        }else{
+            $max=$projet->u2o;
+        }
+        if($max<36000){
+           $calcul= $this->calcul24($projet->puissance);
+           $option="StandardTri24KV";
+        }else{
+            $calcul=  $this->calcul36($projet->puissance);
+            $option="StandardTri36KV";
+        }
+        $garantie= Garantie::FindOrFail($projet->garantie_id);
+        $garantie->update([
+             'option' => $option,
+             'Pog' =>$calcul->po,
+             'log' =>$calcul->lo,
+             'Pccg' =>$calcul->pcc,
+             'Uccg' => $calcul->ucc,
+             'Ptot' =>$calcul->pcc+$calcul->po,
+             'Poglimit' =>($calcul->po*15)/100,
+             'loglimit' => ($calcul->lo*30)/100,
+             'Pccglimit' =>($calcul->pcc*15)/100,
+             'Uccglimit' =>($calcul->ucc*10)/100,
+             'Ptotlimit' =>(($calcul->pcc+$calcul->po)*10)/100,
+             'echauffementHuile' =>100 - $projet->temperatureMax,
+             'echauffementEnroulement' =>105 - $projet->temperatureMax,
          ]);
 
-             return response()->json($projet);
+             return response()->json($garantie);
      }
 
     public function garantie36(){

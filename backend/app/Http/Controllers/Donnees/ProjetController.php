@@ -79,6 +79,7 @@ class ProjetController extends Controller
             'echauffementHuile'=> 700,
             'echauffementEnroulement'=> 700,
         ]);
+        // dd($garantie->id);
         $projet= Projet::create([
              'appareil' => 'Defaut',
              'reference' =>'25/2022',

@@ -22,12 +22,8 @@ class Garantie extends Model
         'Ptotlimit',
         'echauffementHuile',
         'echauffementEnroulement',
-        'garantie36_id',
-        'garantie24_id',
     ];
-    public function garantie36s(){
-        return $this->belongsTo(Garantie36::class);
-    }
+   
     public function projets(){
         return $this->hasMany(Projet::class);
     }

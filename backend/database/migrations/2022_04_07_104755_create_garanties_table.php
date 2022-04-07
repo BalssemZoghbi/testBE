@@ -28,8 +28,6 @@ class CreateGarantiesTable extends Migration
             $table->integer('Ptotlimit');
             $table->integer('echauffementHuile');
             $table->integer('echauffementEnroulement');
-            $table->foreignId('garantie36_id')->constrained()->nullable();
-            $table->foreignId('garantie24_id')->constrained()->nullable();
             $table->timestamps();
         });
     }

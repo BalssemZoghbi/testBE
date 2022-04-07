@@ -66,3 +66,4 @@ Route::get('/bobines',[BobinageController::class ,'getAllBobine']);
 Route::post('/bobine/add',[BobinageController::class ,'storeBobinage']);
 Route::get('/bobine/{id}',[BobinageController::class ,'getOneBobine']);
 Route::post('/garantie24',[GarantieController::class ,'garantie24']);
+Route::put('/garantie/edit/{id}',[GarantieController::class ,'edit']);
