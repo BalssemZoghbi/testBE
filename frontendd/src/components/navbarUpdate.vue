@@ -36,21 +36,7 @@
                                             </ul>
                                         </div>
                                     </li>
-                                    <li class="dropdown-link">
-                                        <a href="#">Traversées</a>
-                                    </li>
-                                    <li class="dropdown-link">
-                                        <a href="#">Commutateur</a>
-                                    </li>
-                                    <li class="dropdown-link">
-                                        <a href="#">Circuit Magnetique</a>
-                                    </li>
-                                    <li class="dropdown-link">
-                                        <a href="#">Couvercle</a>
-                                    </li>
-                                    <li class="dropdown-link">
-                                        <a href="#">Cuve</a>
-                                    </li>
+                                  
                                     <div class="arrow"></div>
                                 </ul>
                             </div>
@@ -60,7 +46,7 @@
                             <div class="dropdown">
                                 <ul>
                                     <li class="dropdown-link">
-                                        <a href="#">Gradin</a>
+                                      <router-link :to="'/gradin/'+ this.$route.params.id">Gradin</router-link>
                                     </li>
                                     <li class="dropdown-link">
                                         <a href="#">Vols,Spire,Prises</a>

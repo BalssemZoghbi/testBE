@@ -95,10 +95,10 @@ class ProjetController extends Controller
             
         // ]);
         $gradin=Gradin::create([
-            "tole"=>  'StandardTri24KV',
+            "tole"=>  'H95-27',
             'diamPropose' => 1320,
             'diamNominale'=> 8,
-            'pas'=> 10,
+            'pas'=> 20,
             'coeffRemplissage'=> 4,
             'nbrGradin'=> 9220,
             'demiGradin'=> 198,
