@@ -51,9 +51,7 @@ class BobinageController extends Controller
             ->get()->first();
             $Bobinage=Bobinage::FindOrFail($projet->bobine_id );
             $Bobinage->update([
-                'materiaupr'=> $request->materiau,
-            'conducteurpr'=> $request->conducteur,
-            'materiau'=> $request->materiau,
+                'materiau'=> $request->materiau,
             'conducteur'=> $request->conducteur,
              ]);
     
