@@ -13,6 +13,7 @@ class Bobinage extends Model
     protected $fillable= [
         'materiau',
         'conducteur',
+        'type',
     ];
     public function projets(){
         return $this->hasMany(Projet::class);

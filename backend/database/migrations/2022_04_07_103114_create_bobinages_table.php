@@ -17,6 +17,7 @@ class CreateBobinagesTable extends Migration
             $table->id();
             $table->enum('materiau',['cuivre','aluminium'])->nullable();
             $table->enum('conducteur',['meplat guipé','Rond emaille','feuillard'])->nullable();
+            $table->enum('type',['primaire','secondaire']);
             $table->timestamps();
         });
     }

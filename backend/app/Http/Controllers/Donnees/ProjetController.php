@@ -84,9 +84,14 @@ class ProjetController extends Controller
         $Bobinage=Bobinage::create([
             'materiau'=> 'Aluminium',
             'conducteur'=> 'feuillard',
-            // 'electrique_id'=> $elec->id,
-            // 'garantie_id'=> $garantie->id,
-            // 'user_id'=> $user->id,
+            'type'=>'primaire',
+            
+        ]);
+        $Bobinage=Bobinage::create([
+            'materiau'=> 'cuivre',
+            'conducteur'=> 'feuillard',
+            'type'=>'secondaire',
+            
         ]);
         $projet= Projet::create([
              'appareil' => 'Defaut',

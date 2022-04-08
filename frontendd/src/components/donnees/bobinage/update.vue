@@ -86,6 +86,7 @@ export default {
          id:undefined,
       materiau:"",
       conducteur:"",
+      
       },
       e1:1
     };

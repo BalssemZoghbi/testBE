@@ -18,7 +18,7 @@ class BobinageResource extends JsonResource
             'id' => $this->id,
             'materiau' => $this->materiau,
             'conducteur' => $this->conducteur,
-            
+            'type' => $this->type,
         
             
         ];
