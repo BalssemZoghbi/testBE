@@ -86,6 +86,7 @@ export default {
          id:undefined,
       materiau:"",
       conducteur:"",
+      
       },
       e1:1
     };
@@ -101,8 +102,7 @@ export default {
         (response) => (this.id = response.data.id)
         
       );
-      this.$router.push({ name: "Home" });
-    },
+ this.$router.push('/gradin/'+this.$route.params.id);    },
   
   },
   async mounted() {

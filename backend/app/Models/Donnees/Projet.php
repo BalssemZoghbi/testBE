@@ -31,6 +31,7 @@ class Projet extends Model
     'electrique_id',
     'garantie_id',
     'bobinage_id',
+    'gradin_id',
 ];
 
      public function user(){
@@ -47,6 +48,10 @@ class Projet extends Model
     public function bobine()
     {
         return $this->belongsTo(Bobinage::class);
+    }
+    public function gradin()
+    {
+        return $this->belongsTo(Gradin::class);
     }
 
 }

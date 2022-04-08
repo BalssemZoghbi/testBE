@@ -10,6 +10,7 @@ use App\Http\Controllers\Donnees\GarantieController;
 use App\Http\Controllers\Donnees\ElectriqueController;
 use App\Http\Controllers\Donnees\TensionElectriqueController;
 use App\Http\Controllers\BobinageController;
+use App\Http\Controllers\GradinController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -69,3 +70,9 @@ Route::post('/bobine/add',[BobinageController::class ,'storeBobinage']);
 Route::get('/bobine/{id}',[BobinageController::class ,'getOneBobine']);
 Route::post('/garantie24',[GarantieController::class ,'garantie24']);
 Route::put('/garantie/edit/{id}',[GarantieController::class ,'edit']);
+Route::post('/gradin', [GradinController::class,'addg']);
+Route::get('/gradins',[GradinController::class ,'getAllGradin']);
+Route::post('/gradin/add',[GradinController::class ,'storeGradin']);
+Route::get('/gradin/{id}',[GradinController::class ,'getOneGradin']);
+Route::put('/gradin/update/{id}',[GradinController::class ,'updateGradin']);
+Route::delete('/gradin/delete/{id}',[GradinController::class ,'deleteGradin']);

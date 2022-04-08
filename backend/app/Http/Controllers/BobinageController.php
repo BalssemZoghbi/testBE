@@ -22,10 +22,11 @@ class BobinageController extends Controller
     }
     public function storeBobinage(Request $request){
    
-
+        // $Bobinage=Bobinage::where('type','primaire')->get()->first();
         $Bobinage= Bobinage::create([
             'materiau'=> $request->materiau,
             'conducteur'=> $request->conducteur,
+            // 'type'=> $request->type,
             
          ]);
 
@@ -34,6 +35,7 @@ class BobinageController extends Controller
          }
 
      }
+
         // public function updateBobinage(Request $request, $id){
         //     $Bobinage = Bobinage::FindOrFail($id);
         //     $Bobinage->update($request->all());
