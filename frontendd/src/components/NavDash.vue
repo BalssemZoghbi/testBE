@@ -69,7 +69,6 @@
       </v-navigation-drawer>
    <Footer/>   
   </nav>
-  
 </template>
 <script>
 import Footer from '@/components/Footer';
@@ -92,7 +91,7 @@ import { mapGetters } from 'vuex';
     drawer: true,
     links: [{ icon: "fas fa-tachometer-alt", text: "Tableau de bord", route: "/dashboard" },
     { icon: "apps", text: "projet", route: "/" },
-    { icon: "mdi-account", text: "Utilisateur", route: "" },
+    { icon: "mdi-account", text: "Utilisateur", route: "/user" },
     ]
   }
 },

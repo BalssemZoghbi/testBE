@@ -18,11 +18,17 @@ import updateGarantie from "../components/donnees/garantie/update.vue";
 import updateGradin from "../components/calcul/gradin/update.vue";
 
 import Bobine from "../components/donnees/bobinage/update.vue";
+import User from "@/components/User";
 
 
 Vue.use(VueRouter);
 
 const routes = [
+  {
+    path: "/user",
+    name: "User",
+    component: User,
+  },
   {
     path: "*",
     name: "NotFound",
