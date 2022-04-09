@@ -29,7 +29,7 @@
          </v-list-item-action>
          <v-list-item-content>
            <v-flex>
-          <a class="nav-link" to="/logout" @click="logout" >Logout</a>
+          <a class="nav-link"  @click="logout" >Logout</a>
          </v-flex>
          </v-list-item-content>
         </v-list-item>
@@ -46,7 +46,7 @@
       </v-card>
             </v-menu>
             
-            <nav align="center">{{ username }}</nav>
+            <nav align="center">{{ user.name }}</nav>
     </v-app-bar>
       <v-spacer></v-spacer>
     <v-navigation-drawer  v-model="drawer" dark app class="main-sidebar sidebar-dark-primary elevation-4">
@@ -73,6 +73,8 @@
 </template>
 <script>
 import Footer from '@/components/Footer'
+import axios from 'axios'
+import { mapGetters } from 'vuex';
 
   export default {
     components: {
@@ -82,21 +84,37 @@ import Footer from '@/components/Footer'
     return {
       search: '',
       token:null,
-      username: '',
+      // user: '',
       email: '',
     drawer: true,
     links: [{ icon: "fas fa-tachometer-alt", text: "Tableau de bord", route: "/dashboard" },
-    { icon: "apps", text: "projet", route: "/sites" },
-    { icon: "mdi-account", text: "Utilisateur", route: "/questions" },
+    { icon: "apps", text: "projet", route: "/" },
+    { icon: "mdi-account", text: "Utilisateur", route: "" },
     ]
   }
 },
-    mounted(){
-    let user=localStorage.getItem('user');
-    if(!user){
-    this.$router.push('/login');
-      }
+methods:{
+logout() {
+      localStorage.removeItem('token');
+      this.$store.dispatch('user',null);
+      this.$router.push("/login");
     },
+},
+async created() {
+  const response=await axios.get('user');
+    this.$store.dispatch('user',response.data);
+
+  this.user=response.data;
+},
+computed: {
+  ...mapGetters(['user'])
+}
+    // mounted(){
+    // let user=localStorage.getItem('user');
+    // if(!user){
+    // this.$router.push('/login');
+    //   }
+    // },
   }
 </script>
 

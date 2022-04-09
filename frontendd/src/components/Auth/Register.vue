@@ -1,9 +1,11 @@
 <template>
 <div class="body">
     <div class="center">
-      <img src="../../assets/sacem1.jpg">
-      <h1>Bienvenue</h1>
-      <form v-on:submit.prevent="register" method="post">
+      <img src="../../assets/logosacem.jpg">
+      <h1>Register</h1>
+      <form @submit.prevent="handleSubmit" method="post">
+              <error v-if="error" :error="error"/>
+
            <div class="txt_field">
           <input type="text" id="name"
         v-model="name" required>
@@ -28,7 +30,7 @@
           <span></span>
           <label>Confirmé le mot de passe</label>
         </div>
-        <input type="submit" @click="createAccount()" :class="{'disabled': !validateFields}" value="Inscription">
+        <input type="submit"  value="Inscription">
         <div class="signup_link">
           Vous avez deja un compte! <router-link  to="/login">Connecter</router-link>
 
@@ -40,51 +42,47 @@
 
 <script>
 import axios from "axios";
+import Error from "@/components/Error";
 export default {
-  data() {
-    return {
-      name: "",
-      email: "",
-      password: "",
-      password_confirm:""
-      
-    };
-  },
-  computed:{
-    validateFields:function(){
-      if(this.email!="" && this.name!="" && this.password!="" &&this.password_confirm!="" ){
-        return true;
-      }else{
-        return false;
-      }
-    }
-  },
-  methods: {
-    async createAccount() {
-      let self = this
-      let result= await axios.post("/register",{
-        email:this.email,
-        name:this.name,
-        password:this.password,
-        password_confirm:this.password_confirm,
-      });
-      console.log(result);
-      if(result.status==200){
-        self.$router.push('/login');
-      }
+name:'Register',
+components:{
+Error
+},
+data(){
+return{
+  name:'',
+  email:'',
+  password:'',
+  password_confirm:'',
+   error:''
+  }
+},
+methods:{
+ async handleSubmit(){
+   try{
+ await axios.post('/register',{
+      name:this.name,
+      email:this.email,
+      password:this.password,
+      password_confirm:this.password_confirm,
 
-    },
-  },
+    });
+  this.$router.push('/login');
+  }catch(e){
+this.error='error occurred';
+  }
+ }
+}
 };
 </script>
 
 <style scoped>
 img{
       width: 25%;
-    /* height: 23%; */
+    height: 23%;
     margin-left: 37%;
     margin-top: 1px;
-    margin-bottom: -8%;
+    margin-bottom: -5%;
 }
 h1{
 	color: #333;

@@ -31,8 +31,11 @@ import axios from "axios";
    }),
   methods:{
     logout(){
-      localStorage.clear();
-      this.$router.push('/loginn');
+      // localStorage.clear();
+      // this.$router.push('/login');
+     localStorage.removeItem('token');
+      this.$store.dispatch('user',null);
+      this.$router.push("/login");
     },
     create(){
      let token= localStorage.getItem('token')
