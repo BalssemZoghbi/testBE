@@ -1,9 +1,10 @@
 <template>
 <div class="body">
     <div class="center">
-      <img src="../assets/sacem1.jpg">
+      <img src="../assets/logosacem.jpg">
       <h1>Bienvenue</h1>
-      <form v-on:submit.prevent="loginn" method="post">
+      <form @submit.prevent="handleSubmit" method="post">
+      <error v-if="error" :error="error"/>
         <div class="txt_field">
           <input type="email" id="email"
         v-model="email" required>
@@ -11,13 +12,12 @@
           <label>Email</label>
         </div>
         <div class="txt_field">
-          <input type="password" id="password"
-        v-model="password" required>
+          <input type="password" id="password" v-model="password" required>
           <span></span>
           <label>Mot de passe</label>
         </div>
         <div class="pass"><router-link class="nav-link"  to="/forgot">Mot de passe oublié ?</router-link></div>
-        <input type="submit" @click="login()" :class="{'disabled': !validateFields}" value="Connexion">
+        <input type="submit" :class="{'disabled': !validateFields}"  value="Connexion">
         <div class="signup_link">
           Vous n'etes pas un membre? <router-link  to="/register">Inscription</router-link>
         </div>
@@ -27,16 +27,21 @@
 </template>
 
 <script>
-import {mapState} from 'vuex';
 import axios from "axios";
-
+import Error from "@/components/Error"
+import {mapState} from 'vuex';
 export default {
-  data() {
-    return {
-      email: "",
-      password: ""
-    };
-  },
+name:'Login',
+components:{
+Error
+},
+data(){
+  return{
+    email:'',
+    password:'' ,
+    error:''
+  }
+},
   computed:{
     validateFields:function(){
       if(this.email!="" && this.password!=""){
@@ -48,29 +53,27 @@ export default {
     ...mapState(['status'])
 
   },
-//  mounted(){
-//    let user= localStorage.getItem(userInfos)
-//    if(user){
-//      this.$router.push('/');
-//    }
-//  },
-  methods: {
- async login() {
-    let self = this
-    let result= await axios.post(`/login?email=${this.email}&password=${this.password}`);
-      localStorage.setItem("user",JSON.stringify(result.data))
-      if(result.status==200 ){
-        console.log('login done')
-      }
-      self.$router.push('/');
+methods:{
+ async handleSubmit(){
+   try{
+      const response= await axios.post('/login',{
+      email:this.email,
+      password:this.password,
+
+    });
+   
+
+  localStorage.setItem('token',response.data.token);
+  this.$store.dispatch('user',response.data.user);
+ this.$router.push('/dashboard');
+  }catch(e){
+    this.error=' Email ou mot de passe incorrect';
+
   }
-},
-mounted(){
-  let user=localStorage.getItem('user');
-  if(user){
-this.$router.push('/');
   }
 }
+
+
 }
 </script>
 
@@ -80,7 +83,7 @@ img{
     /* height: 23%; */
     margin-left: 37%;
     margin-top: 11px;
-    margin-bottom: -8%;
+    margin-bottom: -5%;
 }
 h1{
 	color: #333;
@@ -157,7 +160,8 @@ form .txt_field{
   width: 100%;
 }
 .pass{
-  margin: -5px 0 20px 5px;
+  /* margin-top: ; */
+  margin:-20px 0 10px -10px;
   color: #a6a6a6;
   cursor: pointer;
 }

@@ -160,7 +160,7 @@ import navbar from "../components/navbar.vue";
     mounted(){
     let user=localStorage.getItem('user');
     if(!user){
-    this.$router.push('/loginn');
+    this.$router.push('/login');
       }
     },
 

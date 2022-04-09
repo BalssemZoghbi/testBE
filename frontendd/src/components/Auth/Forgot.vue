@@ -3,12 +3,12 @@
     <div class="center"> 
      
       <!-- <img src="../../assets/ava.svg"> -->
-      <h1>Forgot Password</h1>
+      <h1>Mot de passe oublié</h1>
       <form @submit.prevent="handleSubmit" >
-         <!-- <div v-if="message" class="alert alert-succes" role="alert">
-        {{error}}
+         <div v-if="message" class="alert alert-success" role="alert">
+        {{message}}
     </div>
-      <error v-if="error" :error="error"/> -->
+      <error v-if="error" :error="error"/>
         <div class="txt_field">
           <input type="email" id="email"
         v-model="email" required>
@@ -25,29 +25,33 @@
 
 <script>
 import axios from 'axios';
+import Error from "@/components/Error";
+
 // import Error from '../components/Error.vue';
 export default {
     name:"Forgot",
-    // components:{
-    //   Error
-    // },
+components:{
+Error
+},
   data() {
     return {
       email: "",
-      message:''
+      message:'',
+      error:''
     };
   },
   methods: {
 async handleSubmit(){
-  // try{
- const response= await axios.post('/forgot',{
+  try{
+await axios.post('/forgot',{
   email:this.email
 });
-console.log(response);
-// this.message='The email was sent'
-  // }catch(e){
-    // this.error='Error occurred';
-  // }
+this.message='Le mail a été envoyét';
+this.error='';
+  }catch(e){
+    this.error='email incorrect!!';
+    this.message='';
+  }
 }
   },
 };

@@ -2,7 +2,7 @@
 <div class="body">
     <div class="center">
       <!-- <img src="../../assets/ava.svg"> -->
-      <h1>Reset your Password</h1>
+      <h1>réinitialiser votre mot de passe</h1>
       <form @submit.prevent="handleSubmit" method="post">
         <div class="txt_field">
           <input type="password" id="password"
