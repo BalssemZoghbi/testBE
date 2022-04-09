@@ -83,7 +83,7 @@ nav ul li{
 nav ul li .nav-link{
   color: rgb(234, 243, 246);
   text-decoration: none;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 500;
   margin-top: -14%;
   padding: 8px 15px;
