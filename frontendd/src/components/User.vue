@@ -171,8 +171,8 @@ export default {
   computed: {
     formTitle() {
       return this.editedIndex === -1
-        ? "Ajouter un nouveau site"
-        : "Editer site";
+        ? "Ajouter un nouveau utilisateur"
+        : "Editer utilisateur";
     },
   },
   watch: {
