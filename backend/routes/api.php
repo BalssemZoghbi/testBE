@@ -27,6 +27,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/users', [UserController::class,'index']);
+Route::get('/users/p', [UserController::class,'getup']);
+
 Route::post('/user/create', [UserController::class,'store']);
 Route::put('/user/update/{id}', [UserController::class,'updatestore']);
 Route::get('/user/{id}', [UserController::class,'show']);
@@ -62,7 +64,16 @@ Route::post('/forgot', [ForgotController::class,'forgot']);
 Route::post('/reset', [ForgotController::class,'reset']);
 
 Route::post('/garantie36',[GarantieController::class ,'garantie36']);
+Route::get('/garantie24',[GarantieController::class ,'get24']);
+Route::get('/garantie36',[GarantieController::class ,'get36']);
+Route::delete('/garantie36/delete/{id}', [GarantieController::class ,'deletegar36']);
+Route::delete('/garantie24/delete/{id}', [GarantieController::class ,'deletegar24']);
+Route::post('/create36',[GarantieController::class ,'create36']);
+Route::post('/create24',[GarantieController::class ,'create24']);
+Route::put('/update24/{id}',[GarantieController::class ,'update24']);
 
+
+Route::put('/update36/{id}',[GarantieController::class ,'update36']);
 Route::put('/bobine/update/{id}',[BobinageController::class ,'updateBobinage']);
 Route::delete('/bobine/delete/{id}',[BobinageController::class ,'deleteBobinage']);
 Route::get('/bobines',[BobinageController::class ,'getAllBobine']);

@@ -20,7 +20,14 @@ class UserController extends Controller
         //  $projets=Projet::find($id,'user_id')->get();
         return UserResource::collection($users);
     }
-
+    // public function getup()
+    // {
+    //     $users = User::all();
+    //    if($user->type=='pending'){
+    //     return $users;    
+    //    }
+      
+    // }
     public function store(Request $request){
        $user= User::create([
             'name' => $request->name,
@@ -42,7 +49,6 @@ class UserController extends Controller
         ]);
         if($user->save()){
             return response()->json($user);
-            // UserResource::collection($user);
         }
     }
 

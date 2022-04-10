@@ -12,24 +12,30 @@
         </v-card-title>
         <v-form>
           <v-container>
-            <v-col>
-              
-              <v-row cols="4" sm="4" >
+            <v-row>
+              <v-col cols="12" sm="6">
                 <v-text-field
                   v-model="name"
-                  label="name"
+                  label="Nom"
                   readonly
                 ></v-text-field>
-              </v-row>
-              <v-row cols="6" sm="6" >
+              </v-col>
+           
+              <v-col cols="12" sm="6">
                 <v-text-field
                   v-model="email"
                   label="Email"
                   readonly
                 ></v-text-field>
-              </v-row>
-             
-            </v-col>
+              </v-col>
+              <v-col cols="12" sm="6">
+                <v-text-field
+                  v-model="date"
+                  label="Date"
+                  readonly
+                ></v-text-field>
+              </v-col>
+            </v-row>
           </v-container>
         </v-form>
 
@@ -40,7 +46,7 @@
               >Close</v-btn
             >
             <v-flex class="mt-4 mb-4">
-              <Update :Data="users"/>
+              <!-- <Exemple3 :Data="desserts"/> -->
             </v-flex>
           </v-card-actions>
         </v-form>
@@ -51,18 +57,20 @@
 
 <script>
 import axios from "axios";
-import Update from "./UpdateUser.vue";
+// import Exemple3 from "./UpdateUser.vue";
 export default {
   name: "Profile",
   components: {
-    Update,
+    // Exemple3,
   },
  
   data: () => ({
     dialog: false,
+    // username:'',
+    date:'',
     name:'',
     email:'',
-    users: [],
+    desserts: [],
   }),
   watch: {
     dialog(val) {
@@ -74,20 +82,25 @@ export default {
   },
   methods: {
     initialize() {
-      this.users = [{ name: this.data.name}];
+      this.desserts = [{ name: this.data.name}];
     },
     close() {
       this.dialog = false;
     },
   },
   mounted() {
-axios.get('users', { headers: { token: localStorage.getItem('token')}})
+axios.get('/users/'+this.$route.params.id, 
+{ headers: { token: localStorage.getItem('token')}})
       .then(res => {
-        this.name = res.data.user.name;
+        // this.username = res.data.user.username;
         this.email = res.data.user.email;
-        this.users.name = this.name;
-        this.users.email = this.email;
-        console.log(this.users)
+        this.date = res.data.user.date;
+        this.name = res.data.user.name;
+        // this.desserts.username = this.username;
+        this.desserts.email = this.email;
+        this.desserts.date = this.date;
+        this.desserts.name = this.name;
+        console.log(this.desserts)
       })   
   },
 };
