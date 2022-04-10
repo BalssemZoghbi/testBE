@@ -12,11 +12,11 @@ use App\Models\Donnees\garantie\Garantie36;
 class GarantieController extends Controller
 {
     public function calcul24($puissance){
-                $garantie24=Garantie24::where('Pn',$puissance)->get()->first();
+                $garantie24=Garantie24::where('pn',$puissance)->get()->first();
         return $garantie24;
     }
     public function calcul36($puissance){
-                $garantie36=Garantie36::where('Pn',$puissance)->get()->first();
+                $garantie36=Garantie36::where('pn',$puissance)->get()->first();
         return $garantie36;
     }
     public function edit($id, Request $request){
@@ -27,7 +27,7 @@ class GarantieController extends Controller
         ->where('projets.id',$id)
         ->select('projets.garantie_id','electriques.puissance','electriques.u1n', 'electriques.u2o','projets.temperatureMax')
         ->get()->first();
-        if($projet->u1n>$projet->u2o){
+        if($projet->u1n > $projet->u2o){
             $max=$projet->u1n;
         }else{
             $max=$projet->u2o;
@@ -61,27 +61,27 @@ class GarantieController extends Controller
 
     public function garantie36(){
         $garantie36=[
-            ["Pn"=>25, "Po"=>200, "lo"=>7.9, "Pcc"=>800, "Ucc"=>4.5],
-            ["Pn"=>40, "Po"=>230, "lo"=>6.3, "Pcc"=>870, "Ucc"=>4.5],
-            ["Pn"=>50, "Po"=>260, "lo"=>5, "Pcc"=>1450, "Ucc"=>4.5],
-            ["Pn"=>63, "Po"=>300, "lo"=>4.8, "Pcc"=>1640, "Ucc"=>4.5],
-            ["Pn"=>80, "Po"=>360, "lo"=>4.5, "Pcc"=>1980, "Ucc"=>4.5],
-            ["Pn"=>100, "Po"=>400, "lo"=>4.4, "Pcc"=>2340, "Ucc"=>4.5],
-            ["Pn"=>125, "Po"=>460, "lo"=>4.1, "Pcc"=>2790, "Ucc"=>4.5],
-            ["Pn"=>160, "Po"=>530, "lo"=>3.9, "Pcc"=>3330, "Ucc"=>4.5],
-            ["Pn"=>200, "Po"=>600, "lo"=>3.7, "Pcc"=>3980, "Ucc"=>4.5],
-            ["Pn"=>250, "Po"=>750, "lo"=>3.5, "Pcc"=>4230, "Ucc"=>4.5],
-            ["Pn"=>315, "Po"=>920, "lo"=>3.4, "Pcc"=>5200, "Ucc"=>4.5],
-            ["Pn"=>400, "Po"=>1160, "lo"=>3.2, "Pcc"=>6210, "Ucc"=>4.5],
-            ["Pn"=>500, "Po"=>1300, "lo"=>3.1, "Pcc"=>7400, "Ucc"=>4.5],
-            ["Pn"=>630, "Po"=>1600, "lo"=>2.9, "Pcc"=>8820, "Ucc"=>4.5],
-            ["Pn"=>800, "Po"=>1800, "lo"=>2.8, "Pcc"=>12500, "Ucc"=>5],
-            ["Pn"=>1000, "Po"=>1900, "lo"=>2.7, "Pcc"=>14000, "Ucc"=>5.5],
-            ["Pn"=>1250, "Po"=>2500, "lo"=>2.5, "Pcc"=>18500, "Ucc"=>6],
-            ["Pn"=>1600, "Po"=>2900, "lo"=>2.2, "Pcc"=>21500, "Ucc"=>6.5],
-            ["Pn"=>2000, "Po"=>3430, "lo"=>2.1, "Pcc"=>27300, "Ucc"=>7],
-            ["Pn"=>2500, "Po"=>3870, "lo"=>1.9, "Pcc"=>30500, "Ucc"=>7.5],
-            ["Pn"=>3150, "Po"=>4600, "lo"=>1.8, "Pcc"=>36800, "Ucc"=>7.5],
+            ["pn"=>25, "po"=>200, "lo"=>7.9, "pcc"=>800, "ucc"=>4.5],
+            ["pn"=>40, "po"=>230, "lo"=>6.3, "pcc"=>870, "ucc"=>4.5],
+            ["pn"=>50, "po"=>260, "lo"=>5, "pcc"=>1450, "ucc"=>4.5],
+            ["pn"=>63, "po"=>300, "lo"=>4.8, "pcc"=>1640, "ucc"=>4.5],
+            ["pn"=>80, "po"=>360, "lo"=>4.5, "pcc"=>1980, "ucc"=>4.5],
+            ["pn"=>100, "po"=>400, "lo"=>4.4, "pcc"=>2340, "ucc"=>4.5],
+            ["pn"=>125, "po"=>460, "lo"=>4.1, "pcc"=>2790, "ucc"=>4.5],
+            ["pn"=>160, "po"=>530, "lo"=>3.9, "pcc"=>3330, "ucc"=>4.5],
+            ["pn"=>200, "po"=>600, "lo"=>3.7, "pcc"=>3980, "ucc"=>4.5],
+            ["pn"=>250, "po"=>750, "lo"=>3.5, "pcc"=>4230, "ucc"=>4.5],
+            ["pn"=>315, "po"=>920, "lo"=>3.4, "pcc"=>5200, "ucc"=>4.5],
+            ["pn"=>400, "po"=>1160, "lo"=>3.2, "pcc"=>6210, "ucc"=>4.5],
+            ["pn"=>500, "po"=>1300, "lo"=>3.1, "pcc"=>7400, "ucc"=>4.5],
+            ["pn"=>630, "po"=>1600, "lo"=>2.9, "pcc"=>8820, "ucc"=>4.5],
+            ["pn"=>800, "po"=>1800, "lo"=>2.8, "pcc"=>12500, "ucc"=>5],
+            ["pn"=>1000, "po"=>1900, "lo"=>2.7, "pcc"=>14000, "ucc"=>5.5],
+            ["pn"=>1250, "po"=>2500, "lo"=>2.5, "pcc"=>18500, "ucc"=>6],
+            ["pn"=>1600, "po"=>2900, "lo"=>2.2, "pcc"=>21500, "ucc"=>6.5],
+            ["pn"=>2000, "po"=>3430, "lo"=>2.1, "pcc"=>27300, "ucc"=>7],
+            ["pn"=>2500, "po"=>3870, "lo"=>1.9, "pcc"=>30500, "ucc"=>7.5],
+            ["pn"=>3150, "po"=>4600, "lo"=>1.8, "pcc"=>36800, "ucc"=>7.5],
         ];
         Garantie36::insert($garantie36);
     }

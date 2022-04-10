@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGarantie36sTable extends Migration
+class CreateTolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateGarantie36sTable extends Migration
      */
     public function up()
     {
-        Schema::create('garantie36s', function (Blueprint $table) {
+        Schema::create('toles', function (Blueprint $table) {
             $table->id();
-            $table->integer('pn');
-            $table->integer('po');
-            $table->float('lo');
-            $table->integer('pcc');
-            $table->float('ucc');
+            $table->string('');
+            $table->id();
+            $table->id();
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateGarantie36sTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('garantie36s');
+        Schema::dropIfExists('toles');
     }
 }

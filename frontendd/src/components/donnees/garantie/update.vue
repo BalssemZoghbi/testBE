@@ -209,7 +209,36 @@ export default {
   },
   methods: {
     updateprojet() {
-      const projets = {
+      // const projets = {
+      //   id: undefined,
+      //   option: this.projet.option,
+      //   Pog: this.projet.Pog,
+      //   log: this.projet.log,
+      //   Pccg: this.projet.Pccg,
+      //   Uccg:this.projet.Uccg,
+      //   Ptot: this.projet.Ptot,
+      //   Poglimit: this.projet.Poglimit,
+      //   loglimit: this.projet.loglimit,
+      //   Pccglimit: this.projet.Pccglimit,
+      //   Uccglimit: this.projet.Uccglimit,
+      //   Ptotlimit: this.projet.Ptotlimit,
+      //   echauffementHuile: this.projet.echauffementHuile,
+      //   echauffementEnroulement: this.projet.echauffementEnroulement,
+      // };
+      // axios.put('garantie/edit/'+this.$route.params.id, projets).then(
+      //   (response) => (this.id = response.data.id, console.log(response.data))
+        
+      // );
+       this.$router.push('/bobine/'+this.$route.params.id);
+    },
+  },
+  async mounted() {
+    const result = await axios.get('projets/'+this.$route.params.id);
+    this.projet = result.data;
+  },
+  created(){
+    console.log('create')
+     const projets = {
         id: undefined,
         option: this.projet.option,
         Pog: this.projet.Pog,
@@ -225,17 +254,11 @@ export default {
         echauffementHuile: this.projet.echauffementHuile,
         echauffementEnroulement: this.projet.echauffementEnroulement,
       };
-      axios.put('garantie/edit/'+this.$route.params.id, projets).then(
+     axios.put('garantie/edit/'+this.$route.params.id, projets).then(
         (response) => (this.id = response.data.id, console.log(response.data))
         
       );
-       this.$router.push('/bobine/'+this.$route.params.id);
-    },
-  },
-  async mounted() {
-    const result = await axios.get('projets/'+this.$route.params.id);
-    this.projet = result.data;
-  },
+  }
 };
 </script>
 <style scoped>

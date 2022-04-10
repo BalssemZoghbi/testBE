@@ -86,27 +86,27 @@ class ProjetController extends Controller
             'materiau'=> 'Aluminium',
             'conducteur'=> 'feuillard',
             // 'type'=>'primaire',
-            
+
         ]);
         // $Bobinage=Bobinage::create([
         //     'materiau'=> 'cuivre',
         //     'conducteur'=> 'feuillard',
         //     'type'=>'secondaire',
-            
+
         // ]);
         $gradin=Gradin::create([
             "tole"=>  'H95-27',
-            'diamPropose' => 1320,
-            'diamNominale'=> 8,
-            'pas'=> 20,
-            'coeffRemplissage'=> 4,
-            'nbrGradin'=> 9220,
-            'demiGradin'=> 198,
-            'largeur'=> '[1,5,6]',
-            'epaisseur'=> '[1,5,6]',
-            'Sbrut'=> 4.8,
-            'Snette'=> 101.42,
-            'EpaisseurTot'=> 4.0,
+            'diamPropose' => 308.79,
+            'diamNominale'=> 177,
+            'pas'=> 10,
+            'coeffRemplissage'=> 20,
+            'nbrGradin'=> 7,
+            'demiGradin'=> 4,
+            'largeur'=> '[170,160,150,140,130,120,110]',
+            'epaisseur'=> ' [ 49.28488612140643,26.40527175925861,18.272600699529917,2.867549853436623,2.9550661777275273,2.99721542847614,4.278589602058545]',
+            'Sbrut'=> 21028.25,
+            'Snette'=> 420565.18,
+            'EpaisseurTot'=> 138.66,
         ]);
         $projet= Projet::create([
              'appareil' => 'Defaut',
@@ -142,12 +142,12 @@ class ProjetController extends Controller
         ->join('electriques', 'electriques.id', '=', 'projets.electrique_id')
         ->join('garanties', 'garanties.id', '=', 'projets.garantie_id')
         ->join('bobinages', 'bobinages.id', '=', 'projets.bobinage_id')
-        ->join('Gradins', 'Gradins.id', '=', 'projets.Gradin_id')
+        ->join('gradins', 'gradins.id', '=', 'projets.gradin_id')
         ->where('projets.id',$id)
-        ->select('electriques.*','electriques.id as elec_id','garanties.*','garanties.id as garenti_id','bobinages.*','bobinages.id as bobine_id','gradins.*','gradins.id as gradin_id', 'projets.*')
+        ->select('electriques.*','electriques.id as elec_id','garanties.*','garanties.id as garenti_id','bobinages.*','bobinages.id as bobine_id','gradins.*','gradins.id as gradins_id', 'projets.*')
         ->get()->first();
 
-      
+
     return response()->json($projet);
  }
  public function editProjet($id, Request $request){

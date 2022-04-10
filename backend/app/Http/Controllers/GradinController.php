@@ -6,109 +6,161 @@ use Illuminate\Http\Request;
 use App\Models\Gradin;
 use App\Http\Resources\GradinResource;
 use Illuminate\Support\Facades\DB;
+
 class GradinController extends Controller
 {
-    public function addg(){
-        $gradin=Gradin::create([
-            "tole"=>  'StandardTri24KV',
+    public function addg()
+    {
+        Gradin::create([
+            "tole" =>  'StandardTri24KV',
             'diamPropose' => 1320,
-            'diamNominale'=> 8,
-            'pas'=> 10,
-            'coeffRemplissage'=> 4,
+            'diamNominale' => 8,
+            'pas' => 10,
+            'coeffRemplissage' => 4,
             'nbrGr
-            adin'=> 9220,
-            'demiGradin'=> 198,
-            'largeur'=> '[1,5,6]',
-            'epaisseur'=> '[1,5,6]',
-            'Sbrut'=> 4.8,
-            'Snette'=> 101.42,
-            'EpaisseurTot'=> 4.0,
+            adin' => 9220,
+            'demiGradin' => 198,
+            'largeur' => '[1,5,6]',
+            'epaisseur' => '[1,5,6]',
+            'Sbrut' => 4.8,
+            'Snette' => 101.42,
+            'EpaisseurTot' => 4.0,
         ]);
     }
     public function getAllGradin()
     {
-        $Gradin =Gradin::all();
+        $Gradin = Gradin::all();
 
         return GradinResource::collection($Gradin);
     }
     public function getOneGradin($id)
     {
-        $Gradin =Gradin::FindOrFail($id);
+        $Gradin = Gradin::FindOrFail($id);
         return new GradinResource($Gradin);
     }
-    public function storeGradin(Request $request){
-   
-        $Gradin= Gradin::create([
-            'tole'=>  $request->$tole,
-            'diamPropose' => $request->$diamPropose,
-            'diamNominale'=> $request->$diamNominale,
-            'pas'=> $request->$pas,
-            'coeffRemplissage'=> $request->$coeffRemplissage,
-            'nbrGradin'=> $request->$nbrGradin,
-            'demiGradin'=> $request->$demiGradin,
-            'largeur'=> $request->$largeur,
-            'epaisseur'=> $request->$epaisseur,
-            'Sbrut'=> $request->$Sbrut,
-            'Snette'=> $request->$Snette,
-            'EpaisseurTot'=> $request->$EpaisseurTot
 
-         ]);
-
-         if($Gradin->save()){
-             return response()->json($Gradin);
-         }
-
-     }
-     public function diametre($materiau,$puissance){
-         $diamPropose=null;
-         if($materiau=='cuivre'){
-            $diamPropose=pow(($puissance/100),0.236)*220;
-         }elseif ($materiau=='aluminum') {
-             $diamPropose=pow(($puissance/100),0.236)*200;
-         }
-     }
-
-        public function updateGradin($id, Request $request){
-
-            $projet = DB::table('projets')
-            ->join('electriques', 'electriques.id', '=', 'projets.electrique_id')
-            ->join('Gradins', 'Gradins.id', '=', 'projets.Gradin_id')
-            ->join('bobinages', 'bobinages.id', '=', 'projets.bobinage_id')
-            ->where('projets.id',$id)
-            ->select('projets.garadin_id','electriques.puissance','bobinages.materiau', 'projets.*')
-            ->get()->first();
-            $Gradin=Gradin::FindOrFail($projet->grad_id );
-
-            $diamPropose=$this->diametre($projet->materiau,$projet->puissance);
-
-
-
-
-            $Gradin->update([
-            'tole'=>  $request->$tole,
-            'diamPropose' =>$diamPropose,
-            'diamNominale'=> $request->$diamNominale,
-            'pas'=> $request->$pas,
-            'coeffRemplissage'=> $request->$coeffRemplissage,
-            'nbrGradin'=> $request->$nbrGradin,
-            'demiGradin'=> $request->$demiGradin,
-            'largeur'=> $request->$largeur,
-            'epaisseur'=> $request->$epaisseur,
-            'Sbrut'=> $request->$Sbrut,
-
-            'Snette'=>$request->Sbrut+$request->coeffRemplissage,
-
-            'EpaisseurTot'=> $request->$EpaisseurTot
-            
-            // 'EpaisseurTot'=> $epaisseur->sum('epaisseur')
-             ]); 
-    
-                 return response()->json($Gradin);
-         }
-
-        public function deleteGradin($id){
-            $Gradin = Gradin::FindOrFail($id);
-            $Gradin->delete();
-            return response()->json('deleted');
+    public function diametre($materiau, $puissance)
+    {
+        $diamPropose = null;
+        if ($materiau == 'cuivre') {
+            $diamPropose = pow(($puissance / 100), 0.236) * 220;
+        } elseif ($materiau == 'aluminium') {
+            $diamPropose = pow(($puissance / 100), 0.236) * 200;
         }
+        return $diamPropose;
+    }
+
+    public function largeur($diam,$nbrGradin,$pas)
+    {
+        $diam=floor($diam/10);
+        if($diam%2==0){
+            $diam-=1;
+        }
+        $diam=$diam*10;
+        $largeur=[];
+        for($i=0;$i<$nbrGradin;$i++){
+            $largeur[$i]=$diam;
+            $diam-=$pas;
+        }
+        return $largeur;
+    }
+    public function epaisseur($diam,$largeur,$nbreGradin){
+        $epaisseur=[];
+        $prec=0;
+        // for($i=0;$i<$nbreGradin;$i++){
+        //     $epaisseur[$i]=sqrt(pow($diam,2)-pow($largeur[$i],2));
+        //     $prec+=$epaisseur[$i];
+        //     $epaisseur[$i]-=$prec;
+        // }
+        for($i=0;$i<$nbreGradin;$i++){
+            $epaisseur[$i]=sqrt(pow($diam,2)-pow($largeur[$i],2));
+            $epaisseur[$i]-=$prec;
+            $prec+=$epaisseur[$i];
+            // $prec+=sqrt(pow($diam,2)-pow($largeur[$i],2));
+        }
+        return $epaisseur;
+    }
+    public function epaisseurfeuillard($diam,$largeur,$nbreGradin,$demiGradin){
+        $epaisseur=$this->epaisseur($diam,$largeur,$nbreGradin);
+        $coeff=[0.5, 0.3, 0.25, 0.2];
+        $j=0;
+        for($i=$nbreGradin-1;$i>$nbreGradin-$demiGradin-1;$i--){
+            $epaisseur[$i]=$epaisseur[$i]*$coeff[$j];
+            $j++;
+        }
+        return $epaisseur;
+    }
+
+    public function updateGradin($id, Request $request)
+    {
+
+        $projet = DB::table('projets')
+            ->join('electriques', 'electriques.id', '=', 'projets.electrique_id')
+            ->join('gradins', 'gradins.id', '=', 'projets.gradin_id')
+            ->join('bobinages', 'bobinages.id', '=', 'projets.bobinage_id')
+            ->where('projets.id', $id)
+            ->select('projets.gradin_id', 'electriques.puissance', 'bobinages.materiau', 'bobinages.conducteur')
+            ->get()->first();
+        $Gradin = Gradin::FindOrFail($projet->gradin_id);
+        $diamPropose = $this->diametre($projet->materiau, $projet->puissance);
+        $largeur=$this->largeur($request->diamNominale,$request->nbrGradin,$request->pas);
+        $epaisseur=$this->epaisseur($request->diamNominale,$largeur,$request->nbrGradin);
+        $epaisseurfeuillard=$this->epaisseurfeuillard($request->diamNominale,$largeur,$request->nbrGradin,$request->demiGradin);
+        $brut=array_sum(array_map(function($a, $b) { return $a * $b; }, $largeur, $epaisseur));
+        if($projet->conducteur=='feuillard'){
+            $Gradin->update([
+                'tole' =>  $request->tole,
+                'diamPropose' => $diamPropose,
+                'diamNominale' => $request->diamNominale,
+                'pas' => $request->pas,
+                'coeffRemplissage' => $request->coeffRemplissage,
+                'nbrGradin' => $request->nbrGradin,
+                'demiGradin' => $request->demiGradin,
+                'largeur' => $largeur,
+                'epaisseur' => $epaisseurfeuillard,
+                'Sbrut' => $brut ,
+                'Snette' => $brut * $request->coeffRemplissage,
+                'EpaisseurTot' => array_sum($epaisseur)
+            ]);
+        }else{
+        $Gradin->update([
+            'tole' =>  $request->tole,
+            'diamPropose' => $diamPropose,
+            'diamNominale' => $request->diamNominale,
+            'pas' => $request->pas,
+            'coeffRemplissage' => $request->coeffRemplissage,
+            'nbrGradin' => $request->nbrGradin,
+            'demiGradin' => 0,
+            'largeur' => $largeur,
+            'epaisseur' => $epaisseur,
+            'Sbrut' => $brut ,
+            'Snette' => $brut * $request->coeffRemplissage,
+            'EpaisseurTot' => array_sum($epaisseur)
+        ]);
+    }
+        return response()->json($Gradin);
+    }
+    public function storeGradin()
+    {
+
+        $Gradin = Gradin::create([
+            "tole"=>  'H95-27',
+            'diamNominale'=> 8,
+            'pas'=> 20,
+            'coeffRemplissage'=> 4,
+            'nbrGradin'=> 7,
+            'demiGradin'=> 2,
+        ]);
+
+        if ($Gradin->save()) {
+            return response()->json($Gradin);
+        }
+    }
+
+    public function deleteGradin($id)
+    {
+        $Gradin = Gradin::FindOrFail($id);
+        $Gradin->delete();
+        return response()->json('deleted');
+    }
 }
