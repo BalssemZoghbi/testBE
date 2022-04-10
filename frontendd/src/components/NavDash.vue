@@ -10,9 +10,7 @@
       <v-spacer></v-spacer>
       <v-menu offset-y>
       <template v-slot:activator="{ on }">
-          <v-avatar v-on="on" color="rgb(121 172 249)">
-      <v-icon dark>mdi-account-circle</v-icon>
-    </v-avatar>
+      <v-icon v-on="on" dark>mdi-account-circle</v-icon>
       </template>
       <v-card
     class="mx-auto"
@@ -36,7 +34,7 @@
         
         <v-list-item router>
          <v-list-item-action>
-           <v-icon small color="black">mdi-account-circle</v-icon>
+           <v-icon small color="black">mdi-account</v-icon>
          </v-list-item-action>
          <v-flex class="mt-4 mb-4">
                 <Profile />
@@ -45,7 +43,6 @@
     </v-list>
       </v-card>
             </v-menu>
-            
             <nav align="center">{{ user.name }}</nav>
     </v-app-bar>
       <v-spacer></v-spacer>
@@ -91,7 +88,10 @@ import { mapGetters } from 'vuex';
     drawer: true,
     links: [{ icon: "fas fa-tachometer-alt", text: "Tableau de bord", route: "/dashboard" },
     { icon: "apps", text: "projet", route: "/" },
-    { icon: "mdi-account", text: "Utilisateur", route: "/user" },
+    { icon: "fa-solid fa-user", text: "Utilisateur", route: "/user" },
+    { icon: "fa-solid fa-user-check", text: "demande", route: "/demande" },
+ { icon: "fa-solid fa-bars-staggered", text: "Garantie24", route: "/garantie24" },
+    { icon: "fa-solid fa-table-cells", text: "Garantie36", route: "/garantie36" },
     ]
   }
 },

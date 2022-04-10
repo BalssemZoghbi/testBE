@@ -3,7 +3,7 @@
     <NavDash />
     <v-data-table
       :headers="headers"
-      :items="desserts"
+      :items="users"
       sort-by="calories"
       class="elevation-1"
       :search="search"
@@ -32,52 +32,35 @@
             <v-card>
               <v-card-title>
                 <span class="text-h5">
-                  <!-- {{ formTitle }} -->
+                  {{ formTitle }}
                   </span>
               </v-card-title>
 
               <v-card-text>
                 <v-container>
-                  <v-row>
-                    <v-col cols="12" sm="6" md="4">
+                  <v-col>
+                    <v-row cols="12" sm="6" md="4">
                       <v-text-field
                         v-model="editedItem.name"
                         label="Name"
                       ></v-text-field>
-                    </v-col>
+                    </v-row>
                  
-                    <v-col cols="12" sm="6" md="4">
+                    <v-row cols="12" sm="6" md="4">
                       <v-text-field
                         v-model="editedItem.email"
                         label="Email"
                       ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
+                    </v-row>
+                    <v-row cols="12" sm="6" md="4">
                       <v-text-field
-                        v-model="editedItem.logo"
-                        label="logo"
+                        v-model="editedItem.type"
+                        label="type"
                       ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.phone"
-                        label="phone"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.fax"
-                        label="fax"
-                      ></v-text-field>
-                    </v-col>
+                    </v-row>
+                  
                     
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.codeGAnalytics"
-                        label="Code G-Analytics"
-                      ></v-text-field>
-                    </v-col>
-                  </v-row>
+                  </v-col>
                 </v-container>
               </v-card-text>
 
@@ -86,13 +69,13 @@
                 <v-btn color="blue darken-1" text @click="close">
                   Cancel
                 </v-btn>
-                <v-btn color="blue darken-1" text @click="addSite">
+                <v-btn color="blue darken-1" text @click="addUser">
                   Save
                 </v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
-          <v-dialog v-model="dialogDelete" max-width="500px">
+          <!-- <v-dialog v-model="dialogDelete" max-width="500px">
             <v-card>
               <v-card-title class="text-h5"
                 >Are you sure you want to delete this user?</v-card-title
@@ -108,66 +91,57 @@
                 <v-spacer></v-spacer>
               </v-card-actions>
             </v-card>
-          </v-dialog>
+          </v-dialog> -->
         </v-toolbar>
       </template>
       <template v-slot:[`item.actions`]="{ item }">
         <v-icon small color="green" class="mr-2" @click="editItem(item)">
           mdi-pencil
         </v-icon>
-        <v-icon small color="red" @click="deleteItem(item)">
-          mdi-delete
-        </v-icon>
+               <v-icon small color="red" @click="deleteutilisateur(item.id)"> mdi-delete </v-icon>
+
       </template>
 
-      <template v-slot:no-data>
-        <v-btn color="primary" @load="initialize"> Reset </v-btn>
-      </template>
+     
     </v-data-table>
   </div>
 </template>
 
 <script>
-import NavDash from "../components/NavDash.vue";
-// import axios from "axios";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import NavDash from "../NavDash.vue";
+import axios from "axios";
 export default {
+   components: {
+    NavDash,
+  },
   data: () => ({
     search: "",
     dialog: false,
     dialogDelete: false,
     headers: [
-      { text: "name", value: "name" },
-      { text: "email", value: "email" },
-      { text: "logo", value: "logo" },
-      { text: "phone", value: "phone" },
-      { text: "fax", value: "fax" },
-      { text: "Etat", value: "etat" },
-      { text: "", value: "actions", sortable: false },
+      { text: "Name", value: "name" },
+      { text: "Email", value: "email" },
+      { text: "Type", value: "type" },
+      { text: "Operation", value: "actions" , sortable: false},
+     
     ],
-    desserts: [{ date: "" }, { codeGAnalytics: "" }],
+    users: [],
     editedIndex: -1,
     editedItem: {
       name: "",
       email: "",
-      logo: "",
-      phone: "",
-      fax: "",
-      etat: false,
-      date: "",
-      codeGAnalytics: "",
+      type: "",
     },
     defaultItem: {
       name: "",
-      url: "",
       email: "",
-      logo: "",
-      phone: "",
-      fax: "",
-      etat: false,
-      date: "",
-      codeGAnalytics: "",
+      type: "",
     },
   }),
+    async created() {
+    this.getuser();
+  },
   computed: {
     formTitle() {
       return this.editedIndex === -1
@@ -183,37 +157,62 @@ export default {
       val || this.closeDelete();
     },
   },
-  created() {
-    this.initialize();
-  },
+ 
   methods: {
-    initialize() {
-      this.desserts = [
-        /* {
-          title: this.data.title,
-          url: this.data.url,
-          logo: this.data.logo,
-          email: this.data.email,
-          phone: this.data.phone,
-          fax: this.data.fax,
-          etat: this.data.etat,
-        }, */
-      ];
+  
+     async  getuser() {
+    await axios.get("/users").then((resp) => {
+        this.users = resp.data.data;
+        console.log(resp.data);
+      });
+    },
+         deleteutilisateur(id) {
+      Swal.fire({
+        title: "Supprimer",
+        text: "Vous êtes sure de supprimer cette utilisateur?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Supprimer",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire("Supprimé!", "Cette utilisateur a été supprimé", "success");
+          axios.delete("user/delete/" + id).then(() => {
+            this.getuser();
+          });
+        }
+      });
     },
     editItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
+      this.editedIndex = this.users.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
+      //     update() {
+      let user = {
+        email: this.editedItem.email,
+        username: this.editedItem.username,
+        name: this.editedItem.name,
+        password: this.password,
+      }
+      axios.post('/users/update', user,{ headers: { token: localStorage.getItem('token')}})
+        .then(res => {
+          //if successfull
+          if (res.status === 200) {
+            localStorage.setItem('token', res.data.token);
+            console.log(res)
+            
+          }
+        }, err => {
+          console.log(err.response);
+          this.error = err.response.data.error
+        })
+    
+    //    axios.put("/user/update/"+this.id, users).then(
+    //     (response) => (this.id = response.data.id)
+    // );
     },
-    deleteItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
-      this.editedItem = Object.assign({}, item);
-      this.dialogDelete = true;
-    },
-    deleteItemConfirm() {
-      this.desserts.splice(this.editedIndex, 1);
-      this.closeDelete();
-    },
+   
     close() {
       this.dialog = false;
       this.$nextTick(() => {
@@ -221,51 +220,51 @@ export default {
         this.editedIndex = -1;
       });
     },
-    closeDelete() {
-      this.dialogDelete = false;
-      this.$nextTick(() => {
-        this.editedItem = Object.assign({}, this.defaultItem);
-        this.editedIndex = -1;
-      });
-    },
+    
     save() {
       if (this.editedIndex > -1) {
-        Object.assign(this.desserts[this.editedIndex], this.editedItem);
+        Object.assign(this.users[this.editedIndex], this.editedItem);
       } else {
-        this.desserts.push(this.editedItem);
+        this.users.push(this.editedItem);
       }
       this.close();
     },
-//     addSite() {
-//       axios
-//         .post("http://localhost:5000/api/sites/addSite",this.editedItem , {
-//           headers: { token: localStorage.getItem("token") },
-//         })
-//         .then(() => {console.log(this.editedItem);
-// });
-//     },
-  },
-  components: {
-    NavDash,
-  },
+    addUser() {
+      axios
+        .post("/user/create",this.editedItem , {
+          headers: { token: localStorage.getItem("token") },
+        })
+        .then(() => {console.log(this.editedItem);
+         this.dialog = false;
+      this.editedItem = Object.assign({}, this.defaultItem);
+      this.getuser();
+});
+    },
+  //     updateUser(id) {
+  //    axios.put("user/update/" + id).then(() => {
+  //           this.getuser();
+  //         });
+  // },
+ 
 
   // mounted() {
-  //   axios.get("http://localhost:5000/api/sites/sites").then((res) => {
-  //     this.desserts = res.data.sites;
-  //     console.log(this.desserts);
+  //   axios.get("/users").then((res) => {
+  //     this.users = res.data.data;
+  //     console.log(res.data);
   //   });
-  //   axios.post("http://localhost:5000/api/sites/addSite").then((res) => {
-  //     this.desserts = res.data.sites;
-  //     console.log(this.desserts);
+  //   axios.post("/user/creat").then((res) => {
+  //     this.users = res.data.data;
+  //     console.log(res.data);
   //   });
+     
   // },
-};
+}}
 </script>
 <style scoped>
 .v-data-table {
   /* line-height: 1.5; */
   max-width: 1800px;
-  margin: 3%;
+  margin: 3%;                                                                                                                                                                                               
 }
 .theme--light.v-icon {
   color: #2196f3;

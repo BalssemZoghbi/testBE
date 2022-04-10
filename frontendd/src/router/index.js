@@ -18,12 +18,29 @@ import updateGarantie from "../components/donnees/garantie/update.vue";
 import updateGradin from "../components/calcul/gradin/update.vue";
 
 import Bobine from "../components/donnees/bobinage/update.vue";
-import User from "@/components/User";
+import User from "../components/user/User.vue";
 
-
+import Demande from "../components/user/demande.vue";
+import garantie24 from "../components/garantie24.vue";
+import garantie36 from "../components/garantie36.vue";
 Vue.use(VueRouter);
 
 const routes = [
+  {
+    path: "/garantie24",
+    name: "garantie24",
+    component: garantie24,
+  },
+  {
+    path: "/garantie36",
+    name: "garantie36",
+    component: garantie36,
+  },
+  {
+    path: "/demande",
+    name: "Demande",
+    component: Demande,
+  },
   {
     path: "/user",
     name: "User",
