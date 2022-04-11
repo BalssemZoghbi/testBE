@@ -90,7 +90,7 @@ class ProjetController extends Controller
         ]);
         $BobinageSec=BobinageSec::create([
             'materiauSec'=> 'cuivre',
-            'conducteurSec'=> 'feuillard'
+            'conducteurSec'=> 'Rond emaille'
         ]);
         $gradin=Gradin::create([
             "tole"=>  'H95-27',
