@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBobinagesTable extends Migration
+class CreateBobinageSecsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateBobinagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('bobinages', function (Blueprint $table) {
+        Schema::create('bobinage_secs', function (Blueprint $table) {
             $table->id();
-            $table->enum('materiau',['cuivre','aluminium'])->nullable();
-            $table->enum('conducteur',['meplat guipé','Rond emaille','feuillard'])->nullable();
+            $table->enum('materiauSec',['cuivre','aluminium'])->nullable();
+            $table->enum('conducteurSec',['meplat guipé','Rond emaille','feuillard'])->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateBobinagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bobinages');
+        Schema::dropIfExists('bobinage_secs');
     }
 }
