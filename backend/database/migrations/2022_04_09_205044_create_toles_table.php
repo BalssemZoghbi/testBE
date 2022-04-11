@@ -15,9 +15,9 @@ class CreateTolesTable extends Migration
     {
         Schema::create('toles', function (Blueprint $table) {
             $table->id();
-            $table->string('');
-            $table->id();
-            $table->id();
+            // $table->string('');
+            // $table->id();
+            // $table->id();
             $table->timestamps();
         });
     }

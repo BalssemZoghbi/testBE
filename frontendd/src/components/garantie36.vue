@@ -41,14 +41,14 @@
                   <v-col>
                     <v-row cols="12" sm="6" md="4">
                       <v-text-field
-                        v-model="editedItem.Pn"
+                        v-model="editedItem.pn"
                         label="Pn"
                       ></v-text-field>
                     </v-row>
                  
                     <v-row cols="12" sm="6" md="4">
                       <v-text-field
-                        v-model="editedItem.Po"
+                        v-model="editedItem.po"
                         label="Po"
                       ></v-text-field>
                     </v-row>
@@ -60,14 +60,14 @@
                     </v-row>
                      <v-row cols="12" sm="6" md="4">
                       <v-text-field
-                        v-model="editedItem.Pcc"
+                        v-model="editedItem.pcc"
                         label="Pcc"
                       ></v-text-field>
                     </v-row>
                  
                     <v-row cols="12" sm="6" md="4">
                       <v-text-field
-                        v-model="editedItem.Ucc"
+                        v-model="editedItem.ucc"
                         label="Ucc"
                       ></v-text-field>
                     </v-row>
@@ -136,33 +136,33 @@ export default {
     dialog: false,
     dialogDelete: false,
     headers: [
-      { text: "Pn", value: "Pn" },
-      { text: "Po", value: "Po" },
+      { text: "Pn", value: "pn" },
+      { text: "po", value: "po" },
       { text: "lo", value: "lo" },
-        { text: "Pcc", value: "Pcc" },
-      { text: "Ucc", value: "Ucc" },
+        { text: "pcc", value: "pcc" },
+      { text: "Ucc", value: "ucc" },
       { text: "Operation", value: "actions" , sortable: false},
      
     ],
     gar36: [],
     editedIndex: -1,
     editedItem: {
-      Pn: "",
-      Po: "",
+      pn: "",
+      po: "",
       lo: "",
-      Pcc:"",
-      Ucc:"",
+      pcc:"",
+      ucc:"",
     },
     defaultItem: {
-      Pn: "",
-      Po: "",
+     pn: "",
+     po: "",
       lo: "",
-      Pcc:"",
-      Ucc:"",
+     pcc:"",
+      ucc:"",
     },
   }),
-     created() {
-        this.get36();
+   async created() {
+     await this.get36();
   },
   methods:{
  deletegar(id) {
@@ -177,7 +177,7 @@ export default {
       }).then((result) => {
         if (result.isConfirmed) {
           Swal.fire("Supprimé!", "la colonne a été supprimé", "success");
-          axios.delete("user/delete/" + id).then(() => {
+          axios.delete("/garantie36/delete/" + id).then(() => {
             this.get36();
           });
         }
@@ -189,19 +189,42 @@ export default {
         console.log(resp.data);
       });
     },
- addgar(){
-    axios.post("/create36", this.editedItem).then(() => {
+     save() {
+      if (this.editedIndex > -1) {
+        Object.assign(this.users[this.editedIndex], this.editedItem);
+      } else {
+        this.users.push(this.editedItem);
+      }
+      this.close();
+    },
+async addgar(){
+ await axios.post("/create36", this.editedItem).then(() => {
+    this.dialog = false;
+    this.editedItem = Object.assign({}, this.defaultItem);
+    this.get36();
+  });
+  },
+   
+    updategar(item) {
+      this.editedIndex = this.gar36.indexOf(item);
+      this.editedItem = Object.assign({}, item);
+      this.dialog = true;
+    },
+    close() {
       this.dialog = false;
-      this.editedItem = Object.assign({}, this.defaultItem);
-      this.get36();
-    });
+      setTimeout(() => {
+        this.editedItem = Object.assign({}, this.defaultItem);
+      }, 300);
+    },
+    closeDelete() {
+      this.dialogDelete = false;
+    },
   },
   // updategar(item) {
   //   axios.put("/update36/" + item.id, this.editedItem).then(
   //       (response) => (this.id = response.item.id));
   // },
-  },
-}
+  }
   
 
 </script>

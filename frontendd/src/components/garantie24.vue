@@ -41,14 +41,14 @@
                   <v-col>
                     <v-row cols="12" sm="6" md="4">
                       <v-text-field
-                        v-model="editedItem.Pn"
+                        v-model="editedItem.pn"
                         label="Pn"
                       ></v-text-field>
                     </v-row>
                  
                     <v-row cols="12" sm="6" md="4">
                       <v-text-field
-                        v-model="editedItem.Po"
+                        v-model="editedItem.po"
                         label="Po"
                       ></v-text-field>
                     </v-row>
@@ -60,14 +60,14 @@
                     </v-row>
                      <v-row cols="12" sm="6" md="4">
                       <v-text-field
-                        v-model="editedItem.Pcc"
+                        v-model="editedItem.pcc"
                         label="Pcc"
                       ></v-text-field>
                     </v-row>
                  
                     <v-row cols="12" sm="6" md="4">
                       <v-text-field
-                        v-model="editedItem.Ucc"
+                        v-model="editedItem.ucc"
                         label="Ucc"
                       ></v-text-field>
                     </v-row>
@@ -136,29 +136,29 @@ export default {
     dialog: false,
     dialogDelete: false,
     headers: [
-      { text: "Pn", value: "Pn" },
-      { text: "Po", value: "Po" },
+      { text: "Pn", value: "pn" },
+      { text: "Po", value: "po" },
       { text: "lo", value: "lo" },
-        { text: "Pcc", value: "Pcc" },
-      { text: "Ucc", value: "Ucc" },
+        { text: "Pcc", value: "pcc" },
+      { text: "Ucc", value: "ucc" },
       { text: "Operation", value: "actions" , sortable: false},
      
     ],
     gar24: [],
     editedIndex: -1,
     editedItem: {
-      Pn: "",
-      Po: "",
+      pn: "",
+      po: "",
       lo: "",
-      Pcc:"",
-      Ucc:"",
+      pcc:"",
+      ucc:"",
     },
     defaultItem: {
-      Pn: "",
-      Po: "",
+      pn: "",
+      po: "",
       lo: "",
-      Pcc:"",
-      Ucc:"",
+      pcc:"",
+      ucc:"",
     },
   }),
      created() {
@@ -177,7 +177,7 @@ export default {
       }).then((result) => {
         if (result.isConfirmed) {
           Swal.fire("Supprimé!", "la colonne a été supprimé", "success");
-          axios.delete("user/delete/" + id).then(() => {
+          axios.delete("/garantie24/delete/" + id).then(() => {
             this.get24();
           });
         }
@@ -189,11 +189,10 @@ export default {
         console.log(resp.data);
       });
     },
- addgar(){
-    axios.post("/create24", this.editedItem).then(() => {
+ async addgar(){
+   await axios.post("/create24", this.editedItem).then(() => {
       this.dialog = false;
       this.editedItem = Object.assign({}, this.defaultItem);
-      this.get24();
     });
   },
   // updategar(item) {
@@ -201,6 +200,7 @@ export default {
   //       (response) => (this.id = response.item.id));
   // },
   },
+
 }
   
 

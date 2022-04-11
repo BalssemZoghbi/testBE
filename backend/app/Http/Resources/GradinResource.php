@@ -24,12 +24,11 @@ class GradinResource extends JsonResource
             'nbrGradin'=> $this->nbrGradin,
             'demiGradin'=> $this->demiGradin,
             'largeur'=> $this->largeur,
+            'largeurMin' => $this->largeurMin,
             'epaisseur'=> $this->epaisseur,
             'Sbrut'=> $this->Sbrut,
             'Snette'=> $this->Snette,
             'EpaisseurTot'=> $this->EpaisseurTot
-            
-            
         ];
     }
 }

@@ -11,6 +11,78 @@ use App\Models\Donnees\garantie\Garantie36;
 
 class GarantieController extends Controller
 {
+    public function get24()
+    {
+        $garanties24 = Garantie24::all();
+        return response()->json($garanties24);
+    }
+    public function get36()
+    {
+        $garanties36 = Garantie36::all();
+        return response()->json($garanties36);
+    }
+    public function create36(Request $request){
+        $garanties36 = Garantie36::create([
+            'pn' =>$request->pn,
+            'po' =>$request->po,
+            'lo' =>$request->lo,
+            'pcc' =>$request->pcc,
+            'ucc'=>$request->ucc
+              ]);
+        if($garanties36->save()){
+            return response()->json($garanties36);
+        }
+    }
+    public function create24(Request $request){
+
+        $garanties24 = Garantie24::create([
+            'pn' =>$request->pn,
+            'po' =>$request->po,
+            'lo' =>$request->lo,
+            'pcc' =>$request->pcc,
+            'ucc'=>$request->ucc
+            ]);
+        if($garanties24->save()){
+            return response()->json($garanties24);
+        }
+    }
+    public function update36($id,Request $request){
+        $garanties36 = Garantie36::FindOrFail($id);
+        $garanties36->update([
+            'pn' =>$request->pn,
+            'po' =>$request->po,
+            'lo' =>$request->lo,
+            'pcc' =>$request->pcc,
+            'ucc'=>$request->ucc
+            ]);
+        if($garanties36->save()){
+            return response()->json($garanties36);
+        }
+    }
+    public function update24($id,Request $request){
+        $garanties24 = Garantie24::FindOrFail($id);
+        $garanties24->update([
+            'pn' =>$request->pn,
+            'po' =>$request->po,
+            'lo' =>$request->lo,
+            'pcc' =>$request->pcc,
+            'ucc'=>$request->ucc
+            ]);
+        if($garanties24->save()){
+            return response()->json($garanties24);
+        }
+    }
+    public function deletegar36($id){
+        $garantie= Garantie36::FindOrFail($id);
+        $garantie->delete();
+        return response()->json($garantie);
+     }
+     public function deletegar24($id){
+        $garantie= Garantie24::FindOrFail($id);
+        $garantie->delete();
+        return response()->json($garantie);
+     }
+
     public function calcul24($puissance){
                 $garantie24=Garantie24::where('pn',$puissance)->get()->first();
         return $garantie24;
