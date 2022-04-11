@@ -43,13 +43,12 @@ class GradinController extends Controller
     {
         $diamPropose = null;
         if ($materiau == 'cuivre') {
-            $diamPropose = pow(($puissance / 100), 0.236) * 220;
+            $diamPropose = pow(($puissance / 1000), 0.2316) * 220;
         } elseif ($materiau == 'aluminium') {
-            $diamPropose = pow(($puissance / 100), 0.236) * 200;
+            $diamPropose = pow(($puissance / 1000), 0.2316) * 200;
         }
         return $diamPropose;
     }
-
     public function largeur($diam,$nbrGradin,$pas)
     {
         $diam=floor($diam/10);
