@@ -185,7 +185,7 @@ export default {
         console.log(resp.data);
       });
     },
-         deleteutilisateur(id) {
+         deletegar(id) {
       Swal.fire({
         title: "Supprimer",
         text: "Vous êtes sure de supprimer ?",
