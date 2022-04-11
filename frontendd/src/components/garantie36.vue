@@ -10,7 +10,7 @@
     >
       <template v-slot:top>
         <v-toolbar flat>
-          <v-card-title>Garantie36 </v-card-title>
+          <v-card-title>Garantie36</v-card-title>
           <v-spacer></v-spacer>
           <v-text-field
             v-model="search"
@@ -23,10 +23,10 @@
 
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-spacer></v-spacer>
-           <v-dialog v-model="dialog" max-width="700px">
+          <v-dialog v-model="dialog" max-width="700px">
             <template v-slot:activator="{ on, attrs }">
               <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
-                Ajouter
+                Ajouter 
               </v-btn>
             </template>
             <v-card>
@@ -39,14 +39,13 @@
               <v-card-text>
                 <v-container>
                   <v-col>
-                    <v-row cols="12" sm="6" md="4">
+                  <v-row cols="12" sm="6" md="4">
                       <v-text-field
                         v-model="editedItem.pn"
                         label="Pn"
                       ></v-text-field>
                     </v-row>
-                 
-                    <v-row cols="12" sm="6" md="4">
+                 <v-row cols="12" sm="6" md="4">
                       <v-text-field
                         v-model="editedItem.po"
                         label="Po"
@@ -72,7 +71,6 @@
                       ></v-text-field>
                     </v-row>
                   
-                    
                   </v-col>
                 </v-container>
               </v-card-text>
@@ -82,12 +80,12 @@
                 <v-btn color="blue darken-1" text @click="close">
                   Cancel
                 </v-btn>
-                <v-btn color="blue darken-1" text @click="addgar">
+                <v-btn color="blue darken-1" text @click="save">
                   Save
                 </v-btn>
               </v-card-actions>
             </v-card>
-          </v-dialog> 
+          </v-dialog>
           
           <!-- <v-dialog v-model="dialogDelete" max-width="500px">
             <v-card>
@@ -105,15 +103,13 @@
                 <v-spacer></v-spacer>
               </v-card-actions>
             </v-card>
-          </v-dialog>  -->
+          </v-dialog> -->
         </v-toolbar>
       </template>
-      <template v-slot:[`item.actions`]={item}>
-        <v-icon small color="green" class="mr-2" @click="updategar(item)">
+      <template v-slot:[`item.actions`]="{ item }">
+        <v-icon small color="green" class="mr-2" @click="editItem(item)">
           mdi-pencil
         </v-icon>
-        
-        
                <v-icon small color="red" @click="deletegar(item.id)"> mdi-delete </v-icon>
 
       </template>
@@ -136,10 +132,10 @@ export default {
     dialog: false,
     dialogDelete: false,
     headers: [
-      { text: "Pn", value: "pn" },
-      { text: "po", value: "po" },
+{ text: "Pn", value: "pn" },
+      { text: "Po", value: "po" },
       { text: "lo", value: "lo" },
-        { text: "pcc", value: "pcc" },
+        { text: "Pcc", value: "pcc" },
       { text: "Ucc", value: "ucc" },
       { text: "Operation", value: "actions" , sortable: false},
      
@@ -154,18 +150,42 @@ export default {
       ucc:"",
     },
     defaultItem: {
-     pn: "",
-     po: "",
+      pn: "",
+      po: "",
       lo: "",
-     pcc:"",
+      pcc:"",
       ucc:"",
+
     },
   }),
-   async created() {
-     await this.get36();
+    async created() {
+    this.get36();
   },
-  methods:{
- deletegar(id) {
+  computed: {
+    formTitle() {
+      return this.editedIndex === -1
+        ? "Ajouter "
+        : "Editer ";
+    },
+  },
+  watch: {
+    dialog(val) {
+      val || this.close();
+    },
+    dialogDelete(val) {
+      val || this.closeDelete();
+    },
+  },
+ 
+  methods: {
+  
+     async get36() {
+    await axios.get("/garantie36").then((resp) => {
+        this.gar36 = resp.data;
+        console.log(resp.data);
+      });
+    },
+         deletegar(id) {
       Swal.fire({
         title: "Supprimer",
         text: "Vous êtes sure de supprimer ?",
@@ -176,57 +196,67 @@ export default {
         confirmButtonText: "Supprimer",
       }).then((result) => {
         if (result.isConfirmed) {
-          Swal.fire("Supprimé!", "la colonne a été supprimé", "success");
+          Swal.fire("Supprimé!", "Cette colonne a été supprimé", "success");
           axios.delete("/garantie36/delete/" + id).then(() => {
             this.get36();
           });
         }
       });
     },
-     async  get36() {
-    await axios.get("/garantie36").then((resp) => {
-        this.gar36 = resp.data;
-        console.log(resp.data);
-      });
-    },
-     save() {
-      if (this.editedIndex > -1) {
-        Object.assign(this.users[this.editedIndex], this.editedItem);
-      } else {
-        this.users.push(this.editedItem);
-      }
-      this.close();
-    },
-async addgar(){
- await axios.post("/create36", this.editedItem).then(() => {
-    this.dialog = false;
-    this.editedItem = Object.assign({}, this.defaultItem);
-    this.get36();
-  });
-  },
-   
-    updategar(item) {
+    editItem(item) {
       this.editedIndex = this.gar36.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
+      //     update() {
+      // let user = {
+      //   email: this.editedItem.email,
+      //   type: this.editedItem.type,
+      //   name: this.editedItem.name,
+      //   password: this.password,
+      // }
+      // axios.put('/user/update/'+item.id, user,{ headers: { token: localStorage.getItem('token')}})
+      //   .then(res => {
+      //     //if successfull
+      //     if (res.status === 200) {
+      //       localStorage.setItem('token', res.data.token);
+      //       console.log(res)
+            
+      //     }
+      //   }, err => {
+      //     console.log(err.response);
+      //     this.error = err.response.data.error
+      //   })
+    
+    //    axios.put("/user/update/"+this.id, gar36).then(
+    //     (response) => (this.id = response.data.id)
+    // );
     },
+   
     close() {
       this.dialog = false;
-      setTimeout(() => {
+      this.$nextTick(() => {
         this.editedItem = Object.assign({}, this.defaultItem);
-      }, 300);
+        this.editedIndex = -1;
+      });
     },
-    closeDelete() {
-      this.dialogDelete = false;
+    
+    save() {
+      if (this.editedIndex > -1) {
+        Object.assign(this.gar36[this.editedIndex], this.editedItem);
+        console.log('edit');
+      axios.put("/update36/"+this.editedItem.id, this.editedItem).then(
+          (response) => (this.id = response.data.id)
+        );
+      } else {
+        this.gar36.push(this.editedItem);
+         axios.post("/create36", this.editedItem).then(
+          (response) => (this.id = response.data.id)
+        );
+   }
+      this.close();
     },
-  },
-  // updategar(item) {
-  //   axios.put("/update36/" + item.id, this.editedItem).then(
-  //       (response) => (this.id = response.item.id));
-  // },
-  }
   
-
+}}
 </script>
 <style scoped>
 .v-data-table {

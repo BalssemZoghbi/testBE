@@ -75,12 +75,13 @@
                 <v-btn color="blue darken-1" text @click="close">
                   Cancel
                 </v-btn>
-                <v-btn color="blue darken-1" text @click="addUser">
+                <v-btn color="blue darken-1" text @click="save">
                   Save
                 </v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
+          
           <!-- <v-dialog v-model="dialogDelete" max-width="500px">
             <v-card>
               <v-card-title class="text-h5"
@@ -198,24 +199,24 @@ export default {
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
       //     update() {
-      let user = {
-        email: this.editedItem.email,
-        type: this.editedItem.type,
-        name: this.editedItem.name,
-        password: this.password,
-      }
-      axios.put('/user/update/'+item.id, user,{ headers: { token: localStorage.getItem('token')}})
-        .then(res => {
-          //if successfull
-          if (res.status === 200) {
-            localStorage.setItem('token', res.data.token);
-            console.log(res)
+      // let user = {
+      //   email: this.editedItem.email,
+      //   type: this.editedItem.type,
+      //   name: this.editedItem.name,
+      //   password: this.password,
+      // }
+      // axios.put('/user/update/'+item.id, user,{ headers: { token: localStorage.getItem('token')}})
+      //   .then(res => {
+      //     //if successfull
+      //     if (res.status === 200) {
+      //       localStorage.setItem('token', res.data.token);
+      //       console.log(res)
             
-          }
-        }, err => {
-          console.log(err.response);
-          this.error = err.response.data.error
-        })
+      //     }
+      //   }, err => {
+      //     console.log(err.response);
+      //     this.error = err.response.data.error
+      //   })
     
     //    axios.put("/user/update/"+this.id, users).then(
     //     (response) => (this.id = response.data.id)
@@ -233,13 +234,13 @@ export default {
     save() {
       if (this.editedIndex > -1) {
         Object.assign(this.users[this.editedIndex], this.editedItem);
+        console.log('edit');
+        axios.put("/user/update/"+this.editedItem.id, this.editedItem).then(
+          (response) => (this.id = response.data.id)
+        );
       } else {
         this.users.push(this.editedItem);
-      }
-      this.close();
-    },
-    addUser() {
-      axios
+     axios
         .post("/user/create",this.editedItem , {
           headers: { token: localStorage.getItem("token") },
         })
@@ -247,7 +248,11 @@ export default {
          this.dialog = false;
       this.editedItem = Object.assign({}, this.defaultItem);
       this.getuser();
-});
+});      }
+      this.close();
+    },
+    addUser() {
+ 
     },
   //     updateUser(id) {
   //    axios.put("user/update/" + id).then(() => {
