@@ -68,7 +68,7 @@ methods:{
  this.$router.push('/dashboard');
   }catch(e){
     this.error=' Email ou mot de passe incorrect';
-
+    
   }
   }
 }

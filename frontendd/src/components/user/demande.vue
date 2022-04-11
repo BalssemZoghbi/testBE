@@ -94,11 +94,11 @@
           </v-dialog> -->
         </v-toolbar>
       </template>
-      <template v-slot:[`item.actions`]>
-        <v-icon small color="green" class="mr-2" >
+      <template v-slot:[`item.actions`]="{item}">
+        <v-icon small color="green" class="mr-2" v-on:click="accept(item.id)">
           mdi-pencil
         </v-icon>
-               <v-icon small color="red" > mdi-delete </v-icon>
+               <v-icon small color="red" v-on:click="decline(item.id)" > mdi-delete </v-icon>
 
       </template>
 
@@ -110,7 +110,7 @@
 <script>
 // import Swal from "sweetalert2/dist/sweetalert2.js";
 import NavDash from "../NavDash.vue";
-// import axios from "axios";
+import axios from "axios";
 export default {
    components: {
     NavDash,
@@ -140,15 +140,28 @@ export default {
     },
   }),
      created() {
+       this.getuser();
   },
   methods:{
-// accept(){
-//   await axios.get("/user/accept/").then((resp) => {
-//         this.users = resp.data.data;
-//         console.log(resp.data);
-// }
-// );
-// },
+ async accept(id){
+  console.log(id);
+   await axios.put("/user/accept/"+id).then(() => {
+}
+);
+},
+async decline(id){
+    console.log(id);
+  await axios.delete("/user/decline/"+id).then(() => {
+        console.log('declined');
+}
+);
+},
+async getuser(){
+  await axios.get("/users/p").then((resp) => {
+        this.users = resp.data;
+}
+);
+},
   
   mounted() {
     this.accept();

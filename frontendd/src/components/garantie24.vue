@@ -109,7 +109,7 @@
         </v-toolbar>
       </template>
       <template v-slot:[`item.actions`]={item}>
-        <v-icon small color="green" class="mr-2" @click="updategar(item)">
+        <v-icon small color="green" class="mr-2" @click="updategar(item.id)">
           mdi-pencil
         </v-icon>
         
@@ -195,10 +195,13 @@ export default {
       this.editedItem = Object.assign({}, this.defaultItem);
     });
   },
-  // updategar(item) {
-  //   axios.put("/update24/" + item.id, this.editedItem).then(
-  //       (response) => (this.id = response.item.id));
-  // },
+  updategar(id) {
+     this.dialog = false;
+      this.editedItem = Object.assign({}, this.defaultItem);
+    axios.put("/update24/" + id, this.editedItem).then(
+     
+        (response) => (this.id = response.item.id));
+  },
   },
 
 }

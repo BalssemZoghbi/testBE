@@ -14,8 +14,11 @@ class AuthController extends Controller
 {
     function index(Request $request)
     {
+
         $user= User::where('email', $request->email)->first();
-        if (!$user || !Hash::check($request->password, $user->password)) {
+        // dd($user->type);
+        if($user->type!=='pending'){
+            if (!$user || !Hash::check($request->password, $user->password)) {
                 return response([
                     'message' => ['These credentials do not match our records.']
                 ], 404);
@@ -27,6 +30,12 @@ class AuthController extends Controller
             ];
 
              return response($response, 200);
+        }else{
+            return response([
+                'message' => ['pending.']
+            ], 404);
+        }
+
     }
     function logout(Request $request){
        return $request->user()->currentAccessToken()->delete();

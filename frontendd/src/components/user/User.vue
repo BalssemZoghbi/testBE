@@ -42,7 +42,7 @@
                     <v-row cols="12" sm="6" md="4">
                       <v-text-field
                         v-model="editedItem.name"
-                        label="Name"
+                        label="Nom"
                       ></v-text-field>
                     </v-row>
                  
@@ -56,6 +56,12 @@
                       <v-text-field
                         v-model="editedItem.type"
                         label="type"
+                      ></v-text-field>
+                    </v-row>
+                    <v-row cols="12" sm="6" md="4">
+                      <v-text-field
+                        v-model="editedItem.password"
+                        label="Mot de passe"
                       ></v-text-field>
                     </v-row>
                   
@@ -132,11 +138,14 @@ export default {
       name: "",
       email: "",
       type: "",
+      password:""
     },
     defaultItem: {
       name: "",
       email: "",
       type: "",
+      password:""
+
     },
   }),
     async created() {
@@ -191,11 +200,11 @@ export default {
       //     update() {
       let user = {
         email: this.editedItem.email,
-        username: this.editedItem.username,
+        type: this.editedItem.type,
         name: this.editedItem.name,
         password: this.password,
       }
-      axios.post('/users/update', user,{ headers: { token: localStorage.getItem('token')}})
+      axios.put('/user/update/'+item.id, user,{ headers: { token: localStorage.getItem('token')}})
         .then(res => {
           //if successfull
           if (res.status === 200) {

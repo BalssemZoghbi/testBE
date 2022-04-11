@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Resources\UserResource;
+use Illuminate\Support\Facades\DB;
 
+use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Hash;
+
 class UserController extends Controller
-{ 
+{
     public function index()
     {
         $users = User::all();
@@ -20,14 +22,12 @@ class UserController extends Controller
         //  $projets=Projet::find($id,'user_id')->get();
         return UserResource::collection($users);
     }
-    // public function getup()
-    // {
-    //     $users = User::all();
-    //    if($user->type=='pending'){
-    //     return $users;    
-    //    }
-      
-    // }
+    public function getup()
+    {
+        $users=DB::table('users')->where ('type' , 'pending')->get();
+        return $users;
+
+    }
     public function store(Request $request){
        $user= User::create([
             'name' => $request->name,
@@ -35,8 +35,9 @@ class UserController extends Controller
             'password' =>Hash::make($request->password),
             'type' =>$request->type
         ]);
-        if($user->save){
-        return response()->json($user);}
+        // if($user->save){
+        return response()->json($user);
+    // }
     }
 
     public function updatestore($id,Request $request){
@@ -47,9 +48,9 @@ class UserController extends Controller
             'password' =>Hash::make($request->password),
             'type' =>$request->type
         ]);
-        if($user->save()){
+        // if($user->save()){
             return response()->json($user);
-        }
+        // }
     }
 
     public function delete($id){
