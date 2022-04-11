@@ -10,7 +10,7 @@
     >
       <template v-slot:top>
         <v-toolbar flat>
-          <v-card-title>Garantie24 </v-card-title>
+          <v-card-title>Garantie24</v-card-title>
           <v-spacer></v-spacer>
           <v-text-field
             v-model="search"
@@ -23,10 +23,10 @@
 
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-spacer></v-spacer>
-           <v-dialog v-model="dialog" max-width="700px">
+          <v-dialog v-model="dialog" max-width="700px">
             <template v-slot:activator="{ on, attrs }">
               <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
-                Ajouter
+                Ajouter 
               </v-btn>
             </template>
             <v-card>
@@ -39,14 +39,13 @@
               <v-card-text>
                 <v-container>
                   <v-col>
-                    <v-row cols="12" sm="6" md="4">
+                  <v-row cols="12" sm="6" md="4">
                       <v-text-field
                         v-model="editedItem.pn"
                         label="Pn"
                       ></v-text-field>
                     </v-row>
-                 
-                    <v-row cols="12" sm="6" md="4">
+                 <v-row cols="12" sm="6" md="4">
                       <v-text-field
                         v-model="editedItem.po"
                         label="Po"
@@ -72,7 +71,6 @@
                       ></v-text-field>
                     </v-row>
                   
-                    
                   </v-col>
                 </v-container>
               </v-card-text>
@@ -82,12 +80,12 @@
                 <v-btn color="blue darken-1" text @click="close">
                   Cancel
                 </v-btn>
-                <v-btn color="blue darken-1" text @click="addgar">
+                <v-btn color="blue darken-1" text @click="save">
                   Save
                 </v-btn>
               </v-card-actions>
             </v-card>
-          </v-dialog> 
+          </v-dialog>
           
           <!-- <v-dialog v-model="dialogDelete" max-width="500px">
             <v-card>
@@ -105,15 +103,13 @@
                 <v-spacer></v-spacer>
               </v-card-actions>
             </v-card>
-          </v-dialog>  -->
+          </v-dialog> -->
         </v-toolbar>
       </template>
-      <template v-slot:[`item.actions`]={item}>
-        <v-icon small color="green" class="mr-2" @click="updategar(item.id)">
+      <template v-slot:[`item.actions`]="{ item }">
+        <v-icon small color="green" class="mr-2" @click="editItem(item)">
           mdi-pencil
         </v-icon>
-        
-        
                <v-icon small color="red" @click="deletegar(item.id)"> mdi-delete </v-icon>
 
       </template>
@@ -136,7 +132,7 @@ export default {
     dialog: false,
     dialogDelete: false,
     headers: [
-      { text: "Pn", value: "pn" },
+{ text: "Pn", value: "pn" },
       { text: "Po", value: "po" },
       { text: "lo", value: "lo" },
         { text: "Pcc", value: "pcc" },
@@ -159,13 +155,37 @@ export default {
       lo: "",
       pcc:"",
       ucc:"",
+
     },
   }),
-     created() {
-        this.get24();
+    async created() {
+    this.get24();
   },
-  methods:{
- deletegar(id) {
+  computed: {
+    formTitle() {
+      return this.editedIndex === -1
+        ? "Ajouter "
+        : "Editer ";
+    },
+  },
+  watch: {
+    dialog(val) {
+      val || this.close();
+    },
+    dialogDelete(val) {
+      val || this.closeDelete();
+    },
+  },
+ 
+  methods: {
+  
+     async get24() {
+    await axios.get("/garantie24").then((resp) => {
+        this.gar24 = resp.data;
+        console.log(resp.data);
+      });
+    },
+         deleteutilisateur(id) {
       Swal.fire({
         title: "Supprimer",
         text: "Vous êtes sure de supprimer ?",
@@ -176,37 +196,67 @@ export default {
         confirmButtonText: "Supprimer",
       }).then((result) => {
         if (result.isConfirmed) {
-          Swal.fire("Supprimé!", "la colonne a été supprimé", "success");
+          Swal.fire("Supprimé!", "Cette colonne a été supprimé", "success");
           axios.delete("/garantie24/delete/" + id).then(() => {
             this.get24();
           });
         }
       });
     },
-     async  get24() {
-    await axios.get("/garantie24").then((resp) => {
-        this.gar24 = resp.data;
-        console.log(resp.data);
+    editItem(item) {
+      this.editedIndex = this.gar24.indexOf(item);
+      this.editedItem = Object.assign({}, item);
+      this.dialog = true;
+      //     update() {
+      // let user = {
+      //   email: this.editedItem.email,
+      //   type: this.editedItem.type,
+      //   name: this.editedItem.name,
+      //   password: this.password,
+      // }
+      // axios.put('/user/update/'+item.id, user,{ headers: { token: localStorage.getItem('token')}})
+      //   .then(res => {
+      //     //if successfull
+      //     if (res.status === 200) {
+      //       localStorage.setItem('token', res.data.token);
+      //       console.log(res)
+            
+      //     }
+      //   }, err => {
+      //     console.log(err.response);
+      //     this.error = err.response.data.error
+      //   })
+    
+    //    axios.put("/user/update/"+this.id, gar24).then(
+    //     (response) => (this.id = response.data.id)
+    // );
+    },
+   
+    close() {
+      this.dialog = false;
+      this.$nextTick(() => {
+        this.editedItem = Object.assign({}, this.defaultItem);
+        this.editedIndex = -1;
       });
     },
- async addgar(){
-   await axios.post("/create24", this.editedItem).then(() => {
-      this.dialog = false;
-      this.editedItem = Object.assign({}, this.defaultItem);
-    });
-  },
-  updategar(id) {
-     this.dialog = false;
-      this.editedItem = Object.assign({}, this.defaultItem);
-    axios.put("/update24/" + id, this.editedItem).then(
-     
-        (response) => (this.id = response.item.id));
-  },
-  },
-
-}
+    
+    save() {
+      if (this.editedIndex > -1) {
+        Object.assign(this.gar24[this.editedIndex], this.editedItem);
+        console.log('edit');
+      axios.put("/update24/"+this.editedItem.id, this.editedItem).then(
+          (response) => (this.id = response.data.id)
+        );
+      } else {
+        this.gar24.push(this.editedItem);
+         axios.post("/create24", this.editedItem).then(
+          (response) => (this.id = response.data.id)
+        );
+   }
+      this.close();
+    },
   
-
+}}
 </script>
 <style scoped>
 .v-data-table {
