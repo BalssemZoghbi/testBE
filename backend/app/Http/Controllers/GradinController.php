@@ -25,6 +25,7 @@ class GradinController extends Controller
             'Sbrut' => 4.8,
             'Snette' => 101.42,
             'EpaisseurTot' => 4.0,
+            'largeurMin' => 50,
         ]);
     }
     public function getAllGradin()
@@ -119,7 +120,8 @@ class GradinController extends Controller
                 'epaisseur' => $epaisseurfeuillard,
                 'Sbrut' => $brut ,
                 'Snette' => $brut * $request->coeffRemplissage,
-                'EpaisseurTot' => array_sum($epaisseur)
+                'EpaisseurTot' => array_sum($epaisseur),
+                'largeurMin' => $request->largeurMin,
             ]);
         }else{
         $Gradin->update([
@@ -134,7 +136,8 @@ class GradinController extends Controller
             'epaisseur' => $epaisseur,
             'Sbrut' => $brut ,
             'Snette' => $brut * $request->coeffRemplissage,
-            'EpaisseurTot' => array_sum($epaisseur)
+            'EpaisseurTot' => array_sum($epaisseur),
+            'largeurMin' => $request->largeurMin,
         ]);
     }
         return response()->json($Gradin);
@@ -149,6 +152,7 @@ class GradinController extends Controller
             'coeffRemplissage'=> 4,
             'nbrGradin'=> 7,
             'demiGradin'=> 2,
+            'largeurMin' => 50
         ]);
 
         if ($Gradin->save()) {

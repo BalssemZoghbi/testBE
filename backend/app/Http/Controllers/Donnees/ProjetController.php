@@ -105,6 +105,7 @@ class ProjetController extends Controller
             'Sbrut'=> 21028.25,
             'Snette'=> 420565.18,
             'EpaisseurTot'=> 138.66,
+            'largeurMin' => 50
         ]);
         $projet= Projet::create([
              'appareil' => 'Defaut',
