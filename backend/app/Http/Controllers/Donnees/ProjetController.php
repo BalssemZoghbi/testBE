@@ -15,6 +15,7 @@ use App\Http\Resources\ProjetResource;
 use App\Models\Donnees\garantie\Garantie;
 use App\Models\Bobinage;
 use App\Models\Gradin;
+use App\Models\BobinageSec;
 use Laravel\Sanctum\PersonalAccessToken;
 
 class ProjetController extends Controller
@@ -84,16 +85,13 @@ class ProjetController extends Controller
         // dd($garantie->id);
         $Bobinage=Bobinage::create([
             'materiau'=> 'Aluminium',
-            'conducteur'=> 'feuillard',
-            // 'type'=>'primaire',
+            'conducteur'=> 'feuillard'
 
         ]);
-        // $Bobinage=Bobinage::create([
-        //     'materiau'=> 'cuivre',
-        //     'conducteur'=> 'feuillard',
-        //     'type'=>'secondaire',
-
-        // ]);
+        $BobinageSec=BobinageSec::create([
+            'materiauSec'=> 'cuivre',
+            'conducteurSec'=> 'Rond emaille'
+        ]);
         $gradin=Gradin::create([
             "tole"=>  'H95-27',
             'diamPropose' => 308.79,
@@ -107,6 +105,7 @@ class ProjetController extends Controller
             'Sbrut'=> 21028.25,
             'Snette'=> 420565.18,
             'EpaisseurTot'=> 138.66,
+            'largeurMin' => 50
         ]);
         $projet= Projet::create([
              'appareil' => 'Defaut',
@@ -128,7 +127,8 @@ class ProjetController extends Controller
              'electrique_id' =>$elec->id,
              'garantie_id' =>$garantie->id,
              'bobinage_id'=>$Bobinage->id,
-             'gradin_id'=>$gradin->id
+             'gradin_id'=>$gradin->id,
+             'bobinage_secs_id'=>$BobinageSec->id,
          ]);
 
          if($projet->save()){
@@ -143,8 +143,9 @@ class ProjetController extends Controller
         ->join('garanties', 'garanties.id', '=', 'projets.garantie_id')
         ->join('bobinages', 'bobinages.id', '=', 'projets.bobinage_id')
         ->join('gradins', 'gradins.id', '=', 'projets.gradin_id')
+        ->join('bobinage_secs', 'bobinage_secs.id', '=', 'projets.bobinage_secs_id')
         ->where('projets.id',$id)
-        ->select('electriques.*','electriques.id as elec_id','garanties.*','garanties.id as garenti_id','bobinages.*','bobinages.id as bobine_id','gradins.*','gradins.id as gradins_id', 'projets.*')
+        ->select('electriques.*','electriques.id as elec_id','garanties.*','garanties.id as garenti_id','bobinages.*','bobinages.id as bobine_id','bobinage_secs.*','bobinage_secs.id as bobinesec_id','gradins.*','gradins.id as gradins_id', 'projets.*')
         ->get()->first();
 
 

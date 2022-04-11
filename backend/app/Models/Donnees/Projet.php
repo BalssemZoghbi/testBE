@@ -4,6 +4,7 @@ namespace App\Models\Donnees;
 
 use App\Models\Donnees\Electrique;
 use App\Models\Bobinage;
+use App\Models\BobinageSec;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -32,6 +33,7 @@ class Projet extends Model
     'garantie_id',
     'bobinage_id',
     'gradin_id',
+    'bobinage_secs_id',
 ];
 
      public function user(){
@@ -48,6 +50,10 @@ class Projet extends Model
     public function bobine()
     {
         return $this->belongsTo(Bobinage::class);
+    }
+    public function bobineSec()
+    {
+        return $this->belongsTo(BobinageSec::class);
     }
     public function gradin()
     {

@@ -28,7 +28,8 @@ class GradinResource extends JsonResource
             'epaisseur'=> $this->epaisseur,
             'Sbrut'=> $this->Sbrut,
             'Snette'=> $this->Snette,
-            'EpaisseurTot'=> $this->EpaisseurTot
+            'EpaisseurTot'=> $this->EpaisseurTot,
+            'largeurMin'=> $this->largeurMin,
         ];
     }
 }

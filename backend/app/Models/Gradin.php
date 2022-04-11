@@ -24,7 +24,8 @@ class Gradin extends Model
         'epaisseur',
         'Sbrut',
         'Snette',
-        'EpaisseurTot'
+        'EpaisseurTot',
+        'largeurMin'
       
     ];
     public function projets(){
