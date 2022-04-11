@@ -12,6 +12,7 @@ use App\Http\Controllers\Donnees\TensionElectriqueController;
 use App\Http\Controllers\BobinageController;
 use App\Http\Controllers\GradinController;
 use App\Http\Controllers\BobinageSecController;
+use App\Http\Controllers\VoltspireController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -93,3 +94,4 @@ Route::post('/gradin/add',[GradinController::class ,'storeGradin']);
 Route::get('/gradin/{id}',[GradinController::class ,'getOneGradin']);
 Route::put('/gradin/update/{id}',[GradinController::class ,'updateGradin']);
 Route::delete('/gradin/delete/{id}',[GradinController::class ,'deleteGradin']);
+Route::put('/volt/update/{id}', [VoltspireController::class ,'updateVoltSpire']);

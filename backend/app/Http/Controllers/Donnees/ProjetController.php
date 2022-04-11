@@ -15,6 +15,7 @@ use App\Http\Resources\ProjetResource;
 use App\Models\Donnees\garantie\Garantie;
 use App\Models\Bobinage;
 use App\Models\Gradin;
+use App\Models\VoltSpire;
 use App\Models\BobinageSec;
 use Laravel\Sanctum\PersonalAccessToken;
 
@@ -107,6 +108,15 @@ class ProjetController extends Controller
             'EpaisseurTot'=> 138.66,
             'largeurMin' => 50
         ]);
+        $VoltSpire=VoltSpire::create([
+            'Bmaxdesire'=> 150,
+            'Bmax'=> 544,
+            'Vsp'=> 58,
+            'N2c'=> 56,
+            'N1c'=> 7,
+            'prise' => '[1,5,6]',
+            'spire' => '[1,5,6]'
+        ]);
         $projet= Projet::create([
              'appareil' => 'Defaut',
              'reference' =>'25/2022',
@@ -129,6 +139,7 @@ class ProjetController extends Controller
              'bobinage_id'=>$Bobinage->id,
              'gradin_id'=>$gradin->id,
              'bobinage_secs_id'=>$BobinageSec->id,
+             'volt_spires_id'=>$VoltSpire->id,
          ]);
 
          if($projet->save()){
@@ -143,9 +154,10 @@ class ProjetController extends Controller
         ->join('garanties', 'garanties.id', '=', 'projets.garantie_id')
         ->join('bobinages', 'bobinages.id', '=', 'projets.bobinage_id')
         ->join('gradins', 'gradins.id', '=', 'projets.gradin_id')
+        ->join('volt_spires', 'volt_spires.id', '=', 'projets.volt_spires_id')
         ->join('bobinage_secs', 'bobinage_secs.id', '=', 'projets.bobinage_secs_id')
         ->where('projets.id',$id)
-        ->select('electriques.*','electriques.id as elec_id','garanties.*','garanties.id as garenti_id','bobinages.*','bobinages.id as bobine_id','bobinage_secs.*','bobinage_secs.id as bobinesec_id','gradins.*','gradins.id as gradins_id', 'projets.*')
+        ->select('electriques.*','electriques.id as elec_id','garanties.*','garanties.id as garenti_id','bobinages.*','bobinages.id as bobine_id','bobinage_secs.*','bobinage_secs.id as bobinesec_id','gradins.*','gradins.id as gradins_id','voltSpires.*','voltSpires.id as volt_id', 'projets.*')
         ->get()->first();
 
 
