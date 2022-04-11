@@ -27,6 +27,7 @@ class CreateGradinsTable extends Migration
             $table->float('Sbrut');
             $table->float('Snette');
             $table->float('EpaisseurTot');
+            $table->integer('largeurMin');
             $table->timestamps();
         });
     }

@@ -11,6 +11,7 @@ use App\Http\Controllers\Donnees\ElectriqueController;
 use App\Http\Controllers\Donnees\TensionElectriqueController;
 use App\Http\Controllers\BobinageController;
 use App\Http\Controllers\GradinController;
+use App\Http\Controllers\BobinageSecController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -72,6 +73,11 @@ Route::post('/create36',[GarantieController::class ,'create36']);
 Route::post('/create24',[GarantieController::class ,'create24']);
 Route::put('/update24/{id}',[GarantieController::class ,'update24']);
 
+Route::put('/bobinesec/update/{id}',[BobinageSecController::class ,'updateBobinageS']);
+Route::delete('/bobinesec/delete/{id}',[BobinageSecController::class ,'deleteBobinageS']);
+Route::get('/bobinesec',[BobinageSecController::class ,'getAllBobineS']);
+Route::post('/bobinesec/add',[BobinageSecController::class ,'storeBobinageS']);
+Route::get('/bobinesec/{id}',[BobinageSecController::class ,'getOneBobineS']);
 
 Route::put('/update36/{id}',[GarantieController::class ,'update36']);
 Route::put('/bobine/update/{id}',[BobinageController::class ,'updateBobinage']);

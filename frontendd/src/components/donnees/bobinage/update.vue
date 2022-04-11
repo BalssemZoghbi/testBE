@@ -36,21 +36,22 @@
            
            <div class="input-box"><div class="title">bobine secondaire</div>
                <div class="form__div">
-                    <input type="text" class="form__input" placeholder=" " id="materiau" v-model="projet.materiau">
-                    <label for="" class="form__label">materiau</label>
+                    <input type="text" class="form__input" placeholder=" " id="materiauSec" v-model="projet.materiauSec">
+                    <label for="" class="form__label">materiauSec</label>
                 </div>
           </div>
           
-           <div class="input-box">
-            <div class="form__div">
-              <input type="text" class="form__input" placeholder=" " id="conducteur" v-model="projet.conducteur">
-              <label for="" class="form__label">conducteur</label>
-          </div>
-          </div>
+         
              <div class="input-box">
             <div class="form__div">
               <input type="text" class="form__input" placeholder=" " id="conducteur" v-model="projet.conducteur">
               <label for="" class="form__label">conducteur</label>
+          </div>
+          </div>
+            <div class="input-box">
+            <div class="form__div">
+              <input type="text" class="form__input" placeholder=" " id="conducteurSec" v-model="projet.conducteurSec">
+              <label for="" class="form__label">conducteurSec</label>
           </div>
           </div>
         </div>
@@ -86,7 +87,8 @@ export default {
          id:undefined,
       materiau:"",
       conducteur:"",
-      
+        materiauSec:"",
+      conducteurSec:"",
       },
       e1:1
     };
@@ -96,9 +98,15 @@ export default {
       const projets = {
         id: undefined,
         materiau: this.projet.materiau,
-        conducteur: this.projet.conducteur
+        conducteur: this.projet.conducteur,
+        materiauSec: this.projet.materiauSec,
+        conducteurSec: this.projet.conducteurSec
       };
       axios.put('bobine/update/'+this.$route.params.id, projets).then(
+        (response) => (this.id = response.data.id)
+        
+      );
+       axios.put('bobinesec/update/'+this.$route.params.id, projets).then(
         (response) => (this.id = response.data.id)
         
       );
