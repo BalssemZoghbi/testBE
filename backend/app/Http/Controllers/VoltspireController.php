@@ -43,13 +43,18 @@ class VoltspireController extends Controller
     return $Bmax;
     }
 
-    public function prise($priseAdditive)
+    public function prise($priseAdditive,$priseSoustractive)
     {
         $prise=[];
         for($i=0;$i<$priseAdditive;$i++){
             $prise[$i]='Prise'+$i;
           
         }
+        for($i=0;$i<$priseSoustractive;$i++){
+            $prise[$i]='Prise'-$i;
+          
+        }
+
         dd($prise);
         return $prise;
     }
