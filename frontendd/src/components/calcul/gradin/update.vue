@@ -292,10 +292,14 @@ export default {
         echauffementEnroulement: this.projet.echauffementEnroulement,
         largeurMin: this.projet.largeurMin,
       };
+            console.log(this.projets);
+
       axios
         .put("/gradin/update/" + this.$route.params.id, projets)
         .then(
-          (response) => (this.id = response.data.id,console.log(response.data)),
+          (response) => (this.id = response.data.id
+          // , console.log(response.data)
+          ),
           
         );
       this.$router.push("/VoltSpires/"+ this.$route.params.id);
@@ -304,6 +308,10 @@ export default {
   async mounted() {
     const result = await axios.get("projets/" + this.$route.params.id);
     this.projet = result.data;
+  },
+   created() {
+                console.log(this.projets);
+
   },
 };
 </script>

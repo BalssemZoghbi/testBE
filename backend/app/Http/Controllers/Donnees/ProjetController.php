@@ -101,11 +101,11 @@ class ProjetController extends Controller
             "tole"=>  'H95-27',
             'diamPropose' => 308.79,
             'diamNominale'=> 177,
-            'pas'=> 10,
+            'pas'=> "10",
             'coeffRemplissage'=> 20,
             'nbrGradin'=> 7,
             'demiGradin'=> 4,
-            'largeur'=> '[170,160,150,140,130,120,110]',
+            'largeur'=> [170,160,150,140,130,120,110],
             'epaisseur'=> ' [ 49.28488612140643,26.40527175925861,18.272600699529917,2.867549853436623,2.9550661777275273,2.99721542847614,4.278589602058545]',
             'Sbrut'=> 21028.25,
             'Snette'=> 420565.18,
@@ -113,13 +113,27 @@ class ProjetController extends Controller
             'largeurMin' => 50
         ]);
         $VoltSpire=VoltSpire::create([
-            'Bmaxdesire'=> 150,
-            'Bmax'=> 544,
-            'Vsp'=> 58,
-            'N2c'=> 56,
-            'N1c'=> 7,
-            'prise' => '[1,5,6]',
-            'spire' => '[1,5,6]'
+            'Bmaxdesire'=>20,
+            'Bmax'=> 20,
+            'Vsp'=> 1867.5746016521493,
+            'N2c'=> 0.12365771080614343,
+            'N1c'=>  0.04946534801908362,
+            'prise' => '[
+                "Prise+3",
+                "Prise+2",
+                "Prise+1",
+                "Prise+0",
+                "Prise-1",
+                "Prise-2"
+            ]',
+            'spire' => '[
+                104.86148106105226,
+                102.88296255046637,
+                100.90444403988047,
+                98.92592552929459,
+                99.91518478458754,
+                100.90444403988047
+            ]'
         ]);
         // $volt=new VoltspireController();
         // $volt->updateVoltSpire()
