@@ -47,8 +47,13 @@
     </v-app-bar>
       <v-spacer></v-spacer>
     <v-navigation-drawer  v-model="drawer" dark app class="main-sidebar sidebar-dark-primary elevation-4">
-      <v-list-item class="px-2 py-5">
+      <v-list-item class="px-2 py-5"> <img
+                      src="../assets/trans.png"
+                      width="32%"
+                      alt="sacemindustries"
+                  />
             <v-list-item-title class="text-capitalize" align="center">
+             
                 <!-- <v-icon x-large color="#EB800E">fas fa-balance-scale</v-icon>  -->
                 <span class="brand-text titel"><b>Autocite</b>Pro</span>
             </v-list-item-title>
@@ -135,5 +140,10 @@ computed: {
 }
 .theme--dark.v-navigation-drawer {
     background-color: #366ca8;
+}
+img {
+    width: 32%;
+    margin-left: 0%;
+    margin-top: -0%;
 }
 </style>
