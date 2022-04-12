@@ -95,10 +95,39 @@
         </v-toolbar>
       </template>
       <template v-slot:[`item.actions`]="{item}">
-        <v-icon small color="green" class="mr-2" v-on:click="accept(item.id)">
-          mdi-pencil
+         <v-btn
+        class="ma-2"
+        color="primary"
+        dark
+      >
+        Accept
+        <v-icon
+          dark
+          right
+          v-on:click="accept(item.id)"
+        >
+          mdi-checkbox-marked-circle
         </v-icon>
-               <v-icon small color="red" v-on:click="decline(item.id)" > mdi-delete </v-icon>
+      </v-btn>
+        <!-- <v-icon small color="green" class="mr-2" v-on:click="accept(item.id)">
+          mdi-pencil
+        </v-icon> -->
+         <v-btn
+        class="ma-2"
+        color="red"
+        dark
+        
+      >
+        Decline
+        <v-icon
+          dark
+          right
+          v-on:click="decline(item.id)" 
+        >
+          mdi-cancel
+        </v-icon>
+      </v-btn>
+               <!-- <v-icon small color="red" v-on:click="decline(item.id)" > mdi-delete </v-icon> -->
 
       </template>
 
