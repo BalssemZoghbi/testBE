@@ -50,7 +50,8 @@ class GradinController extends Controller
         }
         return $diamPropose;
     }
-    public function largeur($diam,$nbrGradin,$pas)
+
+    public function largeurcreate($diam,$pas,$nbrGradin)
     {
         $diam=floor($diam/10);
         if($diam%2==0){
@@ -62,7 +63,37 @@ class GradinController extends Controller
             $largeur[$i]=$diam;
             $diam-=$pas;
         }
+    return $largeur;
+    }
+    public function largeur($diam,$pas,$nbrGradin,$largMin,$oldlargGradin,$oldnbreGradin)
+    {
+        $marge=count($oldlargGradin)-$nbrGradin;
+
+        if($nbrGradin>=$oldnbreGradin){
+        $diam=floor($diam/10);
+        if($diam%2==0){
+            $diam-=1;
+        }
+        $diam=$diam*10;
+        for($i=0;$i<$nbrGradin;$i++){
+            $largeur[$i]=$diam;
+            $diam-=$pas;
+        }
         return $largeur;
+
+        }else{
+
+        if($largMin!=0){
+                $largeurrev = array_reverse($oldlargGradin);
+                $indexLargeurMin = array_search($largMin, $largeurrev);
+                // dd($indexLargeurMin);
+                array_splice($largeurrev, $indexLargeurMin + 1, $marge);
+                $largeur = array_reverse($largeurrev);
+            }
+            return $largeur;
+
+        }
+
     }
     public function epaisseur($diam,$largeur,$nbreGradin){
         $epaisseur=[];
@@ -102,10 +133,12 @@ class GradinController extends Controller
             ->select('projets.gradin_id', 'electriques.puissance', 'bobinages.materiau', 'bobinages.conducteur')
             ->get()->first();
         $Gradin = Gradin::FindOrFail($projet->gradin_id);
+        $oldnbreGradin = $Gradin->getOriginal('nbrGradin');
+        $oldlargGradin = $Gradin->getOriginal('largeur');
         $diamPropose = $this->diametre($projet->materiau, $projet->puissance);
-        $largeur=$this->largeur($request->diamNominale,$request->nbrGradin,$request->pas);
+        $largeur=$this->largeur($request->diamNominale,$request->pas,$request->nbrGradin,$request->largeurMin,$oldlargGradin,$oldnbreGradin);
         $epaisseur=$this->epaisseur($request->diamNominale,$largeur,$request->nbrGradin);
-        $epaisseurfeuillard=$this->epaisseurfeuillard($request->diamNominale,$largeur,$request->nbrGradin,$request->demiGradin);
+        $epaisseurfeuillard=$this->epaisseurfeuillard($request->diamNominale,$largeur,$request->nbrGradin,$request->demiGradin,$request->largeurMin,$oldlargGradin,$oldnbreGradin);
         $brut=array_sum(array_map(function($a, $b) { return $a * $b; }, $largeur, $epaisseur));
         if($projet->conducteur=='feuillard'){
             $Gradin->update([

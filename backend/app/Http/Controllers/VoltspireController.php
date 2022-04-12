@@ -41,31 +41,41 @@ class VoltspireController extends Controller
     }
     public function Bmax($U2ph,$Snette,$B,$frequence){
         $N2c = $this->N2c($U2ph,$Snette,$B,$frequence);
-        $Bmax=($U2ph/(3.14*$frequence*sqrt(2)*$Snette*$N2c)*(pow(10,6)));
+        $Bmax=($U2ph*(pow(10,6))/(3.14*$frequence*sqrt(2)*$Snette*$N2c));
     return $Bmax;
     }
 
-    public function priseadd($priseSoustractive)
-    {
-        $prise=[];
-        for($i=0;$i<$priseSoustractive;$i++){
-            $prise[$i]='Prise-'.($i+1);
-            // ($i-$priseSoustractive+1);
-        }
-
-        // dd($prise);
-        return $prise;
-    }
     public function prise($priseAdditive,$priseSoustractive)
     {
-        $prise=$this->priseadd($priseSoustractive);
-
-        for($i=$priseSoustractive;$i<$priseAdditive+$priseSoustractive;$i++){
-            $prise[$i]='Prise+'.($i);
-            // $i-$priseAdditive-1
+        $prise=[];
+        $prise1=[];
+        for($i=0;$i<$priseSoustractive;$i++){
+            $prise[$i]='Prise'.($i-$priseSoustractive);
         }
-        // dd($prise);
-        return $prise;
+        for($i=$priseSoustractive;$i<$priseAdditive+$priseSoustractive+1;$i++){
+            $prise[$i]='Prise+'.($i-$priseSoustractive);
+        }
+        for($i=0;$i<$priseAdditive+$priseSoustractive+1;$i++){
+            $prise1[$i]=$prise[$priseAdditive+$priseSoustractive-$i];
+        }
+        // dd($prise1);
+        return $prise1;
+    }
+    public function spires($echelonAdd,$echelonSous,$priseAdditive,$priseSoustractive,$n1)
+    {
+        $spires=[];
+        $spires1=[];
+        for($i=0;$i<$priseSoustractive;$i++){
+            $spires[$i]=$n1+abs((($i-$priseSoustractive)*$n1*$echelonSous)/100);
+        }
+        for($i=$priseSoustractive;$i<$priseAdditive+$priseSoustractive+1;$i++){
+            $spires[$i]=$n1+abs((($i-$priseSoustractive)*$n1*$echelonAdd)/100);
+        }
+        for($i=0;$i<$priseAdditive+$priseSoustractive+1;$i++){
+            $spires1[$i]=$spires[$priseAdditive+$priseSoustractive-$i];
+        }
+        // dd($spires1);
+        return $spires1;
     }
 
     public function updateVoltSpire($id, Request $request)
@@ -76,7 +86,7 @@ class VoltspireController extends Controller
             ->join('gradins', 'gradins.id', '=', 'projets.gradin_id')
             ->join('volt_spires', 'volt_spires.id', '=', 'projets.volt_spires_id')
             ->where('projets.id', $id)
-            ->select('projets.volt_spires_id','gradins.Snette', 'electriques.secondaireUPhase', 'electriques.PrimaireUPhase', 'electriques.frequence','electriques.priseAdditive','electriques.priseSoustractive','electriques.echelonSousctractive','electriques.priseAdditive')
+            ->select('projets.volt_spires_id','gradins.Snette', 'electriques.secondaireUPhase', 'electriques.PrimaireUPhase', 'electriques.frequence','electriques.priseAdditive','electriques.priseSoustractive','electriques.echelonSousctractive','electriques.echelonAdditive')
             ->get()->first();
         $VoltSpire = VoltSpire::FindOrFail($projet->volt_spires_id);
         $N2c = $this->N2c($projet->secondaireUPhase,$projet->Snette,$request->Bmaxdesire,$projet->frequence);
@@ -88,14 +98,15 @@ class VoltspireController extends Controller
         // $epaisseurfeuillard=$this->epaisseurfeuillard($request->diamNominale,$largeur,$request->nbrGradin,$request->demiGradin);
         // $brut=array_sum(array_map(function($a, $b) { return $a * $b; }, $largeur, $epaisseur));
       $prise=$this->prise($projet->priseAdditive,$projet->priseSoustractive);
-            $VoltSpire->update([
+      $spires=$this->spires($projet->echelonAdditive,$projet->echelonSousctractive,$projet->priseAdditive,$projet->priseSoustractive,$N1c);
+      $VoltSpire->update([
                 'Bmaxdesire' =>  $request->Bmaxdesire,
                 'Bmax' => $Bmax,
                 'Vsp' => $Vsp,
                 'N2c' => $N2c,
                 'N1c' => $N1c,
                 'prise' => $prise,
-                'spire' => $prise,
+                'spire' => $spires,
 
             ]);
 
