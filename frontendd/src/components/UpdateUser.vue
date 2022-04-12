@@ -60,6 +60,8 @@ export default {
   data: () => ({
     dialog: false,
     data: [],
+    name:'',
+    email:'',
     password:''
   }),
   mounted() {
@@ -69,22 +71,15 @@ export default {
     methods: {
     update() {
       let user = {
-        email: this.data.email,
-        name: this.data.name,
+        email: this.email,
+        name: this.name,
         password: this.password,
       }
-      axios.post('/users/update', user,{ headers: { token: localStorage.getItem('token')}})
-        .then(res => {
-          //if successfull
-          if (res.status === 200) {
-            localStorage.setItem('token', res.data.token);
-            console.log(res)
-            
-          }
-        }, err => {
-          console.log(err.response);
-          this.error = err.response.data.error
-        })
+      axios.put('/user/update/', user,{ headers: { token: localStorage.getItem('token')}})
+      .then(
+        (response) => (this.id = response.data.id)
+        
+      );
     }
   },
 };
