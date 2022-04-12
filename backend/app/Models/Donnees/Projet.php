@@ -5,6 +5,7 @@ namespace App\Models\Donnees;
 use App\Models\Donnees\Electrique;
 use App\Models\Bobinage;
 use App\Models\BobinageSec;
+use App\Models\VoltSpire;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -34,6 +35,7 @@ class Projet extends Model
     'bobinage_id',
     'gradin_id',
     'bobinage_secs_id',
+    'volt_spires_id'
 ];
 
      public function user(){
@@ -59,5 +61,8 @@ class Projet extends Model
     {
         return $this->belongsTo(Gradin::class);
     }
-
+    public function volt_spire()
+    {
+        return $this->belongsTo(VoltSpire::class);
+    }
 }

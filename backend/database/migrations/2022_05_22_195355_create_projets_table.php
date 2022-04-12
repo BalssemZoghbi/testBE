@@ -36,6 +36,7 @@ class CreateProjetsTable extends Migration
             $table->foreignId('bobinage_id')->constrained()->onDelete('cascade');
             $table->foreignId('gradin_id')->constrained()->onDelete('cascade');
             $table->foreignId('bobinage_secs_id')->constrained()->onDelete('cascade');
+            $table->foreignId('volt_spires_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
