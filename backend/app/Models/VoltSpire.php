@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class VoltSpire extends Model
 {
     use HasFactory;
+    protected $table="volt_Spires";
     protected $casts=[
         'prise'=>'array',
         'spire'=>'array'

@@ -205,6 +205,21 @@
                               type="text"
                               class="form__input"
                               placeholder=" "
+                              id="largeurMin"
+                              
+                              v-model="projet.largeurMin"
+                            />
+                            <label for="" class="form__label" readonly
+                              >largeur Minimale </label
+                            >
+                          </div>
+                        </div>
+                        <div class="input-box">
+                          <div class="form__div">
+                            <input
+                              type="text"
+                              class="form__input"
+                              placeholder=" "
                               id="EpaisseurTot"
                               readonly
                               v-model="projet.EpaisseurTot"
@@ -253,6 +268,7 @@ export default {
         Sbrut: "",
         Snette: "",
         EpaisseurTot: "",
+        largeurMin: "",
       },
       e1: 1,
     };
@@ -274,6 +290,7 @@ export default {
         Snette: this.projet.Snette,
         EpaisseurTot: this.projet.EpaisseurTot,
         echauffementEnroulement: this.projet.echauffementEnroulement,
+        largeurMin: this.projet.largeurMin,
       };
       axios
         .put("/gradin/update/" + this.$route.params.id, projets)
@@ -281,7 +298,7 @@ export default {
           (response) => (this.id = response.data.id,console.log(response.data)),
           
         );
-      this.$router.push({ name: "Home" });
+      this.$router.push("/VoltSpires/"+ this.$route.params.id);
     },
   },
   async mounted() {

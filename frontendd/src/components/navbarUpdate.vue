@@ -48,8 +48,9 @@
                                     <li class="dropdown-link">
                                       <router-link :to="'/gradin/'+ this.$route.params.id">Gradin</router-link>
                                     </li>
+                                    
                                     <li class="dropdown-link">
-                                        <a href="#">Vols,Spire,Prises</a>
+                                      <router-link :to="'/VoltSpires/'+ this.$route.params.id">Volt Spires</router-link>
                                     </li>
                                     <li class="dropdown-link">
                                         <a href="#">PCC et UCC</a>

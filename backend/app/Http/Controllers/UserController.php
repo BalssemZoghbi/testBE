@@ -22,12 +22,12 @@ class UserController extends Controller
         //  $projets=Projet::find($id,'user_id')->get();
         return UserResource::collection($users);
     }
-    // public function getup()
-    // {
-    //     $users=DB::table('users')->where ('type' , 'pending')->get();
-    //     return $users;
+    public function getup()
+    {
+        $users=DB::table('users')->where ('type' , 'pending')->get();
+        return $users;
 
-    // }
+    }
     public function store(Request $request){
        $user= User::create([
             'name' => $request->name,

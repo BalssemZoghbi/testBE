@@ -135,6 +135,7 @@ class GradinController extends Controller
         $Gradin = Gradin::FindOrFail($projet->gradin_id);
         $oldnbreGradin = $Gradin->getOriginal('nbrGradin');
         $oldlargGradin = $Gradin->getOriginal('largeur');
+        // dd($oldlargGradin);
         $diamPropose = $this->diametre($projet->materiau, $projet->puissance);
         $largeur=$this->largeur($request->diamNominale,$request->pas,$request->nbrGradin,$request->largeurMin,$oldlargGradin,$oldnbreGradin);
         $epaisseur=$this->epaisseur($request->diamNominale,$largeur,$request->nbrGradin);

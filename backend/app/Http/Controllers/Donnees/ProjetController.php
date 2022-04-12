@@ -9,6 +9,7 @@ use App\Models\Donnees\Projet ;
 use App\Models\Donnees\Electrique;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\VoltspireController;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\ProjetResource;
@@ -36,6 +37,9 @@ class ProjetController extends Controller
         $header = $request->header('Authorization');
         $token = PersonalAccessToken::findToken($header);
         $user = $token->tokenable;
+        // $elec=new ElectriqueController();
+        // $elec->store();
+        // dd($elec->id);
         $elec=Electrique::create([
             "colonnes"=>  '4',
             "frequence"=> "50",
@@ -117,6 +121,8 @@ class ProjetController extends Controller
             'prise' => '[1,5,6]',
             'spire' => '[1,5,6]'
         ]);
+        // $volt=new VoltspireController();
+        // $volt->updateVoltSpire()
         $projet= Projet::create([
              'appareil' => 'Defaut',
              'reference' =>'25/2022',
@@ -154,10 +160,10 @@ class ProjetController extends Controller
         ->join('garanties', 'garanties.id', '=', 'projets.garantie_id')
         ->join('bobinages', 'bobinages.id', '=', 'projets.bobinage_id')
         ->join('gradins', 'gradins.id', '=', 'projets.gradin_id')
-        ->join('volt_spires', 'volt_spires.id', '=', 'projets.volt_spires_id')
+        ->join('volt_Spires', 'volt_Spires.id', '=', 'projets.volt_spires_id')
         ->join('bobinage_secs', 'bobinage_secs.id', '=', 'projets.bobinage_secs_id')
         ->where('projets.id',$id)
-        ->select('electriques.*','electriques.id as elec_id','garanties.*','garanties.id as garenti_id','bobinages.*','bobinages.id as bobine_id','bobinage_secs.*','bobinage_secs.id as bobinesec_id','gradins.*','gradins.id as gradins_id','voltSpires.*','voltSpires.id as volt_id', 'projets.*')
+        ->select('electriques.*','electriques.id as elec_id','garanties.*','garanties.id as garenti_id','bobinages.*','bobinages.id as bobine_id','bobinage_secs.*','bobinage_secs.id as bobinesec_id','gradins.*','gradins.id as gradins_id','volt_Spires.*','volt_Spires.id as volt_id', 'projets.*')
         ->get()->first();
 
 

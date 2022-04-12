@@ -16,6 +16,7 @@ import notFound from "../components/NotFound.vue";
 import loginn from "../components/Auth/loginn.vue";
 import updateGarantie from "../components/donnees/garantie/update.vue";
 import updateGradin from "../components/calcul/gradin/update.vue";
+import updateVolt from "../components/calcul/voltspire/update.vue";
 
 import Bobine from "../components/donnees/bobinage/update.vue";
 import User from "../components/user/User.vue";
@@ -130,6 +131,11 @@ const routes = [
     path: "/gradin/:id",
     name: "gradin.update",
     component: updateGradin,
+  },
+  {
+    path: "/VoltSpires/:id",
+    name: "volt.update",
+    component: updateVolt,
   },
 ];
 

@@ -145,26 +145,26 @@ class ElectriqueController extends Controller
         }
         return $indice;
     }
-    public function store(Request $request){
+    public function store(){
 
-         $u1=$request->u1n/1000;
-         $u2nRange=$request->u2o/1000;
+         $u1=36000/1000;
+         $u2nRange=400/1000;
          $tension=$this->tension($u1);
          $tension2=$this->tension($u2nRange);
-         list($PrimaireuLigne,$PrimaireuPhase,$PrimaireiLigne,$PrimaireiPhase)=$this->couplage($request->couplagePrimaire,$request->u1n,$request->puissance);
-         list($SecondaireuLigne,$SecondaireuPhase,$SecondaireiLigne,$SecondaireiPhase,$Uz)=$this->couplage($request->couplageSecondaire,$request->u2o,$request->puissance);
-         $couplage=$request->couplagePrimaire.$request->couplageSecondaire.$request->indiceHoraire;
+         list($PrimaireuLigne,$PrimaireuPhase,$PrimaireiLigne,$PrimaireiPhase)=$this->couplage('Y',36000,630);
+         list($SecondaireuLigne,$SecondaireuPhase,$SecondaireiLigne,$SecondaireiPhase,$Uz)=$this->couplage('z',400,630);
+         $couplage='Yz';
          $indice=$this->indice($couplage);
-         if(in_array($request->indiceHoraire, $indice)){
+         if(in_array(1, $indice)){
             $electrique= Electrique::create([
-                'colonnes' => $request->colonnes,
-                'frequence' =>$request->frequence,
-                'pn' =>$request->pn,
-                'u1n' =>$request->u1n,
-                'u2o' => $request->u2o,
-                'couplagePrimaire' =>$request->couplagePrimaire,
-                'couplageSecondaire' =>$request->couplageSecondaire,
-                'indiceHoraire' => $request->indiceHoraire,
+                'colonnes' => 4,
+                'frequence' =>50,
+                'pn' =>630,
+                'u1n' =>36000,
+                'u2o' => 400,
+                'couplagePrimaire' =>'Y',
+                'couplageSecondaire' =>'z',
+                'indiceHoraire' => 1,
                 'couplage' =>$couplage,
                 'classeU1' =>$tension->tensionEleve,
                 'tenueFr1' =>$tension->tenueFr,
@@ -172,11 +172,11 @@ class ElectriqueController extends Controller
                 'tenueFr2' =>$tension2->tenueFr,
                 'tenueChoc2' =>$tension2->tenueChoc,
                 'classeU2' =>$tension2->tensionEleve,
-                'priseSoustractive' =>$request->priseSoustractive,
-                'priseAdditive' =>$request->priseAdditive,
-                'echelonSousctractive' =>$request->echelonSousctractive,
-                'echelonAdditive' =>$request->echelonAdditive,
-                'puissance' =>$request->puissance,
+                'priseSoustractive' =>2,
+                'priseAdditive' =>2,
+                'echelonSousctractive' =>2.5,
+                'echelonAdditive' =>2.5,
+                'puissance' =>360,
                 'PrimaireUligne' =>$PrimaireuLigne,
                 'PrimaireUPhase' =>$PrimaireuPhase,
                 'PrimaireIligne' =>$PrimaireiLigne,
@@ -186,7 +186,7 @@ class ElectriqueController extends Controller
                 'secondaireIligne' =>$SecondaireiLigne,
                 'secondaireIPhase' =>$SecondaireiPhase,
                 'Uz' =>$Uz,
-                'nbrePosition' =>$request->priseSoustractive+$request->priseAdditive+1,
+                'nbrePosition' =>5,
             ]);
             if($electrique->save()){
                 return new ElectriqueResource($electrique);
