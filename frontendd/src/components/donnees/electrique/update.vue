@@ -32,15 +32,25 @@
                       <div class="user-details">
                         <div class="input-box">
                           <div class="form__div">
-                            <input
+                            <!-- <input
                               type="number"
                               class="form__input"
                               placeholder=" "
                               id="colonnes"
+                              :items="colonnes"
+                              dense
+                              outlined
                               v-model="projet.colonnes"
-                            />
+                            /> -->
+                              <v-select
+                                :items="colonnes"
+                                label="colonnes"
+                                v-model="projet.colonnes"
+                                dense
+                                outlined
+                              ></v-select>
 
-                            <label for="" class="form__label">colonnes</label>
+                            <!-- <label for="" class="form__label">colonnes</label> -->
                           </div>
                         </div>
                         <div class="form__div framei">
@@ -55,14 +65,21 @@
                         </div>
 
                         <div class="form__div framei">
-                          <input
+                          <!-- <input
                             type="number"
                             class="form__input"
                             placeholder=" "
                             id="frequence"
                             v-model="projet.frequence"
                           />
-                          <label for="" class="form__label">frequence</label>
+                          <label for="" class="form__label">frequence</label> -->
+                           <v-select
+                                :items="frequences"
+                                label="frequence"
+                                v-model="projet.frequence"
+                                dense
+                                outlined
+                              ></v-select>
                         </div>
 
                         <div class="form__div framei">
@@ -254,28 +271,32 @@
                         <v-row align="center">
                           <v-col class="d-flex" cols="12" sm="6">
                             <v-select
-                              :items="projet.couplagePrimaire"
+                              :items="couplagePrimaire"
                               label="couplage Primaire"
                               v-model="projet.couplagePrimaire"
                               outlined
+                              dense
                             ></v-select>
+                             
                           </v-col>
 
                           <v-col class="d-flex" cols="12" sm="6">
                             <v-select
-                              :items="projet.couplageSecondaire"
+                              :items="couplageSecondaire"
                               label="couplage Secondaire"
                               v-model="projet.couplageSecondaire"
                               outlined
+                              dense
                             ></v-select>
                           </v-col>
 
                           <v-col class="d-flex" cols="12" sm="6">
                             <v-select
-                              :items="projet.indiceHoraire"
+                              :items="indiceHoraire"
                               label="indice Horaire"
                               v-model="projet.indiceHoraire"
                               outlined
+                              dense
                             ></v-select>
                           </v-col>
                           <v-col class="d-flex" cols="12" sm="6">
@@ -496,7 +517,12 @@ import axios from "axios";
 export default {
   components: { navbarUpdate },
   data() {
-    return {
+    return {          
+      frequences: ['50','60'],
+      couplagePrimaire: ['YN','Y','D'],
+      couplageSecondaire: ['d','zn','z','yn','y'],
+      indiceHoraire: ['0','1','2','3','4','5','6','7','8','9','10','11'],
+      colonnes: ['3','4'],
       projet: {
         id: undefined,
         nbrePosition: "",
@@ -684,7 +710,7 @@ h1 {
   left: 0.8rem;
   font-size: 0.75rem;
   font-weight: 500;
-  z-index: 10;
+  z-index: 1;
 }
 
 /*Input focus*/

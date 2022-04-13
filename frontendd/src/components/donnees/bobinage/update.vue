@@ -29,29 +29,57 @@
         <div class="user-details">
            <div class="input-box">  <div class="title">bobine primaire</div>
                <div class="form__div">
-                    <input type="text" class="form__input" placeholder=" " id="materiau" v-model="projet.materiau">
-                    <label for="" class="form__label">materiau</label>
+                    <!-- <input type="text" class="form__input" placeholder=" " id="materiau" v-model="projet.materiau">
+                    <label for="" class="form__label">materiau</label> -->
+                     <v-select
+                :items="materiau"
+                label="materiau"
+                v-model="projet.materiau"
+                dense
+                outlined
+              ></v-select>
                 </div>
           </div>
            
            <div class="input-box"><div class="title">bobine secondaire</div>
                <div class="form__div">
-                    <input type="text" class="form__input" placeholder=" " id="materiauSec" v-model="projet.materiauSec">
-                    <label for="" class="form__label">materiauSec</label>
+                    <!-- <input type="text" class="form__input" placeholder=" " id="materiauSec" v-model="projet.materiauSec">
+                    <label for="" class="form__label">materiauSec</label> -->
+                     <v-select
+                :items="materiau"
+                label="materiau"
+                v-model="projet.materiauSec"
+                dense
+                outlined
+              ></v-select>
                 </div>
           </div>
           
          
              <div class="input-box">
             <div class="form__div">
-              <input type="text" class="form__input" placeholder=" " id="conducteur" v-model="projet.conducteur">
-              <label for="" class="form__label">conducteur</label>
+              <!-- <input type="text" class="form__input" placeholder=" " id="conducteur" v-model="projet.conducteur">
+              <label for="" class="form__label">conducteur</label> -->
+              <v-select
+                :items="conducteur"
+                label="conducteur"
+                v-model="projet.conducteur"
+                dense
+                outlined
+              ></v-select>
           </div>
           </div>
             <div class="input-box">
             <div class="form__div">
-              <input type="text" class="form__input" placeholder=" " id="conducteurSec" v-model="projet.conducteurSec">
-              <label for="" class="form__label">conducteurSec</label>
+              <!-- <input type="text" class="form__input" placeholder=" " id="conducteurSec" v-model="projet.conducteurSec">
+              <label for="" class="form__label">conducteurSec</label> -->
+               <v-select
+               :items="conducteur"
+                label="conducteur"
+                v-model="projet.conducteurSec"
+                dense
+                outlined
+              ></v-select>
           </div>
           </div>
         </div>
@@ -83,6 +111,8 @@ export default {
     components: { navbarUpdate },
   data() {
     return {
+      conducteur: ['meplat guipé','Rond emaille','feuillard'], 
+      materiau: ['cuivre','aluminium'], 
       projet: {
          id:undefined,
       materiau:"",
@@ -208,7 +238,7 @@ h1 {
   left: 0.8rem;
   font-size: 0.75rem;
   font-weight: 500;
-  z-index: 10;
+  z-index: 1;
 }
 
 /*Input focus*/

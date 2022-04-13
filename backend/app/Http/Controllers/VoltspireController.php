@@ -26,8 +26,8 @@ class VoltspireController extends Controller
         return response()->json('deleted');
     }
     public function N2c($U2ph,$Snette,$B,$frequence){
-  $N2c=($U2ph*(pow(10,6))/(3.14*$frequence*sqrt(2)*$Snette*$B));
-//   dd($N2c);
+  $N2c=($U2ph*(pow(10,6))/(pi()*$frequence*sqrt(2)*$Snette*$B));
+//   dd(pi());
         return $N2c;
     }
     public function N1c($U1ph,$Vsp){
@@ -41,7 +41,7 @@ class VoltspireController extends Controller
     }
     public function Bmax($U2ph,$Snette,$B,$frequence){
         $N2c = $this->N2c($U2ph,$Snette,$B,$frequence);
-        $Bmax=($U2ph*(pow(10,6))/(3.14*$frequence*sqrt(2)*$Snette*$N2c));
+        $Bmax=($U2ph*(pow(10,6))/(pi()*$frequence*sqrt(2)*$Snette*$N2c));
     return $Bmax;
     }
 
@@ -88,7 +88,7 @@ class VoltspireController extends Controller
             ->select('projets.volt_spires_id','gradins.Snette', 'electriques.secondaireUPhase', 'electriques.PrimaireUPhase', 'electriques.frequence','electriques.priseAdditive','electriques.priseSoustractive','electriques.echelonSousctractive','electriques.echelonAdditive')
             ->get()->first();
         $VoltSpire = VoltSpire::FindOrFail($projet->volt_spires_id);
-        $N2c = $this->N2c($projet->cd,$projet->Snette,$request->Bmaxdesire,$projet->frequence);
+        $N2c = $this->N2c($projet->secondaireUPhase,$projet->Snette,$request->Bmaxdesire,$projet->frequence);
         $N1c=$this->N1c($projet->PrimaireUPhase,$VoltSpire->Vsp);
         $Bmax=$this->Bmax($projet->secondaireUPhase,$projet->Snette,$request->Bmaxdesire,$projet->frequence);
         $Vsp=$this->Vsp($projet->secondaireUPhase,$N2c,$projet->Snette,$request->Bmaxdesire,$projet->frequence);

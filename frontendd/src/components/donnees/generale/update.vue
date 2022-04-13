@@ -103,46 +103,88 @@
         <div class="user-details">
              <div class="input-box">
             <div class="form__div">
-              <input type="text" class="form__input" placeholder=" " id="type"
+              <!-- <input type="text" class="form__input" placeholder=" " id="type"
         v-model="projet.type">
-              <label for="" class="form__label">type</label>
+              <label for="" class="form__label">type</label> -->
+                <v-select
+                :items="types"
+                label="type"
+                v-model="projet.type"
+                dense
+                outlined
+              ></v-select>
           </div>
           </div>
             <div class="input-box">
             <div class="form__div">
-              <input type="text" class="form__input" placeholder=" " id="remplissage"
+              <!-- <input type="text" class="form__input" placeholder=" " id="remplissage"
         v-model="projet.remplissage">
-              <label for="" class="form__label">remplissage</label>
+              <label for="" class="form__label">remplissage</label> -->
+              <v-select
+                :items="remplissages"
+                label="remplissage"
+                v-model="projet.remplissage"
+                dense
+                outlined
+              ></v-select>
           </div>
           </div>
           <div class="input-box">
             <div class="form__div">
-              <input type="text" class="form__input" placeholder=" "  id="installation"
+              <!-- <input type="text" class="form__input" placeholder=" "  id="installation"
         v-model="projet.installation">
-              <label for="" class="form__label">Installation</label>
+              <label for="" class="form__label">Installation</label> -->
+               <v-select
+                :items="installations"
+                label="installation"
+                v-model="projet.installation"
+                dense
+                outlined
+              ></v-select>
           </div>
           </div>
           <div class="input-box">
             <div class="form__div">
-              <input type="text" class="form__input" placeholder=" " id="montage"
+              <!-- <input type="text" class="form__input" placeholder=" " id="montage"
         v-model="projet.montage">
-              <label for="" class="form__label">Montage</label>
+              <label for="" class="form__label">Montage</label> -->
+               <v-select
+                :items="montages"
+                label="montage"
+                v-model="projet.montage"
+                dense
+                outlined
+              ></v-select>
           </div>
           </div>
        
            <div class="input-box">
             <div class="form__div">
-              <input type="text" class="form__input" placeholder=" " id="dielectrique"
+              <!-- <input type="text" class="form__input" placeholder=" " id="dielectrique"
         v-model="projet.dielectrique">
-              <label for="" class="form__label">Dielectrique</label>
+              <label for="" class="form__label">Dielectrique</label> -->
+               <v-select
+                :items="dielectriques"
+                label="dielectrique"
+                v-model="projet.dielectrique"
+                dense
+                outlined
+              ></v-select>
           </div>
           
           </div>
                <div class="input-box">
             <div class="form__div">
-              <input type="text" class="form__input" placeholder=" " id="fonctionnement"
+              <!-- <input type="text" class="form__input" placeholder=" " id="fonctionnement"
         v-model="projet.fonctionnement">
-              <label for="" class="form__label">Fonctionnement</label>
+              <label for="" class="form__label">Fonctionnement</label> -->
+               <v-select
+                :items="fonctionnements"
+                label="fonctionnement"
+                v-model="projet.fonctionnement"
+                dense
+                outlined
+              ></v-select>
           </div>
           </div>
         </div>
@@ -176,9 +218,16 @@
         <div class="user-details">
               <div class="input-box">
             <div class="form__div">
-              <input type="text" class="form__input" placeholder=" " id="echangeurs"
+              <!-- <input type="text" class="form__input" placeholder=" " id="echangeurs"
         v-model="projet.echangeurs">
-              <label for="" class="form__label">Echangeurs</label>
+              <label for="" class="form__label">Echangeurs</label> -->
+               <v-select
+                :items="echangeurs"
+                label="Echangeurs"
+                v-model="projet.echangeurs"
+                dense
+                outlined
+              ></v-select>
           </div>
           </div>
                 <div class="input-box">
@@ -195,9 +244,16 @@
           </div>
             <div class="input-box">
             <div class="form__div">
-              <input type="text" class="form__input" placeholder=" " id="refroidissement"
+              <!-- <input type="text" class="form__input" placeholder=" " id="refroidissement"
         v-model="projet.refroidissement">
-              <label for="" class="form__label">Refroidissement</label>
+              <label for="" class="form__label">Refroidissement</label> -->
+               <v-select
+                :items="refroidissements"
+                label="Refroidissement"
+                v-model="projet.refroidissement"
+                dense
+                outlined
+              ></v-select>
           </div>
           </div>
         </div>
@@ -227,6 +283,14 @@ export default {
     components: { navbarUpdate },
   data() {
     return {
+       types: ['cabine','poteau','h61','h59','sec'],
+       remplissages:['à matelas d`air','integral','respirant'],
+       installations:['interieure', 'exterieure','interieur&exterieure'],
+       montages:['sur galets','sur pieds'],
+       echangeurs:['ondes','radiateurs','parois'],
+       dielectriques:['huile biodegradable','huile minerale inhibée','huile siliconne','huile minerale non inhibée'],
+       fonctionnements:['abaisseur','elevateur','isolement'],
+       refroidissements:['onan','onaf'],
       projet: {
       appareil: "",
       reference: "",
@@ -375,7 +439,7 @@ h1 {
   left: 0.8rem;
   font-size: 0.75rem;
   font-weight: 500;
-  z-index: 10;
+  z-index: 1;
 }
 
 /*Input focus*/

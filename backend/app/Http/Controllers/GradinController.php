@@ -115,7 +115,7 @@ class GradinController extends Controller
         $epaisseur=$this->epaisseur($diam,$largeur,$nbreGradin);
         $coeff=[0.5, 0.3, 0.25, 0.2];
         $j=0;
-        for($i=$nbreGradin-1;$i>$nbreGradin-$demiGradin-1;$i--){
+        for($i=$nbreGradin-$demiGradin;$i<$nbreGradin;$i++){
             $epaisseur[$i]=$epaisseur[$i]*$coeff[$j];
             $j++;
         }

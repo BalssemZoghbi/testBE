@@ -91,7 +91,7 @@ class GarantieController extends Controller
                 $garantie36=Garantie36::where('pn',$puissance)->get()->first();
         return $garantie36;
     }
-    public function edit($id, Request $request){
+    public function edit($id){
 
         $projet = DB::table('projets')
         ->join('electriques', 'electriques.id', '=', 'projets.electrique_id')

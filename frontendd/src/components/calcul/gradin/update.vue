@@ -26,7 +26,7 @@
                       <div class="user-details">
                         <div class="input-box">
                           <div class="form__div">
-                            <input
+                            <!-- <input
                               type="text"
                               class="form__input"
                               placeholder=" "
@@ -34,7 +34,14 @@
                               id="tole"
                               v-model="projet.tole"
                             />
-                            <label for="" class="form__label">Tole</label>
+                            <label for="" class="form__label">Tole</label> -->
+
+                            <v-select :items="toles"
+                              label="tole"
+                              v-model="projet.tole"
+                              dense
+                              outlined
+                            ></v-select>
                           </div>
                         </div>
                         <div class="input-box">
@@ -69,7 +76,7 @@
                         </div>
                         <div class="input-box">
                           <div class="form__div">
-                            <input
+                            <!-- <input
                               type="text"
                               class="form__input"
                               placeholder=" "
@@ -77,7 +84,13 @@
                               
                               v-model="projet.pas"
                             />
-                            <label for="" class="form__label">Pas</label>
+                            <label for="" class="form__label">Pas</label> -->
+                            <v-select :items="pas"
+                              label="pas"
+                              v-model="projet.pas"
+                              dense
+                              outlined
+                            ></v-select>
                           </div>
                         </div>
                         <div class="input-box">
@@ -254,6 +267,8 @@ export default {
   components: { navbarUpdate },
   data() {
     return {
+      toles:['M110-23','M120-27','M130-30','H75-23','H80-23','H85-23','H95-27','H105-30'],
+      pas:['10','20'],
       projet: {
         id: undefined,
         tole: "",
@@ -403,7 +418,7 @@ h1 {
   left: 0.8rem;
   font-size: 0.75rem;
   font-weight: 500;
-  z-index: 10;
+  z-index: 1;
 }
 
 /*Input focus*/

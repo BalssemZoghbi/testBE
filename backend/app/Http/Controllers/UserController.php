@@ -52,6 +52,17 @@ class UserController extends Controller
             return response()->json($user);
         // }
     }
+    public function updateprofile($id,Request $request){
+    $user=User::FindOrFail($id);
+    $type = $user->getOriginal('type');
+        $user->update([
+            'name' => $request->name,
+            'email' =>$request->email,
+            'password' =>Hash::make($request->password),
+            'type'=>$type
+        ]);
+            return response()->json($user);
+    }
 
     public function delete($id){
         $user=User::FindOrFail($id);

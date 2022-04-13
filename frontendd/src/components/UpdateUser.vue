@@ -31,7 +31,7 @@
                   label="Password*"
                   type="password"
                   required
-                  v-model="password"
+                  v-model="Data.password"
                 ></v-text-field>
               </v-row>
             </v-col>
@@ -71,11 +71,12 @@ export default {
     methods: {
     update() {
       let user = {
-        email: this.email,
-        name: this.name,
-        password: this.password,
+        email: this.data.email,
+        name: this.data.name,
+        password: this.data.password,
       }
-      axios.put('/user/update/', user,{ headers: { token: localStorage.getItem('token')}})
+      // console.log(user)
+      axios.put('/user/updateprofile/'+this.data.id, user,{ headers: { token: localStorage.getItem('token')}})
       .then(
         (response) => (this.id = response.data.id)
         

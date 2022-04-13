@@ -14,6 +14,7 @@ use App\Http\Controllers\GradinController;
 use App\Http\Controllers\BobinageSecController;
 use App\Http\Controllers\EmailleController;
 use App\Http\Controllers\VoltspireController;
+use App\Http\Controllers\BobinageStatiqueController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -34,6 +35,7 @@ Route::get('/users/p', [UserController::class,'getup']);
 
 Route::post('/user/create', [UserController::class,'store']);
 Route::put('/user/update/{id}', [UserController::class,'updatestore']);
+Route::put('/user/updateprofile/{id}', [UserController::class,'updateprofile']);
 Route::get('/user/{id}', [UserController::class,'show']);
 Route::delete('/user/delete/{id}', [UserController::class,'delete']);
 
@@ -100,3 +102,15 @@ Route::post('/emaille', [EmailleController::class ,'add']);
 Route::post('/saillie', [EmailleController::class ,'addSaillie']);
 Route::post('/hbrin', [EmailleController::class ,'addHbrin']);
 Route::post('/tole', [EmailleController::class ,'addTole']);
+
+
+Route::get('/getSaillie', [BobinageStatiqueController::class ,'getSaillie']);
+Route::get('/getSaillie/{id}', [BobinageStatiqueController::class ,'getoneSaillie']);
+Route::post('/addSaillie', [BobinageStatiqueController::class ,'createSaillie']);
+Route::put('/updateSaillie/{id}', [BobinageStatiqueController::class ,'updateSaillie']);
+Route::delete('/deleteSaillie/{id}', [BobinageStatiqueController::class ,'deleteSaillie']);
+Route::get('/getHbrin', [BobinageStatiqueController::class ,'getHbrin']);
+Route::get('/getHbrin/{id}', [BobinageStatiqueController::class ,'getoneHbrin']);
+Route::put('/updateHbrin/{id}', [BobinageStatiqueController::class ,'updateHbrin']);
+Route::post('/createHbrin', [BobinageStatiqueController::class ,'createHbrin']);
+Route::delete('/deleteHbrin/{id}', [BobinageStatiqueController::class ,'deleteHbrin']);
