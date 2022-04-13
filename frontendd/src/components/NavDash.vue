@@ -103,6 +103,7 @@ import { mapGetters } from 'vuex';
 methods:{
 logout() {
       localStorage.removeItem('token');
+      localStorage.removeItem('user');
       this.$store.dispatch('user',null);
       this.$router.push("/login");
     },

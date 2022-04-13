@@ -12,6 +12,7 @@ use App\Http\Controllers\Donnees\TensionElectriqueController;
 use App\Http\Controllers\BobinageController;
 use App\Http\Controllers\GradinController;
 use App\Http\Controllers\BobinageSecController;
+use App\Http\Controllers\EmailleController;
 use App\Http\Controllers\VoltspireController;
 /*
 |--------------------------------------------------------------------------
@@ -95,3 +96,7 @@ Route::get('/gradin/{id}',[GradinController::class ,'getOneGradin']);
 Route::put('/gradin/update/{id}',[GradinController::class ,'updateGradin']);
 Route::delete('/gradin/delete/{id}',[GradinController::class ,'deleteGradin']);
 Route::put('/volt/update/{id}', [VoltspireController::class ,'updateVoltSpire']);
+Route::post('/emaille', [EmailleController::class ,'add']);
+Route::post('/saillie', [EmailleController::class ,'addSaillie']);
+Route::post('/hbrin', [EmailleController::class ,'addHbrin']);
+Route::post('/tole', [EmailleController::class ,'addTole']);

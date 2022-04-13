@@ -64,6 +64,8 @@ methods:{
    
 
   localStorage.setItem('token',response.data.token);
+  localStorage.setItem('user',response.data.user);
+  // console.log(response.data.user)
   this.$store.dispatch('user',response.data.user);
  this.$router.push('/dashboard');
   }catch(e){

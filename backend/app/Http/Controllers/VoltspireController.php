@@ -80,7 +80,6 @@ class VoltspireController extends Controller
 
     public function updateVoltSpire($id, Request $request)
     {
-
         $projet = DB::table('projets')
             ->join('electriques', 'electriques.id', '=', 'projets.electrique_id')
             ->join('gradins', 'gradins.id', '=', 'projets.gradin_id')
@@ -89,7 +88,7 @@ class VoltspireController extends Controller
             ->select('projets.volt_spires_id','gradins.Snette', 'electriques.secondaireUPhase', 'electriques.PrimaireUPhase', 'electriques.frequence','electriques.priseAdditive','electriques.priseSoustractive','electriques.echelonSousctractive','electriques.echelonAdditive')
             ->get()->first();
         $VoltSpire = VoltSpire::FindOrFail($projet->volt_spires_id);
-        $N2c = $this->N2c($projet->secondaireUPhase,$projet->Snette,$request->Bmaxdesire,$projet->frequence);
+        $N2c = $this->N2c($projet->cd,$projet->Snette,$request->Bmaxdesire,$projet->frequence);
         $N1c=$this->N1c($projet->PrimaireUPhase,$VoltSpire->Vsp);
         $Bmax=$this->Bmax($projet->secondaireUPhase,$projet->Snette,$request->Bmaxdesire,$projet->frequence);
         $Vsp=$this->Vsp($projet->secondaireUPhase,$N2c,$projet->Snette,$request->Bmaxdesire,$projet->frequence);
