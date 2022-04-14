@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Hbrin;
 use App\Models\Saillie;
+use App\Models\Barre;
 use Illuminate\Http\Request;
 
 class BobinageStatiqueController extends Controller
@@ -78,4 +79,59 @@ class BobinageStatiqueController extends Controller
         $hbrin->delete();
         return response()->json($hbrin);
      }
+    public function getBarre()
+    {
+        $Barre = Barre::all();
+        return response()->json($Barre);
+    }
+    public function getoneBarre($id)
+    {
+        $Barre = Barre::FindOrFail($id);
+        return response()->json($Barre);
+    }
+
+    public function createBarre(Request $request){
+
+        $Barre = Barre::create([
+            'designation' =>$request->epaisseur.'*'.$request->largeur,
+            'epaisseur' =>$request->epaisseur,
+            'largeur' =>$request->largeur,
+            ]);
+        if($Barre->save()){
+            return response()->json($Barre);
+        }
+    }
+
+    public function updateBarre($id,Request $request){
+        $Barre = Barre::FindOrFail($id);
+        $Barre->update([
+            'designation' =>$request->epaisseur.'*'.$request->largeur,
+            'epaisseur' =>$request->epaisseur,
+            'largeur' =>$request->largeur,            
+        ]);
+        if($Barre->save()){
+            return response()->json($Barre);
+        }
+    }
+    public function deleteBarre($id){
+        $Barre= Barre::FindOrFail($id);
+        $Barre->delete();
+        return response()->json($Barre);
+     }
+     public function addStatBarre(){
+        $Barre=[
+       ["designation"=>"5*63","epaisseur"=>5,"largeur"=>63],
+       ["designation"=>"6*80","epaisseur"=>6,"largeur"=>80],
+       ["designation"=>"6*100","epaisseur"=>6,"largeur"=>100],
+       ["designation"=>"8*80","epaisseur"=>8,"largeur"=>80],
+       ["designation"=>"8*100","epaisseur"=>8,"largeur"=>100],
+       ["designation"=>"5*50","epaisseur"=>5,"largeur"=>50],
+       ["designation"=>"5*80","epaisseur"=>5,"largeur"=>80],
+       ["designation"=>"6*60","epaisseur"=>6,"largeur"=>60],
+       ["designation"=>"5*100","epaisseur"=>5,"largeur"=>100],
+       ["designation"=>"7*100","epaisseur"=>7,"largeur"=>100],
+       ["designation"=>"10*100","epaisseur"=>10,"largeur"=>100],
+   ];
+    Barre::insert($Barre);
+   }
 }

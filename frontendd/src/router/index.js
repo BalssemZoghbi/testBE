@@ -26,6 +26,7 @@ import garantie24 from "../components/garantie24.vue";
 import garantie36 from "../components/garantie36.vue";
 import saillie from "../components/donnees/bobinage/saillie.vue";
 import Hbrin from "../components/donnees/bobinage/hbrin.vue";
+import barre from "../components/donnees/bobinage/barre.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -48,6 +49,11 @@ const routes = [
     path: "/Hbrin",
     name: "Hbrin",
     component: Hbrin,
+  },
+  {
+    path: "/barre",
+    name: "barre",
+    component: barre,
   },
   {
     path: "/demande",
