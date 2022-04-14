@@ -26,8 +26,7 @@ class VoltspireController extends Controller
         return response()->json('deleted');
     }
     public function N2c($U2ph,$Snette,$B,$frequence){
-  $N2c=($U2ph*(pow(10,6))/(pi()*$frequence*sqrt(2)*$Snette*$B));
-//   dd(pi());
+  $N2c=round($U2ph*(pow(10,6))/(pi()*$frequence*sqrt(2)*$Snette*$B));
         return $N2c;
     }
     public function N1c($U1ph,$Vsp){
@@ -36,6 +35,7 @@ class VoltspireController extends Controller
     }
     public function Vsp($U2ph,$N2c,$Snette,$B,$frequence){
         $N2c = $this->N2c($U2ph,$Snette,$B,$frequence);
+        // dd($N2c);
         $Vsp=$U2ph/$N2c;
         return $Vsp;
     }
@@ -88,10 +88,10 @@ class VoltspireController extends Controller
             ->select('projets.volt_spires_id','gradins.Snette', 'electriques.secondaireUPhase', 'electriques.PrimaireUPhase', 'electriques.frequence','electriques.priseAdditive','electriques.priseSoustractive','electriques.echelonSousctractive','electriques.echelonAdditive')
             ->get()->first();
         $VoltSpire = VoltSpire::FindOrFail($projet->volt_spires_id);
-        $N2c = $this->N2c($projet->secondaireUPhase,$projet->Snette,$request->Bmaxdesire,$projet->frequence);
-        $N1c=$this->N1c($projet->PrimaireUPhase,$VoltSpire->Vsp);
         $Bmax=$this->Bmax($projet->secondaireUPhase,$projet->Snette,$request->Bmaxdesire,$projet->frequence);
-        $Vsp=$this->Vsp($projet->secondaireUPhase,$N2c,$projet->Snette,$request->Bmaxdesire,$projet->frequence);
+        $N2c = $this->N2c($projet->secondaireUPhase,$projet->Snette,$Bmax,$projet->frequence);
+        $N1c=$this->N1c($projet->PrimaireUPhase,$VoltSpire->Vsp);
+        $Vsp=$this->Vsp($projet->secondaireUPhase,$N2c,$projet->Snette,$Bmax,$projet->frequence);
         // $largeur=$this->largeur($request->diamNominale,$request->nbrGradin,$request->pas);
         // $epaisseur=$this->epaisseur($request->diamNominale,$largeur,$request->nbrGradin);
         // $epaisseurfeuillard=$this->epaisseurfeuillard($request->diamNominale,$largeur,$request->nbrGradin,$request->demiGradin);
