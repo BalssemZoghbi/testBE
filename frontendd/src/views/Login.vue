@@ -66,7 +66,7 @@ methods:{
   localStorage.setItem('token',response.data.token);
   localStorage.setItem('user',JSON.stringify(response.data.user));
   // console.log(response.data.user)
-  // this.$store.dispatch('user',response.data.user);
+  this.$store.dispatch('user',response.data.user);
  this.$router.push('/dashboard');
   }catch(e){
     this.error=' Email ou mot de passe incorrect';

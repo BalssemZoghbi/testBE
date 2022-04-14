@@ -98,16 +98,11 @@ class GradinController extends Controller
     public function epaisseur($diam,$largeur,$nbreGradin){
         $epaisseur=[];
         $prec=0;
-        // for($i=0;$i<$nbreGradin;$i++){
-        //     $epaisseur[$i]=sqrt(pow($diam,2)-pow($largeur[$i],2));
-        //     $prec+=$epaisseur[$i];
-        //     $epaisseur[$i]-=$prec;
-        // }
+
         for($i=0;$i<$nbreGradin;$i++){
             $epaisseur[$i]=sqrt(pow($diam,2)-pow($largeur[$i],2));
             $epaisseur[$i]-=$prec;
             $prec+=$epaisseur[$i];
-            // $prec+=sqrt(pow($diam,2)-pow($largeur[$i],2));
         }
         return $epaisseur;
     }
