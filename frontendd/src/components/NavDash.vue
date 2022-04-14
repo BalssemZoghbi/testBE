@@ -99,6 +99,7 @@ import { mapGetters } from 'vuex';
     { icon: "fa-solid fa-table-cells", text: "Garantie36", route: "/garantie36" },
     { icon: "fa-solid fa-table-cells", text: "Saillie", route: "/saillie" },
     { icon: "fa-solid fa-table-cells", text: "Hbrin", route: "/Hbrin" },
+    { icon: "fa-solid fa-table-cells", text: "Barre", route: "/barre" },
     ]
   }
 },

@@ -114,3 +114,9 @@ Route::get('/getHbrin/{id}', [BobinageStatiqueController::class ,'getoneHbrin'])
 Route::put('/updateHbrin/{id}', [BobinageStatiqueController::class ,'updateHbrin']);
 Route::post('/createHbrin', [BobinageStatiqueController::class ,'createHbrin']);
 Route::delete('/deleteHbrin/{id}', [BobinageStatiqueController::class ,'deleteHbrin']);
+Route::get('/getBarre', [BobinageStatiqueController::class ,'getBarre']);
+Route::get('/getBarre/{id}', [BobinageStatiqueController::class ,'getoneBarre']);
+Route::put('/updateBarre/{id}', [BobinageStatiqueController::class ,'updateBarre']);
+Route::post('/createBarre', [BobinageStatiqueController::class ,'createBarre']);
+Route::post('/createBarrestat', [BobinageStatiqueController::class ,'addStatBarre']);
+Route::delete('/deleteBarre/{id}', [BobinageStatiqueController::class ,'deleteBarre']);
