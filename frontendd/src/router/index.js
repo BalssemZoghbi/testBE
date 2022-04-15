@@ -22,6 +22,7 @@ import Bobine from "../components/donnees/bobinage/update.vue";
 import bobinage from "../components/donnees/bobinage/updateCalcul.vue";
 
 import User from "../components/user/User.vue";
+import Profile from '@/components/Profile';
 
 import Demande from "../components/user/demande.vue";
 import garantie24 from "../components/garantie24.vue";
@@ -32,6 +33,11 @@ import barre from "../components/donnees/bobinage/barre.vue";
 Vue.use(VueRouter);
 
 const routes = [
+  {
+    path: "/profil",
+    name: "profil",
+    component: Profile,
+  },
   {
     path: "/garantie24",
     name: "garantie24",

@@ -1,6 +1,9 @@
 <template>
   <div>
-    <navbar />
+   <!-- <navbar /> -->
+    <NavDash />
+   
+    <!-- <button class="nav-link" @click="create()" >Crée</button> -->
     <div class="body panel left-panel">
       <v-data-table
         :headers="headers"
@@ -10,9 +13,13 @@
         :search="search"
         :custom-filter="filterOnlyCapsText"
       >
+      
         <template v-slot:top>
           <v-toolbar flat>
-            <v-toolbar-title>Projets</v-toolbar-title>
+            <!-- <v-toolbar-title>Projets</v-toolbar-title> -->
+             <v-btn color="primary"  @click="create()" dark class="mb-2">
+                Ajouter 
+              </v-btn>
             <v-divider class="mx-4" inset vertical></v-divider>
             <v-spacer></v-spacer>
             <v-card-title>
@@ -33,20 +40,23 @@
           <v-icon small v-on:click="deleteprojet(item.id)"> mdi-delete </v-icon>
         </template>
       </v-data-table>
+      
     </div>
     <Footer />
   </div>
 </template>
 <script>
 import axios from "axios";
-//  import navbar from "../components/nav.vue";
+//  import NavDash from "../components/nav.vue";
 import Footer from "@/components/Footer";
 import Swal from "sweetalert2/dist/sweetalert2.js";
-import navbar from "../components/navbar.vue";
+// import navbar from "../components/navbar.vue";
+import NavDash from "../components/NavDash.vue";
 export default {
   components: {
-    navbar,
+    NavDash,
     Footer,
+    // navbar
   },
   data: () => ({
     search: "",
@@ -115,6 +125,20 @@ export default {
   },
 
   methods: {
+      create(){
+     let token= localStorage.getItem('token')
+       axios.post('projets/create',{}, {
+    headers: {
+    'Authorization': token
+    }
+  }).then(
+        (response) => (
+          this.createprojet = response.data,
+          this.$router.push('/projet/update/'+response.data.id))
+      );
+      
+
+    },
     getprojet() {
       axios.get("/projets").then((resp) => {
         this.projets = resp.data;
@@ -194,8 +218,8 @@ export default {
 </script>
 <style scoped>
 .body {
-  background-color: #a2c7ff77;
-  padding: 70px;
+  /* background-color: #a2c7ff77; */
+  padding: 20px;
   margin: 1.3%;
 }
 .v-card {
