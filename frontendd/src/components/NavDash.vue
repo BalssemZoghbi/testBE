@@ -67,6 +67,39 @@
                       <v-list-item-title >{{link.text}}</v-list-item-title>
                   </v-list-item-content>
               </v-list-item>
+               <v-menu
+      :rounded="rounded"
+      offset-y
+    >
+      <template v-slot:activator="{ on, attrs }">
+         <v-list flat>
+            <v-list-item >
+        <v-list-item-action>
+         <v-icon >fa-solid fa-bars-staggered</v-icon></v-list-item-action>
+       <v-list-item-content >
+        <v-list-item-title
+          color="primary"
+          class="white--text ma-5"
+          v-bind="attrs"
+          v-on="on"
+        >
+
+          Paramétres
+        </v-list-item-title></v-list-item-content > </v-list-item ></v-list>
+      </template>
+
+      <v-list color="primary" dark >
+        <v-list-item style="color: rgba(0, 0, 0, 0.87);"
+        >
+          <v-list-item-title >Garantie</v-list-item-title>
+        </v-list-item>
+        <v-list-item
+        >
+          <v-list-item-title>Bobinage</v-list-item-title>
+        </v-list-item>
+       
+      </v-list>
+    </v-menu>
           </v-list>
       </v-navigation-drawer>
    <Footer/>   
@@ -94,12 +127,8 @@ import { mapGetters } from 'vuex';
     links: [{ icon: "fas fa-tachometer-alt", text: "Tableau de bord", route: "/dashboard" },
     { icon: "apps", text: "projet", route: "/" },
     { icon: "fa-solid fa-user", text: "Utilisateur", route: "/user" },
-    { icon: "fa-solid fa-user-check", text: "demande", route: "/demande" },
- { icon: "fa-solid fa-bars-staggered", text: "Garantie24", route: "/garantie24" },
-    { icon: "fa-solid fa-table-cells", text: "Garantie36", route: "/garantie36" },
-    { icon: "fa-solid fa-table-cells", text: "Saillie", route: "/saillie" },
-    { icon: "fa-solid fa-table-cells", text: "Hbrin", route: "/Hbrin" },
-    { icon: "fa-solid fa-table-cells", text: "Barre", route: "/barre" },
+    { icon: "fa-solid fa-bars-staggered", text: "Garantie", route: "/garantie24" },
+    { icon: "fa-solid fa-table-cells", text: "Bobinage", route: "/saillie" },
     ]
   }
 },

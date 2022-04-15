@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\User as MailUser;
 use App\Mail\Userdecline;
 use App\Models\User;
+use App\Models\UserInactive;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
@@ -46,11 +47,15 @@ class AuthController extends Controller
             'email' => 'required|email|regex:/(.*)@sacemindustries.com/i|unique:users',
             'password' => 'required|min:8',
             'password_confirm'=>'required|same:password',
+            'poste' => 'required',
+            'numero' => 'required',
         ]);
         $name = $request->name;
         $email    = $request->email;
         $password = $request->password;
-        $user     = User::create(['name' => $name, 'email' => $email,'type'=>'pending', 'password' => Hash::make($password)]);
+        $poste = $request->poste;
+        $numero = $request->numero;
+        $user     = User::create(['name' => $name, 'email' => $email,'type'=>'pending', 'password' => Hash::make($password),'poste' => $poste,'numero' => $numero,]);
         return response()->json($user);
     }
 
@@ -70,8 +75,11 @@ class AuthController extends Controller
     {
         $user=User::FindOrFail($id);
         Mail::to($user->email)->send(new Userdecline($user->email));
+        $userr = UserInactive::create(['name' => $user->name, 'email' => $user->email,'type'=>$user->type, 'password' => $user->password,'poste' => $user->poste,'numero' => $user->numero,]);
         if($user->delete()) {
-            return 'user deleted';
+            return $userr;
            }
+
+
     }
 }

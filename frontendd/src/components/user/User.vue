@@ -1,7 +1,23 @@
 <template>
   <div>
-    <NavDash />
-    <v-data-table
+    <NavDash/>
+    <v-tabs
+      v-model="tab"
+      background-color="transparent"
+      grow
+    >
+      <v-tab
+        v-for="itemtab in itemstab"
+        :key="itemtab"
+      >
+        {{ itemtab }}
+      </v-tab>
+    </v-tabs>
+
+    <v-tabs-items v-model="tab">
+      <v-tab-item>
+        <v-card flat>
+        <v-data-table
       :headers="headers"
       :items="users"
       sort-by="calories"
@@ -60,6 +76,18 @@
                     </v-row>
                     <v-row cols="12" sm="6" md="4">
                       <v-text-field
+                        v-model="editedItem.poste"
+                        label="poste"
+                      ></v-text-field>
+                    </v-row>
+                    <v-row cols="12" sm="6" md="4">
+                      <v-text-field
+                        v-model="editedItem.numero"
+                        label="numero"
+                      ></v-text-field>
+                    </v-row>
+                    <v-row cols="12" sm="6" md="4">
+                      <v-text-field
                         v-model="editedItem.password"
                         label="Mot de passe"
                       ></v-text-field>
@@ -111,18 +139,40 @@
 
      
     </v-data-table>
-  </div>
+        </v-card>
+        </v-tab-item>
+        <v-tab-item>
+        <v-card
+          flat
+        >
+         <demande/>
+        </v-card>
+
+      </v-tab-item>
+    </v-tabs-items>
+     <!-- <v-tabs center-active style="margin-left: 33%;">
+    <v-tab>Utilisateurs</v-tab>
+    <v-tab><router-link class="nav-link" to="/demande"  style="text-decoration:none;">Demande d'inscription</router-link></v-tab>
+  </v-tabs> -->
+     </div>
+
 </template>
 
 <script>
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import NavDash from "../NavDash.vue";
+import demande from "../user/demande.vue";
 import axios from "axios";
 export default {
    components: {
     NavDash,
+    demande,
   },
   data: () => ({
+    tab: null,
+        itemstab: [
+          'Utilisateur', 'Demande Inscription'
+        ],
     search: "",
     dialog: false,
     dialogDelete: false,
@@ -130,6 +180,8 @@ export default {
       { text: "Name", value: "name" },
       { text: "Email", value: "email" },
       { text: "Type", value: "type" },
+      { text: "Poste", value: "poste" },
+      { text: "Numero", value: "numero" },
       { text: "Operation", value: "actions" , sortable: false},
      
     ],
@@ -139,12 +191,16 @@ export default {
       name: "",
       email: "",
       type: "",
+      poste: "",
+      numero: "",
       password:""
     },
     defaultItem: {
       name: "",
       email: "",
       type: "",
+      poste: "",
+      numero: "",
       password:""
 
     },
@@ -171,8 +227,8 @@ export default {
   methods: {
   
      async  getuser() {
-    await axios.get("/users").then((resp) => {
-        this.users = resp.data.data;
+    await axios.get("/users/get").then((resp) => {
+        this.users = resp.data;
         console.log(resp.data);
       });
     },

@@ -19,6 +19,18 @@
           <label>Email</label>
         </div>
         <div class="txt_field">
+          <input type="text" id="poste"
+        v-model="poste" required>
+          <span></span>
+          <label>Poste</label>
+        </div>
+        <div class="txt_field">
+          <input type="numero" id="numero"
+        v-model="numero" required>
+          <span></span>
+          <label>Numero</label>
+        </div>
+        <div class="txt_field">
           <input type="password" id="password"
         v-model="password" required>
           <span></span>
@@ -52,6 +64,8 @@ data(){
 return{
   name:'',
   email:'',
+  poste:'',
+  numero:'',
   password:'',
   password_confirm:'',
    error:''
@@ -63,6 +77,8 @@ methods:{
  await axios.post('/register',{
       name:this.name,
       email:this.email,
+      poste:this.poste,
+      numero:this.numero,
       password:this.password,
       password_confirm:this.password_confirm,
 

@@ -1,6 +1,12 @@
 <template>
   <div>
-    <NavDash />
+    <!-- <NavDash /> -->
+     <!-- <v-tabs center-active style="margin-left: 33%;">
+           <v-tab>Demande d'inscription</v-tab>
+
+    <v-tab><router-link class="nav-link" to="/user" style="text-decoration:none;" v-model="model" centered>Utilisateurs</router-link></v-tab>
+  </v-tabs> -->
+  
     <v-data-table
       :headers="headers"
       :items="users"
@@ -116,7 +122,6 @@
         class="ma-2"
         color="red"
         dark
-        
       >
         Decline
         <v-icon
@@ -138,13 +143,14 @@
 
 <script>
 // import Swal from "sweetalert2/dist/sweetalert2.js";
-import NavDash from "../NavDash.vue";
+// import NavDash from "../NavDash.vue";
 import axios from "axios";
 export default {
    components: {
-    NavDash,
+    // NavDash,
   },
   data: () => ({
+    model: 'tab-2',
     search: "",
     dialog: false,
     dialogDelete: false,
@@ -152,6 +158,8 @@ export default {
       { text: "Name", value: "name" },
       { text: "Email", value: "email" },
       { text: "Type", value: "type" },
+      { text: "Poste", value: "poste" },
+      { text: "Numero", value: "numero" },
       { text: "Operation", value: "actions" , sortable: false},
      
     ],
@@ -161,11 +169,15 @@ export default {
       name: "",
       email: "",
       type: "",
+      poste: "",
+      numero: "",
     },
     defaultItem: {
       name: "",
       email: "",
       type: "",
+      poste: "",
+      numero: "",
     },
   }),
      created() {
@@ -173,8 +185,10 @@ export default {
   },
   methods:{
  async accept(id){
+   console.log('aa')
   console.log(id);
    await axios.put("/user/accept/"+id).then(() => {
+      this.getuser();
 }
 );
 },
@@ -182,7 +196,8 @@ async decline(id){
     console.log(id);
   await axios.delete("/user/decline/"+id).then(() => {
         // console.log('declined');
-        this.created();
+        // this.created();
+         this.getuser();
 }
 );
 },

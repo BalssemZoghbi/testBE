@@ -1,6 +1,21 @@
 <template>
   <div>
     <NavDash />
+     <v-tabs
+      v-model="tab"
+      background-color="transparent"
+      grow
+    >
+      <v-tab
+        v-for="itemtab in itemstab"
+        :key="itemtab"
+      >
+        {{ itemtab }}
+      </v-tab>
+    </v-tabs>
+       <v-tabs-items v-model="tab">
+      <v-tab-item>
+        <v-card flat>
     <v-data-table
       :headers="headers"
       :items="gar36"
@@ -92,18 +107,43 @@
 
      
     </v-data-table>
+     </v-card>
+        </v-tab-item>
+        <v-tab-item>
+        <v-card
+          flat
+        >
+         <hbrin/>
+        </v-card>
+
+      </v-tab-item>
+      <v-tab-item>
+        <v-card
+          flat
+        >
+         <barre/>
+        </v-card>
+
+      </v-tab-item>
+    </v-tabs-items>
   </div>
 </template>
 
 <script>
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import NavDash from "@/components/NavDash.vue";
+import barre from "../bobinage/barre.vue";
+import hbrin from "../bobinage/hbrin.vue";
 import axios from "axios";
 export default {
    components: {
     NavDash,
+    barre,
+    hbrin,
   },
   data: () => ({
+     tab: null,
+      itemstab: ['Saillie', 'Hbrin','Barre'],
     search: "",
     dialog: false,
     dialogDelete: false,
