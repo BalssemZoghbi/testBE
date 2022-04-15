@@ -33,7 +33,7 @@ class CreateBobinagesTable extends Migration
             $table->float('ep1Papier')->nullable();
             $table->integer('nbrPapier')->nullable();
             $table->enum('typeCanaux',['complet','lune'])->nullable();
-            $table->integer('canauxBT')->nullable();
+            $table->integer('canauxMT')->nullable();
             $table->integer('lgCales')->nullable();
             $table->float('canauxEp1Papier')->nullable();
             $table->integer('canauxNbrPapier')->nullable();
@@ -69,6 +69,25 @@ class CreateBobinagesTable extends Migration
             $table->integer('largeurBarre')->nullable();
             $table->integer('Sbarre')->nullable();
             $table->float('Jbarre')->nullable();
+            // 
+            $table->float('scu1d')->nullable();
+            $table->float('J1D')->nullable();
+            $table->float('D1d')->nullable();
+            $table->float('filobtenueNue')->nullable();
+            $table->float('filobtenueIsoler')->nullable();
+            $table->string('choix')->default('automatique')->nullable();
+            $table->enum('brinParallele',['1','2'])->nullable();
+            $table->integer('nbCoucheMt')->nullable();
+            $table->float('SpchB')->nullable();
+            $table->float('NchB')->nullable();
+            $table->float('SpchA')->nullaAle();
+            $table->float('NchA')->nullable();
+            $table->float('HCondMt')->nullable();
+            $table->float('DistanceBTMT')->nullable();
+            $table->float('HCollier')->nullable();
+            $table->float('EpfeuillePapier')->nullable();
+            $table->float('EpaiseurPapier')->nullable();
+            $table->float('EpaisseurPapierCanaux')->nullable();
             $table->timestamps();
         });
     }
