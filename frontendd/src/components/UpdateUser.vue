@@ -13,7 +13,7 @@
             <v-col>
               <v-row cols="12" sm="6" md="4">
                 <v-text-field
-                  label="name"
+                  label="Nom"
                   required
                   v-model="data.name"
                 ></v-text-field>
@@ -28,7 +28,7 @@
               </v-row>
               <v-row cols="12">
                 <v-text-field
-                  label="Password*"
+                  label="Mot de passe*"
                   type="password"
                   required
                   v-model="password"
@@ -36,7 +36,7 @@
               </v-row>
             </v-col>
           </v-container>
-          <small>*indicates required field</small>
+          <small>* Champ obligatoire</small>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>

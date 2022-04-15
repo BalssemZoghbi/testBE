@@ -43,8 +43,8 @@ class AuthController extends Controller
     function register(Request $request){
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required',
+            'email' => 'required|email|regex:/(.*)@sacemindustries.com/i|unique:users',
+            'password' => 'required|min:8',
             'password_confirm'=>'required|same:password',
         ]);
         $name = $request->name;

@@ -5,6 +5,7 @@ use App\Models\Bobinage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\BobinageResource;
+use App\Models\Barre;
 
 class BobinageController extends Controller
 {
@@ -21,11 +22,11 @@ class BobinageController extends Controller
         return new BobinageResource($Bobinage);
     }
     public function storeBobinage(Request $request){
-   
+
         $Bobinage= Bobinage::create([
             'materiau'=> $request->materiau,
             'conducteur'=> $request->conducteur,
-            
+
          ]);
 
          if($Bobinage->save()){
@@ -37,6 +38,8 @@ class BobinageController extends Controller
      public function Scu2($conducteur,$hbrin1,$hbrin2,$nbrin1,$nbrin2,$etage,$saillie,$Hfeuillard,$epFeuillard)
      {
         if($conducteur=='meplat guipé'){
+            // dd($saillie);
+
          return 0.987*$saillie*$etage*($hbrin1*$nbrin1+$hbrin2*$nbrin2);
         }else if($conducteur=='feuillard'){
             return $Hfeuillard*$epFeuillard;
@@ -45,7 +48,7 @@ class BobinageController extends Controller
      public function j2($I2phase,$scu2)
      {
          return $I2phase/$scu2;
-             }
+    }
              public function spCouche($conducteur,$N2c,$nbCouche){
                 if($conducteur=='meplat guipé'){
                     return $N2c/$nbCouche;
@@ -84,7 +87,7 @@ class BobinageController extends Controller
             }
             public function Epy($saillie,$e2r,$etage,$nbCouche,$canauxBt,$lgCales,$nbPapier,$ep1Papier){
                return ($saillie+$e2r)*$etage*$nbCouche+($canauxBt*$lgCales)+$nbPapier*$ep1Papier;
-              
+
             }
             public function Dext($dint,$epx){
                 return $dint+2*$epx;
@@ -99,7 +102,7 @@ class BobinageController extends Controller
             }else if($materiau=='aluminium'){
                 $coefPoid=2.7;
                 $coefPerte=12.18;
-                
+
             }
             return $coefPoid*$N2c*$scu2*($dint+$epx)*pi()*3*((100+$majPoid)/100);
         }
@@ -126,11 +129,18 @@ class BobinageController extends Controller
         public function Bextfeui($bint,$epy,$Epbarre){
             return $bint+2*$epy+$Epbarre;
         }
-        public function Sbarre($epaisseur,$largeur){
-            return $epaisseur*$largeur;
+        public function Sbarre($conducteur,$epaisseur,$largeur){
+            if($conducteur=='feuillard'){
+                return $epaisseur*$largeur;
+               }else if($conducteur=='meplat guipé'){
+                   return 0;}
         }
-        public function Jbarre($N2c,$sbarre){
-            return $N2c/$sbarre;
+        public function Jbarre($conducteur,$N2c,$sbarre){
+            if($conducteur=='feuillard'){
+                return $N2c/$sbarre;
+            }else if($conducteur=='meplat guipé'){
+                   return 0;}
+
         }
         public function PoidFeui($materiau,$dext,$bint,$dint,$epx,$majPoid,$bext,$epy,$N2c,$scu2){
             if($materiau=='cuivre'){
@@ -142,6 +152,10 @@ class BobinageController extends Controller
             }
             return $coefPoid*$N2c*$scu2*(((($dint+$dext+$bint+$bext)/4)+($epx+$epy)/2)*pi()*3*(($majPoid+100)/100));
         }
+        public function calculBarre($designation){
+            $barre=Barre::where('designation',$designation)->get()->first();
+    return $barre;
+}
         public function updateBobinage($id, Request $request){
 
             $projet = DB::table('projets')
@@ -154,7 +168,7 @@ class BobinageController extends Controller
             ->get()->first();
             $Bobinage=Bobinage::FindOrFail($projet->bobine_id );
             $epFeuillard=$this->epFeuillard($request->epFeuil1,$request->epFeuil2);
-            $scu2=$this->Scu2($request->conducteur,$request->hbrin1, $request->hbrin2,$request->nbBrin1, $request->nbBrin2, $request->etage, $projet->saillie,$request->Hfeuillard,$epFeuillard);
+            $scu2=$this->Scu2($request->conducteur,$request->hbrin1, $request->hbrin2,$request->nbBrin1, $request->nbBrin2, $request->etage, $request->saillie,$request->Hfeuillard,$epFeuillard);
             $j2=$this->j2($projet->PrimaireIPhase, $scu2);
             $spCouche=$this->spCouche($request->conducteur,$projet->N1c,$request->nbcouche);
             $hSpire=$this->hSpire($request->hbrin1,$request->e2ax,$request->nbBrin1,$request->hbrin2,$request->nbBrin2);
@@ -168,16 +182,17 @@ class BobinageController extends Controller
             $dext=$this->Dext($DintBint,$epx);
             $bext=$this->Bext($DintBint,$epy);
             $poid=$this->Poid($request->materiau,$projet->N1c,$scu2,$DintBint,$epx,$request->majPoid);
-            
+
+            $barre=$this->calculBarre($request->Epbarre);
             $HbobineBt= $this->Hbobine($request->Hfeuillard,$request->collierBT);
-            $ePap=$this->ePap($request->ep1Papier,$request->nbrPap1,$request->ep2Papier,$request->nbrPap2); 
+            $ePap=$this->ePap($request->ep1Papier,$request->nbrPap1,$request->ep2Papier,$request->nbrPap2);
             $epFeuilpap=$this->epPapier($request->epFeuilPap,$request->nbrPapier);
             $epPapier=$this->epPapier($epFeuilpap,$request->nbPapier);
-            $Sbarre=$this->Sbarre($request->epaisseurBarre,$request->largeurBarre);
-            $Jbarre=$this->Jbarre($projet->N1c,$Sbarre);
+            $Sbarre=$this->Sbarre($request->conducteur,$barre->epaisseur,$barre->largeur);
+            $Jbarre=$this->Jbarre($request->conducteur,$projet->N1c,$Sbarre);
             $epxfeui=floor($this->Epxfeui($request->typeCanaux,$projet->N1c,$request->canauxBt,$request->lgCales,$epFeuillard,$ePap));
             $dextfeui=$this->Dext($DintBint,$epxfeui);
-            $Bextfeui=$this->Bextfeui($DintBint,$epxfeui,$request->Epbarre);
+            $Bextfeui=$this->Bextfeui($DintBint,$epxfeui,$barre->epaisseur);
             $PoidFeui=$this->PoidFeui($request->materiau,$dextfeui,$DintBint,$DintBint,$epxfeui,$request->majPoid,$Bextfeui,$epxfeui,$projet->N1c,$scu2);
           if($request->conducteur=='meplat guipé'){
                 $Bobinage->update([
@@ -255,13 +270,14 @@ class BobinageController extends Controller
                     'EpPapier'=>$epPapier,
                     'EpCylindre'=>$request->EpCylindre,
                     'Epbarre'=>$request->Epbarre,
-                    'epaisseurBarre'=>$request->epaisseurBarre,
-                    'largeurBarre'=>$request->largeurBarre,
-                    'Sbarre'=>$Sbarre, 
-                    'Jbarre'=>$Jbarre, 
+                    'designationBarre'=>$request->designationBarre,
+                    'epaisseurBarre'=>$barre->epaisseur,
+                    'largeurBarre'=>$barre->largeur,
+                    'Sbarre'=>$Sbarre,
+                    'Jbarre'=>$Jbarre,
                     ]);
             }
-            
+
                 return response()->json($Bobinage);
          }
 

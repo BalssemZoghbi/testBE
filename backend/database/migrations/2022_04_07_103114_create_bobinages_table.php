@@ -39,7 +39,7 @@ class CreateBobinagesTable extends Migration
             $table->integer('canauxNbrPapier')->nullable();
             $table->float('Hspire')->nullable();
             $table->float('HSFS')->nullable();
-            $table->float('HFS')->nullable(); 
+            $table->float('HFS')->nullable();
             $table->integer('collierBT')->nullable();
             $table->integer('collierBT2')->nullable();
             $table->float('CMBT')->nullable();
@@ -64,11 +64,11 @@ class CreateBobinagesTable extends Migration
             $table->integer('nbrPap1')->nullable();
             $table->float('EpPapier')->nullable();
             $table->float('EpCylindre')->nullable();
-            $table->integer('Epbarre')->nullable();
+            $table->string('Epbarre')->nullable();
             $table->integer('epaisseurBarre')->nullable();
             $table->integer('largeurBarre')->nullable();
             $table->integer('Sbarre')->nullable();
-            $table->float('Jbarre')->nullable(); 
+            $table->float('Jbarre')->nullable();
             $table->timestamps();
         });
     }

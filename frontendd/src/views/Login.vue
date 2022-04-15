@@ -4,7 +4,9 @@
       <img src="../assets/logosacem.jpg">
       <h1>Bienvenue</h1>
       <form @submit.prevent="handleSubmit" method="post">
-      <error v-if="error" :error="error"/>
+      
+        <error v-if="error" :error="error"/>
+      
         <div class="txt_field">
           <input type="email" id="email"
         v-model="email" required>
@@ -37,6 +39,7 @@ Error
 },
 data(){
   return{
+    user:[],
     email:'',
     password:'' ,
     error:''
@@ -61,15 +64,15 @@ methods:{
       password:this.password,
 
     });
-   
 
   localStorage.setItem('token',response.data.token);
   localStorage.setItem('user',JSON.stringify(response.data.user));
-  // console.log(response.data.user)
+ this.user= localStorage.getItem('user');
+ console.log(this.user.data)
   this.$store.dispatch('user',response.data.user);
  this.$router.push('/dashboard');
   }catch(e){
-    this.error=' Email ou mot de passe incorrect';
+    this.error=' vous n`avez pas l`accès pour connecter';
     
   }
   }
@@ -80,6 +83,9 @@ methods:{
 </script>
 
 <style scoped>
+#valert{
+  margin-top: 4%!important;
+}
 img{
      width: 25%;
     /* height: 23%; */

@@ -29,7 +29,15 @@ class BobinageStatiqueController extends Controller
             return response()->json($saillie);
         }
     }
-
+    public function getValeurSaillie()
+    {
+        $tab=[];
+        $Saillie = Saillie::get('valeur');
+        foreach ($Saillie as $valeur){
+            array_push($tab, $valeur->valeur);
+        }
+        return response()->json($tab);
+    }
     public function updateSaillie($id,Request $request){
         $saillie = Saillie::FindOrFail($id);
         $saillie->update([
@@ -48,6 +56,15 @@ class BobinageStatiqueController extends Controller
     {
         $hbrin = Hbrin::all();
         return response()->json($hbrin);
+    }
+    public function getValeurHbrin()
+    {
+        $tab=[];
+        $brin = Hbrin::get('valeurHbrin');
+        foreach ($brin as $valeur){
+            array_push($tab, $valeur->valeurHbrin);
+        }
+        return response()->json($tab);
     }
     public function getoneHbrin($id)
     {
@@ -84,6 +101,15 @@ class BobinageStatiqueController extends Controller
         $Barre = Barre::all();
         return response()->json($Barre);
     }
+    public function getdesignationBarre()
+    {
+        $tab=[];
+        $Barre = Barre::get('designation');
+        foreach ($Barre as $valeur){
+            array_push($tab, $valeur->designation);
+        }
+        return response()->json($tab);
+    }
     public function getoneBarre($id)
     {
         $Barre = Barre::FindOrFail($id);
@@ -107,7 +133,7 @@ class BobinageStatiqueController extends Controller
         $Barre->update([
             'designation' =>$request->epaisseur.'*'.$request->largeur,
             'epaisseur' =>$request->epaisseur,
-            'largeur' =>$request->largeur,            
+            'largeur' =>$request->largeur,
         ]);
         if($Barre->save()){
             return response()->json($Barre);

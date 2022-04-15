@@ -1,7 +1,12 @@
 <template>
-      <div class="alert alert-danger" role="alert">
-          {{error}}
-        </div>
+<v-alert dense
+        id="valert"
+      type="error"
+      text
+      prominent
+      icon="mdi-cloud-alert"  >   
+     {{error}}
+     </v-alert>
 </template>
 <script>
 export default {
@@ -9,3 +14,8 @@ export default {
     props:['error']
 }
 </script>
+<style scoped>
+#valert{
+  margin-top: 4%!important;
+}
+</style>

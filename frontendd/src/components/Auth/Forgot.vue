@@ -5,9 +5,15 @@
       <!-- <img src="../../assets/ava.svg"> -->
       <h1>Mot de passe oublié</h1>
       <form @submit.prevent="handleSubmit" >
-         <div v-if="message" class="alert alert-success" role="alert">
+        <v-alert dense
+        id="valert"
+      type="success"
+      text
+      prominent
+      icon="mdi-cloud-alert" 
+      v-if="message" >   
         {{message}}
-    </div>
+     </v-alert>
       <error v-if="error" :error="error"/>
         <div class="txt_field">
           <input type="email" id="email"
@@ -58,6 +64,9 @@ this.error='';
 </script>
 
 <style scoped>
+#valert{
+  margin-top: 4%!important;
+}
 img{
   width: 455px;
   height: 100px;

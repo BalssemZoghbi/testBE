@@ -283,6 +283,7 @@ export default {
     components: { navbarUpdate },
   data() {
     return {
+      barre:[],
        types: ['cabine','poteau','h61','h59','sec'],
        remplissages:['à matelas d`air','integral','respirant'],
        installations:['interieure', 'exterieure','interieur&exterieure'],
@@ -339,7 +340,12 @@ export default {
         
       );
     },
-  
+    getbarre(){
+       axios.get('/getdesignationBarre').then(
+        (response) => (this.barre = response.data,console.log(this.barre))
+        
+      );
+    }
   },
   async mounted() {
     const result = await axios.get('projets/'+this.$route.params.id);
@@ -347,8 +353,11 @@ export default {
     // this.updateprojet();
   },
   created(){
-        // this.updateprojet();
-  }
+       axios.get('/getdesignationBarre').then(
+        (response) => (this.barre = response.data,console.log(this.barre))
+        
+      );
+    }
 };
 </script>
 <style scoped>

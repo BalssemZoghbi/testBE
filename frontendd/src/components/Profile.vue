@@ -76,7 +76,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="red darken-1" text @click="dialog = false"
-              >Close</v-btn
+              >Fermer</v-btn
             >
             <v-flex class="mt-4 mb-4">
               <Update :Data="user"/>
