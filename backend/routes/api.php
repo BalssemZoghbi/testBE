@@ -86,6 +86,7 @@ Route::get('/bobinesec/{id}',[BobinageSecController::class ,'getOneBobineS']);
 
 Route::put('/update36/{id}',[GarantieController::class ,'update36']);
 Route::put('/bobine/update/{id}',[BobinageController::class ,'updateBobinage']);
+Route::put('/bobinesec/update/{id}',[BobinageSecController::class ,'updateBobinage']);
 Route::delete('/bobine/delete/{id}',[BobinageController::class ,'deleteBobinage']);
 Route::get('/bobines',[BobinageController::class ,'getAllBobine']);
 Route::post('/bobine/add',[BobinageController::class ,'storeBobinage']);
