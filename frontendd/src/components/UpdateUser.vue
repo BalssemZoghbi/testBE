@@ -1,6 +1,6 @@
 <template>
   <v-row justify="center">
-    <v-dialog v-model="dialog" max-width="600px">
+    <v-dialog v-model="dialog" max-width="300px">
       <template v-slot:activator="{ on, attrs }">
         <v-btn color="blue" dark v-bind="attrs" v-on="on"> Mise à jour </v-btn>
       </template>

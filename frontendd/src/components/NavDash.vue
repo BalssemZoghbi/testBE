@@ -4,13 +4,32 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <v-toolbar-title class="text">
         <span class="font-weight-light">Sacem</span>
-        <span>autocite</span>
+        <span>autocite</span>   
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-spacer></v-spacer>
+      <!-- projetnav -->
+      <!-- <div v-if="links.route='/' ">
+       
+        <li><button class="nav-link" @click="create()" >Crée</button></li>
+        
+        <li><button class="nav-link "  @click="logout()"><v-icon >fas fa-sign-out-alt</v-icon>
+</button></li>
+       -->
+      <v-spacer></v-spacer><ul >
+        <li><router-link class="nav-link" to=""><i class="fa-solid fa-file-import"></i></router-link></li></ul>
       <v-menu offset-y>
       <template v-slot:activator="{ on }">
-      <v-icon v-on="on" dark>mdi-account-circle</v-icon>
+      <!-- <v-icon v-on="on" dark>mdi-account-circle</v-icon> -->
+            <span style="cursor: pointer" v-bind="attrs" v-on="on">
+          <v-chip link>
+            <v-badge dot bottom color="green" offset-y="10" offset-x="10">
+              <v-avatar size="40">
+               <v-icon v-on="on" dark>mdi-account-circle</v-icon>
+              </v-avatar>
+            </v-badge>
+            <span class="ml-3">{{ user.name }}</span>
+          </v-chip>
+        </span>
       </template>
       <v-card
     class="mx-auto"
@@ -18,17 +37,28 @@
     tile
   >
 
-    <v-list dense>
-      <v-subheader>Espace {{ user.name }}</v-subheader>
+    <v-list width="250" class="py-0">
+      <!-- <v-subheader>Espace {{ user.name }}</v-subheader> -->
+           <v-list-item two-line>
+          <v-list-item-avatar>
+            <img src="https://randomuser.me/api/portraits/women/81.jpg" />
+          </v-list-item-avatar>
+
+          <v-list-item-content>
+            <v-list-item-title>{{ user.name }}</v-list-item-title>
+            <v-list-item-subtitle>Connecter</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+        <v-divider />
       <v-spacer></v-spacer>
       <v-list-item router>
          <v-list-item-action>
            <v-icon small>fas fa-sign-out-alt</v-icon>
          </v-list-item-action>
          <v-list-item-content>
-           <v-flex>
+           <!-- <v-flex> --><v-list-item-title>
           <a class="nav-link"  @click="logout" >Logout</a>
-         </v-flex>
+         <!-- </v-flex> --></v-list-item-title>
          </v-list-item-content>
         </v-list-item>
         
@@ -43,19 +73,19 @@
     </v-list>
       </v-card>
             </v-menu>
-            <nav align="center">{{ user.name }}</nav>
+            <!-- <nav align="center">{{ user.name }}</nav> -->
     </v-app-bar>
       <v-spacer></v-spacer>
     <v-navigation-drawer  v-model="drawer" dark app class="main-sidebar sidebar-dark-primary elevation-4">
       <v-list-item class="px-2 py-5"> <img
                       src="../assets/trans.png"
-                      width="32%"
+                      width="42%"
                       alt="sacemindustries"
                   />
             <v-list-item-title class="text-capitalize" align="center">
              
                 <!-- <v-icon x-large color="#EB800E">fas fa-balance-scale</v-icon>  -->
-                <span class="brand-text titel"><b>Autocite</b>Pro</span>
+                <span class="brand-text titel"><b>SACEM</b></span>
             </v-list-item-title>
         </v-list-item>
           <v-list flat>
@@ -86,6 +116,7 @@ import { mapGetters } from 'vuex';
   },  data() {
     
     return {
+      
       search: '',
       token:null,
       // user: '',
@@ -149,5 +180,87 @@ img {
     width: 32%;
     margin-left: 0%;
     margin-top: -0%;
+}
+ul{
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+}
+ul li{
+  margin: 0 5px;
+}
+ul li .nav-link{
+  color: rgb(234, 243, 246);
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 500;
+  margin-top: -14%;
+  padding: 8px 15px;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+ul li .nav-link.active,
+ul li .nav-link:hover{
+  color: #366ca8;
+  background: #fff;
+}
+.menu-btn i{
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  display: none;
+}
+input[type="checkbox"]{
+  display: none;
+}
+@media (max-width: 1000px){
+  nav{
+    padding: 0 40px 0 50px;
+  }
+}
+@media (max: width 1000px) {
+ .menu-btn i{
+    display: block;
+  }
+  #click:checked ~ .menu-btn i:before{
+    content: "\f00d";
+	/* content: icon; */
+  }
+ ul{
+    position: fixed;
+    top: 80px;
+    left: -100%;
+    background: rgb(226, 234, 150);
+    height: 100vh;
+    width: 100%;
+    text-align: center;
+    display: block;
+    transition: all 0.3s ease;
+  }
+  #click:checked ~ ul{
+    left: 0;
+  }
+ ul li{
+    width: 100%;
+    margin: 40px 0;
+  }
+ ul li a{
+    width: 100%;
+    margin-left: -100%;
+    display: block;
+    font-size: 20px;
+    transition: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+  #click:checked ~ ul li a{
+    margin-left: 0px;
+  }
+ ul li a.active,
+ ul li a:hover{
+    background: none;
+    color: cyan;
+  }}
+.theme--dark.v-chip:not(.v-chip--active) {
+    background: #156397;
 }
 </style>

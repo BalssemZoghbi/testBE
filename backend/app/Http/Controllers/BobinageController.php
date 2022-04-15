@@ -150,7 +150,8 @@ class BobinageController extends Controller
                 $coefPoid=2.7;
                 $coefPerte=12.18;
             }
-            return $coefPoid*$N2c*$scu2*(((($dint+$dext+$bint+$bext)/4)+($epx+$epy)/2)*pi()*3*(($majPoid+100)/100));
+            // return ($coefPoid*$N2c*$scu2*(((($dint+$dext+$bint+$bext)/4)+($epx+$epy)/2)*pi()*3*(($majPoid+100)/100)))*(pow(10,-6));
+            return pow(10,-6)*($coefPoid*3*pi()*$N2c*$scu2)*(($dint+$bint+$dext+$bext)/4)*(100+$majPoid)/100;
         }
         public function calculBarre($designation){
             $barre=Barre::where('designation',$designation)->get()->first();
