@@ -352,12 +352,7 @@ export default {
     this.projet = result.data;
     // this.updateprojet();
   },
-  created(){
-       axios.get('/getdesignationBarre').then(
-        (response) => (this.barre = response.data,console.log(this.barre))
-        
-      );
-    }
+ 
 };
 </script>
 <style scoped>

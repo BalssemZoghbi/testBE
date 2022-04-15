@@ -54,43 +54,57 @@
                           </div>
                         </div>
                         <div class="form__div framei">
-                          <input
+                           <v-select
+                                :items="saillie"
+                                label="saillie"
+                                v-model="projet.saillie"
+                                dense
+                                outlined
+                              ></v-select>
+                          <!-- <input
                             type="number"
                             class="form__input"
                             placeholder=" "
                             id="saillie"
                             v-model="projet.saillie"
                           />
-                          <label for="" class="form__label">saillie</label>
+                          <label for="" class="form__label">saillie</label> -->
                         </div>
 
                         <div class="form__div framei">
-                          <input
+                          <!-- <input
                             type="number"
                             class="form__input"
                             placeholder=" "
                             id="hbrin1"
                             v-model="projet.hbrin1"
                           />
-                          <label for="" class="form__label">hbrin1</label>
-                           <!-- <v-select
-                                :items="frequences"
-                                label="frequence"
-                                v-model="projet.frequence"
+                          <label for="" class="form__label">hbrin1</label> -->
+                           <v-select
+                                :items="hbrin"
+                                label="hbrin1"
+                                v-model="projet.hbrin1"
                                 dense
                                 outlined
-                              ></v-select> -->
+                              ></v-select>
                         </div>
 
                         <div class="form__div framei">
-                          <input
+                          <v-select
+                                :items="hbrin"
+                                label="hbrin2"
+                                v-model="projet.hbrin2"
+                                dense
+                                outlined
+                              ></v-select>
+                          <!-- <input
                             type="number"
                             class="form__input"
                             placeholder=" "
                             id="hbrin2"
                             v-model="projet.hbrin2"
                           />
-                          <label for="" class="form__label">hbrin2</label>
+                          <label for="" class="form__label">hbrin2</label> -->
                         </div>
                         <div class="form__div framei">
                           <input
@@ -682,14 +696,21 @@
                         </div>
 
                         <div class="form__div framei">
-                          <input
+                          <!-- <input
                             type="number"
                             class="form__input"
                             placeholder=" "
                             id="Epbarre"
                             v-model="projet.Epbarre"
                           />
-                          <label for="" class="form__label">Epbarre</label>
+                          <label for="" class="form__label">Epbarre</label> -->
+                            <v-select
+                                :items="barre"
+                                label="barre"
+                                v-model="projet.Epbarre"
+                                dense
+                                outlined
+                              ></v-select>
                         </div>
                         <div class="form__div framei">
                           <input
@@ -790,6 +811,9 @@ export default {
     components: { navbarUpdate },
   data() {
     return {
+      saillie:[],
+      barre:[],
+      hbrin:[],
       conducteur: ['meplat guipé','Rond emaille','feuillard'], 
       materiau: ['cuivre','aluminium'], 
        etage: ['1','2'], 
@@ -923,6 +947,17 @@ export default {
     const result = await axios.get('projets/'+this.$route.params.id);
     this.projet = result.data;
   },
+   created(){
+       axios.get('/getdesignationBarre').then(
+        (response) => (this.barre = response.data)
+      );
+       axios.get('/getValeurHbrin').then(
+        (response) => (this.hbrin = response.data)
+      );
+       axios.get('/getValeurSaillie').then(
+        (response) => (this.saillie = response.data)
+      );
+    }
  
 };
 </script>

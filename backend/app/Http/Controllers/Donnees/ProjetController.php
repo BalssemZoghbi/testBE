@@ -128,7 +128,7 @@ class ProjetController extends Controller
             'nbrPap1'=>1,
             'epFeuilPap'=>0,
             'EpCylindre'=>1,
-            'Epbarre'=>6,
+            'Epbarre'=>'6*60',
             'ep1Papier'=>0.325,
             'nbrPapier'=>1,
             'canauxBt'=>2,
@@ -148,7 +148,7 @@ class ProjetController extends Controller
             'Dext'=>4.5,
             'Bext'=>4.5,
             'majPoid'=>0,
-            'sp/couche'=>0
+            'sp/couche'=>5
 
         ]);
         $BobinageSec=BobinageSec::create([
