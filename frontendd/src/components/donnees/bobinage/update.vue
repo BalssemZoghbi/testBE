@@ -86,12 +86,8 @@
       </form>
     </div>
 </div>
-
         </div>
-
-  </v-card>
-
-       
+  </v-card>   
         <v-btn color="primary" @click="updateprojet">
           Changer
         </v-btn>
