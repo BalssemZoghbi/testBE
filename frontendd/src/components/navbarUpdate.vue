@@ -53,6 +53,9 @@
                                       <router-link :to="'/VoltSpires/'+ this.$route.params.id">Volt Spires</router-link>
                                     </li>
                                     <li class="dropdown-link">
+                                      <router-link :to="'/bobinecal/'+ this.$route.params.id">Bobine Primaire</router-link>
+                                    </li>
+                                    <li class="dropdown-link">
                                         <a href="#">PCC et UCC</a>
                                     </li>
                                 
