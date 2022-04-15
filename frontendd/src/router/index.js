@@ -19,6 +19,8 @@ import updateGradin from "../components/calcul/gradin/update.vue";
 import updateVolt from "../components/calcul/voltspire/update.vue";
 
 import Bobine from "../components/donnees/bobinage/update.vue";
+import bobinage from "../components/donnees/bobinage/updateCalcul.vue";
+
 import User from "../components/user/User.vue";
 
 import Demande from "../components/user/demande.vue";
@@ -144,6 +146,11 @@ const routes = [
     path: "/bobine/:id",
     name: "bobine.update",
     component: Bobine,
+  },
+  {
+    path: "/bobinecal/:id",
+    name: "bobine",
+    component: bobinage,
   },
   {
     path: "/gradin/:id",
