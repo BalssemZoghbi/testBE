@@ -98,12 +98,12 @@ export default {
       return this.editedIndex === -1 ? "New Item" : "Edit Item";
     },
   },
-  // mounted(){
-  // let user=localStorage.getItem('user');
-  // if(!user){
-  // this.$router.push('/login');
-  //   }
-  // },
+  mounted(){
+  let user=localStorage.getItem('user');
+  if(!user){
+  this.$router.push('/login');
+    }
+  },
 
   watch: {
     dialog(val) {

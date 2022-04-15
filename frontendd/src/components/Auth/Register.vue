@@ -69,9 +69,11 @@ methods:{
     });
   this.$router.push('/login');
   }catch(e){
-this.error='error occurred';
+this.error='une erreur s\'est produite';
   }
- }
+  
+  }
+ 
 }
 };
 </script>

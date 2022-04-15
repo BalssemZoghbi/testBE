@@ -182,7 +182,7 @@ export default {
           (response) => (this.id = response.data.id,console.log(response.data)),
           
         );
-      this.$router.push({ name: "Home" });
+      this.$router.push( '/bobinecal/' + this.$route.params.id);
     },
   },
   async mounted() {

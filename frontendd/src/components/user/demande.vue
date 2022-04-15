@@ -181,7 +181,8 @@ export default {
 async decline(id){
     console.log(id);
   await axios.delete("/user/decline/"+id).then(() => {
-        console.log('declined');
+        // console.log('declined');
+        this.created();
 }
 );
 },
@@ -193,7 +194,8 @@ async getuser(){
 },
   
   mounted() {
-    this.accept();
+    // this.accept();
+     this.getuser();
   },
 }}
   

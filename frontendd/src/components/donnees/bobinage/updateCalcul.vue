@@ -940,7 +940,7 @@ export default {
         (response) => (this.id = response.data.id, console.log(projets))
         
       );
- this.$router.push('/gradin/'+this.$route.params.id);    },
+ this.$router.push('/');    },
   
   },
   async mounted() {
