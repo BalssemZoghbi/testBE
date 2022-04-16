@@ -18,6 +18,8 @@ use App\Models\Bobinage;
 use App\Models\Gradin;
 use App\Models\VoltSpire;
 use App\Models\BobinageSec;
+use  App\Models\PccUcc;
+
 use Laravel\Sanctum\PersonalAccessToken;
 
 class ProjetController extends Controller
@@ -262,6 +264,17 @@ class ProjetController extends Controller
                 2722
             ]'
         ]);
+        $pccUcc=PccUcc::create([
+            'MajourationU'=>6,
+            'pcc1'=>1554,
+            'pcc2'=>1156,
+            'pccMaj'=>2710,
+            'Pccg'=>2600,
+            'Uccr'=>3.84,
+            'Ucca'=>1.69,
+            'Ucc'=>4.2,
+            'Uccg'=>4,
+        ]);
         // $volt=new VoltspireController();
         // $volt->updateVoltSpire()
         $projet= Projet::create([
@@ -287,6 +300,7 @@ class ProjetController extends Controller
              'gradin_id'=>$gradin->id,
              'bobinage_secs_id'=>$BobinageSec->id,
              'volt_spires_id'=>$VoltSpire->id,
+             'pcc_uccs_id'=>$pccUcc->id,
          ]);
 
          if($projet->save()){
@@ -303,8 +317,9 @@ class ProjetController extends Controller
         ->join('gradins', 'gradins.id', '=', 'projets.gradin_id')
         ->join('volt_Spires', 'volt_Spires.id', '=', 'projets.volt_spires_id')
         ->join('bobinage_secs', 'bobinage_secs.id', '=', 'projets.bobinage_secs_id')
+        ->join('pcc_uccs', 'pcc_uccs.id', '=', 'projets.pcc_uccs_id')
         ->where('projets.id',$id)
-        ->select('electriques.*','electriques.id as elec_id','garanties.*','garanties.id as garenti_id','bobinages.*','bobinages.id as bobine_id','bobinage_secs.*','bobinage_secs.id as bobinesec_id','gradins.*','gradins.id as gradins_id','volt_Spires.*','volt_Spires.id as volt_id', 'projets.*')
+        ->select('electriques.*','electriques.id as elec_id','garanties.*','garanties.id as garenti_id','bobinages.*','bobinages.id as bobine_id','bobinage_secs.*','bobinage_secs.id as bobinesec_id','gradins.*','gradins.id as gradins_id','volt_Spires.*','volt_Spires.id as volt_id','pcc_uccs.*','pcc_uccs.id as pucc_id', 'projets.*')
         ->get()->first();
 
 

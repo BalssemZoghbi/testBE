@@ -35,7 +35,8 @@ class Projet extends Model
     'bobinage_id',
     'gradin_id',
     'bobinage_secs_id',
-    'volt_spires_id'
+    'volt_spires_id',
+    'pcc_uccs_id',
 ];
 
      public function user(){
