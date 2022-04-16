@@ -15,6 +15,7 @@ use App\Http\Controllers\BobinageSecController;
 use App\Http\Controllers\EmailleController;
 use App\Http\Controllers\VoltspireController;
 use App\Http\Controllers\BobinageStatiqueController;
+use App\Http\Controllers\PccUccController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -83,6 +84,7 @@ Route::delete('/bobinesec/delete/{id}',[BobinageSecController::class ,'deleteBob
 Route::get('/bobinesec',[BobinageSecController::class ,'getAllBobineS']);
 Route::post('/bobinesec/add',[BobinageSecController::class ,'storeBobinageS']);
 Route::get('/bobinesec/{id}',[BobinageSecController::class ,'getOneBobineS']);
+Route::put('pucc/update/{id}',[PccUccController::class ,'updatePUCC']);
 
 Route::put('/update36/{id}',[GarantieController::class ,'update36']);
 Route::put('/bobine/update/{id}',[BobinageController::class ,'updateBobinage']);
