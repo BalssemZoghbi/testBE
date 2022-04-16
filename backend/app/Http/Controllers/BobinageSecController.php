@@ -198,7 +198,7 @@ class BobinageSecController extends Controller
             $HbobineBt= $this->Hbobine($request->Hfeuillard,$request->collierBT);
             $ePap=$this->ePap($request->ep1Papier,$request->nbrPap1,$request->ep2Papier,$request->nbrPap2);
             $epxfeui=floor($this->Epxfeui($request->typeCanaux,$projet->N2c,$request->canauxBt,$request->lgCales,$epFeuillard,$ePap));
- $epFeuilpap=$this->epPapier($request->epFeuilPap,$request->nbrPapier);
+            $epFeuilpap=$this->epPapier($request->epFeuilPap,$request->nbrPapier);
             $epPapier=$this->epPapier($epFeuilpap,$request->nbPapier);
             if($barre!=null){
             $Sbarre=$this->Sbarre($request->conducteurSec,$barre->epaisseur,$barre->largeur);
