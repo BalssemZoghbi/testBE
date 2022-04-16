@@ -57,14 +57,14 @@ public function Ucca($pccMaj,$puissance){
     ->join('bobinage_secs', 'bobinage_secs.id', '=', 'projets.bobinage_secs_id')
     ->join('bobinages', 'bobinages.id', '=', 'projets.bobinage_id')
     ->where('projets.id',$id)
-    ->select('pcc_uccs.*','garanties.Uccg','garanties.Pccg','pcc_uccs.id as pccucc_id','volt_Spires.N2c','volt_Spires.N1c','electriques.PrimaireIPhase','electriques.PrimaireUPhase','electriques.secondaireUPhase','electriques.secondaireIPhase','electriques.puissance','bobinage_secs.Hfeuillard','bobinage_secs.materiauSec','bobinage_secs.*','bobinages.j2','bobinages.poidBT','bobinages.HSFS','bobinages.HCondMt','bobinages.*','projets.*')
+    ->select('pcc_uccs.*','garanties.Uccg','garanties.Pccg','pcc_uccs.id as pccucc_id','volt_Spires.N2c','volt_Spires.N1c','electriques.PrimaireIPhase','electriques.PrimaireUPhase','electriques.secondaireUPhase','electriques.secondaireIPhase','electriques.puissance','bobinage_secs.Hfeuillard','bobinage_secs.j2','bobinage_secs.Dint','bobinage_secs.*','bobinage_secs.Epx','bobinage_secs.materiauSec','bobinage_secs.poidBT','bobinages.j1','bobinages.DintMT','bobinages.poidMT','bobinages.HSFS','bobinages.HCondMt','bobinages.EpxMT','bobinages.materiau','bobinages.EpyMT','bobinages.*','projets.*')
     ->get()->first();
-   $pcc1=$this->pcc1($projet->materiau,$projet->j2,$projet->poidBT,$request->MajourationU);
-   $pcc2=$this->pcc1($projet->materiau,$projet->j2,$projet->poidBT,$request->MajourationU);
+   $pcc1=$this->pcc1($projet->materiau,$projet->j1,$projet->poidMT,$request->MajourationU);
+   $pcc2=$this->pcc1($projet->materiauSec,$projet->j2,$projet->poidBT,$request->MajourationU);
     $pccMaj=$this->pccMaj($pcc1,$pcc2);
-    $CMoy=$this->comoy($projet->Dint,$projet->Epx,$projet->Dint,$projet->Epx);
-    $delta=$this->delta($projet->DistanceBTMT,$projet->Epx,$projet->Epy);
-    $Hmoy=$this->Hmoy($projet->conducteur,$projet->HCondMt,$projet->HSFS,$projet->Hfeuillard);
+    $CMoy=$this->comoy($projet->Dint,$projet->Epx,$projet->DintMT,$projet->EpxMT);
+    $delta=$this->delta($projet->DistanceBTMT,$projet->EpxMT,$projet->EpyMT);
+    $Hmoy=$this->Hmoy($projet->conducteurSec,$projet->HCondMt,$projet->HSFS,$projet->Hfeuillard);
     $Uccr=$this->Uccr($CMoy,$delta,$projet->N1c,$projet->PrimaireIPhase,$projet->PrimaireUPhase,$Hmoy);
     $Ucca=$this->Ucca($pccMaj,$projet->puissance);
     $Ucc=$this->Ucc($Uccr,$Ucca);

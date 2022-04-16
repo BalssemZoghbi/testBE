@@ -42,7 +42,7 @@ class BobinageSec extends Model
         'Bint',
         'Epx',
         'Epy',
-        'Dext',
+        'DextBT',
         'Bext',
         'poidBT',
         'majPoid',

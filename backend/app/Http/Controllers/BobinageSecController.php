@@ -41,7 +41,7 @@ class BobinageSecController extends Controller
 
          return 0.987*$saillie*$etage*($hbrin1*$nbrin1+$hbrin2*$nbrin2);
         }else if($conducteur=='feuillard'){
-            // dd($epFeuillard);
+            // dd($Hfeuillard);
 
             return $Hfeuillard*$epFeuillard;
         }
@@ -174,14 +174,14 @@ class BobinageSecController extends Controller
             ->join('volt_Spires', 'volt_Spires.id', '=', 'projets.volt_spires_id')
             ->join('gradins', 'gradins.id', '=', 'projets.gradin_id')
             ->where('projets.id',$id)
-            ->select('bobinage_secs.*','bobinage_secs.id as bobine_id','volt_Spires.N2c','volt_Spires.N1c','electriques.PrimaireIPhase','gradins.diamNominale','electriques.secondaireIPhase', 'projets.*')
+            ->select('bobinage_secs.*','bobinage_secs.id as bobine_id','volt_Spires.N2c','gradins.diamNominale','electriques.secondaireIPhase', 'projets.*')
             ->get()->first();
             $Bobinage=BobinageSec::FindOrFail($projet->bobine_id );
             $epFeuillard=$this->epFeuillard($request->epFeuil1,$request->epFeuil2);
             $scu2=$this->Scu2($request->conducteurSec,$request->hbrin1, $request->hbrin2,$request->nbBrin1, $request->nbBrin2, $request->etage, $request->saillie,$request->Hfeuillard,$epFeuillard);
         //    dd($scu2);
-            $j2=$this->j2($projet->PrimaireIPhase, $scu2);
-            $spCouche=$this->spCouche($request->conducteurSec,$projet->N1c,$request->nbcouche);
+            $j2=$this->j2($projet->secondaireIPhase, $scu2);
+            $spCouche=$this->spCouche($request->conducteurSec,$projet->N2c,$request->nbcouche);
             $hSpire=$this->hSpire($request->hbrin1,$request->e2ax,$request->nbBrin1,$request->hbrin2,$request->nbBrin2);
             $hsfs=$this->hsfs($hSpire,$spCouche,$request->etage,$request->hbrin1,$request->hbrin2,$request->e2ax);
             $hfs=$this->hfs($hSpire,$spCouche,$request->etage,$request->hbrin1,$request->hbrin2,$request->e2ax);
@@ -192,20 +192,21 @@ class BobinageSecController extends Controller
             $epy=$this->Epy($request->saillie,$request->e2r,$request->etage,$request->nbcouche,$request->canauxBt,$request->lgCales,$request->nbPapier,$request->ep1Papier);
             $dext=$this->Dext($DintBint,$epx);
             $bext=$this->Bext($DintBint,$epy);
-            $poid=$this->Poid($request->materiauSec,$projet->N1c,$scu2,$DintBint,$epx,$request->majPoid);
+            $poid=$this->Poid($request->materiauSec,$projet->N2c,$scu2,$DintBint,$epx,$request->majPoid);
 
             $barre=$this->calculBarre($request->Epbarre);
             $HbobineBt= $this->Hbobine($request->Hfeuillard,$request->collierBT);
             $ePap=$this->ePap($request->ep1Papier,$request->nbrPap1,$request->ep2Papier,$request->nbrPap2);
-            $epFeuilpap=$this->epPapier($request->epFeuilPap,$request->nbrPapier);
+            $epxfeui=floor($this->Epxfeui($request->typeCanaux,$projet->N2c,$request->canauxBt,$request->lgCales,$epFeuillard,$ePap));
+ $epFeuilpap=$this->epPapier($request->epFeuilPap,$request->nbrPapier);
             $epPapier=$this->epPapier($epFeuilpap,$request->nbPapier);
             if($barre!=null){
             $Sbarre=$this->Sbarre($request->conducteurSec,$barre->epaisseur,$barre->largeur);
-            $Jbarre=$this->Jbarre($request->conducteurSec,$projet->N1c,$Sbarre);
-            $epxfeui=floor($this->Epxfeui($request->typeCanaux,$projet->N1c,$request->canauxBt,$request->lgCales,$epFeuillard,$ePap));
+            $Jbarre=$this->Jbarre($request->conducteurSec,$projet->N2c,$Sbarre);
+
             $dextfeui=$this->Dext($DintBint,$epxfeui);
             $Bextfeui=$this->Bextfeui($DintBint,$epxfeui,$barre->epaisseur);
-            $PoidFeui=$this->PoidFeui($request->materiauSec,$dextfeui,$DintBint,$DintBint,$epxfeui,$request->majPoid,$Bextfeui,$epxfeui,$projet->N1c,$scu2);
+            $PoidFeui=$this->PoidFeui($request->materiauSec,$dextfeui,$DintBint,$DintBint,$epxfeui,$request->majPoid,$Bextfeui,$epxfeui,$projet->N2c,$scu2);
         }
           if($request->conducteurSec=='meplat guipé'){
                 $Bobinage->update([
@@ -241,7 +242,7 @@ class BobinageSecController extends Controller
                         'Bint'=>$DintBint,
                         'Epx'=>$epx,
                         'Epy'=>$epy,
-                        'Dext'=>$dext,
+                        'DextBT'=>$dext,
                         'Bext'=>$bext,
                         'poidBT'=>$poid,
                         'majPoid'=>$request->majPoid,
@@ -266,7 +267,7 @@ class BobinageSecController extends Controller
                     'Bint'=>$DintBint,
                     'Epx'=>$epxfeui,
                     'Epy'=>$epxfeui,
-                    'Dext'=>$dextfeui,
+                    'DextBT'=>$dextfeui,
                     'Bext'=>$Bextfeui,
                     'poidBT'=>$PoidFeui,
                     'majPoid'=>$request->majPoid,
