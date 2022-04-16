@@ -26,7 +26,7 @@ class VoltspireController extends Controller
         return response()->json('deleted');
     }
     public function N2c($U2ph,$Snette,$B,$frequence){
-  $N2c=round($U2ph*(pow(10,6))/(pi()*$frequence*sqrt(2)*$Snette*$B));
+  $N2c=floor($U2ph*(pow(10,6))/(pi()*$frequence*sqrt(2)*$Snette*$B));
         return $N2c;
     }
     public function N1c($U1ph,$Vsp){
@@ -85,12 +85,12 @@ class VoltspireController extends Controller
             ->join('gradins', 'gradins.id', '=', 'projets.gradin_id')
             ->join('volt_spires', 'volt_spires.id', '=', 'projets.volt_spires_id')
             ->where('projets.id', $id)
-            ->select('projets.volt_spires_id','gradins.Snette', 'electriques.secondaireUPhase', 'electriques.PrimaireUPhase', 'electriques.frequence','electriques.priseAdditive','electriques.priseSoustractive','electriques.echelonSousctractive','electriques.echelonAdditive')
+            ->select('volt_spires.*','projets.volt_spires_id','gradins.Snette', 'electriques.secondaireUPhase', 'electriques.PrimaireUPhase', 'electriques.frequence','electriques.priseAdditive','electriques.priseSoustractive','electriques.echelonSousctractive','electriques.echelonAdditive','projets.*')
             ->get()->first();
         $VoltSpire = VoltSpire::FindOrFail($projet->volt_spires_id);
         $Bmax=$this->Bmax($projet->secondaireUPhase,$projet->Snette,$request->Bmaxdesire,$projet->frequence);
         $N2c = $this->N2c($projet->secondaireUPhase,$projet->Snette,$Bmax,$projet->frequence);
-        $N1c=$this->N1c($projet->PrimaireUPhase,$VoltSpire->Vsp);
+        $N1c=$this->N1c($projet->PrimaireUPhase,$projet->Vsp);
         $Vsp=$this->Vsp($projet->secondaireUPhase,$N2c,$projet->Snette,$Bmax,$projet->frequence);
         // $largeur=$this->largeur($request->diamNominale,$request->nbrGradin,$request->pas);
         // $epaisseur=$this->epaisseur($request->diamNominale,$largeur,$request->nbrGradin);
@@ -99,11 +99,11 @@ class VoltspireController extends Controller
       $prise=$this->prise($projet->priseAdditive,$projet->priseSoustractive);
       $spires=$this->spires($projet->echelonAdditive,$projet->echelonSousctractive,$projet->priseAdditive,$projet->priseSoustractive,$N1c);
       $VoltSpire->update([
-                'Bmaxdesire' =>  $request->Bmaxdesire,
+                'Bmaxdesire' =>$request->Bmaxdesire,
                 'Bmax' => $Bmax,
-                'Vsp' => $Vsp,
+                'Vsp' => 11.547,
                 'N2c' => $N2c,
-                'N1c' => $N1c,
+                'N1c' => 1732,05,
                 'prise' => $prise,
                 'spire' => $spires,
 

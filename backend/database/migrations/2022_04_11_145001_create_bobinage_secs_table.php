@@ -47,7 +47,7 @@ class CreateBobinageSecsTable extends Migration
             $table->float('Bint')->nullable();
             $table->float('Epx')->nullable();
             $table->float('Epy')->nullable();
-            $table->float('Dext')->nullable();
+            $table->float('DextBT')->nullable();
             $table->float('Bext')->nullable();
             $table->float('poidBT')->nullable();
             $table->float('majPoid')->nullable();

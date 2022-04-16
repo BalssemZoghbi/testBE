@@ -127,7 +127,7 @@ class ElectriqueController extends Controller
     {
         $indice=[];
         switch ($couplage) {
-            case (in_array($couplage, ['Yz','YNzn','Dyn','Dy']) ):
+            case (in_array($couplage, ['Yz','YNzn','Dyn','Yzn','Dy']) ):
                 $indice=['1','5','7','11'];
                 break;
 
