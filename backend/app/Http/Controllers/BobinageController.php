@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\BobinageResource;
 use App\Models\Barre;
+use App\Models\Emaille;
 
 class BobinageController extends Controller
 {
@@ -116,7 +117,7 @@ class BobinageController extends Controller
 
 
 
-     
+
 //
     public function su1d($conducteur,$I1phase,$J1d){
         if($conducteur=="meplat guipé"){
@@ -129,9 +130,21 @@ class BobinageController extends Controller
     public function D1d($su1d){
     return 2*sqrt($su1d/pi());
     }
-    public function N1cmax(){
-
+    public function N1cmax($N1cmax){
+        $N1cmax = str_replace("[","",$N1cmax);
+        $N1cmax = str_replace("]","",$N1cmax);
+        $N1cmax=explode(',',$N1cmax);
+        return (float)$N1cmax[0];
     }
+
+    public function filobtenue($d1d){
+    $filObtenue=Emaille::where('designation',$d1d)->get()->first();
+    if($filObtenue==null){
+        $filObtenue=Emaille::where('designation','<=',$d1d)->orderBy('designation','desc')->get()->first();
+    }
+    return $filObtenue;
+    }
+
     public function spchb($conducteur,$n1cMax,$nbCoucheMt){
         if($conducteur=='Rond emaille'){
             return $n1cMax/$nbCoucheMt;
@@ -180,6 +193,13 @@ class BobinageController extends Controller
     public function epyMtLune($nbreCoucheMt,$fileisole,$epaisseurPapier,$canauxMt,$lrgc){
         return  ($nbreCoucheMt*$fileisole+$epaisseurPapier)*($nbreCoucheMt-1)+$canauxMt*$lrgc;
     }
+    public function BextMt($typeconducteur,$dext,$bint,$epy){
+        if($typeconducteur=='complet'){
+            return $dext;
+        }else if($typeconducteur=='lune'){
+            return $bint+2*$epy;
+        }
+    }
     public function poidEmaille($materiau,$dext,$bint,$dint,$majPoid,$bext,$n1cMax,$scu2){
         if($materiau=='cuivre'){
             $coefPoid=8.9;
@@ -200,12 +220,11 @@ class BobinageController extends Controller
             ->join('gradins', 'gradins.id', '=', 'projets.gradin_id')
             ->join('bobinage_secs', 'bobinage_secs.id', '=', 'projets.bobinage_secs_id')
             ->where('projets.id',$id)
-            ->select('bobinages.*','bobinages.id as bobine_id','volt_Spires.Vsp','volt_Spires.N1c','electriques.PrimaireIPhase','gradins.diamNominale','electriques.secondaireIPhase','bobinage_secs.HbobineBt','bobinage_secs.Dext','bobinage_secs.Bext','projets.*')
+            ->select('bobinages.*','bobinages.id as bobine_id','volt_Spires.Vsp','volt_Spires.N1c','volt_Spires.spire','electriques.PrimaireIPhase','gradins.diamNominale','electriques.secondaireIPhase','bobinage_secs.HbobineBt','bobinage_secs.Dext','bobinage_secs.Bext','projets.*')
             ->get()->first();
             $Bobinage=Bobinage::FindOrFail($projet->bobine_id );
             $epFeuillard=$this->epFeuillard($request->epFeuil1,$request->epFeuil2);
             $scu2=$this->Scu2($request->conducteur,$request->hbrin1, $request->hbrin2,$request->nbBrin1, $request->nbBrin2, $request->etage, $request->saillie,$request->Hfeuillard,$epFeuillard,1.32);
-        //    dd($filobtenueNue);
             $j2=$this->j2($projet->PrimaireIPhase, $scu2);
             $spCouche=$this->spCouche($request->conducteur,$projet->N1c,$request->nbcouche);
             $hSpire=$this->hSpire($request->hbrin1,$request->e2ax,$request->nbBrin1,$request->hbrin2,$request->nbBrin2);
@@ -219,10 +238,14 @@ class BobinageController extends Controller
             $dext=$this->Dext($DintBint,$epx);
             $bext=$this->Bext($DintBint,$epy);
             $poid=$this->Poid($request->materiau,$projet->N1c,$scu2,$DintBint,$epx,$request->majPoid);
-            
+
+            // $filobtenue=$this->filobtenue(0.51);
+            // dd($filobtenue);
+            $N1cmax=$this->N1cmax($projet->spire);
             $su1d=$this->su1d($request->conducteur,$projet->PrimaireIPhase,$request->J1D);
             $D1d=$this->D1d($su1d);
-            $spchb=$this->spchb($request->conducteur,2700,$request->nbCoucheMt);
+            $filobtenue=$this->filobtenue($D1d);
+            $spchb=$this->spchb($request->conducteur,$N1cmax,$request->nbCoucheMt);
             $ncha=$this->ncha($request->nbCoucheMt,$spchb,10);
             $nchb=$this->nchb($request->nbCoucheMt,$ncha);
             $spcha=$this->spcha($spchb);
@@ -233,7 +256,8 @@ class BobinageController extends Controller
             $EpxMt=$this->EpxMt($request->typeCanaux,$request->nbCoucheMt,1.42,$epaisseurPapier,$request->canauxMT,$request->lgCales,$request->EpaisseurPapierCanaux);
             $dintMt=$this->dintMt($projet->Bext,$request->DistanceBTMT);
             $dextMt=$this->dextMt($dintMt,$EpxMt);
-            $poidEmaille=$this->poidEmaille($request->materiau,$dextMt,$dintMt,$dintMt,$request->majPoid,$dextMt,1000,$scu2);
+            $BextMt=$this->BextMt($request->typeCanaux,$dextMt,$dintMt,$epy);
+            $poidEmaille=$this->poidEmaille($request->materiau,$dextMt,$dintMt,$dintMt,$request->majPoid,$dextMt,$N1cmax,$scu2);
             if($request->typeCanaux=="complet"){
                 $epy=$EpxMt;
             }else if($request->typeCanaux=="lune"){
@@ -279,7 +303,7 @@ class BobinageController extends Controller
                         'majPoid'=>$request->majPoid,
                         'HBOBT'=>$hbobt,
                         ]);
-            
+
             }else if($request->conducteur=='Rond emaille'){
 
                 $Bobinage->update([
@@ -296,18 +320,18 @@ class BobinageController extends Controller
                     'Epx'=>$EpxMt,
                     'Epy'=>$epy,
                     'Dext'=>$dextMt,
-                    'Bext'=>$dextMt,
+                    'Bext'=>$BextMt,
                     'poidBT'=>$poidEmaille,
                     'majPoid'=>$request->majPoid,
                     'HbobineBt'=>$projet->HbobineBt,
                     'EpCylindre'=>$request->EpCylindre,
                     'rigiditePapier'=>$request->rigiditePapier,
-                    // 
+                     'N1cmax'=>$N1cmax,
                     'scu1d'=>$su1d,
                     'J1D'=>$request->J1D,
                     'D1d'=>$D1d,
-                    'filobtenueNue'=>1.32,
-                    'filobtenueIsoler'=>1.42,
+                    'filobtenueNue'=>$filobtenue->Designation,
+                    'filobtenueIsoler'=>$filobtenue->Isole,
                     'choix'=>$request->choix,
                      'brinParallele'=>$request->brinParallele,
                     'nbCoucheMt'=>$request->nbCoucheMt,

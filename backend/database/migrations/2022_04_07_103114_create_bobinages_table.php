@@ -43,6 +43,7 @@ class CreateBobinagesTable extends Migration
             $table->integer('collierBT')->nullable();
             $table->integer('collierBT2')->nullable();
             $table->float('CMBT')->nullable();
+            $table->float('N1cmax')->nullable();
             $table->float('Dint')->nullable();
             $table->float('Bint')->nullable();
             $table->float('Epx')->nullable();
@@ -69,7 +70,7 @@ class CreateBobinagesTable extends Migration
             $table->integer('largeurBarre')->nullable();
             $table->integer('Sbarre')->nullable();
             $table->float('Jbarre')->nullable();
-            // 
+            //
             $table->float('scu1d')->nullable();
             $table->float('J1D')->nullable();
             $table->float('D1d')->nullable();

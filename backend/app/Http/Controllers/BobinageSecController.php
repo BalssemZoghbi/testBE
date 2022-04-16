@@ -38,15 +38,17 @@ class BobinageSecController extends Controller
      public function Scu2($conducteur,$hbrin1,$hbrin2,$nbrin1,$nbrin2,$etage,$saillie,$Hfeuillard,$epFeuillard)
      {
         if($conducteur=='meplat guipé'){
-            // dd($saillie);
 
          return 0.987*$saillie*$etage*($hbrin1*$nbrin1+$hbrin2*$nbrin2);
         }else if($conducteur=='feuillard'){
+            // dd($epFeuillard);
+
             return $Hfeuillard*$epFeuillard;
         }
      }
      public function j2($I2phase,$scu2)
      {
+        //  dd($scu2);
          return $I2phase/$scu2;
     }
              public function spCouche($conducteur,$N2c,$nbCouche){
@@ -95,6 +97,7 @@ class BobinageSecController extends Controller
             public function Bext($dint,$epy){
                 return $dint+2*$epy;
             }
+
             public function Poid($materiau,$N2c,$scu2,$dint,$epx,$majPoid){
             if($materiau=='cuivre'){
                 $coefPoid=8.9;
@@ -140,7 +143,6 @@ class BobinageSecController extends Controller
                 return $N2c/$sbarre;
             }else if($conducteur=='meplat guipé'){
                    return 0;}
-
         }
         public function PoidFeui($materiau,$dext,$bint,$dint,$epx,$majPoid,$bext,$epy,$N2c,$scu2){
             if($materiau=='cuivre'){
@@ -159,7 +161,7 @@ class BobinageSecController extends Controller
 }
     public function su1d($I1phase,$J1d){
     return $I1phase/$J1d;
-        
+
     }
     public function D1d($su1d){
     return 2*sqrt($su1d/pi());
@@ -197,13 +199,14 @@ class BobinageSecController extends Controller
             $ePap=$this->ePap($request->ep1Papier,$request->nbrPap1,$request->ep2Papier,$request->nbrPap2);
             $epFeuilpap=$this->epPapier($request->epFeuilPap,$request->nbrPapier);
             $epPapier=$this->epPapier($epFeuilpap,$request->nbPapier);
+            if($barre!=null){
             $Sbarre=$this->Sbarre($request->conducteurSec,$barre->epaisseur,$barre->largeur);
             $Jbarre=$this->Jbarre($request->conducteurSec,$projet->N1c,$Sbarre);
             $epxfeui=floor($this->Epxfeui($request->typeCanaux,$projet->N1c,$request->canauxBt,$request->lgCales,$epFeuillard,$ePap));
             $dextfeui=$this->Dext($DintBint,$epxfeui);
             $Bextfeui=$this->Bextfeui($DintBint,$epxfeui,$barre->epaisseur);
             $PoidFeui=$this->PoidFeui($request->materiauSec,$dextfeui,$DintBint,$DintBint,$epxfeui,$request->majPoid,$Bextfeui,$epxfeui,$projet->N1c,$scu2);
-           
+        }
           if($request->conducteurSec=='meplat guipé'){
                 $Bobinage->update([
                         'materiauSec'=> $request->materiauSec,
