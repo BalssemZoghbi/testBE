@@ -1,11 +1,35 @@
 <template>
-<div class="body">
-    <div class="center"> 
-     
-      <!-- <img src="../../assets/ava.svg"> -->
-      <h1>Mot de passe oublié</h1>
-      <form @submit.prevent="handleSubmit" >
-        <v-alert dense
+  <v-app id="inspire">
+    <v-main>
+      <v-container class="fill-height" fluid>
+        <v-row align="center" justify="center">
+          <v-col cols="12" sm="8" md="8">
+            <v-card class="elevation-12">
+              <v-window v-model="step">
+                <v-window-item :value="1">
+                  <v-row>
+                    <v-col cols="12" md="8">
+                      <v-card-text class="mt-12">
+                        <h1
+                          class="text-center display-2 teal--text text--accent-3"
+                        >
+                          Mot de passe oublié
+                        </h1>
+                        <div class="text-center mt-4">
+                          <v-btn class="mx-2" fab color="black" outlined>
+                            <v-icon>fab fa-facebook-f</v-icon>
+                          </v-btn>
+
+                          <v-btn class="mx-2" fab color="black" outlined>
+                            <v-icon>fab fa-google-plus-g</v-icon>
+                          </v-btn>
+                          <v-btn class="mx-2" fab color="black" outlined>
+                            <v-icon>fab fa-linkedin-in</v-icon>
+                          </v-btn>
+                        </div>
+                        <br>
+                        <v-form>
+                                 <v-alert dense
         id="valert"
       type="success"
       text
@@ -14,21 +38,46 @@
       v-if="message" >   
         {{message}}
      </v-alert>
-      <error v-if="error" :error="error"/>
-        <div class="txt_field">
-          <input type="email" id="email"
-        v-model="email" required>
-          <span></span>
-          <label>Email</label>
-        </div>
-        <input type="submit" value="Envoyer">
-        <div class="signup_link">
-        </div>
-      </form>
-    </div>
-    </div>
-</template>
+                            <error v-if="error" :error="error"/>
 
+                          <v-text-field 
+                            label="Email"
+                            name="Email"
+                            prepend-icon="email"
+                            type="text"
+                            v-model="email"
+                          />
+
+                    
+                        </v-form>
+              <h3 class="text-center mt-4" >consultez votre email </h3>
+                      </v-card-text>
+                      <div class="text-center mt-3">
+                        <v-btn rounded color="teal accent-3" dark  @click="handleSubmit()"
+                          >Envoyer</v-btn
+                        >
+                     <!-- <input type="submit" :class="{'disabled': !validateFields}"  value="Connexion"> -->
+
+                      </div>
+                    </v-col>
+                    <v-col cols="12" md="4" class="teal accent-3">
+                      <v-card-text class="white--text mt-12">
+                        <h1 class="text-center display-1">Content de vous revoir!</h1>
+                        <h5 class="text-center">
+vous recevrez un email pour réinitialiser votre mot de passe
+                        </h5>
+                      </v-card-text>
+                    </v-col>
+                  </v-row>
+                </v-window-item>
+              </v-window>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-main>
+  </v-app>
+</template>
 <script>
 import axios from 'axios';
 import Error from "@/components/Error";
@@ -41,6 +90,7 @@ Error
 },
   data() {
     return {
+      step: 1,
       email: "",
       message:'',
       error:''
@@ -52,7 +102,7 @@ async handleSubmit(){
 await axios.post('/forgot',{
   email:this.email
 });
-this.message='Le mail a été envoyét';
+this.message='Le mail a été envoyé';
 this.error='';
   }catch(e){
     this.error='email incorrect!!';
@@ -62,126 +112,20 @@ this.error='';
   },
 };
 </script>
-
 <style scoped>
-#valert{
-  margin-top: 4%!important;
-}
-img{
-  width: 455px;
-  height: 100px;
-  margin-top: 20px;
-}
-h1{
-	color: #333;
-	text-transform: uppercase;
-	font-size: 2rem;
-}
-.body{
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(120deg,#2980b9, #449dad);
-  height: 100vh;
-  overflow: hidden;
-}
-.center{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 450px;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
-}
-.center h1{
-  text-align: center;
-  padding: 20px 0;
-  border-bottom: 1px solid silver;
-}
-.center form{
-  padding: 0 40px;
-  box-sizing: border-box;
-}
-form .txt_field{
-  position: relative;
-  border-bottom: 2px solid #adadad;
-  margin: 30px 0;
-}
-.txt_field input{
-  width: 100%;
-  padding: 0 5px;
-  height: 40px;
-  font-size: 16px;
-  border: none;
-  background: none;
-  outline: none;
-}
-.txt_field label{
-  position: absolute;
-  top: 50%;
-  left: 5px;
-  color: #adadad;
-  transform: translateY(-50%);
-  font-size: 16px;
-  pointer-events: none;
-  transition: .5s;
-}
-.txt_field span::before{
-  content: '';
-  position: absolute;
-  top: 40px;
-  left: 0;
-  width: 0%;
-  height: 2px;
-  background: #2691d9;
-  transition: .5s;
-}
-.txt_field input:focus ~ label,
-.txt_field input:valid ~ label{
-  top: -5px;
-  color: #2691d9;
-}
-.txt_field input:focus ~ span::before,
-.txt_field input:valid ~ span::before{
-  width: 100%;
-}
-.pass{
-  margin: -5px 0 20px 5px;
-  color: #a6a6a6;
-  cursor: pointer;
-}
-.pass:hover{
-  text-decoration: underline;
-}
-input[type="submit"]{
-  width: 100%;
-  height: 50px;
-  border: 1px solid;
-  background: #2691d9;
-  border-radius: 25px;
-  font-size: 18px;
-  color: #e9f4fb;
-  font-weight: 700;
-  cursor: pointer;
-  outline: none;
-}
-input[type="submit"]:hover{
-  border-color: #2691d9;
-  transition: .5s;
-}
-.signup_link{
-  margin: 30px 0;
-  text-align: center;
-  font-size: 16px;
-  color: #666666;
-}
-.signup_link a{
-  color: #2691d9;
-  text-decoration: none;
-}
-.signup_link a:hover{
-  text-decoration: underline;
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1 auto;
+    margin: 0.1px;
 }
 
+.v-application .teal.accent-3 {
+    background-color: #3569a3 !important;
+    border-color: #366ca8!important;
+}
+.v-application .teal--text.text--accent-3 {
+    color: #3e80cc !important;
+    /* caret-color: #2196f3 !important; */
+}
 </style>

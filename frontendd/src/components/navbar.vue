@@ -35,7 +35,7 @@ import axios from "axios";
       // this.$router.push('/login');
      localStorage.removeItem('token');
       this.$store.dispatch('user',null);
-      this.$router.push("/login");
+      this.$router.push("/Connexion");
     },
     create(){
      let token= localStorage.getItem('token')

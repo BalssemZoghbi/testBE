@@ -111,7 +111,7 @@ export default {
   mounted(){
   let user=localStorage.getItem('user');
   if(!user){
-  this.$router.push('/login');
+  this.$router.push('/Connexion');
     }
   },
 
