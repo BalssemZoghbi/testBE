@@ -137,7 +137,6 @@
 </template>
 <script>
 import Footer from '@/components/Footer';
-
 import Profile from '@/components/Profile';
 import axios from 'axios';
 import { mapGetters } from 'vuex';
@@ -168,7 +167,7 @@ logout() {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       this.$store.dispatch('user',null);
-      this.$router.push("/login");
+      this.$router.push("/Connexion");
     },
 },
 async created() {

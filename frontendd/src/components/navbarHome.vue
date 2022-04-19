@@ -47,7 +47,7 @@
                     <router-link class="nav-link" to="/about">Importer</router-link>
                   </li>
                   <li class="nav-item">
-                  <router-link class="nav-link" to="/login" @click="logout()"> <span>logout</span></router-link>
+                  <router-link class="nav-link"  @click="logout()"> <span>logout</span></router-link>
                   </li>
                 </ul>
                 <div class="Call">
@@ -67,7 +67,7 @@
   methods:{
     logout(){
       localStorage.clear();
-      this.$router.push('/login');
+      this.$router.push('/Connexion');
     }
   }
 };
