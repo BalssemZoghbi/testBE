@@ -35,9 +35,38 @@
         </template>
         <template v-slot:[`item.actions`]="{ item }">
           <router-link :to="'/projet/update/' + item.id">
-            <v-icon small class="mr-2"> mdi-pencil </v-icon>
+              <!-- <v-btn
+              color="cyan"
+              
+    dark
+    fab
+ small
+    class="clickable"
+    > <v-icon > mdi-pencil </v-icon></v-btn> -->
+        <v-btn
+      class="mx-2"
+      fab
+      dark
+      small
+      color="primary"
+    >
+      <v-icon dark>
+        mdi-pencil
+      </v-icon>
+    </v-btn>
           </router-link>
-          <v-icon small v-on:click="deleteprojet(item.id)"> mdi-delete </v-icon>
+                  <v-btn
+      class="mx-2"
+      fab
+      dark
+      small
+      color="red"
+    >
+      <v-icon dark v-on:click="deleteprojet(item.id)">
+        mdi-delete
+      </v-icon>
+    </v-btn>
+          <!-- <v-icon small > mdi-delete </v-icon> -->
         </template>
       </v-data-table>
       
@@ -250,11 +279,11 @@ export default {
 }
 .v-data-table {
   /* line-height: 1.5; */
-  max-width: 1800px;
-  /* margin-left: 3%; */
+  /* max-width: 1800px; */
+  margin-top: -12%;
   /* box-shadow: 20px 20px 50px grey; */
 }
-.theme--light.v-icon {
+/* .theme--light.v-icon {
   color: #2196f3;
-}
+} */
 </style>

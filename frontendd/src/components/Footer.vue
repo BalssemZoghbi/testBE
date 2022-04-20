@@ -4,7 +4,7 @@
       class="flex"
       flat
       tile
-      color="#366ca8"
+      color="rgb(5 48 96)"
       :elevation="10"
     >
       <v-card-text class="py-2 white--text text-center">
