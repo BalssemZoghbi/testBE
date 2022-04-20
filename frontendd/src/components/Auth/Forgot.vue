@@ -121,11 +121,11 @@ this.error='';
 }
 
 .v-application .teal.accent-3 {
-    background-color: #3569a3 !important;
-    border-color: #366ca8!important;
+    background-color: rgb(29 48 117) !important;
+    border-color: rgb(29 48 117) !important;
 }
 .v-application .teal--text.text--accent-3 {
-    color: #3e80cc !important;
+    color: rgb(29 48 117)  !important;
     /* caret-color: #2196f3 !important; */
 }
 </style>
