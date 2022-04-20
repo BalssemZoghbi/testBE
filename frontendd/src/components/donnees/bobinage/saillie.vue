@@ -98,11 +98,32 @@
         </v-toolbar>
       </template>
       <template v-slot:[`item.actions`]="{ item }">
-        <v-icon small color="green" class="mr-2" @click="editItem(item)">
+        <!-- <v-icon small color="green" class="mr-2" @click="editItem(item)">
           mdi-pencil
         </v-icon>
-               <v-icon small color="red" @click="deletegar(item.id)"> mdi-delete </v-icon>
-
+               <v-icon small color="red" @click="deletegar(item.id)"> mdi-delete </v-icon> -->
+<v-btn
+      class="mx-2"
+      fab
+      dark
+      small
+      color="primary"
+    >
+      <v-icon dark v-on:click="editItem(item)">
+        mdi-pencil
+      </v-icon>
+    </v-btn>
+            <v-btn
+      class="mx-2"
+      fab
+      dark
+      small
+      color="red"
+    >
+      <v-icon dark v-on:click="deletegar(item.id)">
+        mdi-delete
+      </v-icon>
+    </v-btn>
       </template>
 
      

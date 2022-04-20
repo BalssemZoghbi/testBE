@@ -19,7 +19,7 @@
       <v-stepper-content step="1">
         <v-card
           class="mb-12"
-          color="#71b7e675"
+          color="rgb(5 48 96 / 78%)"
           height="450px"
         >
         <div class="body">
@@ -258,7 +258,7 @@ h1 {
   max-height: calc(100vh - 50px);
 
   /* margin: 0.5%; */
-  /* background: linear-gradient(135deg,#71b7e675, #71b7e675); */
+  /* background: linear-gradient(135deg,rgb(5 48 96 / 78%), rgb(5 48 96 / 78%)); */
 }
 .container {
   max-width: 98%;

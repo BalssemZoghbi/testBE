@@ -107,7 +107,7 @@ a{
 header{
     position: sticky;
     top: 0px;
-        background-color: rgb(54, 108, 168);
+        /* background-color: rgb(54, 108, 168); */
     width: 100%;
     z-index: 1000;
 }
@@ -357,7 +357,7 @@ header{
         top: 3rem;
         left: 0;
         width: 100%;
-        background-color: #69bde7;
+        /* background-color: #69bde7; */
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
