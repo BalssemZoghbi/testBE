@@ -85,6 +85,7 @@
         <v-btn
           color="primary"
           @click="e1=2"
+        style="margin-top: -3%!important;margin-bottom:5%!important;"
         >
           Continue
         </v-btn>
@@ -195,10 +196,12 @@
 </div>
         </div>
         </v-card>
-<v-btn @click="e1 = 1"> précédente </v-btn>
+<v-btn @click="e1 = 1"         style="margin-top: -3%!important;margin-bottom:5%!important;"
+> précédente </v-btn>
         <v-btn
           color="primary"
           @click="e1 = 3"
+                  style="margin-top: -3%!important;margin-bottom:5%!important;"
         >
           Continue
         </v-btn>
@@ -264,8 +267,9 @@
         </div>
 
         </v-card>
-        <v-btn @click="e1 = 2"> précédente </v-btn>
-        <router-link class="nav-link" :to="'/electrique/update/' + projet.id+'/'+ projet.electrique_id"><v-btn color="primary" @click="updateprojet">
+        <v-btn @click="e1 = 2"         style="margin-top: -3%!important;margin-bottom:5%!important;"
+> précédente </v-btn>
+        <router-link class="nav-link" :to="'/electrique/update/' + projet.id+'/'+ projet.electrique_id"><v-btn color="primary" @click="updateprojet"  style="margin-top: -3%!important;margin-bottom:5%!important;">
           Modifier
         </v-btn></router-link>
       </v-stepper-content>

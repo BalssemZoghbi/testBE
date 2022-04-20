@@ -107,7 +107,7 @@ a{
 header{
     position: sticky;
     top: 0px;
-    background-color: #60b4df;
+        background-color: rgb(54, 108, 168);
     width: 100%;
     z-index: 1000;
 }
@@ -183,9 +183,9 @@ header{
 }
 
 .dropdown{
-    position: absolute;
+    position: fixed;
     top: 100%;
-    left: 0;
+    /* left: 0; */
     width: 10rem;
     transform: translateY(10px);
     opacity: 0;

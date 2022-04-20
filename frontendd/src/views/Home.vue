@@ -51,7 +51,7 @@ import axios from "axios";
 import Footer from "@/components/Footer";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 // import navbar from "../components/navbar.vue";
-import NavDash from "../components/NavDash.vue";
+import NavDash from "../components/NavDashboard.vue";
 export default {
   components: {
     NavDash,

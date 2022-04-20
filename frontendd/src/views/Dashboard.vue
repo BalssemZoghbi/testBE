@@ -6,7 +6,7 @@
 </template>
 
 <script>
-  import NavDash from '@/components/NavDash';;
+  import NavDash from '@/components/NavDashboard';
 
   export default {
     name: 'Dashboard',

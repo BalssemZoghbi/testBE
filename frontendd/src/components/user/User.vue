@@ -160,7 +160,7 @@
 
 <script>
 import Swal from "sweetalert2/dist/sweetalert2.js";
-import NavDash from "../NavDash.vue";
+import NavDash from "../NavDashboard.vue";
 import demande from "../user/demande.vue";
 import axios from "axios";
 export default {

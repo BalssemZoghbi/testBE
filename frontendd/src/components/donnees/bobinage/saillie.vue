@@ -131,7 +131,7 @@
 
 <script>
 import Swal from "sweetalert2/dist/sweetalert2.js";
-import NavDash from "@/components/NavDash.vue";
+import NavDash from "@/components/NavDashboard.vue";
 import barre from "../bobinage/barre.vue";
 import hbrin from "../bobinage/hbrin.vue";
 import axios from "axios";
