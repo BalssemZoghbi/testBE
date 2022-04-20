@@ -2,9 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Dashboard from "../views/Dashboard.vue";
-import Login from "../views/Login.vue";
 import about from "../views/About.vue";
-import Register from "../components/Auth/Register.vue";
 import Forgot from "../components/Auth/Forgot.vue";
 import Reset from "../components/Auth/Reset.vue";
 import createProjet from "../components/donnees/generale/create.vue";
@@ -13,7 +11,7 @@ import updateElec from "../components/donnees/electrique/update.vue";
 import createElec from "../components/donnees/electrique/create.vue";
 import Uni from "../views/Untitled-1.vue";
 import notFound from "../components/NotFound.vue";
-import loginn from "../components/Auth/loginn.vue";
+import Connexion from "../components/Auth/Connexion.vue";
 import updateGarantie from "../components/donnees/garantie/update.vue";
 import updateGradin from "../components/calcul/gradin/update.vue";
 import updateVolt from "../components/calcul/voltspire/update.vue";
@@ -89,9 +87,9 @@ const routes = [
     component: Dashboard,
   },
   {
-    path: "/loginn",
-    name: "loginn",
-    component: loginn,
+    path: "/Connexion",
+    name: "Connexion",
+    component: Connexion,
   },
   {
     path: "/reset/:token",
@@ -108,16 +106,7 @@ const routes = [
     name: "Uni",
     component: Uni,
   },
-  {
-    path: "/login",
-    name: "Login",
-    component: Login,
-  },
-  {
-    path: "/register",
-    name: "Register",
-    component: Register,
-  },
+
   {
     path: "/projet/create",
     name: "projet.create",
