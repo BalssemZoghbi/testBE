@@ -5,9 +5,9 @@
             <div class="nav-btn">
                 <div class="nav-links">
                     <ul>
-                        <li class="nav-link" style="--i: .6s">
-                              <router-link to="/"> Page D'accueil</router-link>
-                        <li class="nav-link" style="--i: .85s">
+                        <!-- <li class="nav-link" style="--i: .6s"> -->
+                              <!-- <router-link to="/"> Page D'accueil</router-link> -->
+                        <li class="nav-link" style="--i: 1.1s">
                             <a href="#">Données <i class="fas fa-caret-down"></i></a>
                             <div class="dropdown">
                                 <ul>
