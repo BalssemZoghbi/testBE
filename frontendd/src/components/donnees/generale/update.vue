@@ -32,7 +32,7 @@
       <v-stepper-content step="1">
         <v-card
           class="mb-12"
-          color="#71b7e675"
+          color="rgb(5 48 96 / 78%)"
           height="450px"
         >
         <div class="body">

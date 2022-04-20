@@ -23,7 +23,7 @@
 
         <v-stepper-items>
           <v-stepper-content step="1">
-            <v-card class="mb-12" color="#71b7e675 " height="450px">
+            <v-card class="mb-12" color="rgb(5 48 96 / 78%) " height="450px">
               <div class="body">
                 <div class="container">
                   <div class="title">Calcul bobine</div>
@@ -189,7 +189,7 @@
           </v-stepper-content>
 
           <v-stepper-content step="2">
-            <v-card class="mb-12" color="#71b7e675" height="450px">
+            <v-card class="mb-12" color="rgb(5 48 96 / 78%)" height="450px">
               <div class="body">
                 <div class="container">
                   <div class="title">Calcul bobine</div>
@@ -334,7 +334,7 @@
           </v-stepper-content>
 
           <v-stepper-content step="3">
-            <v-card class="mb-12" color="#71b7e675" height="450px">
+            <v-card class="mb-12" color="rgb(5 48 96 / 78%)" height="450px">
               <div class="body">
                 <div class="container">
                   <div class="title">Calcul bobine</div>
@@ -495,7 +495,7 @@
         </v-btn> -->
  
           <v-stepper-content step="4">
-            <v-card class="mb-12" color="#71b7e675" height="450px">
+            <v-card class="mb-12" color="rgb(5 48 96 / 78%)" height="450px">
               <div class="body">
                  <div class="container">
                   <div class="title">Calcul bobine</div>
@@ -655,7 +655,7 @@
             <v-btn color="primary" @click="e1 = 5" > Continue </v-btn>   
                    </v-stepper-content>
                    <v-stepper-content step="5">
-            <v-card class="mb-12" color="#71b7e675" height="450px">
+            <v-card class="mb-12" color="rgb(5 48 96 / 78%)" height="450px">
               <div class="body">
                 <div class="container">
                   <div class="title">Calcul bobine</div>
@@ -1066,7 +1066,7 @@ h1 {
   max-height: calc(100vh - 50px);
 
   /* margin: 0.5%; */
-  /* background: linear-gradient(135deg,#71b7e675, #71b7e675); */
+  /* background: linear-gradient(135deg,rgb(5 48 96 / 78%), rgb(5 48 96 / 78%)); */
 }
 .container {
   max-width: 98%;

@@ -3,8 +3,9 @@
     <v-app-bar color="#366ca8" dark app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <v-toolbar-title class="text">
-        <span class="font-weight-light">Sacem</span>
-        <span>autocite</span>   
+        <!-- <span class="font-weight-light">Sacem</span>
+        <span>autocite</span>    -->
+        <navbarUpdate/>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <!-- projetnav -->
@@ -138,13 +139,15 @@
 <script>
 import Footer from '@/components/Footer';
 import Profile from '@/components/Profile';
+import navbarUpdate from '@/components/navbarUpdate';
 import axios from 'axios';
 import { mapGetters } from 'vuex';
 
   export default {
     components: {
     Footer,
-    Profile
+    Profile,
+    navbarUpdate
   },  data() {
     
     return {

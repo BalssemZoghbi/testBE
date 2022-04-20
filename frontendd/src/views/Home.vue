@@ -280,7 +280,7 @@ export default {
 .v-data-table {
   /* line-height: 1.5; */
   /* max-width: 1800px; */
-  margin-top: -12%;
+  /* margin-top: -12%; */
   /* box-shadow: 20px 20px 50px grey; */
 }
 /* .theme--light.v-icon {
