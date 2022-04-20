@@ -1,6 +1,7 @@
 <template>
    <div>
-  <navbarUpdate :elec_id='projet.electrique_id' :id='projet.id'/>
+         <NavDash />
+  <!-- <navbarUpdate :elec_id='projet.electrique_id' :id='projet.id'/> -->
 <div class="body">
   <v-stepper v-model="e1">
     <v-stepper-header>
@@ -276,11 +277,15 @@
 
 <script>
 // import { reactive } from "vue";
-import navbarUpdate from '../../navbarUpdate';
-
+// import navbarUpdate from '../../navbarUpdate';
+import NavDash from "@/components/NavDash.vue";
 import axios from "axios";
 export default {
-    components: { navbarUpdate },
+    components: { 
+      // navbarUpdate
+          NavDash,
+
+       },
   data() {
     return {
       barre:[],

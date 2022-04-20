@@ -1,6 +1,8 @@
 <template>
   <div>
-    <navbarUpdate :elec_id="projet.electrique_id" />
+    <!-- <navbarUpdate :elec_id="projet.electrique_id" /> -->
+             <NavDash />
+
     <div class="body">
       <v-stepper v-model="e1">
         <v-stepper-header>
@@ -260,11 +262,17 @@
 
 <script>
 // import { reactive } from "vue";
-import navbarUpdate from "../../navbarUpdate.vue";
+// import navbarUpdate from "../../navbarUpdate.vue";
+
+import NavDash from "@/components/NavDash.vue";
 
 import axios from "axios";
 export default {
-  components: { navbarUpdate },
+    components: { 
+      // navbarUpdate 
+                NavDash,
+
+      },
   data() {
     return {
       toles:['M110-23','M120-27','M130-30','H75-23','H80-23','H85-23','H95-27','H105-30'],
