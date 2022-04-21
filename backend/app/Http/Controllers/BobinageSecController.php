@@ -144,7 +144,7 @@ class BobinageSecController extends Controller
             }else if($conducteur=='meplat guipé'){
                    return 0;}
         }
-        public function PoidFeui($materiau,$dext,$bint,$dint,$epx,$majPoid,$bext,$epy,$N2c,$scu2){
+        public function PoidFeui($materiau,$dext,$bint,$dint,$majPoid,$bext,$N2c,$scu2){
             if($materiau=='cuivre'){
                 $coefPoid=8.9;
                 $coefPerte=2.286;
@@ -197,7 +197,7 @@ class BobinageSecController extends Controller
             $barre=$this->calculBarre($request->Epbarre);
             $HbobineBt= $this->Hbobine($request->Hfeuillard,$request->collierBT);
             $ePap=$this->ePap($request->ep1Papier,$request->nbrPap1,$request->ep2Papier,$request->nbrPap2);
-            $epxfeui=floor($this->Epxfeui($request->typeCanaux,$projet->N2c,$request->canauxBt,$request->lgCales,$epFeuillard,$ePap));
+            $epxfeui=$this->Epxfeui($request->typeCanaux,$projet->N2c,$request->canauxBt,$request->lgCales,$epFeuillard,$ePap);
             $epFeuilpap=$this->epPapier($request->epFeuilPap,$request->nbrPapier);
             $epPapier=$this->epPapier($epFeuilpap,$request->nbPapier);
             if($barre!=null){
@@ -206,7 +206,7 @@ class BobinageSecController extends Controller
 
             $dextfeui=$this->Dext($DintBint,$epxfeui);
             $Bextfeui=$this->Bextfeui($DintBint,$epxfeui,$barre->epaisseur);
-            $PoidFeui=$this->PoidFeui($request->materiauSec,$dextfeui,$DintBint,$DintBint,$epxfeui,$request->majPoid,$Bextfeui,$epxfeui,$projet->N2c,$scu2);
+            $PoidFeui=$this->PoidFeui($request->materiauSec,$dextfeui,$DintBint,$DintBint,$request->majPoid,$Bextfeui,$projet->N2c,$scu2);
         }
           if($request->conducteurSec=='meplat guipé'){
                 $Bobinage->update([
