@@ -1,282 +1,324 @@
 <template>
-   <div>
-         <NavDash />
-  <!-- <navbarUpdate :elec_id='projet.electrique_id' :id='projet.id'/> -->
-<div class="body">
-  <v-stepper v-model="e1">
-    <v-stepper-header>
-      <v-stepper-step
-        :complete="e1 > 1"
-        step="1"
-      >
-        Name of step 1
-      </v-stepper-step>
+  <div>
+    <NavDash />
+    <!-- <navbarUpdate :elec_id='projet.electrique_id' :id='projet.id'/> -->
+    <div class="body">
+      <v-stepper v-model="e1">
+        <v-stepper-header>
+          <v-stepper-step :complete="e1 > 1" step="1">
+            Name of step 1
+          </v-stepper-step>
 
-      <v-divider></v-divider>
+          <v-divider></v-divider>
 
-      <v-stepper-step
-        :complete="e1 > 2"
-        step="2"
-      >
-        Name of step 2
-      </v-stepper-step>
+          <v-stepper-step :complete="e1 > 2" step="2">
+            Name of step 2
+          </v-stepper-step>
 
-      <v-divider></v-divider>
+          <v-divider></v-divider>
 
-      <v-stepper-step step="3">
-        Name of step 3
-      </v-stepper-step>
-    </v-stepper-header>
+          <v-stepper-step step="3"> Name of step 3 </v-stepper-step>
+        </v-stepper-header>
 
-    <v-stepper-items>
-      <v-stepper-content step="1">
-        <v-card
-          class="mb-12"
-          color="rgb(5 48 96 / 78%)"
-          height="450px"
-        >
-        <div class="body">
-<div class="container">
-    <div class="title">Données Generale</div>
-    <div class="content">
-      <form  v-on:submit.prevent="updateprojet">
-        <div class="user-details">
-           <div class="input-box">
-               <div class="form__div">
-                    <input type="text" class="form__input" placeholder=" " id="appareil" v-model="projet.appareil">
-                    <label for="" class="form__label">Appareil</label>
+        <v-stepper-items>
+          <v-stepper-content step="1">
+            <v-card class="mb-12" color="rgb(5 48 96 / 78%)" height="450px">
+              <div class="body">
+                <div class="container">
+                  <div class="title">Données Generale</div>
+                  <div class="content">
+                    <form v-on:submit.prevent="updateprojet">
+                      <div class="user-details">
+                        <div class="input-box">
+                          <div class="form__div">
+                            <input
+                              type="text"
+                              class="form__input"
+                              placeholder=" "
+                              id="appareil"
+                              v-model="projet.appareil"
+                            />
+                            <label for="" class="form__label">Appareil</label>
+                          </div>
+                        </div>
+                        <div class="input-box">
+                          <div class="form__div">
+                            <input
+                              type="text"
+                              class="form__input"
+                              placeholder=" "
+                              id="reference"
+                              v-model="projet.reference"
+                            />
+                            <label for="" class="form__label">Reference</label>
+                          </div>
+                        </div>
+                        <div class="input-box">
+                          <div class="form__div">
+                            <input
+                              type="text"
+                              class="form__input"
+                              placeholder=" "
+                              id="client"
+                              v-model="projet.client"
+                            />
+                            <label for="" class="form__label">Client</label>
+                          </div>
+                        </div>
+                        <div class="input-box">
+                          <div class="form__div">
+                            <input
+                              type="text"
+                              class="form__input"
+                              placeholder=" "
+                              id="refClient"
+                              v-model="projet.refClient"
+                            />
+                            <label for="" class="form__label"
+                              >Reference Client</label
+                            >
+                          </div>
+                        </div>
+
+                        <div class="input-box">
+                          <div class="form__div">
+                            <input
+                              type="text"
+                              class="form__input"
+                              placeholder=" "
+                              id="user_id"
+                              v-model="projet.elaborateur"
+                            />
+                            <label for="" class="form__label"
+                              >Elaboré par</label
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
                 </div>
-          </div>
-           <div class="input-box">
-            <div class="form__div">
-              <input type="text" class="form__input" placeholder=" " id="reference" v-model="projet.reference">
-              <label for="" class="form__label">Reference</label>
-          </div>
-          </div>
-           <div class="input-box">
-            <div class="form__div">
-              <input type="text" class="form__input" placeholder=" " id="client" v-model="projet.client">
-              <label for="" class="form__label">Client</label>
-          </div>
-          </div>
-            <div class="input-box">
-            <div class="form__div">
-              <input type="text" class="form__input" placeholder=" " id="refClient" v-model="projet.refClient">
-              <label for="" class="form__label">Reference Client</label>
-          </div>
-          </div>
-       
-          
-            <div class="input-box">
-            <div class="form__div">
-              <input type="text" class="form__input" placeholder=" "  id="user_id"
-        v-model="projet.elaborateur" >
-              <label for="" class="form__label">Elaboré par</label>
-          </div>
-          </div>
-        </div>
-      </form>
-    </div>
-</div>
-        </div>
+              </div>
+            </v-card>
 
-  </v-card>
+            <v-btn
+              color="primary"
+              @click="e1 = 2"
+              style="margin-top: -3% !important; margin-bottom: 5% !important"
+            >
+              Continue
+            </v-btn>
+          </v-stepper-content>
 
-        <v-btn
-          color="primary"
-          @click="e1=2"
-        style="margin-top: -3%!important;margin-bottom:5%!important;"
-        >
-          Continue
-        </v-btn>
-
-      </v-stepper-content>
-
-      <v-stepper-content step="2">
-        <v-card
-          class="mb-12"
-          color="#71b7e675"
-          height="450px"
-        >
-            <div class="body">
-<div class="container">
-    <div class="content">
-      <form  v-on:submit.prevent="updateprojet">
-        <div class="user-details">
-             <div class="input-box">
-            <div class="form__div">
-              <!-- <input type="text" class="form__input" placeholder=" " id="type"
+          <v-stepper-content step="2">
+            <v-card class="mb-12" color="#71b7e675" height="450px">
+              <div class="body">
+                <div class="container">
+                  <div class="content">
+                    <form v-on:submit.prevent="updateprojet">
+                      <div class="user-details">
+                        <div class="input-box">
+                          <div class="form__div">
+                            <!-- <input type="text" class="form__input" placeholder=" " id="type"
         v-model="projet.type">
               <label for="" class="form__label">type</label> -->
-                <v-select
-                :items="types"
-                label="type"
-                v-model="projet.type"
-                dense
-                outlined
-              ></v-select>
-          </div>
-          </div>
-            <div class="input-box">
-            <div class="form__div">
-              <!-- <input type="text" class="form__input" placeholder=" " id="remplissage"
+                            <v-select
+                              :items="types"
+                              label="type"
+                              v-model="projet.type"
+                              dense
+                              outlined
+                            ></v-select>
+                          </div>
+                        </div>
+                        <div class="input-box">
+                          <div class="form__div">
+                            <!-- <input type="text" class="form__input" placeholder=" " id="remplissage"
         v-model="projet.remplissage">
               <label for="" class="form__label">remplissage</label> -->
-              <v-select
-                :items="remplissages"
-                label="remplissage"
-                v-model="projet.remplissage"
-                dense
-                outlined
-              ></v-select>
-          </div>
-          </div>
-          <div class="input-box">
-            <div class="form__div">
-              <!-- <input type="text" class="form__input" placeholder=" "  id="installation"
+                            <v-select
+                              :items="remplissages"
+                              label="remplissage"
+                              v-model="projet.remplissage"
+                              dense
+                              outlined
+                            ></v-select>
+                          </div>
+                        </div>
+                        <div class="input-box">
+                          <div class="form__div">
+                            <!-- <input type="text" class="form__input" placeholder=" "  id="installation"
         v-model="projet.installation">
               <label for="" class="form__label">Installation</label> -->
-               <v-select
-                :items="installations"
-                label="installation"
-                v-model="projet.installation"
-                dense
-                outlined
-              ></v-select>
-          </div>
-          </div>
-          <div class="input-box">
-            <div class="form__div">
-              <!-- <input type="text" class="form__input" placeholder=" " id="montage"
+                            <v-select
+                              :items="installations"
+                              label="installation"
+                              v-model="projet.installation"
+                              dense
+                              outlined
+                            ></v-select>
+                          </div>
+                        </div>
+                        <div class="input-box">
+                          <div class="form__div">
+                            <!-- <input type="text" class="form__input" placeholder=" " id="montage"
         v-model="projet.montage">
               <label for="" class="form__label">Montage</label> -->
-               <v-select
-                :items="montages"
-                label="montage"
-                v-model="projet.montage"
-                dense
-                outlined
-              ></v-select>
-          </div>
-          </div>
-       
-           <div class="input-box">
-            <div class="form__div">
-              <!-- <input type="text" class="form__input" placeholder=" " id="dielectrique"
+                            <v-select
+                              :items="montages"
+                              label="montage"
+                              v-model="projet.montage"
+                              dense
+                              outlined
+                            ></v-select>
+                          </div>
+                        </div>
+
+                        <div class="input-box">
+                          <div class="form__div">
+                            <!-- <input type="text" class="form__input" placeholder=" " id="dielectrique"
         v-model="projet.dielectrique">
               <label for="" class="form__label">Dielectrique</label> -->
-               <v-select
-                :items="dielectriques"
-                label="dielectrique"
-                v-model="projet.dielectrique"
-                dense
-                outlined
-              ></v-select>
-          </div>
-          
-          </div>
-               <div class="input-box">
-            <div class="form__div">
-              <!-- <input type="text" class="form__input" placeholder=" " id="fonctionnement"
+                            <v-select
+                              :items="dielectriques"
+                              label="dielectrique"
+                              v-model="projet.dielectrique"
+                              dense
+                              outlined
+                            ></v-select>
+                          </div>
+                        </div>
+                        <div class="input-box">
+                          <div class="form__div">
+                            <!-- <input type="text" class="form__input" placeholder=" " id="fonctionnement"
         v-model="projet.fonctionnement">
               <label for="" class="form__label">Fonctionnement</label> -->
-               <v-select
-                :items="fonctionnements"
-                label="fonctionnement"
-                v-model="projet.fonctionnement"
-                dense
-                outlined
-              ></v-select>
-          </div>
-          </div>
-        </div>
-         
-      </form>
-    </div>
-</div>
-        </div>
-        </v-card>
-<v-btn @click="e1 = 1"         style="margin-top: -3%!important;margin-bottom:5%!important;"
-> précédente </v-btn>
-        <v-btn
-          color="primary"
-          @click="e1 = 3"
-                  style="margin-top: -3%!important;margin-bottom:5%!important;"
-        >
-          Continue
-        </v-btn>
+                            <v-select
+                              :items="fonctionnements"
+                              label="fonctionnement"
+                              v-model="projet.fonctionnement"
+                              dense
+                              outlined
+                            ></v-select>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </v-card>
+            <v-btn
+              @click="e1 = 1"
+              style="margin-top: -3% !important; margin-bottom: 5% !important"
+            >
+              précédente
+            </v-btn>
+            <v-btn
+              color="primary"
+              @click="e1 = 3"
+              style="margin-top: -3% !important; margin-bottom: 5% !important"
+            >
+              Continue
+            </v-btn>
+          </v-stepper-content>
 
-    
-      </v-stepper-content>
-
-      <v-stepper-content step="3">
-        <v-card
-          class="mb-12"
-          color="#71b7e675"
-          height="450px"
-        >
-           <div class="body">
-<div class="container" >
-    <div class="content">
-      <form v-on:submit.prevent="updateprojet" style="padding: 30px;">
-        <div class="user-details">
-              <div class="input-box">
-            <div class="form__div">
-              <!-- <input type="text" class="form__input" placeholder=" " id="echangeurs"
+          <v-stepper-content step="3">
+            <v-card class="mb-12" color="#71b7e675" height="450px">
+              <div class="body">
+                <div class="container">
+                  <div class="content">
+                    <form
+                      v-on:submit.prevent="updateprojet"
+                      style="padding: 30px"
+                    >
+                      <div class="user-details">
+                        <div class="input-box">
+                          <div class="form__div">
+                            <!-- <input type="text" class="form__input" placeholder=" " id="echangeurs"
         v-model="projet.echangeurs">
               <label for="" class="form__label">Echangeurs</label> -->
-               <v-select
-                :items="echangeurs"
-                label="Echangeurs"
-                v-model="projet.echangeurs"
-                dense
-                outlined
-              ></v-select>
-          </div>
-          </div>
-                <div class="input-box">
-            <div class="form__div">
-              <input type="text" class="form__input" placeholder=" " id="temperatureMax" v-model="projet.temperatureMax">
-              <label for="" class="form__label">TemperatureMax</label>
-          </div>
-          </div>
-          <div class="input-box">
-            <div class="form__div">
-              <input type="text" class="form__input" placeholder=" " id="attitudeMax" v-model="projet.attitudeMax">
-              <label for="" class="form__label">attitudeMax</label>
-          </div>
-          </div>
-            <div class="input-box">
-            <div class="form__div">
-              <!-- <input type="text" class="form__input" placeholder=" " id="refroidissement"
+                            <v-select
+                              :items="echangeurs"
+                              label="Echangeurs"
+                              v-model="projet.echangeurs"
+                              dense
+                              outlined
+                            ></v-select>
+                          </div>
+                        </div>
+                        <div class="input-box">
+                          <div class="form__div">
+                            <input
+                              type="text"
+                              class="form__input"
+                              placeholder=" "
+                              id="temperatureMax"
+                              v-model="projet.temperatureMax"
+                            />
+                            <label for="" class="form__label"
+                              >TemperatureMax</label
+                            >
+                          </div>
+                        </div>
+                        <div class="input-box">
+                          <div class="form__div">
+                            <input
+                              type="text"
+                              class="form__input"
+                              placeholder=" "
+                              id="attitudeMax"
+                              v-model="projet.attitudeMax"
+                            />
+                            <label for="" class="form__label"
+                              >attitudeMax</label
+                            >
+                          </div>
+                        </div>
+                        <div class="input-box">
+                          <div class="form__div">
+                            <!-- <input type="text" class="form__input" placeholder=" " id="refroidissement"
         v-model="projet.refroidissement">
               <label for="" class="form__label">Refroidissement</label> -->
-               <v-select
-                :items="refroidissements"
-                label="Refroidissement"
-                v-model="projet.refroidissement"
-                dense
-                outlined
-              ></v-select>
-          </div>
-          </div>
-        </div>
-      </form>
+                            <v-select
+                              :items="refroidissements"
+                              label="Refroidissement"
+                              v-model="projet.refroidissement"
+                              dense
+                              outlined
+                            ></v-select>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </v-card>
+            <v-btn
+              @click="e1 = 2"
+              style="margin-top: -3% !important; margin-bottom: 5% !important"
+            >
+              précédente
+            </v-btn>
+            <router-link
+              class="nav-link"
+              :to="
+                '/electrique/update/' + projet.id + '/' + projet.electrique_id
+              "
+              ><v-btn
+                color="primary"
+                @click="updateprojet"
+                style="margin-top: -3% !important; margin-bottom: 5% !important"
+              >
+                Modifier
+              </v-btn></router-link
+            >
+          </v-stepper-content>
+        </v-stepper-items>
+      </v-stepper>
     </div>
-</div>
-        </div>
-
-        </v-card>
-        <v-btn @click="e1 = 2"         style="margin-top: -3%!important;margin-bottom:5%!important;"
-> précédente </v-btn>
-        <router-link class="nav-link" :to="'/electrique/update/' + projet.id+'/'+ projet.electrique_id"><v-btn color="primary" @click="updateprojet"  style="margin-top: -3%!important;margin-bottom:5%!important;">
-          Modifier
-        </v-btn></router-link>
-      </v-stepper-content>
-    </v-stepper-items>
-  </v-stepper>
-</div>
-</div>
+  </div>
 </template>
 
 <script>
@@ -285,41 +327,45 @@
 import NavDash from "@/components/NavDash.vue";
 import axios from "axios";
 export default {
-    components: { 
-      // navbarUpdate
-          NavDash,
-
-       },
+  components: {
+    // navbarUpdate
+    NavDash,
+  },
   data() {
     return {
-      barre:[],
-       types: ['cabine','poteau','h61','h59','sec'],
-       remplissages:['à matelas d`air','integral','respirant'],
-       installations:['interieure', 'exterieure','interieur&exterieure'],
-       montages:['sur galets','sur pieds'],
-       echangeurs:['ondes','radiateurs','parois'],
-       dielectriques:['huile biodegradable','huile minerale inhibée','huile siliconne','huile minerale non inhibée'],
-       fonctionnements:['abaisseur','elevateur','isolement'],
-       refroidissements:['onan','onaf'],
+      barre: [],
+      types: ["cabine", "poteau", "h61", "h59", "sec"],
+      remplissages: ["à matelas d`air", "integral", "respirant"],
+      installations: ["interieure", "exterieure", "interieur&exterieure"],
+      montages: ["sur galets", "sur pieds"],
+      echangeurs: ["ondes", "radiateurs", "parois"],
+      dielectriques: [
+        "huile biodegradable",
+        "huile minerale inhibée",
+        "huile siliconne",
+        "huile minerale non inhibée",
+      ],
+      fonctionnements: ["abaisseur", "elevateur", "isolement"],
+      refroidissements: ["onan", "onaf"],
       projet: {
-      appareil: "",
-      reference: "",
-      client: "",
-      refClient: "",
-      temperatureMax: "",
-      attitudeMax: "",
-      type: "",
-      remplissage: "",
-      installation: "",
-      montage: "",
-      echangeurs: "",
-      dielectrique: "",
-      fonctionnement: "",
-      refroidissement: "",
-      elaborateur:"",
-      user_id: "",
+        appareil: "",
+        reference: "",
+        client: "",
+        refClient: "",
+        temperatureMax: "",
+        attitudeMax: "",
+        type: "",
+        remplissage: "",
+        installation: "",
+        montage: "",
+        echangeurs: "",
+        dielectrique: "",
+        fonctionnement: "",
+        refroidissement: "",
+        elaborateur: "",
+        user_id: "",
       },
-      e1:1
+      e1: 1,
     };
   },
   methods: {
@@ -330,7 +376,7 @@ export default {
         reference: this.projet.reference,
         client: this.projet.client,
         refClient: this.projet.refClient,
-        temperatureMax:this.projet.temperatureMax,
+        temperatureMax: this.projet.temperatureMax,
         attitudeMax: this.projet.attitudeMax,
         type: this.projet.type,
         remplissage: this.projet.remplissage,
@@ -342,26 +388,24 @@ export default {
         refroidissement: this.projet.refroidissement,
         user_id: this.projet.user_id,
         elaborateur: this.projet.elaborateur,
-        
       };
-      axios.put('projets/edit/'+this.$route.params.id, projets).then(
-        (response) => (this.id = response.data.id)
-        
-      );
+      axios
+        .put("projets/edit/" + this.$route.params.id, projets)
+        .then((response) => (this.id = response.data.id));
     },
-    getbarre(){
-       axios.get('/getdesignationBarre').then(
-        (response) => (this.barre = response.data,console.log(this.barre))
-        
-      );
-    }
+    getbarre() {
+      axios
+        .get("/getdesignationBarre")
+        .then(
+          (response) => ((this.barre = response.data), console.log(this.barre))
+        );
+    },
   },
   async mounted() {
-    const result = await axios.get('projets/'+this.$route.params.id);
+    const result = await axios.get("projets/" + this.$route.params.id);
     this.projet = result.data;
     // this.updateprojet();
   },
- 
 };
 </script>
 <style scoped>

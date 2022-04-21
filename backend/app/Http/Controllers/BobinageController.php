@@ -125,11 +125,21 @@ class BobinageController extends Controller
     }
 
     public function filobtenue($d1d){
-    $filObtenue=Emaille::where('designation',$d1d)->get()->first();
-    if($filObtenue==null){
-        $filObtenue=Emaille::where('designation','<=',$d1d)->orderBy('designation','desc')->get()->first();
-    }
-    return $filObtenue;
+        $closest = null;
+        $tab=[];
+        $Emaille=Emaille::get('Designation');
+
+        foreach ($Emaille as $valeur){
+            array_push($tab, $valeur->Designation);
+        }
+        foreach ($tab as $item) {
+           if ($closest === null || abs($d1d - $closest) > abs($item - $d1d)) {
+              $closest = $item;
+           }
+        }
+        $filObtenue=Emaille::where('designation',$closest)->get()->first();
+
+        return $filObtenue;
     }
 
     public function spchb($conducteur,$n1cMax,$nbCoucheMt){
