@@ -23,8 +23,8 @@ import User from "../components/user/User.vue";
 import Profile from '@/components/Profile';
 
 import Demande from "../components/user/demande.vue";
-import garantie24 from "../components/garantie24.vue";
-import garantie36 from "../components/garantie36.vue";
+import garantie24 from "../components/donnees/garantie/garantie24.vue";
+import garantie36 from "../components/donnees/garantie/garantie36.vue";
 import saillie from "../components/donnees/bobinage/saillie.vue";
 import Hbrin from "../components/donnees/bobinage/hbrin.vue";
 import barre from "../components/donnees/bobinage/barre.vue";

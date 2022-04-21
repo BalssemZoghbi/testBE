@@ -1,6 +1,7 @@
 <template>
   <div>
     <navbarUpdate />
+    <NavDash />
     <div class="body">
       <v-stepper v-model="e1">
         <v-stepper-header>
@@ -804,11 +805,12 @@
 
 <script>
 // import { reactive } from "vue";
-import navbarUpdate from '../../navbarUpdate';
+// import navbarUpdate from '../../navbarUpdate';
+import NavDash from "@/components/NavDash.vue";
 
 import axios from "axios";
 export default {
-    components: { navbarUpdate },
+    components: { NavDash },
   data() {
     return {
       saillie:[],

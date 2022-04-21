@@ -17,5 +17,11 @@
   data: () => ({
     //
   }),
+    mounted(){
+  let user=localStorage.getItem('user');
+  if(!user){
+  this.$router.push('/Connexion');
+    }
+  },
   }
 </script>

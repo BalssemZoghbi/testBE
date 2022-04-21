@@ -168,8 +168,8 @@
 
 <script>
 import Swal from "sweetalert2/dist/sweetalert2.js";
-import NavDash from "../components/NavDashboard.vue";
-import garantie36 from "../components/garantie36.vue";
+import NavDash from "@/components/NavDashboard.vue";
+import garantie36 from "../garantie/garantie36.vue";
 import axios from "axios";
 export default {
    components: {
