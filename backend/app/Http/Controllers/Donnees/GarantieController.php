@@ -104,7 +104,7 @@ class GarantieController extends Controller
         }else{
             $max=$projet->u2o;
         }
-        if($max<36000){
+        if($max<24000){
            $calcul= $this->calcul24($projet->puissance);
            $option="StandardTri24KV";
         }else{

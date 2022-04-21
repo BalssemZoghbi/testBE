@@ -134,19 +134,19 @@ class BobinageController extends Controller
 
     public function spchb($conducteur,$n1cMax,$nbCoucheMt){
         if($conducteur=='Rond emaille'){
-            return $n1cMax/$nbCoucheMt;
+            return Ceil($n1cMax/$nbCoucheMt);
         }else{
             return 0;
             }
     }
     public function ncha($nbCoucheMt,$spchb,$n1cmax){
-        return ($nbCoucheMt*$spchb)-$n1cmax;
+        return floor(($nbCoucheMt*$spchb)-$n1cmax);
     }
     public function nchb($nbCoucheMt,$ncha){
         return $nbCoucheMt-$ncha;
     }
     public function spcha($spchb){
-        return $spchb-1 ;
+        return Ceil($spchb-1) ;
     }
     public function hCondMt($filObtenueisole,$spchb){
         return $spchb*$filObtenueisole;
@@ -154,10 +154,10 @@ class BobinageController extends Controller
     public function Hcollier($hBobine,$HcondMt){
         return ($hBobine-$HcondMt)/2;
     }
-    public function NbrePapier($conducteur,$rigidite,$spchb,$vsp,$filIsole,$filNue){
+    public function NbrePapier($conducteur,$rigidite,$spchb,$vsp,$filIsole,$filNue,$epaisseurPapier){
         if($conducteur=="Rond emaille"){
-            
-            return ($rigidite/($spchb*$vsp*4))-($filIsole-$filNue);
+
+            return Ceil(((($spchb*$vsp*4)/$rigidite)-($filIsole-$filNue))/$epaisseurPapier);
         }else{
             return 0;
         }
@@ -165,12 +165,15 @@ class BobinageController extends Controller
     public function epaisseurPapier($epfeuille,$nbrepapier){
         return ($epfeuille*$nbrepapier);
     }
-    public function dintMt($bext,$distance){
+    public function dintMt($dext,$distance){
+        return ($distance*2)+$dext;
+    }
+    public function bintMt($bext,$distance){
         return ($distance*2)+$bext;
     }
     public function EpxMt($typecanaux,$nbreCoucheMt,$fileisole,$epaisseurPapier,$canauxMt,$lrgc,$epaisseurPapierCanaux){
         if($typecanaux=='complet'){
-        return ($nbreCoucheMt*$fileisole+$epaisseurPapier)*($nbreCoucheMt-1-$canauxMt)+$canauxMt*$lrgc+$canauxMt*$epaisseurPapierCanaux;
+        return $nbreCoucheMt*$fileisole+$epaisseurPapier*($nbreCoucheMt-1-$canauxMt)+$canauxMt*$lrgc+$canauxMt*$epaisseurPapierCanaux;
         }else if($typecanaux=='lune'){
             return ($nbreCoucheMt*$fileisole+$epaisseurPapier)*($nbreCoucheMt-1);
         }
@@ -181,12 +184,17 @@ class BobinageController extends Controller
     public function epyMtLune($nbreCoucheMt,$fileisole,$epaisseurPapier,$canauxMt,$lrgc){
         return  ($nbreCoucheMt*$fileisole+$epaisseurPapier)*($nbreCoucheMt-1)+$canauxMt*$lrgc;
     }
-    public function BextMt($typeconducteur,$dext,$bint,$epy){
-        if($typeconducteur=='complet'){
-            return $dext;
-        }else if($typeconducteur=='lune'){
+    // public function BextMt($typeconducteur,$bint,$epy){
+    //     if($typeconducteur=='complet'){
+    //         return $bint+2*$epy;
+    //     }else if($typeconducteur=='lune'){
+    //         return $bint+2*$epy;
+    //     }
+    // }
+    public function BextMt($bint,$epy){
+
             return $bint+2*$epy;
-        }
+
     }
     public function poidEmaille($materiau,$dext,$bint,$dint,$majPoid,$bext,$n1cMax,$scu1){
         if($materiau=='cuivre'){
@@ -210,11 +218,11 @@ class BobinageController extends Controller
             ->where('projets.id',$id)
             ->select('bobinages.*','bobinages.id as bobine_id','volt_Spires.Vsp','volt_Spires.N1c','volt_Spires.spire','electriques.PrimaireIPhase','gradins.diamNominale','bobinage_secs.HbobineBt','bobinage_secs.DextBT','bobinage_secs.Bext','projets.*')
             ->get()->first();
-           
+
             $Bobinage=Bobinage::FindOrFail($projet->bobine_id );
             // dd($projet->spire);
             $su1d=$this->su1d($request->conducteur,$projet->PrimaireIPhase,$request->J1D);
-           
+
            if($request->conducteur=='Rond emaille'){ $D1d=$this->D1d($su1d);
             $filobtenue=$this->filobtenue($D1d);
             $Designation=$filobtenue->Designation;
@@ -239,26 +247,29 @@ class BobinageController extends Controller
             $poid=$this->Poid($request->materiau,$projet->N1c,$scu1,$DintBint,$epx,$request->majPoid);
 
             $N1cmax=$this->N1cmax($projet->spire);
-            
+
             $spchb=$this->spchb($request->conducteur,$N1cmax,$request->nbcoucheMT);
             $ncha=$this->ncha($request->nbcoucheMT,$spchb,$N1cmax);
             $nchb=$this->nchb($request->nbcoucheMT,$ncha);
             $spcha=$this->spcha($spchb);
             $HcondMt=$this->hcondMt($Isole,$spchb);
-            // chouf 
+            // chouf
             $Hcollier=$this->Hcollier($projet->HbobineBt,$HcondMt);
-            $nbrPapierMT=$this->NbrePapier($request->conducteur,$request->rigiditePapier,$spchb,$projet->Vsp,$Isole,$Designation);
+            $nbrPapierMT=$this->NbrePapier($request->conducteur,$request->rigiditePapierMT,$spchb,$projet->Vsp,$Isole,$Designation,$request->EpfeuillePapier);
+
             $epaisseurPapier=$this->epaisseurPapier($request->EpfeuillePapier, $nbrPapierMT);
             $EpxMt=$this->EpxMt($request->typeCanaux,$request->nbcoucheMT,$Isole,$epaisseurPapier,$request->canauxMT,$request->lgCales,$request->EpaisseurPapierCanaux);
-            $dintMt=$this->dintMt($projet->Bext,$request->DistanceBTMT);
-            $dextMt=$this->dextMt($dintMt,$EpxMt);
-            $BextMt=$this->BextMt($request->typeCanaux,$dextMt,$dintMt,$epy);
-            $poidEmaille=$this->poidEmaille($request->materiau,$dextMt,$dintMt,$dintMt,$request->majPoid,$dextMt,$N1cmax,$scu1);
-            if($request->typeCanaux=="complet"){
+            $dintMt=$this->dintMt($projet->DextBT,$request->DistanceBTMT);
+            $bintMt=$this->bintMt($projet->Bext,$request->DistanceBTMT);
+   if($request->typeCanaux=="complet"){
                 $epy=$EpxMt;
             }else if($request->typeCanaux=="lune"){
                 $epy=$this->epyMtLune($request->nbcoucheMT,$Isole,$epaisseurPapier,$request->canauxMT,$request->lgCales);
             }
+            $dextMt=$this->dextMt($dintMt,$EpxMt);
+            $BextMt=$this->BextMt($bintMt,$epy);
+            $poidEmaille=$this->poidEmaille($request->materiau,$dextMt,$dintMt,$dintMt,$request->majPoid,$dextMt,$N1cmax,$scu1);
+
           if($request->conducteur=='meplat guipé'){
                 $Bobinage->update([
                         'materiau'=> $request->materiau,
@@ -311,7 +322,7 @@ class BobinageController extends Controller
                     'canauxMT'=>$request->canauxMT,
                     'lgCales'=>$request->lgCales,
                     'DintMT'=>$dintMt,
-                    'BintMT'=>$dintMt,
+                    'BintMT'=>$bintMt,
                     'EpxMT'=>$EpxMt,
                     'EpyMT'=>$epy,
                     'DextMT'=>$dextMt,

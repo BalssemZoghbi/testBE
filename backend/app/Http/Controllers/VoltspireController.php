@@ -26,8 +26,9 @@ class VoltspireController extends Controller
         return response()->json('deleted');
     }
     public function N2c($U2ph,$Snette,$B,$frequence){
-  $N2c=floor($U2ph*(pow(10,6))/(pi()*$frequence*sqrt(2)*$Snette*$B));
-        return $N2c;
+
+  $N2c=round($U2ph*(pow(10,6))/(pi()*$frequence*sqrt(2)*$Snette*$B));
+        return $N2c;dd($N2c);
     }
     public function N1c($U1ph,$Vsp){
         $N1c=$U1ph/$Vsp;
@@ -66,7 +67,7 @@ class VoltspireController extends Controller
         $spires=[];
         $spires1=[];
         for($i=0;$i<$priseSoustractive;$i++){
-            $spires[$i]=$n1+abs((($i-$priseSoustractive)*$n1*$echelonSous)/100);
+            $spires[$i]=$n1-abs((($i-$priseSoustractive)*$n1*$echelonSous)/100);
         }
         for($i=$priseSoustractive;$i<$priseAdditive+$priseSoustractive+1;$i++){
             $spires[$i]=$n1+abs((($i-$priseSoustractive)*$n1*$echelonAdd)/100);
@@ -90,8 +91,9 @@ class VoltspireController extends Controller
         $VoltSpire = VoltSpire::FindOrFail($projet->volt_spires_id);
         $Bmax=$this->Bmax($projet->secondaireUPhase,$projet->Snette,$request->Bmaxdesire,$projet->frequence);
         $N2c = $this->N2c($projet->secondaireUPhase,$projet->Snette,$Bmax,$projet->frequence);
-        $N1c=$this->N1c($projet->PrimaireUPhase,$projet->Vsp);
+
         $Vsp=$this->Vsp($projet->secondaireUPhase,$N2c,$projet->Snette,$Bmax,$projet->frequence);
+        $N1c=$this->N1c($projet->PrimaireUPhase,$projet->Vsp);
         // $largeur=$this->largeur($request->diamNominale,$request->nbrGradin,$request->pas);
         // $epaisseur=$this->epaisseur($request->diamNominale,$largeur,$request->nbrGradin);
         // $epaisseurfeuillard=$this->epaisseurfeuillard($request->diamNominale,$largeur,$request->nbrGradin,$request->demiGradin);
@@ -101,9 +103,9 @@ class VoltspireController extends Controller
       $VoltSpire->update([
                 'Bmaxdesire' =>$request->Bmaxdesire,
                 'Bmax' => $Bmax,
-                'Vsp' => 11.547,
+                'Vsp' => $Vsp,
                 'N2c' => $N2c,
-                'N1c' => 1732,05,
+                'N1c' => $N1c,
                 'prise' => $prise,
                 'spire' => $spires,
 

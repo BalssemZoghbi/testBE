@@ -154,6 +154,7 @@ class GradinController extends Controller
                 'demiGradin' => $request->demiGradin,
                 'largeur' => $largeur,
                 'epaisseur' => $epaisseurfeuillard,
+                // 'Sbrut' => $brut ,
                 'Sbrut' => $brut ,
                 'Snette' => $brut * $request->coeffRemplissage,
                 'EpaisseurTot' => array_sum($epaisseur),
