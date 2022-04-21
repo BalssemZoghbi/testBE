@@ -113,7 +113,7 @@ class ElectriqueController extends Controller
                 $UPhase=$Uligne/sqrt(3);
                 $Iligne=($puissance*1000)/($u1n*sqrt(3));
                 $IPhase=$Iligne;
-                $Uz=(2*$Uligne)/3;
+                $Uz=((2*$Uligne)/3)/2;
                 break;
 
             default:
