@@ -123,7 +123,7 @@ class GradinController extends Controller
     }
 
     public function updateGradin($id, Request $request)
-    {
+     {
 
         $projet = DB::table('projets')
             ->join('electriques', 'electriques.id', '=', 'projets.electrique_id')
