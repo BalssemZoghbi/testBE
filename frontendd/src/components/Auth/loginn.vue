@@ -59,18 +59,31 @@
                     <label for="" class="form__label">Email</label>
                 </div>
           </div>
+           <v-row no-gutters>
+           <v-col
+          cols="12"
+          md="4"
+        >
              <div class="input-field input-box">
                <div class="form__div">
                     <input class="form__input" placeholder=" " type="password" id="password"  v-model="password" >
                     <label for="" class="form__label">Mot de passe</label>
                 </div>
           </div>
+          </v-col>
+          <v-col
+        cols="12"
+        sm="6"
+        md="8"
+      >
           <div class="input-field input-box">
                <div class="form__div">
                     <input class="form__input" placeholder=" " type="password"  v-model="password_confirm" >
                     <label for="" class="form__label">Confirmer le mot de passe</label>
                 </div>
           </div>
+                    </v-col>
+ </v-row >
             <!-- <div class="input-field">
               <i class="fas fa-lock"></i>
               <input type="password" placeholder="Confirmer le mot de passe" v-model="password_confirm"    />

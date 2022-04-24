@@ -171,6 +171,14 @@
         </v-card>
 
       </v-tab-item>
+        <v-tab-item>
+        <v-card
+          flat
+        >
+         <Inactive/>
+        </v-card>
+
+      </v-tab-item>
     </v-tabs-items>
      <!-- <v-tabs center-active style="margin-left: 33%;">
     <v-tab>Utilisateurs</v-tab>
@@ -184,16 +192,18 @@
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import NavDash from "../NavDashboard.vue";
 import demande from "../user/demande.vue";
+import Inactive from "../user/userInactive.vue";
 import axios from "axios";
 export default {
    components: {
     NavDash,
     demande,
+    Inactive
   },
   data: () => ({
     tab: null,
         itemstab: [
-          'Utilisateur', 'Demande Inscription'
+          'Utilisateur', 'Demande Inscription','Utilisateur Inactive'
         ],
     search: "",
     dialog: false,

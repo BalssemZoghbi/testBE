@@ -1,11 +1,11 @@
 <template>
   <v-app id="inspire">
-    <v-main>
-      <v-container class="fill-height" fluid>
-        <v-row align="center" justify="center">
+    <v-main >
+      <v-container class="fill-height image" fluid >
+        <v-row align="center" justify="center" >
           <v-col cols="12" sm="8" md="8">
             <v-card class="elevation-12">
-              <v-window v-model="step">
+              <v-window v-model="step" >
                 <v-window-item :value="1">
                   <v-row>
                     <v-col cols="12" md="8">
@@ -35,6 +35,7 @@
                             prepend-icon="email"
                             type="text"
                             v-model="email"
+                            :rules="EmailRules"
                           />
 
                           <v-text-field
@@ -44,6 +45,7 @@
                             prepend-icon="lock"
                             type="password"
                             v-model="password"
+                            :rules="nameRules"
                           />
                         </v-form>
                       <router-link class="nav-link"  to="/forgot">  <h3 class="text-center mt-4" >Mot de passe oublié ?</h3></router-link>
@@ -56,7 +58,7 @@
 
                       </div>
                     </v-col>
-                    <v-col cols="12" md="4" class="teal accent-3">
+                    <v-col cols="12" md="4" class="teal accent-3" style="    margin-top: -1%;">
                       <v-card-text class="white--text mt-12">
                         <h1 class="text-center display-1">Bonjour !</h1>
                         <h5 class="text-center">
@@ -93,7 +95,7 @@ Entrez vos données personnelles et commencez votre journée                    
                         <h1
                           class="text-center display-2 teal--text text--accent-3"
                         >
-                          Crée un nouveau compte
+                          Crée un compte
                         </h1>
                         <!-- <div class="text-center mt-4">
                           <v-btn class="mx-2" fab color="black" outlined>
@@ -118,30 +120,47 @@ Entrez vos données personnelles et commencez votre journée                    
                             prepend-icon="person"
                             type="text"
                             v-model="name"
+                            :rules="nameRules"
+                             required
                           />   
+                             <v-row no-gutters>
+                           <v-col
+                              cols="6"
+                              md="4"
+                            >
                               <v-text-field
                             label="Poste"
                             name="poste"
                             prepend-icon="fa fa-user-tie"
                             type="text"
                             v-model="poste" 
-                          />  
+                            :rules="nameRules"
+                          /> </v-col> 
+                           <v-col
+                            cols="12"
+                            sm="6"
+                            md="8"
+                          >
                              <v-text-field
                             label="Numero de telephone"
                             name="numero"
                             prepend-icon="phone"
                             type="text"
                             v-model="numero" 
-                          /> 
+                            :rules="nameRules"
+                          /> </v-col></v-row>
                           <v-text-field
                             label="Email"
                             name="Email"
                             prepend-icon="email"
                             type="text"
                              v-model="email"
+                             :rules="EmailRules"
                           />
-                      
-                               
+                      <v-row no-gutters>
+                            <v-col
+                            cols="6"
+                          >    
                           <v-text-field
                             id="password"
                             label="Mot de passe"
@@ -149,7 +168,11 @@ Entrez vos données personnelles et commencez votre journée                    
                             prepend-icon="lock"
                             type="password"
                             v-model="password"
-                          />
+                            :rules="nameRules"
+                          /></v-col>
+                           <v-col
+                            cols="6"
+                          >  
                              <v-text-field
                             id="password_confirm"
                             label="Confirmer Mot de passe"
@@ -157,7 +180,8 @@ Entrez vos données personnelles et commencez votre journée                    
                             prepend-icon="lock"
                             type="password"
                             v-model="password_confirm"
-                          />
+                            :rules="passwordRules"
+                          /></v-col></v-row>
                         </v-form>
                       </v-card-text>
                       <div class="text-center mt-n5">
@@ -188,7 +212,24 @@ Error
   data: () => ({
     step: 1,
     user:[],
+     valid: false,
     email:'',
+     EmailRules: [
+        v => !!v || 'E-mail est obligatoire',
+        v => /.+@sacemindustries.+/.test(v) || 'E-mail doit inclure @sacemindustries',
+      ],
+       nameRules: [
+        v => !!v || 'Champs Obligatoire',
+        v => v.length <= 100 || 'Champs doit etre valide ',
+      ],
+       phoneRules: [
+        v => !!v || 'Champs Obligatoire',
+        v => v.length == 8 || 'Le Numero doit etre huit chiffres', 
+      ],
+       passwordRules: [
+        v => !!v || 'Champs Obligatoire',
+        (v) =>( v == this.password) || 'Le mot de passe doit etre compatible', 
+      ],
     password:'' ,
      password_confirm:"",
      name: "",
@@ -223,7 +264,7 @@ Error
   this.$store.dispatch('user',response.data.user);
  this.$router.push('/dashboard');
   }catch(e){
-    this.error=' vous n`avez pas l`accès pour connecter';
+    this.error=' vous n`avez pas l`accès pour connecter, Veuillez contactez L`administrateur';
     
   }
   },
@@ -250,6 +291,14 @@ this.error='une erreur s\'est produite';
 };
 </script>
 <style scoped>
+.image{
+  /* background-image:  url("../../assets/backgroundai.jpg"); */
+  /* background-image:  url("../../assets/ai-technology-brain-background-digital-transformation-concept.jpg"); */
+  background-image:  url("../../assets/rm373batch2-04.jpg");
+   background-position: center; 
+  background-repeat: no-repeat; 
+  background-size: cover; 
+}
 .row {
     display: flex;
     flex-wrap: wrap;

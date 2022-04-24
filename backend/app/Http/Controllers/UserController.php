@@ -79,13 +79,24 @@ class UserController extends Controller
 
     public function delete($id){
         $user=User::FindOrFail($id);
+        $userr = UserInactive::create(['name' => $user->name, 'email' => $user->email,'type'=>$user->type, 'password' => $user->password,'poste' => $user->poste,'numero' => $user->numero,]);
+
        if($user->delete()) {
-        return 'User deleted successfully';
+        return response()->json($userr);;
        }
     }
 
     //user inactive
-
+    public function indexinactive()
+    {
+        $users = UserInactive::all();
+        return response()->json($users);
+    }
+    public function showinactive($id)
+    {
+         $users=UserInactive::FindOrFail($id);
+        return response()->json($users);
+    }
     public function addinactive(Request $request){
         $user= UserInactive::create([
              'name' => $request->name,
