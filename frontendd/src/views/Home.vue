@@ -110,7 +110,7 @@
               color="cyan"
               
     dark
-    fab
+    fab 
  small
     class="clickable"
     > <v-icon > mdi-pencil </v-icon></v-btn> -->
@@ -137,6 +137,20 @@
         mdi-delete
       </v-icon>
     </v-btn>
+                      <v-btn
+      class="mx-2"
+      fab
+      dark
+      small
+      color="orange"
+      ref="files"
+      @click="exportword()"
+      :disabled="isDisabled"
+    >
+      <v-icon dark >
+        mdi-cloud-download
+      </v-icon>
+    </v-btn>
           <!-- <v-icon small > mdi-delete </v-icon> -->
         </template>
       </v-data-table>
@@ -159,6 +173,7 @@ export default {
     // navbar
   },
   data: () => ({
+    isDisabled: false,
      dialog2: false,
      select: [
           { text: 'Document Vierge' },
@@ -232,6 +247,22 @@ export default {
   },
 
   methods: {
+    exportword(){
+
+//      axios.post("documents/" + this.$route.params.id, formdata , {responseType:'blob'}).then(function (response) {
+//       var headers = response.headers;
+//        console.log(headers);
+//        var blob=new Blob([response.data],{type:headers['content-type']});
+//         var link = document.createElement("a");
+//           link.href = window.URL.createObjectURL(blob);
+//           link.download = vm.appareil;
+//           link.click();
+//           link.remove();
+//  vm.isDisabled = false;
+//      }) .catch(function (error) {
+//           console.log(error);
+//         });
+    },
       create(){
      let token= localStorage.getItem('token')
        axios.post('projets/add',{}, {
