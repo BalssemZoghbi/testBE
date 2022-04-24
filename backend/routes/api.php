@@ -41,10 +41,17 @@ Route::put('/user/updateprofile/{id}', [UserController::class,'updateprofile']);
 Route::get('/user/{id}', [UserController::class,'show']);
 Route::delete('/user/delete/{id}', [UserController::class,'delete']);
 
+Route::get('/usersInactive', [UserController::class,'indexinactive']);
+Route::post('/userInactive/create', [UserController::class,'addinactive']);
+Route::put('/userInactive/update/{id}', [UserController::class,'updateinactive']);
+Route::get('/userInactive/{id}', [UserController::class,'showinactive']);
+Route::delete('/userInactive/delete/{id}', [UserController::class,'deleteinactive']);
+
 Route::get('/projets',[ProjetController::class ,'getProjets']);
 Route::get('/projets/search/{query}',[ProjetController::class ,'getsearch']);
 Route::get('/projets/pagination',[ProjetController::class ,'paginateProjets']);
 Route::post('/projets/create',[ProjetController::class ,'storeProjet']);
+Route::post('/projets/add',[ProjetController::class ,'addProjet']);
 Route::get('/projets/{id}', [ProjetController::class ,'showProjet']);
 Route::put('/projets/edit/{id}', [ProjetController::class ,'editProjet']);
 Route::delete('/projets/delete/{id}', [ProjetController::class ,'deleteProjet']);
