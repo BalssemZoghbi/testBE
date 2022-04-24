@@ -16,6 +16,7 @@ use App\Http\Controllers\EmailleController;
 use App\Http\Controllers\VoltspireController;
 use App\Http\Controllers\BobinageStatiqueController;
 use App\Http\Controllers\PccUccController;
+use App\Http\Controllers\WordExportController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -134,3 +135,4 @@ Route::put('/updateBarre/{id}', [BobinageStatiqueController::class ,'updateBarre
 Route::post('/createBarre', [BobinageStatiqueController::class ,'createBarre']);
 Route::post('/createBarrestat', [BobinageStatiqueController::class ,'addStatBarre']);
 Route::delete('/deleteBarre/{id}', [BobinageStatiqueController::class ,'deleteBarre']);
+Route::post('/documents/{id}', [WordExportController::class ,'wordExport']);

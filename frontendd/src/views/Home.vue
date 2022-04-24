@@ -243,6 +243,23 @@ export default {
   },
 
   methods: {
+    exportword(){
+//        var vm = this;
+//       var formdata = new FormData(vm.$refs.form);
+//      axios.post("documents/" + this.$route.params.id, projets, formdata , {responseType:'blob'}).then(function (response) {
+//       var headers = response.headers;
+//        console.log(headers);
+//        var blob=new Blob([response.data],{type:headers['content-type']});
+//         var link = document.createElement("a");
+//           link.href = window.URL.createObjectURL(blob);
+//           link.download = vm.appareil;
+//           link.click();
+//           link.remove();
+//  vm.isDisabled = false;
+//      }) .catch(function (error) {
+//           console.log(error);
+//         });
+    },
       create(){
      let token= localStorage.getItem('token')
        axios.post('projets/add',{}, {
