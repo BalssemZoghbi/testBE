@@ -141,14 +141,17 @@ Entrez vos données personnelles et commencez votre journée                    
                             sm="6"
                             md="8"
                           >
+                          <v-form ref="form">
                              <v-text-field
                             label="Numero de telephone"
                             name="numero"
                             prepend-icon="phone"
                             type="text"
                             v-model="numero" 
-                            :rules="nameRules"
-                          /> </v-col></v-row>
+                            :counter="max"
+                            :rules="rules"
+                          />
+                          </v-form> </v-col></v-row>
                           <v-text-field
                             label="Email"
                             name="Email"
@@ -168,7 +171,7 @@ Entrez vos données personnelles et commencez votre journée                    
                             prepend-icon="lock"
                             type="password"
                             v-model="password"
-                            :rules="nameRules"
+                            :rules="rules"
                           /></v-col>
                            <v-col
                             cols="6"
@@ -235,10 +238,42 @@ Error
      name: "",
      poste:"",
      numero:"",
+      max: 8,
+      min:8,
     error:''
   }),
 
   computed:{
+       rules () {
+        const rules = []
+
+        if (this.max) {
+          const rule =
+            v => (v || '').length <= this.max ||
+              `Un maximum de ${this.max} caractères est autorisé`
+
+          rules.push(rule)
+        }
+             if (this.min) {
+          const rule =
+            v => (v || '').length >= this.min ||
+              `Au minimum  ${this.min} caractères `
+
+          rules.push(rule)
+        }
+
+        if (!this.allowSpaces) {
+          const rule =
+            v => (v || '').indexOf(' ') < 0 ||
+              'Eviter les espaces s\'il vous plait'
+
+          rules.push(rule)
+        }
+
+     
+
+        return rules
+      },
     validateFields:function(){
       if(this.email!="" && this.password!=""){
         return true;
@@ -247,6 +282,7 @@ Error
       }
     },
     ...mapState(['status'])
+    
   },
   methods:{
  async login(){
