@@ -1,6 +1,6 @@
 !<template>
 <div>
-    <!-- <navbar />  -->
+    <NavDash />
     <img src="../assets/6384608.jpg" alt="">
     <Footer/> 
 
@@ -8,10 +8,12 @@
 </template>
 
 <script>
+import NavDash from "../components/NavDashboard.vue";
 import Footer from '@/components/Footer'
 export default {
   components: {
-    Footer
+    Footer,
+    NavDash
   },
 }
 </script>
