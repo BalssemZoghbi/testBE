@@ -110,7 +110,7 @@
               color="cyan"
               
     dark
-    fab
+    fab 
  small
     class="clickable"
     > <v-icon > mdi-pencil </v-icon></v-btn> -->
@@ -135,6 +135,17 @@
     >
       <v-icon dark v-on:click="deleteprojet(item.id)">
         mdi-delete
+      </v-icon>
+    </v-btn>
+                      <v-btn
+      class="mx-2"
+      fab
+      dark
+      small
+      color="orange"
+    >
+      <v-icon dark >
+        mdi-cloud-download
       </v-icon>
     </v-btn>
           <!-- <v-icon small > mdi-delete </v-icon> -->
