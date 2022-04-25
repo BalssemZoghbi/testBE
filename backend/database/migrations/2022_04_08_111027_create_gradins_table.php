@@ -28,6 +28,7 @@ class CreateGradinsTable extends Migration
             $table->float('Snette');
             $table->float('EpaisseurTot');
             $table->integer('largeurMin');
+            $table->float('DistanceCMBobine')->nullable();
             $table->timestamps();
         });
     }
