@@ -41,7 +41,6 @@ class BobinageSecController extends Controller
 
          return 0.987*$saillie*$etage*($hbrin1*$nbrin1+$hbrin2*$nbrin2);
         }else if($conducteur=='feuillard'){
-            // dd($Hfeuillard);
 
             return $Hfeuillard*$epFeuillard;
         }
@@ -68,11 +67,12 @@ class BobinageSecController extends Controller
                 if($hbrin1 == 0){
                     return $hspire*$spcouche+($etage-1)*($hbrin1+$e2ax);
                 }else{
-                    return ($hspire*$spcouche)+($etage-1)*($hbrin1+$hbrin2+($e2ax*2));
+                    return ($hspire*($spcouche+1))+($etage-1)*($hbrin1+$hbrin2+($e2ax*2));
                 }
             }
             public function hbobt($hfs,$collierBT){
                 return $hfs+($collierBT*2);
+                // timchi 5
             }
             public function collierBt2($hbobt,$hsfs,$collierBT){
                 return $hbobt-$hsfs-$collierBT;
@@ -107,7 +107,7 @@ class BobinageSecController extends Controller
                 $coefPerte=12.18;
 
             }
-            return $coefPoid*$N2c*$scu2*($dint+$epx)*pi()*3*((100+$majPoid)/100);
+            return  pow(10,-6)*($coefPoid*$N2c*$scu2)*($dint+$epx)*pi()*3*((100+$majPoid)/100);
         }
         //feuillard
         public function Hbobine($Hfeuillard,$collierBT){
@@ -179,7 +179,7 @@ class BobinageSecController extends Controller
             $Bobinage=BobinageSec::FindOrFail($projet->bobine_id );
             $epFeuillard=$this->epFeuillard($request->epFeuil1,$request->epFeuil2);
             $scu2=$this->Scu2($request->conducteurSec,$request->hbrin1, $request->hbrin2,$request->nbBrin1, $request->nbBrin2, $request->etage, $request->saillie,$request->Hfeuillard,$epFeuillard);
-        //    dd($scu2);
+
             $j2=$this->j2($projet->secondaireIPhase, $scu2);
             $spCouche=$this->spCouche($request->conducteurSec,$projet->N2c,$request->nbcouche);
             $hSpire=$this->hSpire($request->hbrin1,$request->e2ax,$request->nbBrin1,$request->hbrin2,$request->nbBrin2);

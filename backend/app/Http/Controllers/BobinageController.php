@@ -226,7 +226,7 @@ class BobinageController extends Controller
             ->join('gradins', 'gradins.id', '=', 'projets.gradin_id')
             ->join('bobinage_secs', 'bobinage_secs.id', '=', 'projets.bobinage_secs_id')
             ->where('projets.id',$id)
-            ->select('bobinages.*','bobinages.id as bobine_id','volt_Spires.Vsp','volt_Spires.N1c','volt_Spires.spire','electriques.PrimaireIPhase','gradins.diamNominale','bobinage_secs.HbobineBt','bobinage_secs.DextBT','bobinage_secs.Bext','projets.*')
+            ->select('bobinages.*','bobinages.id as bobine_id','volt_Spires.Vsp','volt_Spires.N1c','volt_Spires.spire','electriques.PrimaireIPhase','gradins.diamNominale','bobinage_secs.HbobineBt','bobinage_secs.HBOBT','bobinage_secs.DextBT','bobinage_secs.Bext','projets.*')
             ->get()->first();
 
             $Bobinage=Bobinage::FindOrFail($projet->bobine_id );
@@ -264,7 +264,7 @@ class BobinageController extends Controller
             $spcha=$this->spcha($spchb);
             $HcondMt=$this->hcondMt($Isole,$spchb);
             // chouf
-            $Hcollier=$this->Hcollier($projet->HbobineBt,$HcondMt);
+            $Hcollier=$this->Hcollier($projet->HBOBT,$HcondMt);
             $nbrPapierMT=$this->NbrePapier($request->conducteur,$request->rigiditePapierMT,$spchb,$projet->Vsp,$Isole,$Designation,$request->EpfeuillePapier);
 
             $epaisseurPapier=$this->epaisseurPapier($request->EpfeuillePapier, $nbrPapierMT);
@@ -339,7 +339,7 @@ class BobinageController extends Controller
                     'BextMT'=>$BextMt,
                     'poidMT'=>$poidEmaille,
                     'majPoid'=>$request->majPoid,
-                    'HbobineBt'=>$projet->HbobineBt,
+                    'HbobineBt'=>$projet->HBOBT,
                     'EpCylindre'=>$request->EpCylindre,
                     'rigiditePapierMT'=>$request->rigiditePapierMT,
                      'N1cmax'=>$N1cmax,

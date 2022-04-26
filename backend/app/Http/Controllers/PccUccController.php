@@ -61,6 +61,7 @@ public function Ucca($pccMaj,$puissance){
     ->get()->first();
    $pcc1=$this->pcc1($projet->materiau,$projet->j1,$projet->poidMT,$request->MajourationU);
    $pcc2=$this->pcc1($projet->materiauSec,$projet->j2,$projet->poidBT,$request->MajourationU);
+ 
     $pccMaj=$this->pccMaj($pcc1,$pcc2);
     $CMoy=$this->comoy($projet->Dint,$projet->Epx,$projet->DintMT,$projet->EpxMT);
     $delta=$this->delta($projet->DistanceBTMT,$projet->EpxMT,$projet->EpyMT);
