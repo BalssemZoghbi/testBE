@@ -25,8 +25,9 @@ class Gradin extends Model
         'Sbrut',
         'Snette',
         'EpaisseurTot',
-        'largeurMin'
-      
+        'largeurMin',
+        'DistanceCMBobine'
+
     ];
     public function projets(){
         return $this->hasMany(Projet::class);
