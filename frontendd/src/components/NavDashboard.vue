@@ -16,8 +16,57 @@
         </v-list-item-avatar>
         <v-list-item-title class="ml-4 text-capitalize">SacemAutocite</v-list-item-title>
     </v-list-item>
-      <v-list shaped  class="clickable">
+      <v-list shaped  class="clickable" v-if="user.type == 'admin'">
         <template v-for="item in items">
+          <v-list-group
+            v-if="item.children"
+            :key="item.text"
+            v-model="item.model"
+            :prepend-icon="item['icon-ctr']"
+            :append-icon="item.model ? item.icon : item['icon-alt']"
+            active-class="orange--text"
+          >
+            <template v-slot:activator>
+              <v-list-item-content>
+                <v-list-item-title >
+                  {{ item.text }}
+                </v-list-item-title>
+              </v-list-item-content>
+            </template>
+            <v-list-item
+              v-for="(child, i) in item.children"
+              :key="i"
+              route :to="child.route"
+            >
+              <v-list-item-action v-if="child.icon">
+                <v-icon>{{ child.icon }}</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title>
+                  {{ child.text }}
+                </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list-group>
+          <v-list-item
+            v-else
+            :key="item.text"
+             route :to="item.route"
+          >
+            <v-list-item-action>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>
+                {{ item.text }}
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </template>  
+    
+      </v-list>
+      <v-list shaped  class="clickable" v-if="user.type === 'employe'">
+        <template v-for="item in itemsemploye">
           <v-list-group
             v-if="item.children"
             :key="item.text"
@@ -187,6 +236,7 @@ import { mapGetters } from 'vuex';
         search: '',
       token:null,
       user: '',
+      // user1: '',
       email: '',
       // name:'',
     // drawer: true,
@@ -208,6 +258,8 @@ import { mapGetters } from 'vuex';
         // { icon: 'fa-solid fa-bars-staggered', text: 'Garantie36', route:'/garantie36' },
         //   ],
         // },
+        // this.$router.go()
+        
         {
           icon: 'mdi-chevron-up',
           'icon-alt': 'mdi-chevron-down',
@@ -223,8 +275,15 @@ import { mapGetters } from 'vuex';
         // { icon: 'mdi-chart-pie', text: 'Analytics', route:'/chart' },
         // { icon: 'mdi-magnify', text: 'Search', route:'/recherches' },
       ],
+      itemsemploye: [
+        { icon: 'mdi-home', text: 'Tableau de bord' , route:'/dashboard'},
+         { icon: "fas fa-charging-station", text: "projet", route: "/" },
+       
+      ],
     }),
    async created() {
+    //  this.user1=localStorage.getItem('user').type;
+    //  console.log(this.user1);
   const response=await axios.get('user');
     this.$store.dispatch('user',response.data);
 

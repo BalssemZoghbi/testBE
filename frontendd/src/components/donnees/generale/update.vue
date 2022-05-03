@@ -3,24 +3,22 @@
     <NavDash />
     <!-- <navbarUpdate :elec_id='projet.electrique_id' :id='projet.id'/> -->
     <div class="body">
-      <v-stepper v-model="e1">
-        <v-stepper-header>
+      <v-stepper v-model="e1"  vertical>
+        <!-- <v-stepper-header> -->
           <v-stepper-step :complete="e1 > 1" step="1">
             Name of step 1
           </v-stepper-step>
 
-          <v-divider></v-divider>
+          <!-- <v-divider></v-divider> -->
 
-          <v-stepper-step :complete="e1 > 2" step="2">
-            Name of step 2
-          </v-stepper-step>
+         
 
-          <v-divider></v-divider>
+          <!-- <v-divider></v-divider> -->
 
-          <v-stepper-step step="3"> Name of step 3 </v-stepper-step>
-        </v-stepper-header>
+      
+        <!-- </v-stepper-header> -->
 
-        <v-stepper-items>
+        <!-- <v-stepper-items> -->
           <v-stepper-content step="1">
             <v-card class="mb-12" color="rgb(5 48 96 / 78%)" height="450px">
               <div class="body">
@@ -109,7 +107,9 @@
               Continue
             </v-btn>
           </v-stepper-content>
-
+ <v-stepper-step :complete="e1 > 2" step="2">
+            Name of step 2
+          </v-stepper-step>
           <v-stepper-content step="2">
             <v-card class="mb-12" color="#71b7e675" height="450px">
               <div class="body">
@@ -222,7 +222,7 @@
               Continue
             </v-btn>
           </v-stepper-content>
-
+    <v-stepper-step step="3"> Name of step 3 </v-stepper-step>
           <v-stepper-content step="3">
             <v-card class="mb-12" color="#71b7e675" height="450px">
               <div class="body">
@@ -315,7 +315,7 @@
               </v-btn></router-link
             >
           </v-stepper-content>
-        </v-stepper-items>
+        <!-- </v-stepper-items> -->
       </v-stepper>
     </div>
   </div>

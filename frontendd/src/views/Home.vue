@@ -72,7 +72,7 @@
         mandatory
         color="blue"
       >
-        <v-list-item @click="onClick"   color="indigo">
+        <v-list-item @click="onClick"   color="blue">
           <v-list-item-title  @click="create()">Document Vierge</v-list-item-title>
         </v-list-item>
 
@@ -235,6 +235,7 @@ export default {
   if(!user){
   this.$router.push('/Connexion');
     }
+     this.getprojet();
   },
 
   watch: {
