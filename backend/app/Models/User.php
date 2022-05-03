@@ -23,6 +23,7 @@ class User extends Authenticatable
         'password',
         'poste',
         'numero',
+        'image',
     ];
 
     /**
@@ -46,5 +47,8 @@ class User extends Authenticatable
 
     public function projets(){
         return $this->hasMany(Projet::class);
+    }
+    public function userProfilr(){
+        return $this->hasOne('App\Models\Userprofile');
     }
 }

@@ -38,7 +38,7 @@ Route::get('/users/get', [UserController::class,'getuser']);
 
 Route::post('/user/create', [UserController::class,'store']);
 Route::put('/user/update/{id}', [UserController::class,'updatestore']);
-Route::put('/user/updateprofile/{id}', [UserController::class,'updateprofile']);
+Route::post('/user/updateprofile/{id}', [UserController::class,'updateprofile']);
 Route::get('/user/{id}', [UserController::class,'show']);
 Route::delete('/user/delete/{id}', [UserController::class,'delete']);
 

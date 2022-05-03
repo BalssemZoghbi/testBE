@@ -114,7 +114,7 @@ Entrez vos données personnelles et commencez votre journée                    
                         </h4>
                         <v-form>
                             <error v-if="error" :error="error"/>
-                          <v-text-field
+                          <!-- <v-text-field
                             label="Nom"
                             name="Name"
                             prepend-icon="person"
@@ -122,7 +122,35 @@ Entrez vos données personnelles et commencez votre journée                    
                             v-model="name"
                             :rules="nameRules"
                              required
-                          />   
+                          />    -->
+                          
+                      <v-row no-gutters>
+                            <v-col
+                            cols="6"
+                          >    
+                          <v-text-field
+                             label="Nom"
+                            name="Name"
+                            prepend-icon="person"
+                            type="text"
+                            v-model="name"
+                            :rules="nameRules"
+                             required
+                          /></v-col>
+                           <v-col
+                            cols="6"
+                          >  
+                                   <v-form ref="form">
+                             <v-text-field
+                            label="Numero de telephone"
+                            name="numero"
+                            prepend-icon="phone"
+                            type="text"
+                            v-model="numero" 
+                            :counter="max"
+                            :rules="rules"
+                          />
+                          </v-form> </v-col></v-row>
                              <v-row no-gutters>
                            <v-col
                               cols="6"
@@ -141,17 +169,32 @@ Entrez vos données personnelles et commencez votre journée                    
                             sm="6"
                             md="8"
                           >
-                          <v-form ref="form">
-                             <v-text-field
-                            label="Numero de telephone"
-                            name="numero"
-                            prepend-icon="phone"
-                            type="text"
-                            v-model="numero" 
-                            :counter="max"
-                            :rules="rules"
-                          />
-                          </v-form> </v-col></v-row>
+                          <!-- <v-form enctype="multipart/form-data">
+                          <v-file-input
+                          @change="imageSelected"
+    :rules="images"
+    accept="image/*"
+    ref="files"
+    placeholder="choisir un avatar"
+    prepend-icon="mdi-camera"
+    label="Avatar"
+  ></v-file-input>
+    <v-list-item-avatar v-if="imagePreview">
+            <img :src="imagePreview" class="figure-img img-fluid rounded" style="max-height:100px;"/>
+          </v-list-item-avatar>
+
+                          </v-form>  -->
+                          <form @submit.prevent="profileUpload" method="POST" enctype="multipart/form-data">
+            <div >
+                <input type="file" @change="imageSelected"  id="customFile">
+                <label  for="customFile">Choose an image</label>
+            </div>
+            <div v-if="imagePreview" class="mt-3">
+                <img :src="imagePreview" class="figure-img img-fluid rounded"  style="max-height:100px;">
+            </div>
+            <button class="btn btn-success mt-5" type="submit">Upload profile</button>
+        </form>
+                          </v-col></v-row>
                           <v-text-field
                             label="Email"
                             name="Email"
@@ -217,6 +260,9 @@ Error
     user:[],
      valid: false,
     email:'',
+     images: [
+        value => !value || value.size < 2000000 || 'Avatar size should be less than 2 MB!',
+      ],
      EmailRules: [
         v => !!v || 'E-mail est obligatoire',
         v => /.+@sacemindustries.+/.test(v) || 'E-mail doit inclure @sacemindustries',
@@ -240,6 +286,8 @@ Error
      numero:"",
       max: 8,
       min:8,
+      image:null,
+      imagePreview:null,
     error:''
   }),
 
@@ -285,6 +333,25 @@ Error
     
   },
   methods:{
+    imageSelected(e)
+    {
+       this.image=e.target.files[0];
+       let reader=new FileReader();
+       reader.readAsDataURL(this.image);
+        reader.onload= e =>{
+          this.imagePreview=e.target.result;
+        };
+    },
+    profileUpload()
+    {
+      let data= new FormData();
+      data.append('image',this.image);
+      axios.post('userprofile',data).then(response=>{
+        console.log(response.data);
+      }).catch(error=>{
+        console.log(error);
+      });
+    },
  async login(){
    try{
       const response= await axios.post('/login',{

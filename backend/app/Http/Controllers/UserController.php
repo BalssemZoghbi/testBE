@@ -7,8 +7,9 @@ use Illuminate\Support\Facades\DB;
 
 use App\Http\Resources\UserResource;
 use App\Models\UserInactive;
+use App\Models\Userprofile;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     public function index()
@@ -44,7 +45,8 @@ class UserController extends Controller
             'password' =>Hash::make($request->password),
             'type' =>$request->type,
             'poste' =>$request->poste,
-            'numero' =>$request->numero
+            'numero' =>$request->numero,
+            'image' =>$request->image,
         ]);
         // if($user->save){
         return response()->json($user);
@@ -59,10 +61,12 @@ class UserController extends Controller
             'password' =>Hash::make($request->password),
             'type' =>$request->type,
             'poste' =>$request->poste,
-            'numero' =>$request->numero
+            'numero' =>$request->numero,
+            'image' =>$request->image,
         ]);
             return response()->json($user);
     }
+
     public function updateprofile($id,Request $request){
     $user=User::FindOrFail($id);
     $type = $user->getOriginal('type');
@@ -71,10 +75,22 @@ class UserController extends Controller
             'email' =>$request->email,
             'password' =>Hash::make($request->password),
             'type'=>$type,
-            'poste' =>$request->poste,
-            'numero' =>$request->numero
+            // 'poste' =>$request->poste,
+            // 'numero' =>$request->numero,
+            'image' =>$request->image,
         ]);
+        if($request->hasFile('image')){
+        $image =request()->file('image');
+        $imagename =$image->getClientOriginalName();
+        $imagename =time().'_'.$imagename;
+        $image->move(public_path('/images'), $imagename);
+        $img=new Userprofile;
+        $img->user_id=Auth::user()->id;
+        $img->image='/images'.$imagename;
+        $img->save();
+}
             return response()->json($user);
+
     }
 
     public function delete($id){

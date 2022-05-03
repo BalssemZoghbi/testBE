@@ -25,6 +25,7 @@
                   margin-left: -4%;
                 "
               />
+              
             </div>
             <div class="col-md-8">
               <h6>Details :</h6>
