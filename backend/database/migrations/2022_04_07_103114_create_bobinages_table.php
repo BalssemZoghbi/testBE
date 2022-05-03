@@ -70,6 +70,7 @@ class CreateBobinagesTable extends Migration
             $table->float('EpfeuillePapier')->nullable();
             $table->float('EpaiseurPapier')->nullable();
             $table->float('EpaisseurPapierCanaux')->nullable();
+            $table->integer('HbobineBt')->nullable();
             $table->timestamps();
         });
     }

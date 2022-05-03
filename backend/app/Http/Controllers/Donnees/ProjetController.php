@@ -402,6 +402,7 @@ class ProjetController extends Controller
             'EpfeuillePapier'=>0.15,
             'EpaiseurPapier'=>1.05,
             'EpaisseurPapierCanaux'=>0.6,
+            'HbobineBt'=>0,
 
         ]);
         $BobinageSec=BobinageSec::create([

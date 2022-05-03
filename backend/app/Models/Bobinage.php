@@ -66,6 +66,7 @@ class Bobinage extends Model
         'EpfeuillePapier',
         'EpaiseurPapier',
         'EpaisseurPapierCanaux',
+        'HbobineBt'
     ];
     public function projets(){
         return $this->hasMany(Projet::class);

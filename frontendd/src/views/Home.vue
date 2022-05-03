@@ -137,13 +137,14 @@
         mdi-delete
       </v-icon>
     </v-btn>
-                      <v-btn
+    <v-form ref="form">
+     <v-btn
       class="mx-2"
       fab
       dark
       small
       color="orange"
-      ref="files"
+      
       @click="exportword()"
       :disabled="isDisabled"
     >
@@ -151,6 +152,7 @@
         mdi-cloud-download
       </v-icon>
     </v-btn>
+    </v-form>
           <!-- <v-icon small > mdi-delete </v-icon> -->
         </template>
       </v-data-table>
@@ -173,6 +175,7 @@ export default {
     // navbar
   },
   data: () => ({
+    projet: Object,
     isDisabled: false,
      dialog2: false,
      select: [
@@ -224,6 +227,7 @@ export default {
     this.$store.dispatch("user", response.data);
     this.user = response.data;
     this.getprojet();
+    
   },
   computed: {
     formTitle() {
@@ -249,7 +253,25 @@ export default {
 
   methods: {
     exportword(){
-
+          axios.get('projets/'+this.$route.params.id).then((resp) => {
+      this.projet = resp.data;
+      console.log(this.projet);
+    });
+// var formdata=new FormData(this.$refs.form);
+// var form={
+//   projet:this.projet,
+//   formdata:formdata
+// }
+axios.post("documents/" + this.$route.params.id,{
+    Reference:this.projet.reference,
+     Puissance:this.projet.Puissance,
+      u1n:this.projet.u1n,
+        u2o: this.projet.u2o,
+        couplage: this.projet.couplage,
+        frequence:this.projet.frequence,
+}).then(function(response){
+  console.log(response.data);
+})
 //      axios.post("documents/" + this.$route.params.id, formdata , {responseType:'blob'}).then(function (response) {
 //       var headers = response.headers;
 //        console.log(headers);

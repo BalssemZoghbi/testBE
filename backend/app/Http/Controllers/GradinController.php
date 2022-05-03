@@ -78,7 +78,10 @@ class GradinController extends Controller
         for($i=0;$i<$nbrGradin;$i++){
             $largeur[$i]=$diam;
             $diam-=$pas;
+            if($largeur[$i] == $largMin){
+                break;}
         }
+        // dd($largeur);
         // return $largeur;
 
         }else{
@@ -98,8 +101,9 @@ class GradinController extends Controller
     public function epaisseur($diam,$largeur,$nbreGradin){
         $epaisseur=[];
         $prec=0;
-
-        for($i=0;$i<$nbreGradin;$i++){
+//length of the array largeur
+        $length=count($largeur);
+        for($i=0;$i<$length;$i++){
             $epaisseur[$i]=sqrt(pow($diam,2)-pow($largeur[$i],2));
             $epaisseur[$i]-=$prec;
             $prec+=$epaisseur[$i];
@@ -107,14 +111,15 @@ class GradinController extends Controller
         return $epaisseur;
     }
     public function epaisseurfeuillard($diam,$largeur,$nbreGradin,$demiGradin){
+        $length=count($largeur);
         $epaisseur=$this->epaisseur($diam,$largeur,$nbreGradin);
         $coeff=[0.5, 0.3, 0.25, 0.2];
         $j=0;
         $prec=0;
-        for($i=0;$i<$nbreGradin-$demiGradin;$i++){
+        for($i=0;$i<$length-$demiGradin;$i++){
             $prec+=$epaisseur[$i];
         }
-        for($i=$nbreGradin-$demiGradin;$i<$nbreGradin;$i++){
+        for($i=$length-$demiGradin;$i<$length;$i++){
             $epaisseur[$i]=(sqrt(pow($diam,2)-pow($largeur[$i],2))-$prec)*$coeff[$j];
             $j++;
             $prec+=$epaisseur[$i];
