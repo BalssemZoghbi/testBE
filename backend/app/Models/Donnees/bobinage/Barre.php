@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Donnees\bobinage;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Emaille extends Model
+class Barre extends Model
 {
     use HasFactory;
     protected $fillable= [
-        'Designation',
-        'Isole'
+        'designation',
+        'epaisseur',
+        'largeur',
     ];
 }

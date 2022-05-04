@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\Mail\User as MailUser;
 use App\Mail\Userdecline;
-use App\Models\User;
+use App\Models\user\User;
 use App\Models\UserInactive;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;

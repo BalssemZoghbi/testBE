@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Calcul;
 
-use App\Models\Circuitmagnetique;
+use App\Http\Controllers\Controller;
+use App\Models\Donnees\Circuitmagnetique;
 use App\Models\Tole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

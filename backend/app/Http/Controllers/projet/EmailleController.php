@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\projet;
 
-use Illuminate\Http\Request;
-use App\Models\Emaille;
-use App\Models\Hbrin;
-use App\Models\Saillie;
+use App\Http\Controllers\Controller;
+use App\Models\Donnees\bobinage\Emaille;
+use App\Models\Donnees\bobinage\Hbrin;
+use App\Models\Donnees\bobinage\Saillie;
 use App\Models\Tole;
+use Illuminate\Http\Request;
+
 
 class EmailleController extends Controller
 {

@@ -1,22 +1,23 @@
 <?php
 
+use App\Http\Controllers\Calcul\Bobinage\BobinageController;
+use App\Http\Controllers\Calcul\Bobinage\BobinageSecController;
+use App\Http\Controllers\Calcul\Bobinage\BobinageStatiqueController;
+use App\Http\Controllers\Calcul\CircuitmagnetiqueController;
+use App\Http\Controllers\Calcul\PccUccController;
+use App\Http\Controllers\Calcul\VoltspireController;
+use App\Http\Controllers\Donnees\ElectriqueController;
+use App\Http\Controllers\Donnees\GarantieController;
+use App\Http\Controllers\GradinController;
+use App\Http\Controllers\projet\EmailleController;
+use App\Http\Controllers\projet\ProjetController;
+use App\Http\Controllers\projet\TensionElectriqueController;
+use App\Http\Controllers\User\AuthController;
+use App\Http\Controllers\User\ForgotController;
+use App\Http\Controllers\User\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\ForgotController;
-use App\Http\Controllers\Donnees\ProjetController;
-use App\Http\Controllers\Donnees\GarantieController;
-use App\Http\Controllers\Donnees\ElectriqueController;
-use App\Http\Controllers\Donnees\TensionElectriqueController;
-use App\Http\Controllers\BobinageController;
-use App\Http\Controllers\GradinController;
-use App\Http\Controllers\BobinageSecController;
-use App\Http\Controllers\EmailleController;
-use App\Http\Controllers\VoltspireController;
-use App\Http\Controllers\BobinageStatiqueController;
-use App\Http\Controllers\CircuitmagnetiqueController;
-use App\Http\Controllers\PccUccController;
+
 use App\Http\Controllers\WordExportController;
 /*
 |--------------------------------------------------------------------------
