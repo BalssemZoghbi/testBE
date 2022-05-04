@@ -18,6 +18,7 @@ use App\Models\Bobinage;
 use App\Models\Gradin;
 use App\Models\VoltSpire;
 use App\Models\BobinageSec;
+use App\Models\Circuitmagnetique;
 use  App\Models\PccUcc;
 
 use Laravel\Sanctum\PersonalAccessToken;
@@ -507,6 +508,30 @@ class ProjetController extends Controller
         ]);
         // $volt=new VoltspireController();
         // $volt->updateVoltSpire()
+        $circuitMagnetique=Circuitmagnetique::create([
+            'masseFertot'=>6,
+            'Bmax'=>6,
+            'pFerspecifique'=>6,
+            'Majferprop'=>6,
+            'tole'=>'gg',
+            'Majfer'=>6,
+            'pFer'=>6,
+            'pFergarantie'=>6,
+            'Ex'=>6,
+            'Hc'=>6,
+            'E1'=>6,
+            'E2'=>6,
+            'E3'=>6,
+            'E4'=>6,
+            'Eh'=>6,
+            'Ebc'=>6,
+            'Longeurcuve'=>6,
+            'Largeurcuve'=>6,
+            'LCM'=>6,
+            'masseFerCM'=>6,
+            'surfaceCM'=>6,
+            'Hauteurcuve'=>6,
+        ]);
         $projet= Projet::create([
              'appareil' => 'Transfo Triphasé',
              'reference' =>'Pc 25/2022',
@@ -531,6 +556,7 @@ class ProjetController extends Controller
              'bobinage_secs_id'=>$BobinageSec->id,
              'volt_spires_id'=>$VoltSpire->id,
              'pcc_uccs_id'=>$pccUcc->id,
+             'circuitmagnetiques_id'=>$circuitMagnetique->id,
          ]);
 
          if($projet->save()){
@@ -548,8 +574,9 @@ class ProjetController extends Controller
         ->join('volt_Spires', 'volt_Spires.id', '=', 'projets.volt_spires_id')
         ->join('bobinage_secs', 'bobinage_secs.id', '=', 'projets.bobinage_secs_id')
         ->join('pcc_uccs', 'pcc_uccs.id', '=', 'projets.pcc_uccs_id')
+        ->join('circuitmagnetiques', 'circuitmagnetiques.id', '=', 'projets.circuitmagnetiques_id')
         ->where('projets.id',$id)
-        ->select('electriques.*','electriques.id as elec_id','garanties.*','garanties.id as garenti_id','bobinages.*','bobinages.id as bobine_id','bobinage_secs.*','bobinage_secs.id as bobinesec_id','gradins.*','gradins.id as gradins_id','volt_Spires.*','volt_Spires.id as volt_id','pcc_uccs.*','pcc_uccs.id as pucc_id', 'projets.*')
+        ->select('electriques.*','electriques.id as elec_id','circuitmagnetiques.*','circuitmagnetiques.id as circuitmagnetiqus_id','garanties.*','garanties.id as garenti_id','bobinages.*','bobinages.id as bobine_id','bobinage_secs.*','bobinage_secs.id as bobinesec_id','gradins.*','gradins.id as gradins_id','volt_Spires.*','volt_Spires.id as volt_id','pcc_uccs.*','pcc_uccs.id as pucc_id', 'projets.*')
         ->get()->first();
 
 

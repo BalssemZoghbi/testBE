@@ -202,7 +202,7 @@ class BobinageSecController extends Controller
             $epPapier=$this->epPapier($epFeuilpap,$request->nbPapier);
             if($barre!=null){
             $Sbarre=$this->Sbarre($request->conducteurSec,$barre->epaisseur,$barre->largeur);
-            $Jbarre=$this->Jbarre($request->conducteurSec,$projet->N2c,$Sbarre);
+            $Jbarre=$this->Jbarre($request->conducteurSec,$projet->secondaireIPhase,$Sbarre);
 
             $dextfeui=$this->Dext($DintBint,$epxfeui);
             $Bextfeui=$this->Bextfeui($DintBint,$epxfeui,$barre->epaisseur);

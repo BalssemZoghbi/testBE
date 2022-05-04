@@ -105,7 +105,6 @@ class BobinageController extends Controller
             return $coefPoid*$N1c*$scu1*($dint+$epx)*pi()*3*((100+$majPoid)/100);
         }
 
-//
     public function su1d($conducteur,$I1phase,$J1d){
         if($conducteur=="meplat guipé"){
             return 0;
@@ -263,7 +262,6 @@ class BobinageController extends Controller
             $nchb=$this->nchb($request->nbcoucheMT,$ncha);
             $spcha=$this->spcha($spchb);
             $HcondMt=$this->hcondMt($Isole,$spchb);
-            // chouf
             $Hcollier=$this->Hcollier($projet->HBOBT,$HcondMt);
             $nbrPapierMT=$this->NbrePapier($request->conducteur,$request->rigiditePapierMT,$spchb,$projet->Vsp,$Isole,$Designation,$request->EpfeuillePapier);
 

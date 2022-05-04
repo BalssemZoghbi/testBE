@@ -15,15 +15,14 @@ class CreateTolesTable extends Migration
     {
         Schema::create('toles', function (Blueprint $table) {
             $table->id();
-            $table->float('induction');
-            $table->float('M110-23');
-            $table->float('M120-27');
-            $table->float('M130-30');
-            $table->float('H75-23');
-            $table->float('H80-23');
-            $table->float('H85-23');
-            $table->float('H95-27');
-            $table->float('H105-30');
+            $table->string('tole');
+            $table->float('coef0');
+            $table->float('coef1');
+            $table->float('coef2');
+            $table->float('coef3');
+            $table->float('coef4');
+            $table->float('coef5');
+            $table->float('coef6');
             $table->timestamps();
         });
     }
