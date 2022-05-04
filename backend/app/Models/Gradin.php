@@ -26,7 +26,7 @@ class Gradin extends Model
         'Snette',
         'EpaisseurTot',
         'largeurMin',
-        'DistanceCMBobine'
+        'CMBT',
 
     ];
     public function projets(){

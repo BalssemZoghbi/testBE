@@ -86,6 +86,7 @@ class ProjetController extends Controller
             'Ptotlimit'=>0,
             'echauffementHuile'=>0,
             'echauffementEnroulement'=>0,
+
         ]);
         // dd($garantie->id);
         $Bobinage=Bobinage::create([
@@ -125,7 +126,6 @@ class ProjetController extends Controller
             'lgCales'=>0,
             'poidMT'=>0,
             'collierBT'=>0,
-            'CMBT'=>0,
             'DintMT'=>0,
             'BintMT'=>0,
             'EpyMT'=>0,
@@ -204,7 +204,6 @@ class ProjetController extends Controller
             'Sbarre'=>0,
             'Jbarre'=>0,
             'collierBT'=>0,
-            'CMBT'=>0,
             'HBOBT'=>0,
             'Dint'=>0,
             'Bint'=>0,
@@ -232,7 +231,8 @@ class ProjetController extends Controller
             'Sbrut'=>0,
             'Snette'=> 0,
             'EpaisseurTot'=> 0,
-            'largeurMin' => 0
+            'largeurMin' => 0,
+            'CMBT'=>0,
         ]);
         $VoltSpire=VoltSpire::create([
             'Bmaxdesire'=>0,
@@ -484,7 +484,8 @@ class ProjetController extends Controller
             'Sbrut'=> 30468.863427581993,
             'Snette'=> 29250.108890478714,
             'EpaisseurTot'=> 197.77765293379332,
-            'largeurMin' => 70
+            'largeurMin' => 70,
+            'CMBT'=>4,
         ]);
         $VoltSpire=VoltSpire::create([
             'Bmaxdesire'=>1.82,
