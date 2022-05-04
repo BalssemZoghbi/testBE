@@ -5,6 +5,7 @@ namespace App\Models\Donnees;
 use App\Models\Donnees\Electrique;
 use App\Models\Bobinage;
 use App\Models\BobinageSec;
+use App\Models\Circuitmagnetique;
 use App\Models\VoltSpire;
 
 use Illuminate\Database\Eloquent\Model;
@@ -37,7 +38,8 @@ class Projet extends Model
     'bobinage_secs_id',
     'volt_spires_id',
     'pcc_uccs_id',
-];
+    'circuitmagnetiques_id',
+    ];
 
      public function user(){
         return $this->belongsTo(User::class);
@@ -65,5 +67,9 @@ class Projet extends Model
     public function volt_spire()
     {
         return $this->belongsTo(VoltSpire::class);
+    }
+    public function circuitmaj()
+    {
+        return $this->belongsTo(Circuitmagnetique::class);
     }
 }

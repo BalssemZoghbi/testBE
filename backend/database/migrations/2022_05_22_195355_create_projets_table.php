@@ -38,7 +38,7 @@ class CreateProjetsTable extends Migration
             $table->foreignId('bobinage_secs_id')->constrained()->onDelete('cascade');
             $table->foreignId('volt_spires_id')->constrained()->onDelete('cascade');
             $table->foreignId('pcc_uccs_id')->constrained()->onDelete('cascade');
-
+            $table->foreignId('circuitmagnetiques_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

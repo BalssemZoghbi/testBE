@@ -15,6 +15,7 @@ use App\Http\Controllers\BobinageSecController;
 use App\Http\Controllers\EmailleController;
 use App\Http\Controllers\VoltspireController;
 use App\Http\Controllers\BobinageStatiqueController;
+use App\Http\Controllers\CircuitmagnetiqueController;
 use App\Http\Controllers\PccUccController;
 use App\Http\Controllers\WordExportController;
 /*
@@ -136,3 +137,5 @@ Route::post('/createBarre', [BobinageStatiqueController::class ,'createBarre']);
 Route::post('/createBarrestat', [BobinageStatiqueController::class ,'addStatBarre']);
 Route::delete('/deleteBarre/{id}', [BobinageStatiqueController::class ,'deleteBarre']);
 Route::post('/documents/{id}', [WordExportController::class ,'wordExport']);
+Route::put('/cm/update/{id}',[CircuitmagnetiqueController::class ,'update']);
+
