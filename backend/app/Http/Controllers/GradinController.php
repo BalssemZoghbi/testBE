@@ -145,7 +145,9 @@ class GradinController extends Controller
         $largeur=$this->largeur($request->diamNominale,$request->pas,$request->nbrGradin,$request->largeurMin,$oldlargGradin,$oldnbreGradin);
         $epaisseur=$this->epaisseur($request->diamNominale,$largeur,$request->nbrGradin);
         $epaisseurfeuillard=$this->epaisseurfeuillard($request->diamNominale,$largeur,$request->nbrGradin,$request->demiGradin,$request->largeurMin,$oldlargGradin,$oldnbreGradin);
+        // dd($epaisseurfeuillard);
         $brut=array_sum(array_map(function($a, $b) { return $a * $b; }, $largeur, $epaisseur));
+        $brutFeuillard=array_sum(array_map(function($a, $b) { return $a * $b; }, $largeur, $epaisseurfeuillard));
         if($projet->conducteurSec=='feuillard'){
             $Gradin->update([
                 'tole' =>  $request->tole,
@@ -157,10 +159,9 @@ class GradinController extends Controller
                 'demiGradin' => $request->demiGradin,
                 'largeur' => $largeur,
                 'epaisseur' => $epaisseurfeuillard,
-                // 'Sbrut' => $brut ,
-                'Sbrut' => $brut ,
-                'Snette' => $brut * $request->coeffRemplissage,
-                'EpaisseurTot' => array_sum($epaisseur),
+                'Sbrut' => $brutFeuillard ,
+                'Snette' => $brutFeuillard * $request->coeffRemplissage,
+                'EpaisseurTot' => array_sum($epaisseurfeuillard),
                 'largeurMin' => $request->largeurMin,
                 'CMBT'=>$request->CMBT,
             ]);
