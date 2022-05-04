@@ -225,7 +225,7 @@ class BobinageController extends Controller
             ->join('gradins', 'gradins.id', '=', 'projets.gradin_id')
             ->join('bobinage_secs', 'bobinage_secs.id', '=', 'projets.bobinage_secs_id')
             ->where('projets.id',$id)
-            ->select('bobinages.*','bobinages.id as bobine_id','volt_Spires.Vsp','volt_Spires.N1c','volt_Spires.spire','electriques.PrimaireIPhase','gradins.diamNominale','bobinage_secs.HbobineBt','bobinage_secs.HBOBT','bobinage_secs.DextBT','bobinage_secs.Bext','projets.*')
+            ->select('bobinages.*','bobinages.id as bobine_id','volt_Spires.Vsp','volt_Spires.N1c','volt_Spires.spire','electriques.PrimaireIPhase','gradins.diamNominale','gradins.CMBT','bobinage_secs.HbobineBt','bobinage_secs.HBOBT','bobinage_secs.DextBT','bobinage_secs.Bext','projets.*')
             ->get()->first();
 
             $Bobinage=Bobinage::FindOrFail($projet->bobine_id );
@@ -248,7 +248,7 @@ class BobinageController extends Controller
             $hfs=$this->hfs($hSpire,$spCouche,$request->etageMT,$request->hbrin1MT,$request->hbrin2MT,$request->e1ax);
             $hbobt=$this->hbobt($hfs,$request->collierBT);
             $collierBt2=$this->collierBt2($hbobt,$hsfs,$request->collierBT);
-            $DintBint=$this->DintBint($projet->diamNominale,$request->CMBT);
+            $DintBint=$this->DintBint($projet->diamNominale,$projet->CMBT);
             $epx=$this->Epx($request->typeCanaux,$request->saillieMT,$request->e1r,$request->etageMT,$request->nbcoucheMT,$request->canauxMT,$request->lgCales,$request->nbrPapierMT,$request->ep1PapierMT);
             $epy=$this->Epy($request->saillieMT,$request->e1r,$request->etageMT,$request->nbcoucheMT,$request->canauxBt,$request->lgCales,$request->nbrPapierMT,$request->ep1PapierMT);
             $dext=$this->Dext($DintBint,$epx);
@@ -307,7 +307,7 @@ class BobinageController extends Controller
                         'HFS'=>$hfs,
                         'collierBT'=>$request->collierBT,
                         'collierBT2'=> $collierBt2,
-                        'CMBT'=>$request->CMBT,
+                        'CMBT'=>$projet->CMBT,
                         'DintMT'=>$DintBint,
                         'BintMT'=>$DintBint,
                         'EpxMT'=>$epx,

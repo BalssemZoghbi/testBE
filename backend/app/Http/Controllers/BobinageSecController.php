@@ -174,7 +174,7 @@ class BobinageSecController extends Controller
             ->join('volt_Spires', 'volt_Spires.id', '=', 'projets.volt_spires_id')
             ->join('gradins', 'gradins.id', '=', 'projets.gradin_id')
             ->where('projets.id',$id)
-            ->select('bobinage_secs.*','bobinage_secs.id as bobine_id','volt_Spires.N2c','gradins.diamNominale','electriques.secondaireIPhase', 'projets.*')
+            ->select('bobinage_secs.*','bobinage_secs.id as bobine_id','volt_Spires.N2c','gradins.diamNominale','gradins.CMBT','electriques.secondaireIPhase', 'projets.*')
             ->get()->first();
             $Bobinage=BobinageSec::FindOrFail($projet->bobine_id );
             $epFeuillard=$this->epFeuillard($request->epFeuil1,$request->epFeuil2);
@@ -187,7 +187,7 @@ class BobinageSecController extends Controller
             $hfs=$this->hfs($hSpire,$spCouche,$request->etage,$request->hbrin1,$request->hbrin2,$request->e2ax);
             $hbobt=$this->hbobt($hfs,$request->collierBT);
             $collierBt2=$this->collierBt2($hbobt,$hsfs,$request->collierBT);
-            $DintBint=$this->DintBint($projet->diamNominale,$request->CMBT);
+            $DintBint=$this->DintBint($projet->diamNominale,$projet->CMBT);
             $epx=$this->Epx($request->typeCanaux,$request->saillie,$request->e2r,$request->etage,$request->nbcouche,$request->canauxBt,$request->lgCales,$request->nbPapier,$request->ep1Papier);
             $epy=$this->Epy($request->saillie,$request->e2r,$request->etage,$request->nbcouche,$request->canauxBt,$request->lgCales,$request->nbPapier,$request->ep1Papier);
             $dext=$this->Dext($DintBint,$epx);
@@ -237,7 +237,7 @@ class BobinageSecController extends Controller
                         'HFS'=>$hfs,
                         'collierBT'=>$request->collierBT,
                         'collierBT2'=> $collierBt2,
-                        'CMBT'=>$request->CMBT,
+                        'CMBT'=>$projet->CMBT,
                         'Dint'=>$DintBint,
                         'Bint'=>$DintBint,
                         'Epx'=>$epx,
@@ -262,7 +262,7 @@ class BobinageSecController extends Controller
                     'lgCales'=>$request->lgCales,
                     'collierBT'=>$request->collierBT,
                     'collierBT2'=> $collierBt2,
-                    'CMBT'=>$request->CMBT,
+                    'CMBT'=>$projet->CMBT,
                     'Dint'=>$DintBint,
                     'Bint'=>$DintBint,
                     'Epx'=>$epxfeui,

@@ -162,6 +162,7 @@ class GradinController extends Controller
                 'Snette' => $brut * $request->coeffRemplissage,
                 'EpaisseurTot' => array_sum($epaisseur),
                 'largeurMin' => $request->largeurMin,
+                'CMBT'=>$request->CMBT,
             ]);
         }else{
         $Gradin->update([
@@ -178,6 +179,7 @@ class GradinController extends Controller
             'Snette' => $brut * $request->coeffRemplissage,
             'EpaisseurTot' => array_sum($epaisseur),
             'largeurMin' => $request->largeurMin,
+            'CMBT'=>$request->CMBT,
         ]);
     }
         return response()->json($Gradin);
