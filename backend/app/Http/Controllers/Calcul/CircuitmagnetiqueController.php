@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Calcul;
 
 use App\Http\Controllers\Controller;
 use App\Models\Donnees\Circuitmagnetique;
-use App\Models\Tole;
+use App\Models\Donnees\gradin\Tole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 

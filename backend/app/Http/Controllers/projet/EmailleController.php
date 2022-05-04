@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Donnees\bobinage\Emaille;
 use App\Models\Donnees\bobinage\Hbrin;
 use App\Models\Donnees\bobinage\Saillie;
-use App\Models\Tole;
+use App\Models\Donnees\gradin\Tole;
 use Illuminate\Http\Request;
 
 

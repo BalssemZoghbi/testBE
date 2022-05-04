@@ -17,9 +17,9 @@ use App\Models\Donnees\bobinage\BobinageSec;
 use App\Models\Donnees\Circuitmagnetique;
 use App\Models\Donnees\electrique\Electrique;
 use App\Models\Donnees\garantie\Garantie;
+use App\Models\Donnees\gradin\Gradin;
 use App\Models\Donnees\PccUcc;
 use App\Models\Donnees\VoltSpire;
-use App\Models\Gradin;
 
 
 use Laravel\Sanctum\PersonalAccessToken;

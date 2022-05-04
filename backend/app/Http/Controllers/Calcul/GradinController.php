@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Calcul;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Gradin;
 use App\Http\Resources\GradinResource;
+use App\Models\Donnees\gradin\Gradin;
 use Illuminate\Support\Facades\DB;
 
 class GradinController extends Controller
