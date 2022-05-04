@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Donnees;
+namespace App\Models\Donnees\electrique;
 
 use App\Models\Donnees\Projet;
 use Illuminate\Database\Eloquent\Model;

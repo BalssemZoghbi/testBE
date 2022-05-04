@@ -51,7 +51,6 @@ class CreateBobinageSecsTable extends Migration
             $table->float('Bext')->nullable();
             $table->float('poidBT')->nullable();
             $table->float('majPoid')->nullable();
-            $table->float('HBOBT')->nullable();
             $table->integer('Hfeuillard')->nullable();
             $table->integer('HbobineBt')->nullable();
             $table->float('epFeuil1')->nullable();
@@ -69,6 +68,24 @@ class CreateBobinageSecsTable extends Migration
             $table->integer('largeurBarre')->nullable();
             $table->integer('Sbarre')->nullable();
             $table->float('Jbarre')->nullable();
+            $table->float('scu2d')->nullable();
+            $table->float('J2D')->nullable();
+            $table->float('D2d')->nullable();
+            $table->float('filobtenueNue')->nullable();
+            $table->float('filobtenueIsoler')->nullable();
+            $table->string('choix')->default('automatique')->nullable();
+            $table->enum('brinParallele',['1','2'])->nullable();
+            $table->float('SpchB')->nullable();
+            $table->float('NchB')->nullable();
+            $table->float('SpchA')->nullable();
+            $table->float('NchA')->nullable();
+            $table->float('HCondBt')->nullable();
+            $table->float('DistanceBTMT')->nullable();
+            $table->float('HCollier')->nullable();
+            $table->float('EpfeuillePapier')->nullable();
+            $table->float('EpaiseurPapier')->nullable();
+            $table->float('EpaisseurPapierCanaux')->nullable();
+            $table->float('N1cmax')->nullable();
             $table->timestamps();
         });
     }

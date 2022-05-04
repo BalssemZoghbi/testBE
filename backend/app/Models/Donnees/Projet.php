@@ -2,12 +2,12 @@
 
 namespace App\Models\Donnees;
 
-use App\Models\Donnees\Electrique;
-use App\Models\Bobinage;
-use App\Models\BobinageSec;
-use App\Models\Circuitmagnetique;
-use App\Models\VoltSpire;
-
+use App\Models\Donnees\bobinage\Bobinage;
+use App\Models\Donnees\bobinage\BobinageSec;
+use App\Models\Donnees\electrique\Electrique;
+use App\Models\Donnees\garantie\Garantie;
+use App\Models\Gradin;
+use App\Models\user\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 

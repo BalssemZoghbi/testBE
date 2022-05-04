@@ -70,7 +70,23 @@ class CreateBobinagesTable extends Migration
             $table->float('EpfeuillePapier')->nullable();
             $table->float('EpaiseurPapier')->nullable();
             $table->float('EpaisseurPapierCanaux')->nullable();
+            $table->integer('Hfeuillard')->nullable();
             $table->integer('HbobineBt')->nullable();
+            $table->float('epFeuil1')->nullable();
+            $table->float('epFeuil2')->nullable();
+            $table->float('epFeuillard')->nullable();
+            $table->float('ep2Papier')->nullable();
+            $table->integer('nbrPap2')->nullable();
+            $table->integer('ePap')->nullable();
+            $table->float('epFeuilPap')->nullable();
+            $table->integer('nbrPap1')->nullable();
+            $table->float('EpPapier')->nullable();
+            $table->string('Epbarre')->nullable();
+            $table->integer('epaisseurBarre')->nullable();
+            $table->integer('largeurBarre')->nullable();
+            $table->integer('Sbarre')->nullable();
+            $table->float('Jbarre')->nullable();
+            $table->integer('nbrPapier')->nullable();
             $table->timestamps();
         });
     }

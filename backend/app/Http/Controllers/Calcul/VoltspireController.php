@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
-use App\Models\VoltSpire;
+namespace App\Http\Controllers\Calcul;
+
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Donnees\Projet;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\VoltSpireResource;
+use App\Models\Donnees\VoltSpire;
 
 class VoltspireController extends Controller
 {

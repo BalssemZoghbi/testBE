@@ -1,25 +1,26 @@
 <?php
 
-namespace App\Http\Controllers\Donnees;
+namespace App\Http\Controllers\projet;
 
 // use App\Models\Projet;
 
 use Illuminate\Http\Request;
-use App\Models\Donnees\Projet ;
-use App\Models\Donnees\Electrique;
+use App\Models\Donnees\Projet;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\VoltspireController;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\ProjetResource;
+use App\Models\Donnees\bobinage\Bobinage;
+use App\Models\Donnees\bobinage\BobinageSec;
+use App\Models\Donnees\Circuitmagnetique;
+use App\Models\Donnees\electrique\Electrique;
 use App\Models\Donnees\garantie\Garantie;
-use App\Models\Bobinage;
+use App\Models\Donnees\PccUcc;
+use App\Models\Donnees\VoltSpire;
 use App\Models\Gradin;
-use App\Models\VoltSpire;
-use App\Models\BobinageSec;
-use App\Models\Circuitmagnetique;
-use  App\Models\PccUcc;
+
 
 use Laravel\Sanctum\PersonalAccessToken;
 

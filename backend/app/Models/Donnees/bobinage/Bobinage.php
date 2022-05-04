@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Donnees\bobinage;
 use App\Models\Donnees\Projet;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -66,7 +66,41 @@ class Bobinage extends Model
         'EpfeuillePapier',
         'EpaiseurPapier',
         'EpaisseurPapierCanaux',
-        'HbobineBt'
+        'Hfeuillard',
+        'HbobineBt',
+        'epFeuil1',
+        'nbrPapier',
+        'epFeuil2',
+        'epFeuillard',
+        'ep2Papier',
+        'nbrPap2',
+        'ePap',
+        'epFeuilPap',
+        'nbrPap1',
+        'EpPapier',
+        'EpCylindre',
+        'Epbarre',
+        'epaisseurBarre',
+        'largeurBarre',
+        'Sbarre',
+        'Jbarre',
+        'scu1d',
+        'J1D',
+        'D1d',
+        'filobtenueNue',
+        'filobtenueIsoler',
+        'choix',
+         'brinParallele',
+        'nbCoucheMt',
+        'SpchB',
+        'NchB',
+        'SpchA',
+        'NchA',
+        'HCondMt',
+        'HCollier',
+        'EpfeuillePapier',
+        'nbrPapier',
+        'EpaiseurPapier',
     ];
     public function projets(){
         return $this->hasMany(Projet::class);

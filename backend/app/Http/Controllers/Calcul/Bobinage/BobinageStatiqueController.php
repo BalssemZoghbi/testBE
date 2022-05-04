@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Calcul\Bobinage;
 
-use App\Models\Hbrin;
-use App\Models\Saillie;
-use App\Models\Barre;
+use App\Http\Controllers\Controller;
+use App\Models\Donnees\bobinage\Barre;
+use App\Models\Donnees\bobinage\Hbrin;
+use App\Models\Donnees\bobinage\Saillie;
 use Illuminate\Http\Request;
 
 class BobinageStatiqueController extends Controller

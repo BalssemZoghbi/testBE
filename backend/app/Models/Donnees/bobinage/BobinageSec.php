@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Donnees\bobinage;
 use App\Models\Donnees\Projet;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -46,7 +46,6 @@ class BobinageSec extends Model
         'Bext',
         'poidBT',
         'majPoid',
-        'HBOBT',
         'Hfeuillard',
         'HbobineBt',
         'epFeuil1',
@@ -64,23 +63,24 @@ class BobinageSec extends Model
         'largeurBarre',
         'Sbarre',
         'Jbarre',
-        'scu1d',
-        'J1D',
-        'D1d',
+        'scu2d',
+        'J2D',
+        'D2d',
         'filobtenueNue',
         'filobtenueIsoler',
         'choix',
-         'brinParallele',
-        'nbCoucheMt',
+        'brinParallele',
+        'nbCoucheBt',
         'SpchB',
         'NchB',
         'SpchA',
         'NchA',
-        'HCondMt',
+        'HCondBt',
         'HCollier',
         'EpfeuillePapier',
         'nbrPapier',
         'EpaiseurPapier',
+        'N1cmax'
     ];
     public function projets(){
         return $this->hasMany(Projet::class);
