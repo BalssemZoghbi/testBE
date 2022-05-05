@@ -38,7 +38,7 @@ class BobinageSecController extends Controller
 
      }
 //meplat guipé
-     public function Scu2($conducteur,$hbrin1,$hbrin2,$nbrin1,$nbrin2,$etage,$saillie,$Hfeuillard,$epFeuillard,$filobtenueNue)
+     public function Scu2($conducteur,$hbrin1,$hbrin2,$nbrin1,$nbrin2,$etage,$saillie,$Hfeuillard,$epFeuillard,$filobtenueNue,$brin)
      {
         if($conducteur=='meplat guipé'){
 
@@ -47,7 +47,7 @@ class BobinageSecController extends Controller
 
             return $Hfeuillard*$epFeuillard;
         }else if($conducteur=='Rond emaille'){
-            return (pi()*pow($filobtenueNue,2))/4;
+            return (pi()*pow($filobtenueNue,2))*$brin/4;
         }
      }
      public function j2($I2phase,$scu2)
@@ -315,7 +315,7 @@ public function BextMt($bint,$epy){
                 $Isole=0;
             }
             $epFeuillard=$this->epFeuillard($request->epFeuil1,$request->epFeuil2);
-            $scu2=$this->Scu2($request->conducteurSec,$request->hbrin1, $request->hbrin2,$request->nbBrin1, $request->nbBrin2, $request->etage, $request->saillie,$request->Hfeuillard,$epFeuillard,$Designation);
+            $scu2=$this->Scu2($request->conducteurSec,$request->hbrin1, $request->hbrin2,$request->nbBrin1, $request->nbBrin2, $request->etage, $request->saillie,$request->Hfeuillard,$epFeuillard,$Designation,$request->brinParallele);
             $j2=$this->j2($projet->secondaireIPhase, $scu2);
             $spCouche=$this->spCouche($request->conducteurSec,$projet->N2c,$request->nbcouche);
             $hSpire=$this->hSpire($request->hbrin1,$request->e2ax,$request->nbBrin1,$request->hbrin2,$request->nbBrin2);
