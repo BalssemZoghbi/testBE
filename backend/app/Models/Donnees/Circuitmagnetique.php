@@ -37,6 +37,7 @@ class Circuitmagnetique extends Model
         'masseFerCM',
         'surfaceCM',
         'Hauteurcuve',
+        'coeffPoid'
     ];
     public function projets(){
         return $this->hasMany(Projet::class);

@@ -37,6 +37,7 @@ class CreateCircuitmagnetiquesTable extends Migration
             $table->json('masseFerCM');
             $table->json('surfaceCM');
             $table->integer('Hauteurcuve');
+            $table->integer('coeffPoid');
             $table->timestamps();
         });
     }
