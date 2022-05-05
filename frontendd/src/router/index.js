@@ -28,9 +28,15 @@ import garantie36 from "../components/donnees/garantie/garantie36.vue";
 import saillie from "../components/donnees/bobinage/saillie.vue";
 import Hbrin from "../components/donnees/bobinage/hbrin.vue";
 import barre from "../components/donnees/bobinage/barre.vue";
+import t from "../components/t.vue";
 Vue.use(VueRouter);
 
 const routes = [
+  {
+    path: "/t",
+    name: "t",
+    component: t,
+  },
   {
     path: "/profil",
     name: "profil",
