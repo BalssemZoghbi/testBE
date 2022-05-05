@@ -12,6 +12,7 @@ use App\Http\Controllers\Donnees\GarantieController;
 use App\Http\Controllers\projet\EmailleController;
 use App\Http\Controllers\projet\ProjetController;
 use App\Http\Controllers\projet\TensionElectriqueController;
+use App\Http\Controllers\StatisiqueController;
 use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\User\ForgotController;
 use App\Http\Controllers\User\UserController;
@@ -139,4 +140,8 @@ Route::post('/createBarrestat', [BobinageStatiqueController::class ,'addStatBarr
 Route::delete('/deleteBarre/{id}', [BobinageStatiqueController::class ,'deleteBarre']);
 Route::post('/documents/{id}', [WordExportController::class ,'wordExport']);
 Route::put('/cm/update/{id}',[CircuitmagnetiqueController::class ,'update']);
+
+Route::post('/stat',[StatisiqueController::class ,'edit']);
+
+
 

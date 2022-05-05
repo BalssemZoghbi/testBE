@@ -251,7 +251,7 @@ export default {
      async  getuser() {
     await axios.get("/usersInactive").then((resp) => {
         this.users = resp.data;
-        console.log(resp.data);
+        // console.log(resp.data);
       });
     },
          deleteutilisateur(id) {
@@ -329,9 +329,7 @@ export default {
 });      }
       this.close();
     },
-    addUser() {
- 
-    },
+  
   //     updateUser(id) {
   //    axios.put("user/update/" + id).then(() => {
   //           this.getuser();

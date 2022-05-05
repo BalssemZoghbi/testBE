@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
-use App\Mail\User as MailUser;
 use App\Mail\Userdecline;
 use App\Models\user\User;
-use App\Models\UserInactive;
+use App\Models\user\UserInactive;
 use Illuminate\Http\Request;
+use App\Mail\User as MailUser;
 use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Controller;
+use App\Models\UserInactive as ModelsUserInactive;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 

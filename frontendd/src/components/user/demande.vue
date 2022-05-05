@@ -1,12 +1,12 @@
 <template>
   <div>
     <!-- <NavDash /> -->
-     <!-- <v-tabs center-active style="margin-left: 33%;">
+    <!-- <v-tabs center-active style="margin-left: 33%;">
            <v-tab>Demande d'inscription</v-tab>
 
     <v-tab><router-link class="nav-link" to="/user" style="text-decoration:none;" v-model="model" centered>Utilisateurs</router-link></v-tab>
   </v-tabs> -->
-  
+
     <v-data-table
       :headers="headers"
       :items="users"
@@ -100,43 +100,42 @@
           </v-dialog> -->
         </v-toolbar>
       </template>
-      <template v-slot:[`item.actions`]="{item}">
-         <v-btn
-        class="ma-2"
-        color="primary"
-        dark
-      >
-        Accept
-        <v-icon
-          dark
-          right
-          v-on:click="accept(item.id)"
-        >
-          mdi-checkbox-marked-circle
-        </v-icon>
-      </v-btn>
+      <template v-slot:[`item.actions`]="{ item }">
+        <v-btn class="ma-2" color="primary" dark>
+          Accepter
+          <v-icon dark right @click="accept(item.id)">
+            mdi-checkbox-marked-circle
+          </v-icon>
+        </v-btn>
         <!-- <v-icon small color="green" class="mr-2" v-on:click="accept(item.id)">
           mdi-pencil
         </v-icon> -->
-         <v-btn
-        class="ma-2"
-        color="red"
-        dark
-      >
-        Decline
-        <v-icon
-          dark
-          right
-          v-on:click="decline(item.id)" 
-        >
-          mdi-cancel
-        </v-icon>
-      </v-btn>
-               <!-- <v-icon small color="red" v-on:click="decline(item.id)" > mdi-delete </v-icon> -->
+        <v-btn class="ma-2" color="red" dark>
+          Refuser
+          <v-icon dark right @click="decline(item.id)">
+            mdi-cancel
+          </v-icon>
+        </v-btn>
+        <!-- <v-icon small color="red" v-on:click="decline(item.id)" > mdi-delete </v-icon> -->
+        <v-snackbar v-model="snackbarDecline">
+          {{ textDecline }}
 
+          <template v-slot:action="{ attrs }">
+            <v-btn color="blue" text v-bind="attrs" @click="snackbarDecline = false">
+              Fermer
+            </v-btn>
+          </template>
+        </v-snackbar>
+        <v-snackbar v-model="snackbar">
+          {{ text }}
+
+          <template v-slot:action="{ attrs }">
+            <v-btn color="blue" text v-bind="attrs" @click="snackbar = false">
+              Fermer
+            </v-btn>
+          </template>
+        </v-snackbar>
       </template>
-
-     
     </v-data-table>
   </div>
 </template>
@@ -146,11 +145,15 @@
 // import NavDash from "../NavDash.vue";
 import axios from "axios";
 export default {
-   components: {
+  components: {
     // NavDash,
   },
   data: () => ({
-    model: 'tab-2',
+    snackbar: false,
+    text: `L'utilisateur a été accepté`,
+    snackbarDecline: false,
+    textDecline: `L'utilisateur a été refusé`,
+    model: "tab-2",
     search: "",
     dialog: false,
     dialogDelete: false,
@@ -160,8 +163,7 @@ export default {
       { text: "Type", value: "type" },
       { text: "Poste", value: "poste" },
       { text: "Numero", value: "numero" },
-      { text: "Operation", value: "actions" , sortable: false},
-     
+      { text: "Operation", value: "actions", sortable: false },
     ],
     users: [],
     editedIndex: -1,
@@ -180,47 +182,44 @@ export default {
       numero: "",
     },
   }),
-     created() {
-       this.getuser();
+  created() {
+    this.getuser();
   },
-  methods:{
- async accept(id){
-   console.log('aa')
-  console.log(id);
-   await axios.put("/user/accept/"+id).then(() => {
-      this.getuser();
-}
-);
-},
-async decline(id){
-    console.log(id);
-  await axios.delete("/user/decline/"+id).then(() => {
-        // console.log('declined');
-        // this.created();
-         this.getuser();
-}
-);
-},
-async getuser(){
-  await axios.get("/users/p").then((resp) => {
+  methods: {
+     async getuser() {
+      await axios.get("/users/p").then((resp) => {
         this.users = resp.data;
-}
-);
-},
-  
-  mounted() {
-    // this.accept();
-     this.getuser();
-  },
-}}
-  
+        console.log(this.users)
+      });
+    },
+    async accept(id) {
+      //  console.log('aa')
+      console.log(id);
+      await axios.put("/user/accept/" + id).then(() => {
+        this.getuser();
+      });
+      this.snackbar=true;
+    },
+    async decline(id) {
+      console.log(id);
+      await axios.delete("/user/decline/" + id).then(() => {
+        this.getuser();
+      });
+      this.snackbarDecline=true;
+    },
+   
 
+    mounted() {
+      // this.getuser();
+    },
+  },
+};
 </script>
 <style scoped>
 .v-data-table {
   /* line-height: 1.5; */
   max-width: 1800px;
-  margin: 3%;                                                                                                                                                                                               
+  margin: 3%;
 }
 .theme--light.v-icon {
   color: #2196f3;

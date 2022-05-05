@@ -271,9 +271,6 @@ import { mapGetters } from 'vuex';
         { icon: 'reorder', text: 'Garanties', route:'/garantie24' },
           ],
         },
-        // { icon: 'mdi-finance', text: 'Revenue', route:'/revenue' },
-        // { icon: 'mdi-chart-pie', text: 'Analytics', route:'/chart' },
-        // { icon: 'mdi-magnify', text: 'Search', route:'/recherches' },
       ],
       itemsemploye: [
         { icon: 'mdi-home', text: 'Tableau de bord' , route:'/dashboard'},

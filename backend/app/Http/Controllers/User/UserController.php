@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Http\Resources\UserResource;
 use App\Models\user\User;
-use App\Models\UserInactive;
+use App\Models\user\UserInactive;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller

@@ -339,9 +339,7 @@ export default {
 });      }
       this.close();
     },
-    addUser() {
- 
-    },
+    
   //     updateUser(id) {
   //    axios.put("user/update/" + id).then(() => {
   //           this.getuser();
