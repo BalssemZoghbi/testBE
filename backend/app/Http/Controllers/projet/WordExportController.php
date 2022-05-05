@@ -1,19 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\projet;
 
-
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\Donnees\bobinage\Bobinage;
+use App\Models\Donnees\bobinage\BobinageSec;
+use App\Models\Donnees\electrique\Electrique;
+use App\Models\Donnees\garantie\Garantie;
+use App\Models\Donnees\gradin\Gradin;
+use App\Models\Donnees\PccUcc;
 use App\Models\Donnees\Projet;
+use App\Models\Donnees\VoltSpire;
+use Illuminate\Http\Request;
 use PhpOffice\PhpWord\TemplateProcessor;
 use Illuminate\Support\Facades\DB;
-use App\Models\Donnees\Electrique;
-use App\Models\Donnees\garantie\Garantie;
-use App\Models\Bobinage;
-use App\Models\BobinageSec;
-use App\Models\Gradin;
-use  App\Models\PccUcc;
-use App\Models\VoltSpire;
+
 class WordExportController extends Controller
 {
     public function wordExport($id)

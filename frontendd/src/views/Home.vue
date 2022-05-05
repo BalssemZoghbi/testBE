@@ -137,7 +137,7 @@
         mdi-delete
       </v-icon>
     </v-btn>
-    <v-form ref="form">
+    <!-- <v-form ref="form"> -->
      <v-btn
       class="mx-2"
       fab
@@ -152,7 +152,7 @@
         mdi-cloud-download
       </v-icon>
     </v-btn>
-    </v-form>
+    <!-- </v-form> -->
           <!-- <v-icon small > mdi-delete </v-icon> -->
         </template>
       </v-data-table>
@@ -199,7 +199,7 @@ export default {
       { text: "Tension Primaire", value: "u1n" },
       { text: "Tension Secondaire", value: "u2o" },
       { text: "Couplage", value: "couplage" },
-      // { text: "Frequence", value: "frequence" },
+      { text: "Frequence", value: "frequence" },
       { text: "Actions", value: "actions", sortable: false },
     ],
     projets: [],

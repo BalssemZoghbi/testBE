@@ -6,7 +6,7 @@
       <v-stepper v-model="e1"  vertical>
         <!-- <v-stepper-header> -->
           <v-stepper-step :complete="e1 > 1" step="1">
-            Name of step 1
+            Données Generale
           </v-stepper-step>
 
           <!-- <v-divider></v-divider> -->
@@ -19,52 +19,37 @@
         <!-- </v-stepper-header> -->
 
         <!-- <v-stepper-items> -->
-          <v-stepper-content step="1">
-            <v-card class="mb-12" color="rgb(5 48 96 / 78%)" height="450px">
-              <div class="body">
-                <div class="container">
+           <v-stepper-content step="1">
+            <v-card class="mb-6"  >
+              <!-- <div class="body"> -->
+                <!-- <div class="container"> -->
                   <div class="title">Données Generale</div>
                   <div class="content">
                     <form v-on:submit.prevent="updateprojet">
                       <div class="user-details">
-                        <div class="input-box">
-                          <div class="form__div">
-                            <input
-                              type="text"
-                              class="form__input"
-                              placeholder=" "
-                              id="appareil"
-                              v-model="projet.appareil"
-                            />
-                            <label for="" class="form__label">Appareil</label>
-                          </div>
+                        <div class="form__div framei">
+                          <input
+                            type="text"
+                            class="form__input"
+                            placeholder=" "
+                            id="appareil"
+                            v-model="projet.appareil"
+                          />
+                          <label for="" class="form__label">Appareil</label>
                         </div>
-                        <div class="input-box">
-                          <div class="form__div">
-                            <input
-                              type="text"
-                              class="form__input"
-                              placeholder=" "
-                              id="reference"
-                              v-model="projet.reference"
-                            />
-                            <label for="" class="form__label">Reference</label>
-                          </div>
+                        <div class="form__div framei">
+                          <input
+                            type="text"
+                            class="form__input"
+                            placeholder=" "
+                            id="reference"
+                            v-model="projet.reference"
+                          />
+                          <label for="" class="form__label">Reference</label>
                         </div>
-                        <div class="input-box">
-                          <div class="form__div">
-                            <input
-                              type="text"
-                              class="form__input"
-                              placeholder=" "
-                              id="client"
-                              v-model="projet.client"
-                            />
-                            <label for="" class="form__label">Client</label>
-                          </div>
-                        </div>
-                        <div class="input-box">
-                          <div class="form__div">
+                       
+                     <div class="input-box">
+                           <div class="form__div">
                             <input
                               type="text"
                               class="form__input"
@@ -72,14 +57,22 @@
                               id="refClient"
                               v-model="projet.refClient"
                             />
-                            <label for="" class="form__label"
-                              >Reference Client</label
-                            >
+                            <label for="" class="form__label">refClient</label>
                           </div>
                         </div>
+                       
+                         <div class="form__div framei">
+                          <input
+                            type="text"
+                            class="form__input"
+                            placeholder=" "
+                            id="client"
+                            v-model="projet.client"
+                          />
+                          <label for="" class="form__label">Client</label>
+                        </div>
 
-                        <div class="input-box">
-                          <div class="form__div">
+                        <div class="form__div framei">
                             <input
                               type="text"
                               class="form__input"
@@ -87,55 +80,45 @@
                               id="user_id"
                               v-model="projet.elaborateur"
                             />
-                            <label for="" class="form__label"
-                              >Elaboré par</label
-                            >
-                          </div>
+                            <label for="" class="form__label">Elaboré par</label>
+                           <!-- <v-select
+                                :items="frequences"
+                                label="frequence"
+                                v-model="projet.frequence"
+                                dense
+                                outlined
+                              ></v-select> -->
                         </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </v-card>
-
-            <v-btn
-              color="primary"
-              @click="e1 = 2"
-              style="margin-top: -3% !important; margin-bottom: 5% !important"
-            >
-              Continue
-            </v-btn>
-          </v-stepper-content>
- <v-stepper-step :complete="e1 > 2" step="2">
-            Name of step 2
-          </v-stepper-step>
-          <v-stepper-content step="2">
-            <v-card class="mb-12" color="#71b7e675" height="450px">
-              <div class="body">
-                <div class="container">
-                  <div class="content">
-                    <form v-on:submit.prevent="updateprojet">
-                      <div class="user-details">
-                        <div class="input-box">
-                          <div class="form__div">
-                            <!-- <input type="text" class="form__input" placeholder=" " id="type"
-        v-model="projet.type">
-              <label for="" class="form__label">type</label> -->
-                            <v-select
+                        <div class="form__div framei">
+                          <input
+                            type="number"
+                            class="form__input"
+                            placeholder=" "
+                            id="temperatureMax"
+                            v-model="projet.temperatureMax"
+                          />
+                          <label for="" class="form__label">temperatureMax</label>
+                        </div>
+                        <div class="form__div framei">
+                          <input
+                            type="number"
+                            class="form__input"
+                            placeholder=" "
+                            id="attitudeMax"
+                            v-model="projet.attitudeMax"
+                          />
+                          <label for="" class="form__label">attitudeMax</label>
+                        </div>
+                        <div class="form__div framei">
+                         <v-select
                               :items="types"
                               label="type"
                               v-model="projet.type"
                               dense
                               outlined
                             ></v-select>
-                          </div>
                         </div>
-                        <div class="input-box">
-                          <div class="form__div">
-                            <!-- <input type="text" class="form__input" placeholder=" " id="remplissage"
-        v-model="projet.remplissage">
-              <label for="" class="form__label">remplissage</label> -->
+                        <div class="form__div framei">
                             <v-select
                               :items="remplissages"
                               label="remplissage"
@@ -144,26 +127,16 @@
                               outlined
                             ></v-select>
                           </div>
-                        </div>
-                        <div class="input-box">
-                          <div class="form__div">
-                            <!-- <input type="text" class="form__input" placeholder=" "  id="installation"
-        v-model="projet.installation">
-              <label for="" class="form__label">Installation</label> -->
-                            <v-select
+                        <div class="form__div framei">
+                          <v-select
                               :items="installations"
                               label="installation"
                               v-model="projet.installation"
                               dense
                               outlined
                             ></v-select>
-                          </div>
                         </div>
-                        <div class="input-box">
-                          <div class="form__div">
-                            <!-- <input type="text" class="form__input" placeholder=" " id="montage"
-        v-model="projet.montage">
-              <label for="" class="form__label">Montage</label> -->
+                        <div class="form__div framei">
                             <v-select
                               :items="montages"
                               label="montage"
@@ -171,74 +144,28 @@
                               dense
                               outlined
                             ></v-select>
-                          </div>
                         </div>
-
-                        <div class="input-box">
-                          <div class="form__div">
-                            <!-- <input type="text" class="form__input" placeholder=" " id="dielectrique"
-        v-model="projet.dielectrique">
-              <label for="" class="form__label">Dielectrique</label> -->
-                            <v-select
+                        <div class="form__div framei">
+                             <v-select
                               :items="dielectriques"
                               label="dielectrique"
                               v-model="projet.dielectrique"
                               dense
                               outlined
                             ></v-select>
-                          </div>
                         </div>
-                        <div class="input-box">
-                          <div class="form__div">
-                            <!-- <input type="text" class="form__input" placeholder=" " id="fonctionnement"
-        v-model="projet.fonctionnement">
-              <label for="" class="form__label">Fonctionnement</label> -->
-                            <v-select
+                        <div class="form__div framei">
+                             <v-select
                               :items="fonctionnements"
                               label="fonctionnement"
                               v-model="projet.fonctionnement"
                               dense
                               outlined
                             ></v-select>
-                          </div>
                         </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </v-card>
-            <v-btn
-              @click="e1 = 1"
-              style="margin-top: -3% !important; margin-bottom: 5% !important"
-            >
-              précédente
-            </v-btn>
-            <v-btn
-              color="primary"
-              @click="e1 = 3"
-              style="margin-top: -3% !important; margin-bottom: 5% !important"
-            >
-              Continue
-            </v-btn>
-          </v-stepper-content>
-    <v-stepper-step step="3"> Name of step 3 </v-stepper-step>
-          <v-stepper-content step="3">
-            <v-card class="mb-12" color="#71b7e675" height="450px">
-              <div class="body">
-                <div class="container">
-                  <div class="content">
-                    <form
-                      v-on:submit.prevent="updateprojet"
-                      style="padding: 30px"
-                    >
-                      <div class="user-details">
-                        <div class="input-box">
-                          <div class="form__div">
-                            <!-- <input type="text" class="form__input" placeholder=" " id="echangeurs"
-        v-model="projet.echangeurs">
-              <label for="" class="form__label">Echangeurs</label> -->
-                            <v-select
+                     
+                        <div class="form__div framei">
+                         <v-select
                               :items="echangeurs"
                               label="Echangeurs"
                               v-model="projet.echangeurs"
@@ -246,61 +173,26 @@
                               outlined
                             ></v-select>
                           </div>
-                        </div>
-                        <div class="input-box">
-                          <div class="form__div">
-                            <input
-                              type="text"
-                              class="form__input"
-                              placeholder=" "
-                              id="temperatureMax"
-                              v-model="projet.temperatureMax"
-                            />
-                            <label for="" class="form__label"
-                              >TemperatureMax</label
-                            >
-                          </div>
-                        </div>
-                        <div class="input-box">
-                          <div class="form__div">
-                            <input
-                              type="text"
-                              class="form__input"
-                              placeholder=" "
-                              id="attitudeMax"
-                              v-model="projet.attitudeMax"
-                            />
-                            <label for="" class="form__label"
-                              >attitudeMax</label
-                            >
-                          </div>
-                        </div>
-                        <div class="input-box">
-                          <div class="form__div">
-                            <!-- <input type="text" class="form__input" placeholder=" " id="refroidissement"
-        v-model="projet.refroidissement">
-              <label for="" class="form__label">Refroidissement</label> -->
-                            <v-select
+                        
+                        <div class="form__div framei">
+                       <v-select
                               :items="refroidissements"
                               label="Refroidissement"
                               v-model="projet.refroidissement"
                               dense
                               outlined
                             ></v-select>
-                          </div>
                         </div>
+                    
+                        
                       </div>
+                      
                     </form>
                   </div>
-                </div>
-              </div>
+                <!-- </div> -->
+              <!-- </div> -->
             </v-card>
-            <v-btn
-              @click="e1 = 2"
-              style="margin-top: -3% !important; margin-bottom: 5% !important"
-            >
-              précédente
-            </v-btn>
+   
             <router-link
               class="nav-link"
               :to="
@@ -311,11 +203,12 @@
                 @click="updateprojet"
                 style="margin-top: -3% !important; margin-bottom: 5% !important"
               >
-                Modifier
+                Valider
               </v-btn></router-link
             >
           </v-stepper-content>
-        <!-- </v-stepper-items> -->
+          <!-- <v-stepper-content >
+        </v-stepper-content> -->
       </v-stepper>
     </div>
   </div>
@@ -409,9 +302,6 @@ export default {
 };
 </script>
 <style scoped>
-/* Googlefont Poppins CDN Link */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
 
 h1 {
   margin: 0;
@@ -525,20 +415,23 @@ h1 {
   border-radius: 5px;
   box-shadow: 0 5px 10px rgb(0 0 0 / 15%);
 }
-.container .title {
+.title {
   font-size: 25px;
   font-weight: 500;
+  /* margin-top:-1% ; */
+  margin-bottom: 3.5%;
   position: relative;
 }
-.container .title::before {
+ .title::before {
   content: "";
   position: absolute;
   left: 0;
-  bottom: -5px;
+  bottom: -4px;
   height: 3px;
   width: 250px;
   border-radius: 5px;
-  background: linear-gradient(135deg, #71b7e6, #71b7e6);
+  
+  background: linear-gradient(135deg, #0b65a0, #71b7e6);
 }
 .content form .user-details {
   display: flex;
@@ -562,7 +455,7 @@ form .input-box span.details {
   font-size: 16px;
   border-radius: 5px;
   padding-left: 15px;
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   /* border-bottom-width: 2px; */
   transition: all 0.3s ease;
 }
@@ -631,7 +524,12 @@ form .button input:hover {
   width: 100%;
   border-color: #000;
 }
-
+.v-sheet.v-card:not(.v-sheet--outlined) {
+    box-shadow: 0px 0px 0px 0px;
+}
+.v-stepper--vertical {
+    padding-bottom:0px;
+}
 @media (max-width: 584px) {
   .container {
     max-width: 100%;
