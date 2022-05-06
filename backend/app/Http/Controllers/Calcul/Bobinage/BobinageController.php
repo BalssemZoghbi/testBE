@@ -245,14 +245,16 @@ return $barre;
         if($typecanaux=='complet'){
         return $nbreCoucheMt*$fileisole+$epaisseurPapier*($nbreCoucheMt-1-$canauxMt)+$canauxMt*$lrgc+$canauxMt*$epaisseurPapierCanaux;
         }else if($typecanaux=='lune'){
-            return ($nbreCoucheMt*$fileisole+$epaisseurPapier)*($nbreCoucheMt-1);
+            $epx=$nbreCoucheMt*$fileisole+$epaisseurPapier*($nbreCoucheMt-1);
+            return Ceil($epx);
         }
     }
     public function dextMt($dint,$epxmt){
         return ($epxmt*2)+$dint;
     }
     public function epyMtLune($nbreCoucheMt,$fileisole,$epaisseurPapier,$canauxMt,$lrgc){
-        return  ($nbreCoucheMt*$fileisole+$epaisseurPapier)*($nbreCoucheMt-1)+$canauxMt*$lrgc;
+        $epyRond= $nbreCoucheMt*$fileisole+$epaisseurPapier*($nbreCoucheMt-1)+$canauxMt*$lrgc;
+        return Ceil($epyRond);
     }
     // public function BextMt($typeconducteur,$bint,$epy){
     //     if($typeconducteur=='complet'){
@@ -263,7 +265,7 @@ return $barre;
     // }
     public function BextMt($bint,$epy){
 
-            return $bint+2*$epy;
+            return round($bint+2*$epy);
 
     }
     public function poidEmaille($materiau,$dext,$bint,$dint,$majPoid,$bext,$n1cMax,$scu1){
@@ -334,12 +336,12 @@ return $barre;
             $dintMt=$this->dintMt($projet->DextBT,$request->DistanceBTMT);
             $bintMt=$this->bintMt($projet->Bext,$request->DistanceBTMT,$projet->epaisseurBarre,$projet->conducteurSec);
    if($request->typeCanaux=="complet"){
-                $epy=$EpxMt;
+                $epyMtLune=$EpxMt;
             }else if($request->typeCanaux=="lune"){
-                $epy=$this->epyMtLune($request->nbcoucheMT,$Isole,$epaisseurPapier,$request->canauxMT,$request->lgCales);
+                $epyMtLune=$this->epyMtLune($request->nbcoucheMT,$Isole,$epaisseurPapier,$request->canauxMT,$request->lgCales);
             }
             $dextMt=$this->dextMt($dintMt,$EpxMt);
-            $BextMt=$this->BextMt($bintMt,$epy);
+            $BextMt=$this->BextMt($bintMt,$epyMtLune);
             $poidEmaille=$this->poidEmaille($request->materiau,$dextMt,$dintMt,$dintMt,$request->majPoid,$dextMt,$N1cmax,$scu1);
 //FEUILLARD
 $barre=$this->calculBarre($request->Epbarre);
@@ -406,11 +408,11 @@ $PoidFeui=$this->PoidFeui($request->materiau,$dextfeui,$DintBint,$DintBint,$requ
                     'typeCanaux'=>$request->typeCanaux,
                     'canauxMT'=>$request->canauxMT,
                     'lgCales'=>$request->lgCales,
-                    'DintMT'=>$dintMt,
-                    'BintMT'=>$bintMt,
+                    'DintMT'=>Ceil($dintMt),
+                    'BintMT'=>Ceil($bintMt),
                     'EpxMT'=>$EpxMt,
-                    'EpyMT'=>$epy,
-                    'DextMT'=>$dextMt,
+                    'EpyMT'=>$epyMtLune,
+                    'DextMT'=>round($dextMt),
                     'BextMT'=>$BextMt,
                     'poidMT'=>$poidEmaille,
                     'majPoid'=>$request->majPoid,

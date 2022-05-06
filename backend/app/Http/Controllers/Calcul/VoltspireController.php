@@ -62,6 +62,7 @@ class VoltspireController extends Controller
 
         }else{
             $Bmax=($U2ph*(pow(10,6))/(pi()*$frequence*sqrt(2)*$Snette*$N2c));
+           
         }
         // dd($N2c);
     return $Bmax;

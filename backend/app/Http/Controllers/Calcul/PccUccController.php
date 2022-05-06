@@ -41,11 +41,13 @@ public function Hmoy($conducteur,$hcond,$hsfs,$hfeullard){
    if($conducteur=='feuillard'){
        return ($hcond+$hfeullard)/2;
    }else{
+
        return ($hcond+$hsfs)/2;
    }
 }
 
 public function Uccr($coMoy,$delta,$n1c,$Iph1,$Uph,$Hmoy){
+
 $Uccr=(3.81*($coMoy*$delta*pow($n1c,2)*$Iph1)/($Uph*$Hmoy))*pow(10,-5);
 return $Uccr;
 }
@@ -64,7 +66,7 @@ public function Ucca($pccMaj,$puissance){
     ->join('bobinage_secs', 'bobinage_secs.id', '=', 'projets.bobinage_secs_id')
     ->join('bobinages', 'bobinages.id', '=', 'projets.bobinage_id')
     ->where('projets.id',$id)
-    ->select('pcc_uccs.*','garanties.Uccg','garanties.Pccg','pcc_uccs.id as pccucc_id','volt_Spires.N2c','volt_Spires.N1c','electriques.PrimaireIPhase','electriques.PrimaireUPhase','electriques.secondaireUPhase','electriques.secondaireIPhase','electriques.puissance','bobinage_secs.Hfeuillard','bobinage_secs.j2','bobinage_secs.Dint','bobinage_secs.*','bobinage_secs.Epx','bobinage_secs.materiauSec','bobinage_secs.poidBT','bobinages.j1','bobinages.DintMT','bobinages.poidMT','bobinages.HSFS','bobinages.HCondMt','bobinages.*','bobinages.materiau','bobinages.EpyMT','bobinages.*','projets.*')
+    ->select('pcc_uccs.*','garanties.Uccg','garanties.Pccg','pcc_uccs.id as pccucc_id','volt_Spires.N2c','volt_Spires.N1c','electriques.PrimaireIPhase','electriques.PrimaireUPhase','electriques.secondaireUPhase','electriques.secondaireIPhase','electriques.puissance','bobinage_secs.Hfeuillard','bobinage_secs.j2','bobinage_secs.Dint','bobinage_secs.*','bobinage_secs.Epx','bobinage_secs.materiauSec','bobinage_secs.HSFS','bobinage_secs.poidBT','bobinages.j1','bobinages.DintMT','bobinages.poidMT','bobinages.HCondMt','bobinages.materiau','bobinages.EpyMT','bobinages.BintMT','bobinages.DextMT','bobinages.BextMT','bobinages.EpxMT','projets.*')
     ->get()->first();
    $pcc1=$this->pcc1($projet->materiau,$projet->j1,$projet->poidMT,$request->MajourationU);
    $pcc2=$this->pcc1($projet->materiauSec,$projet->j2,$projet->poidBT,$request->MajourationU);
