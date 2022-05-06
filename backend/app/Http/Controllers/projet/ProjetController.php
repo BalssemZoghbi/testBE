@@ -295,9 +295,7 @@ class ProjetController extends Controller
         $header = $request->header('Authorization');
         $token = PersonalAccessToken::findToken($header);
         $user = $token->tokenable;
-        // $elec=new ElectriqueController();
-        // $elec->store();
-        // dd($elec->id);
+
         $elec=Electrique::create([
             "colonnes"=>  '3',
             "frequence"=> "50",

@@ -7,6 +7,7 @@ use App\Models\Donnees\bobinage\BobinageSec;
 use App\Models\Donnees\electrique\Electrique;
 use App\Models\Donnees\garantie\Garantie;
 use App\Models\Gradin;
+use App\Models\Modele;
 use App\Models\user\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -43,6 +44,9 @@ class Projet extends Model
 
      public function user(){
         return $this->belongsTo(User::class);
+    }
+     public function modele(){
+        return $this->belongsTo(Modele::class);
     }
     public function electrique()
     {
