@@ -47,7 +47,9 @@ class GradinController extends Controller
         if ($materiau == 'cuivre') {
             $diamPropose = pow(($puissance / 1000), 0.2316) * 220;
         } elseif ($materiau == 'aluminium') {
-            $diamPropose = pow(($puissance / 1000), 0.2316) * 200;
+
+            $diamPropose = Ceil(pow(($puissance / 1000), 0.2316) * 205);
+
         }
         return $diamPropose;
     }

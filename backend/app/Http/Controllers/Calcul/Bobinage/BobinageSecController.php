@@ -224,6 +224,7 @@ class BobinageSecController extends Controller
         }
 
     public function epaisseurPapier($epfeuille,$nbrepapier){
+
         return ($epfeuille*$nbrepapier);
     }
     public function dintBt($dext,$distance){
@@ -270,7 +271,10 @@ public function EpxMt($typecanaux,$nbreCoucheMt,$fileisole,$epaisseurPapier,$can
     if($typecanaux=='complet'){
     return $nbreCoucheMt*$fileisole+$epaisseurPapier*($nbreCoucheMt-1-$canauxMt)+$canauxMt*$lrgc+$canauxMt*$epaisseurPapierCanaux;
     }else if($typecanaux=='lune'){
-        return ($nbreCoucheMt*$fileisole+$epaisseurPapier)*($nbreCoucheMt-1);
+
+        return $nbreCoucheMt*$fileisole+$epaisseurPapier*($nbreCoucheMt-1);
+
+
     }
 }
 public function dintMt($dext,$distance){
@@ -326,9 +330,9 @@ public function BextMt($bint,$epy){
             $DintBint=$this->DintBint($projet->diamNominale,$projet->CMBT);
 
             $epx=$this->Epx($request->typeCanaux,$request->saillie,$request->e2r,$request->etage,$request->nbcouche,$request->canauxBt,$request->lgCales,$request->nbPapier,$request->ep1Papier);
-            $epy=$this->Epy($request->saillie,$request->e2r,$request->etage,$request->nbcouche,$request->canauxBt,$request->lgCales,$request->nbPapier,$request->ep1Papier);
+            $epyMeplat=$this->Epy($request->saillie,$request->e2r,$request->etage,$request->nbcouche,$request->canauxBt,$request->lgCales,$request->nbPapier,$request->ep1Papier);
             $dext=$this->Dext($DintBint,$epx);
-            $bext=$this->Bext($DintBint,$epy);
+            $bext=$this->Bext($DintBint,$epyMeplat);
             $poid=$this->Poid($request->materiauSec,$projet->N2c,$scu2,$DintBint,$epx,$request->majPoid);
 
             $barre=$this->calculBarre($request->Epbarre);
@@ -355,12 +359,15 @@ public function BextMt($bint,$epy){
         $HcondMt=$this->hcondMt($Isole,$spchb);
         $Hcollier=$this->Hcollier($projet->HbobineBt,$HcondMt);
         $nbrPapierMT=$this->NbrePapier($request->conducteurSec,$request->rigiditePapierMT,$spchb,$projet->Vsp,$Isole,$Designation,$request->EpfeuillePapier);
-        $epaisseurPapier=$this->epaisseurPapier($request->EpfeuillePapier, $nbrPapierMT);
+      $epaisseurPapier=$this->epaisseurPapier($request->EpfeuillePapier, $nbrPapierMT);
+
         $EpxMt=$this->EpxMt($request->typeCanaux,$request->nbcoucheBT,$Isole,$epaisseurPapier,$request->canauxMT,$request->lgCales,$request->EpaisseurPapierCanaux);
-        $dintMt=$this->dintMt($projet->DextBT,$request->DistanceBTMT);
+       $dintMt=$this->dintMt($projet->DextBT,$request->DistanceBTMT);
         $bintMt=$this->bintMt($projet->Bext,$request->DistanceBTMT);
 if($request->typeCanaux=="complet"){
+
             $epy=$EpxMt;
+
         }else if($request->typeCanaux=="lune"){
             $epy=$this->epyMtLune($request->nbcoucheMT,$Isole,$epaisseurPapier,$request->canauxMT,$request->lgCales);
         }
@@ -400,7 +407,7 @@ if($request->typeCanaux=="complet"){
                         'Dint'=>$DintBint,
                         'Bint'=>$DintBint,
                         'Epx'=>$epx,
-                        'Epy'=>$epy,
+                        'Epy'=>$epyMeplat,
                         'DextBT'=>$dext,
                         'Bext'=>$bext,
                         'poidBT'=>$poid,
