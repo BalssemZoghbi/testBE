@@ -45,48 +45,30 @@ class StatisiqueController extends Controller
         foreach ($useremploye as $valeur){
                 array_push($usersname, $valeur->name);
         }
-
-//         $userprojet=[];
-//         for($i=0;$i<count($usersname);$i++){
-//             $user=User::where('name',$usersname[$i])->get()->first();
-
-//         $userprojet[$i] = DB::table('projets')->where('user_id',$user->id)->get('id');
-//  dd(count($userprojet));
-//         }
-
-
-
-
-        // $userProj=0;
-        // $projet = DB::table('projets')
-        // ->join('users', 'users.id', '=', 'projets.user_id')
-        // // ->where('users.name',$usersname)
-        // ->select('users.*','projets.*')
-        // ->get()->first();
-        // for($i=0;$i<count($usersname);$i++){
-        //     $projet = DB::table('projets')
-        // ->join('users', 'users.id', '=', 'projets.user_id')
-        // ->where('users.name',$usersname[$i])
-        // ->select('users.*','projets.*')
-        // ->get()->first();
-        // // if($usersname[$i]==$projet->name){
-        // //     $userProj+=1;}
-        // //     $UserProjet[$i]=$userProj;
-        // }
-        // dd($projet);
-
-
+    $lengthUser=count($usersname);
+        $userprojet=[];
+        for($i=0;$i<$lengthUser;$i++){
+            $projet = DB::table('projets')
+            ->join('users', 'users.id', '=', 'projets.user_id')
+            ->where('users.name',$usersname[$i])
+            ->select('users.*','projets.*')
+            ->get();
+            $userprojet[$i]=count($projet);
+        }
+        // dd($userprojet);
         $stat= Statisique::create([
             'userCount' => count($users),
             'projetCount' =>count($projets),
             'UserChart' =>$UserChart,
             'UserName' =>$usersname,
-            'UserProjet' =>[],
+            'UserProjet' =>$userprojet,
         ]);
         if($stat->save()){
             return response()->json($stat);
         }
     }
+
+    
 
     /**
      * Update the specified resource in storage.

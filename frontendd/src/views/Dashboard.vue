@@ -3,9 +3,9 @@
       <NavDash/>  
         <v-layout style="margin-left:4%">
     <v-row class="clickable">
-      <v-col cols="12" md="10">
-        <v-card  class="ml-5 mr-5">
-          <v-app-bar
+      <!-- <v-col cols="12" md="10">
+        <v-card  class="ml-5 mr-5"> -->
+          <!-- <v-app-bar
           dark
           color="rgb(5 48 96)"
           >
@@ -13,9 +13,9 @@
             <v-icon>mdi-finance</v-icon>
           </v-btn>
           <v-toolbar-title>Statistiques</v-toolbar-title>
-          </v-app-bar>
+          </v-app-bar> -->
         <v-container>
-          <v-row>
+          <v-row style="margin-left:-2%">
             <v-col cols="12" sm="6">
               <v-hover
         v-slot:default="{ hover }"
@@ -132,7 +132,7 @@
 
             </v-col> -->
           </v-row>
-              <div style="margin-top: 4%;margin-right: -43%;width: 155%;">
+              <div style="margin-top: 4%;width: 139%;">
    <Pie
     :chart-options="chartOptions"
     :chart-data="chartData"
@@ -145,7 +145,9 @@
     :height="height"
   />
   </div>
-  <div style="    margin-top: -44%;width: 51%;">
+  <div style="    margin-top: -35%;
+    width: 51%;
+    margin-left: -2%;">
     <Bar
     :chart-options="chartOptionsBar"
     :chart-data="chartDataBar"
@@ -159,8 +161,8 @@
   />
   </div>
         </v-container>
-        </v-card>
-      </v-col>
+        <!-- </v-card>
+      </v-col> -->
       <!-- <v-col cols="10" sm="12">
     <v-card class="px-2">
         <Carousel />
@@ -269,29 +271,29 @@ import axios from "axios";
     UserName:[],
     chartData:{},
     chartOptions:{},
-    // chartDataBar:{},
-    // chartOptionsBar:{},
-    chartDataBar: {
-        labels: [
-          'Utilisateur1',
-          'Utilisateur2',
-          'Utilisateur3',
-          'Utilisateur4',
-          'Utilisateur5',
-          'Utilisateur6'
-        ],
-        datasets: [
-          {
-            label: 'Projets',
-            backgroundColor: '#448DD3',
-            data: [40, 20, 12, 39, 10, 40]
-          }
-        ]
-      },
-      chartOptionsBar: {
-        responsive: true,
-        maintainAspectRatio: false
-      }
+    chartDataBar:{},
+    chartOptionsBar:{},
+    // chartDataBar: {
+    //     labels: [
+    //       'Utilisateur1',
+    //       'Utilisateur2',
+    //       'Utilisateur3',
+    //       'Utilisateur4',
+    //       'Utilisateur5',
+    //       'Utilisateur6'
+    //     ],
+    //     datasets: [
+    //       {
+    //         label: 'Projets',
+    //         backgroundColor: '#448DD3',
+    //         data: [40, 20, 12, 39, 10, 40]
+    //       }
+    //     ]
+    //   },
+    //   chartOptionsBar: {
+    //     responsive: true,
+    //     maintainAspectRatio: false
+    //   }
     
   }),
     mounted(){
@@ -322,32 +324,23 @@ import axios from "axios";
       this.chartOptions= {
         responsive: true,
         maintainAspectRatio: false
-      }),
-      // this.chartDataBar= {
-      //   labels: [
-      //     'Utilisateur1',
-      //     'Utilisateur2',
-      //     'Utilisateur3',
-      //     'Utilisateur4',
-      //     'Utilisateur5',
-      //     'Utilisateur6'
-      //   ],
-      //   // response.data.UserName,
-      //   datasets: [
-      //     {
-      //       label: 'Projets',
-      //       backgroundColor: '#448DD3',
-      //       data:[40, 20, 12, 39, 10, 40]
-      //     }
-      //   ]
-      // },
-      // this.chartOptionsBar= {
-      //   responsive: true,
-      //   maintainAspectRatio: false
-      // }
-        
-        
-        );
+      },
+      this.chartDataBar= {
+        labels: response.data.UserName,
+        // response.data.UserName,
+        datasets: [
+          {
+            label: 'Projets',
+            backgroundColor: '#448DD3',
+            data :response.data.UserProjet
+          }
+        ]
+      },
+      this.chartOptionsBar= {
+        responsive: true,
+        maintainAspectRatio: false
+      }
+      ),);
   }
   }
 </script>

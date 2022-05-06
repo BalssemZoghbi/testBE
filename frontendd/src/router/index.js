@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Dashboard from "../views/Dashboard.vue";
+import DashboardEmploye from "../views/DashboardEmploye.vue";
 import about from "../views/About.vue";
 import Forgot from "../components/Auth/Forgot.vue";
 import Reset from "../components/Auth/Reset.vue";
@@ -91,6 +92,11 @@ const routes = [
     path: "/dashboard",
     name: "dashboard",
     component: Dashboard,
+  },
+  {
+    path: "/dashboardEmploye",
+    name: "dashboardEmploye",
+    component: DashboardEmploye,
   },
   {
     path: "/Connexion",

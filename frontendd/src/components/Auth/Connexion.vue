@@ -295,10 +295,14 @@ Error
 
   localStorage.setItem('token',response.data.token);
   localStorage.setItem('user',JSON.stringify(response.data.user));
- this.user= localStorage.getItem('user');
- console.log(this.user);
+ this.user= JSON.parse(localStorage.getItem('user'));
+//  console.log(this.user);
   this.$store.dispatch('user',response.data.user);
- this.$router.push('/dashboard');
+  if(this.user.type=="admin"){
+ this.$router.push('/dashboard');}
+ else{
+   this.$router.push('/dashboardEmploye');
+ }
   }catch(e){
     this.error=' vous n`avez pas l`accès pour connecter, Veuillez contactez L`administrateur';
     

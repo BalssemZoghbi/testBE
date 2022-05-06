@@ -11,6 +11,17 @@ use App\Models\Donnees\garantie\Garantie36;
 
 class GarantieController extends Controller
 {
+    public function getGarantie($id)
+    {
+        $garanties = DB::table('projets')
+        ->join('garanties', 'garanties.id', '=', 'projets.garantie_id')
+        ->where('projets.id',$id)
+        ->select()
+        ->get()->first();
+        $garantie= Garantie::FindOrFail($garanties->garantie_id);
+
+        return response()->json($garantie);
+    }
     public function get24()
     {
         $garanties24 = Garantie24::all();
@@ -126,6 +137,33 @@ class GarantieController extends Controller
              'Ptotlimit' =>$calcul->pcc+$calcul->po+((($calcul->pcc+$calcul->po)*10)/100),
              'echauffementHuile' =>100 - $projet->temperatureMax,
              'echauffementEnroulement' =>105 - $projet->temperatureMax,
+         ]);
+
+             return response()->json($garantie);
+     }
+    public function updateManuelle($id){
+
+        $projet = DB::table('projets')
+        ->join('electriques', 'electriques.id', '=', 'projets.electrique_id')
+        ->join('garanties', 'garanties.id', '=', 'projets.garantie_id')
+        ->where('projets.id',$id)
+        ->select('projets.garantie_id','electriques.puissance','electriques.u1n', 'electriques.u2o','projets.temperatureMax')
+        ->get()->first();
+        $garantie= Garantie::FindOrFail($projet->garantie_id);
+        $garantie->update([
+             'option' => "",
+             'Pog' =>0,
+             'log' =>0,
+             'Pccg' =>0,
+             'Uccg' => 0,
+             'Ptot' =>0,
+             'Poglimit' =>0,
+             'loglimit' => 0,
+             'Pccglimit' =>0.0,
+             'Uccglimit' =>0,
+             'Ptotlimit' =>0,
+             'echauffementHuile' =>0,
+             'echauffementEnroulement' =>0,
          ]);
 
              return response()->json($garantie);
