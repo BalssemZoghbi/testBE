@@ -1,22 +1,59 @@
 <template>
   <div>
     <NavDash />
+    <!-- <NavDashEmp v-if="this.usertype == 'employe'" /> -->
     <!-- <navbarUpdate :elec_id='projet.electrique_id' :id='projet.id'/> -->
     <div class="body">
       <v-stepper v-model="e1"  vertical>
         <!-- <v-stepper-header> -->
           <v-stepper-step :complete="e1 > 1" step="1">
            Données de Garantie
+          
           </v-stepper-step>
            <v-stepper-content step="1">
             <v-card class="mb-6"  >
               <!-- <div class="body"> -->
                 <!-- <div class="container"> -->
                   <div class="title">Données de Garantie</div>
+        
                   <div class="content">
-                    <form v-on:submit.prevent="updateprojet">
+                               <v-col cols="2" style="margin-top:-4%">
+                                 <v-menu transition="slide-x-transition" offset-x>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn v-bind="attrs" v-on="on" color="primary"> Automatique </v-btn>
+              </template>
+
+              <v-list>
+                <v-list-item-group v-model="model" mandatory color="blue">
+                  <v-list-item @click="onClick" color="blue">
+                    <v-list-item-title @click="automatique()"
+                      >Automatique</v-list-item-title
+                    >
+                  </v-list-item>
+
+                  <v-list-item>
+                    <v-list-item-title @click="manuel()"
+                      >Manuel</v-list-item-title
+                    >
+                  </v-list-item>
+                </v-list-item-group>
+              </v-list>
+            </v-menu>
+        <!-- <v-select
+          v-model="select"
+          :items="items"
+          item-text="state"
+          label="Select"
+          persistent-hint
+          return-object
+          single-line
+        ></v-select> -->
+         <!-- v-if="this.select.state=='automatique'" -->
+      </v-col>
+                    <form v-on:submit.prevent="updateprojet" style="margin-top:-2%">
                       <div class="user-details">
                         <div class="form__div framei">
+                          
                           <input
                             type="text"
                             class="form__input"
@@ -195,6 +232,8 @@
           <!-- <v-stepper-content >
         </v-stepper-content> -->
       </v-stepper>
+        
+
     </div>
   </div>
 </template>
@@ -202,15 +241,22 @@
 // import { reactive } from "vue";
 // import navbarUpdate from '../../navbarUpdate.vue';
 import NavDash from "@/components/NavDash.vue";
+// import NavDashEmp from "@/components/NavDashboardEmploye.vue";
 
 import axios from "axios";
 export default {
     components: { 
       // navbarUpdate 
                 NavDash,
+
       },
   data() {
     return {
+       select: { state: 'Automatique'},
+        items: [
+          { state: 'Automatique'},
+          { state: 'Manuel' },
+        ],
       projet: {
         id:undefined,
       option: "",
@@ -232,7 +278,34 @@ export default {
     };
   },
   methods: {
+   async manuel(){
+      console.log("manuel")
+      const projets = {
+        id: undefined,
+        option: this.projet.option,
+        Pog: this.projet.Pog,
+        log: this.projet.log,
+        Pccg: this.projet.Pccg,
+        Uccg:this.projet.Uccg,
+        Ptot: this.projet.Ptot,
+        Poglimit: this.projet.Poglimit,
+        loglimit: this.projet.loglimit,
+        Pccglimit: this.projet.Pccglimit,
+        Uccglimit: this.projet.Uccglimit,
+        Ptotlimit: this.projet.Ptotlimit,
+        echauffementHuile: this.projet.echauffementHuile,
+        echauffementEnroulement: this.projet.echauffementEnroulement,
+      };
+   await  axios.put('garantie/manuelle/'+this.$route.params.id, projets).then(
+        (response) => (this.id = response.data.id, console.log(response.data),
+        window.location.reload()
+        
+        )
+        
+      );
+    },
     updateprojet() {
+     
       // const projets = {
       //   id: undefined,
       //   option: this.projet.option,
@@ -255,14 +328,8 @@ export default {
       // );
        this.$router.push('/bobine/'+this.$route.params.id);
     },
-  },
-  async mounted() {
-    const result = await axios.get('projets/'+this.$route.params.id);
-    this.projet = result.data;
-  },
-  created(){
-    console.log('create')
-     const projets = {
+   async automatique(){
+       const projets = {
         id: undefined,
         option: this.projet.option,
         Pog: this.projet.Pog,
@@ -278,10 +345,19 @@ export default {
         echauffementHuile: this.projet.echauffementHuile,
         echauffementEnroulement: this.projet.echauffementEnroulement,
       };
-     axios.put('garantie/edit/'+this.$route.params.id, projets).then(
-        (response) => (this.id = response.data.id, console.log(response.data))
+    await axios.put('garantie/edit/'+this.$route.params.id, projets).then(
+        (response) => (this.id = response.data.id, console.log(response.data),this.$router.go())
         
       );
+    }
+  },
+  async mounted() {
+    const result = await axios.get('projets/'+this.$route.params.id);
+    this.projet = result.data;
+  },
+  created(){
+  //  this.automatique();
+    
   }
 };
 </script>
