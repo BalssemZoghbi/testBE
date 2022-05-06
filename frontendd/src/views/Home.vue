@@ -77,11 +77,14 @@
         </v-list-item>
 
         <v-list-item >
-          <v-list-item-title @click="createModele1()">Modele 1</v-list-item-title>
+          <v-list-item-title @click="createModeleFeuillardEmaille()">Modele Feuillard Emaille</v-list-item-title>
         </v-list-item>
 
-        <v-list-item @click="onClick" >
-          <v-list-item-title>Modele 2</v-list-item-title>
+        <v-list-item @click="createModeleMeplatEmaille()" >
+          <v-list-item-title>Modele Meplat Emaille</v-list-item-title>
+        </v-list-item>
+        <v-list-item @click="createModeleFeuillardMeplat()" >
+          <v-list-item-title>Modele Feuillard Meplat</v-list-item-title>
         </v-list-item>
          </v-list-item-group>
       </v-list>
@@ -180,9 +183,9 @@ export default {
      dialog2: false,
      select: [
           { text: 'Document Vierge' },
-          { text: 'Modele 1' },
-          { text: 'Modele 2' },
-          { text: 'Modele 3' },
+          { text: 'Modele Feuillard Emaille' },
+          { text: 'Modele Meplat Emaille' },
+          { text: 'Modele Feuillard Meplat' },
         ],
     search: "",
     dialog: false,
@@ -298,9 +301,9 @@ axios.post("documents/" + this.$route.params.id,{
           this.$router.push('/projet/update/'+response.data.id))
       );
     },
-      createModele1(){
+      createModeleFeuillardEmaille(){
      let token= localStorage.getItem('token')
-       axios.post('projets/create',{}, {
+       axios.post('projets/storeFeuillardEmaille',{}, {
     headers: {
     'Authorization': token
     }
@@ -309,8 +312,30 @@ axios.post("documents/" + this.$route.params.id,{
           this.createprojet = response.data,
           this.$router.push('/projet/update/'+response.data.id))
       );
-      
-
+    },
+      createModeleFeuillardMeplat(){
+     let token= localStorage.getItem('token')
+       axios.post('projets/storeFeuillardMeplat',{}, {
+    headers: {
+    'Authorization': token
+    }
+  }).then(
+        (response) => (
+          this.createprojet = response.data,
+          this.$router.push('/projet/update/'+response.data.id))
+      );
+    },
+      createModeleMeplatEmaille(){
+     let token= localStorage.getItem('token')
+       axios.post('projets/storeMeplatEmaille',{}, {
+    headers: {
+    'Authorization': token
+    }
+  }).then(
+        (response) => (
+          this.createprojet = response.data,
+          this.$router.push('/projet/update/'+response.data.id))
+      );
     },
     getprojet() {
       axios.get("/projets").then((resp) => {
