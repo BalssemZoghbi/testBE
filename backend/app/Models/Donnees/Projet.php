@@ -30,6 +30,7 @@ class Projet extends Model
     'fonctionnement',
     'refroidissement',
     'elaborateur',
+    'Modele',
     'user_id',
     'electrique_id',
     'garantie_id',

@@ -22,6 +22,7 @@ class CreateProjetsTable extends Migration
             $table->string('temperatureMax')->nullable();
             $table->string('attitudeMax')->nullable();
             $table->string('elaborateur')->nullable();
+            $table->enum('Modele',["Document Vierge","Modele Feuillard Emaille","Modele Meplat Emaille","Modele Feuillard Meplat"])->nullable();
             $table->enum('type',['cabine','poteau','h61','h59','sec'])->nullable();
             $table->enum('remplissage',['à matelas d`air','integral','respirant'])->nullable();
             $table->enum('installation',['interieure', 'exterieure','interieur&exterieure'])->nullable();

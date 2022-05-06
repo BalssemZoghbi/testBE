@@ -54,11 +54,15 @@ Route::delete('/userInactive/delete/{id}', [UserController::class,'deleteinactiv
 Route::get('/projets',[ProjetController::class ,'getProjets']);
 Route::get('/projets/search/{query}',[ProjetController::class ,'getsearch']);
 Route::get('/projets/pagination',[ProjetController::class ,'paginateProjets']);
-Route::post('/projets/create',[ProjetController::class ,'storeProjet']);
 Route::post('/projets/add',[ProjetController::class ,'addProjet']);
 Route::get('/projets/{id}', [ProjetController::class ,'showProjet']);
 Route::put('/projets/edit/{id}', [ProjetController::class ,'editProjet']);
 Route::delete('/projets/delete/{id}', [ProjetController::class ,'deleteProjet']);
+
+Route::post('/projets/storeFeuillardMeplat',[ProjetController::class ,'storeFeuillardMeplat']);
+Route::post('/projets/storeFeuillardEmaille',[ProjetController::class ,'storeFeuillardEmaille']);
+Route::post('/projets/storeMeplatEmaille',[ProjetController::class ,'storeMeplatEmaille']);
+
 
 Route::group(['middleware' => 'auth:sanctum'], function(){
     // Route::get('/projets',[ProjetController::class ,'getProjets']);
