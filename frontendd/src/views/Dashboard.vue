@@ -269,29 +269,29 @@ import axios from "axios";
     UserName:[],
     chartData:{},
     chartOptions:{},
-    chartDataBar:{},
-    chartOptionsBar:{},
-    // chartDataBar: {
-    //     labels: [
-    //       'Utilisateur1',
-    //       'Utilisateur2',
-    //       'Utilisateur3',
-    //       'Utilisateur4',
-    //       'Utilisateur5',
-    //       'Utilisateur6'
-    //     ],
-    //     datasets: [
-    //       {
-    //         label: 'Projets',
-    //         backgroundColor: '#448DD3',
-    //         data: [40, 20, 12, 39, 10, 40]
-    //       }
-    //     ]
-    //   },
-    //   chartOptionsBar: {
-    //     responsive: true,
-    //     maintainAspectRatio: false
-    //   }
+    // chartDataBar:{},
+    // chartOptionsBar:{},
+    chartDataBar: {
+        labels: [
+          'Utilisateur1',
+          'Utilisateur2',
+          'Utilisateur3',
+          'Utilisateur4',
+          'Utilisateur5',
+          'Utilisateur6'
+        ],
+        datasets: [
+          {
+            label: 'Projets',
+            backgroundColor: '#448DD3',
+            data: [40, 20, 12, 39, 10, 40]
+          }
+        ]
+      },
+      chartOptionsBar: {
+        responsive: true,
+        maintainAspectRatio: false
+      }
     
   }),
     mounted(){
@@ -322,22 +322,30 @@ import axios from "axios";
       this.chartOptions= {
         responsive: true,
         maintainAspectRatio: false
-      },
-      this.chartDataBar= {
-        labels:response.data.UserName,
-        datasets: [
-          {
-            label: 'Projets',
-            backgroundColor: '#448DD3',
-            data: [40, 20, 12]
-          }
-        ]
-      },
-      this.chartOptionsBar= {
-        responsive: true,
-        maintainAspectRatio: false
-      }
-        ),
+      }),
+      // this.chartDataBar= {
+      //   labels: [
+      //     'Utilisateur1',
+      //     'Utilisateur2',
+      //     'Utilisateur3',
+      //     'Utilisateur4',
+      //     'Utilisateur5',
+      //     'Utilisateur6'
+      //   ],
+      //   // response.data.UserName,
+      //   datasets: [
+      //     {
+      //       label: 'Projets',
+      //       backgroundColor: '#448DD3',
+      //       data:[40, 20, 12, 39, 10, 40]
+      //     }
+      //   ]
+      // },
+      // this.chartOptionsBar= {
+      //   responsive: true,
+      //   maintainAspectRatio: false
+      // }
+        
         
         );
   }

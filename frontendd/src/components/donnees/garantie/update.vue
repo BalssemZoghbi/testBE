@@ -33,7 +33,7 @@
                             placeholder=" "
                             id="Pog"
                             v-model="projet.Pog"
-                            readonly
+                            
                           />
                           <label for="" class="form__label">Pog</label>
                         </div>
