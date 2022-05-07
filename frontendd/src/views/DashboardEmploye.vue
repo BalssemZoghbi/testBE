@@ -101,7 +101,7 @@
     width: 51%;
     margin-left: -2%;" -->
   <div style="margin-top: 1%;
-    width: 60%;
+    width: 54%;
     margin-left: 2%;">
    <LineChartGenerator
     :chart-options="chartOptions"
@@ -115,7 +115,7 @@
     :height="height"
   />
   </div>
-  <div style="margin-top: -34%;width: 160%;">
+  <div style="margin-top: -37%;width: 150%;">
   <Doughnut
     :chart-options="chartOptionsDonut"
     :chart-data="chartDataDonut"
@@ -139,6 +139,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import NavDashEmp from "../components/NavDashboardEmploye.vue";
 import { Doughnut } from 'vue-chartjs/legacy'
 import { Line as LineChartGenerator } from 'vue-chartjs/legacy'
@@ -210,45 +211,12 @@ LinearScale,LineElement,PointElement)
     // UserChart:[],
     // UserProjet:[],
     // UserName:[],
-    // chartData:{},
-    // chartOptions:{},
-    // chartDataBar:{},
-    // chartOptionsBar:{},
-      chartData: {
-        labels: [
-          'January',
-          'February',
-          'March',
-          'April',
-          'May',
-          'June',
-          'July'
-        ],
-        datasets: [
-          {
-            label: 'Data One',
-            backgroundColor: '#f87979',
-            data: [40, 39, 10, 40, 39, 80, 40]
-          }
-        ]
-      },
-      chartOptions: {
-        responsive: true,
-        maintainAspectRatio: false
-      },
-      chartDataDonut: {
-        labels: ['VueJs', 'EmberJs', 'ReactJs', 'AngularJs'],
-        datasets: [
-          {
-            backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
-            data: [40, 20, 80, 10]
-          }
-        ]
-      },
-      chartOptionsDonut: {
-        responsive: true,
-        maintainAspectRatio: false
-      }
+    chartData:{},
+    chartOptions:{},
+    chartDataDonut:{},
+    chartOptionsDonut:{},
+     
+      
   }),
     mounted(){
   let user=JSON.parse(localStorage.getItem('user'));
@@ -258,43 +226,55 @@ LinearScale,LineElement,PointElement)
   },
   created(){
     
-//      axios
-//         .post("/stat")
-//         .then((response) => (this.userCount=response.data.userCount,
-//         this.projetCount=response.data.projetCount,
-//         this.UserChart=response.data.UserChart,
-//         this.UserProjet=response.data.UserProjet,
-//         this.UserName=response.data.UserName,
-//         console.log(this.UserChart),
-//         this.chartData= {
-//         labels: ['Employé', 'En Attente', 'Administrateur','Inactive'],
-//         datasets: [
-//           {
-//             backgroundColor: [' #3358FF', '#0628C4', '#00D8FF','#1DA1B0'],
-//             data: response.data.UserChart,
-//           }
-//         ]
-//       },
-//       this.chartOptions= {
-//         responsive: true,
-//         maintainAspectRatio: false
-//       },
-//       this.chartDataBar= {
-//         labels: response.data.UserName,
-//         // response.data.UserName,
-//         datasets: [
-//           {
-//             label: 'Projets',
-//             backgroundColor: '#448DD3',
-//             data :response.data.UserProjet
-//           }
-//         ]
-//       },
-//       this.chartOptionsBar= {
-//         responsive: true,
-//         maintainAspectRatio: false
-//       }
-//       ),);
+     axios
+        .post("/statEmploye")
+        .then((response) => (this.ProjetChart=response.data.ProjetChart,
+        this.projetCount=response.data.projetCount,
+        // this.UserChart=response.data.UserChart,
+        // this.UserProjet=response.data.UserProjet,
+        // this.UserName=response.data.UserName,
+        console.log(this.ProjetChart),
+        this.chartDataDonut={
+        labels: ['Vierge', 'Feuillard&Emaille', 'Feuillard&Meplat', 'Meplat&Emaille'],
+        datasets: [
+          {
+            backgroundColor: ['#3358FF', '#0628C4', '#00D8FF', '#1DA1B0'],
+            data: response.data.ProjetChart
+          }
+        ]
+      },
+      this.chartOptionsDonut= {
+        responsive: true,
+        maintainAspectRatio: false
+      },
+     this. chartData= {
+        labels: [
+          'Janvier',
+          'Fevrier',
+          'Mas',
+          'Avril',
+          'Mai',
+          'Juin',
+          'Juillet',
+          'Aout',
+          'Septembre',
+          'Octobre',
+          'Novembre',
+          'Decembre',
+        ],
+        datasets: [
+          {
+            label: 'Projets',
+            backgroundColor: '#448DD3',
+            data: response.data.NbreProjet
+          }
+        ]
+      },
+     this. chartOptions={
+        responsive: true,
+        maintainAspectRatio: false
+      }
+      ),);
   }
   }
 </script>

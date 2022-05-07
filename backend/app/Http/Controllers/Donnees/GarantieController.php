@@ -151,19 +151,19 @@ class GarantieController extends Controller
         ->get()->first();
         $garantie= Garantie::FindOrFail($projet->garantie_id);
         $garantie->update([
-             'option' => "",
-             'Pog' =>0,
-             'log' =>0,
-             'Pccg' =>0,
-             'Uccg' => 0,
-             'Ptot' =>0,
-             'Poglimit' =>0,
-             'loglimit' => 0,
-             'Pccglimit' =>0.0,
-             'Uccglimit' =>0,
-             'Ptotlimit' =>0,
-             'echauffementHuile' =>0,
-             'echauffementEnroulement' =>0,
+             'option' => null,
+             'Pog' =>null,
+             'log' =>null,
+             'Pccg' =>null,
+             'Uccg' => null,
+             'Ptot' =>null,
+             'Poglimit' =>null,
+             'loglimit' => null,
+             'Pccglimit' =>null.null,
+             'Uccglimit' =>null,
+             'Ptotlimit' =>null,
+             'echauffementHuile' =>null,
+             'echauffementEnroulement' =>null,
          ]);
 
              return response()->json($garantie);

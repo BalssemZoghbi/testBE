@@ -198,7 +198,12 @@ class ElectriqueController extends Controller
      }
 
      public function edit($id, Request $request){
-        $electrique= Electrique::FindOrFail($id);
+        $projet = DB::table('projets')
+        ->join('electriques', 'electriques.id', '=', 'projets.electrique_id')
+        ->where('projets.id',$id)
+        ->select()
+        ->get()->first();
+        $electrique= Electrique::FindOrFail($projet->electrique_id);
         $u1nRange=$request->u1n/1000;
         $u2nRange=$request->u2o/1000;
         $tension=$this->tension($u1nRange);

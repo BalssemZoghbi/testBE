@@ -17,7 +17,7 @@
                   <div class="title">Données de Garantie</div>
         
                   <div class="content">
-                               <v-col cols="2" style="margin-top:-4%">
+                               <v-col cols="2" style="    margin-top: -8%;margin-left: 28%;">
                                  <v-menu transition="slide-x-transition" offset-x>
               <template v-slot:activator="{ on, attrs }">
                 <v-btn v-bind="attrs" v-on="on" color="primary"> Automatique </v-btn>
@@ -39,6 +39,23 @@
                 </v-list-item-group>
               </v-list>
             </v-menu>
+            <!-- <v-switch
+      v-model="people"
+      color="primary"
+      label="Automatique"
+      value="Automatique"
+    ></v-switch> -->
+           <!-- <v-sheet class="pa-5">
+    <v-switch
+      v-model="switch1"
+      inset
+      :label="`Switch 1: ${switch1.toString()}`"
+    >
+    <p v-if="switch1.toString()=='true'">Manuel</p>
+    <p v-if="switch1.toString()=='false'">Automatique</p>
+    </v-switch>
+   
+  </v-sheet> -->
         <!-- <v-select
           v-model="select"
           :items="items"
@@ -50,7 +67,7 @@
         ></v-select> -->
          <!-- v-if="this.select.state=='automatique'" -->
       </v-col>
-                    <form v-on:submit.prevent="updateprojet" style="margin-top:-2%">
+                    <form v-on:submit.prevent="updateprojet" style="margin-top:-1%">
                       <div class="user-details">
                         <div class="form__div framei">
                           
@@ -82,7 +99,7 @@
                               class="form__input"
                               placeholder=" "
                               id="log"
-                              readonly
+                              
                               v-model="projet.log"
                             />
                             <label for="" class="form__label">log</label>
@@ -95,7 +112,7 @@
                             class="form__input"
                             placeholder=" "
                             id="Pccg"
-                            readonly
+                            
                             v-model="projet.Pccg"
                           />
                           <label for="" class="form__label">Pccg</label>
@@ -103,7 +120,7 @@
 
                         <div class="form__div framei">
                             <input
-                            readonly
+                            
                               type="text"
                               class="form__input"
                               placeholder=" "
@@ -120,7 +137,7 @@
                             placeholder=" "
                             id="Ptot"
                             v-model="projet.Ptot"
-                            readonly
+                            
                           />
                           <label for="" class="form__label">Ptot</label>
                         </div>
@@ -130,7 +147,7 @@
                             class="form__input"
                             placeholder=" "
                             id="Poglimit"
-                            readonly
+                            
                             v-model="projet.Poglimit"
                           />
                           <label for="" class="form__label">Poglimite</label>
@@ -141,7 +158,7 @@
                             class="form__input"
                             placeholder=" "
                             id="Pccglimit"
-                            readonly
+                            
                             v-model="projet.Pccglimit"
                           />
                           <label for="" class="form__label">Pccglimite</label>
@@ -152,7 +169,7 @@
                             class="form__input"
                             placeholder=" "
                             id="loglimit"
-                            readonly
+                            
                             v-model="projet.loglimit"
                           />
                           <label for="" class="form__label">loglimit</label>
@@ -163,7 +180,7 @@
                             class="form__input"
                             placeholder=" "
                             id="Uccglimit"
-                            readonly
+                            
                             v-model="projet.Uccglimit"
                           />
                           <label for="" class="form__label">Uccglimit</label>
@@ -174,40 +191,34 @@
                             class="form__input"
                             placeholder=" "
                             id="Ptotlimit"
-                            readonly
+                            
                             v-model="projet.Ptotlimit"
                           />
                           <label for="" class="form__label">Ptotlimit</label>
                         </div>
-                           <div class="form__div framei">
+                           <div class="form__div framei" style="  width: 48%;">
                           <input
                             type="number"
                             class="form__input"
                             placeholder=" "
                             id="echauffementHuile"
-                            readonly
+                            
                             v-model="projet.echauffementHuile"
                           />
                           <label for="" class="form__label">Echauffement Huile</label>
                         </div>
-                       <div class="form__div framei">
+                       <div class="form__div frame" style="  width: 48%;">
                           <input
                             type="number"
                             class="form__input"
                             placeholder=" "
                             id="echauffementEnroulement"
-                            readonly
+                            
                             v-model="projet.echauffementEnroulement"
                           />
                           <label for="" class="form__label">Echauffement Enroulement</label>
                         </div>
-                     
-                       
-                        
-                        
-                        
                       </div>
-                      
                     </form>
                   </div>
                 <!-- </div> -->
@@ -232,8 +243,6 @@
           <!-- <v-stepper-content >
         </v-stepper-content> -->
       </v-stepper>
-        
-
     </div>
   </div>
 </template>
@@ -252,6 +261,9 @@ export default {
       },
   data() {
     return {
+      // switch1: "Automatique",
+      // people: ['Automatique','Manuel'],
+        // switch2: false,
        select: { state: 'Automatique'},
         items: [
           { state: 'Automatique'},
@@ -298,8 +310,8 @@ export default {
       };
    await  axios.put('garantie/manuelle/'+this.$route.params.id, projets).then(
         (response) => (this.id = response.data.id, console.log(response.data),
-        window.location.reload()
-        
+        // window.location.reload()
+        this.getGarantie()
         )
         
       );
@@ -346,7 +358,29 @@ export default {
         echauffementEnroulement: this.projet.echauffementEnroulement,
       };
     await axios.put('garantie/edit/'+this.$route.params.id, projets).then(
-        (response) => (this.id = response.data.id, console.log(response.data),this.$router.go())
+        (response) => (this.id = response.data.id, console.log(response.data),this.getGarantie())
+        
+      );
+    },
+   async getGarantie(){
+      //  const projets = {
+      //   id: undefined,
+      //   option: this.projet.option,
+      //   Pog: this.projet.Pog,
+      //   log: this.projet.log,
+      //   Pccg: this.projet.Pccg,
+      //   Uccg:this.projet.Uccg,
+      //   Ptot: this.projet.Ptot,
+      //   Poglimit: this.projet.Poglimit,
+      //   loglimit: this.projet.loglimit,
+      //   Pccglimit: this.projet.Pccglimit,
+      //   Uccglimit: this.projet.Uccglimit,
+      //   Ptotlimit: this.projet.Ptotlimit,
+      //   echauffementHuile: this.projet.echauffementHuile,
+      //   echauffementEnroulement: this.projet.echauffementEnroulement,
+      // };
+    await axios.get('getGarantie/'+this.$route.params.id).then(
+        (response) => ( this.projet=response.data,console.log(this.projet))
         
       );
     }
@@ -356,7 +390,7 @@ export default {
     this.projet = result.data;
   },
   created(){
-  //  this.automatique();
+   this.getGarantie();
     
   }
 };

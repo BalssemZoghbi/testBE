@@ -617,7 +617,7 @@ export default {
         nbrePosition: this.projet.nbrePosition,
       };
       axios
-        .put("electrique/edit/" + this.$route.params.elec_id, projets)
+        .put("electrique/edit/" + this.$route.params.id, projets)
         .then(
           (response) => (
             (this.id = response.data.id), console.log(response.data.id)

@@ -135,7 +135,7 @@ const routes = [
     component: updateProjet,
   },
   {
-    path: "/electrique/update/:id/:elec_id",
+    path: "/electrique/update/:id",
     name: "electrique.update",
     component: updateElec,
   },
