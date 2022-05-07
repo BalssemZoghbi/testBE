@@ -13,6 +13,7 @@ use App\Http\Controllers\projet\EmailleController;
 use App\Http\Controllers\projet\ProjetController;
 use App\Http\Controllers\projet\TensionElectriqueController;
 use App\Http\Controllers\StatisiqueController;
+use App\Http\Controllers\StatistiqueEmployeController;
 use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\User\ForgotController;
 use App\Http\Controllers\User\UserController;
@@ -20,6 +21,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\WordExportController;
+use App\Models\StatistiqueEmploye;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -148,6 +151,7 @@ Route::post('/documents/{id}', [WordExportController::class ,'wordExport']);
 Route::put('/cm/update/{id}',[CircuitmagnetiqueController::class ,'update']);
 
 Route::post('/stat',[StatisiqueController::class ,'edit']);
+Route::post('/statEmploye',[StatistiqueEmployeController::class ,'create']);
 
 
 

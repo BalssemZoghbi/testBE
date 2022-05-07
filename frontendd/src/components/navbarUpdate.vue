@@ -15,7 +15,7 @@
                                             <router-link :to="'/projet/update/'+this.$route.params.id">  Generale</router-link>
                                     </li>
                                     <li class="dropdown-link">
-                                            <router-link :to="'/electrique/update/'+ this.$route.params.id+'/'+elec_id ">  Electriques</router-link>
+                                            <router-link :to="'/electrique/update/'+ this.$route.params.id ">  Electriques</router-link>
                                     </li>
                                     <li class="dropdown-link">
                                             <router-link :to="'/garantie/'+ this.$route.params.id">  Garantie</router-link>
