@@ -1,301 +1,451 @@
 <template>
   <div>
-    <!-- <navbar /> -->
-    <v-data-table
-      :headers="headers"
-      :items="projets"
-      sort-by="calories"
-      class="elevation-1"
-      :search="search"
-    >
-      <template v-slot:top>
-        <v-toolbar flat>
-          <v-card-title>Sites</v-card-title>
-          <v-spacer></v-spacer>
-          <v-text-field
-            v-model="search"
-            append-icon="mdi-magnify"
-            label="Search"
-            single-line
-            hide-details
-          >
-          </v-text-field>
+    <!-- <navbarUpdate :elec_id="projet.electrique_id" /> -->
+             <NavDash />
 
-          <v-divider class="mx-4" inset vertical></v-divider>
-          <v-spacer></v-spacer>
-          <v-dialog v-model="dialog" max-width="700px">
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
-                Ajouter Site
-              </v-btn>
-            </template>
-            <v-card>
-              <v-card-title>
-                <span class="text-h5">{{ formTitle }}</span>
-              </v-card-title>
+    <div class="body">
+      <v-stepper v-model="e1">
+        <v-stepper-header>
+          <v-stepper-step :complete="e1 > 1" step="1">
+            Name of step 1
+          </v-stepper-step>
 
-              <v-card-text>
-                <v-container>
-                  <v-row>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.title"
-                        label="title"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.url"
-                        label="url"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.email"
-                        label="email"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.logo"
-                        label="logo"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.phone"
-                        label="phone"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.fax"
-                        label="fax"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-switch
-                        v-model="editedItem.etat"
-                        label="Etat"
-                      ></v-switch>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.date"
-                        label="Date"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.codeGAnalytics"
-                        label="Code G-Analytics"
-                      ></v-text-field>
-                    </v-col>
-                  </v-row>
-                </v-container>
-              </v-card-text>
+          <v-divider></v-divider>
 
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="close">
-                  Cancel
-                </v-btn>
-                <v-btn color="blue darken-1" text @click="addSite">
-                  Save
-                </v-btn>
-              </v-card-actions>
+          <v-stepper-step :complete="e1 > 2" step="2">
+            Name of step 2
+          </v-stepper-step>
+        </v-stepper-header>
+
+        <v-stepper-items>
+          <v-stepper-content step="1">
+            <v-card class="mb-12" color="grey lighten-1" height="450px">
+              <div class="body">
+                <div class="container">
+                  <div class="title">Calcul de Volt/Spires</div>
+                  <div class="content">
+                    <form v-on:submit.prevent="updateprojet">
+                      <div class="user-details">
+                        <div class="input-box">
+                          <div class="form__div">
+                            <input
+                              type="text"
+                              class="form__input"
+                              placeholder=" "
+                              
+                              id="tole"
+                              v-model="projet.Bmaxdesire"
+                            />
+                            <label for="" class="form__label">Bmaxdesire</label>
+                          </div>
+                        </div>
+                        <div class="input-box">
+                          <div class="form__div">
+                            <input
+                              type="text"
+                              class="form__input"
+                              placeholder=" "
+                              readonly
+                              id="diamPropose"
+                              v-model="projet.Bmax"
+                            />
+                            <label for="" class="form__label"
+                              >Bmax </label
+                            >
+                          </div>
+                        </div>
+                        <div class="input-box">
+                          <div class="form__div">
+                            <input
+                              type="text"
+                              class="form__input"
+                              placeholder=" "
+                              
+                              id="diamNominale"
+                              v-model="projet.Vsp"
+                            />
+                            <label for="" class="form__label"
+                              >Vsp </label
+                            >
+                          </div>
+                        </div>
+                        <div class="input-box">
+                          <div class="form__div">
+                            <input
+                              type="text"
+                              class="form__input"
+                              placeholder=" "
+                              id="pas"
+                              
+                              v-model="projet.N2c"
+                            />
+                            <label for="" class="form__label">N2c</label>
+                          </div>
+                        </div>
+                        <div class="input-box">
+                          <div class="form__div">
+                            <input
+                              type="text"
+                              class="form__input"
+                              placeholder=" "
+                              id="N1c"
+                              
+                              v-model="projet.N1c"
+                            />
+                            <label for="" class="form__label">
+                              N1c</label
+                            >
+                          </div>
+                        </div>
+
+                        <div class="input-box">
+                          <div class="form__div">
+                            <input
+                              type="text"
+                              class="form__input"
+                              placeholder=" "
+                              
+                              id="prise"
+                              v-model="projet.prise"
+                            />
+                            <label for="" class="form__label"
+                              >prise</label
+                            >
+                          </div>
+                        </div>
+                        <div class="input-box">
+                          <div class="form__div">
+                            <input
+                              type="text"
+                              class="form__input"
+                              placeholder=" "
+                              id="spire"
+                              
+                              v-model="projet.spire"
+                            />
+                            <label for="" class="form__label"
+                              >spire </label
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
             </v-card>
-          </v-dialog>
-          <v-dialog v-model="dialogDelete" max-width="500px">
-            <v-card>
-              <v-card-title class="text-h5"
-                >Are you sure you want to delete this site?</v-card-title
-              >
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="closeDelete"
-                  >Cancel</v-btn
-                >
-                <v-btn color="red darken-1" text @click="deleteItemConfirm"
-                  >OK</v-btn
-                >
-                <v-spacer></v-spacer>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-        </v-toolbar>
-      </template>
-      <!-- <template v-slot:item.etat="{item}">
-        <v-etat-linear
-      height="22"
-      v-model= "item.etat"
-      class="fas fa-eye" style="font-size: 24px; color: #00b44e"
-    ></v-etat-linear>
-    </template> -->
-      <template v-slot:[`item.actions`]="{ item }">
-        <v-icon small color="green" class="mr-2" @click="editItem(item)">
-          mdi-pencil
-        </v-icon>
-        <v-icon small color="red" @click="deleteItem(item)">
-          mdi-delete
-        </v-icon>
-      </template>
 
-      <template v-slot:no-data>
-        <v-btn color="primary" @load="initialize"> Reset </v-btn>
-      </template>
-    </v-data-table>
+            <v-btn color="primary" @click="updateprojet"> Changer </v-btn>
+
+          </v-stepper-content>
+        </v-stepper-items>
+      </v-stepper>
+    </div>
   </div>
 </template>
+
 <script>
+// import { reactive } from "vue";
+// import navbarUpdate from "../../navbarUpdate.vue";
+
+import NavDash from "@/components/NavDash.vue";
+
 import axios from "axios";
-  export default {
-    data: () => ({
-      search:"",
-      dialog: false,
-      dialogDelete: false,
-      headers: [
-        {
-          text: 'Reference Transformateur',
-          align: 'start',
-          sortable: false,
-          value: 'couplage',
-        },
-        { text: 'Puissance', value: 'puissance' },
-        { text: 'Tension Primaire', value: 'u1n' },
-          { text: 'Tension Secondaire', value: 'u2o' },
-          { text: 'Couplage', value: 'couplage' },
-          { text: 'Frequence', value: 'frequence' },
-        { text: 'Actions', value: 'actions', sortable: false },
-      ],
-       projets: [],
-      editedIndex: -1,
-      editedItem: {
-       Reference: "",
-      Puissance: "",
-      u1n: "",
-      u2o: "",
-      couplage: "",
-      frequence: "",
+export default {
+    components: { 
+      // navbarUpdate 
+                NavDash,
+
       },
-      defaultItem: {
-       Reference: "",
-      Puissance: "",
-      u1n: "",
-      u2o: "",
-      couplage: "",
-      frequence: "",
+  data() {
+    return {
+      projet: {
+        id: undefined,
+        Bmaxdesire: "",
+        Bmax: "",
+        Vsp: "",
+        N2c: "",
+        N1c: "",
+        prise: "",
+        spire: "",
       },
-    }),created() {
-    this.getprojet();
+      e1: 1,
+    };
   },
-
-
-    computed: {
-      formTitle () {
-        return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
-      },
+  methods: {
+    updateprojet() {
+      const projets = {
+        id: undefined,
+        Bmaxdesire: this.projet.Bmaxdesire,
+        Bmax: this.projet.Bmax,
+        Vsp: this.projet.Vsp,
+        N2c: this.projet.N2c,
+        N1c: this.projet.N1c,
+        prise: this.projet.prise,
+        spire: this.projet.spire,
+      };
+      axios
+        .put("/volt/update/" + this.$route.params.id, projets)
+        .then(
+          (response) => (this.id = response.data.id,console.log(response.data)),
+          
+        );
+      this.$router.push( '/bobinecal/' + this.$route.params.id);
     },
-
-    watch: {
-      dialog (val) {
-        val || this.close()
-      },
-      dialogDelete (val) {
-        val || this.closeDelete()
-      },
-    },
-
-
-    methods: {
-            getprojet() {
-      axios.get('/electrique').then((resp) => {
-        this.projets = resp.data.data;
-      });
-    },
-
-      editItem (item) {
-        this.editedIndex = this.desserts.indexOf(item)
-        this.editedItem = Object.assign({}, item)
-        this.dialog = true
-      },
-
-      deleteItem (item) {
-        this.editedIndex = this.desserts.indexOf(item)
-        this.editedItem = Object.assign({}, item)
-        this.dialogDelete = true
-      },
-
-      deleteItemConfirm () {
-        this.desserts.splice(this.editedIndex, 1)
-        this.closeDelete()
-      },
-
-      close () {
-        this.dialog = false
-        this.$nextTick(() => {
-          this.editedItem = Object.assign({}, this.defaultItem)
-          this.editedIndex = -1
-        })
-      },
-
-      closeDelete () {
-        this.dialogDelete = false
-        this.$nextTick(() => {
-          this.editedItem = Object.assign({}, this.defaultItem)
-          this.editedIndex = -1
-        })
-      },
-
-      save () {
-        if (this.editedIndex > -1) {
-          Object.assign(this.desserts[this.editedIndex], this.editedItem)
-        } else {
-          this.desserts.push(this.editedItem)
-        }
-        this.close()
-      },
-    },
-  }
+  },
+  async mounted() {
+    const result = await axios.get("projets/" + this.$route.params.id);
+    this.projet = result.data;
+  },
+};
 </script>
 <style scoped>
-.body{
-  padding:80px;
+/* Googlefont Poppins CDN Link */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
+
+h1 {
+  margin: 0;
 }
-.v-card {
-  margin-left: 85%;
-    border-width: thin;
-    display: block;
+
+/*===== FORM =====*/
+.l-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.form {
+  width: 360px;
+  padding: 4rem 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(92, 99, 105, 0.2);
+}
+.form__title {
+  font-weight: 400;
+  margin-bottom: 3rem;
+}
+.form__div {
+  position: relative;
+  height: 48px;
+  margin-bottom: 1.5rem;
+}
+.form__input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 1rem;
+  border: 1px solid #dadce0;
+  border-radius: 0.5rem;
+  outline: none;
+  padding: 1rem;
+  background: none;
+  z-index: 1;
+}
+.form__label {
+  position: absolute;
+  left: 1rem;
+  top: 0.7rem;
+  padding: 0 0.25rem;
+  background-color: #fff;
+  color: #000000ad;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+.form__button {
+  display: block;
+  margin-left: auto;
+  padding: 0.75rem 2rem;
+  outline: none;
+  border: none;
+  background-color: #4797d1;
+  color: #fff;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.form__button:hover {
+  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.15);
+}
+
+/*Input focus move up label*/
+.form__input:focus + .form__label {
+  top: -0.5rem;
+  left: 0.8rem;
+  color: #4797d1;
+  font-size: 0.75rem;
+  font-weight: 500;
+  z-index: 10;
+}
+
+/*Input focus sticky top label*/
+.form__input:not(:placeholder-shown).form__input:not(:focus) + .form__label {
+  top: -0.5rem;
+  left: 0.8rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  z-index: 10;
+}
+
+/*Input focus*/
+.form__input:focus {
+  border: 1.5px solid #4797d1;
+}
+
+/* *{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins',sans-serif;
+} */
+
+.body {
+  height: 100%;
+  /* display: flex; */
+  /* justify-content: center;
+  align-items: center; */
+  padding: 20px;
+  max-height: calc(100vh - 50px);
+
+  /* margin: 0.5%; */
+  background: linear-gradient(135deg, #71b7e675, #71b7e675);
+}
+.container {
+  max-width: 92%;
+  max-height: 99%;
+  /* height: 80%; */
+  margin-top: 0%;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgb(0 0 0 / 15%);
+}
+.container .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+.container .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  height: 3px;
+  width: 250px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #71b7e6, #71b7e6);
+}
+.content form .user-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 20px 0 12px 0;
+}
+form .user-details .input-box {
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+}
+form .input-box span.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.user-details .input-box input {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  /* border-bottom-width: 2px; */
+  transition: all 0.3s ease;
+}
+.user-details .input-box input:focus,
+.user-details .input-box input:valid {
+  border-color: #000;
+}
+form .gender-details .gender-title {
+  font-size: 20px;
+  font-weight: 500;
+}
+form .category {
+  display: flex;
+  width: 80%;
+  margin: 14px 0;
+  justify-content: space-between;
+}
+form .category label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+form .category label .dot {
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  margin-right: 10px;
+  background: #d9d9d9;
+  border: 5px solid transparent;
+  transition: all 0.3s ease;
+}
+#dot-1:checked ~ .category label .one,
+#dot-2:checked ~ .category label .two,
+#dot-3:checked ~ .category label .three {
+  background: #71b7e6;
+  border-color: #d9d9d9;
+}
+form input[type="radio"] {
+  display: none;
+}
+form .button {
+  height: 45px;
+  margin-top: 10px;
+  margin-left: 80%;
+}
+form .button input {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #4797d1, #4797d1);
+}
+form .button input:hover {
+  /* transform: scale(0.99); */
+  background: linear-gradient(-135deg, #71b7e6, #71b7e6);
+}
+@media (max-width: 584px) {
+  .container {
     max-width: 100%;
-    outline: none;
-    text-decoration: none;
-    transition-property: box-shadow, opacity;
-    overflow-wrap: break-word;
-    position: relative;
-    white-space: normal;
+  }
+  form .user-details .input-box {
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  form .category {
+    width: 100%;
+  }
+  .content form .user-details {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .user-details::-webkit-scrollbar {
+    width: 5px;
+  }
 }
-.v-input {
-    align-items: flex-start;
-    display: flex;
-    flex: 1 1 auto;
-    font-size: 58px;
-    letter-spacing: normal;
-    max-width:50%;
-    margin-left: 50%;
-    text-align: right;
+@media (max-width: 459px) {
+  .container .content .category {
+    flex-direction: column;
+  }
 }
-.v-card > *:last-child:not(.v-btn):not(.v-chip):not(.v-avatar) {
-    border-bottom-left-radius: inherit;
-    border-bottom-right-radius: inherit;
-    border-top: thin solid rgba(0, 0, 0, 0.12);}
-.v-data-table {
-    /* line-height: 1.5; */
-    max-width: 88%;
-      margin-left: 5%;
-
-}
-.theme--light.v-icon {
-    color: #2196f3;
-}
-
 </style>

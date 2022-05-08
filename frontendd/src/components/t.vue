@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <navbarUpdate :elec_id="projet.electrique_id" /> -->
              <NavDash />
 
     <div class="body">
