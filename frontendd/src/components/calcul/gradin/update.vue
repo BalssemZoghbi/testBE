@@ -100,7 +100,8 @@
                           />
                           <label for="" class="form__label">Snette</label>
                         </div>
-                          <div class="form__div framei">
+                         <div class="input-box">
+                          <div class="form__div">
                           <input
                             type="number"
                             class="form__input"
@@ -110,9 +111,9 @@
                             v-model="projet.Sbrut"
                           />
                           <label for="" class="form__label">Sbrut</label>
-                        </div>
-                         <!-- <div class="input-box"> -->
-                       <div class="form__div frameii">
+                        </div></div>
+                         <div class="input-box">
+                       <div class="form__div">
                           <input
                             type="number"
                             class="form__input"
@@ -123,19 +124,26 @@
                           />
                           <label for="" class="form__label">Epaisseur Totale</label>
                         </div>
-                    </div>
-                    <!-- </div> -->
-                      
+                    </div></div>
+                     <div class="form__div framei">
+                          <input
+                            type="number"
+                            class="form__input"
+                            placeholder=" "
+                            id="largeurMin"
+                            readonly
+                            v-model="projet.largeurMin"
+                          />
+                          <label for="" class="form__label">largeur Minimale</label>
+                        </div>
                     </form>
                   </div>
-                <!-- </div> -->
-              <!-- </div> -->
             </v-card>
    
             <router-link
               class="nav-link"
               :to="
-                '/electrique/update/' + projet.id + '/' + projet.electrique_id
+                '/garantie/' + projet.id 
               "
               > <v-btn
         color="primary mb-14"
@@ -143,12 +151,125 @@
       >
         précédent
       </v-btn> </router-link>
-                   <v-btn color="success mb-14" @click="updateprojet">
+           <v-btn
+        color="success mb-14"
+        @click="e1 = 2"
+      >
+        suivant
+      </v-btn>
+          </v-stepper-content>
+        
+             <v-stepper-step
+      :complete="e1 > 2"
+      step="2"
+    >
+      Gadin
+    </v-stepper-step>
+
+    <v-stepper-content step="2">
+                 <!-- <v-card class="mb-6"  > -->
+                  <div class="title">Gadin</div>
+                  <div class="content">
+          
+ <v-row
+              cols="2"
+        md="4"
+          class="ml-4"
+              >
+        <!-- <v-col md="4">
+        </v-col> -->
+        <!-- <v-col
+          cols="6"
+        md="4"
+        > -->
+         <v-card
+          outlined
+          tile
+        >
+          <template>
+        <!-- <v-row>
+          <v-col
+          
+          > -->
+            <v-card>
+              <v-card-title class="subheading font-weight-bold">
+              Largeur
+              </v-card-title>
+
+              <v-divider></v-divider>
+
+              <v-list dense>
+                <v-list-item>
+                  <v-list-item-content>{{largeur}}</v-list-item-content>
+                  <v-list-item-content class="align-end"  >
+                  
+                  </v-list-item-content>
+                </v-list-item>
+
+              </v-list>
+            </v-card>
+          <!-- </v-col>
+        </v-row> -->
+      </template>
+         </v-card>
+      <!-- </v-col> -->
+      <!-- <v-col
+        cols="4"
+        md="4"
+      > -->
+        <v-card
+            cols="2"
+        md="4"
+          class="ml-4"
+          outlined
+          tile
+        >
+          <template >
+        <!-- <v-row>
+          <v-col
+         
+          > -->
+            <!-- <v-card> -->
+              <v-card-title class="subheading font-weight-bold" >
+               Epaisseur
+              </v-card-title>
+
+              <v-divider></v-divider>
+
+              <v-list dense>
+                <v-list-item>
+                  <v-list-item-content vertical>{{epaisseur}}</v-list-item-content>
+                  <v-list-item-content class="align-end"  v-model="projet.spire">
+                  
+                  </v-list-item-content>
+                </v-list-item>
+
+                
+              </v-list>
+            <!-- </v-card> -->
+          <!-- </v-col>
+        </v-row> -->
+      </template>
+        </v-card>
+        <!-- </v-col> -->
+      </v-row>
+                     
+                  </div>
+                <!-- </div> -->
+              <!-- </div> -->
+            <!-- </v-card> -->
+           <v-btn
+        color="primary mb-14"
+        @click="e1 = 1"
+      >
+        précédent
+      </v-btn>
+       <v-btn color="success mb-14" @click="updateprojet">
           Valider
         </v-btn>
-          </v-stepper-content>
-          <!-- <v-stepper-content >
-        </v-stepper-content> -->
+     
+   
+    </v-stepper-content>
       </v-stepper>
     </div>
   </div>
@@ -230,15 +351,20 @@ export default {
                 console.log(this.projets);
 
   },
+     computed:{
+     largeur(){
+       
+  return this.projet.largeur.replace("[","",this.projet.largeur.length-1).split(",").join("").replace("]","");
+},
+epaisseur(){
+  return this.projet.epaisseur.replace("[","",this.projet.epaisseur.length-1).split(",").join("").replace("]","");
+}
+},
 };
 </script>
 <style scoped>
 
-h1 {
-  margin: 0;
-}
 
-/*===== FORM =====*/
 .l-form {
   display: flex;
   justify-content: center;

@@ -10,59 +10,81 @@
           
           </v-stepper-step>
            <v-stepper-content step="1">
-            <v-card class="mb-12"  >
-                  <div class="title">Volt/Spires</div>
+   <v-card class="mb-12"  >
+                  <div class="title">Pcc/Ucc</div>
         
                 <div class="content">
       <form  v-on:submit.prevent="updateprojet">
-       
-               <!-- <div class="title">Primaire</div> -->
-          
-         <div class="user-details">
+        <div class="user-details">
            <div class="input-box">
-             <div class="user-details">
-                        <div class="form__div frame">
+               <!-- <div class="title">Primaire</div> -->
+               <div class="user-details">
+                  <!-- <div class="form__div frame">
                           <input
                             type="text"
                             class="form__input"
                             placeholder=" "
-                            id="Bmaxdesire"
-                            v-model="projet.Bmaxdesire"
+                            id="puissance"
+                            v-model="projet.puissance"
                           />
-                          <label for="" class="form__label">Bmax desire</label>
+                          <label for="" class="form__label">Puissance de dimensionnement</label>
+                        </div> -->
+                <div class="form__div framei">
+                          <input
+                            type="text"
+                            class="form__input"
+                            placeholder=" "
+                            id="Pccg"
+                            readonly
+                            v-model="projet.Pccg"
+                          />
+                          <label for="" class="form__label">Pccg</label>
                         </div>
-        
-                <div class="form__div frame">
+                        
+                        <div class="form__div framei">
+                          <input
+                            type="text"
+                            class="form__input"
+                            placeholder=" "
+                            
+                            id="pcc1"
+                            v-model="projet.pcc1"
+                          />
+                          <label for="" class="form__label">Pcc primaire</label>
+                        </div>
+                         <div class="form__div framei">
+                          <input
+                            type="text"
+                            class="form__input"
+                            placeholder=" "
+                            
+                            id="pcc2"
+                            v-model="projet.pcc2"
+                          />
+                          <label for="" class="form__label">Pcc Sec</label>
+                        </div>
+                        
+                <div class="form__div framei">
                           <input
                             type="number"
                             class="form__input"
                             placeholder=" "
-                            id="Bmax"
-                            v-model="projet.Bmax"
+                            id="pccMaj"
+                            readonly
+                            v-model="somme"
                           />
-                          <label for="" class="form__label">Bmax</label>
-                        </div>
-                         <div class="form__div frame">
-                          <input
-                            type="number"
-                            class="form__input"
-                            placeholder=" "
-                            id="N1c"
-                            v-model="projet.N1c"
-                          />
-                          <label for="" class="form__label">N1c</label>
+                          <label for="" class="form__label">Pcc Maj</label>
                         </div>
                         <div class="form__div frame">
                           <input
                             type="number"
                             class="form__input"
                             placeholder=" "
-                            id="N2c"
-                            v-model="projet.N2c"
+                            id="MajourationU"
+                            v-model="projet.MajourationU"
                           />
-                          <label for="" class="form__label">N2c</label>
+                          <label for="" class="form__label">Majouration Utilisée</label>
                         </div>
-                         
           <!-- </div>
           </div>
           </div>
@@ -71,138 +93,72 @@
                <div class="title">Primaire</div>
                <div class="user-details"> -->
                 
-                        <div class="form__div framei">
-                          <input
-                            type="text"
-                            class="form__input"
-                            placeholder=" "
-                            id="Vsp"
-                            v-model="projet.Vsp"
-                          />
-                          <label for="" class="form__label">Vsp</label>
-                        </div>
-                        
-                <!-- <div class="form__div framei">
-                          <input
-                            type="number"
-                            class="form__input"
-                            placeholder=" "
-                            id="PrimaireUPhase"
-                            v-model="projet.PrimaireUPhase"
-                          />
-                          <label for="" class="form__label">UPhase</label>
-                        </div> -->
-                         <!-- <div class="form__div framei">
-                          <input
-                            type="number"
-                            class="form__input"
-                            placeholder=" "
-                            id="PrimaireIligne"
-                            v-model="projet.PrimaireIligne"
-                          />
-                          <label for="" class="form__label">Iligne</label>
-                        </div> -->
-                        <!-- <div class="form__div framei">
-                          <input
-                            type="number"
-                            class="form__input"
-                            placeholder=" "
-                            id="PrimaireIPhase"
-                            v-model="projet.PrimaireIPhase"
-                          />
-                          <label for="" class="form__label">IPhase</label>
-                        </div> -->
-                        
-                        </div>
-                        
-                        </div>
-              <v-row
-              cols="2"
+          </div>
+          </div>
+         
+             <v-row
         md="4"
-          class="ml-4"
-              >
+          class="mt-4 "
+              > 
         <!-- <v-col md="4">
         </v-col> -->
         <!-- <v-col
           cols="6"
         md="4"
         > -->
-         <v-card
-          outlined
-          tile
-        >
-          <template>
-        <!-- <v-row>
-          <v-col
-          
-          > -->
-            <v-card>
-              <v-card-title class="subheading font-weight-bold">
-               prise
-              </v-card-title>
+            
 
-              <v-divider></v-divider>
-
-              <v-list dense>
-                <v-list-item>
-                  <v-list-item-content>{{prises}}</v-list-item-content>
-                  <v-list-item-content class="align-end"  >
-                  
-                  </v-list-item-content>
-                </v-list-item>
-
-              </v-list>
-            </v-card>
-          <!-- </v-col>
-        </v-row> -->
-      </template>
-         </v-card>
-      <!-- </v-col> -->
-      <!-- <v-col
-        cols="4"
-        md="4"
-      > -->
-        <v-card
-            cols="2"
-        md="4"
-          class="ml-4"
-          outlined
-          tile
-        >
-          <template >
-        <!-- <v-row>
-          <v-col
-         
-          > -->
-            <!-- <v-card> -->
-              <v-card-title class="subheading font-weight-bold" >
-               spire
-              </v-card-title>
-
-              <v-divider></v-divider>
-
-              <v-list dense>
-                <v-list-item>
-                  <v-list-item-content vertical>{{spires}}</v-list-item-content>
-                  <v-list-item-content class="align-end" >
-                  
-                  </v-list-item-content>
-                </v-list-item>
-
+          <div class="form__div framei">
+                          <input
+                            type="text"
+                            class="form__input"
+                            placeholder=" "
+                            id="Uccg"
+                            readonly
+                            v-model="projet.Uccg"
+                          />
+                          <label for="" class="form__label">Uccg</label>
+                        </div>
+                        
+                        <div class="form__div framei">
+                          <input
+                            type="text"
+                            class="form__input"
+                            placeholder=" "
+                            
+                            id="Uccr"
+                            v-model="projet.Uccr"
+                          />
+                          <label for="" class="form__label">Uccr</label>
+                        </div>
+                         <div class="form__div framei">
+                          <input
+                            type="text"
+                            class="form__input"
+                            placeholder=" "
+                            
+                            id="Ucca"
+                            v-model="projet.Ucca"
+                          />
+                          <label for="" class="form__label">Ucca</label>
+                        </div>
+                        
+                <div class="form__div framei">
+                          <input
+                            type="number"
+                            class="form__input"
+                            placeholder=" "
+                            id="Ucc"
+                            readonly
+                            v-model="projet.Ucc"
+                          />
+                          <label for="" class="form__label">Ucc</label>
+                        </div>
                 
-              </v-list>
-            <!-- </v-card> -->
-          <!-- </v-col>
-        </v-row> -->
-      </template>
-        </v-card>
-        <!-- </v-col> -->
       </v-row>
-                    </div>  
-           
-             <!-- </div> -->
 
-          <!-- </div> -->
+
+          </div>
       </form>
     </div>
   </v-card>  
@@ -210,7 +166,7 @@
             <router-link
               class="nav-link"
               :to="
-                '/gradin/' + projet.id 
+                '/cm/update/' + projet.id 
               "
               > <v-btn
         color="primary mb-14"
@@ -246,16 +202,17 @@ export default {
       },
   data() {
     return {
-      prise:[],
       projet: {
         id: undefined,
-        Bmaxdesire: "",
-        Bmax: "",
-        Vsp: "",
-        N2c: "",
-        N1c: "",
-        prise: "",
-        spire: Array,
+        MajourationU: "",
+        pcc1: "",
+        pcc2: "",
+        pccMaj: "",
+        Pccg: "",
+        Uccr: "",
+        Ucca: "",
+        Ucc: "",
+        Uccg: "",
       },
       e1: 1,
     };
@@ -265,21 +222,23 @@ export default {
     updateprojet() {
       const projets = {
         id: undefined,
-        Bmaxdesire: this.projet.Bmaxdesire,
-        Bmax: this.projet.Bmax,
-        Vsp: this.projet.Vsp,
-        N2c: this.projet.N2c,
-        N1c: this.projet.N1c,
-        prise: this.projet.prise,
-        spire: this.projet.spire,
+        MajourationU: this.projet.MajourationU,
+        pcc1: this.projet.pcc1,
+        pcc2: this.projet.pcc2,
+        pccMaj: this.projet.pccMaj,
+        Pccg: this.projet.Pccg,
+        Uccr: this.projet.Uccr,
+        Ucca: this.projet.Ucca,
+        Ucc: this.projet.Ucc,
+        Uccg: this.projet.Uccg,
       };
       axios
-        .put("/volt/update/" + this.$route.params.id, projets)
+        .put("/pucc/update/" + this.$route.params.id, projets)
         .then(
           (response) => (this.id = response.data.id,console.log(response.data)),
           
         );
-      this.$router.push( '/bobinecal/' + this.$route.params.id);
+      this.$router.push( '/cm/' + this.$route.params.id);
     },
   },
   async mounted() {
@@ -287,17 +246,23 @@ export default {
     this.projet = result.data;
   },
    computed:{
-     spires(){
-  return this.projet.spire.replace("[","",this.projet.spire.length-1).split(",").join("").replace("]","");
+     somme(){
+       return parseInt(this.projet.pcc1) + parseInt(this.projet.pcc2);
 },
-prises(){
-  // let newElem = document.createElement("BR")
-  return this.projet.prise.replace("[","",this.projet.prise.length-1).split(",").join("").replace("]","");
-}
+
 },
 };
 </script>
 <style scoped>
+.row {
+    display: flex;
+    flex: 1 1 auto;
+    margin: -12px;
+    flex-direction: row;
+    align-content: space-between;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
 .l-form {
   display: flex;
   justify-content: center;
@@ -423,9 +388,27 @@ prises(){
   
   background: linear-gradient(135deg, #0b65a0, #71b7e6);
 }
+.titles {
+  font-size: 20px;
+  font-weight: 500;
+  margin-top:-14% ;
+  margin-bottom: 55%;
+  position: relative;
+}
+ .titles::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 3px;
+  width: 150px;
+  border-radius: 5px;
+  
+  background: linear-gradient(135deg, #0b65a0, #71b7e6);
+}
 .content form .user-details {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap-reverse;
   justify-content: space-between;
   margin: 10px 0 12px 0;
 }
