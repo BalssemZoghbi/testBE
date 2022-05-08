@@ -112,14 +112,14 @@ Entrez vos données personnelles et commencez votre journée                    
                         <h4 class="text-center mt-4">
                         Assurez-vous de votre email pour l'inscription
                         </h4>
-                        <v-form>
+                        <v-form  enctype="multipart/form-data">
                             <error v-if="error" :error="error"/>
                           <v-text-field
                             label="Nom"
                             name="Name"
                             prepend-icon="person"
                             type="text"
-                            v-model="name"
+                            v-model="formFields.name"
                             :rules="nameRules"
                              required
                           />   
@@ -133,7 +133,7 @@ Entrez vos données personnelles et commencez votre journée                    
                             name="poste"
                             prepend-icon="fa fa-user-tie"
                             type="text"
-                            v-model="poste" 
+                            v-model="formFields.poste" 
                             :rules="nameRules"
                           /> </v-col> 
                            <v-col
@@ -147,7 +147,7 @@ Entrez vos données personnelles et commencez votre journée                    
                             name="numero"
                             prepend-icon="phone"
                             type="text"
-                            v-model="numero" 
+                            v-model="formFields.numero" 
                             :counter="max"
                             :rules="rules"
                           />
@@ -157,7 +157,7 @@ Entrez vos données personnelles et commencez votre journée                    
                             name="Email"
                             prepend-icon="email"
                             type="text"
-                             v-model="email"
+                             v-model="formFields.email"
                              :rules="EmailRules"
                           />
                       <v-row no-gutters>
@@ -170,7 +170,7 @@ Entrez vos données personnelles et commencez votre journée                    
                             name="password"
                             prepend-icon="lock"
                             type="password"
-                            v-model="password"
+                            v-model="formFields.password"
                             :rules="rules"
                           /></v-col>
                            <v-col
@@ -182,13 +182,25 @@ Entrez vos données personnelles et commencez votre journée                    
                             name="password_confirm"
                             prepend-icon="lock"
                             type="password"
-                            v-model="password_confirm"
+                            v-model="formFields.password_confirm"
                             :rules="passwordRules"
-                          /></v-col></v-row>
+                          /></v-col>
+                          </v-row>
+                          <v-row>
+                              <v-file-input
+                              show-size
+                              counter
+                              multiple
+                              label="File input"
+                              action="/app/upload"
+                              v-model="formFields.image"
+                              @change="pickImage"
+                            ></v-file-input>
+                          </v-row>
                         </v-form>
                       </v-card-text>
                       <div class="text-center mt-n5">
-                        <v-btn rounded color="teal accent-3" dark @click="createAccount()"
+                        <v-btn rounded color="teal accent-3" dark type="submit" @click="createAccount()"
                           >Inscription</v-btn
                         >
                       </div>
@@ -238,9 +250,20 @@ Error
      name: "",
      poste:"",
      numero:"",
+     image:"",
       max: 8,
       min:8,
-    error:''
+    error:'',
+   formFields: {
+      password:'' ,
+     password_confirm:"",
+     name: "",
+     poste:"",
+     numero:"",
+     image:"",
+     email:"",
+            },
+            
   }),
 
   computed:{
@@ -309,23 +332,33 @@ Error
   }
   },
    async createAccount(){
-   try{
- await axios.post('/register',{
-     step:this.step,
-      name:this.name,
-      email:this.email,
-      poste:this.poste,
-      numero:this.numero,
-      password:this.password,
-      password_confirm:this.password_confirm,
 
-    });
+   try{
+     let formData = new FormData();
+    formData.append("step", this.step);
+    formData.append("name", this.formFields.name);
+    formData.append("email", this.formFields.email);
+    formData.append("poste", this.formFields.poste);
+    formData.append("numero", this.formFields.numero);
+    formData.append("password", this.formFields.password);
+    formData.append("password_confirm", this.formFields.password_confirm);
+    formData.append("image", this.formFields.image);
+console.log(formData);
+ await axios.post('/register',formData,{headers:{"Content-Type": "multipart/form-data"}}).then((res) => {
+                console.log(res);
+            });
 //   this.$router.push('/Connexion');
+// await this.form.post('/register').then(( response ) => { 
+//   console.log(response)
+// });
   this.step--;
   }catch(e){
 this.error='une erreur s\'est produite';
   }
   
+  },
+  pickImage(e){
+   this.formFields.image = e.target.files[0];
   }
 }
 };

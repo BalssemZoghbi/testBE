@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use App\Mail\User as MailUser;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use App\Models\UserInactive as ModelsUserInactive;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
@@ -52,13 +51,42 @@ class AuthController extends Controller
             'password_confirm'=>'required|same:password',
             'poste' => 'required',
             'numero' => 'required',
+            'image' => 'required',
         ]);
+        // dd($request->image->getClientOriginalName());
         $name = $request->name;
         $email    = $request->email;
         $password = $request->password;
         $poste = $request->poste;
         $numero = $request->numero;
-        $user     = User::create(['name' => $name, 'email' => $email,'type'=>'pending', 'password' => Hash::make($password),'poste' => $poste,'numero' => $numero,]);
+
+        // $image = time().'.'.$request->image->extension();
+        // dd($image);
+        // $request->image->move(public_path('images'),$image);
+// dd(var_dump($request->file('image')));
+        $image=$request->file('image');
+
+        $fileNameWithExt = $image->getClientOriginalName();
+            //just filename
+            $filename = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            //just extension
+            $extension = $image->getClientOriginalExtension();
+            //filename to store
+            $filenametoStore = $filename.'_'.time().'.'.$extension;
+            //upload
+            // return response()->json($request->file('image'));
+            // dd($request->file());
+             $request->image->storeAs('public/images/',$filenametoStore);
+            // Save into database
+// dd($request->file());
+
+
+        // if($request->file()) {
+        //     $image = time().'_'.$request->file->getClientOriginalName();
+        //     $request->file->move(public_path('images'),$image);
+        // }
+
+        $user     = User::create(['name' => $name, 'email' => $email,'type'=>'pending', 'password' => Hash::make($password),'poste' => $poste,'numero' => $numero,'image'=>$filenametoStore]);
         return response()->json($user);
     }
 

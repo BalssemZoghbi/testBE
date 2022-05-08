@@ -13,6 +13,7 @@
     "chart.js": "^3.7.1",
     "core-js": "^3.6.5",
     "sweetalert2": "^11.4.8",
+    "vform": "^2.1.2",
     "vue": "^2.6.11",
     "vue-chartjs": "^4.0.7",
     "vue-router": "^3.2.0",
