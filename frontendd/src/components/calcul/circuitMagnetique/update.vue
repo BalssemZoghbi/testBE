@@ -11,6 +11,7 @@
             
  <img src="..\..\..\..\..\frontendd\src\assets\cm.png" class="mt-1"/>
  <div class="mb-14" style="max-width: 55px;margin-top:-23%;margin-left:16%;">
+   
         <v-text-field
             label="Outlined"
             outlined
