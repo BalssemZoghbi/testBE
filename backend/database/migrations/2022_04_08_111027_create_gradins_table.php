@@ -15,19 +15,19 @@ class CreateGradinsTable extends Migration
     {
         Schema::create('gradins', function (Blueprint $table) {
             $table->id();
-            $table->string('tole');
-            $table->integer('diamPropose');
-            $table->integer('diamNominale');
-            $table->enum('pas',['10','20']);
-            $table->float('coeffRemplissage');
-            $table->integer('nbrGradin');
-            $table->integer('demiGradin');
-            $table->json('largeur');
-            $table->json('epaisseur');
-            $table->float('Sbrut');
-            $table->float('Snette');
-            $table->float('EpaisseurTot');
-            $table->integer('largeurMin');
+            $table->string('tole')->nullable();
+            $table->integer('diamPropose')->nullable();
+            $table->integer('diamNominale')->nullable();
+            $table->enum('pas',['10','20'])->nullable();
+            $table->float('coeffRemplissage')->nullable();
+            $table->integer('nbrGradin')->nullable();
+            $table->integer('demiGradin')->nullable();
+            $table->json('largeur')->nullable();
+            $table->json('epaisseur')->nullable();
+            $table->float('Sbrut')->nullable();
+            $table->float('Snette')->nullable();
+            $table->float('EpaisseurTot')->nullable();
+            $table->integer('largeurMin')->nullable();
             $table->float('CMBT')->nullable();
             $table->timestamps();
         });

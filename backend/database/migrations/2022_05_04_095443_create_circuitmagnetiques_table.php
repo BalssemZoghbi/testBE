@@ -15,29 +15,29 @@ class CreateCircuitmagnetiquesTable extends Migration
     {
         Schema::create('circuitmagnetiques', function (Blueprint $table) {
             $table->id();
-            $table->integer('masseFertot');//calcul automatique
-            $table->float('Bmax');
-            $table->float('pFerspecifique');
-            $table->float('Majferprop');
-            $table->string('tole');
-            $table->integer('Majfer');//manuelle
-            $table->integer('pFer');
-            $table->integer('pFergarantie');
-            $table->integer('Ex');
-            $table->integer('Hc');
-            $table->integer('E1');//manuelle
-            $table->integer('E2');//manuelle
-            $table->integer('E3');//manuelle
-            $table->integer('E4');//manuelle
-            $table->integer('Eh');
-            $table->integer('Ebc');//manuelle
-            $table->integer('Longeurcuve');
-            $table->integer('Largeurcuve');
-            $table->json('LCM');
-            $table->json('masseFerCM');
-            $table->json('surfaceCM');
-            $table->integer('Hauteurcuve');
-            $table->integer('coeffPoid');
+            $table->integer('masseFertot')->nullable();//calcul automatique
+            $table->float('Bmax')->nullable();
+            $table->float('pFerspecifique')->nullable();
+            $table->float('Majferprop')->nullable();
+            $table->string('tole')->nullable();
+            $table->integer('Majfer')->nullable();//manuelle
+            $table->integer('pFer')->nullable();
+            $table->integer('pFergarantie')->nullable();
+            $table->integer('Ex')->nullable();
+            $table->integer('Hc')->nullable();
+            $table->integer('E1')->nullable();//manuelle
+            $table->integer('E2')->nullable();//manuelle
+            $table->integer('E3')->nullable();//manuelle
+            $table->integer('E4')->nullable();//manuelle
+            $table->integer('Eh')->nullable();
+            $table->integer('Ebc')->nullable();//manuelle
+            $table->integer('Longeurcuve')->nullable();
+            $table->integer('Largeurcuve')->nullable();
+            $table->json('LCM')->nullable();
+            $table->json('masseFerCM')->nullable();
+            $table->json('surfaceCM')->nullable();
+            $table->integer('Hauteurcuve')->nullable();
+            $table->integer('coeffPoid')->nullable();
             $table->timestamps();
         });
     }

@@ -53,7 +53,11 @@
                                       <router-link :to="'/VoltSpires/'+ this.$route.params.id">Volt Spires</router-link>
                                     </li>
                                     <li class="dropdown-link">
-                                      <router-link :to="'/bobinecal/'+ this.$route.params.id">Bobine Primaire</router-link>
+                                      <router-link :to="'/bobinagePrimaireRond/'+ this.$route.params.id" >Bobine Primaire</router-link>
+                                      <!-- <router-link :to="'/bobinagePrimaireFeuillard/'+ this.$route.params.id" v-if="conducteur=='feuillard'">Bobine Primaire</router-link> -->
+                                    </li>
+                                    <li class="dropdown-link">
+                                      <router-link :to="'/bobinageSecondaireRond/'+ this.$route.params.id">Bobine Secondaire</router-link>
                                     </li>
                                     <li class="dropdown-link">
                                         <a href="#">PCC et UCC</a>
@@ -63,9 +67,9 @@
                                 </ul>
                             </div>
                         </li>
-                        <li class="nav-link" style="--i: 1.35s">
+                        <!-- <li class="nav-link" style="--i: 1.35s">
                             <a href="#">Aide</a>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
 
@@ -86,7 +90,10 @@ export default {
   data: () => ({
     id:undefined,
    }),
-  props: ['id','elec_id',]
+  props:['conducteur','conducteurSec'],
+  mounted(){
+      console.log(this.conducteur,this.conducteurSec);
+  }
 };
 </script>
 <style scoped>

@@ -15,15 +15,15 @@ class CreatePccUccsTable extends Migration
     {
         Schema::create('pcc_uccs', function (Blueprint $table) {
             $table->id();
-            $table->integer('MajourationU');
-            $table->float('pcc1');
-            $table->float('pcc2');
-            $table->float('pccMaj');
-            $table->float('Pccg');
-            $table->float('Uccr');
-            $table->float('Ucca');
-            $table->float('Ucc');
-            $table->float('Uccg');
+            $table->integer('MajourationU')->nullable();
+            $table->float('pcc1')->nullable();
+            $table->float('pcc2')->nullable();
+            $table->float('pccMaj')->nullable();
+            $table->float('Pccg')->nullable();
+            $table->float('Uccr')->nullable();
+            $table->float('Ucca')->nullable();
+            $table->float('Ucc')->nullable();
+            $table->float('Uccg')->nullable();
             $table->timestamps();
         });
     }

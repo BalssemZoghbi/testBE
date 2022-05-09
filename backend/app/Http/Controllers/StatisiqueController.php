@@ -55,7 +55,9 @@ class StatisiqueController extends Controller
             ->get();
             $userprojet[$i]=count($projet);
         }
-        // dd($userprojet);
+        $statistiquecount = count(DB::table('statisiques')->get());
+        // dd($statistiquecount);
+        if($statistiquecount==0){
         $stat= Statisique::create([
             'userCount' => count($users),
             'projetCount' =>count($projets),
@@ -63,12 +65,22 @@ class StatisiqueController extends Controller
             'UserName' =>$usersname,
             'UserProjet' =>$userprojet,
         ]);
+        }else{
+            $stat= Statisique::FindOrFail(1);
+            $stat->update([
+                'userCount' => count($users),
+                'projetCount' =>count($projets),
+                'UserChart' =>$UserChart,
+                'UserName' =>$usersname,
+                'UserProjet' =>$userprojet,
+            ]);
+        }
         if($stat->save()){
             return response()->json($stat);
         }
     }
 
-    
+
 
     /**
      * Update the specified resource in storage.

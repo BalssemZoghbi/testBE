@@ -19,6 +19,12 @@ import updateVolt from "../components/calcul/voltspire/update.vue";
 
 import Bobine from "../components/donnees/bobinage/update.vue";
 import bobinage from "../components/donnees/bobinage/updateCalcul.vue";
+import bobinagePrimaireRond from "../components/donnees/bobinage/BobinagePrimaire/RondEmaille.vue";
+import bobinagePrimaireFeuillard from "../components/donnees/bobinage/BobinagePrimaire/Feuillard.vue";
+import bobinagePrimaireMeplat from "../components/donnees/bobinage/BobinagePrimaire/MeplatGuipe.vue";
+import bobinageSecondaireRond from "../components/donnees/bobinage/BobinageSecondaire/RondEmaille.vue";
+import bobinageSecondaireFeuillard from "../components/donnees/bobinage/BobinageSecondaire/Feuillard.vue";
+import bobinageSecondaireMeplat from "../components/donnees/bobinage/BobinageSecondaire/MeplatGuipe.vue";
 
 import User from "../components/user/User.vue";
 import Profile from '@/components/Profile';
@@ -165,6 +171,36 @@ const routes = [
     path: "/bobine/:id",
     name: "bobine.update",
     component: Bobine,
+  },
+  {
+    path: "/bobinagePrimaireRond/:id",
+    name: "bobinagePrimaireRond.update",
+    component: bobinagePrimaireRond,
+  },
+  {
+    path: "/bobinagePrimaireFeuillard/:id",
+    name: "bobinagePrimaireFeuillard.update",
+    component: bobinagePrimaireFeuillard,
+  },
+  {
+    path: "/bobinagePrimaireMeplat/:id",
+    name: "bobinagePrimaireMeplat.update",
+    component: bobinagePrimaireMeplat,
+  },
+  {
+    path: "/bobinageSecondaireRond/:id",
+    name: "bobinageSecondaireRond.update",
+    component: bobinageSecondaireRond,
+  },
+  {
+    path: "/bobinageSecondaireFeuillard/:id",
+    name: "bobinageSecondaireFeuillard.update",
+    component: bobinageSecondaireFeuillard,
+  },
+  {
+    path: "/bobinageSecondaireMeplat/:id",
+    name: "bobinageSecondaireMeplat.update",
+    component: bobinageSecondaireMeplat,
   },
   {
     path: "/bobinecal/:id",

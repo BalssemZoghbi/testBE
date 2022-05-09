@@ -15,8 +15,8 @@ class CreateStatistiqueEmployesTable extends Migration
     {
         Schema::create('statistique_employes', function (Blueprint $table) {
             $table->id();
-            $table->json('ProjetChart');
-            $table->json('NbreProjet');
+            $table->json('ProjetChart')->nullable();
+            $table->json('NbreProjet')->nullable();
             $table->timestamps();
         });
     }
