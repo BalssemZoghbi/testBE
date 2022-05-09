@@ -22,7 +22,7 @@ class Bobinage extends Model
         'scu1',
         'j1',
         'nbcoucheMT',
-        'sp/coucheMT',
+        'spCoucheMT',
         'e1ax',
         'e1r',
         'rigiditePapierMT',
@@ -56,15 +56,7 @@ class Bobinage extends Model
         'filobtenueIsoler',
         'choix',
         'brinParallele',
-        'SpchB',
-        'NchB',
-        'SpchA',
-        'NchA',
-        'HCondMt',
-        'DistanceBTMT',
-        'HCollier',
-        'EpfeuillePapier',
-        'EpaiseurPapier',
+
         'EpaisseurPapierCanaux',
         'Hfeuillard',
         'HbobineBt',
@@ -101,6 +93,7 @@ class Bobinage extends Model
         'EpfeuillePapier',
         'nbrPapier',
         'EpaiseurPapier',
+        'DistanceBTMT',
     ];
     public function projets(){
         return $this->hasMany(Projet::class);

@@ -41,17 +41,18 @@ class BobinageController extends Controller
      public function Scu1($conducteur,$hbrin1,$hbrin2,$nbrin1,$nbrin2,$etage,$saillie,$filobtenueNue,$Hfeuillard,$epFeuillard,$brin)
      {
         if($conducteur=='meplat guipé'){
+
          return 0.987*$saillie*$etage*($hbrin1*$nbrin1+$hbrin2*$nbrin2);
         }else if($conducteur=='Rond emaille'){
             return (pi()*pow($filobtenueNue,2))*$brin/4;
         }else if($conducteur=='feuillard'){
-
             return $Hfeuillard*$epFeuillard;
         }
     }
 
      public function j1($I1phase,$scu1)
      {
+        // dd($scu1);
          return $I1phase/$scu1;
     }
              public function spCouche($conducteur,$N1c,$nbCouche){
@@ -288,11 +289,11 @@ return $barre;
             ->join('gradins', 'gradins.id', '=', 'projets.gradin_id')
             ->join('bobinage_secs', 'bobinage_secs.id', '=', 'projets.bobinage_secs_id')
             ->where('projets.id',$id)
-            ->select('bobinages.*','bobinages.id as bobine_id','volt_Spires.Vsp','volt_Spires.N1c','volt_Spires.N2c','volt_Spires.spire','electriques.PrimaireIPhase','gradins.diamNominale','gradins.CMBT','bobinage_secs.HbobineBt','bobinage_secs.epaisseurBarre','bobinage_secs.conducteurSec','bobinage_secs.DextBT','bobinage_secs.Bext','projets.*')
+            ->select('bobinages.*','bobinages.id as bobine_id','volt_Spires.Vsp','volt_Spires.N1c','volt_Spires.N2c','volt_Spires.spire','electriques.PrimaireIPhase','gradins.diamNominale','gradins.CMBT','bobinage_secs.HbobineBtSec','bobinage_secs.epaisseurBarreBT','bobinage_secs.conducteurSec','bobinage_secs.DextBT','bobinage_secs.BextBT','projets.*')
             ->get()->first();
 
             $Bobinage=Bobinage::FindOrFail($projet->bobine_id );
-            // dd($projet->spire);
+            // dd($request->canauxMT);
             $su1d=$this->su1d($request->conducteur,$projet->PrimaireIPhase,$request->J1D);
 
            if($request->conducteur=='Rond emaille'){
@@ -305,7 +306,7 @@ return $barre;
             $Isole=0;
         }
         $epFeuillard=$this->epFeuillard($request->epFeuil1,$request->epFeuil2);
-
+// dd($request);
             $scu1=$this->Scu1($request->conducteur,$request->hbrin1MT, $request->hbrin2MT,$request->nbBrin1MT, $request->nbBrin2MT, $request->etageMT, $request->saillieMT,$Designation,$request->Hfeuillard,$epFeuillard,$request->brinParallele);
             $j1=$this->j1($projet->PrimaireIPhase, $scu1);
             $spCouche=$this->spCouche($request->conducteur,$projet->N1c,$request->nbcoucheMT);
@@ -328,13 +329,13 @@ return $barre;
             $nchb=$this->nchb($request->nbcoucheMT,$ncha);
             $spcha=$this->spcha($spchb);
             $HcondMt=$this->hcondMt($Isole,$spchb,$request->brinParallele);
-            $Hcollier=$this->Hcollier($projet->HbobineBt,$HcondMt);
+            $Hcollier=$this->Hcollier($projet->HbobineBtSec,$HcondMt);
             $nbrPapierMT=$this->NbrePapier($request->conducteur,$request->rigiditePapierMT,$spchb,$projet->Vsp,$Isole,$Designation,$request->EpfeuillePapier);
 
             $epaisseurPapier=$this->epaisseurPapier($request->EpfeuillePapier, $nbrPapierMT);
             $EpxMt=$this->EpxMt($request->typeCanaux,$request->nbcoucheMT,$Isole,$epaisseurPapier,$request->canauxMT,$request->lgCales,$EpaisseurPapierCanaux);
             $dintMt=$this->dintMt($projet->DextBT,$request->DistanceBTMT);
-            $bintMt=$this->bintMt($projet->Bext,$request->DistanceBTMT,$projet->epaisseurBarre,$projet->conducteurSec);
+            $bintMt=$this->bintMt($projet->BextBT,$request->DistanceBTMT,$projet->epaisseurBarreBT,$projet->conducteurSec);
    if($request->typeCanaux=="complet"){
                 $epyMtLune=$EpxMt;
             }else if($request->typeCanaux=="lune"){
@@ -361,40 +362,40 @@ $PoidFeui=$this->PoidFeui($request->materiau,$dextfeui,$DintBint,$DintBint,$requ
                 $Bobinage->update([
                         'materiau'=> $request->materiau,
                         'conducteur'=> $request->conducteur,
-                        'etageMT'=> $request->etageMT,
-                        'saillieMT'=> $request->saillieMT,
-                        'hbrin1MT'=> $request->hbrin1MT,
-                        'hbrin2MT'=> $request->hbrin2MT,
-                        'nbBrin1MT'=>$request->nbBrin1MT,
-                        'nbBrin2MT'=>$request->nbBrin2MT,
-                        'scu1'=>$scu1,
-                        'j1'=>$j1,
-                        'nbcoucheMT'=>$request->nbcoucheMT,
-                        'sp/coucheMT'=>$spCouche,
-                        'e1ax'=>$request->e1ax,
-                        'e1r'=>$request->e1r,
-                        'rigiditePapierMT'=>$request->rigiditePapierMT,
+                        'etageMT'=> $request->etageMT ,
+                        'saillieMT'=> $request->saillieMT ,
+                        'hbrin1MT'=> $request->hbrin1MT ,
+                        'hbrin2MT'=> $request->hbrin2MT ,
+                        'nbBrin1MT'=>$request->nbBrin1MT ,
+                        'nbBrin2MT'=>$request->nbBrin2MT ,
+                        'scu1'=>$scu1 ,
+                        'j1'=>$j1 ,
+                        'nbcoucheMT'=>$request->nbcoucheMT ,
+                        'spCoucheMT'=>$spCouche ,
+                        'e1ax'=>$request->e1ax ,
+                        'e1r'=>$request->e1r ,
+                        'rigiditePapierMT'=>$request->rigiditePapierMT ,
                         'ep1PapierMT'=>$request->ep1PapierMT,
-                        'nbrPapierMT'=>$request->nbrPapierMT,
+                        'nbrPapierMT'=>$request->nbrPapierMT ,
                         'typeCanaux'=>$request->typeCanaux,
-                        'canauxMT'=>$request->canauxMT,
-                        'lgCales'=>$request->lgCales,
+                        'canauxMT'=>$request->canauxMT ,
+                        'lgCales'=>$request->lgCales ,
                         'canauxEp1Papier'=>$request->canauxEp1Papier,
-                        'canauxNbrPapier'=>$request->canauxNbrPapier,
-                        'Hspire'=>$hSpire,
-                        'HSFS'=>$hsfs,
-                        'HFS'=>$hfs,
-                        'collierBT'=>$request->collierBT,
-                        'collierBT2'=> $collierBt2,
-                        'CMBT'=>$projet->CMBT,
-                        'DintMT'=>$DintBint,
-                        'BintMT'=>$DintBint,
-                        'EpxMT'=>$epx,
-                        'EpyMT'=>$epy,
-                        'DextMT'=>$dext,
-                        'BextMT'=>$bext,
-                        'poidMT'=>$poid,
-                        'majPoid'=>$request->majPoid,
+                        'canauxNbrPapier'=>$request->canauxNbrPapier ,
+                        'Hspire'=>$hSpire ,
+                        'HSFS'=>$hsfs ,
+                        'HFS'=>$hfs ,
+                        'collierBT'=>$request->collierBT ,
+                        'collierBT2'=> $collierBt2 ,
+                        'CMBT'=>$projet->CMBT ,
+                        'DintMT'=>$DintBint ,
+                        'BintMT'=>$DintBint ,
+                        'EpxMT'=>$epx ,
+                        'EpyMT'=>$epy ,
+                        'DextMT'=>$dext ,
+                        'BextMT'=>$bext ,
+                        'poidMT'=>$poid ,
+                        'majPoid'=>$request->majPoid ,
                         ]);
 
             }else if($request->conducteur=='Rond emaille'){
@@ -402,85 +403,85 @@ $PoidFeui=$this->PoidFeui($request->materiau,$dextfeui,$DintBint,$DintBint,$requ
                 $Bobinage->update([
                     'materiau'=> $request->materiau,
                     'conducteur'=> $request->conducteur,
-                    'scu1'=>$scu1,
-                    'j1'=>$j1,
-                    'nbrPapierMT'=>$nbrPapierMT,
+                    'scu1'=>$scu1 ,
+                    'j1'=>$j1 ,
+                    'nbrPapierMT'=>$nbrPapierMT ,
                     'typeCanaux'=>$request->typeCanaux,
-                    'canauxMT'=>$request->canauxMT,
-                    'lgCales'=>$request->lgCales,
-                    'DintMT'=>Ceil($dintMt),
-                    'BintMT'=>Ceil($bintMt),
-                    'EpxMT'=>$EpxMt,
-                    'EpyMT'=>$epyMtLune,
-                    'DextMT'=>round($dextMt),
-                    'BextMT'=>$BextMt,
-                    'poidMT'=>$poidEmaille,
-                    'majPoid'=>$request->majPoid,
-                    'HbobineBt'=>$projet->HbobineBt,
-                    'EpCylindre'=>$request->EpCylindre,
-                    'rigiditePapierMT'=>$request->rigiditePapierMT,
+                    'canauxMT'=>$request->canauxMT ,
+                    'lgCales'=>$request->lgCales ,
+                    'DintMT'=>Ceil($dintMt) ,
+                    'BintMT'=>Ceil($bintMt) ,
+                    'EpxMT'=>$EpxMt ,
+                    'EpyMT'=>$epyMtLune ,
+                    'DextMT'=>round($dextMt) ,
+                    'BextMT'=>$BextMt ,
+                    'poidMT'=>$poidEmaille ,
+                    'majPoid'=>$request->majPoid ,
+                    'HbobineBt'=>$projet->HbobineBt ,
+                    'EpCylindre'=>$request->EpCylindre  ,
+                    'rigiditePapierMT'=>$request->rigiditePapierMT ,
                      'N1cmax'=>$N1cmax,
-                    'scu1d'=>$su1d,
-                    'J1D'=>$request->J1D,
-                    'D1d'=>$D1d,
-                    'filobtenueNue'=>$Designation,
-                    'filobtenueIsoler'=>$Isole,
-                    'choix'=>$request->choix,
-                     'brinParallele'=>$request->brinParallele,
-                    'nbcoucheMT'=>$request->nbcoucheMT,
-                    'SpchB'=>$spchb,
-                    'NchB'=>$nchb,
-                    'SpchA'=>$spcha,
-                    'NchA'=>$ncha,
-                    'HCondMt'=>$HcondMt,
-                    'DistanceBTMT'=>$request->DistanceBTMT,
-                    'HCollier'=>$Hcollier,
-                    'EpfeuillePapier'=>$request->EpfeuillePapier,
-                    'EpaiseurPapier'=>$epaisseurPapier,
-                    'EpaisseurPapierCanaux'=>$EpaisseurPapierCanaux,
-                    'canauxNbrPapier'=>$request->canauxNbrPapier,
+                    'scu1d'=>$su1d ,
+                    'J1D'=>$request->J1D ,
+                    'D1d'=>$D1d ,
+                    'filobtenueNue'=>$Designation ,
+                    'filobtenueIsoler'=>$Isole ,
+                    'choix'=>$request->choix ,
+                     'brinParallele'=>$request->brinParallele ,
+                    'nbcoucheMT'=>$request->nbcoucheMT ,
+                    'SpchB'=>$spchb ,
+                    'NchB'=>$nchb ,
+                    'SpchA'=>$spcha ,
+                    'NchA'=>$ncha ,
+                    'HCondMt'=>$HcondMt ,
+                    'DistanceBTMT'=>$request->DistanceBTMT ,
+                    'HCollier'=>$Hcollier ,
+                    'EpfeuillePapier'=>$request->EpfeuillePapier ,
+                    'EpaiseurPapier'=>$epaisseurPapier ,
+                    'EpaisseurPapierCanaux'=>$EpaisseurPapierCanaux ,
+                    'canauxNbrPapier'=>$request->canauxNbrPapier ,
                     ]);
             }else if($request->conducteur=='feuillard'){
 
                 $Bobinage->update([
                     'materiau'=> $request->materiau,
                     'conducteur'=> $request->conducteur,
-                    'scu1'=>$scu1,
-                    'j1'=>$j1,
-                    'ep1Papier'=>$request->ep1Papier,
-                    'nbrPapier'=>$request->nbrPapier,
-                    'typeCanaux'=>$request->typeCanaux,
-                    'canauxMT'=>$request->canauxMt,
-                    'lgCales'=>$request->lgCales,
-                    'collierBT'=>$request->collierBT,
-                    'collierBT2'=> $collierBt2,
-                    'CMBT'=>$projet->CMBT,
-                    'DintMT'=>$DintBint,
-                    'BintMT'=>$DintBint,
-                    'EpxMT'=>$epxfeui,
-                    'EpyMT'=>$epxfeui,
-                    'DextMT'=>$dextfeui,
-                    'BextMT'=>$Bextfeui,
-                    'poidMT'=>$PoidFeui,
-                    'majPoid'=>$request->majPoid,
-                    'Hfeuillard'=>$request->Hfeuillard,
-                    'HbobineBt'=>$HbobineBt,
-                    'epFeuil1'=>$request->epFeuil1,
-                    'epFeuil2'=>$request->epFeuil2,
-                    'epFeuillard'=>$epFeuillard,
-                    'ep2Papier'=>$request->ep2Papier,
-                    'nbrPap2'=>$request->nbrPap2,
-                    'ePap'=>$ePap,
-                    'epFeuilPap'=>$epFeuilpap,
-                    'nbrPap1'=>$request->nbrPap1,
-                    'EpPapier'=>$epPapier,
-                    'EpCylindre'=>$request->EpCylindre,
-                    'Epbarre'=>$request->Epbarre,
-                    'designationBarre'=>$request->designationBarre,
-                    'epaisseurBarre'=>$barre->epaisseur,
-                    'largeurBarre'=>$barre->largeur,
-                    'Sbarre'=>$Sbarre,
-                    'Jbarre'=>$Jbarre,
+                    'scu1'=>$scu1 ,
+                    'j1'=>$j1 ,
+                    'ep1PapierMT'=>$request->ep1PapierMT ,
+                    'nbrPapierMT'=>$request->nbrPapierMT ,
+                    'typeCanaux'=>$request->typeCanaux ,
+                    'canauxMT'=>$request->canauxMT ,
+                    'lgCales'=>$request->lgCales ,
+                    'collierBT'=>$request->collierBT ,
+                    'collierBT2'=> $collierBt2 ,
+                    'CMBT'=>$projet->CMBT ,
+                    'DintMT'=>$DintBint ,
+                    'BintMT'=>$DintBint ,
+                    'EpxMT'=>$epxfeui ,
+                    'EpyMT'=>$epxfeui ,
+                    'DextMT'=>$dextfeui ,
+                    'BextMT'=>$Bextfeui ,
+                    'poidMT'=>$PoidFeui ,
+                    'majPoid'=>$request->majPoid ,
+                    'Hfeuillard'=>$request->Hfeuillard ,
+                    'HbobineBt'=>$HbobineBt ,
+                    'epFeuil1'=>$request->epFeuil1 ,
+                    'epFeuil2'=>$request->epFeuil2 ,
+                    'epFeuillard'=>$epFeuillard ,
+                    'ep2Papier'=>$request->ep2Papier ,
+                    'nbrPap2'=>$request->nbrPap2 ,
+                    'ePap'=>$ePap ,
+                    'epFeuilPap'=>$epFeuilpap ,
+                    'nbrPap1'=>$request->nbrPap1 ,
+                    'EpPapier'=>$epPapier ,
+                    'EpCylindre'=>$request->EpCylindre ,
+                    'Epbarre'=>$request->Epbarre ,
+                    // 'designationBarre'=>$request->designationBarre,
+                    'epaisseurBarre'=>$barre->epaisseur ,
+                    'largeurBarre'=>$barre->largeur ,
+                    'Sbarre'=>$Sbarre ,
+                    'Jbarre'=>$Jbarre ,
                     ]);
             }
 

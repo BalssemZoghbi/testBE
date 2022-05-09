@@ -26,26 +26,25 @@ class StatistiqueEmployeController extends Controller
     public function create()
     {
 
-            $Vierge=DB::table('projets')->where ('modele' , 'Document Vierge')->get();
-            $FE=DB::table('projets')->where ('modele' , 'Modele Feuillard Emaille')->get();
-            $ME=DB::table('projets')->where ('modele' , 'Modele Meplat Emaille')->get();
-            $FM=DB::table('projets')->where ('modele' , 'Modele Feuillard Meplat')->get();
-            $ProjetChart=[];
-            $ProjetChart[0]=count($Vierge);
-            $ProjetChart[1]=count($FE);
-            $ProjetChart[2]=count($FM);
-            $ProjetChart[3]=count($ME);
+        $Vierge = DB::table('projets')->where('modele', 'Document Vierge')->get();
+        $FE = DB::table('projets')->where('modele', 'Modele Feuillard Emaille')->get();
+        $ME = DB::table('projets')->where('modele', 'Modele Meplat Emaille')->get();
+        $FM = DB::table('projets')->where('modele', 'Modele Feuillard Meplat')->get();
+        $ProjetChart = [];
+        $ProjetChart[0] = count($Vierge);
+        $ProjetChart[1] = count($FE);
+        $ProjetChart[2] = count($FM);
+        $ProjetChart[3] = count($ME);
 
 
-             $projets = DB::table('projets')->get();
-            $lengthProjet=count($projets);
-            $DateProjet=[];
-            $DateProjet = DB::table('projets')->get('created_at');
-            for($i=0;$i<$lengthProjet;$i++){
-            $DateProjet[$i]= date('F',strtotime($DateProjet[$i]->created_at));
+        $projets = DB::table('projets')->get();
+        $lengthProjet = count($projets);
+        $DateProjet = [];
+        $DateProjet = DB::table('projets')->get('created_at');
+        for ($i = 0; $i < $lengthProjet; $i++) {
+            $DateProjet[$i] = date('F', strtotime($DateProjet[$i]->created_at));
         }
-        // dd($DateProjet);
-        $month= [
+        $month = [
             'January',
             'February',
             'March',
@@ -58,31 +57,34 @@ class StatistiqueEmployeController extends Controller
             'October',
             'November',
             'December'
-          ];
-          $count=0;
-          $countProjet=[];
-          for($j=0;$j<count($month);$j++){
-          for($i=0;$i<count($DateProjet);$i++){
-              if($month[$j] == $DateProjet[$i]){
-                  $count++;
-              }
-
-
-        }
-        $countProjet[$j]=$count;
-        $count=0;
-    }
-        // dd($countProjet);
-
-
-            $stat= StatistiqueEmploye::create([
-                'ProjetChart' => $ProjetChart,
-                'NbreProjet' =>$countProjet,
-            ]);
-            if($stat->save()){
-                return response()->json($stat);
+        ];
+        $count = 0;
+        $countProjet = [];
+        for ($j = 0; $j < count($month); $j++) {
+            for ($i = 0; $i < count($DateProjet); $i++) {
+                if ($month[$j] == $DateProjet[$i]) {
+                    $count++;
+                }
             }
-
+            $countProjet[$j] = $count;
+            $count = 0;
+        }
+        $statistiquecount = count(DB::table('statistique_employes')->get());
+        if($statistiquecount==0){
+        $stat = StatistiqueEmploye::create([
+            'ProjetChart' => $ProjetChart,
+            'NbreProjet' => $countProjet,
+        ]);
+    }else{
+        $stat= StatistiqueEmploye::FindOrFail(1);
+        $stat->update([
+            'ProjetChart' => $ProjetChart,
+            'NbreProjet' => $countProjet,
+        ]);
+    }
+        if ($stat->save()) {
+            return response()->json($stat);
+        }
     }
 
     /**

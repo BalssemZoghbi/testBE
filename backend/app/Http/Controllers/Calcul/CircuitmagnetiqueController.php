@@ -90,14 +90,14 @@ return $surface;
         ->join('bobinage_secs', 'bobinage_secs.id', '=', 'projets.bobinage_secs_id')
         ->join('bobinages', 'bobinages.id', '=', 'projets.bobinage_id')
         ->where('projets.id',$id)
-        ->select('circuitmagnetiques.*','garanties.Pog','gradins.epaisseur','gradins.coeffRemplissage','gradins.largeur','gradins.tole','circuitmagnetiques.id as circuitmagnetique_id','volt_Spires.Bmax','bobinage_secs.HbobineBt','bobinages.DextMT','bobinages.BextMT','bobinage_secs.materiauSec','bobinages.materiau','projets.*')
+        ->select('circuitmagnetiques.*','garanties.Pog','gradins.epaisseur','gradins.coeffRemplissage','gradins.largeur','gradins.tole','circuitmagnetiques.id as circuitmagnetique_id','volt_Spires.Bmax','bobinage_secs.HbobineBtSec','bobinages.DextMT','bobinages.BextMT','bobinage_secs.materiauSec','bobinages.materiau','projets.*')
         ->get()->first();
         $Ex=round($projet->DextMT+$request->E1);
-        $Hc=$projet->HbobineBt+2*($request->Ebc);
+        $Hc=$projet->HbobineBtSec+2*($request->Ebc);
         $Largeurcuve=$projet->BextMT+2*($request->E3);
         $Longeurcuve=2*$Ex+$projet->DextMT+2*($request->E2);
         $CM= Circuitmagnetique::FindOrFail($projet->circuitmagnetique_id);
-        $Hauteurcuve=$this->Hauteurcuve($projet->HbobineBt,$request->Ebc,$projet->largeur,$request->Eh,$request->E4);
+        $Hauteurcuve=$this->Hauteurcuve($projet->HbobineBtSec,$request->Ebc,$projet->largeur,$request->Eh,$request->E4);
         $surfaceCM=$this->surfaceCM($projet->largeur,$projet->epaisseur);
         $LCM=$this->LCM($Ex,$projet->largeur,$Hc);
         $masseFerCM=$this->masseFerCM($projet->materiau,$LCM,$surfaceCM,$request->coeffPoid);

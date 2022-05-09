@@ -15,11 +15,11 @@ class CreateStatisiquesTable extends Migration
     {
         Schema::create('statisiques', function (Blueprint $table) {
             $table->id();
-            $table->integer('projetCount');
-            $table->integer('userCount');
-            $table->json('UserChart');
-            $table->json('UserName');
-            $table->json('UserProjet');
+            $table->integer('projetCount')->nullable();
+            $table->integer('userCount')->nullable();
+            $table->json('UserChart')->nullable();
+            $table->json('UserName')->nullable();
+            $table->json('UserProjet')->nullable();
             $table->timestamps();
         });
     }

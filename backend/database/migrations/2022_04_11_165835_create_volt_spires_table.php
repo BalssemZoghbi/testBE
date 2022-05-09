@@ -15,13 +15,13 @@ class CreateVoltSpiresTable extends Migration
     {
         Schema::create('volt_spires', function (Blueprint $table) {
             $table->id();
-            $table->float('Bmaxdesire');
-            $table->float('Bmax');
-            $table->float('Vsp');
-            $table->float('N2c');
-            $table->float('N1c');
-            $table->json('prise');
-            $table->json('spire');
+            $table->float('Bmaxdesire')->nullable();
+            $table->float('Bmax')->nullable();
+            $table->float('Vsp')->nullable();
+            $table->float('N2c')->nullable();
+            $table->float('N1c')->nullable();
+            $table->json('prise')->nullable();
+            $table->json('spire')->nullable();
             $table->timestamps();
         });
     }
