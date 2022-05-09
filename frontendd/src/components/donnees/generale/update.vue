@@ -200,7 +200,7 @@
 
           <router-link
             class="nav-link"
-            :to="'/electrique/update/' + projet.id + '/' + projet.electrique_id"
+            :to="'/electrique/update/' + projet.id"
             ><v-btn
               color="primary"
               @click="updateprojet"
@@ -261,12 +261,21 @@ export default {
         elaborateur: "",
         Modele: "",
         user_id: "",
+        garantie_id: "",
+        electrique_id: "",
+        bobinage_id: "",
+        gradin_id: "",
+        bobinage_secs_id: "",
+        volt_spires_id: "",
+        pcc_uccs_id: "",
+        circuitmagnetiques_id: "",
       },
       e1: 1,
     };
   },
   methods: {
     updateprojet() {
+  let token = localStorage.getItem("token");  
       const projets = {
         id: undefined,
         appareil: this.projet.appareil,
@@ -284,11 +293,23 @@ export default {
         fonctionnement: this.projet.fonctionnement,
         refroidissement: this.projet.refroidissement,
         user_id: this.projet.user_id,
+        garantie_id: this.projet.garantie_id,
+        electrique_id: this.projet.electrique_id,
+        bobinage_id: this.projet.bobinage_id,
+        gradin_id: this.projet.gradin_id,
+        bobinage_secs_id: this.projet.bobinage_secs_id,
+        volt_spires_id: this.projet.volt_spires_id,
+        pcc_uccs_id: this.projet.pcc_uccs_id,
+        circuitmagnetiques_id: this.projet.circuitmagnetiques_id,
         elaborateur: this.projet.elaborateur,
         Modele: this.projet.Modele,
       };
       axios
-        .put("projets/edit/" + this.$route.params.id, projets)
+        .put("projets/edit/" + this.$route.params.id, projets, {
+            headers: {
+              Authorization: token,
+            },
+          })
         .then((response) => (this.id = response.data.id));
     },
     getbarre() {
@@ -302,8 +323,9 @@ export default {
   async mounted() {
     const result = await axios.get("projets/" + this.$route.params.id);
     this.projet = result.data;
-    // this.updateprojet();
+
   },
+
 };
 </script>
 <style scoped>

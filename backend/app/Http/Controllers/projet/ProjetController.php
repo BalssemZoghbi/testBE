@@ -907,11 +907,23 @@ class ProjetController extends Controller
     return response()->json($projet);
  }
  public function editProjet($id, Request $request){
-     $projet=DB::table('projets')
-     ->join('electriques','electriques.id','=','projets.electrique_id')
+    $header = $request->header('Authorization');
+    $token = PersonalAccessToken::findToken($header);
+    $user = $token->tokenable;
+     $projet = DB::table('projets')
+     ->join('electriques', 'electriques.id', '=', 'projets.electrique_id')
+     ->join('garanties', 'garanties.id', '=', 'projets.garantie_id')
+     ->join('bobinages', 'bobinages.id', '=', 'projets.bobinage_id')
+     ->join('gradins', 'gradins.id', '=', 'projets.gradin_id')
+     ->join('volt_Spires', 'volt_Spires.id', '=', 'projets.volt_spires_id')
+     ->join('bobinage_secs', 'bobinage_secs.id', '=', 'projets.bobinage_secs_id')
+     ->join('pcc_uccs', 'pcc_uccs.id', '=', 'projets.pcc_uccs_id')
+     ->join('circuitmagnetiques', 'circuitmagnetiques.id', '=', 'projets.circuitmagnetiques_id')
      ->where('projets.id',$id)
-     ->update
-    //  $projet->update
+     ->select('electriques.*','electriques.id as elec_id','circuitmagnetiques.*','circuitmagnetiques.id as circuitmagnetiqus_id','garanties.*','garanties.id as garenti_id','bobinages.*','bobinages.id as bobine_id','bobinage_secs.*','bobinage_secs.id as bobinesec_id','gradins.*','gradins.id as gradins_id','volt_Spires.*','volt_Spires.id as volt_id','pcc_uccs.*','pcc_uccs.id as pucc_id', 'projets.*')
+     ->get()->first();
+    $projet1= Projet::FindOrFail($id);
+     $projet1->update
      ([
          'appareil' => $request->appareil,
          'reference' =>$request->reference,
@@ -927,21 +939,20 @@ class ProjetController extends Controller
          'dielectrique' =>$request->dielectrique,
          'fonctionnement' =>$request->fonctionnement,
          'refroidissement' =>$request->refroidissement,
-         'user_id' =>$request->user_id,
-        //  'electrique_id' =>$request->electrique_id,
+         'user_id' =>$user->id,
+         'elaborateur' =>$user->name,
+         'Modele' =>$request->Modele,
+         'electrique_id' =>$projet->elec_id,
+         'garantie_id' =>$projet->garenti_id,
+         'bobinage_id'=>$projet->bobine_id,
+         'gradin_id'=>$projet->gradins_id,
+         'bobinage_secs_id'=>$projet->bobinesec_id,
+         'volt_spires_id'=>$projet->volt_id,
+         'pcc_uccs_id'=>$projet->pucc_id,
+         'circuitmagnetiques_id'=>$projet->circuitmagnetiqus_id,
 
      ]);
-    //  $userid=DB::table('users')->id;
-    //  $user=DB::table('users')->where ($userid,'user_id')->get();
-
-    //  if($projet->save()){
-         return
-         new ProjetResource($projet);
-        //   [
-        //      new ProjetResource($projet),
-        //      new UserResource($user),
-        //     ];
-    //  }
+         return new ProjetResource($projet1);
  }
     public function storeFeuillardMeplat(Request $request){
         $header = $request->header('Authorization');

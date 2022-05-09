@@ -33,6 +33,13 @@ class ProjetResource extends JsonResource
             'elaborateur'=> $this->elaborateur,
             'user_id'=> $this->user_id,
             'electrique_id'=> $this->electrique_id,
+            'garantie_id'=> $this->garantie_id,
+            'bobinage_id'=> $this->bobinage_id,
+            'gradin_id'=> $this->gradin_id,
+            'bobinage_secs_id'=> $this->bobinage_secs_id,
+            'volt_spires_id'=> $this->volt_spires_id,
+            'pcc_uccs_id'=> $this->pcc_uccs_id,
+            'circuitmagnetiques_id'=> $this->circuitmagnetiques_id,
         ];
     }
 }
