@@ -271,11 +271,10 @@ class ProjetController extends Controller
             'surfaceCM'=>null,
             'Hauteurcuve'=>null,
         ]);
-        // $volt=new VoltspireController();
-        // $volt->updateVoltSpire()
+        $reference="PC ".date("m/d/y") ;
         $projet= Projet::create([
              'appareil' => '',
-             'reference' =>null,
+             'reference' =>$reference,
              'client' =>null,
              'refClient' =>null,
              'temperatureMax' => null,
@@ -579,9 +578,10 @@ class ProjetController extends Controller
             "Hauteurcuve"=> 774,
             "coeffPoid"=> 0.964,
         ]);
+        $reference="PC ".date("m/d/y") ;
         $projet= Projet::create([
              'appareil' => 'Transfo Triphasé',
-             'reference' =>'Pc 25/2022',
+             'reference' =>$reference,
              'client' =>'STEG',
              'refClient' =>'AD 2850/2022 du 25/05/2022',
              'temperatureMax' => 50,
@@ -855,9 +855,10 @@ class ProjetController extends Controller
             'surfaceCM'=>6,
             'Hauteurcuve'=>6,
         ]);
+        $reference="PC ".date("m/d/y") ;
         $projet= Projet::create([
              'appareil' => 'Transfo Triphasé',
-             'reference' =>'Pc 25/2022',
+             'reference' =>$reference,
              'client' =>'STEG',
              'refClient' =>'AD 2850/2022 du 25/05/2022',
              'temperatureMax' => 50,
@@ -922,11 +923,13 @@ class ProjetController extends Controller
      ->where('projets.id',$id)
      ->select('electriques.*','electriques.id as elec_id','circuitmagnetiques.*','circuitmagnetiques.id as circuitmagnetiqus_id','garanties.*','garanties.id as garenti_id','bobinages.*','bobinages.id as bobine_id','bobinage_secs.*','bobinage_secs.id as bobinesec_id','gradins.*','gradins.id as gradins_id','volt_Spires.*','volt_Spires.id as volt_id','pcc_uccs.*','pcc_uccs.id as pucc_id', 'projets.*')
      ->get()->first();
+     $reference="PC ".date("m/d/y") ;
+    //  dd($reference);
     $projet1= Projet::FindOrFail($id);
      $projet1->update
      ([
          'appareil' => $request->appareil,
-         'reference' =>$request->reference,
+         'reference' =>$reference,
          'client' =>$request->client,
          'refClient' =>$request->refClient,
          'temperatureMax' => $request->temperatureMax,
@@ -1195,9 +1198,10 @@ class ProjetController extends Controller
             'surfaceCM'=>6,
             'Hauteurcuve'=>6,
         ]);
+        $reference="PC ".date("m/d/y") ;
         $projet= Projet::create([
              'appareil' => 'Transfo Triphasé',
-             'reference' =>'Pc 25/2022',
+             'reference' =>$reference,
              'client' =>'STEG',
              'refClient' =>'AD 2850/2022 du 25/05/2022',
              'temperatureMax' => 50,
@@ -1242,10 +1246,10 @@ class ProjetController extends Controller
         ->join('pcc_uccs', 'pcc_uccs.id', '=', 'projets.pcc_uccs_id')
         ->select('electriques.*','electriques.id as elec_id','garanties.*','garanties.id as garenti_id','bobinages.*','bobinages.id as bobine_id','bobinage_secs.*','bobinage_secs.id as bobinesec_id','gradins.*','gradins.id as gradins_id','volt_Spires.*','volt_Spires.id as volt_id','pcc_uccs.*','pcc_uccs.id as pucc_id', 'projets.*')
         ->get()->first();
-
+        $reference="PC ".date("m/d/y") ;
         $projet=Projet::create([
             'appareil' => 'Transfo Triphasé',
-            'reference' =>$request->reference,
+            'reference' =>$reference,
             'client' =>$request->client,
             'refClient' =>$request->refClient,
             'temperatureMax' => $request->temperatureMax,
