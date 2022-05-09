@@ -9,24 +9,350 @@
           <v-card class="mb-14" >
             <div class="title">Circuit Magnetique</div>
             
- <img src="..\..\..\..\..\frontendd\src\assets\cm.png" class="mt-1"/>
- <div class="mb-14" style="max-width: 55px;margin-top:-23%;margin-left:16%;">
-   
-        <v-text-field
-            label="Outlined"
+ <img src="..\..\..\..\..\frontendd\src\assets\cm1.png" class="mt-1"/>
+  <form v-on:submit.prevent="updateprojet">
+                      <div class="user-details">
+<!--   <div class="form__div field1">
+                          <input
+                            type="text"
+                            class="form__input"
+                            placeholder=" "
+                            
+                            id="Ucca"
+                            v-model="projet.Ucca"
+                          />
+                          <label for="" class="form__label">Ucca</label>
+                        </div> -->
+                        
+ <!-- <div class="mb-14" > -->
+                        <div class="field1">      
+                          <input
+                            type="text"
+                            v-model="projet.E2"/>
+                        </div>
+
+        <!-- <v-text-field
+        class="field1"
+            label="E2"
+       v-model="projet.E2"
+            outlined
+          ></v-text-field> -->
+            <!-- <v-text-field
+        class="field2"
+            label="Ebc"
+            v-model="projet.Ebc"
+            outlined
+          ></v-text-field> -->
+            <div class="field2">      
+                          <input
+                            type="text"
+                            v-model="projet.Ebc"/>
+                        </div>
+              <!-- <v-text-field
+        class="field3"
+            label="E1"
+            v-model="projet.E1"
+            outlined
+          ></v-text-field> -->
+                        <div class="field3">      
+                          <input
+                            type="text"
+                            v-model="projet.E1"/>
+                        </div>
+              <!-- <v-text-field
+        class="field4"
+            label="Ex"
+            v-model="projet.Ex"
+            outlined
+          ></v-text-field> -->
+             <div class="field4">      
+                          <input
+                            type="text"
+                            v-model="projet.Ex"/>
+                        </div>
+                <!-- <v-text-field
+        class="field5"
+            label="E2"
+            v-model="projet.E2"
+            outlined
+          ></v-text-field> -->
+              <div class="field5">      
+                          <input
+                            type="text"
+                            v-model="projet.E2"/>
+                        </div>
+                <!-- <v-text-field
+        class="field6"
+            label="E3"
+            v-model="projet.E3"
+            outlined
+          ></v-text-field> -->
+            <div class="field6">      
+                          <input
+                            type="text"
+                            v-model="projet.E3"/>
+                        </div>
+                <!-- <v-text-field
+        class="field7"
+            label="E4"
+            v-model="projet.E4"
+            outlined
+          ></v-text-field> -->
+             <div class="field7">      
+                          <input
+                            type="text"
+                            v-model="projet.E4"/>
+                        </div>
+                <!-- <v-text-field
+        class="field8"
+            label="Eh"
+            v-model="projet.Eh"
+            outlined
+          ></v-text-field> -->
+           <div class="field8">      
+                          <input
+                            type="text"
+                            v-model="projet.Eh"/>
+                        </div>
+                <!-- <v-text-field
+        class="field9"
+            label="Longeurcuve"
+            v-model="projet.Longeurcuve"
+            outlined
+          ></v-text-field> -->
+           <div class="field9">      
+                          <input
+                            type="text"
+                            v-model="projet.Longeurcuve"/>
+                        </div>
+          <div  class="field10">
+           <v-text-field
+       
+            label="Masse Fer"
+            v-model="projet.masseFertot"
             outlined
           ></v-text-field>
-        </div>
-   
+             <v-text-field
+       
+            label="pFerspecif"
+            v-model="projet.pFerspecifique"
+            outlined
+          ></v-text-field>
+               <v-text-field
+       
+            label="Maj fer prop"
+            v-model="projet.Majferprop"
+            outlined
+          ></v-text-field>
+               <v-text-field
+       
+            label="pFer"
+            v-model="projet.pFer"
+            outlined
+          ></v-text-field>
+               <v-text-field
+       
+            label="Majfer"
+            v-model="projet.Majfer"
+            outlined
+          ></v-text-field>
+               <v-text-field
+       
+            label="pFerg"
+            v-model="projet.pFergarantie"
+            outlined
+          ></v-text-field>
+               <v-text-field
+       
+            label="Lcuve"
+            v-model="projet.Longeurcuve"
+            outlined
+          ></v-text-field>
+               <v-text-field
+       
+            label="coeffPoid"
+            v-model="projet.coeffPoid"
+            outlined
+          ></v-text-field>
+               <v-text-field
+       
+            label="Hc"
+            v-model="projet.Hc"
+            outlined
+          ></v-text-field>
+               <v-text-field
+       
+            label="Hcuve"
+            v-model="projet.Hauteurcuve"
+            outlined
+          ></v-text-field>
+          </div>
+          <div class="field11">
+                     <v-chip
+               active-class="primary--text"      
+
+            >BMax :
+             {{projet.Bmax}}
+            </v-chip>
+                  <v-chip
+               active-class="primary--text"      
+
+            >Tole :
+             {{projet.tole}}
+            </v-chip>
+             
+          </div>
+                      </div>
+                      </form>
           </v-card>
 
           <router-link class="nav-link" :to="'/cm/update/' + projet.id">
-            <v-btn color="primary mb-14" @click="e1 = 2"> précédent </v-btn>
+            <v-btn color="primary mt-4 " > précédent </v-btn>
           </router-link>
-          <v-btn color="success mb-14" @click="updateprojet"> Valider </v-btn>
+          <v-btn color="success mt-4" @click="e1 = 2"> suivant </v-btn>
         </v-stepper-content>
+                 <v-stepper-step
+      :complete="e1 > 2"
+      step="2"
+    >
+      Table perte
+    </v-stepper-step>
+
+    <v-stepper-content step="2">
+                 <!-- <v-card class="mb-6"  > -->
+                  <div class="title">Circuit Magnetique</div>
+                  <div class="content">
+          
+ <v-row
+      
+              >
+        <!-- <v-col md="4">
+        </v-col> -->
+        <!-- <v-col
+          cols="6"
+        md="4"
+        > -->
+         <v-card
+          outlined
+          tile
+        >
+          <template>
+        <!-- <v-row>
+          <v-col
+          
+          > -->
+            <v-card>
+              <v-card-title class="subheading font-weight-bold">
+              LCM
+              </v-card-title>
+
+              <v-divider></v-divider>
+
+              <v-list dense>
+                <v-list-item>
+                  <v-list-item-content>{{lcm}}</v-list-item-content>
+                  <v-list-item-content class="align-end"  >
+                  
+                  </v-list-item-content>
+                </v-list-item>
+
+              </v-list>
+            </v-card>
+          <!-- </v-col>
+        </v-row> -->
+      </template>
+         </v-card>
+      <!-- </v-col> -->
+      <!-- <v-col
+        cols="4"
+        md="4"
+      > -->
+           <v-card
+          outlined
+          tile
+        >
+          <template>
+        <!-- <v-row>
+          <v-col
+          
+          > -->
+            <v-card>
+              <v-card-title class="subheading font-weight-bold">
+              surfaceCM
+              </v-card-title>
+
+              <v-divider></v-divider>
+
+              <v-list dense>
+                <v-list-item>
+                  <v-list-item-content>{{surface}}</v-list-item-content>
+                  <v-list-item-content class="align-end"  >
+                  
+                  </v-list-item-content>
+                </v-list-item>
+
+              </v-list>
+            </v-card>
+          <!-- </v-col>
+        </v-row> -->
+      </template>
+         </v-card>
+        <v-card
+          
+      
+          outlined
+          tile
+        >
+          <template >
+        <!-- <v-row>
+          <v-col
+         
+          > -->
+            <!-- <v-card> -->
+              <v-card-title class="subheading font-weight-bold" >
+               masseFerCM
+              </v-card-title>
+
+              <v-divider></v-divider>
+
+              <v-list dense>
+                <v-list-item>
+                  <v-list-item-content vertical>{{masse}}</v-list-item-content>
+                  <v-list-item-content class="align-end"  v-model="projet.spire">
+                  
+                  </v-list-item-content>
+                </v-list-item>
+
+                
+              </v-list>
+            <!-- </v-card> -->
+          <!-- </v-col>
+        </v-row> -->
+      </template>
+        </v-card>
+        <!-- </v-col> -->
+      </v-row>
+                     
+                  </div>
+                <!-- </div> -->
+              <!-- </div> -->
+            <!-- </v-card> -->
+           <v-btn
+        color="primary " style="margin-top:5%"
+        @click="e1 = 1"
+      >
+        précédent
+      </v-btn>
+       <v-btn color="success " style="margin-top:5%" @click="updateprojet">
+          Valider
+        </v-btn>
+     
+   
+    </v-stepper-content>
       </v-stepper>
+      
     </div>
+    
   </div>
 </template>
 
@@ -45,8 +371,6 @@ export default {
         masseFertot: "",
         pFerspecifique: "",
         Majferprop: "",
-        pccMaj: "",
-        Pccg: "",
         Majfer: "",
         pFer: "",
         pFergarantie: "",
@@ -67,6 +391,7 @@ export default {
         coeffPoid: "",
         Bmax: "",
         tole: "",
+        
       },
       e1: 1,
     };
@@ -121,10 +446,112 @@ export default {
     somme() {
       return parseInt(this.projet.pcc1) + parseInt(this.projet.pcc2);
     },
+   lcm(){
+       
+  return this.projet.LCM.replace("[","",this.projet.LCM.length-1).split(",").join('').replace("]","");
+},
+masse(){
+  return this.projet.masseFerCM.replace("[","",this.projet.masseFerCM.length-1).split(",").join("\n").replace("]","");
+},
+surface(){
+  return this.projet.surfaceCM.replace("[","",this.projet.surfaceCM.length-1).split(",").join("\n").replace("]","");
+}
   },
 };
 </script>
 <style scoped>
+/* .v-text-field.v-text-field--enclosed:not(.v-text-field--rounded) > .v-input__control > .v-input__slot, .v-text-field.v-text-field--enclosed .v-text-field__details {
+    padding: 0 12px;
+    margin-top: -420%;
+} */
+input[data-v-c569fce0] {
+  width: 60%;  
+    border: solid 1px black;
+    background-color: #ffffe7;
+}
+.field1[data-v-c569fce0]{
+  /* max-width: 35px; */
+  width: 4%;
+  margin-left:16.6%;
+  margin-top: -19%;
+  /* position: relative; */
+}
+.field2 {
+   max-width: 48px;
+  margin-left:27%;
+  /* margin-top: -10%; */
+  margin-top: -4%;
+  position: relative;
+}
+.field3 {
+   max-width: 48px;
+  margin-left:27.6%;
+  /* margin-bottom:5%; */
+  margin-top: 1%;
+  position: relative;
+}
+.field4 {
+   max-width: 230px;
+   height: 20%;
+  margin-left:30%;
+  margin-top: 120px;
+  position: relative;
+}
+.field5 {
+  max-width: 48px;
+  margin-left:49%;
+  margin-top:-15%;
+  position: relative;
+}
+.field6 {
+ max-width: 48px;
+  margin-left:816px;
+  margin-top:-5%;
+  position: relative;
+}
+.field7 {
+ max-width: 48px;
+  margin-left:805px;
+    margin-top:14%;
+  position: relative;
+}
+.field8 {
+ max-width: 50px;
+  margin-left:785px;
+    margin-top:-28%;
+  position: relative;
+}
+.field9 {
+ max-width:160px;
+  margin-left:30%;
+   margin-top:-5%;
+  position: relative;
+}
+.field10 {
+  /* display: flex;
+
+  flex-wrap: wrap; */
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 15px;
+ max-width:470px;
+  margin-left:15%;
+   margin-top:34%;
+   /* background-color: white; */
+  /* position: &; */
+}
+.field11{
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: 1fr ;
+  grid-gap: 15px;
+ max-width:110px;
+  margin-left:60%;
+   margin-top:-42%;
+   /* background-color: white;
+  position: relative; */
+}
 img{
     width: 60%;
 }
@@ -210,18 +637,18 @@ img{
 }
 
 /*Input focus sticky top label*/
-.form__input:not(:placeholder-shown).form__input:not(:focus) + .form__label {
+/* .form__input:not(:placeholder-shown).form__input:not(:focus) + .form__label {
   top: -0.5rem;
   left: 0.8rem;
   font-size: 0.75rem;
   font-weight: 500;
   z-index: 1;
-}
+} */
 
 /*Input focus*/
-.form__input:focus {
+/* .form__input:focus {
   border: 1.5px solid #4797d1;
-}
+} */
 
 .body {
   height: 100%;
@@ -290,11 +717,11 @@ form .user-details .input-box {
   margin-bottom: 15px;
   width: calc(100% / 2 - 20px);
 }
-form .input-box span.details {
+/* form .input-box span.details {
   display: block;
   font-weight: 500;
   margin-bottom: 5px;
-}
+} */
 .user-details .input-box input {
   height: 45px;
   width: 100%;
