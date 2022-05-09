@@ -1,6 +1,6 @@
 <template>
    <div>
-  <!-- <navbarUpdate :elec_id='projet.electrique_id' :id='projet.id'/> -->
+  <navbarUpdate :conducteur="projet.conducteur" :conducteurSec="this.projet.conducteurSec"/>
            <NavDash />
 
 <div class="body">
