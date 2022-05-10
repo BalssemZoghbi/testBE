@@ -200,7 +200,7 @@
 
           <router-link
             class="nav-link"
-            :to="'/electrique/update/' + projet.id + '/' + projet.electrique_id"
+            :to="'/electrique/update/' + projet.id "
             ><v-btn
               color="primary"
               @click="updateprojet"

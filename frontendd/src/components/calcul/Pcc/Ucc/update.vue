@@ -10,157 +10,77 @@
           
           </v-stepper-step>
            <v-stepper-content step="1">
-   <v-card class="mb-12"  >
+   <v-card class="mb-14"  >
                   <div class="title">Pcc/Ucc</div>
         
-                <div class="content">
+                <!-- <div class="content"> -->
       <form  v-on:submit.prevent="updateprojet">
-        <div class="user-details">
-           <div class="input-box">
-               <!-- <div class="title">Primaire</div> -->
-               <div class="user-details">
-                  <!-- <div class="form__div frame">
-                          <input
-                            type="text"
-                            class="form__input"
-                            placeholder=" "
-                            id="puissance"
-                            v-model="projet.puissance"
-                          />
-                          <label for="" class="form__label">Puissance de dimensionnement</label>
-                        </div> -->
-                <div class="form__div framei">
-                          <input
-                            type="text"
-                            class="form__input"
-                            placeholder=" "
-                            id="Pccg"
-                            readonly
-                            v-model="projet.Pccg"
-                          />
-                          <label for="" class="form__label">Pccg</label>
-                        </div>
-                        
-                        <div class="form__div framei">
-                          <input
-                            type="text"
-                            class="form__input"
-                            placeholder=" "
-                            
-                            id="pcc1"
-                            v-model="projet.pcc1"
-                          />
-                          <label for="" class="form__label">Pcc primaire</label>
-                        </div>
-                         <div class="form__div framei">
-                          <input
-                            type="text"
-                            class="form__input"
-                            placeholder=" "
-                            
-                            id="pcc2"
-                            v-model="projet.pcc2"
-                          />
-                          <label for="" class="form__label">Pcc Sec</label>
-                        </div>
-                        
-                <div class="form__div framei">
-                          <input
-                            type="number"
-                            class="form__input"
-                            placeholder=" "
-                            id="pccMaj"
+         <div class="user-details">
+              <v-text-field
+                         class="frame"
+                        label="Majouration Utilisée"
+                        v-model="projet.MajourationU"
+                        outlined
+                      ></v-text-field>
+           <div style="margin-bottom:2%">
+                         <v-chip style=""
+                      >Pccg :
+                      {{ projet.Pccg }}
+                    </v-chip>
+                    <v-chip style="text-align: left;margin-left: 42%;"
+                      >Uccg :
+                      {{ projet.Uccg }}
+                    </v-chip>
+                    </div>
+                      
+
+                    <div class="div">
+                 
+                    <div class="field10">
+                      
+                      <v-text-field
+                        label="Pcc1"
+                        v-model="projet.pcc1"
+                        outlined
+                      ></v-text-field>
+                      <v-text-field
+                        label="Pcc2"
+                        v-model="projet.pcc2"
+                        outlined
+                      ></v-text-field>
+                 
+                      <v-text-field
+                        label="Pcc Maj"
+                       id="pccMaj"
                             readonly
                             v-model="somme"
-                          />
-                          <label for="" class="form__label">Pcc Maj</label>
-                        </div>
-                        <div class="form__div frame">
-                          <input
-                            type="number"
-                            class="form__input"
-                            placeholder=" "
-                            id="MajourationU"
-                            v-model="projet.MajourationU"
-                          />
-                          <label for="" class="form__label">Majouration Utilisée</label>
-                        </div>
-          <!-- </div>
-          </div>
-          </div>
-           <div class="user-details">
-           <div class="input-box">
-               <div class="title">Primaire</div>
-               <div class="user-details"> -->
-                
-          </div>
-          </div>
-         
-             <v-row
-        md="4"
-          class="mt-4 "
-              > 
-        <!-- <v-col md="4">
-        </v-col> -->
-        <!-- <v-col
-          cols="6"
-        md="4"
-        > -->
-            
+                        outlined
+                      ></v-text-field>
+                    </div>
+                    <div class="field10">
+                      <v-text-field
+                        label="Uccr"
+                        v-model="projet.Uccr"
+                        outlined
+                      ></v-text-field>
+                      <v-text-field
+                        label="Ucca"
+                        v-model="projet.Ucca"
+                        outlined
+                      ></v-text-field>
 
-          <div class="form__div framei">
-                          <input
-                            type="text"
-                            class="form__input"
-                            placeholder=" "
-                            id="Uccg"
-                            readonly
-                            v-model="projet.Uccg"
-                          />
-                          <label for="" class="form__label">Uccg</label>
-                        </div>
-                        
-                        <div class="form__div framei">
-                          <input
-                            type="text"
-                            class="form__input"
-                            placeholder=" "
-                            
-                            id="Uccr"
-                            v-model="projet.Uccr"
-                          />
-                          <label for="" class="form__label">Uccr</label>
-                        </div>
-                         <div class="form__div framei">
-                          <input
-                            type="text"
-                            class="form__input"
-                            placeholder=" "
-                            
-                            id="Ucca"
-                            v-model="projet.Ucca"
-                          />
-                          <label for="" class="form__label">Ucca</label>
-                        </div>
-                        
-                <div class="form__div framei">
-                          <input
-                            type="number"
-                            class="form__input"
-                            placeholder=" "
-                            id="Ucc"
-                            readonly
-                            v-model="projet.Ucc"
-                          />
-                          <label for="" class="form__label">Ucc</label>
-                        </div>
-                
-      </v-row>
+                      <v-text-field
+                        label="Ucc"
+                        v-model="projet.Ucc"
+                        outlined
+                      ></v-text-field>
+                  
+                    </div>
+                  </div>
+                  </div>
 
-
-          </div>
       </form>
-    </div>
+
   </v-card>  
    
             <router-link
@@ -169,12 +89,12 @@
                 '/cm/update/' + projet.id 
               "
               > <v-btn
-        color="primary mb-14"
+        color="primary mb-8"
         @click="e1 = 2"
       >
         précédent
       </v-btn> </router-link>
-                   <v-btn color="success mb-14" @click="updateprojet">
+                   <v-btn color="success mb-8" @click="updateprojet">
           Valider
         </v-btn>
           </v-stepper-content>
@@ -254,6 +174,18 @@ export default {
 };
 </script>
 <style scoped>
+.field10 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 10px;
+  margin-right: 5%;
+}
+.div{
+  display: grid; 
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+}
 .row {
     display: flex;
     flex: 1 1 auto;
@@ -412,6 +344,7 @@ export default {
   justify-content: space-between;
   margin: 10px 0 12px 0;
 }
+
 form .user-details .input-box {
   margin-bottom: 15px;
   width: calc(100% / 2 - 20px);
@@ -532,8 +465,8 @@ form .button input:hover {
   }
 }
 .v-btn:not(.v-btn--round).v-size--default {
-    height: 36px;
-    min-width: 64px;
+    /* height: 36px; */
+    /* min-width: 64px; */
     padding: 16px;
     margin: 3px;
 }

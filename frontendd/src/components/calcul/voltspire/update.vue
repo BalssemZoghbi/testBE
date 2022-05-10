@@ -1,232 +1,121 @@
 <template>
   <div>
     <NavDash />
-
     <div class="body">
-      <v-stepper v-model="e1"  vertical>
-        <!-- <v-stepper-header> -->
-          <v-stepper-step :complete="e1 > 1" step="1">
-           Calcul
-          
-          </v-stepper-step>
-           <v-stepper-content step="1">
-            <v-card class="mb-12"  >
-                  <div class="title">Volt/Spires</div>
-        
-                <div class="content">
-      <form  v-on:submit.prevent="updateprojet">
-       
-               <!-- <div class="title">Primaire</div> -->
-          
-         <div class="user-details">
-           <div class="input-box">
-             <div class="user-details">
-                        <div class="form__div frame">
-                          <input
-                            type="text"
-                            class="form__input"
-                            placeholder=" "
-                            id="Bmaxdesire"
-                            v-model="projet.Bmaxdesire"
-                          />
-                          <label for="" class="form__label">Bmax desire</label>
-                        </div>
-        
-                <div class="form__div frame">
-                          <input
-                            type="number"
-                            class="form__input"
-                            placeholder=" "
-                            id="Bmax"
-                            v-model="projet.Bmax"
-                          />
-                          <label for="" class="form__label">Bmax</label>
-                        </div>
-                         <div class="form__div frame">
-                          <input
-                            type="number"
-                            class="form__input"
-                            placeholder=" "
-                            id="N1c"
-                            v-model="projet.N1c"
-                          />
-                          <label for="" class="form__label">N1c</label>
-                        </div>
-                        <div class="form__div frame">
-                          <input
-                            type="number"
-                            class="form__input"
-                            placeholder=" "
-                            id="N2c"
-                            v-model="projet.N2c"
-                          />
-                          <label for="" class="form__label">N2c</label>
-                        </div>
-                         
-          <!-- </div>
-          </div>
-          </div>
-           <div class="user-details">
-           <div class="input-box">
-               <div class="title">Primaire</div>
-               <div class="user-details"> -->
-                
-                        <div class="form__div framei">
-                          <input
-                            type="text"
-                            class="form__input"
-                            placeholder=" "
-                            id="Vsp"
-                            v-model="projet.Vsp"
-                          />
-                          <label for="" class="form__label">Vsp</label>
-                        </div>
-                        
-                <!-- <div class="form__div framei">
-                          <input
-                            type="number"
-                            class="form__input"
-                            placeholder=" "
-                            id="PrimaireUPhase"
-                            v-model="projet.PrimaireUPhase"
-                          />
-                          <label for="" class="form__label">UPhase</label>
-                        </div> -->
-                         <!-- <div class="form__div framei">
-                          <input
-                            type="number"
-                            class="form__input"
-                            placeholder=" "
-                            id="PrimaireIligne"
-                            v-model="projet.PrimaireIligne"
-                          />
-                          <label for="" class="form__label">Iligne</label>
-                        </div> -->
-                        <!-- <div class="form__div framei">
-                          <input
-                            type="number"
-                            class="form__input"
-                            placeholder=" "
-                            id="PrimaireIPhase"
-                            v-model="projet.PrimaireIPhase"
-                          />
-                          <label for="" class="form__label">IPhase</label>
-                        </div> -->
-                        
-                        </div>
-                        
-                        </div>
-              <v-row
-              cols="2"
-        md="4"
-          class="ml-4"
-              >
-        <!-- <v-col md="4">
-        </v-col> -->
-        <!-- <v-col
-          cols="6"
-        md="4"
-        > -->
-         <v-card
-          outlined
-          tile
-        >
-          <template>
-        <!-- <v-row>
-          <v-col
-          
-          > -->
-            <v-card>
-              <v-card-title class="subheading font-weight-bold">
-               prise
-              </v-card-title>
+      <v-stepper v-model="e1" vertical>
+        <v-stepper-step :complete="e1 > 1" step="1"> Calcul </v-stepper-step>
+        <v-stepper-content step="1">
+          <v-card class="mb-12">
+            <div class="title">Volt/Spires</div>
+            <div class="content">
+              <form v-on:submit.prevent="updateprojet">
+                <div class="user-details">
+                  <div class="input-box">
+                    <div class="form__div frame">
+                      <input
+                        type="text"
+                        class="form__input"
+                        placeholder=" "
+                        id="Bmaxdesire"
+                        v-model="projet.Bmaxdesire"
+                      />
+                      <label for="" class="form__label">Bmax desire</label>
+                    </div>
 
-              <v-divider></v-divider>
+                    <div class="form__div frame">
+                      <input
+                        type="number"
+                        class="form__input"
+                        placeholder=" "
+                        id="Bmax"
+                        v-model="projet.Bmax"
+                      />
+                      <label for="" class="form__label">Bmax</label>
+                    </div>
+                    <div class="form__div frame">
+                      <input
+                        type="number"
+                        class="form__input"
+                        placeholder=" "
+                        id="N1c"
+                        v-model="projet.N1c"
+                      />
+                      <label for="" class="form__label">N1c</label>
+                    </div>
+                    <div class="form__div frame">
+                      <input
+                        type="number"
+                        class="form__input"
+                        placeholder=" "
+                        id="N2c"
+                        v-model="projet.N2c"
+                      />
+                      <label for="" class="form__label">N2c</label>
+                    </div>
 
-              <v-list dense>
-                <v-list-item>
-                  <v-list-item-content>{{prises}}</v-list-item-content>
-                  <v-list-item-content class="align-end"  >
-                  
-                  </v-list-item-content>
-                </v-list-item>
+                    <div class="form__div frame">
+                      <input
+                        type="text"
+                        class="form__input"
+                        placeholder=" "
+                        id="Vsp"
+                        v-model="projet.Vsp"
+                      />
+                      <label for="" class="form__label">Vsp</label>
+                    </div>
+                  </div>
+                  <v-row cols="2" md="4" class="ml-4">
+                    <v-card outlined tile>
+                      <template>
+                        <v-card>
+                          <v-card-title class="subheading font-weight-bold">
+                            prise
+                          </v-card-title>
 
-              </v-list>
-            </v-card>
-          <!-- </v-col>
-        </v-row> -->
-      </template>
-         </v-card>
-      <!-- </v-col> -->
-      <!-- <v-col
-        cols="4"
-        md="4"
-      > -->
-        <v-card
-            cols="2"
-        md="4"
-          class="ml-4"
-          outlined
-          tile
-        >
-          <template >
-        <!-- <v-row>
-          <v-col
-         
-          > -->
-            <!-- <v-card> -->
-              <v-card-title class="subheading font-weight-bold" >
-               spire
-              </v-card-title>
+                          <v-divider></v-divider>
 
-              <v-divider></v-divider>
+                          <v-list dense>
+                            <v-list-item>
+                              <v-list-item-content>{{}}</v-list-item-content>
+                              <v-list-item-content class="align-end">
+                              </v-list-item-content>
+                            </v-list-item>
+                          </v-list>
+                        </v-card>
+                      </template>
+                    </v-card>
 
-              <v-list dense>
-                <v-list-item>
-                  <v-list-item-content vertical>{{spires}}</v-list-item-content>
-                  <v-list-item-content class="align-end" >
-                  
-                  </v-list-item-content>
-                </v-list-item>
+                    <v-card cols="2" md="4" class="ml-4" outlined tile>
+                      <template>
+                        <v-card-title class="subheading font-weight-bold">
+                          spire
+                        </v-card-title>
 
-                
-              </v-list>
-            <!-- </v-card> -->
-          <!-- </v-col>
-        </v-row> -->
-      </template>
-        </v-card>
-        <!-- </v-col> -->
-      </v-row>
-                    </div>  
-           
-             <!-- </div> -->
+                        <v-divider></v-divider>
 
-          <!-- </div> -->
-      </form>
-    </div>
-  </v-card>  
-   
-            <router-link
-              class="nav-link"
-              :to="
-                '/gradin/' + projet.id 
-              "
-              > <v-btn
-        color="primary mb-14"
-        @click="e1 = 2"
-      >
-        précédent
-      </v-btn> </router-link>
-                   <v-btn color="success mb-14" @click="updateprojet">
-          Valider
-        </v-btn>
-          </v-stepper-content>
-          <!-- <v-stepper-content >
-        </v-stepper-content> -->
+                        <v-list dense>
+                          <v-list-item>
+                            <v-list-item-content vertical
+                              >{{}}</v-list-item-content
+                            >
+                            <v-list-item-content class="align-end">
+                            </v-list-item-content>
+                          </v-list-item>
+                        </v-list>
+                      </template>
+                    </v-card>
+                  </v-row>
+                </div>
+              </form>
+            </div>
+          </v-card>
+
+          <router-link class="nav-link" :to="'/gradin/' + projet.id">
+            <v-btn color="primary mb-14" @click="e1 = 2"> précédent </v-btn>
+          </router-link>
+          <v-btn color="success mb-14" @click="updateprojet"> Valider </v-btn>
+        </v-stepper-content>
       </v-stepper>
-        
-
     </div>
   </div>
 </template>
@@ -239,14 +128,12 @@ import NavDash from "@/components/NavDash.vue";
 
 import axios from "axios";
 export default {
-    components: { 
-      // navbarUpdate 
-                NavDash,
-
-      },
+  components: {
+    // navbarUpdate
+    NavDash,
+  },
   data() {
     return {
-      prise:[],
       projet: {
         id: undefined,
         Bmaxdesire: "",
@@ -255,7 +142,7 @@ export default {
         N2c: "",
         N1c: "",
         prise: "",
-        spire: Array,
+        spire: "",
       },
       e1: 1,
     };
@@ -276,25 +163,34 @@ export default {
       axios
         .put("/volt/update/" + this.$route.params.id, projets)
         .then(
-          (response) => (this.id = response.data.id,console.log(response.data)),
-          
+          (response) => (
+            (this.id = response.data.id), console.log(response.data)
+          )
         );
-      this.$router.push( '/bobinecal/' + this.$route.params.id);
+      this.$router.push("/bobinecal/" + this.$route.params.id);
     },
   },
   async mounted() {
     const result = await axios.get("projets/" + this.$route.params.id);
     this.projet = result.data;
   },
-   computed:{
-     spires(){
-  return this.projet.spire.replace("[","",this.projet.spire.length-1).split(",").join("").replace("]","");
-},
-prises(){
-  // let newElem = document.createElement("BR")
-  return this.projet.prise.replace("[","",this.projet.prise.length-1).split(",").join("").replace("]","");
-}
-},
+  computed: {
+    spires() {
+      return this.projet.spire
+        .replace("[", "", this.projet.spire.length - 1)
+        .split(",")
+        .join("")
+        .replace("]", "");
+    },
+    prises() {
+      // let newElem = document.createElement("BR")
+      return this.projet.prise
+        .replace("[", "", this.projet.prise.length - 1)
+        .split(",")
+        .join("")
+        .replace("]", "");
+    },
+  },
 };
 </script>
 <style scoped>
@@ -308,7 +204,6 @@ prises(){
   width: 360px;
   padding: 4rem 2rem;
   border-radius: 1rem;
-  /* box-shadow: 0 10px 25px rgba(92,99,105,.2); */
 }
 .form__title {
   font-weight: 400;
@@ -412,7 +307,7 @@ prises(){
   margin-bottom: 3.5%;
   position: relative;
 }
- .title::before {
+.title::before {
   content: "";
   position: absolute;
   left: 0;
@@ -420,7 +315,7 @@ prises(){
   height: 3px;
   width: 250px;
   border-radius: 5px;
-  
+
   background: linear-gradient(135deg, #0b65a0, #71b7e6);
 }
 .content form .user-details {
@@ -428,6 +323,10 @@ prises(){
   flex-wrap: wrap;
   justify-content: space-between;
   margin: 10px 0 12px 0;
+}
+.input-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 form .user-details .input-box {
   margin-bottom: 15px;
@@ -519,10 +418,10 @@ form .button input:hover {
   border-color: #000;
 }
 .v-sheet.v-card:not(.v-sheet--outlined) {
-    box-shadow: 0px 0px 0px 0px;
+  box-shadow: 0px 0px 0px 0px;
 }
 .v-stepper--vertical {
-    padding-bottom:0px;
+  padding-bottom: 0px;
 }
 @media (max-width: 584px) {
   .container {
@@ -549,9 +448,9 @@ form .button input:hover {
   }
 }
 .v-btn:not(.v-btn--round).v-size--default {
-    height: 36px;
-    min-width: 64px;
-    padding: 16px;
-    margin: 3px;
+  height: 36px;
+  min-width: 64px;
+  padding: 16px;
+  margin: 3px;
 }
 </style>
