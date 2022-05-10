@@ -1,153 +1,109 @@
 <template>
-  <div>
-    <!-- <navbarUpdate :elec_id="projet.electrique_id" /> -->
-             <NavDash />
+   <div>
+  <navbarUpdate :conducteur="projet.conducteur" :conducteurSec="this.projet.conducteurSec"/>
+           <NavDash />
 
-    <div class="body">
-      <v-stepper v-model="e1">
-        <v-stepper-header>
-          <v-stepper-step :complete="e1 > 1" step="1">
-            Name of step 1
-          </v-stepper-step>
+<div class="body">
+  <v-stepper v-model="e1">
+    <v-stepper-header>
+      <v-stepper-step
+        :complete="e1 > 1"
+        step="1"
+      >
+        Bobinage
+      </v-stepper-step>
 
-          <v-divider></v-divider>
+    </v-stepper-header>
 
-          <v-stepper-step :complete="e1 > 2" step="2">
-            Name of step 2
-          </v-stepper-step>
-        </v-stepper-header>
-
-        <v-stepper-items>
-          <v-stepper-content step="1">
-            <v-card class="mb-12" color="grey lighten-1" height="450px">
-              <div class="body">
-                <div class="container">
-                  <div class="title">Calcul de Volt/Spires</div>
-                  <div class="content">
-                    <form v-on:submit.prevent="updateprojet">
-                      <div class="user-details">
-                        <div class="input-box">
-                          <div class="form__div">
-                            <input
-                              type="text"
-                              class="form__input"
-                              placeholder=" "
-                              
-                              id="tole"
-                              v-model="projet.Bmaxdesire"
-                            />
-                            <label for="" class="form__label">Bmaxdesire</label>
-                          </div>
-                        </div>
-                        <div class="input-box">
-                          <div class="form__div">
-                            <input
-                              type="text"
-                              class="form__input"
-                              placeholder=" "
-                              readonly
-                              id="diamPropose"
-                              v-model="projet.Bmax"
-                            />
-                            <label for="" class="form__label"
-                              >Bmax </label
-                            >
-                          </div>
-                        </div>
-                        <div class="input-box">
-                          <div class="form__div">
-                            <input
-                              type="text"
-                              class="form__input"
-                              placeholder=" "
-                              
-                              id="diamNominale"
-                              v-model="projet.Vsp"
-                            />
-                            <label for="" class="form__label"
-                              >Vsp </label
-                            >
-                          </div>
-                        </div>
-                        <div class="input-box">
-                          <div class="form__div">
-                            <input
-                              type="text"
-                              class="form__input"
-                              placeholder=" "
-                              id="pas"
-                              
-                              v-model="projet.N2c"
-                            />
-                            <label for="" class="form__label">N2c</label>
-                          </div>
-                        </div>
-                        <div class="input-box">
-                          <div class="form__div">
-                            <input
-                              type="text"
-                              class="form__input"
-                              placeholder=" "
-                              id="N1c"
-                              
-                              v-model="projet.N1c"
-                            />
-                            <label for="" class="form__label">
-                              N1c</label
-                            >
-                          </div>
-                        </div>
-
-                        <div class="input-box">
-                          <div class="form__div">
-                            <input
-                              type="text"
-                              class="form__input"
-                              placeholder=" "
-                              
-                              id="prise"
-                              v-model="projet.prise"
-                            />
-                            <label for="" class="form__label"
-                              >prise</label
-                            >
-                          </div>
-                        </div>
-                        <div class="input-box">
-                          <div class="form__div">
-                            <input
-                              type="text"
-                              class="form__input"
-                              placeholder=" "
-                              id="spire"
-                              
-                              v-model="projet.spire"
-                            />
-                            <label for="" class="form__label"
-                              >spire </label
-                            >
-                          </div>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
+    <v-stepper-items>
+      <v-stepper-content step="1">
+        <v-card
+          class="mb-12"
+          color="rgb(5 48 96 / 78%)"
+          height="450px"
+        >
+        <div class="body">
+          
+<div class="container">
+  
+    <div class="content">
+      <form  v-on:submit.prevent="updateprojet">
+        <div class="user-details">
+           <div class="input-box">  <div class="title">bobine primaire</div>
+               <div class="form__div">
+                    <!-- <input type="text" class="form__input" placeholder=" " id="materiau" v-model="projet.materiau">
+                    <label for="" class="form__label">materiau</label> -->
+                     <v-select
+                :items="materiau"
+                label="materiau"
+                v-model="projet.materiau"
+                dense
+                outlined
+              ></v-select>
                 </div>
-              </div>
-            </v-card>
-
-            <v-btn color="primary" @click="updateprojet"> Changer </v-btn>
-
-          </v-stepper-content>
-        </v-stepper-items>
-      </v-stepper>
+          </div>
+           
+           <div class="input-box">
+             <div class="title">bobine secondaire</div>
+               <div class="form__div">
+                    <!-- <input type="text" class="form__input" placeholder=" " id="materiauSec" v-model="projet.materiauSec">
+                    <label for="" class="form__label">materiauSec</label> -->
+                     <v-select
+                :items="materiau"
+                label="materiau"
+                v-model="projet.materiauSec"
+                dense
+                outlined
+              ></v-select>
+                </div>
+          </div>
+          
+         
+             <div class="input-box">
+            <div class="form__div">
+              <!-- <input type="text" class="form__input" placeholder=" " id="conducteur" v-model="projet.conducteur">
+              <label for="" class="form__label">conducteur</label> -->
+              <v-select
+                :items="conducteur"
+                label="conducteur"
+                v-model="projet.conducteur"
+                dense
+                outlined
+              ></v-select>
+          </div>
+          </div>
+            <div class="input-box">
+            <div class="form__div">
+              <!-- <input type="text" class="form__input" placeholder=" " id="conducteurSec" v-model="projet.conducteurSec">
+              <label for="" class="form__label">conducteurSec</label> -->
+               <v-select
+               :items="conducteur"
+                label="conducteur"
+                v-model="projet.conducteurSec"
+                dense
+                outlined
+              ></v-select>
+          </div>
+          </div>
+        </div>
+      </form>
     </div>
-  </div>
+</div>
+        </div>
+  </v-card>   
+        <v-btn color="primary" @click="updateprojet">
+          Changer
+        </v-btn>
+      </v-stepper-content>
+    </v-stepper-items>
+  </v-stepper>
+</div>
+</div>
 </template>
 
 <script>
 // import { reactive } from "vue";
-// import navbarUpdate from "../../navbarUpdate.vue";
-
+// import navbarUpdate from '../../navbarUpdate';
 import NavDash from "@/components/NavDash.vue";
 
 import axios from "axios";
@@ -159,44 +115,43 @@ export default {
       },
   data() {
     return {
+      conducteur: ['meplat guipé','Rond emaille','feuillard'], 
+      materiau: ['cuivre','aluminium'], 
       projet: {
-        id: undefined,
-        Bmaxdesire: "",
-        Bmax: "",
-        Vsp: "",
-        N2c: "",
-        N1c: "",
-        prise: "",
-        spire: "",
+         id:undefined,
+      materiau:"",
+      conducteur:"",
+        materiauSec:"",
+      conducteurSec:"",
       },
-      e1: 1,
+      e1:1
     };
   },
   methods: {
     updateprojet() {
       const projets = {
         id: undefined,
-        Bmaxdesire: this.projet.Bmaxdesire,
-        Bmax: this.projet.Bmax,
-        Vsp: this.projet.Vsp,
-        N2c: this.projet.N2c,
-        N1c: this.projet.N1c,
-        prise: this.projet.prise,
-        spire: this.projet.spire,
+        materiau: this.projet.materiau,
+        conducteur: this.projet.conducteur,
+        materiauSec: this.projet.materiauSec,
+        conducteurSec: this.projet.conducteurSec
       };
-      axios
-        .put("/volt/update/" + this.$route.params.id, projets)
-        .then(
-          (response) => (this.id = response.data.id,console.log(response.data)),
-          
-        );
-      this.$router.push( '/bobinecal/' + this.$route.params.id);
-    },
+      axios.put('bobine/update/'+this.$route.params.id, projets).then(
+        (response) => (this.id = response.data.id)
+        
+      );
+       axios.put('bobinesec/update/'+this.$route.params.id, projets).then(
+        (response) => (this.id = response.data.id)
+        
+      );
+ this.$router.push('/gradin/'+this.$route.params.id);    },
+  
   },
   async mounted() {
-    const result = await axios.get("projets/" + this.$route.params.id);
+    const result = await axios.get('projets/'+this.$route.params.id);
     this.projet = result.data;
   },
+ 
 };
 </script>
 <style scoped>
@@ -219,7 +174,7 @@ h1 {
   width: 360px;
   padding: 4rem 2rem;
   border-radius: 1rem;
-  box-shadow: 0 10px 25px rgba(92, 99, 105, 0.2);
+  /* box-shadow: 0 10px 25px rgba(92,99,105,.2); */
 }
 .form__title {
   font-weight: 400;
@@ -287,20 +242,13 @@ h1 {
   left: 0.8rem;
   font-size: 0.75rem;
   font-weight: 500;
-  z-index: 10;
+  z-index: 1;
 }
 
 /*Input focus*/
 .form__input:focus {
   border: 1.5px solid #4797d1;
 }
-
-/* *{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins',sans-serif;
-} */
 
 .body {
   height: 100%;
@@ -311,13 +259,12 @@ h1 {
   max-height: calc(100vh - 50px);
 
   /* margin: 0.5%; */
-  background: linear-gradient(135deg, #71b7e675, #71b7e675);
+  /* background: linear-gradient(135deg,rgb(5 48 96 / 78%), rgb(5 48 96 / 78%)); */
 }
 .container {
-  max-width: 92%;
-  max-height: 99%;
+  max-width: 98%;
   /* height: 80%; */
-  margin-top: 0%;
+  margin-top: 2%;
   width: 100%;
   background-color: #fff;
   padding: 25px 30px;
@@ -328,16 +275,18 @@ h1 {
   font-size: 25px;
   font-weight: 500;
   position: relative;
+  color: #56a5da;
 }
 .container .title::before {
   content: "";
   position: absolute;
   left: 0;
-  bottom: -5px;
+  bottom: -2px;
   height: 3px;
   width: 250px;
   border-radius: 5px;
-  background: linear-gradient(135deg, #71b7e6, #71b7e6);
+/* margin-bottom: 5%; */
+  /* background: linear-gradient(135deg, #71b7e6, #71b7e6); */
 }
 .content form .user-details {
   display: flex;
@@ -365,10 +314,7 @@ form .input-box span.details {
   /* border-bottom-width: 2px; */
   transition: all 0.3s ease;
 }
-.user-details .input-box input:focus,
-.user-details .input-box input:valid {
-  border-color: #000;
-}
+
 form .gender-details .gender-title {
   font-size: 20px;
   font-weight: 500;
@@ -424,6 +370,16 @@ form .button input:hover {
   /* transform: scale(0.99); */
   background: linear-gradient(-135deg, #71b7e6, #71b7e6);
 }
+.framei {
+  width: 22%;
+  justify-content: space-between;
+}
+.frameii {
+  /* width: calc(100% /1 - 2px); */
+  width: 100%;
+  border-color: #000;
+}
+
 @media (max-width: 584px) {
   .container {
     max-width: 100%;
