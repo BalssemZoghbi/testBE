@@ -493,4 +493,88 @@ $PoidFeui=$this->PoidFeui($request->materiau,$dextfeui,$DintBint,$DintBint,$requ
             $Bobinage->delete();
             return response()->json('deleted');
         }
+        public function updateBobine($id,Request $request){
+            DB::table('projets')
+            ->join('bobinages', 'bobinages.id', '=', 'projets.bobinage_id')
+            ->join('bobinage_secs', 'bobinage_secs.id', '=', 'projets.bobinage_secs_id')
+            ->where('projets.id',$id)
+            ->select()
+            ->get()->first();
+            $Bobinage = Bobinage::FindOrFail($id);
+            $Bobinage->update([
+                'materiau'=> $request->materiau,
+                'conducteur'=> $request->conducteur,
+                'etageMT' =>null,
+                'hbrin1MT'=>null,
+                'saillieMT'=>null,
+                'hbrin2MT'=>null,
+                'nbBrin1MT'=>null,
+                'nbBrin2MT'=>null,
+                'scu1'=>null,
+                'j1'=>null,
+                'nbcoucheMT'=>null,
+                'e1ax'=>null,
+                'spCoucheMT'=>null,
+                'e1r'=>null,
+                'rigiditePapierMT'=>null,
+                'ep1PapierMT'=>null,
+                'nbrPapierMT'=>null,
+                'typeCanaux'=>null,
+                'canauxMT'=>null,
+                'lgCales'=>null,
+                'canauxEp1Papier'=>null,
+                'canauxNbrPapier'=>null,
+                'Hspire'=>null,
+                'HSFS'=>null,
+                'HFS'=>null,
+                'collierBT'=>null,
+                'collierBT2'=>null,
+                'CMBT'=>null,
+                'N1cmax'=>null,
+                'DintMT'=>null,
+                'BintMT'=>null,
+                'EpxMT'=>null,
+                'EpyMT'=>null,
+                'DextMT'=>null,
+                'BextMT'=>null,
+                'poidMT'=>null,
+                'majPoid'=>null,
+                'EpCylindre'=>null,
+                'scu1d'=>null,
+                'J1D'=>null,
+                'D1d'=>null,
+                'filobtenueNue'=>null,
+                'filobtenueIsoler'=>null,
+                'automatique'=>null,
+                'brinParallele'=>null,
+                'SpchB'=>null,
+                'NchB'=>null,
+                'SpchA'=>null,
+                'NchA'=>null,
+                'HCondMt'=>null,
+                'DistanceBTMT'=>null,
+                'HCollier'=>null,
+                'EpfeuillePapier'=>null,
+                'EpaiseurPapier'=>null,
+                'EpaisseurPapierCanaux'=>null,
+                'Hfeuillard'=>null,
+                'HbobineBt'=>null,
+                'epFeuil1'=>null,
+                'epFeuil2'=>null,
+                'epFeuillard'=>null,
+                'ep2Papier'=>null,
+                'nbrPap2'=>null,
+                'ePap'=>null,
+                'epFeuilPap'=>null,
+                'nbrPap1'=>null,
+                'EpPapier'=>null,
+                'Epbarre'=>null,
+                'epaisseurBarre'=>null,
+                'largeurBarre'=>null,
+                'Sbarre'=>null,
+                'Jbarre'=>null,
+                'nbrPapier'=>null,
+            ]);
+            return response()->json($Bobinage);
+        }
 }

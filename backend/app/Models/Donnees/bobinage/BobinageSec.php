@@ -70,7 +70,7 @@ class BobinageSec extends Model
         'filobtenueIsolerBT',
         'choixBT',
         'brinParalleleBT',
-        'nbCoucheBtBT',
+        'nbCoucheBT',
         'SpchBBT',
         'NchBBT',
         'SpchABT',
