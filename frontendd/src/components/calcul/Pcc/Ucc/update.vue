@@ -4,10 +4,8 @@
 
     <div class="body">
       <v-stepper v-model="e1"  vertical>
-        <!-- <v-stepper-header> -->
           <v-stepper-step :complete="e1 > 1" step="1">
            Calcul
-          
           </v-stepper-step>
            <v-stepper-content step="1">
    <v-card class="mb-14"  >

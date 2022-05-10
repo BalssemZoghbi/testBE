@@ -1,39 +1,33 @@
 <template>
    <div>
-  <navbarUpdate :conducteur="projet.conducteur" :conducteurSec="this.projet.conducteurSec"/>
-           <NavDash />
+  <!-- <navbarUpdate :conducteur="projet.conducteur" :conducteurSec="this.projet.conducteurSec"/> -->
+         <NavDash :conducteur="cond1" :conducteurSec="cond2" />
 
 <div class="body">
-  <v-stepper v-model="e1">
-    <v-stepper-header>
+      <v-stepper v-model="e1"  vertical>
+   
       <v-stepper-step
         :complete="e1 > 1"
         step="1"
       >
-        Bobinage
+       Données Bobinage
       </v-stepper-step>
+ <v-stepper-content step="1">
 
-    </v-stepper-header>
-
-    <v-stepper-items>
-      <v-stepper-content step="1">
-        <v-card
-          class="mb-12"
-          color="rgb(5 48 96 / 78%)"
-          height="450px"
-        >
-        <div class="body">
+    <!-- <v-stepper-items>
+      <v-stepper-content step="1"> -->
+  <v-card class="mb-14"  >
+        <!-- <div class="body">
           
-<div class="container">
+<div class="container"> -->
   
     <div class="content">
       <form  v-on:submit.prevent="updateprojet">
         <div class="user-details">
-           <div class="input-box">  <div class="title">bobine primaire</div>
+           <div class="input-box">
+               <div class="title">bobine primaire</div>
                <div class="form__div">
-                    <!-- <input type="text" class="form__input" placeholder=" " id="materiau" v-model="projet.materiau">
-                    <label for="" class="form__label">materiau</label> -->
-                     <v-select
+                <v-select
                 :items="materiau"
                 label="materiau"
                 v-model="projet.materiau"
@@ -43,7 +37,8 @@
                 </div>
           </div>
            
-           <div class="input-box"><div class="title">bobine secondaire</div>
+           <div class="input-box">
+             <div class="title">bobine secondaire</div>
                <div class="form__div">
                     <!-- <input type="text" class="form__input" placeholder=" " id="materiauSec" v-model="projet.materiauSec">
                     <label for="" class="form__label">materiauSec</label> -->
@@ -86,15 +81,26 @@
           </div>
         </div>
       </form>
-    </div>
-</div>
+    <!-- </div>
+</div> -->
         </div>
   </v-card>   
-        <v-btn color="primary" @click="updateprojet">
-          Changer
+       <router-link
+              class="nav-link"
+              :to="
+                '/garantie/' + projet.id 
+              "
+              > <v-btn
+        color="primary mb-8"
+        @click="e1 = 2"
+      >
+        précédent
+      </v-btn> </router-link>
+                   <v-btn color="success mb-8" @click="updateprojet">
+          Valider
         </v-btn>
       </v-stepper-content>
-    </v-stepper-items>
+    <!-- </v-stepper-items> -->
   </v-stepper>
 </div>
 </div>
@@ -114,6 +120,8 @@ export default {
       },
   data() {
     return {
+      cond1: "meplat guipé",
+      cond2: "feuillard",
       conducteur: ['meplat guipé','Rond emaille','feuillard'], 
       materiau: ['cuivre','aluminium'], 
       projet: {
@@ -146,9 +154,16 @@ export default {
  this.$router.push('/gradin/'+this.$route.params.id);    },
   
   },
+  beforeCreate(){
+     const result =  axios.get('projets/'+this.$route.params.id);
+    this.cond1=result.data.conducteur;
+    this.cond2=result.data.conducteurSec;
+ },
   async mounted() {
     const result = await axios.get('projets/'+this.$route.params.id);
     this.projet = result.data;
+    this.cond1=result.data.conducteur;
+    this.cond2=result.data.conducteurSec;
   },
  
 };
@@ -270,31 +285,32 @@ h1 {
   border-radius: 5px;
   box-shadow: 0 5px 10px rgb(0 0 0 / 15%);
 }
-.container .title {
+.title {
   font-size: 25px;
   font-weight: 500;
+  margin-bottom: 3.5%;
   position: relative;
-  color: #56a5da;
 }
-.container .title::before {
+ .title::before {
   content: "";
   position: absolute;
   left: 0;
-  bottom: -2px;
+  bottom: -4px;
   height: 3px;
   width: 250px;
   border-radius: 5px;
-/* margin-bottom: 5%; */
-  /* background: linear-gradient(135deg, #71b7e6, #71b7e6); */
+ 
+  background: linear-gradient(135deg, #0b65a0, #71b7e6);
 }
 .content form .user-details {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin: 20px 0 12px 0;
+  /* margin: 20px 0 12px 0; */
+    
 }
 form .user-details .input-box {
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
   width: calc(100% / 2 - 20px);
 }
 form .input-box span.details {
@@ -402,5 +418,14 @@ form .button input:hover {
   .container .content .category {
     flex-direction: column;
   }
+}
+.v-sheet.v-card:not(.v-sheet--outlined) {
+    box-shadow: 0px 0px 0px 0px;
+}
+.v-btn:not(.v-btn--round).v-size--default {
+    /* height: 36px; */
+    /* min-width: 64px; */
+    padding: 16px;
+    margin: 3px;
 }
 </style>
