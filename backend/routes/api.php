@@ -97,6 +97,7 @@ Route::post('/create36',[GarantieController::class ,'create36']);
 Route::post('/create24',[GarantieController::class ,'create24']);
 Route::put('/update24/{id}',[GarantieController::class ,'update24']);
 
+Route::put('/bobinesec/updatecond/{id}',[BobinageSecController::class ,'updateBobine']);
 Route::put('/bobinesec/update/{id}',[BobinageSecController::class ,'updateBobinageS']);
 Route::delete('/bobinesec/delete/{id}',[BobinageSecController::class ,'deleteBobinageS']);
 Route::get('/bobinesec',[BobinageSecController::class ,'getAllBobineS']);
@@ -105,6 +106,7 @@ Route::get('/bobinesec/{id}',[BobinageSecController::class ,'getOneBobineS']);
 Route::put('pucc/update/{id}',[PccUccController::class ,'updatePUCC']);
 
 Route::put('/update36/{id}',[GarantieController::class ,'update36']);
+Route::put('/bobine/updatecond/{id}',[BobinageController::class ,'updateBobine']);
 Route::put('/bobine/update/{id}',[BobinageController::class ,'updateBobinage']);
 Route::put('/bobinesec/update/{id}',[BobinageSecController::class ,'updateBobinage']);
 Route::delete('/bobine/delete/{id}',[BobinageController::class ,'deleteBobinage']);
