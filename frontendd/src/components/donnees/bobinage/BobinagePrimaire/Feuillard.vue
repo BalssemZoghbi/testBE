@@ -1,46 +1,41 @@
 <template>
   <div>
     <navbarUpdate />
-    <NavDash :conducteur="projet.conducteur" :conducteurSec="projet.conducteurSec"/>
-   <div class="body">
+    <NavDash
+      :conducteur="projet.conducteur"
+      :conducteurSec="projet.conducteurSec"
+    />
+    <div class="body">
       <v-stepper v-model="e1" vertical>
         <v-stepper-step :complete="e1 > 1" step="1">
           Bobinage du primaire en feuillards
         </v-stepper-step>
         <v-stepper-items>
           <v-stepper-content step="1">
-            <v-card class="mb-16">
+            <v-card class="mb-4">
               <div class="title">Bobine haute tension</div>
-        
-                <!-- <div class="content"> -->
-      <form  v-on:submit.prevent="updateprojet">
-         <div class="user-details">
-           <div style="margin-bottom:2%">
-              <v-chip 
+              <form v-on:submit.prevent="updateprojet">
+                <div class="user-details">
+                  <div style="margin-bottom: 2%">
+                    <v-chip
                       >materiau :
                       {{ projet.materiau }}
                     </v-chip>
-              <v-chip style="margin-left:1%" 
+                    <v-chip style="margin-left: 1%"
                       >conducteur :
                       {{ projet.conducteur }}
                     </v-chip>
-                         <v-chip style="margin-left:1%"
+                    <v-chip style="margin-left: 1%"
                       >N1c :
                       {{ projet.N1c }}
                     </v-chip>
-                    <v-chip style="margin-left:1%" 
+                    <v-chip style="margin-left: 1%"
                       >I1ph :
                       {{ projet.PrimaireIPhase }}
                     </v-chip>
-                 
-                    </div>
-                      
-
-                    <div class="div">
-                 
+                  </div>
+                  <div class="div">
                     <div class="field10">
-    
-                   
                       <v-text-field
                         label="Hfeuillard"
                         v-model="projet.Hfeuillard"
@@ -53,7 +48,7 @@
                         dense
                         outlined
                       ></v-text-field>
-                   
+
                       <v-text-field
                         label="epFeuil1"
                         v-model="projet.epFeuil1"
@@ -66,7 +61,7 @@
                         dense
                         outlined
                       ></v-text-field>
-                    <v-text-field
+                      <v-text-field
                         label="epFeuillard"
                         v-model="projet.epFeuillard"
                         dense
@@ -78,45 +73,42 @@
                         dense
                         outlined
                       ></v-text-field>
-                    <v-text-field
+                    </div>
+                    <div class="field10">
+                      <v-text-field
                         label="j1"
                         v-model="projet.j1"
                         dense
                         outlined
                       ></v-text-field>
-                    
-                    </div>
-                    <div class="field10">
-                         <v-text-field
+                      <v-text-field
                         label="ep1PapierMT"
                         dense
-                       id="ep1PapierMT"
-                            
-                            v-model="projet.ep1PapierMT"
+                        id="ep1PapierMT"
+                        v-model="projet.ep1PapierMT"
                         outlined
                       ></v-text-field>
                       <v-text-field
                         label="nbrPap1"
                         dense
-                       id="nbrPap1"
-                            readonly
-                            v-model="projet.nbrPap1"
+                        id="nbrPap1"
+                        readonly
+                        v-model="projet.nbrPap1"
                         outlined
                       ></v-text-field>
-                        <v-text-field
+                      <v-text-field
                         label="ep2Papier"
                         dense
-                       id="ep2Papier"
-                            readonly
-                            v-model="projet.ep2Papier"
+                        id="ep2Papier"
+                        readonly
+                        v-model="projet.ep2Papier"
                         outlined
                       ></v-text-field>
                       <v-text-field
                         label="nbrPap2"
                         dense
-                       id="nbrPap2"
-                            
-                            v-model="projet.nbrPap2"
+                        id="nbrPap2"
+                        v-model="projet.nbrPap2"
                         outlined
                       ></v-text-field>
                       <v-text-field
@@ -126,12 +118,10 @@
                         outlined
                         dense
                       ></v-text-field>
-             
-                  
                     </div>
                   </div>
-                  </div>
-                </form>
+                </div>
+              </form>
             </v-card>
             <router-link class="nav-link" :to="'/projet/update/' + projet.id"
               ><v-btn color="primary mb-16" @click="updateprojet">
@@ -146,44 +136,42 @@
           </v-stepper-step>
 
           <v-stepper-content step="2">
-            <v-card class="mb-14">
+            <v-card class="mb-4">
               <div class="title">Caneaux/Diamétre</div>
               <!-- <div class="content"> -->
-                 <form  v-on:submit.prevent="updateprojet">
-         <div class="user-details">
-       <div style="margin-bottom:2%">
-                         <v-chip
+              <form v-on:submit.prevent="updateprojet">
+                <div class="user-details">
+                  <div style="margin-bottom: 2%">
+                    <v-chip
                       >Dn :
                       {{ projet.diamNominale }}
                     </v-chip>
-                    <v-chip style="margin-left:2%" 
+                    <v-chip style="margin-left: 2%"
                       >CMBT :
                       {{ projet.CMBT }}
                     </v-chip>
-                    </div>
-                    <div class="div">
+                  </div>
+                  <div class="div">
                     <div class="div2">
-                 <v-select
-                :items="typeCanaux"
-                label="typeCanaux"
-                v-model="projet.typeCanaux"
-                outlined
-              ></v-select>
-                 
+                      <v-select
+                        :items="typeCanaux"
+                        label="typeCanaux"
+                        v-model="projet.typeCanaux"
+                        outlined
+                      ></v-select>
+
                       <v-text-field
                         label="CanauxMT"
-                        
-                       id="canauxMT"
-                            readonly
-                            v-model="projet.canauxMT"
+                        id="canauxMT"
+                        readonly
+                        v-model="projet.canauxMT"
                         outlined
                       ></v-text-field>
                       <v-text-field
                         label="Lrg Cales"
-                        
-                       id="lgCales"
-                            readonly
-                            v-model="projet.lgCales"
+                        id="lgCales"
+                        readonly
+                        v-model="projet.lgCales"
                         outlined
                       ></v-text-field>
 
@@ -191,40 +179,34 @@
                         label="EpfeuillePapier"
                         v-model="projet.EpfeuillePapier"
                         outlined
-                        
                       ></v-text-field>
                       <v-text-field
                         label="NbrPapier"
                         v-model="projet.nbrPapierMT"
                         outlined
-                        
                       ></v-text-field>
                       <v-text-field
                         label="EpPapier"
                         v-model="projet.EpPapier"
                         outlined
-                        
                       ></v-text-field>
-                 
-                
-                  
                     </div>
-                  
-                    <div class="div2" >
-        <v-text-field
+
+                    <div class="div2">
+                      <v-text-field
                         label="DintMT"
                         v-model="projet.DintMT"
                         dense
                         outlined
                       ></v-text-field>
-                   
+
                       <v-text-field
                         label="BintMT"
                         v-model="projet.BintMT"
                         dense
                         outlined
                       ></v-text-field>
-                    
+
                       <v-text-field
                         label="EpxMT"
                         v-model="projet.EpxMT"
@@ -232,13 +214,12 @@
                         outlined
                       ></v-text-field>
                       <v-text-field
-   
-                        label= "EpyMT"
+                        label="EpyMT"
                         v-model="projet.EpyMT"
                         dense
                         outlined
                       ></v-text-field>
-                            <v-text-field
+                      <v-text-field
                         label="DextMT"
                         v-model="projet.DextMT"
                         outlined
@@ -251,7 +232,7 @@
                         v-model="projet.BextMT"
                         outlined
                       ></v-text-field>
-                          <v-text-field
+                      <v-text-field
                         label="majPoid"
                         dense
                         v-model="projet.majPoid"
@@ -263,96 +244,76 @@
                         v-model="projet.poidMT"
                         outlined
                       ></v-text-field>
-                  
-                      
-                                          </div>
-                   
+                    </div>
                   </div>
-                  </div>
-                </form>
+                </div>
+              </form>
               <!-- </div> -->
             </v-card>
             <v-btn color="primary" @click="e1 = 1"> précédent </v-btn>
             <v-btn color="success" @click="e1 = 3"> suivant </v-btn>
           </v-stepper-content>
-          <v-stepper-step :complete="e1 > 3" step="3">
-            Barre
-          </v-stepper-step>
+          <v-stepper-step :complete="e1 > 3" step="3"> Barre </v-stepper-step>
           <v-stepper-content step="3">
-            <v-card class="mb-16">
-              <!-- <div class="content"> -->
-                            <form  v-on:submit.prevent="updateprojet">
-         <div class="user-details">
-           <div style="margin-bottom:2%">
-                         <v-chip
-                      >Dn :
-                      {{ projet.diamNominale }}
+            <v-card class="mb-4">
+              <form v-on:submit.prevent="updateprojet">
+                <div class="user-details">
+                  <div style="margin-bottom: 2%">
+                    <v-chip
+                      >materiau :
+                      {{ projet.materiau }}
                     </v-chip>
-                    <v-chip style="margin-left:2%" 
-                      >CMBT :
-                      {{ projet.CMBT }}
+                    <v-chip style="margin-left: 1%"
+                      >conducteur :
+                      {{ projet.conducteur }}
                     </v-chip>
-                    </div>
-                      
+                  </div>
 
-                    <div class="div">
-                 
-                    <div class="div2" >
-        <v-text-field
+                  <div class="div">
+                    <div class="div2">
+                      <v-text-field
                         label="largeurBarre"
                         v-model="projet.largeurBarre"
                         dense
                         outlined
                       ></v-text-field>
-                   
+
                       <v-text-field
                         label="epaisseurBarre"
                         v-model="projet.epaisseurBarre"
                         dense
                         outlined
                       ></v-text-field>
-                    
-                      <v-text-field
-                        label="Barre"
-                        v-model="epbarre"
+
+                      <v-select
+                        :items="barre"
+                        label="barre"
+                        v-model="projet.Epbarre"
                         dense
                         outlined
-                      ></v-text-field>
+                      ></v-select>
                       <v-text-field
-   
-                        label= "Sbarre"
+                        label="Sbarre"
                         v-model="projet.Sbarre"
                         dense
                         outlined
                       ></v-text-field>
 
-                            <v-text-field
+                      <v-text-field
                         label="Jbarre"
                         v-model="projet.Jbarre"
                         outlined
                         dense
                       ></v-text-field>
-                            <v-text-field
-                        label="designationBarre"
-                        v-model="projet.designationBarre"
-                        outlined
-                        dense
-                      ></v-text-field>
-            
-                  
-                      
-                                          </div>
-                   
+                    </div>
                   </div>
-                  </div>
-                </form>
-              <!-- </div> -->
+                </div>
+              </form>
             </v-card>
-            <v-btn color="primary mb-14" @click="e1 = 2"> précédent </v-btn>
-            <v-btn color="success mb-14" @click="updateprojet"> Valider </v-btn>
+            <v-btn color="primary mb-4" @click="e1 = 2"> précédent </v-btn>
+            <v-btn color="success mb-4" @click="updateprojet"> Valider </v-btn>
           </v-stepper-content>
         </v-stepper-items>
-
       </v-stepper>
     </div>
   </div>
@@ -366,9 +327,7 @@ export default {
   components: { NavDash },
   data() {
     return {
-      saillie: [],
       barre: [],
-      hbrin: [],
       conducteur: ["meplat guipé", "Rond emaille", "feuillard"],
       materiau: ["cuivre", "aluminium"],
       etage: ["1", "2"],
@@ -408,7 +367,6 @@ export default {
         EpPapier: "",
         EpCylindre: "",
         Epbarre: "",
-        designationBarre: "",
         epaisseurBarre: "",
         largeurBarre: "",
         Sbarre: "",
@@ -482,12 +440,11 @@ export default {
       .get("/getValeurSaillie")
       .then((response) => (this.saillie = response.data));
   },
-  computed:{
-    epbarre(){
-      return this.projet.epaisseurBarre+"*"+this.projet.largeurBarre;
+  computed: {
+    epbarre() {
+      return this.projet.epaisseurBarre + "*" + this.projet.largeurBarre;
     },
-    }
-  
+  },
 };
 </script>
 <style scoped>
@@ -495,7 +452,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   /* grid-template-rows: repeat(3, 1fr); */
-  grid-gap:10px;
+  grid-gap: 10px;
   width: 80%;
   /* margin-right: 5%; */
 }
@@ -503,24 +460,24 @@ export default {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   /* grid-template-rows: repeat(2, 1fr); */
-  grid-gap:10px;
+  grid-gap: 10px;
   width: 56%;
   /* margin-right: 5%; */
 }
 
-.div{
-  display: grid; 
+.div {
+  display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 10px;
 }
 .row {
-    display: flex;
-    flex: 1 1 auto;
-    margin: -12px;
-    flex-direction: row;
-    align-content: space-between;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+  display: flex;
+  flex: 1 1 auto;
+  margin: -12px;
+  flex-direction: row;
+  align-content: space-between;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 .l-form {
   display: flex;
@@ -636,7 +593,7 @@ export default {
   margin-bottom: 3.5%;
   position: relative;
 }
- .title::before {
+.title::before {
   content: "";
   position: absolute;
   left: 0;
@@ -644,17 +601,17 @@ export default {
   height: 3px;
   width: 250px;
   border-radius: 5px;
-  
+
   background: linear-gradient(135deg, #0b65a0, #71b7e6);
 }
 .titles {
   font-size: 20px;
   font-weight: 500;
-  margin-top:-14% ;
+  margin-top: -14%;
   margin-bottom: 55%;
   position: relative;
 }
- .titles::before {
+.titles::before {
   content: "";
   position: absolute;
   left: 0;
@@ -662,7 +619,7 @@ export default {
   height: 3px;
   width: 150px;
   border-radius: 5px;
-  
+
   background: linear-gradient(135deg, #0b65a0, #71b7e6);
 }
 .content form .user-details {
@@ -762,10 +719,10 @@ form .button input:hover {
   border-color: #000;
 }
 .v-sheet.v-card:not(.v-sheet--outlined) {
-    box-shadow: 0px 0px 0px 0px;
+  box-shadow: 0px 0px 0px 0px;
 }
 .v-stepper--vertical {
-    padding-bottom:0px;
+  padding-bottom: 0px;
 }
 @media (max-width: 584px) {
   .container {
@@ -792,9 +749,9 @@ form .button input:hover {
   }
 }
 .v-btn:not(.v-btn--round).v-size--default {
-    /* height: 36px; */
-    /* min-width: 64px; */
-    padding: 16px;
-    margin: 3px;
+  /* height: 36px; */
+  /* min-width: 64px; */
+  padding: 16px;
+  margin: 3px;
 }
 </style>
