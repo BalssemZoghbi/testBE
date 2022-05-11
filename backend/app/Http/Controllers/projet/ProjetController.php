@@ -594,7 +594,7 @@ class ProjetController extends Controller
             'refroidissement' => 'onan',
             'user_id' => $user->id,
             'elaborateur' => $user->name,
-            'Modele' => 'Modele Feuillard Meplat',
+            'Modele' => 'Modele Emaille Meplat',
             'electrique_id' => $elec->id,
             'garantie_id' => $garantie->id,
             'bobinage_id' => $Bobinage->id,

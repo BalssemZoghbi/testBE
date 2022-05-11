@@ -73,7 +73,7 @@
                   </v-list-item>
 
                   <v-list-item @click="createModeleMeplatEmaille()">
-                    <v-list-item-title>Modele Meplat Emaille</v-list-item-title>
+                    <v-list-item-title>Modele Emaille Meplat</v-list-item-title>
                   </v-list-item>
                   <v-list-item @click="createModeleFeuillardMeplat()">
                     <v-list-item-title
@@ -163,7 +163,7 @@ export default {
     select: [
       { text: "Document Vierge" },
       { text: "Modele Feuillard Emaille" },
-      { text: "Modele Meplat Emaille" },
+      { text: "Modele Emaille Meplat" },
       { text: "Modele Feuillard Meplat" },
     ],
     search: "",

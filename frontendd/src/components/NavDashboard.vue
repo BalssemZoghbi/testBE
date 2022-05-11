@@ -97,39 +97,55 @@
             <!-- <v-subheader>Espace {{ user.name }}</v-subheader> -->
             <v-list-item two-line>
               <v-list-item-avatar>
-                <img src="https://randomuser.me/api/portraits/women/81.jpg" />
-              </v-list-item-avatar>
+                <!-- <img src="../assets/usericon.png" /> -->
+                  <v-btn style="margin-left:0%!important"
+                    class="mx-2"
+                    fab
+                    dark
+                    small
+                    color="blue"
+                  >
+                    <v-icon dark>
+                    mdi-account
+                    </v-icon></v-btn>
+                            </v-list-item-avatar>
 
               <v-list-item-content>
                 <v-list-item-title>{{ user.name }}</v-list-item-title>
-                <v-list-item-subtitle>Connecter</v-list-item-subtitle>
+                <v-list-item-subtitle>{{ user.type }}</v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
             <v-divider />
             <v-spacer></v-spacer>
-            <v-list-item router>
-              <v-list-item-action>
-                <v-icon small>fas fa-sign-out-alt</v-icon>
-              </v-list-item-action>
-              <v-list-item-content>
-                <!-- <v-flex> --><v-list-item-title>
-                  <!-- <a class="nav-link"  @click="logout" >Logout</a> -->
-                  <v-btn icon v-on:click="logout()" class="clickable">
-                    <v-icon>mdi-logout</v-icon>
-                  </v-btn>
-                  <!-- </v-flex> --></v-list-item-title
-                >
-              </v-list-item-content>
-            </v-list-item>
-
-            <v-list-item router>
-              <v-list-item-action>
-                <v-icon small color="black">mdi-account</v-icon>
+             <v-list-item router style="margin-top:2%;margin-left: 1%;">
+              <v-list-item-action >
+                <v-icon medium color="black">mdi-account</v-icon>
               </v-list-item-action>
               <v-flex class="mt-4 mb-4">
                 <Profile />
               </v-flex>
             </v-list-item>
+            <v-list-item router>
+              <!-- <v-list-item-action>
+                <v-icon small>fas fa-sign-out-alt</v-icon>
+              </v-list-item-action> -->
+              <v-list-item-content style="margin-top:-3%">
+                <!-- <v-flex> --><v-list-item-title>
+                  <!-- <a class="nav-link"  @click="logout" >Logout</a> -->
+                  
+                  <v-btn icon v-on:click="logout()" class="clickable">
+                    <v-icon medium color="black">mdi-logout</v-icon>
+                  </v-btn>
+                  
+     
+                  <!-- </v-flex> --></v-list-item-title>  
+                  <v-list-item-subtitle style="margin-top: -18%;margin-left: 19%;font-weight: 400;font-size: 16px;color:black">
+                  Deconnexion
+                  </v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+
+           
           </v-list>
         </v-card>
       </v-menu>

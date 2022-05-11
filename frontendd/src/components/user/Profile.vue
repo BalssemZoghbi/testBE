@@ -2,9 +2,8 @@
   <v-row justify="center">
     <v-dialog v-model="dialog" max-width="800px">
       <template v-slot:activator="{ on, attrs }">
-        <v-btn outlined color="black" dark v-bind="attrs" v-on="on"
-          >Profile</v-btn
-        >
+        <v-btn  color="black" dark v-bind="attrs" v-on="on" style="color: black!important;margin-left: -49%;"
+          >Profile</v-btn>
       </template>
       <v-card>
         <v-card-title>

@@ -1,83 +1,46 @@
 <template>
   <v-row justify="center">
-    <v-dialog v-model="dialog" max-width="550px" max-height="750px">
+    <v-dialog v-model="dialog" max-width="350px" max-height="750px">
       <template v-slot:activator="{ on, attrs }">
-        <v-btn outlined color="blue" dark v-bind="attrs" v-on="on"
-          >Profile</v-btn
-        >
+        <v-btn  v-bind="attrs" v-on="on" style=" background-color:white;   margin-left: -70%!important;   border: 0px!important ;box-shadow: 0px 0px!important; color:black;text-transform: none;font-weight: 400;font-size: 16px;"  >
+          Profile
+          </v-btn>
       </template>
-      <v-card>
+      <v-card >
         <v-card-title>
-          <span class="text-h5">Bonjour {{ user.name }} </span>
+          <!-- <span class="text-h5">Bonjour {{ user.name }} </span> -->
         </v-card-title>
-        <!-- <v-form> -->
-        <!-- <v-container> -->
-        <div class="p-3 mb-5 bg-body">
-          <div class="row g-0">
-            <div class="col-md-4">
-              <!-- <strong>Photo :</strong> -->
-              <br />
-              <img
-                src="../assets/user.png"
-                style="
-                  width: 100%;
-                  height: 100%;
-                  margin-left: -4%;
-                "
-              />
-            </div>
-            <div class="col-md-8">
-              <h6>Details :</h6>
-              <br />
-              <p>
-                <i class="fa fa-user">: {{ user.name }}</i>
-              </p>
-              <hr />
-              <br />
-              <!-- <strong>Social Media :</strong> -->
-              <p>
-               <i class="fa-solid fa-envelope">: {{ user.email }}</i>
-              </p>
-              <hr />
-              <br />
-              <p>
-                <i class="fa fa-user-tie">: {{ user.type }}</i>
-              </p>
-            </div>
-          </div>
-        </div>
-        <!-- <v-col>
-              <v-row cols="4" sm="4">
-                <v-text-field
-                  v-model="user.name"
-                  label="name"
-                  readonly
-                ></v-text-field>
-              </v-row>
-              <v-row cols="6" sm="6">
-                <v-text-field
-                  v-model="user.email"
-                  label="Email"
-                  readonly
-                ></v-text-field>
-              </v-row>
-              <v-row cols="6" sm="6">
-                <v-text-field
-                  v-model="user.type"
-                  label="Email"
-                  readonly
-                ></v-text-field>
-              </v-row>
-            </v-col> -->
-        <!-- </v-container> -->
-        <!-- </v-form> -->
+        <v-card-text>
+          <v-avatar
+          color="primary"
+          style="margin-left: 41%!important;"
+          size="61"><v-icon large color="white">mdi-account</v-icon></v-avatar>
+          <v-container style="margin-left: 20%;">
+          <h2 style="color:black;">{{  user.name  }}</h2> <br>
+           <!-- <v-col
+        md="4">Poste: {{  user.poste  }} </v-col>
+          <v-col
+        md="4"> -->
+           <h3><span>Email : </span> {{  user.email  }}</h3>
+         <h3> <span>Poste : </span> {{  user.poste  }}</h3>
+         <h3><span>Numero tel : </span>  {{  user.numero  }}</h3>
+      
+         <!-- </v-col> -->
+           <!-- <v-col  cols="5">  <v-text-field
 
+      hide-details="auto"
+      v-model=" user.numero"
+      color="blue"
+      style="margin-left:-10%;color:black!important;"
+      disabled
+    ></v-text-field></v-col> -->
+          </v-container>
+        </v-card-text>
         <v-form class="px-3" ref="form">
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="red darken-1" text @click="dialog = false"
-              >Fermer</v-btn
-            >
+              >Fermer</v-btn>
             <v-flex class="mt-4 mb-4">
               <Update :Data="user"/>
             </v-flex>
@@ -105,6 +68,8 @@ export default {
     email: "",
     type: "",
     password: "",
+    numero: "",
+    poste: "",
     user: [],
   }),
   watch: {
@@ -133,11 +98,25 @@ axios.get('/user/'+this.$route.params.id,
         this.email = res.data.user.email;
         this.password = res.data.password;
         this.name = res.data.user.name;
+        this.numero = res.data.user.numero;
+        this.poste = res.data.user.poste;
         this.user.email = this.email;
         this.user.password = this.password;
         this.user.name = this.name;
+        this.user.numero = this.numero;
+        this.user.poste = this.poste;
         console.log(this.user)
       })   
   },
 };
 </script>
+<style scoped>
+img{
+  margin-top: 10%;
+  margin-left:30%;
+}
+span{
+  color: black;
+  margin-left: -20%;
+}
+</style>

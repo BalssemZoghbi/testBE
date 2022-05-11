@@ -64,10 +64,22 @@
                                       <router-link :to="'/bobinagePrimaireMeplat/'+ this.$route.params.id" >Bobine Primaire</router-link>
                                     </li>
                                     <li class="dropdown-link" v-else>
-                                      <router-link  :to="'/bobinagePrimaireMeplat/'">Bobine error</router-link>
+                                      <router-link  to="/notfound">Bobine Primaire</router-link>
                                     </li>
-                                    <li class="dropdown-link">
+                                    <!-- <li class="dropdown-link">
                                       <router-link :to="'/bobinageSecondaireRond/'+ this.$route.params.id">Bobine Secondaire</router-link>
+                                    </li> -->
+                                    <li class="dropdown-link"  v-if="conducteurSec=='Rond emaille'">
+                                      <router-link :to="'/bobinageSecondaireRond/'+ this.$route.params.id" >Bobine Secondaire</router-link>
+                                     </li>
+                                    <li class="dropdown-link" v-else-if="conducteurSec=='feuillard'">
+                                      <router-link :to="'/bobinageSecondaireFeuillard/'+ this.$route.params.id" >Bobine Secondaire</router-link>
+                                    </li>
+                                    <li class="dropdown-link" v-else-if="conducteurSec=='meplat guipé'">
+                                      <router-link :to="'/bobinageSecondaireMeplat/'+ this.$route.params.id" >Bobine Secondaire</router-link>
+                                    </li>
+                                    <li class="dropdown-link" v-else>
+                                      <router-link  to="/notfound">Bobine Secondaire</router-link>
                                     </li>
                                     <li class="dropdown-link">
                                         <a href="#">PCC et UCC</a>

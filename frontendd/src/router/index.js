@@ -6,10 +6,8 @@ import DashboardEmploye from "../views/DashboardEmploye.vue";
 import about from "../views/About.vue";
 import Forgot from "../components/Auth/Forgot.vue";
 import Reset from "../components/Auth/Reset.vue";
-import createProjet from "../components/donnees/generale/create.vue";
 import updateProjet from "../components/donnees/generale/update.vue";
 import updateElec from "../components/donnees/electrique/update.vue";
-import createElec from "../components/donnees/electrique/create.vue";
 import Uni from "../views/Untitled-1.vue";
 import notFound from "../components/NotFound.vue";
 import Connexion from "../components/Auth/Connexion.vue";
@@ -92,6 +90,11 @@ const routes = [
     component: notFound,
   },
   {
+    path: "/notfound",
+    name: "NotFound",
+    component: notFound,
+  },
+  {
     path: "/",
     name: "Home",
     component: Home,
@@ -128,11 +131,6 @@ const routes = [
   },
 
   {
-    path: "/projet/create",
-    name: "projet.create",
-    component: createProjet,
-  },
-  {
     path: "/projet/:id",
     name: "projet.about",
     component: about,
@@ -147,11 +145,7 @@ const routes = [
     name: "electrique.update",
     component: updateElec,
   },
-  {
-    path: "/electrique/create/:id",
-    name: "electrique.create",
-    component: createElec,
-  },
+
   {
     path: "/pccucc/:id",
     name: "courcircuit.update",

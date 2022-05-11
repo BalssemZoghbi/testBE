@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NavDash />
+    <NavDash :conducteur="projet.conducteur" :conducteurSec="projet.conducteurSec"/>
     <!-- <navbarUpdate :elec_id='projet.electrique_id' :id='projet.id'/> -->
     <div class="body">
       <v-stepper v-model="e1" vertical>

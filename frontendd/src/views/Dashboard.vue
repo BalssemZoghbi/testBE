@@ -47,8 +47,8 @@
       <v-icon flab color="blue darken-2">apps</v-icon>
       <v-btn text >{{projetCount}}</v-btn>
       <v-spacer></v-spacer>
-      <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon>
-
+      <!-- <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon> -->
+<router-link to="/" style="text-decoration:none">  <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon></router-link>
     </v-card-actions>
   </v-card>
       </v-hover>
@@ -86,10 +86,11 @@
       <v-btn text >{{userCount}}</v-btn>
       <!-- <v-btn text v-model="userCount">{{userCount}}</v-btn> -->
       <v-spacer></v-spacer>
-      <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon>
-
+      <!-- <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon> -->
+<router-link to="/user" style="text-decoration:none"><v-icon flab color="#2C3A47">mdi-chevron-right</v-icon></router-link>
     </v-card-actions>
   </v-card>
+  
       </v-hover>
 
             </v-col>

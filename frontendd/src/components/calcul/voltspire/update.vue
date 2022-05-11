@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NavDash />
+    <NavDash :conducteur="projet.conducteur" :conducteurSec="projet.conducteurSec"/>
     <div class="body">
       <v-stepper v-model="e1" vertical>
         <v-stepper-step :complete="e1 > 1" step="1"> Calcul </v-stepper-step>
