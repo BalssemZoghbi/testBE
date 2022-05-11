@@ -1,130 +1,571 @@
 <template>
-   <div>
-  <navbarUpdate :conducteur="projet.conducteur" :conducteurSec="this.projet.conducteurSec"/>
-           <NavDash />
+  <div>
+    <navbarUpdate />
+    <NavDash :conducteur="projet.conducteur" :conducteurSec="projet.conducteurSec"/>
+    <div class="body">
+      <v-stepper v-model="e1">
+        <v-stepper-header>
+          <v-stepper-step :complete="e1 > 1" step="1"> Frame 1 </v-stepper-step>
+          <v-divider></v-divider>
+          <v-stepper-step :complete="e1 > 2" step="2"> Frame 2 </v-stepper-step>
+          <v-divider></v-divider>
+          <v-stepper-step :complete="e1 > 3" step="3"> Frame 3 </v-stepper-step>
+          <v-divider></v-divider>
+          <v-stepper-step :complete="e1 > 4" step="4"> Frame 4 </v-stepper-step>
+          <v-divider></v-divider>
+          <v-stepper-step step="5"> Frame 5 </v-stepper-step>
+        </v-stepper-header>
 
-<div class="body">
-  <v-stepper v-model="e1">
-    <v-stepper-header>
-      <v-stepper-step
-        :complete="e1 > 1"
-        step="1"
-      >
-        Bobinage
-      </v-stepper-step>
+        <v-stepper-items>
+          <v-stepper-content step="1">
+            <v-card class="mb-12" color="rgb(5 48 96 / 78%) " height="450px">
+              <div class="body">
+                <div class="container">
+                  <div class="title">Calcul bobine</div>
+                  <div class="content">
+                    <form v-on:submit.prevent="updateprojet">
+                      <div class="user-details">
+                        <div class="input-box">
+                          <div class="form__div">
+                            <input
+                              type="number"
+                              class="form__input"
+                              placeholder=" "
+                              id="nbBrin1"
+                              v-model="projet.scu1"
+                            />
+                            <label for="" class="form__label">scu1</label>
+                          </div>
+                        </div>
+                        <div class="form__div framei">
+                          <input
+                            type="number"
+                            class="form__input"
+                            placeholder=" "
+                            id="nbBrin1"
+                            v-model="projet.j1"
+                          />
+                          <label for="" class="form__label">j1</label>
+                        </div>
 
-    </v-stepper-header>
+                        <div class="form__div framei">
+                          <input
+                            type="number"
+                            class="form__input"
+                            placeholder=" "
+                            id="nbcoucheMT"
+                            v-model="projet.nbcoucheMT"
+                          />
+                          <label for="" class="form__label">nbcoucheMT</label>
+                        </div>
 
-    <v-stepper-items>
-      <v-stepper-content step="1">
-        <v-card
-          class="mb-12"
-          color="rgb(5 48 96 / 78%)"
-          height="450px"
-        >
-        <div class="body">
-          
-<div class="container">
-  
-    <div class="content">
-      <form  v-on:submit.prevent="updateprojet">
-        <div class="user-details">
-           <div class="input-box">  <div class="title">bobine primaire</div>
-               <div class="form__div">
-                    <!-- <input type="text" class="form__input" placeholder=" " id="materiau" v-model="projet.materiau">
-                    <label for="" class="form__label">materiau</label> -->
-                     <v-select
-                :items="materiau"
-                label="materiau"
-                v-model="projet.materiau"
-                dense
-                outlined
-              ></v-select>
+                        <div class="form__div framei">
+                          <input
+                            type="number"
+                            class="form__input"
+                            placeholder=" "
+                            id="nbBrin1"
+                            v-model="projet.rigiditePapierMT"
+                          />
+                          <label for="" class="form__label"
+                            >rigiditePapierMT</label
+                          >
+                        </div>
+                        <div class="form__div framei">
+                          <input
+                            type="number"
+                            class="form__input"
+                            placeholder=" "
+                            id="nbrPapierMT"
+                            v-model="projet.nbrPapierMT"
+                          />
+                          <label for="" class="form__label">nbrPapierMT</label>
+                        </div>
+
+                        <div class="form__div framei">
+                          <input
+                            type="number"
+                            class="form__input"
+                            placeholder=" "
+                            id="scu2"
+                            v-model="projet.canauxMT"
+                            readonly
+                          />
+                          <label for="" class="form__label">canauxMT</label>
+                        </div>
+                        <div class="form__div framei">
+                          <input
+                            type="number"
+                            class="form__input"
+                            placeholder=" "
+                            id="j2"
+                            v-model="projet.lgCales"
+                            readonly
+                          />
+                          <label for="" class="form__label">lgCales</label>
+                        </div>
+                        <div class="form__div framei">
+                          <input
+                            type="number"
+                            class="form__input"
+                            placeholder=" "
+                            id="nbcouche"
+                            v-model="projet.canauxNbrPapier"
+                          />
+                          <label for="" class="form__label"
+                            >canauxNbrPapier</label
+                          >
+                        </div>
+                        <div class="form__div framei">
+                          <input
+                            type="number"
+                            class="form__input"
+                            placeholder=" "
+                            id="sp/couche"
+                            v-model="projet.DintMT"
+                          />
+                          <label for="" class="form__label">DintMT</label>
+                        </div>
+                        <div class="form__div framei">
+                          <input
+                            type="number"
+                            class="form__input"
+                            placeholder=" "
+                            id="e2ax"
+                            v-model="projet.BintMT"
+                          />
+                          <label for="" class="form__label">BintMT</label>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
                 </div>
-          </div>
-           
-           <div class="input-box">
-             <div class="title">bobine secondaire</div>
-               <div class="form__div">
-                    <!-- <input type="text" class="form__input" placeholder=" " id="materiauSec" v-model="projet.materiauSec">
-                    <label for="" class="form__label">materiauSec</label> -->
-                     <v-select
-                :items="materiau"
-                label="materiau"
-                v-model="projet.materiauSec"
-                dense
-                outlined
-              ></v-select>
+              </div>
+            </v-card>
+
+            <v-btn color="primary" @click="e1 = 2"> Continue </v-btn>
+          </v-stepper-content>
+
+          <v-stepper-content step="2">
+            <v-card class="mb-12" color="rgb(5 48 96 / 78%)" height="450px">
+              <div class="body">
+                <div class="container">
+                  <div class="title">Calcul bobine</div>
+                  <div class="content">
+                    <form v-on:submit.prevent="updateprojet">
+                      <div class="user-details">
+                        <div class="input-box">
+                          <div class="form__div">
+                            <input
+                              type="number"
+                              class="form__input"
+                              placeholder=" "
+                              id="e2r"
+                              :items="e2r"
+                              dense
+                              outlined
+                              v-model="projet.EpxMT"
+                            />
+
+                            <label for="" class="form__label">EpxMT</label>
+                          </div>
+                        </div>
+                        <div class="form__div framei">
+                          <input
+                            type="number"
+                            class="form__input"
+                            placeholder=" "
+                            id="rigiditePapier"
+                            v-model="projet.EpyMT"
+                          />
+                          <label for="" class="form__label">EpyMT</label>
+                        </div>
+
+                        <div class="form__div framei">
+                          <input
+                            type="number"
+                            class="form__input"
+                            placeholder=" "
+                            id="ep1Papier"
+                            v-model="projet.DextMT"
+                          />
+                          <label for="" class="form__label">DextMT</label>
+                        </div>
+
+                        <div class="form__div framei">
+                          <input
+                            type="number"
+                            class="form__input"
+                            placeholder=" "
+                            id="HSFS"
+                            v-model="projet.BextMT"
+                          />
+                          <label for="" class="form__label">BextMT</label>
+                        </div>
+                        <div class="form__div framei">
+                          <input
+                            type="number"
+                            class="form__input"
+                            placeholder=" "
+                            id="nbrPapier"
+                            v-model="projet.poidMT"
+                          />
+                          <label for="" class="form__label">poidMT</label>
+                        </div>
+
+                        <div class="form__div framei">
+                          <v-select
+                            :items="typeCanaux"
+                            label="typeCanaux"
+                            v-model="projet.typeCanaux"
+                            dense
+                            outlined
+                          ></v-select>
+                        </div>
+                        <div class="form__div framei">
+                          <input
+                            type="number"
+                            class="form__input"
+                            placeholder=" "
+                            id="canauxBT"
+                            v-model="projet.majPoid"
+                          />
+                          <label for="" class="form__label">majPoid</label>
+                        </div>
+                        <div class="form__div framei">
+                          <input
+                            type="number"
+                            class="form__input"
+                            placeholder=" "
+                            id="lgCales"
+                            v-model="projet.EpCylindre"
+                            readonly
+                          />
+                          <label for="" class="form__label">EpCylindre</label>
+                        </div>
+                        <div class="form__div framei">
+                          <input
+                            type="number"
+                            class="form__input"
+                            placeholder=" "
+                            id="scu1d"
+                            v-model="projet.scu1d"
+                          />
+                          <label for="" class="form__label">scu1d</label>
+                        </div>
+                        <div class="form__div framei">
+                          <input
+                            type="number"
+                            class="form__input"
+                            placeholder=" "
+                            id="J1D"
+                            v-model="projet.J1D"
+                          />
+                          <label for="" class="form__label">J1D</label>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
                 </div>
-          </div>
-          
-         
-             <div class="input-box">
-            <div class="form__div">
-              <!-- <input type="text" class="form__input" placeholder=" " id="conducteur" v-model="projet.conducteur">
-              <label for="" class="form__label">conducteur</label> -->
-              <v-select
-                :items="conducteur"
-                label="conducteur"
-                v-model="projet.conducteur"
-                dense
-                outlined
-              ></v-select>
-          </div>
-          </div>
-            <div class="input-box">
-            <div class="form__div">
-              <!-- <input type="text" class="form__input" placeholder=" " id="conducteurSec" v-model="projet.conducteurSec">
-              <label for="" class="form__label">conducteurSec</label> -->
-               <v-select
-               :items="conducteur"
-                label="conducteur"
-                v-model="projet.conducteurSec"
-                dense
-                outlined
-              ></v-select>
-          </div>
-          </div>
-        </div>
-      </form>
+              </div>
+            </v-card>
+
+            <v-btn @click="e1 = 1"> précédente </v-btn>
+            <v-btn color="primary" @click="e1 = 3"> Continue </v-btn>
+          </v-stepper-content>
+
+          <v-stepper-content step="3">
+            <v-card class="mb-12" color="rgb(5 48 96 / 78%)" height="450px">
+              <div class="body">
+                <div class="container">
+                  <div class="title">Calcul bobine</div>
+                  <div class="content">
+                    <form v-on:submit.prevent="updateprojet">
+                      <div class="user-details">
+                        <div class="input-box">
+                          <div class="form__div">
+                            <input
+                              type="number"
+                              class="form__input"
+                              placeholder=" "
+                              id="D1d"
+                              v-model="projet.D1d"
+                            />
+                            <label for="" class="form__label">D1d</label>
+                          </div>
+                        </div>
+                        <div class="form__div framei">
+                          <input
+                            type="number"
+                            class="form__input"
+                            placeholder=" "
+                            id="filobtenueNue"
+                            v-model="projet.filobtenueNue"
+                          />
+                          <label for="" class="form__label"
+                            >filobtenueNue</label
+                          >
+                        </div>
+
+                        <div class="form__div framei">
+                          <input
+                            type="number"
+                            class="form__input"
+                            placeholder=" "
+                            id="filobtenueIsoler"
+                            v-model="projet.filobtenueIsoler"
+                          />
+                          <label for="" class="form__label"
+                            >filobtenueIsoler</label
+                          >
+                        </div>
+
+                        <div class="form__div framei">
+                          <input
+                            type="text"
+                            class="form__input"
+                            placeholder=" "
+                            id="choix"
+                            v-model="projet.choix"
+                          />
+                          <label for="" class="form__label">choix</label>
+                        </div>
+                        <div class="form__div framei">
+                          <input
+                            type="number"
+                            class="form__input"
+                            placeholder=" "
+                            id="brinParallele"
+                            v-model="projet.brinParallele"
+                          />
+                          <label for="" class="form__label"
+                            >brinParallele</label
+                          >
+                        </div>
+                        <div class="form__div framei">
+                          <input
+                            type="number"
+                            class="form__input"
+                            placeholder=" "
+                            id="SpchB"
+                            v-model="projet.SpchB"
+                            readonly
+                          />
+                          <label for="" class="form__label">SpchB</label>
+                        </div>
+                        <div class="form__div framei">
+                          <input
+                            type="number"
+                            class="form__input"
+                            placeholder=" "
+                            id="NchB"
+                            v-model="projet.NchB"
+                            readonly
+                          />
+                          <label for="" class="form__label">NchB</label>
+                        </div>
+                        <div class="form__div framei">
+                          <input
+                            type="number"
+                            class="form__input"
+                            placeholder=" "
+                            id="SpchA"
+                            v-model="projet.SpchA"
+                          />
+                          <label for="" class="form__label">SpchA</label>
+                        </div>
+                        <div class="form__div framei">
+                          <input
+                            type="number"
+                            class="form__input"
+                            placeholder=" "
+                            id="NchA"
+                            v-model="projet.NchA"
+                          />
+                          <label for="" class="form__label">NchA</label>
+                        </div>
+                        <div class="form__div framei">
+                          <input
+                            type="number"
+                            class="form__input"
+                            placeholder=" "
+                            id="HCondMt"
+                            v-model="projet.HCondMt"
+                          />
+                          <label for="" class="form__label">HCondMt</label>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </v-card>
+            <v-btn @click="e1 = 2"> précédente </v-btn>
+            <v-btn color="primary" @click="e1 = 4"> Continue </v-btn>
+          </v-stepper-content>
+
+          <v-stepper-content step="4">
+            <v-card class="mb-12" color="rgb(5 48 96 / 78%)" height="450px">
+              <div class="body">
+                <div class="container">
+                  <div class="title">Calcul bobine</div>
+                  <div class="content">
+                    <form v-on:submit.prevent="updateprojet">
+                      <div class="user-details">
+                        <div class="input-box">
+                          <div class="form__div">
+                            <input
+                              type="number"
+                              class="form__input"
+                              placeholder=" "
+                              id="DistanceBTMT"
+                              v-model="projet.DistanceBTMT"
+                            />
+                            <label for="" class="form__label"
+                              >DistanceBTMT</label
+                            >
+                          </div>
+                        </div>
+                        <div class="form__div framei">
+                          <input
+                            type="number"
+                            class="form__input"
+                            placeholder=" "
+                            id="HCollier"
+                            v-model="projet.HCollier"
+                          />
+                          <label for="" class="form__label">HCollier</label>
+                        </div>
+
+                        <div class="form__div framei">
+                          <input
+                            type="number"
+                            class="form__input"
+                            placeholder=" "
+                            id="EpfeuillePapier"
+                            v-model="projet.EpfeuillePapier"
+                          />
+                          <label for="" class="form__label"
+                            >EpfeuillePapier</label
+                          >
+                        </div>
+
+                        <div class="form__div framei">
+                          <input
+                            type="number"
+                            class="form__input"
+                            placeholder=" "
+                            id="EpaiseurPapier"
+                            v-model="projet.EpaiseurPapier"
+                          />
+                          <label for="" class="form__label"
+                            >EpaiseurPapier</label
+                          >
+                        </div>
+                        <div class="form__div framei">
+                          <input
+                            type="number"
+                            class="form__input"
+                            placeholder=" "
+                            id="EpaisseurPapierCanaux"
+                            v-model="projet.EpaisseurPapierCanaux"
+                          />
+                          <label for="" class="form__label"
+                            >EpaisseurPapierCanaux</label
+                          >
+                        </div>
+                        <div class="form__div framei">
+                          <input
+                            type="number"
+                            class="form__input"
+                            placeholder=" "
+                            id="HbobineBt"
+                            v-model="projet.HbobineBt"
+                          />
+                          <label for="" class="form__label">HbobineBt</label>
+                        </div>
+
+                        <div class="form__div framei">
+                          <input
+                            type="number"
+                            class="form__input"
+                            placeholder=" "
+                            id="N1cmax"
+                            v-model="projet.N1cmax"
+                          />
+                          <label for="" class="form__label">N1cmax</label>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </v-card>
+            <v-btn @click="e1 = 3"> précédente </v-btn>
+
+            <v-btn color="primary" @click="updateprojet"> Valider </v-btn>
+          </v-stepper-content>
+        </v-stepper-items>
+      </v-stepper>
     </div>
-</div>
-        </div>
-  </v-card>   
-        <v-btn color="primary" @click="updateprojet">
-          Changer
-        </v-btn>
-      </v-stepper-content>
-    </v-stepper-items>
-  </v-stepper>
-</div>
-</div>
+  </div>
 </template>
 
 <script>
-// import { reactive } from "vue";
-// import navbarUpdate from '../../navbarUpdate';
 import NavDash from "@/components/NavDash.vue";
 
 import axios from "axios";
 export default {
-    components: { 
-      // navbarUpdate 
-                NavDash,
-
-      },
+  components: { NavDash },
   data() {
     return {
-      conducteur: ['meplat guipé','Rond emaille','feuillard'], 
-      materiau: ['cuivre','aluminium'], 
+      barre: [],
+      conducteur: ["meplat guipé", "Rond emaille", "feuillard"],
+      materiau: ["cuivre", "aluminium"],
+      typeCanaux: ["complet", "lune"],
       projet: {
-         id:undefined,
-      materiau:"",
-      conducteur:"",
-        materiauSec:"",
-      conducteurSec:"",
+        id: undefined,
+        materiau: "",
+        conducteur: "",
+        scu1: "",
+        j1: "",
+        nbcoucheMT: "",
+        rigiditePapierMT: "",
+        nbrPapierMt: "",
+        typeCanaux: "",
+        canauxMT: "",
+        lgCales: "",
+        canauxNbrPapier: "",
+        DintMT: "",
+        BintMT: "",
+        EpxMT: "",
+        EpyMT: "",
+        DextMT: "",
+        BextMT: "",
+        poidMT: "",
+        majPoid: "",
+        EpCylindre: "",
+        scu1d: "",
+        J1D: "",
+        D1d: "",
+        filobtenueNue: "",
+        filobtenueIsoler: "",
+        choix: "",
+        brinParallele: "",
+        SpchB: "",
+        NchB: "",
+        SpchA: "",
+        NchA: "",
+        HCondMt: "",
+        DistanceBTMT: "",
+        HCollier: "",
+        EpfeuillePapier: "",
+        EpaiseurPapier: "",
+        EpaisseurPapierCanaux: "",
+        HbobineBt: "",
+        N1cmax: "",
       },
-      e1:1
+      e1: 1,
     };
   },
   methods: {
@@ -133,25 +574,66 @@ export default {
         id: undefined,
         materiau: this.projet.materiau,
         conducteur: this.projet.conducteur,
-        materiauSec: this.projet.materiauSec,
-        conducteurSec: this.projet.conducteurSec
+        scu1: this.projet.scu1,
+        j1: this.projet.j1,
+        nbcoucheMT: this.projet.nbcoucheMT,
+        rigiditePapierMT: this.projet.rigiditePapierMT,
+        nbrPapierMt: this.projet.nbrPapierMt,
+        typeCanaux: this.projet.typeCanaux,
+        canauxMT: this.projet.canauxMT,
+        lgCales: this.projet.lgCales,
+        canauxNbrPapier: this.projet.canauxNbrPapier,
+        DintMT: this.projet.DintMT,
+        BintMT: this.projet.BintMT,
+        EpxMT: this.projet.EpxMT,
+        EpyMT: this.projet.EpyMT,
+        DextMT: this.projet.DextMT,
+        BextMT: this.projet.BextMT,
+        poidMT: this.projet.poidMT,
+        majPoid: this.projet.majPoid,
+        N1cmax: this.projet.N1cmax,
+        EpCylindre: this.projet.EpCylindre,
+        scu1d: this.projet.scu1d,
+        J1D: this.projet.J1D,
+        filobtenueNue: this.projet.filobtenueNue,
+        filobtenueIsoler: this.projet.filobtenueIsoler,
+        choix: this.projet.choix,
+        brinParallele: this.projet.brinParallele,
+        SpchB: this.projet.SpchB,
+        NchB: this.projet.NchB,
+        SpchA: this.projet.SpchA,
+        NchA: this.projet.NchA,
+        HCondMt: this.projet.HCondMt,
+        DistanceBTMT: this.projet.DistanceBTMT,
+        HCollier: this.projet.HCollier,
+        EpfeuillePapier: this.projet.EpfeuillePapier,
+        EpaiseurPapier: this.projet.EpaiseurPapier,
+        EpaisseurPapierCanaux: this.projet.EpaisseurPapierCanaux,
+        HbobineBt: this.projet.HbobineBt,
       };
-      axios.put('bobine/update/'+this.$route.params.id, projets).then(
-        (response) => (this.id = response.data.id)
-        
-      );
-       axios.put('bobinesec/update/'+this.$route.params.id, projets).then(
-        (response) => (this.id = response.data.id)
-        
-      );
- this.$router.push('/gradin/'+this.$route.params.id);    },
-  
+      axios
+        .put("bobine/update/" + this.$route.params.id, projets)
+        .then(
+          (response) => ((this.id = response.data.id), console.log(projets))
+        );
+      this.$router.push("/");
+    },
   },
   async mounted() {
-    const result = await axios.get('projets/'+this.$route.params.id);
+    const result = await axios.get("projets/" + this.$route.params.id);
     this.projet = result.data;
   },
- 
+  created() {
+    axios
+      .get("/getdesignationBarre")
+      .then((response) => (this.barre = response.data));
+    axios
+      .get("/getValeurHbrin")
+      .then((response) => (this.hbrin = response.data));
+    axios
+      .get("/getValeurSaillie")
+      .then((response) => (this.saillie = response.data));
+  },
 };
 </script>
 <style scoped>
@@ -285,7 +767,7 @@ h1 {
   height: 3px;
   width: 250px;
   border-radius: 5px;
-/* margin-bottom: 5%; */
+  /* margin-bottom: 5%; */
   /* background: linear-gradient(135deg, #71b7e6, #71b7e6); */
 }
 .content form .user-details {
