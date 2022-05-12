@@ -338,12 +338,12 @@
               <!-- </div> -->
             <!-- </v-card> -->
            <v-btn
-        color="primary " style="margin-top:5%"
+        color="primary mb-14" style="margin-top:5%"
         @click="e1 = 1"
       >
         précédent
       </v-btn>
-       <v-btn color="success " style="margin-top:5%" @click="updateprojet">
+       <v-btn color="success mb-14" style="margin-top:5%" @click="updateprojet">
           Valider
         </v-btn>
      

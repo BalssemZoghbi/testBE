@@ -1,6 +1,63 @@
 <template>
   <div>
     <NavDashEmp  />
+      <v-layout style="margin-left:4%">
+    <v-row class="clickable">
+      <!-- <v-col cols="12" md="10">
+        <v-card  class="ml-5 mr-5"> -->
+          <!-- <v-app-bar
+          dark
+          color="rgb(5 48 96)"
+          >
+          <v-btn icon>
+            <v-icon>mdi-finance</v-icon>
+          </v-btn>
+          <v-toolbar-title>Statistiques</v-toolbar-title>
+          </v-app-bar> -->
+        <v-container>
+          <v-row style="margin-left:-12%;margin-bottom:1%">
+            <v-col cols="12" sm="6">
+              <v-hover
+        v-slot:default="{ hover }"
+        open-delay="200"
+      >
+       <v-card
+       :elevation="hover ? 16 : 2"
+        class="mx-auto"
+        max-width="344"
+        outlined
+
+  >
+    <v-list-item three-line>
+      <v-list-item-content>
+        <v-list-item-title class="headline mb-1">Projets</v-list-item-title>
+
+      </v-list-item-content>
+
+      <v-list-item-avatar
+        tile
+        size="80"
+       color="blue darken-2"
+      >
+        <v-icon dark>fas fa-project-diagram</v-icon>
+      </v-list-item-avatar>
+    </v-list-item>
+    <v-divider></v-divider>
+    <v-card-actions>
+      <v-icon flab color="blue darken-2">apps</v-icon>
+      <v-btn text >{{projetCount}}</v-btn>
+      <v-spacer></v-spacer>
+      <!-- <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon> -->
+<router-link to="/" style="text-decoration:none">  <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon></router-link>
+    </v-card-actions>
+  </v-card>
+      </v-hover>
+
+            </v-col>
+          </v-row>
+        </v-container>
+    </v-row>
+      </v-layout>
         <!-- <v-layout style="margin-left:4%">
     <v-row class="clickable"> -->
       
@@ -115,7 +172,7 @@
     :height="height"
   />
   </div>
-  <div style="margin-top: -37%;width: 150%;">
+  <div style="margin-top: -32%;width: 150%;">
   <Doughnut
     :chart-options="chartOptionsDonut"
     :chart-data="chartDataDonut"
@@ -207,7 +264,7 @@ LinearScale,LineElement,PointElement)
   },
   data: () => ({
     // userCount:"",
-    // projetCount:"",
+    projetCount:"",
     // UserChart:[],
     // UserProjet:[],
     // UserName:[],
@@ -225,14 +282,14 @@ LinearScale,LineElement,PointElement)
     }
   },
   created(){
-    
+       axios
+        .post("/stat")
+        .then((response) => (this.userCount=response.data.userCount,
+        this.projetCount=response.data.projetCount)),
      axios
         .post("/statEmploye")
         .then((response) => (this.ProjetChart=response.data.ProjetChart,
-        this.projetCount=response.data.projetCount,
-        // this.UserChart=response.data.UserChart,
-        // this.UserProjet=response.data.UserProjet,
-        // this.UserName=response.data.UserName,
+ 
         console.log(this.ProjetChart),
         this.chartDataDonut={
         labels: ['Vierge', 'Feuillard&Emaille', 'Feuillard&Meplat', 'Meplat&Emaille'],

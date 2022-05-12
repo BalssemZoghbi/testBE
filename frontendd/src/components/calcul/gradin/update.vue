@@ -321,8 +321,8 @@ export default {
   },
      computed:{
      largeur(){
-       
-  return this.projet.largeur.replace("[","",this.projet.largeur.length-1).split(",").join("").replace("]","");
+      //  arjaalha
+  return this.projet.largeur.replace("[","",this.projet.largeur.length-1).replace("]","").split(",");
 },
 epaisseur(){
   return this.projet.epaisseur.replace("[","",this.projet.epaisseur.length-1).split(",").join("").replace("]","");

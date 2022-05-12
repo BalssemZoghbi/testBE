@@ -2,6 +2,7 @@
   <v-app>
  
     <v-main>
+      <!-- <h1 >transparent</h1> -->
       <!-- <login/> -->
       <router-view />
     </v-main>

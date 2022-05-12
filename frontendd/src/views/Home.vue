@@ -245,18 +245,18 @@ export default {
       //   projet:this.projet,
       //   formdata:formdata
       // }
-      axios
-        .post("documents/" + this.$route.params.id, {
-          Reference: this.projet.reference,
-          Puissance: this.projet.Puissance,
-          u1n: this.projet.u1n,
-          u2o: this.projet.u2o,
-          couplage: this.projet.couplage,
-          frequence: this.projet.frequence,
-        })
-        .then(function (response) {
-          console.log(response.data);
-        });
+      // axios
+      //   .post("documents/" + this.$route.params.id, {
+      //     Reference: this.projet.reference,
+      //     Puissance: this.projet.Puissance,
+      //     u1n: this.projet.u1n,
+      //     u2o: this.projet.u2o,
+      //     couplage: this.projet.couplage,
+      //     frequence: this.projet.frequence,
+      //   })
+      //   .then(function (response) {
+      //     console.log(response.data);
+      //   });
       //      axios.post("documents/" + this.$route.params.id, formdata , {responseType:'blob'}).then(function (response) {
       //       var headers = response.headers;
       //        console.log(headers);

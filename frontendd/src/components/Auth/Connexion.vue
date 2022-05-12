@@ -128,14 +128,19 @@ Entrez vos données personnelles et commencez votre journée                    
                               cols="6"
                               md="4"
                             >
-                              <v-text-field
-                            label="Poste"
-                            name="poste"
+
+                                    <v-select
+                        :items="Poste"
+                        label="Poste"
+                        name="poste"
                             prepend-icon="fa fa-user-tie"
                             type="text"
                             v-model="poste" 
                             :rules="nameRules"
-                          /> </v-col> 
+                        
+                      ></v-select>
+
+                          </v-col> 
                            <v-col
                             cols="12"
                             sm="6"
@@ -215,6 +220,7 @@ Error
   data: () => ({
     step: 1,
     user:[],
+    Poste:['Directeur','Employe','Autre'],
      valid: false,
     email:'',
      EmailRules: [

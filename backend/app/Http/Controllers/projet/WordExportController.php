@@ -11,6 +11,7 @@ use App\Models\Donnees\gradin\Gradin;
 use App\Models\Donnees\PccUcc;
 use App\Models\Donnees\Projet;
 use App\Models\Donnees\VoltSpire;
+use App\Models\Donnees\Circuitmagnetique;
 use Illuminate\Http\Request;
 use PhpOffice\PhpWord\TemplateProcessor;
 use Illuminate\Support\Facades\DB;
@@ -28,6 +29,7 @@ class WordExportController extends Controller
         $Gradin = Gradin::FindOrFail($id);
         $pUCC= PccUcc::FindOrFail($id);
         $VoltSpire = VoltSpire::FindOrFail($id);
+        $cm = Circuitmagnetique::FindOrFail($id);
 
         $my_template= new TemplateProcessor(storage_path('templateProjet.docx'));
 
@@ -130,13 +132,15 @@ class WordExportController extends Controller
         $my_template->setValue('pcc1',$pUCC->pcc1);
         $my_template->setValue('Ucca',$pUCC->Ucca);
         $my_template->setValue('Ucc',$pUCC->Ucc);
+        $my_template->setValue('pFer',$cm->pFer);
 
         try{
             $my_template->saveAs(storage_path( $projet->appareil.'.docx'));
+            return response()->download(storage_path( $projet->appareil.'.docx'));
         }catch(\Exception $e){
-            echo $e->getMessage();
+            return $e->getMessage();
         }
-        return response()->download(storage_path( $projet->appareil.'.docx'));
+
 
 
     }

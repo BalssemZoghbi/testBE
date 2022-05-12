@@ -12,6 +12,7 @@ use App\Http\Controllers\Donnees\GarantieController;
 use App\Http\Controllers\projet\EmailleController;
 use App\Http\Controllers\projet\ProjetController;
 use App\Http\Controllers\projet\TensionElectriqueController;
+use App\Http\Controllers\projet\WordExportController;
 use App\Http\Controllers\StatisiqueController;
 use App\Http\Controllers\StatistiqueEmployeController;
 use App\Http\Controllers\User\AuthController;
@@ -20,7 +21,6 @@ use App\Http\Controllers\User\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\WordExportController;
 use App\Models\StatistiqueEmploye;
 
 /*
