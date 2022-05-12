@@ -422,8 +422,16 @@ export default {
         .then(
           (response) => ((this.id = response.data.id), console.log(projets))
         );
-      this.$router.push("/");
-    },
+
+      if(this.projet.conducteurSec=="Rond emaille"){
+      this.$router.push("/bobinageSecondaireRond/"+this.$route.params.id);
+    }else if(this.projet.conducteurSec=="feuillard"){
+      this.$router.push("/bobinageSecondaireFeuillard/"+this.$route.params.id);
+    }else if(this.projet.conducteurSec=="meplat guipé"){
+      this.$router.push("/bobinageSecondaireMeplat/"+this.$route.params.id);
+    }
+    }
+    
   },
   async mounted() {
     const result = await axios.get("projets/" + this.$route.params.id);

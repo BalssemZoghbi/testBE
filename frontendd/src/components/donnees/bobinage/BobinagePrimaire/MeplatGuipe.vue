@@ -435,9 +435,15 @@ export default {
       axios
         .put("bobine/update/" + this.$route.params.id, projets)
         .then(
-          (response) => ((this.id = response.data.id), console.log(projets))
+          (response) => ((this.id = response.data.id), console.log(this.projet))
         );
-      this.$router.push("/");
+        if(this.projet.conducteurSec=="Rond emaille"){
+      this.$router.push("/bobinageSecondaireRond/"+this.$route.params.id);
+    }else if(this.projet.conducteurSec=="feuillard"){
+      this.$router.push("/bobinageSecondaireFeuillard/"+this.$route.params.id);
+    }else if(this.projet.conducteurSec=="meplat guipé"){
+      this.$router.push("/bobinageSecondaireMeplat/"+this.$route.params.id);
+    }
     },
   },
   async mounted() {

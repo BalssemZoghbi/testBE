@@ -61,7 +61,7 @@
                       <v-select
                         :items="hbrin"
                         label="Hbrin 2BT"
-                        v-model="projet.hbrin2BT"
+                       v-model="projet.hbrin2BT"
                         dense
                         outlined
                       ></v-select>
@@ -426,7 +426,7 @@ export default {
         .then(
           (response) => ((this.id = response.data.id), console.log(projets))
         );
-      this.$router.push("/");
+      this.$router.push("/pccucc/"+this.$route.params.id);
     },
   },
   async mounted() {

@@ -421,7 +421,7 @@ export default {
         (response) => (this.id = response.data.id, console.log(projets))
         
       );
- this.$router.push('/');    },
+  this.$router.push("/pccucc/"+this.$route.params.id);    },
   
   },
   async mounted() {

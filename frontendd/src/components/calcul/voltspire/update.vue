@@ -167,7 +167,13 @@ export default {
             (this.id = response.data.id), console.log(response.data)
           )
         );
-      this.$router.push("/bobinecal/" + this.$route.params.id);
+        if(this.projet.conducteur=="Rond emaille"){
+      this.$router.push("/bobinagePrimaireRond/"+this.$route.params.id);
+    }else if(this.projet.conducteur=="feuillard"){
+      this.$router.push("/bobinagePrimaireFeuillard/"+this.$route.params.id);
+    }else if(this.projet.conducteur=="meplat guipé"){
+      this.$router.push("/bobinagePrimaireMeplat/"+this.$route.params.id);
+    }
     },
   },
   async mounted() {

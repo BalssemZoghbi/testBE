@@ -82,7 +82,10 @@
                                       <router-link  to="/notfound">Bobine Secondaire</router-link>
                                     </li>
                                     <li class="dropdown-link">
-                                        <a href="#">PCC et UCC</a>
+                                         <router-link :to="'/pccucc/'+ this.$route.params.id" >PCC et UCC</router-link>
+                                    </li>
+                                    <li class="dropdown-link">
+                                         <router-link :to="'/cm/'+ this.$route.params.id" >Circuit Magnetique</router-link>
                                     </li>
                                 
                                     <div class="arrow"></div>

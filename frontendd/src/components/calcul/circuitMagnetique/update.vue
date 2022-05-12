@@ -435,7 +435,7 @@ export default {
             (this.id = response.data.id), console.log(response.data)
           )
         );
-      this.$router.push("/cm/" + this.$route.params.id);
+      this.$router.push("/");
     },
   },
   async mounted() {

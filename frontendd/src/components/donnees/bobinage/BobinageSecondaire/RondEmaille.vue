@@ -26,7 +26,7 @@
                      <div class="div">
                     <div class="field10">
                       <v-text-field
-                        label="N1cmax"
+                        label="N2cmax"
                         v-model="projet.N2cmax"
                         dense
                         outlined
@@ -393,7 +393,7 @@ export default {
         .then(
           (response) => ((this.id = response.data.id), console.log(projets))
         );
-      this.$router.push("/");
+      this.$router.push("/pccucc/"+this.$route.params.id);
     },
   },
   async mounted() {
