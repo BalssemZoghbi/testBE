@@ -8,135 +8,104 @@
           </v-stepper-step>
            <v-stepper-content step="1">
             <v-card class="mb-6"  >
-              <!-- <div class="body"> -->
-                <!-- <div class="container"> -->
                   <div class="title">Gradin</div>
                   <div class="content">
-                    <form v-on:submit.prevent="updateprojet">
-                      <div class="user-details">
-                        <div class="form__div framei">
-                            <v-select :items="toles"
-                              label="tole"
-                              v-model="projet.tole"
-                              dense
-                              outlined
-                            ></v-select>
-                        </div>
-                        <div class="form__div framei">
-                          <input
-                            type="text"
-                            class="form__input"
-                            placeholder=" "
-                            id="diamPropose"
-                            v-model="projet.diamPropose"
-                            
-                          />
-                          <label for="" class="form__label">Diametre Proposé</label>
-                        </div>
-                       
-                           <div class="form__div frame">
-                            <input
-                              type="text"
-                              class="form__input"
-                              placeholder=" "
-                              id="diamNominale"
-                              readonly
-                              v-model="projet.diamNominale"
-                            />
-                            <label for="" class="form__label">Diametre Nominale</label>
-                          </div>
-                       
-                         <div class="form__div frame">
-                            <v-select :items="pas"
-                              label="pas"
-                              v-model="projet.pas"
-                              dense
-                              outlined
-                            ></v-select>
-                        </div>
+                  <form v-on:submit.prevent="updateprojet">
+                <div class="user-details">
+                  <div class="div">
+                    <div class="field10">
+                      <v-select
+                        :items="toles"
+                        label="toles"
+                        v-model="projet.tole"
+                        dense
+                        outlined
+                      ></v-select>
 
-                        <div class="form__div framei">
-                            <input
-                            readonly
-                              type="text"
-                              class="form__input"
-                              placeholder=" "
-                              id="coeffRemplissage"
-                              v-model="projet.coeffRemplissage"
-                            />
-                            <label for="" class="form__label">Coeff de Remplissage</label>
-                       
-                        </div>
-                        <div class="form__div framei">
-                          <input
-                            type="number"
-                            class="form__input"
-                            placeholder=" "
-                            id="nbrGradin"
-                            v-model="projet.nbrGradin"
-                            readonly
-                          />
-                          <label for="" class="form__label">nbrGradin</label>
-                        </div>
-                        <div class="form__div framei">
-                          <input
-                            type="number"
-                            class="form__input"
-                            placeholder=" "
-                            id="demiGradin"
-                            readonly
-                            v-model="projet.demiGradin"
-                          />
-                          <label for="" class="form__label">demiGradine</label>
-                        </div>
-                          <div class="form__div framei">
-                          <input
-                            type="number"
-                            class="form__input"
-                            placeholder=" "
-                            id="Snette"
-                            readonly
-                            v-model="projet.Snette"
-                          />
-                          <label for="" class="form__label">Snette</label>
-                        </div>
-                         <div class="input-box">
-                          <div class="form__div">
-                          <input
-                            type="number"
-                            class="form__input"
-                            placeholder=" "
-                            id="Sbrut"
-                            readonly
-                            v-model="projet.Sbrut"
-                          />
-                          <label for="" class="form__label">Sbrut</label>
-                        </div></div>
-                         <div class="input-box">
-                       <div class="form__div">
-                          <input
-                            type="number"
-                            class="form__input"
-                            placeholder=" "
-                            id="EpaisseurTot"
-                            readonly
-                            v-model="projet.EpaisseurTot"
-                          />
-                          <label for="" class="form__label">Epaisseur Totale</label>
-                        </div>
-                    </div></div>
-                     <div class="form__div framei">
-                          <input
-                            type="number"
-                            class="form__input"
-                            placeholder=" "
-                            id="largeurMin"
-                            readonly
-                            v-model="projet.largeurMin"
-                          />
-                          <label for="" class="form__label">largeur Minimale</label>
-                        </div>
-                    </form>
+                      <v-select
+                        :items="pas"
+                        label="pas"
+                        v-model="projet.pas"
+                        dense
+                        outlined
+                      ></v-select>
+                  
+
+                      <v-text-field
+                        label="Diametre propose"
+                        v-model="projet.diamPropose"
+                        dense
+                        outlined
+                      ></v-text-field>
+                    
+
+                      <v-text-field
+                        label="Diametre Nominale"
+                        dense
+                        id="diamNominale"
+                        readonly
+                        v-model="projet.diamNominale"
+                        outlined
+                      ></v-text-field>
+                      <v-text-field
+                        label="j1"
+                        dense
+                        id="j1"
+                        readonly
+                        v-model="projet.j1"
+                        outlined
+                      ></v-text-field>
+                       <v-text-field
+                        label="coeffRemplissage"
+                        v-model="projet.coeffRemplissage"
+                        outlined
+                        dense
+                      ></v-text-field>
+                      <v-text-field
+                        label="nbrGradin"
+                        v-model="projet.nbrGradin"
+                        outlined
+                        dense
+                      ></v-text-field>
+                      <v-text-field
+                        label="demiGradin"
+                        v-model="projet.demiGradin"
+                        outlined
+                        dense
+                      ></v-text-field>
+                     
+                      <v-text-field
+                        label="Sbrut"
+                        dense
+                        v-model="projet.Sbrut"
+                        outlined
+                      ></v-text-field>
+                      <v-text-field
+                        label="Snette"
+                        dense
+                        v-model="projet.Snette"
+                        outlined
+                      ></v-text-field>
+                      <v-text-field
+                        label="largeurMin"
+                        dense
+                        v-model="projet.largeurMin"
+                        outlined
+                      ></v-text-field>
+                      <v-text-field
+                        label="EpaisseurTot"
+                        dense
+                        v-model="projet.EpaisseurTot"
+                        outlined
+                      ></v-text-field>
+                    </div>
+                    <div class="field10">
+                     
+                      <p>graphe</p>
+                    </div>
+                  </div>
+                </div>
+              </form>
                   </div>
             </v-card>
    
@@ -167,7 +136,6 @@
     </v-stepper-step>
 
     <v-stepper-content step="2">
-                 <!-- <v-card class="mb-6"  > -->
                   <div class="title">Gadin</div>
                   <div class="content">
           
@@ -363,8 +331,37 @@ epaisseur(){
 };
 </script>
 <style scoped>
+.field10 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* grid-template-rows: repeat(3, 1fr); */
+  grid-gap: 10px;
+  width: 80%;
+  /* margin-right: 5%; */
+}
+.div2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* grid-template-rows: repeat(2, 1fr); */
+  grid-gap: 10px;
+  width: 56%;
+  /* margin-right: 5%; */
+}
 
-
+.div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+}
+.row {
+  display: flex;
+  flex: 1 1 auto;
+  margin: -12px;
+  flex-direction: row;
+  align-content: space-between;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
 .l-form {
   display: flex;
   justify-content: center;
@@ -479,7 +476,7 @@ epaisseur(){
   margin-bottom: 3.5%;
   position: relative;
 }
- .title::before {
+.title::before {
   content: "";
   position: absolute;
   left: 0;
@@ -487,15 +484,34 @@ epaisseur(){
   height: 3px;
   width: 250px;
   border-radius: 5px;
-  
+
+  background: linear-gradient(135deg, #0b65a0, #71b7e6);
+}
+.titles {
+  font-size: 20px;
+  font-weight: 500;
+  margin-top: -14%;
+  margin-bottom: 55%;
+  position: relative;
+}
+.titles::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 3px;
+  width: 150px;
+  border-radius: 5px;
+
   background: linear-gradient(135deg, #0b65a0, #71b7e6);
 }
 .content form .user-details {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap-reverse;
   justify-content: space-between;
-  margin: 20px 0 12px 0;
+  margin: 10px 0 12px 0;
 }
+
 form .user-details .input-box {
   margin-bottom: 15px;
   width: calc(100% / 2 - 20px);
@@ -586,10 +602,10 @@ form .button input:hover {
   border-color: #000;
 }
 .v-sheet.v-card:not(.v-sheet--outlined) {
-    box-shadow: 0px 0px 0px 0px;
+  box-shadow: 0px 0px 0px 0px;
 }
 .v-stepper--vertical {
-    padding-bottom:0px;
+  padding-bottom: 0px;
 }
 @media (max-width: 584px) {
   .container {
@@ -616,9 +632,9 @@ form .button input:hover {
   }
 }
 .v-btn:not(.v-btn--round).v-size--default {
-    height: 36px;
-    min-width: 64px;
-    padding: 16px;
-    margin: 3px;
+  /* height: 36px; */
+  /* min-width: 64px; */
+  padding: 16px;
+  margin: 3px;
 }
 </style>

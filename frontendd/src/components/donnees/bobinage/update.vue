@@ -1,7 +1,7 @@
 <template>
    <div>
   <!-- <navbarUpdate :conducteur="projet.conducteur" :conducteurSec="this.projet.conducteurSec"/> -->
-         <NavDash :conducteur="cond1" :conducteurSec="cond2" />
+        <NavDash :conducteur="projet.conducteur" :conducteurSec="projet.conducteurSec"/>
 
 <div class="body">
       <v-stepper v-model="e1"  vertical>
