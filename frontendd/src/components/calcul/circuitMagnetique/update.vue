@@ -249,8 +249,8 @@
               <v-divider></v-divider>
 
               <v-list dense>
-                <v-list-item>
-                  <v-list-item-content>{{lcm}}</v-list-item-content>
+                <v-list-item v-for="item in lcm"  :key="item" style="width: 176%!important;">
+                  <v-list-item-content>{{item}}</v-list-item-content>
                   <v-list-item-content class="align-end"  >
                   
                   </v-list-item-content>
@@ -284,8 +284,8 @@
               <v-divider></v-divider>
 
               <v-list dense>
-                <v-list-item>
-                  <v-list-item-content>{{surface}}</v-list-item-content>
+                <v-list-item v-for="item in surface"  :key="item" style="width: 176%!important;">
+                  <v-list-item-content>{{item}}</v-list-item-content>
                   <v-list-item-content class="align-end"  >
                   
                   </v-list-item-content>
@@ -316,8 +316,8 @@
               <v-divider></v-divider>
 
               <v-list dense>
-                <v-list-item>
-                  <v-list-item-content vertical>{{masse}}</v-list-item-content>
+                <v-list-item v-for="item in masse"  :key="item" style="width: 176%!important;">
+                  <v-list-item-content vertical>{{item}}</v-list-item-content>
                   <v-list-item-content class="align-end"  v-model="projet.spire">
                   
                   </v-list-item-content>
@@ -448,13 +448,13 @@ export default {
     },
    lcm(){
        
-  return this.projet.LCM.replace("[","",this.projet.LCM.length-1).split(",").join('').replace("]","");
+  return this.projet.LCM.replace("[","",this.projet.LCM.length-1).replace("]","").split(",");
 },
 masse(){
-  return this.projet.masseFerCM.replace("[","",this.projet.masseFerCM.length-1).split(",").join("\n").replace("]","");
+  return this.projet.masseFerCM.replace("[","",this.projet.masseFerCM.length-1).replace("]","").split(",");
 },
 surface(){
-  return this.projet.surfaceCM.replace("[","",this.projet.surfaceCM.length-1).split(",").join("\n").replace("]","");
+  return this.projet.surfaceCM.replace("[","",this.projet.surfaceCM.length-1).replace("]","").split(",");
 }
   },
 };

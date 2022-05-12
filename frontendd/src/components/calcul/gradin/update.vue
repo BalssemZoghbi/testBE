@@ -155,10 +155,10 @@
           tile
         >
           <template>
-        <!-- <v-row>
+        <v-row>
           <v-col
-          
-          > -->
+       
+          >
             <v-card>
               <v-card-title class="subheading font-weight-bold">
               Largeur
@@ -166,9 +166,9 @@
 
               <v-divider></v-divider>
 
-              <v-list dense>
-                <v-list-item>
-                  <v-list-item-content>{{largeur}}</v-list-item-content>
+              <v-list dense    >
+                <v-list-item v-for="item in largeur"  :key="item">
+                  <v-list-item-content >{{item}}</v-list-item-content>
                   <v-list-item-content class="align-end"  >
                   
                   </v-list-item-content>
@@ -176,8 +176,8 @@
 
               </v-list>
             </v-card>
-          <!-- </v-col>
-        </v-row> -->
+          </v-col>
+        </v-row>
       </template>
          </v-card>
       <!-- </v-col> -->
@@ -192,7 +192,7 @@
           outlined
           tile
         >
-          <template >
+          <template style="width: 33%;">
         <!-- <v-row>
           <v-col
          
@@ -205,8 +205,8 @@
               <v-divider></v-divider>
 
               <v-list dense>
-                <v-list-item>
-                  <v-list-item-content vertical>{{epaisseur}}</v-list-item-content>
+                <v-list-item v-for="item in epaisseur"  :key="item" style="width: 176%!important;">
+                  <v-list-item-content vertical >{{item}}</v-list-item-content>
                   <v-list-item-content class="align-end"  v-model="projet.spire">
                   
                   </v-list-item-content>
@@ -325,7 +325,7 @@ export default {
   return this.projet.largeur.replace("[","",this.projet.largeur.length-1).replace("]","").split(",");
 },
 epaisseur(){
-  return this.projet.epaisseur.replace("[","",this.projet.epaisseur.length-1).split(",").join("").replace("]","");
+  return this.projet.epaisseur.replace("[","",this.projet.epaisseur.length-1).replace("]","").split(",");
 }
 },
 };

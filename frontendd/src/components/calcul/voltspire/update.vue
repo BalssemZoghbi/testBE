@@ -66,7 +66,7 @@
                   </div>
                   <v-row cols="2" md="4" class="ml-4">
                     <v-card outlined tile>
-                      <template>
+                      <template >
                         <v-card>
                           <v-card-title class="subheading font-weight-bold">
                             prise
@@ -75,8 +75,8 @@
                           <v-divider></v-divider>
 
                           <v-list dense>
-                            <v-list-item>
-                              <v-list-item-content>{{}}</v-list-item-content>
+                            <v-list-item v-for="item in prises"  :key="item" style="width: 176%!important;">
+                              <v-list-item-content>{{item}}</v-list-item-content>
                               <v-list-item-content class="align-end">
                               </v-list-item-content>
                             </v-list-item>
@@ -94,9 +94,9 @@
                         <v-divider></v-divider>
 
                         <v-list dense>
-                          <v-list-item>
+                          <v-list-item v-for="item in spires"  :key="item" style="width: 176%!important;">
                             <v-list-item-content vertical
-                              >{{}}</v-list-item-content
+                              >{{item}}</v-list-item-content
                             >
                             <v-list-item-content class="align-end">
                             </v-list-item-content>
@@ -184,17 +184,17 @@ export default {
     spires() {
       return this.projet.spire
         .replace("[", "", this.projet.spire.length - 1)
-        .split(",")
-        .join("")
-        .replace("]", "");
+        .replace("]", "")
+        .split(",");
+        
     },
     prises() {
       // let newElem = document.createElement("BR")
       return this.projet.prise
         .replace("[", "", this.projet.prise.length - 1)
-        .split(",")
-        .join("")
-        .replace("]", "");
+         .replace("]", "")
+        .split(",");
+        
     },
   },
 };
