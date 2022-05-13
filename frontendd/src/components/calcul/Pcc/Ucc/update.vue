@@ -199,13 +199,15 @@ if(this.projet.conducteurSec=='feuillard'){
     return hmoy;
 },
   uccr(){
-let coBt=(parseFloat(this.projet.DintBT)+parseFloat(this.projet.BintBT)+parseFloat(this.projet.DextBT)+parseFloat(this.projet.BextBT))*parseFloat(Math.Pi)/4;
-let coMt=(parseFloat(this.projet.DintMT)+parseFloat(this.projet.BintMT)+parseFloat(this.projet.DextMT)+parseFloat(this.projet.BextMT))*parseFloat(Math.Pi)/4;
+let coBt=(parseFloat(this.projet.DintBT)+parseFloat(this.projet.BintBT)+parseFloat(this.projet.DextBT)+parseFloat(this.projet.BextBT))*parseFloat(Math.PI)/4;
+let coMt=(parseFloat(this.projet.DintMT)+parseFloat(this.projet.BintMT)+parseFloat(this.projet.DextMT)+parseFloat(this.projet.BextMT))*parseFloat(Math.PI)/4;
 let comoy=(coBt+coMt)/2;
 let delta=(parseFloat(this.projet.EpxBT)+parseFloat(this.projet.EpxMT))/2;
 
 let uccr=this.projet.Uccr;
+
 uccr=(3.81*(comoy*delta*parseFloat(Math.pow(parseFloat(this.projet.N1c),2))*parseFloat(this.projet.PrimaireIPhase))/(parseFloat(this.projet.PrimaireUPhase)*this.hmoy))*parseFloat(Math.pow(10,-5));
+
 return uccr;
 },
 ucca(){

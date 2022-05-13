@@ -151,6 +151,7 @@ Route::post('/createBarrestat', [BobinageStatiqueController::class ,'addStatBarr
 Route::delete('/deleteBarre/{id}', [BobinageStatiqueController::class ,'deleteBarre']);
 Route::post('/documents/{id}', [WordExportController::class ,'wordExport']);
 Route::put('/cm/update/{id}',[CircuitmagnetiqueController::class ,'update']);
+// Route::post('/hcuve',[CircuitmagnetiqueController::class ,'Hauteurcuve']);
 
 Route::post('/stat',[StatisiqueController::class ,'edit']);
 Route::post('/statEmploye',[StatistiqueEmployeController::class ,'create']);

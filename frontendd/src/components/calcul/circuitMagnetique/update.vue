@@ -68,7 +68,7 @@
              <div class="field4">      
                           <input
                             type="text"
-                            v-model="projet.Ex"/>
+                            v-model="ex"/>
                         </div>
                 <!-- <v-text-field
         class="field5"
@@ -123,7 +123,7 @@
            <div class="field9">      
                           <input
                             type="text"
-                            v-model="projet.Longeurcuve"/>
+                            v-model="largeurcuve"/>
                         </div>
           <div  class="field10">
            <v-text-field
@@ -165,7 +165,7 @@
                <v-text-field
        
             label="Lcuve"
-            v-model="projet.Longeurcuve"
+            v-model="longeurcuve"
             outlined
           ></v-text-field>
                <v-text-field
@@ -177,13 +177,13 @@
                <v-text-field
        
             label="Hc"
-            v-model="projet.Hc"
+            v-model="hc"
             outlined
           ></v-text-field>
                <v-text-field
        
             label="Hcuve"
-            v-model="projet.Hauteurcuve"
+            v-model="hauteurcuve"
             outlined
           ></v-text-field>
           </div>
@@ -446,17 +446,69 @@ export default {
     somme() {
       return parseInt(this.projet.pcc1) + parseInt(this.projet.pcc2);
     },
+    
+  ex(){
+let ex=this.projet.Ex;
+ex=parseFloat(Math.round(parseFloat(this.projet.DextMT)+parseFloat(this.projet.E1)));
+return ex;
+  },
    lcm(){
-       
-  return this.projet.LCM.replace("[","",this.projet.LCM.length-1).replace("]","").split(",");
+      let largeur=this.projet.largeur.replace("[","",this.projet.largeur.length-1).replace("]","").split(",");
+  
+let lCM = [];
+for(let i=0;i<largeur.length;i++){
+ lCM[i]=(2*(2*this.ex+parseFloat(largeur[i]))+(3*(this.hc+parseFloat(largeur[0])-parseFloat(largeur[i]))))/10;
+}
+return lCM;  
+  // return this.projet.LCM.replace("[","",this.projet.LCM.length-1).replace("]","").split(",");
+},
+
+surface(){
+  // return this.projet.surfaceCM.replace("[","",this.projet.surfaceCM.length-1).replace("]","").split(",");
+ let largeur=this.projet.largeur.replace("[","",this.projet.largeur.length-1).replace("]","").split(",");
+ let epaisseur=this.projet.epaisseur.replace("[","",this.projet.epaisseur.length-1).replace("]","").split(",");
+  
+let surfaceCM = [];
+for(let i=0;i<largeur.length;i++){
+ surfaceCM[i]=parseFloat(largeur[i])*parseFloat(epaisseur[i]);
+}
+return surfaceCM;
+
 },
 masse(){
-  return this.projet.masseFerCM.replace("[","",this.projet.masseFerCM.length-1).replace("]","").split(",");
-},
-surface(){
-  return this.projet.surfaceCM.replace("[","",this.projet.surfaceCM.length-1).replace("]","").split(",");
+  let masse = [];
+for(let i=0;i<this.lcm.length;i++){
+ masse[i]=this.lcm[i]*this.surface[i]*7.65*parseFloat(this.projet.coeffPoid)*parseFloat(Math.pow(10,-5));
 }
+return masse;
+  // return this.projet.masseFerCM.replace("[","",this.projet.masseFerCM.length-1).replace("]","").split(",");
+},
+
+  hc(){
+    let hc=this.projet.Hc;
+    hc=parseFloat(this.projet.HbobineBtSec)+2*(parseFloat(this.projet.Ebc));
+    return hc;
   },
+  largeurcuve(){
+    let largeurcuve=this.projet.Largeurcuve;
+    largeurcuve=parseFloat(this.projet.BextMT)+2*(parseFloat(this.projet.E3));
+    return largeurcuve;
+
+  },
+  longeurcuve(){
+    let longeurcuve=this.projet.Longeurcuve;
+    longeurcuve=2*this.ex+parseFloat(this.projet.DextMT)+2*(parseFloat(this.projet.E2));
+    return longeurcuve;
+  },
+hauteurcuve(){
+ let largeur=this.projet.largeur.replace("[","",this.projet.largeur.length-1).replace("]","").split(",");
+ let lmax=largeur[0];
+  let hauteurcuve=this.projet.Hauteurcuve;
+  hauteurcuve=parseFloat(this.projet.HbobineBtSec)+(2*(parseFloat(this.projet.Ebc)))+(2*parseFloat(lmax))+parseFloat(this.projet.Eh)+parseFloat(this.projet.E4);
+  return hauteurcuve;
+  }
+  }
+
 };
 </script>
 <style scoped>
