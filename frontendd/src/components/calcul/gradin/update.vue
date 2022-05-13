@@ -33,7 +33,7 @@
 
                       <v-text-field
                         label="Diametre propose"
-                        v-model="projet.diamPropose"
+                        v-model="diamPropose"
                         dense
                         outlined
                       ></v-text-field>
@@ -47,14 +47,14 @@
                         v-model="projet.diamNominale"
                         outlined
                       ></v-text-field>
-                      <v-text-field
+                      <!-- <v-text-field
                         label="j1"
                         dense
                         id="j1"
                         readonly
                         v-model="projet.j1"
                         outlined
-                      ></v-text-field>
+                      ></v-text-field> -->
                        <v-text-field
                         label="coeffRemplissage"
                         v-model="projet.coeffRemplissage"
@@ -83,7 +83,7 @@
                       <v-text-field
                         label="Snette"
                         dense
-                        v-model="projet.Snette"
+                        v-model="Snette"
                         outlined
                       ></v-text-field>
                       <v-text-field
@@ -320,12 +320,48 @@ export default {
 
   },
      computed:{
+       diamPropose(){
+         if(this.projet.materiau=='cuivre'){
+          return parseFloat(Math.pow((parseInt(this.projet.puissance) / 1000), 0.2316)) * 220;
+         }else if (this.projet.materiau=='aluminium'){
+          return parseFloat(Math.pow((parseInt(this.projet.puissance) / 1000), 0.2316)) * 205;
+         }else{
+           return 0;
+         }
+       },
      largeur(){
-      //  arjaalha
+        //  let diam=parseInt(Math.floor(diam/10));
+        //  let largeur=[];
+        // if(diam%2==0){
+        //     diam-=1;
+        // }
+        // diam=diam*10;
+        // for(let i=0;i<parseInt(this.projet.nbrGradin);i++){
+        //     largeur[i]=diam;
+        //     diam-=this.projet.pas;
+        //     if( largeur[i] == this.projet.largeurMin){
+        //         break;}
+        // }
+        // return largeur;
   return this.projet.largeur.replace("[","",this.projet.largeur.length-1).replace("]","").split(",");
 },
 epaisseur(){
   return this.projet.epaisseur.replace("[","",this.projet.epaisseur.length-1).replace("]","").split(",");
+},
+// Sbrut(){
+//   // 
+//   return array1.map(function($a, $b) { return $a * $b; }, this.projet.largeur, this.projet.epaisseur)
+// }
+Snette(){
+  return parseFloat(this.projet.Sbrut)*parseFloat(this.projet.coeffRemplissage);
+},
+EpaisseurTot(){
+  // get the somme of the array epaisseur
+  let somme=0;
+  for(let i=0;i<this.projet.epaisseur.length;i++){
+    somme+=parseFloat(this.projet.epaisseur[i]);
+  }
+  return somme;
 }
 },
 };

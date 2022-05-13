@@ -136,7 +136,7 @@
                             class="form__input"
                             placeholder=" "
                             id="Ptot"
-                            v-model="projet.Ptot"
+                            v-model="Ptot"
                             
                           />
                           <label for="" class="form__label">Ptot</label>
@@ -148,7 +148,7 @@
                             placeholder=" "
                             id="Poglimit"
                             
-                            v-model="projet.Poglimit"
+                            v-model="Poglimit"
                           />
                           <label for="" class="form__label">Poglimite</label>
                         </div>
@@ -159,7 +159,7 @@
                             placeholder=" "
                             id="Pccglimit"
                             
-                            v-model="projet.Pccglimit"
+                            v-model="Pccglimit"
                           />
                           <label for="" class="form__label">Pccglimite</label>
                         </div>
@@ -170,7 +170,7 @@
                             placeholder=" "
                             id="loglimit"
                             
-                            v-model="projet.loglimit"
+                            v-model="loglimit"
                           />
                           <label for="" class="form__label">loglimit</label>
                         </div>
@@ -181,7 +181,7 @@
                             placeholder=" "
                             id="Uccglimit"
                             
-                            v-model="projet.Uccglimit"
+                            v-model="Uccglimit"
                           />
                           <label for="" class="form__label">Uccglimit</label>
                         </div>
@@ -192,7 +192,7 @@
                             placeholder=" "
                             id="Ptotlimit"
                             
-                            v-model="projet.Ptotlimit"
+                            v-model="Ptotlimit"
                           />
                           <label for="" class="form__label">Ptotlimit</label>
                         </div>
@@ -203,7 +203,7 @@
                             placeholder=" "
                             id="echauffementHuile"
                             
-                            v-model="projet.echauffementHuile"
+                            v-model="this.projet.echauffementHuile"
                           />
                           <label for="" class="form__label">Echauffement Huile</label>
                         </div>
@@ -214,7 +214,7 @@
                             placeholder=" "
                             id="echauffementEnroulement"
                             
-                            v-model="projet.echauffementEnroulement"
+                            v-model="this.projet.echauffementEnroulement"
                           />
                           <label for="" class="form__label">Echauffement Enroulement</label>
                         </div>
@@ -228,7 +228,7 @@
             <router-link
               class="nav-link"
               :to="
-                '/electrique/update/' + projet.id + '/' + projet.electrique_id
+                '/electrique/update/' + projet.id 
               "
               > <v-btn
         color="primary mb-14"
@@ -389,9 +389,38 @@ export default {
     const result = await axios.get('projets/'+this.$route.params.id);
     this.projet = result.data;
   },
-  created(){
+  async created(){
+     const result = await axios.get('projets/'+this.$route.params.id);
+    this.projet = result.data;
+    console.log(this.projet);
    this.getGarantie();
     
+  },
+  computed:{
+    Poglimit(){
+      return parseFloat(this.projet.Pog)+(parseFloat(this.projet.Pog)*0.15);
+    },
+    loglimit(){
+      return parseFloat(this.projet.log)+((parseFloat(this.projet.log)*30)/100);
+    },
+    Pccglimit(){
+      return parseFloat(this.projet.Pccg)+((parseFloat(this.projet.Pccg)*15)/100);
+    },
+    Uccglimit(){
+      return parseFloat(this.projet.Uccg)+((parseFloat(this.projet.Uccg)*10)/100);
+    },
+    Ptotlimit(){
+      return parseFloat(this.projet.Pccg)+parseFloat(this.projet.Pog)+(((parseFloat(this.projet.Pccg)+parseFloat(this.projet.Pog))*10)/100);
+    },
+    echauffementHuile(){
+      return 100-parseInt(this.projet.temperatureMax);
+    },
+    echauffementEnroulement(){
+      return 105-parseInt(this.projet.temperatureMax);
+    },
+    Ptot(){
+      return parseInt(this.projet.Pccg)+parseInt(this.projet.Pog);
+    },
   }
 };
 </script>

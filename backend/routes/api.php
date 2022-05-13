@@ -156,4 +156,8 @@ Route::post('/stat',[StatisiqueController::class ,'edit']);
 Route::post('/statEmploye',[StatistiqueEmployeController::class ,'create']);
 
 
+Route::get('/electrique/tension/{id}/{u1nRange}',[ElectriqueController::class ,'tension']);
+
+
+
 
