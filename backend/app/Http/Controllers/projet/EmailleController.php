@@ -136,5 +136,8 @@ class EmailleController extends Controller
     ];
     Tole ::insert($tole);
     }
-
+public function getTole(){
+    $tole=Tole::all();
+    return $tole;
+}
 }

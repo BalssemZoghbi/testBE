@@ -128,6 +128,8 @@ Route::post('/emaille', [EmailleController::class ,'add']);
 Route::post('/saillie', [EmailleController::class ,'addSaillie']);
 Route::post('/hbrin', [EmailleController::class ,'addHbrin']);
 Route::post('/tole', [EmailleController::class ,'addTole']);
+Route::get('/gettole', [EmailleController::class ,'getTole']);
+
 
 
 Route::get('/getSaillie', [BobinageStatiqueController::class ,'getSaillie']);

@@ -135,7 +135,7 @@
              <v-text-field
        
             label="pFerspecif"
-            v-model="projet.pFerspecifique"
+            v-model="pferspecifique"
             outlined
           ></v-text-field>
                <v-text-field
@@ -366,6 +366,7 @@ export default {
   },
   data() {
     return {
+      // tole:[],
       projet: {
         id: undefined,
         masseFertot: "",
@@ -437,7 +438,22 @@ export default {
         );
       this.$router.push("/");
     },
+   async getTole(){
+    await  axios.get('/gettole').then(response => (
+      this.tole = response.data.data,
+      console.log(response.data)
+      ));
+      
+    //     const result = await axios.get("/gettole" );
+    // this.tole = result.data;
+    // console.log("tole");
+    
+    }
   },
+  created(){
+    this.getTole();
+  },
+  
   async mounted() {
     const result = await axios.get("projets/" + this.$route.params.id);
     this.projet = result.data;
@@ -506,7 +522,18 @@ hauteurcuve(){
   let hauteurcuve=this.projet.Hauteurcuve;
   hauteurcuve=parseFloat(this.projet.HbobineBtSec)+(2*(parseFloat(this.projet.Ebc)))+(2*parseFloat(lmax))+parseFloat(this.projet.Eh)+parseFloat(this.projet.E4);
   return hauteurcuve;
-  }
+  },
+//   pferspecifique(){
+//    let tole=this.tole.replace("[","",this.tole.length-1).replace("]","").split(",");
+// //     let tole = [];
+// // for(let i=0;i<tole.length;i++){
+// //  tole[i];
+// // }
+// console.log("hhhh",this.tole);
+//   // let pfs=this.tole.coef6;
+//   //  console.log(pfs);
+//    return tole;
+//   }
   }
 
 };
