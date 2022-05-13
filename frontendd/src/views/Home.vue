@@ -126,8 +126,7 @@
             dark
             small
             color="orange"
-            @click="exportword()"
-            :disabled="isDisabled"
+             @click="exportword(item.id)"
           >
             <v-icon dark> mdi-cloud-download </v-icon>
           </v-btn>
@@ -157,7 +156,7 @@ export default {
   data: () => ({
     usertype: "",
     projet: Object,
-    
+    appareil:"",
     isDisabled: false,
     dialog2: false,
     select: [
@@ -235,41 +234,28 @@ export default {
   },
 
   methods: {
-    exportword() {
-      axios.get("projets/" + this.$route.params.id).then((resp) => {
-        this.projet = resp.data;
-        console.log(this.projet);
-      });
-      // var formdata=new FormData(this.$refs.form);
-      // var form={
-      //   projet:this.projet,
-      //   formdata:formdata
-      // }
-      // axios
-      //   .post("documents/" + this.$route.params.id, {
-      //     Reference: this.projet.reference,
-      //     Puissance: this.projet.Puissance,
-      //     u1n: this.projet.u1n,
-      //     u2o: this.projet.u2o,
-      //     couplage: this.projet.couplage,
-      //     frequence: this.projet.frequence,
-      //   })
-      //   .then(function (response) {
-      //     console.log(response.data);
-      //   });
-      //      axios.post("documents/" + this.$route.params.id, formdata , {responseType:'blob'}).then(function (response) {
-      //       var headers = response.headers;
-      //        console.log(headers);
-      //        var blob=new Blob([response.data],{type:headers['content-type']});
-      //         var link = document.createElement("a");
-      //           link.href = window.URL.createObjectURL(blob);
-      //           link.download = vm.appareil;
-      //           link.click();
-      //           link.remove();
+    exportword(id) {
+
+ var vm=this;
+vm.isDisabled = true;
+  
+ axios.post('documents/'+id,{responseType:'blob'}).then(function(response){
+   var headers = response.headers;
+   console.log(headers);
+   var blob=new Blob([response.data.data],{type:headers['content-type']});
+   var link = document.createElement('a');
+   link.href = window.URL.createObjectURL(blob);
+    link.download = vm.appareil;
+    link.click();
+    link.remove();
+    vm.isDisabled = false;
+
+ }).catch(error=>{
+   if(error)
       //  vm.isDisabled = false;
-      //      }) .catch(function (error) {
-      //           console.log(error);
-      //         });
+      console.log("error");
+              });
+
     },
     create() {
       let token = localStorage.getItem("token");
