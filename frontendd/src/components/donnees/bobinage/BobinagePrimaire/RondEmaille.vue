@@ -33,7 +33,13 @@
                       ></v-text-field>
                       <v-text-field
                         label="scu1d"
-                        v-model="projet.scu1d"
+                        v-model="scu1d"
+                        dense
+                        outlined
+                      ></v-text-field>
+                      <v-text-field
+                        label="scu1"
+                        v-model="scu1"
                         dense
                         outlined
                       ></v-text-field>
@@ -45,7 +51,7 @@
                       ></v-text-field>
                       <v-text-field
                         label="D1d"
-                        v-model="projet.D1d"
+                        v-model="D1d"
                         dense
                         outlined
                       ></v-text-field>
@@ -87,13 +93,13 @@
                       ></v-text-field>
                       <v-text-field
                         label="nbrPapierMt"
-                        v-model="projet.nbrPapierMt"
+                        v-model="nbrPapierMt"
                         outlined
                         dense
                       ></v-text-field>
                       <v-text-field
                         label="EpaiseurPapier"
-                        v-model="projet.EpaiseurPapier"
+                        v-model="EpaiseurPapier"
                         outlined
                         dense
                       ></v-text-field>
@@ -143,20 +149,20 @@
                     
                       <v-text-field
                         label="NchA"
-                        v-model="projet.NchA"
+                        v-model="NchA"
                         dense
                         outlined
                       ></v-text-field>
                       <v-text-field
    
                         label= "SpchA"
-                        v-model="projet.SpchA"
+                        v-model="SpchA"
                         dense
                         outlined
                       ></v-text-field>
                             <v-text-field
                         label="NchB"
-                        v-model="projet.NchB"
+                        v-model="NchB"
                         outlined
                         dense
                       ></v-text-field>
@@ -164,7 +170,7 @@
                       <v-text-field
                         label="SpchB"
                         dense
-                        v-model="projet.SpchB"
+                        v-model="SpchB"
                         outlined
                       ></v-text-field>
                       
@@ -173,23 +179,56 @@
                         <v-text-field
                         label="HCondMt"
                         dense
-                        v-model="projet.HCondMt"
+                        v-model="HCondMt"
                         outlined
                       ></v-text-field>
                         <v-text-field
                         label="HCollier"
                         dense
-                        v-model="projet.HCollier"
+                        v-model="HCollier"
                         outlined
                       ></v-text-field>
                         <v-text-field
                         label="Hbobine"
                         dense
-                        v-model="projet.HbobineBt"
+                        v-model="HbobineBt"
                         outlined
                       ></v-text-field>
-
-                 
+     <v-select
+                        :items="typeCanaux"
+                        label="typeCanaux"
+                        v-model="projet.typeCanaux"
+                        dense
+                        outlined
+                      ></v-select>
+                      <v-text-field
+                        label="CanauxMT"
+                        dense
+                        id="canauxMT"
+                        readonly
+                        v-model="projet.canauxMT"
+                        outlined
+                      ></v-text-field>
+                      <v-text-field
+                        label="Lrg Cales"
+                        dense
+                        id="lgCales"
+                        readonly
+                        v-model="projet.lgCales"
+                        outlined
+                      ></v-text-field>
+                  <v-text-field
+                        label="EpaisseurPapierCanaux"
+                        v-model="EpaisseurPapierCanaux"
+                        dense
+                        outlined
+                      ></v-text-field>
+                     <v-text-field 
+                        label="canauxNbrPapier"
+                        v-model="projet.canauxNbrPapier"
+                        dense
+                        outlined
+                      ></v-text-field>
                 
                   
                     </div>
@@ -210,16 +249,17 @@
                             <form  v-on:submit.prevent="updateprojet">
          <div class="user-details">
                     <div class="div4" >
-        <v-text-field
+                       
+                     <v-text-field
                         label="DintMT"
-                        v-model="projet.DintMT"
+                        v-model="DintMT"
                         dense
                         outlined
                       ></v-text-field>
                    
                       <v-text-field
                         label="BintMT"
-                        v-model="projet.BintMT"
+                        v-model="BintMT"
                         dense
                         outlined
                       ></v-text-field>
@@ -239,20 +279,20 @@
                     
                       <v-text-field
                         label="EpxMT"
-                        v-model="projet.EpxMT"
+                        v-model="EpxMT"
                         dense
                         outlined
                       ></v-text-field>
                       <v-text-field
    
                         label= "EpyMT"
-                        v-model="projet.EpyMT"
+                        v-model="EpyMT"
                         dense
                         outlined
                       ></v-text-field>
                             <v-text-field
                         label="DextMT"
-                        v-model="projet.DextMT"
+                        v-model="DextMT"
                         outlined
                         dense
                       ></v-text-field>
@@ -260,7 +300,7 @@
                       <v-text-field
                         label="BextMT"
                         dense
-                        v-model="projet.BextMT"
+                        v-model="BextMT"
                         outlined
                       ></v-text-field>
                           <v-text-field
@@ -272,7 +312,7 @@
                       <v-text-field
                         label="poidMT"
                         dense
-                        v-model="projet.poidMT"
+                        v-model="poidMT"
                         outlined
                       ></v-text-field>
                   
@@ -409,7 +449,7 @@ export default {
     const result = await axios.get("projets/" + this.$route.params.id);
     this.projet = result.data;
   },
-  created() {
+ async created() {
     axios
       .get("/getdesignationBarre")
       .then((response) => (this.barre = response.data));
@@ -419,7 +459,95 @@ export default {
     axios
       .get("/getValeurSaillie")
       .then((response) => (this.saillie = response.data));
+        const result = await axios.get("projets/" + this.$route.params.id);
+    this.projet = result.data;
+      console.log(this.projet);
   },
+  computed:{
+    scu1d(){
+      return parseFloat(this.projet.PrimaireIPhase)/parseFloat(this.projet.J1D);
+    },
+    D1d(){
+      return 2*(Math.sqrt(this.projet.scu1d/(Math.PI*parseFloat(this.projet.brinParallele))));
+    },
+    nbrPapierMt(){
+        return Math.ceil((((this.projet.SpchB*this.projet.Vsp*4)/this.projet.rigiditePapierMT)-(this.projet.filobtenueIsoler-this.projet.filobtenueNue))/this.projet.EpfeuillePapier);
+    },
+    EpaiseurPapier(){
+        return this.projet.EpfeuillePapier*this.projet.nbrPapierMT;
+    },
+    NchA(){
+        return Math.floor((this.projet.nbcoucheMT*this.projet.SpchB)-this.projet.N1cmax);
+    },
+    SpchA(){
+        return Math.ceil(this.projet.SpchB-1);
+    },
+    NchB(){
+        return (this.projet.nbcoucheMT-this.projet.NchA);
+    },
+    SpchB(){
+        return Math.ceil(this.projet.N1cmax/this.projet.nbcoucheMT);
+    },
+    HbobineBt(){
+        return this.projet.HbobineBtSec;
+    },
+    HCollier(){
+        return (this.projet.HbobineBtSec-this.projet.HCondMt)/2;
+    },
+    HCondMt(){
+        return (this.projet.SpchB*this.projet.filobtenueIsoler*this.projet.brinParallele);
+    },
+    DintMT(){
+        // console.log(this.projet.DextMT,this.projet.BextMT);
+        // return parseFloat(Math.ceil(parseFloat(this.projet.DextMT)+(2*parseFloat(this.projet.DistanceBTMT))));
+        let dint=this.projet.DintMT;
+        dint=(parseFloat(this.projet.DistanceBTMT)*2)+parseFloat(this.projet.DextMT);
+        console.log(parseFloat(this.projet.DextMT));
+        return dint;
+    },
+    BintMT(){
+        return Math.ceil(this.projet.BextMT+(2*this.projet.DistanceBTMT));
+    },
+    DextMT(){
+        return Math.round(this.projet.DintMT+(2*this.projet.EpxMT));
+    },
+    BextMT(){
+        return Math.round(this.projet.BintMT+(2*this.projet.EpyMT));
+    },
+    EpxMT(){
+         if(this.projet.typeCanaux=='complet'){
+        return (this.projet.nbcoucheMT*this.projet.filobtenueIsoler+this.projet.EpaiseurPapier*(this.projet.nbcoucheMT-1-this.projet.canauxMT)+this.projet.canauxMT*this.projet.lgCales+this.projet.canauxMT*this.projet.EpaisseurPapierCanaux);
+        }else if(this.projet.typeCanaux=='lune'){
+            return (this.projet.nbcoucheMT*this.projet.filobtenueIsoler+this.projet.EpaiseurPapier*(this.projet.nbcoucheMT-1));
+        }else {
+            return 0;
+        }
+    },
+    EpyMT(){ 
+         if(this.projet.typeCanaux=='complet'){
+        return (this.projet.EpxMT);
+        }else if(this.projet.typeCanaux=='lune'){
+        return parseFloat((parseFloat(this.projet.nbcoucheMT)*parseFloat(this.projet.filobtenueIsoler)+parseFloat(this.projet.EpaiseurPapier)*(parseFloat(this.projet.nbcoucheMT)-1)+parseFloat(this.projet.canauxMT)*parseFloat(this.projet.lgCales)));
+        }else {
+            return 0;
+        }
+    },
+    poidMT(){ 
+        let coefPoid=0;
+         if(this.projet.materiau=='cuivre'){
+                coefPoid=8.9;
+            }else if(this.projet.materiau=='aluminium'){
+                coefPoid=2.7;
+            }
+            return Math.pow(10, -6)*(coefPoid*parseFloat(this.projet.N1c)*parseFloat(this.projet.scu1)*Math.PI*3)*((parseFloat(this.projet.DintMT)+parseFloat(this.projet.BintMT)+parseFloat(this.projet.DextMT)+parseFloat(this.projet.BextMT))/4)*(100+parseFloat(this.projet.majPoid))/100;
+    },
+    scu1(){ 
+        return (Math.PI*Math.pow(this.projet.filobtenueIsoler, 2))*this.projet.brinParallele/4;
+         },
+    EpaisseurPapierCanaux(){ 
+        return this.projet.canauxNbrPapier*this.projet.EpfeuillePapier;
+         },
+  }
 };
 </script>
 <style scoped>
@@ -442,9 +570,9 @@ export default {
 .div3 {
   padding: auto;
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
-
-  width: 46%;
+  grid-template-columns: repeat(2, 1fr);
+ grid-gap:10px;
+  width: 66%;
   /* margin-right: 5%; */
 }
 

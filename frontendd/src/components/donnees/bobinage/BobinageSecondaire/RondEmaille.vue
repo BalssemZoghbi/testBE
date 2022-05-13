@@ -33,7 +33,7 @@
                       ></v-text-field>
                       <v-text-field
                         label="scu2d"
-                        v-model="projet.scu2d"
+                        v-model="scu2d"
                         dense
                         outlined
                       ></v-text-field>
@@ -45,7 +45,7 @@
                       ></v-text-field>
                       <v-text-field
                         label="D2d"
-                        v-model="projet.D2d"
+                        v-model="D2d"
                         dense
                         outlined
                       ></v-text-field>
@@ -87,13 +87,13 @@
                       ></v-text-field>
                       <v-text-field
                         label="nbrPapierBT"
-                        v-model="projet.nbrPapierBT"
+                        v-model="nbrPapierBT"
                         outlined
                         dense
                       ></v-text-field>
                       <v-text-field
                         label="EpaiseurPapier"
-                        v-model="projet.EpaiseurPapierBT"
+                        v-model="EpaiseurPapierBT"
                         outlined
                         dense
                       ></v-text-field>
@@ -411,6 +411,91 @@ export default {
       .get("/getValeurSaillie")
       .then((response) => (this.saillie = response.data));
   },
+   computed:{
+    scu2d(){
+      return parseFloat(this.projet.secondaireIPhase)/parseFloat(this.projet.J2D);
+    },
+    D2d(){
+      return 2*(Math.sqrt(this.projet.scu2d/(Math.PI)));
+    },
+    nbrPapierBT(){
+        return Math.ceil((((this.projet.SpchBBT*this.projet.Vsp*4)/this.projet.rigiditePapierBT)-(this.projet.filobtenueIsolerBT-this.projet.filobtenueNueBT))/this.projet.EpfeuillePapierBT);
+    },
+    EpaiseurPapierBT(){
+        return this.projet.EpfeuillePapierBT*this.projet.nbrPapierBT;
+    },
+    NchA(){
+        return Math.floor((this.projet.nbcoucheMT*this.projet.SpchB)-this.projet.N1cmax);
+    },
+    SpchA(){
+        return Math.ceil(this.projet.SpchB-1);
+    },
+    NchB(){
+        return (this.projet.nbcoucheMT-this.projet.NchA);
+    },
+    SpchB(){
+        return Math.ceil(this.projet.N1cmax/this.projet.nbcoucheMT);
+    },
+    HbobineBt(){
+        return this.projet.HbobineBtSec;
+    },
+    HCollier(){
+        return (this.projet.HbobineBtSec-this.projet.HCondMt)/2;
+    },
+    HCondMt(){
+        return (this.projet.SpchB*this.projet.filobtenueIsoler*this.projet.brinParallele);
+    },
+    DintMT(){
+        // console.log(this.projet.DextMT,this.projet.BextMT);
+        // return parseFloat(Math.ceil(parseFloat(this.projet.DextMT)+(2*parseFloat(this.projet.DistanceBTMT))));
+        let dint=this.projet.DintMT;
+        dint=(parseFloat(this.projet.DistanceBTMT)*2)+parseFloat(this.projet.DextMT);
+        console.log(parseFloat(this.projet.DextMT));
+        return dint;
+    },
+    BintMT(){
+        return Math.ceil(this.projet.BextMT+(2*this.projet.DistanceBTMT));
+    },
+    DextMT(){
+        return Math.round(this.projet.DintMT+(2*this.projet.EpxMT));
+    },
+    BextMT(){
+        return Math.round(this.projet.BintMT+(2*this.projet.EpyMT));
+    },
+    EpxMT(){
+         if(this.projet.typeCanaux=='complet'){
+        return (this.projet.nbcoucheMT*this.projet.filobtenueIsoler+this.projet.EpaiseurPapier*(this.projet.nbcoucheMT-1-this.projet.canauxMT)+this.projet.canauxMT*this.projet.lgCales+this.projet.canauxMT*this.projet.EpaisseurPapierCanaux);
+        }else if(this.projet.typeCanaux=='lune'){
+            return (this.projet.nbcoucheMT*this.projet.filobtenueIsoler+this.projet.EpaiseurPapier*(this.projet.nbcoucheMT-1));
+        }else {
+            return 0;
+        }
+    },
+    EpyMT(){ 
+         if(this.projet.typeCanaux=='complet'){
+        return (this.projet.EpxMT);
+        }else if(this.projet.typeCanaux=='lune'){
+        return parseFloat((parseFloat(this.projet.nbcoucheMT)*parseFloat(this.projet.filobtenueIsoler)+parseFloat(this.projet.EpaiseurPapier)*(parseFloat(this.projet.nbcoucheMT)-1)+parseFloat(this.projet.canauxMT)*parseFloat(this.projet.lgCales)));
+        }else {
+            return 0;
+        }
+    },
+    poidMT(){ 
+        let coefPoid=0;
+         if(this.projet.materiau=='cuivre'){
+                coefPoid=8.9;
+            }else if(this.projet.materiau=='aluminium'){
+                coefPoid=2.7;
+            }
+            return Math.pow(10, -6)*(coefPoid*parseFloat(this.projet.N1c)*parseFloat(this.projet.scu1)*Math.PI*3)*((parseFloat(this.projet.DintMT)+parseFloat(this.projet.BintMT)+parseFloat(this.projet.DextMT)+parseFloat(this.projet.BextMT))/4)*(100+parseFloat(this.projet.majPoid))/100;
+    },
+     scu1(){ 
+        return (Math.PI*Math.pow(this.projet.filobtenueIsoler, 2))*this.projet.brinParallele/4;
+         },
+    EpaisseurPapierCanaux(){ 
+        return this.projet.canauxNbrPapier*this.projet.EpfeuillePapier;
+         },
+   }
 };
 </script>
 <style scoped>
