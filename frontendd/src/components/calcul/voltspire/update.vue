@@ -28,7 +28,7 @@
                         class="form__input"
                         placeholder=" "
                         id="Bmax"
-                        v-model="projet.Bmax"
+                        v-model="bmax"
                       />
                       <label for="" class="form__label">Bmax</label>
                     </div>
@@ -38,7 +38,7 @@
                         class="form__input"
                         placeholder=" "
                         id="N1c"
-                        v-model="projet.N1c"
+                        v-model="n1c"
                       />
                       <label for="" class="form__label">N1c</label>
                     </div>
@@ -48,7 +48,7 @@
                         class="form__input"
                         placeholder=" "
                         id="N2c"
-                        v-model="projet.N2c"
+                        v-model="n2c"
                       />
                       <label for="" class="form__label">N2c</label>
                     </div>
@@ -59,7 +59,7 @@
                         class="form__input"
                         placeholder=" "
                         id="Vsp"
-                        v-model="projet.Vsp"
+                        v-model="vsp"
                       />
                       <label for="" class="form__label">Vsp</label>
                     </div>
@@ -196,7 +196,43 @@ export default {
         .split(",");
         
     },
+       n2c(){
+    let  n2c=parseFloat(this.projet.N2c);
+
+if(this.projet.couplageSecondaire=="zn"){
+    n2c=(parseFloat(this.projet.secondaireUligne)*2/3)*parseFloat(Math.pow(10,6))/(parseFloat(Math.PI)*parseFloat(this.projet.frequence)*parseFloat(Math.sqrt(2))*parseFloat(this.projet.Snette)*parseFloat(this.projet.Bmax));
+    }
+    else{
+    n2c=parseFloat(this.projet.secondaireUPhase)*(parseFloat(Math.pow(10,6)))/(parseFloat(Math.PI)*parseFloat(this.projet.frequence)*parseFloat(Math.sqrt(2))*parseFloat(this.projet.Snette)*parseFloat(this.projet.Bmax));
+
+    }
+    return n2c;
   },
+  n1c(){
+    let  n1c=parseFloat(this.projet.N1c);
+     n1c=parseFloat(this.projet.PrimaireUPhase)/(parseFloat(this.projet.Vsp));
+     return n1c;
+  },
+  vsp(){
+let vsp=this.projet.Vsp;
+if(this.projet.couplageSecondaire=="zn"){
+  vsp=(parseFloat(this.projet.secondaireUligne)*2/3)/parseFloat(this.projet.N2c);
+}else{
+        vsp=parseFloat(this.projet.secondaireUPhase)/parseFloat(this.projet.N2c);
+        }
+return vsp;
+  },
+  bmax(){
+let bmax=this.projet.Bmax;
+if(this.projet.couplageSecondaire=="zn"){
+  bmax=(parseFloat(this.projet.secondaireUligne)*2/3)*parseFloat(Math.pow(10,6))/(parseFloat(Math.PI)*parseFloat(this.projet.frequence)*parseFloat(Math.sqrt(2))*parseFloat(this.projet.Snette)*parseFloat(this.projet.N2c));
+}else{
+  bmax=parseFloat(this.projet.secondaireUPhase)*parseFloat(Math.pow(10,6))/(parseFloat(Math.PI)*parseFloat(this.projet.frequence)*parseFloat(Math.sqrt(2))*parseFloat(this.projet.Snette)*parseFloat(this.projet.N2c));
+     }
+        return bmax;
+  },
+  }
+
 };
 </script>
 <style scoped>

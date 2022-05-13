@@ -128,6 +128,8 @@ Route::post('/emaille', [EmailleController::class ,'add']);
 Route::post('/saillie', [EmailleController::class ,'addSaillie']);
 Route::post('/hbrin', [EmailleController::class ,'addHbrin']);
 Route::post('/tole', [EmailleController::class ,'addTole']);
+Route::get('/gettole', [EmailleController::class ,'getTole']);
+
 
 
 Route::get('/getSaillie', [BobinageStatiqueController::class ,'getSaillie']);
@@ -151,6 +153,7 @@ Route::post('/createBarrestat', [BobinageStatiqueController::class ,'addStatBarr
 Route::delete('/deleteBarre/{id}', [BobinageStatiqueController::class ,'deleteBarre']);
 Route::post('/documents/{id}', [WordExportController::class ,'wordExport']);
 Route::put('/cm/update/{id}',[CircuitmagnetiqueController::class ,'update']);
+// Route::post('/hcuve',[CircuitmagnetiqueController::class ,'Hauteurcuve']);
 
 Route::post('/stat',[StatisiqueController::class ,'edit']);
 Route::post('/statEmploye',[StatistiqueEmployeController::class ,'create']);

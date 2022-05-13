@@ -38,12 +38,12 @@
                       
                       <v-text-field
                         label="Pcc1"
-                        v-model="projet.pcc1"
+                        v-model="pcc1"
                         outlined
                       ></v-text-field>
                       <v-text-field
                         label="Pcc2"
-                        v-model="projet.pcc2"
+                        v-model="pcc2"
                         outlined
                       ></v-text-field>
                  
@@ -58,18 +58,18 @@
                     <div class="field10">
                       <v-text-field
                         label="Uccr"
-                        v-model="projet.Uccr"
+                        v-model="uccr"
                         outlined
                       ></v-text-field>
                       <v-text-field
                         label="Ucca"
-                        v-model="projet.Ucca"
+                        v-model="ucca"
                         outlined
                       ></v-text-field>
 
                       <v-text-field
                         label="Ucc"
-                        v-model="projet.Ucc"
+                        v-model="ucc"
                         outlined
                       ></v-text-field>
                   
@@ -164,11 +164,64 @@ export default {
     this.projet = result.data;
   },
    computed:{
+   pcc1(){
+    
+     let pcc1=this.projet.pcc1;
+     if(this.projet.materiau=='cuivre'){
+     pcc1=2.286*parseFloat(Math.pow(parseFloat(this.projet.j1),2))*parseFloat(this.projet.poidMT)*(100+parseInt(this.projet.MajourationU))/100;
+     }else if(this.projet.materiau=='aluminium'){
+      pcc1=12.18*parseFloat(Math.pow(parseFloat(this.projet.j1),2))*parseFloat(this.projet.poidMT)*(100+parseInt(this.projet.MajourationU))/100;
+     }
+     return pcc1;
+     },
+       pcc2(){
+     let m2=this.projet.materiauSec;
+     let pcc2=this.projet.pcc2;
+     if(m2=='cuivre'){
+     pcc2=2.286*parseFloat(Math.pow(parseFloat(this.projet.j2),2))*parseFloat(this.projet.poidBT)*(100+parseInt(this.projet.MajourationU))/100;
+     }else if(m2=='aluminium'){
+      pcc2=12.18*parseFloat(Math.pow(parseFloat(this.projet.j2),2))*parseFloat(this.projet.poidBT)*(100+parseInt(this.projet.MajourationU))/100;
+     }
+     return pcc2;
+     },
      somme(){
-       return parseInt(this.projet.pcc1) + parseInt(this.projet.pcc2);
+       return parseFloat(this.projet.pcc1) + parseFloat(this.projet.pcc2);
 },
+hmoy()
+{
+   let hmoy;
+if(this.projet.conducteurSec=='feuillard'){
+ hmoy=parseFloat(this.projet.HCondMt)+parseFloat(this.projet.HfeuillardBT)/2;
+// hmoy=parseFloat(this.projet.HCondMt)+parseFloat(this.projet.HfeuillardBT)/2;
+}else{
+  hmoy=parseFloat(this.projet.HCondMt)+parseFloat(this.projet.HSFSBT)/2;
+}
+    return hmoy;
+},
+  uccr(){
+let coBt=(parseFloat(this.projet.DintBT)+parseFloat(this.projet.BintBT)+parseFloat(this.projet.DextBT)+parseFloat(this.projet.BextBT))*parseFloat(Math.PI)/4;
+let coMt=(parseFloat(this.projet.DintMT)+parseFloat(this.projet.BintMT)+parseFloat(this.projet.DextMT)+parseFloat(this.projet.BextMT))*parseFloat(Math.PI)/4;
+let comoy=(coBt+coMt)/2;
+let delta=(parseFloat(this.projet.EpxBT)+parseFloat(this.projet.EpxMT))/2;
 
+let uccr=this.projet.Uccr;
+
+uccr=(3.81*(comoy*delta*parseFloat(Math.pow(parseFloat(this.projet.N1c),2))*parseFloat(this.projet.PrimaireIPhase))/(parseFloat(this.projet.PrimaireUPhase)*this.hmoy))*parseFloat(Math.pow(10,-5));
+
+return uccr;
 },
+ucca(){
+  let ucca=parseFloat(this.projet.Ucca);
+  ucca=(parseFloat(this.projet.pccMaj)*100/parseInt(this.projet.puissance)*1000+parseFloat(this.projet.pccMaj))*parseFloat(Math.pow(10,-6));
+  return ucca;
+},
+ucc(){
+  let ucc=parseFloat(this.projet.Ucc);
+  ucc=parseFloat(Math.sqrt(parseFloat(Math.pow(this.projet.Uccr,2))+parseFloat(Math.pow(this.projet.Ucca,2))));
+
+  return ucc;
+},
+}
 };
 </script>
 <style scoped>
