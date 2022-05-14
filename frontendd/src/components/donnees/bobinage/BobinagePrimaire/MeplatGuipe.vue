@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navbarUpdate />
+    <!-- <navbarUpdate /> -->
     <NavDash
       :conducteur="projet.conducteur"
       :conducteurSec="projet.conducteurSec"
@@ -71,7 +71,7 @@
                         dense
                         id="scu1"
                         readonly
-                        v-model="projet.scu1"
+                        v-model="scu1"
                         outlined
                       ></v-text-field>
                       <v-text-field
@@ -79,7 +79,7 @@
                         dense
                         id="j1"
                         readonly
-                        v-model="projet.j1"
+                        v-model="j1"
                         outlined
                       ></v-text-field>
                     </div>
@@ -92,7 +92,7 @@
                       ></v-text-field>
                       <v-text-field
                         label="spCoucheMT"
-                        v-model="projet.spCoucheMT"
+                        v-model="spCouche"
                         outlined
                         dense
                       ></v-text-field>
@@ -166,27 +166,27 @@
                     <div class="div2">
                       <v-text-field
                         label="Hspire"
-                        v-model="projet.Hspire"
+                        v-model="hSpire"
                         dense
                         outlined
                       ></v-text-field>
 
                       <v-text-field
                         label="HSFS"
-                        v-model="projet.HSFS"
+                        v-model="hsfs"
                         dense
                         outlined
                       ></v-text-field>
 
                       <v-text-field
                         label="HFS"
-                        v-model="projet.HFS"
+                        v-model="hfs"
                         dense
                         outlined
                       ></v-text-field>
                       <v-text-field
-                        label="HbobineBt"
-                        v-model="projet.HbobineBt"
+                        label="HbobineMt"
+                        v-model="hbobt"
                         dense
                         outlined
                       ></v-text-field>
@@ -200,7 +200,7 @@
                       <v-text-field
                         label="CollierBT2"
                         dense
-                        v-model="projet.collierBT2"
+                        v-model="collierBt2"
                         outlined
                       ></v-text-field>
                     </div>
@@ -268,37 +268,36 @@
                     </v-chip>
                   </div>
 
-
                   <div class="div2">
                     <v-text-field
                       label="DintMT"
-                      v-model="projet.DintMT"
+                      v-model="DintBint"
                       dense
                       outlined
                     ></v-text-field>
 
                     <v-text-field
                       label="BintMT"
-                      v-model="projet.BintMT"
+                      v-model="DintBint"
                       dense
                       outlined
                     ></v-text-field>
 
                     <v-text-field
                       label="EpxMT"
-                      v-model="projet.EpxMT"
+                      v-model="Epx"
                       dense
                       outlined
                     ></v-text-field>
                     <v-text-field
                       label="EpyMT"
-                      v-model="projet.EpyMT"
+                      v-model="Epy"
                       dense
                       outlined
                     ></v-text-field>
                     <v-text-field
                       label="DextMT"
-                      v-model="projet.DextMT"
+                      v-model="Dext"
                       outlined
                       dense
                     ></v-text-field>
@@ -306,7 +305,7 @@
                     <v-text-field
                       label="BextMT"
                       dense
-                      v-model="projet.BextMT"
+                      v-model="Bext"
                       outlined
                     ></v-text-field>
                     <v-text-field
@@ -318,7 +317,7 @@
                     <v-text-field
                       label="poidMT"
                       dense
-                      v-model="projet.poidMT"
+                      v-model="poid"
                       outlined
                     ></v-text-field>
                   </div>
@@ -343,6 +342,8 @@ export default {
   data() {
     return {
       barre: [],
+      hbrin: [],
+      saillie: [],
       conducteur: ["meplat guipé", "Rond emaille", "feuillard"],
       materiau: ["cuivre", "aluminium"],
       etage: ["1", "2"],
@@ -386,6 +387,7 @@ export default {
         BextMT: "",
         poidMT: "",
         majPoid: "",
+        nbrPapier: "",
       },
       e1: 1,
     };
@@ -410,7 +412,9 @@ export default {
         e1r: this.projet.e1r,
         rigiditePapierMT: this.projet.rigiditePapierMT,
         ep1PapierMT: this.projet.ep1PapierMT,
+
         nbrPapierMt: this.projet.nbrPapierMt,
+        nbrPapier: this.projet.nbrPapier,
         typeCanaux: this.projet.typeCanaux,
         canauxMT: this.projet.canauxMT,
         lgCales: this.projet.lgCales,
@@ -437,13 +441,15 @@ export default {
         .then(
           (response) => ((this.id = response.data.id), console.log(this.projet))
         );
-        if(this.projet.conducteurSec=="Rond emaille"){
-      this.$router.push("/bobinageSecondaireRond/"+this.$route.params.id);
-    }else if(this.projet.conducteurSec=="feuillard"){
-      this.$router.push("/bobinageSecondaireFeuillard/"+this.$route.params.id);
-    }else if(this.projet.conducteurSec=="meplat guipé"){
-      this.$router.push("/bobinageSecondaireMeplat/"+this.$route.params.id);
-    }
+      if (this.projet.conducteurSec == "Rond emaille") {
+        this.$router.push("/bobinageSecondaireRond/" + this.$route.params.id);
+      } else if (this.projet.conducteurSec == "feuillard") {
+        this.$router.push(
+          "/bobinageSecondaireFeuillard/" + this.$route.params.id
+        );
+      } else if (this.projet.conducteurSec == "meplat guipé") {
+        this.$router.push("/bobinageSecondaireMeplat/" + this.$route.params.id);
+      }
     },
   },
   async mounted() {
@@ -460,6 +466,116 @@ export default {
     axios
       .get("/getValeurSaillie")
       .then((response) => (this.saillie = response.data));
+  },
+  computed: {
+    scu1() {
+      return (
+        0.987 *
+        this.projet.saillieMT *
+        this.projet.etageMT *
+        (this.projet.hbrin1MT * this.projet.nbBrin1MT +
+          this.projet.hbrin2MT * this.projet.nbBrin2MT)
+      );
+    },
+    j1() {
+      return this.projet.PrimaireIPhase / this.scu1;
+    },
+    spCouche() {
+      return this.projet.N1c / this.projet.nbcoucheMT;
+    },
+    hSpire() {
+      return (
+        (this.projet.hbrin1MT + this.projet.e1ax) * this.projet.nbBrin1MT +
+        (this.projet.hbrin2MT + this.projet.e1ax) * this.projet.nbBrin2MT
+      );
+    },
+    hsfs() {
+      return (
+        this.hSpire * this.spCouche +
+        (this.projet.etageMT - 1) *
+          (this.projet.hbrin1MT + this.projet.hbrin2MT + this.projet.e1ax * 2)
+      );
+    },
+    hfs() {
+      if (this.projet.hbrin1MT == 0) {
+        return (
+          this.hSpire * this.spCouche +
+          (this.projet.etageMT - 1) * (this.projet.hbrin1MT + this.projet.e1ax)
+        );
+      } else {
+        return (
+          this.hSpire * this.spCouche +
+          (this.projet.etageMT - 1) *
+            (this.projet.hbrin1MT + this.projet.hbrin2MT + this.projet.e1ax * 2)
+        );
+      }
+    },
+    hbobt() {
+      return this.hfs + this.projet.collierBT * 2;
+    },
+    collierBt2() {
+      return this.hbobt - this.hfs - this.projet.collierBT;
+    },
+    poid() {
+      // let coefPoid;
+      // if (this.projet.materiau == "cuivre") {
+      //   coefPoid = 8.9;
+      // } else if (this.projet.materiau == "aluminium") {
+      //   coefPoid = 2.7;
+      // }
+      // console.log(coefPoid);
+      // return Math.pow(10, -6)*(
+      //  coefPoid*
+      //   this.projet.N1c *
+      //   this.scu1 *
+      //   (this.DintBint + this.Epx) *
+      //   parseFloat(Math.PI) *
+      //   3 *
+      //   ((100 + this.projet.majPoid) / 100)
+      // );
+      let coefPoid=0;
+         if(this.projet.materiau=='cuivre'){
+                coefPoid=8.9;
+            }else if(this.projet.materiau=='aluminium'){
+                coefPoid=2.7;
+            }
+ return Math.pow(10, -6)*(coefPoid*parseFloat(this.projet.N1c)*parseFloat(this.projet.scu1)*(parseFloat(this.projet.DintMT)+parseFloat(this.projet.EpxMT))*Math.PI*3*((100+parseFloat(this.projet.majPoid))/100));
+    },
+    DintBint() {
+      return this.projet.diamNominale + 2 * this.projet.CMBT;
+    },
+    Epx() {
+      let epx=this.projet.EpxMT;
+      if (this.projet.typeCanaux == "complet") {
+        epx =
+          (this.projet.saillieMT + this.projet.e1r) *
+            this.projet.etageMT *
+            this.projet.nbcoucheMT +
+          this.projet.canauxMT * this.projet.lgCales +
+          this.projet.nbrPapierMT * this.projet.canauxEp1Papier;
+      } else if (this.projet.typeCanaux == "lune") {
+        epx =
+          (this.projet.saillieMT + this.projet.e1r) *
+          this.projet.etageMT *
+          this.projet.nbcoucheMT;
+      }
+
+      // console.log("hhhhh",this.projet.nbrPapier);
+      return epx;
+    },
+    Epy() {
+      return(this.projet.saillieMT + this.projet.e1r) *
+          this.projet.etageMT *
+          this.projet.nbcoucheMT;
+    },
+    Dext() {
+      // console.log(this.projet.DintMT,this.projet.EpxMT);
+      return this.projet.DintMT + 2 * this.projet.EpxMT;
+    },
+    Bext() {
+      return this.DintBint + 2 * this.Epy;
+    },
+    
   },
 };
 </script>
