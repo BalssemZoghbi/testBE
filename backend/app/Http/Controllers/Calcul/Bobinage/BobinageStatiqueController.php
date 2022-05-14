@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Calcul\Bobinage;
 
 use App\Http\Controllers\Controller;
 use App\Models\Donnees\bobinage\Barre;
+use App\Models\Donnees\bobinage\Emaille;
 use App\Models\Donnees\bobinage\Hbrin;
 use App\Models\Donnees\bobinage\Saillie;
+use App\Models\Donnees\gradin\Tole;
 use Illuminate\Http\Request;
 
 class BobinageStatiqueController extends Controller
@@ -65,6 +67,25 @@ class BobinageStatiqueController extends Controller
         foreach ($brin as $valeur){
             array_push($tab, $valeur->valeurHbrin);
         }
+        return response()->json($tab);
+    }
+    public function getTole()
+    {
+        $tab=[];
+        $tole = Tole::get('tole');
+        foreach ($tole as $valeur){
+            array_push($tab, $valeur->tole);
+        }
+        return response()->json($tab);
+    }
+    public function getEmaille()
+    {
+        $tab = Emaille::all();
+        // $tab=[];
+        // $tole = Emaille::get('tole');
+        // foreach ($tole as $valeur){
+        //     array_push($tab, $valeur->tole);
+        // }
         return response()->json($tab);
     }
     public function getoneHbrin($id)

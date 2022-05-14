@@ -44,7 +44,7 @@
                       ></v-text-field>
                       <v-text-field
                         label="HbobineBt"
-                        v-model="projet.HbobineBtSec"
+                        v-model="HbobineBt"
                         dense
                         outlined
                       ></v-text-field>
@@ -69,7 +69,7 @@
                       ></v-text-field>
                       <v-text-field
                         label="scu2"
-                        v-model="projet.scu2"
+                        v-model="scu2"
                         dense
                         outlined
                       ></v-text-field>
@@ -77,7 +77,7 @@
                     <div class="field10">
                       <v-text-field
                         label="j2"
-                        v-model="projet.j2"
+                        v-model="j2"
                         dense
                         outlined
                       ></v-text-field>
@@ -113,7 +113,7 @@
                       ></v-text-field>
                       <v-text-field
                         label="ePap"
-                        v-model="projet.ePapBT"
+                        v-model="ePapBT"
                         readonly
                         outlined
                         dense
@@ -156,7 +156,7 @@
                       <v-select
                         :items="typeCanaux"
                         label="typeCanaux"
-                        v-model="projet.typeCanaux"
+                        v-model="projet.typeCanauxBT"
                         outlined
                       ></v-select>
 
@@ -187,7 +187,7 @@
                       ></v-text-field>
                       <v-text-field
                         label="EpPapier"
-                        v-model="projet.EpPapierBT"
+                        v-model="EpPapierBT"
                         outlined
                       ></v-text-field>
                     </div>
@@ -195,33 +195,33 @@
                     <div class="div2">
                       <v-text-field
                         label="DintBT"
-                        v-model="projet.DintBT"
+                        v-model="DintBT"
                         dense
                         outlined
                       ></v-text-field>
 
                       <v-text-field
                         label="BintBT"
-                        v-model="projet.BintBT"
+                        v-model="DintBT"
                         dense
                         outlined
                       ></v-text-field>
 
                       <v-text-field
                         label="EpxBT"
-                        v-model="projet.EpxBT"
+                        v-model="EpxBT"
                         dense
                         outlined
                       ></v-text-field>
                       <v-text-field
                         label="EpyBT"
-                        v-model="projet.EpyBT"
+                        v-model="EpxBT"
                         dense
                         outlined
                       ></v-text-field>
                       <v-text-field
                         label="DextBT"
-                        v-model="projet.DextBT"
+                        v-model="DextBT"
                         outlined
                         dense
                       ></v-text-field>
@@ -229,7 +229,7 @@
                       <v-text-field
                         label="BextBT"
                         dense
-                        v-model="projet.BextBT"
+                        v-model="BextBT"
                         outlined
                       ></v-text-field>
                       <v-text-field
@@ -241,7 +241,7 @@
                       <v-text-field
                         label="poidBT"
                         dense
-                        v-model="projet.poidBT"
+                        v-model="poidBT"
                         outlined
                       ></v-text-field>
                     </div>
@@ -273,14 +273,14 @@
                     <div class="div2">
                       <v-text-field
                         label="largeurBarre"
-                        v-model="projet.largeurBarreBT"
+                        v-model="largeurBarreBT"
                         dense
                         outlined
                       ></v-text-field>
 
                       <v-text-field
                         label="epaisseurBarre"
-                        v-model="projet.epaisseurBarreBT"
+                        v-model="epaisseurBarreBT"
                         dense
                         outlined
                       ></v-text-field>
@@ -294,13 +294,13 @@
                       ></v-select>
                       <v-text-field
                         label="Sbarre"
-                        v-model="projet.SbarreBT"
+                        v-model="SbarreBT"
                         dense
                         outlined
                       ></v-text-field>
                       <v-text-field
                         label="Jbarre"
-                        v-model="projet.JbarreBT"
+                        v-model="JbarreBT"
                         outlined
                         dense
                       ></v-text-field>
@@ -438,6 +438,78 @@ export default {
        axios.get('/getValeurSaillie').then(
         (response) => (this.saillie = response.data)
       );
+    },
+    computed:{
+    HbobineBt(){
+      console.log(this.projet.HfeuillardBT,this.projet.collierBTSec);
+      return this.projet.HfeuillardBT+2*this.projet.collierBTSec;
+    },
+    epFeuillardBT(){
+      return this.projet.epFeuil1BT+this.projet.epFeuil2BT;
+    },
+    epFeuilPapBT(){
+      return this.projet.epFeuilPapBT*this.projet.nbrPapierBT;
+    },
+    EpPapierBT(){
+      return this.epFeuilPapBT*this.projet.nbrPapierBT;
+    },
+    scu2(){
+      return this.projet.HfeuillardBT*this.epFeuillardBT;
+    },
+    j2(){
+            return this.projet.secondaireIPhase/this.projet.scu2;
+        },
+    ePapBT(){
+      return (parseFloat(this.projet.ep1PapierBT)*parseFloat(this.projet.nbrPap1BT))+(parseFloat(this.projet.ep2PapierBT)*parseFloat(this.projet.nbrPap2BT));
+    },
+    DintBT(){
+        // console.log(this.projet.DextMT,this.projet.BextMT);
+        // return parseFloat(Math.ceil(parseFloat(this.projet.DextMT)+(2*parseFloat(this.projet.DistanceBTMT))));
+        let dint=this.projet.DintBT;
+        dint=(parseFloat(this.projet.CMBT)*2)+parseFloat(this.projet.diamNominale);
+        // console.log(parseFloat(this.projet.DextMT));
+        return dint;
+    },
+    DextBT(){
+        return Math.round(this.DintBT+(2*this.EpxBT));
+    },
+    BextBT(){
+        return Math.round(this.DintBT+(2*this.EpxBT)+this.epaisseurBarreBT);
+    },
+    EpxBT(){
+         if(this.projet.typeCanauxBT=='complet'){
+        return ((this.projet.N2c*this.projet.epFeuillardBT)+(this.projet.N2c-1)*this.projet.ePapBT+(this.projet.canauxBTSec*this.projet.lgCalesBT));
+        }else if(this.projet.typeCanauxBT=='lune'){
+            return (this.projet.N2c*this.projet.epFeuillardBT+(this.projet.N2c-1)*(this.projet.ePapBT));
+        }else {
+            return 0;
+        }
+    },
+
+    poidBT(){ 
+        let coefPoid=0;
+         if(this.projet.materiauSec=='cuivre'){
+                coefPoid=8.9;
+            }else if(this.projet.materiauSec=='aluminium'){
+                coefPoid=2.7;
+            }
+            return Math.pow(10, -6)*(coefPoid*parseFloat(this.projet.N2c)*parseFloat(this.projet.scu2)*Math.PI*3)*((parseFloat(this.projet.DintBT)+parseFloat(this.projet.BintBT)+parseFloat(this.projet.DextBT)+parseFloat(this.projet.BextBT))/4)*(100+parseFloat(this.projet.majPoidBT))/100;
+    },
+    JbarreBT(){
+      return this.projet.secondaireIPhase/this.SbarreBT;
+    },
+    SbarreBT(){
+      return parseFloat(this.epaisseurBarreBT)*parseFloat(this.largeurBarreBT);
+    },
+    epaisseurBarreBT(){
+      let barre=this.projet.EpbarreBT;
+      return barre.split("*")[0];
+    },
+    largeurBarreBT(){
+      let barre=this.projet.EpbarreBT;
+      return barre.split("*")[1];
+    },
+  
     }
  
 };

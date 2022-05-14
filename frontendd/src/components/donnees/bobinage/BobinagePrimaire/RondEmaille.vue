@@ -27,7 +27,7 @@
                     <div class="field10">
                       <v-text-field
                         label="N1cmax"
-                        v-model="projet.N1cmax"
+                        v-model="N1cmax"
                         dense
                         outlined
                       ></v-text-field>
@@ -43,7 +43,7 @@
                         dense
                         outlined
                       ></v-text-field>
-                    x
+                    
                       <v-text-field
                         label="D1d"
                         v-model="D1d"
@@ -61,7 +61,7 @@
                         dense
                         id="filobtenueNue"
                         readonly
-                        v-model="projet.filobtenueNue"
+                        v-model="filobtenueNue"
                         outlined
                       ></v-text-field>
                       <v-text-field
@@ -69,7 +69,7 @@
                         dense
                        id="filobtenueIsoler"
                             readonly
-                            v-model="projet.filobtenueIsoler"
+                            v-model="filobtenueIsoler"
                         outlined
                       ></v-text-field>
                     </div>
@@ -100,7 +100,7 @@
                       ></v-text-field>
                       <v-text-field
                         label="J1D"
-                        v-model="J1D"
+                        v-model="projet.J1D"
                         outlined
                         dense
                       ></v-text-field>
@@ -347,6 +347,7 @@ export default {
   data() {
     return {
       barre: [],
+      emaille: [],
       conducteur: ["meplat guipé", "Rond emaille", "feuillard"],
       materiau: ["cuivre", "aluminium"],
       typeCanaux: ["complet", "lune"],
@@ -466,6 +467,10 @@ export default {
     axios
       .get("/getValeurSaillie")
       .then((response) => (this.saillie = response.data));
+    axios
+      .get("/emaille")
+      .then((response) => (this.emaille = response.data));
+
         const result = await axios.get("projets/" + this.$route.params.id);
     this.projet = result.data;
       console.log(this.projet);
@@ -556,6 +561,42 @@ export default {
          },
     j1(){
         return this.projet.PrimaireIPhase/this.projet.scu1;
+    },
+    N1cmax(){
+        let spires=this.projet.spire.replace("[","",this.projet.spire.length-1).replace("]","").split(",");
+       return spires[0];
+    },
+    filobtenueIsoler(){
+      let emaille=this.emaille;
+      let des=[];
+      for(let i=0;i<emaille.length;i++){
+          des[i]= emaille[i].Designation;
+      }
+      const needle = this.D1d;  
+      const closest = des.reduce((a, b) => {
+          return Math.abs(b - needle) < Math.abs(a - needle) ? b : a;
+      });
+      return closest;
+    },
+    filobtenueNue(){
+      // let emaille=this.emaille;
+      // console.log(emaille);
+      // for(let i=0;i<emaille.length;i++){
+      //   if(emaille[i].Designation==this.projet.D1d){
+      //     return emaille[i].Designation;
+      //   }
+      // }
+      // return 0 ;
+       let emaille=this.emaille;
+      let des=[];
+      for(let i=0;i<emaille.length;i++){
+          des[i]= emaille[i].Designation;
+      }
+      const needle = this.D1d;
+      const closest = des.reduce((a, b) => {
+          return Math.abs(b - needle) < Math.abs(a - needle) ? b : a;
+      });
+      return closest;
     }
   }
 };

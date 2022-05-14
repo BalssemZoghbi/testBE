@@ -44,7 +44,7 @@
                       ></v-text-field>
                       <v-text-field
                         label="HbobineBt"
-                        v-model="projet.HbobineBt"
+                        v-model="HbobineBt"
                         dense
                         outlined
                       ></v-text-field>
@@ -63,13 +63,19 @@
                       ></v-text-field>
                       <v-text-field
                         label="epFeuillard"
-                        v-model="projet.epFeuillard"
+                        v-model="epFeuillard"
+                        dense
+                        outlined
+                      ></v-text-field>
+                      <v-text-field
+                        label="epFeuilPap"
+                        v-model="epFeuilPap"
                         dense
                         outlined
                       ></v-text-field>
                       <v-text-field
                         label="scu1"
-                        v-model="projet.scu1"
+                        v-model="scu1"
                         dense
                         outlined
                       ></v-text-field>
@@ -77,7 +83,7 @@
                     <div class="field10">
                       <v-text-field
                         label="j1"
-                        v-model="projet.j1"
+                        v-model="j1"
                         dense
                         outlined
                       ></v-text-field>
@@ -113,7 +119,7 @@
                       ></v-text-field>
                       <v-text-field
                         label="ePap"
-                        v-model="projet.ePap"
+                        v-model="ePap"
                         readonly
                         outlined
                         dense
@@ -132,12 +138,12 @@
           </v-stepper-content>
 
           <v-stepper-step :complete="e1 > 2" step="2">
-            Caneaux/Diamétre
+            Canaux/Diamétre
           </v-stepper-step>
 
           <v-stepper-content step="2">
             <v-card class="mb-4">
-              <div class="title">Caneaux/Diamétre</div>
+              <div class="title">Canaux/Diamétre</div>
               <!-- <div class="content"> -->
               <form v-on:submit.prevent="updateprojet">
                 <div class="user-details">
@@ -187,7 +193,7 @@
                       ></v-text-field>
                       <v-text-field
                         label="EpPapier"
-                        v-model="projet.EpPapier"
+                        v-model="EpPapier"
                         outlined
                       ></v-text-field>
                     </div>
@@ -195,33 +201,33 @@
                     <div class="div2">
                       <v-text-field
                         label="DintMT"
-                        v-model="projet.DintMT"
+                        v-model="DintMT"
                         dense
                         outlined
                       ></v-text-field>
 
                       <v-text-field
                         label="BintMT"
-                        v-model="projet.BintMT"
+                        v-model="DintMT"
                         dense
                         outlined
                       ></v-text-field>
 
                       <v-text-field
                         label="EpxMT"
-                        v-model="projet.EpxMT"
+                        v-model="EpxMT"
                         dense
                         outlined
                       ></v-text-field>
                       <v-text-field
                         label="EpyMT"
-                        v-model="projet.EpyMT"
+                        v-model="EpxMT"
                         dense
                         outlined
                       ></v-text-field>
                       <v-text-field
                         label="DextMT"
-                        v-model="projet.DextMT"
+                        v-model="DextMT"
                         outlined
                         dense
                       ></v-text-field>
@@ -229,7 +235,7 @@
                       <v-text-field
                         label="BextMT"
                         dense
-                        v-model="projet.BextMT"
+                        v-model="BextMT"
                         outlined
                       ></v-text-field>
                       <v-text-field
@@ -241,7 +247,7 @@
                       <v-text-field
                         label="poidMT"
                         dense
-                        v-model="projet.poidMT"
+                        v-model="poidMT"
                         outlined
                       ></v-text-field>
                     </div>
@@ -273,14 +279,14 @@
                     <div class="div2">
                       <v-text-field
                         label="largeurBarre"
-                        v-model="projet.largeurBarre"
+                        v-model="largeurBarre"
                         dense
                         outlined
                       ></v-text-field>
 
                       <v-text-field
                         label="epaisseurBarre"
-                        v-model="projet.epaisseurBarre"
+                        v-model="epaisseurBarre"
                         dense
                         outlined
                       ></v-text-field>
@@ -294,14 +300,14 @@
                       ></v-select>
                       <v-text-field
                         label="Sbarre"
-                        v-model="projet.Sbarre"
+                        v-model="Sbarre"
                         dense
                         outlined
                       ></v-text-field>
 
                       <v-text-field
                         label="Jbarre"
-                        v-model="projet.Jbarre"
+                        v-model="Jbarre"
                         outlined
                         dense
                       ></v-text-field>
@@ -449,8 +455,73 @@ export default {
       .then((response) => (this.saillie = response.data));
   },
   computed: {
-    epbarre() {
-      return this.projet.epaisseurBarre + "*" + this.projet.largeurBarre;
+    HbobineBt(){
+      return this.projet.Hfeuillard+2*this.projet.collierBT;
+    },
+    epFeuillard(){
+      return this.projet.epFeuil1+this.projet.epFeuil2;
+    },
+    epFeuilPap(){
+      return this.projet.epFeuilPap*this.projet.ep2Papier;
+    },
+    EpPapier(){
+      return this.projet.epFeuilPap*this.projet.nbrPapierMT;
+    },
+    scu1(){
+      return this.projet.Hfeuillard*this.projet.epFeuillard;
+    },
+    j1(){
+            return this.projet.PrimaireIPhase/this.projet.scu1;
+        },
+    ePap(){
+      return (parseFloat(this.projet.ep1PapierMT)*parseFloat(this.projet.nbrPap1))+(parseFloat(this.projet.ep2Papier)*parseFloat(this.projet.nbrPap2));
+    },
+    DintMT(){
+        // console.log(this.projet.DextMT,this.projet.BextMT);
+        // return parseFloat(Math.ceil(parseFloat(this.projet.DextMT)+(2*parseFloat(this.projet.DistanceBTMT))));
+        let dint=this.projet.DintMT;
+        dint=(parseFloat(this.projet.CMBT)*2)+parseFloat(this.projet.diamNominale);
+        // console.log(parseFloat(this.projet.DextMT));
+        return dint;
+    },
+    DextMT(){
+        return Math.round(this.DintMT+(2*this.EpxMT));
+    },
+    BextMT(){
+        return Math.round(this.DintMT+(2*this.EpxMT)+this.epaisseurBarre);
+    },
+    EpxMT(){
+         if(this.projet.typeCanaux=='complet'){
+        return ((this.projet.N2c*this.projet.epFeuillard)+(this.projet.N2c-1)*this.projet.ePap+(this.projet.canauxBT*this.projet.lgCales));
+        }else if(this.projet.typeCanaux=='lune'){
+            return (this.projet.N2c*this.projet.epFeuillard+(this.projet.N2c-1)*(this.projet.ePap));
+        }else {
+            return 0;
+        }
+    },
+
+    poidMT(){ 
+        let coefPoid=0;
+         if(this.projet.materiau=='cuivre'){
+                coefPoid=8.9;
+            }else if(this.projet.materiau=='aluminium'){
+                coefPoid=2.7;
+            }
+            return Math.pow(10, -6)*(coefPoid*parseFloat(this.projet.N2c)*parseFloat(this.projet.scu1)*Math.PI*3)*((parseFloat(this.projet.DintMT)+parseFloat(this.projet.BintMT)+parseFloat(this.projet.DextMT)+parseFloat(this.projet.BextMT))/4)*(100+parseFloat(this.projet.majPoid))/100;
+    },
+    Jbarre(){
+      return this.projet.secondaireIPhase/this.Sbarre;
+    },
+    Sbarre(){
+      return this.epaisseurBarre*this.largeurBarre;
+    },
+    epaisseurBarre(){
+      let barre=this.projet.Epbarre;
+      return barre.split("*")[0];
+    },
+    largeurBarre(){
+      let barre=this.projet.Epbarre;
+      return barre.split("*")[1];
     },
   },
 };

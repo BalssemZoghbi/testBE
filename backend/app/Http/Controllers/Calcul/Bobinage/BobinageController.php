@@ -348,7 +348,7 @@ return $barre;
 $barre=$this->calculBarre($request->Epbarre);
 $HbobineBt= $this->Hbobine($request->Hfeuillard,$request->collierBT);
 $ePap=$this->ePap($request->ep1Papier,$request->nbrPap1,$request->ep2Papier,$request->nbrPap2);
-$epxfeui=$this->Epxfeui($request->typeCanaux,$projet->N2c,$request->canauxBt,$request->lgCales,$epFeuillard,$ePap);
+$epxfeui=$this->Epxfeui($request->typeCanaux,$projet->N2c,$request->canauxMT,$request->lgCales,$epFeuillard,$ePap);
 $epFeuilpap=$this->epPapier($request->epFeuilPap,$request->nbrPapier);
 $epPapier=$this->epPapier($epFeuilpap,$request->nbPapier);
 if($barre!=null){
