@@ -82,6 +82,7 @@ return $surface;
      */
     public function update(Request $request,$id)
     {
+     
         $projet = DB::table('projets')
         ->join('circuitmagnetiques', 'circuitmagnetiques.id', '=', 'projets.circuitmagnetiques_id')
         ->join('gradins', 'gradins.id', '=', 'projets.gradin_id')
