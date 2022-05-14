@@ -125,6 +125,7 @@ Route::put('/gradin/update/{id}',[GradinController::class ,'updateGradin']);
 Route::delete('/gradin/delete/{id}',[GradinController::class ,'deleteGradin']);
 Route::put('/volt/update/{id}', [VoltspireController::class ,'updateVoltSpire']);
 Route::post('/emaille', [EmailleController::class ,'add']);
+Route::get('/emaille', [BobinageStatiqueController::class ,'getEmaille']);
 Route::post('/saillie', [EmailleController::class ,'addSaillie']);
 Route::post('/hbrin', [EmailleController::class ,'addHbrin']);
 Route::post('/tole', [EmailleController::class ,'addTole']);
@@ -132,6 +133,7 @@ Route::get('/gettole', [EmailleController::class ,'getTole']);
 
 
 
+Route::get('/getTole', [BobinageStatiqueController::class ,'getTole']);
 Route::get('/getSaillie', [BobinageStatiqueController::class ,'getSaillie']);
 Route::get('/getSaillie/{id}', [BobinageStatiqueController::class ,'getoneSaillie']);
 Route::post('/addSaillie', [BobinageStatiqueController::class ,'createSaillie']);

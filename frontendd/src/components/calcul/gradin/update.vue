@@ -77,7 +77,7 @@
                       <v-text-field
                         label="Sbrut"
                         dense
-                        v-model="projet.Sbrut"
+                        v-model="Sbrut"
                         outlined
                       ></v-text-field>
                       <v-text-field
@@ -95,7 +95,7 @@
                       <v-text-field
                         label="EpaisseurTot"
                         dense
-                        v-model="projet.EpaisseurTot"
+                        v-model="EpaisseurTot"
                         outlined
                       ></v-text-field>
                     </div>
@@ -258,7 +258,7 @@ export default {
       },
   data() {
     return {
-      toles:['M110-23','M120-27','M130-30','H75-23','H80-23','H85-23','H95-27','H105-30'],
+      toles:[],
       pas:['10','20'],
       projet: {
         id: undefined,
@@ -316,8 +316,10 @@ export default {
     this.projet = result.data;
   },
    created() {
-                console.log(this.projets);
-
+       axios.get('/getTole').then(
+        (response) => (this.toles = response.data)
+      );
+    
   },
      computed:{
        diamPropose(){
@@ -330,40 +332,69 @@ export default {
          }
        },
      largeur(){
-        //  let diam=parseInt(Math.floor(diam/10));
-        //  let largeur=[];
-        // if(diam%2==0){
-        //     diam-=1;
-        // }
-        // diam=diam*10;
-        // for(let i=0;i<parseInt(this.projet.nbrGradin);i++){
-        //     largeur[i]=diam;
-        //     diam-=this.projet.pas;
-        //     if( largeur[i] == this.projet.largeurMin){
-        //         break;}
-        // }
-        // return largeur;
-  return this.projet.largeur.replace("[","",this.projet.largeur.length-1).replace("]","").split(",");
+         let diam=parseInt(Math.floor(this.projet.diamNominale/10));
+         let largeur=[];
+        if(diam%2==0){
+            diam-=1;
+        }
+        diam=diam*10;
+        for(let i=0;i<parseInt(this.projet.nbrGradin);i++){
+            largeur[i]=diam;
+            diam-=this.projet.pas;
+            if( largeur[i] == this.projet.largeurMin){
+                break;}
+        }
+        return largeur;
+  // return this.projet.largeur.replace("[","",this.projet.largeur.length-1).replace("]","").split(",");
 },
 epaisseur(){
-  return this.projet.epaisseur.replace("[","",this.projet.epaisseur.length-1).replace("]","").split(",");
+        let epaisseur=[];
+        let precedent=0;
+        for(let i=0;i<this.largeur.length;i++){
+            epaisseur[i]=Math.sqrt(Math.pow(this.projet.diamNominale, 2)-Math.pow(this.largeur[i], 2));
+            epaisseur[i]-=precedent;
+            precedent+=epaisseur[i];
+        }
+         let j=0;
+        let coeff=[0.5, 0.3, 0.25, 0.2];
+        let prec=0;
+        for(let i=0;i<this.largeur.length-this.projet.demiGradin;i++){
+            prec+=epaisseur[i];
+        }
+        for(let i=this.largeur.length-this.projet.demiGradin;i<this.largeur.length;i++){
+            epaisseur[i]=(Math.sqrt(Math.pow(this.projet.diamNominale, 2)-Math.pow(this.largeur[i],2))-prec)*coeff[j];
+            j++;
+            prec+=epaisseur[i];
+        }
+        console.log(prec);
+        return epaisseur;
+    
+  // return this.projet.epaisseur.replace("[","",this.projet.epaisseur.length-1).replace("]","").split(",");
 },
-// Sbrut(){
-//   // 
-//   return array1.map(function($a, $b) { return $a * $b; }, this.projet.largeur, this.projet.epaisseur)
-// }
 Snette(){
   return parseFloat(this.projet.Sbrut)*parseFloat(this.projet.coeffRemplissage);
 },
 EpaisseurTot(){
-  // get the somme of the array epaisseur
+ let epaisseur=this.projet.epaisseur.replace("[","",this.projet.epaisseur.length-1).replace("]","").split(",");
   let somme=0;
-  for(let i=0;i<this.projet.epaisseur.length;i++){
-    somme+=parseFloat(this.projet.epaisseur[i]);
+  for(let i=0;i<epaisseur.length;i++){
+    somme+=parseFloat(epaisseur[i]);
   }
   return somme;
+},
+Sbrut(){
+let brut=[];
+let somme=0;
+   let epaisseur=this.projet.epaisseur.replace("[","",this.projet.epaisseur.length-1).replace("]","").split(",");
+   let largeur=this.projet.largeur.replace("[","",this.projet.largeur.length-1).replace("]","").split(",");
+   for(let i=0;i<largeur.length;i++){
+    brut[i]=parseFloat(largeur[i])*parseFloat(epaisseur[i]);
+    somme+=brut[i];
+    }
+return somme;
 }
 },
+
 };
 </script>
 <style scoped>

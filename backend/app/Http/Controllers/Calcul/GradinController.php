@@ -72,7 +72,7 @@ class GradinController extends Controller
     {
         $marge=count($oldlargGradin)-$nbrGradin;
 
-        if($nbrGradin>=$oldnbreGradin){
+        // if($nbrGradin>=$oldnbreGradin){
         $diam=floor($diam/10);
         if($diam%2==0){
             $diam-=1;
@@ -87,17 +87,16 @@ class GradinController extends Controller
         // dd($largeur);
         // return $largeur;
 
-        }else{
+        // }else{
 
-        if($largMin!=0){
-                $largeurrev = array_reverse($oldlargGradin);
-                $indexLargeurMin = array_search($largMin, $largeurrev);
-                array_splice($largeurrev, $indexLargeurMin + 1, $marge);
-                $largeur = array_reverse($largeurrev);
-            }
-            // return $largeur;
+        // if($largMin!=0){
+        //         $largeurrev = array_reverse($oldlargGradin);
+        //         $indexLargeurMin = array_search($largMin, $largeurrev);
+        //         array_splice($largeurrev, $indexLargeurMin + 1, $marge);
+        //         $largeur = array_reverse($largeurrev);
+        //     }
 
-        }
+        // }
             return $largeur;
 
     }
