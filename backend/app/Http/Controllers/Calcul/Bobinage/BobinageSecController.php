@@ -174,8 +174,8 @@ class BobinageSecController extends Controller
     }
 
     }
-    public function D1d($su1d){
-    return 2*sqrt($su1d/pi());
+    public function D1d($su1d,$brin){
+    return 2*sqrt($su1d/(pi()*$brin));
     }
     public function filobtenue($d1d){
         $closest = null;
@@ -211,8 +211,8 @@ class BobinageSecController extends Controller
     public function spcha($spchb){
         return Ceil($spchb-1) ;
     }
-    public function hCondMt($filObtenueisole,$spchb){
-        return $spchb*$filObtenueisole;
+    public function hCondMt($filObtenueisole,$spchb,$brin){
+        return $spchb*$filObtenueisole*$brin;
     }
     public function Hcollier($hBobine,$HcondMt){
         return ($hBobine-$HcondMt)/2;
@@ -302,11 +302,12 @@ public function BextMt($bint,$epy){
 
             $projet = DB::table('projets')
             ->join('bobinage_secs', 'bobinage_secs.id', '=', 'projets.bobinage_secs_id')
+            ->join('bobinages', 'bobinages.id', '=', 'projets.bobinage_id')
             ->join('electriques', 'electriques.id', '=', 'projets.electrique_id')
             ->join('volt_Spires', 'volt_Spires.id', '=', 'projets.volt_spires_id')
             ->join('gradins', 'gradins.id', '=', 'projets.gradin_id')
             ->where('projets.id',$id)
-            ->select('bobinage_secs.*','bobinage_secs.id as bobine_id','volt_Spires.N2c','volt_Spires.Vsp','volt_Spires.spire','gradins.diamNominale','gradins.CMBT','electriques.secondaireIPhase', 'projets.*')
+            ->select('bobinage_secs.*','bobinage_secs.id as bobine_id','volt_Spires.N2c','bobinages.HbobineBt','volt_Spires.Vsp','volt_Spires.spire','gradins.diamNominale','gradins.CMBT','electriques.secondaireIPhase', 'projets.*')
             ->get()->first();
             $Bobinage=BobinageSec::FindOrFail($projet->bobine_id );
 
@@ -314,7 +315,7 @@ public function BextMt($bint,$epy){
 
             if($request->conducteurSec=='Rond emaille'){
                 // dd($request->conducteurSec);
-                $D1d=$this->D1d($su1d);
+                $D1d=$this->D1d($su1d,$request->brinParalleleBT);
                 $filobtenue=$this->filobtenue($D1d);
                 $Designation=$filobtenue->Designation;
                 $Isole=$filobtenue->Isole;
@@ -360,9 +361,9 @@ public function BextMt($bint,$epy){
         $ncha=$this->ncha($request->nbcoucheBT,$spchb,$N1cmax);
         $nchb=$this->nchb($request->nbcoucheBT,$ncha);
         $spcha=$this->spcha($spchb);
-        $HcondMt=$this->hcondMt($Isole,$spchb);
+        $HcondMt=$this->hcondMt($Isole,$spchb,$request->brinParalleleBT);
 
-        $Hcollier=$this->Hcollier($projet->HbobineBtSec,$HcondMt);
+        $Hcollier=$this->Hcollier($projet->HbobineBt,$HcondMt);
         $nbrPapierMT=$this->NbrePapier($request->conducteurSec,$request->rigiditePapierBT,$spchb,$projet->Vsp,$Isole,$Designation,$request->EpfeuillePapierBT);
       $epaisseurPapier=$this->epaisseurPapier($request->EpfeuillePapierBT, $nbrPapierMT);
 
@@ -476,11 +477,11 @@ if($request->typeCanauxBT=="complet"){
                     'BintBT'=>$bintMt ,
                     'EpxBT'=>$EpxMt ,
                     'EpyBT'=>$epy ,
-                    'DextBTBT'=>$dextMt ,
+                    'DextBT'=>$dextMt ,
                     'BextBT'=>$BextMt ,
                     'poidBT'=>$poidEmaille ,
                     'majPoidBT'=>$request->majPoidBT ,
-                    'HbobineBtSec'=>$projet->HbobineBtSec ,
+                    'HbobineBtSec'=>$projet->HbobineBt ,
                     'EpCylindreBT'=>$request->EpCylindreBT ,
                     'rigiditePapierBT'=>$request->rigiditePapierBT ,
                      'N2cmax'=>$N1cmax,
