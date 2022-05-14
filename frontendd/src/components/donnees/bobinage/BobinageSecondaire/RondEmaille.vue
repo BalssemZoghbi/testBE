@@ -37,9 +37,21 @@
                         dense
                         outlined
                       ></v-text-field>
+                        <v-text-field
+                        label="scu2"
+                        v-model="scu2"
+                        dense
+                        outlined
+                      ></v-text-field>
                       <v-text-field
                         label="J2D"
                         v-model="projet.J2D"
+                        dense
+                        outlined
+                      ></v-text-field>
+                      <v-text-field
+                        label="j2"
+                        v-model="j2"
                         dense
                         outlined
                       ></v-text-field>
@@ -125,6 +137,31 @@
                     <div class="div">
                  
                     <div class="div2">
+                     
+                      <v-text-field
+                        label="CanauxMT"
+                        dense
+                        id="canauxBT"
+                        readonly
+                        v-model="projet.canauxBT"
+                        outlined
+                      ></v-text-field>
+                      <v-text-field
+                        label="Lrg Cales"
+                        dense
+                        id="lgCalesBT"
+                        readonly
+                        v-model="projet.lgCalesBT"
+                        outlined
+                      ></v-text-field>
+                  
+                     <v-text-field 
+                        label="canauxNbrPapierBT"
+                        v-model="projet.canauxNbrPapierBT"
+                        dense
+                        outlined
+                      ></v-text-field>
+                
         <v-text-field
                         label="nbcoucheBT"
                         v-model="projet.nbcoucheBT"
@@ -141,20 +178,20 @@
                     
                       <v-text-field
                         label="NchA"
-                        v-model="projet.NchABT"
+                        v-model="NchABT"
                         dense
                         outlined
                       ></v-text-field>
                       <v-text-field
    
                         label= "SpchA"
-                        v-model="projet.SpchABT"
+                        v-model="SpchABT"
                         dense
                         outlined
                       ></v-text-field>
                             <v-text-field
                         label="NchB"
-                        v-model="projet.NchBBT"
+                        v-model="NchBBT"
                         outlined
                         dense
                       ></v-text-field>
@@ -162,7 +199,7 @@
                       <v-text-field
                         label="SpchB"
                         dense
-                        v-model="projet.SpchBBT"
+                        v-model="SpchBBT"
                         outlined
                       ></v-text-field>
                       
@@ -171,19 +208,25 @@
                         <v-text-field
                         label="HCondBt"
                         dense
-                        v-model="projet.HCondBt"
+                        v-model="HCondBt"
                         outlined
                       ></v-text-field>
                         <v-text-field
                         label="HCollier"
                         dense
-                        v-model="projet.HCollierBT"
+                        v-model="HCollierBT"
                         outlined
                       ></v-text-field>
                         <v-text-field
                         label="Hbobine"
                         dense
-                        v-model="projet.HbobineBtSec"
+                        v-model="HbobineBtSec"
+                        outlined
+                      ></v-text-field>
+                        <v-text-field
+                        label="EpaisseurPapierCanauxBT"
+                        dense
+                        v-model="EpaisseurPapierCanauxBT"
                         outlined
                       ></v-text-field>
 
@@ -208,16 +251,23 @@
                             <form  v-on:submit.prevent="updateprojet">
          <div class="user-details">
                     <div class="div4" >
+                        <v-select
+                        :items="typeCanaux"
+                        label="typeCanaux"
+                        v-model="projet.typeCanauxBT"
+                        dense
+                        outlined
+                      ></v-select>
         <v-text-field
                         label="DintBT"
-                        v-model="projet.DintBT"
+                        v-model="DintBT"
                         dense
                         outlined
                       ></v-text-field>
                    
                       <v-text-field
                         label="BintBT"
-                        v-model="projet.BintBT"
+                        v-model="BintBT"
                         dense
                         outlined
                       ></v-text-field>
@@ -237,20 +287,20 @@
                     
                       <v-text-field
                         label="EpxBT"
-                        v-model="projet.EpxBT"
+                        v-model="EpxBT"
                         dense
                         outlined
                       ></v-text-field>
                       <v-text-field
    
                         label= "EpyBT"
-                        v-model="projet.EpyBT"
+                        v-model="EpyBT"
                         dense
                         outlined
                       ></v-text-field>
                             <v-text-field
                         label="DextBT"
-                        v-model="projet.DextBT"
+                        v-model="DextBT"
                         outlined
                         dense
                       ></v-text-field>
@@ -258,7 +308,7 @@
                       <v-text-field
                         label="BextBT"
                         dense
-                        v-model="projet.BextBT"
+                        v-model="BextBT"
                         outlined
                       ></v-text-field>
                           <v-text-field
@@ -270,7 +320,7 @@
                       <v-text-field
                         label="poidBT"
                         dense
-                        v-model="projet.poidBT"
+                        v-model="poidBT"
                         outlined
                       ></v-text-field>
                   
@@ -342,6 +392,7 @@ export default {
         EpaiseurPapierBT: "",
         EpaisseurPapierCanauxBT: "",
         HbobineBtSec: "",
+        canauxNbrPapierBT: "",
       },
       e1: 1,
     };
@@ -387,6 +438,7 @@ export default {
         EpaiseurPapierBT: this.projet.EpaiseurPapierBT,
         EpaisseurPapierCanauxBT: this.projet.EpaisseurPapierCanauxBT,
         HbobineBtSec: this.projet.HbobineBtSec,
+        canauxNbrPapierBT: this.projet.canauxNbrPapierBT,
       };
       axios
         .put("bobinesec/update/" + this.$route.params.id, projets)
@@ -416,7 +468,7 @@ export default {
       return parseFloat(this.projet.secondaireIPhase)/parseFloat(this.projet.J2D);
     },
     D2d(){
-      return 2*(Math.sqrt(this.projet.scu2d/(Math.PI)));
+      return 2*(Math.sqrt(this.projet.scu2d/(Math.PI*parseFloat(this.projet.brinParalleleBT))));
     },
     nbrPapierBT(){
         return Math.ceil((((this.projet.SpchBBT*this.projet.Vsp*4)/this.projet.rigiditePapierBT)-(this.projet.filobtenueIsolerBT-this.projet.filobtenueNueBT))/this.projet.EpfeuillePapierBT);
@@ -424,77 +476,83 @@ export default {
     EpaiseurPapierBT(){
         return this.projet.EpfeuillePapierBT*this.projet.nbrPapierBT;
     },
-    NchA(){
-        return Math.floor((this.projet.nbcoucheMT*this.projet.SpchB)-this.projet.N1cmax);
+    NchABT(){
+        return Math.floor((this.projet.nbcoucheBT*this.projet.SpchBBT)-this.projet.N2cmax);
     },
-    SpchA(){
-        return Math.ceil(this.projet.SpchB-1);
+    SpchABT(){
+        return Math.ceil(parseFloat(this.projet.SpchBBT)-1);
     },
-    NchB(){
-        return (this.projet.nbcoucheMT-this.projet.NchA);
+    NchBBT(){
+        return (this.projet.nbcoucheBT-this.projet.NchABT);
     },
-    SpchB(){
-        return Math.ceil(this.projet.N1cmax/this.projet.nbcoucheMT);
+    SpchBBT(){
+        return Math.ceil(this.projet.N2cmax/this.projet.nbcoucheBT);
     },
-    HbobineBt(){
-        return this.projet.HbobineBtSec;
+    HbobineBtSec(){
+      // console.log(this.projet.HbobineBt);
+        return this.projet.HbobineBt;
     },
-    HCollier(){
-        return (this.projet.HbobineBtSec-this.projet.HCondMt)/2;
+    HCollierBT(){
+      console.log(this.projet.HCondBt);
+        return (this.projet.HbobineBtSec-this.projet.HCondBt)/2;
     },
-    HCondMt(){
-        return (this.projet.SpchB*this.projet.filobtenueIsoler*this.projet.brinParallele);
+    HCondBt(){
+        return (this.projet.SpchBBT*this.projet.filobtenueIsolerBT*this.projet.brinParalleleBT);
     },
-    DintMT(){
+    DintBT(){
         // console.log(this.projet.DextMT,this.projet.BextMT);
         // return parseFloat(Math.ceil(parseFloat(this.projet.DextMT)+(2*parseFloat(this.projet.DistanceBTMT))));
-        let dint=this.projet.DintMT;
-        dint=(parseFloat(this.projet.DistanceBTMT)*2)+parseFloat(this.projet.DextMT);
-        console.log(parseFloat(this.projet.DextMT));
+        let dint=this.projet.DintBT;
+        dint=(parseFloat(this.projet.DistanceBTMTSec)*2)+parseFloat(this.projet.DextBT);
+        // console.log(parseFloat(this.projet.DextBT));
         return dint;
     },
-    BintMT(){
-        return Math.ceil(this.projet.BextMT+(2*this.projet.DistanceBTMT));
+    BintBT(){
+        return Math.ceil(this.projet.BextBT+(2*this.projet.DistanceBTMTSec));
     },
-    DextMT(){
-        return Math.round(this.projet.DintMT+(2*this.projet.EpxMT));
+    DextBT(){
+        return (this.projet.DintBT+(2*this.projet.EpxBT));
     },
-    BextMT(){
-        return Math.round(this.projet.BintMT+(2*this.projet.EpyMT));
+    BextBT(){
+        return (this.projet.BintBT+(2*this.projet.EpyBT));
     },
-    EpxMT(){
-         if(this.projet.typeCanaux=='complet'){
-        return (this.projet.nbcoucheMT*this.projet.filobtenueIsoler+this.projet.EpaiseurPapier*(this.projet.nbcoucheMT-1-this.projet.canauxMT)+this.projet.canauxMT*this.projet.lgCales+this.projet.canauxMT*this.projet.EpaisseurPapierCanaux);
-        }else if(this.projet.typeCanaux=='lune'){
-            return (this.projet.nbcoucheMT*this.projet.filobtenueIsoler+this.projet.EpaiseurPapier*(this.projet.nbcoucheMT-1));
+    EpxBT(){
+         if(this.projet.typeCanauxBT=='complet'){
+        return (this.projet.nbcoucheBT*this.projet.filobtenueIsolerBT+this.projet.EpaiseurPapierBT*(this.projet.nbcoucheBT-1-this.projet.canauxBT)+this.projet.canauxBT*this.projet.lgCalesBT+this.projet.canauxBT*this.projet.EpaisseurPapierCanauxBT);
+        }else if(this.projet.typeCanauxBT=='lune'){
+            return (this.projet.nbcoucheBT*this.projet.filobtenueIsolerBT+this.projet.EpaiseurPapierBT*(this.projet.nbcoucheBT-1));
         }else {
             return 0;
         }
     },
-    EpyMT(){ 
-         if(this.projet.typeCanaux=='complet'){
-        return (this.projet.EpxMT);
-        }else if(this.projet.typeCanaux=='lune'){
-        return parseFloat((parseFloat(this.projet.nbcoucheMT)*parseFloat(this.projet.filobtenueIsoler)+parseFloat(this.projet.EpaiseurPapier)*(parseFloat(this.projet.nbcoucheMT)-1)+parseFloat(this.projet.canauxMT)*parseFloat(this.projet.lgCales)));
+    EpyBT(){ 
+         if(this.projet.typeCanauxBT=='complet'){
+        return (this.projet.EpxBT);
+        }else if(this.projet.typeCanauxBT=='lune'){
+        return parseFloat((parseFloat(this.projet.nbcoucheBT)*parseFloat(this.projet.filobtenueIsolerBT)+parseFloat(this.projet.EpaiseurPapierBT)*(parseFloat(this.projet.nbcoucheBT)-1)+parseFloat(this.projet.canauxBT)*parseFloat(this.projet.lgCalesBT)));
         }else {
             return 0;
         }
     },
-    poidMT(){ 
+    poidBT(){ 
         let coefPoid=0;
-         if(this.projet.materiau=='cuivre'){
+         if(this.projet.materiauSec=='cuivre'){
                 coefPoid=8.9;
-            }else if(this.projet.materiau=='aluminium'){
+            }else if(this.projet.materiauSec=='aluminium'){
                 coefPoid=2.7;
             }
-            return Math.pow(10, -6)*(coefPoid*parseFloat(this.projet.N1c)*parseFloat(this.projet.scu1)*Math.PI*3)*((parseFloat(this.projet.DintMT)+parseFloat(this.projet.BintMT)+parseFloat(this.projet.DextMT)+parseFloat(this.projet.BextMT))/4)*(100+parseFloat(this.projet.majPoid))/100;
+            return Math.pow(10, -6)*(coefPoid*parseFloat(this.projet.N2cmax)*parseFloat(this.projet.scu2)*Math.PI*3)*((parseFloat(this.projet.DintBT)+parseFloat(this.projet.BintBT)+parseFloat(this.projet.DextBT)+parseFloat(this.projet.BextBT))/4)*(100+parseFloat(this.projet.majPoidBT))/100;
     },
-     scu1(){ 
-        return (Math.PI*Math.pow(this.projet.filobtenueIsoler, 2))*this.projet.brinParallele/4;
+     scu2(){ 
+        return (Math.PI*Math.pow(this.projet.filobtenueNueBT, 2))*this.projet.brinParalleleBT/4;
          },
-    EpaisseurPapierCanaux(){ 
-        return this.projet.canauxNbrPapier*this.projet.EpfeuillePapier;
+    EpaisseurPapierCanauxBT(){ 
+        return this.projet.canauxNbrPapierBT*this.projet.EpfeuillePapierBT;
          },
+    j2(){
+      console.log(this.projet.scu2)
+      return this.projet.secondaireIPhase/this.projet.scu2;
+    }
    }
 };
 </script>

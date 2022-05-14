@@ -43,12 +43,7 @@
                         dense
                         outlined
                       ></v-text-field>
-                      <v-text-field
-                        label="J1D"
-                        v-model="projet.J1D"
-                        dense
-                        outlined
-                      ></v-text-field>
+                    x
                       <v-text-field
                         label="D1d"
                         v-model="D1d"
@@ -100,6 +95,18 @@
                       <v-text-field
                         label="EpaiseurPapier"
                         v-model="EpaiseurPapier"
+                        outlined
+                        dense
+                      ></v-text-field>
+                      <v-text-field
+                        label="J1D"
+                        v-model="J1D"
+                        outlined
+                        dense
+                      ></v-text-field>
+                      <v-text-field
+                        label="j1"
+                        v-model="j1"
                         outlined
                         dense
                       ></v-text-field>
@@ -547,6 +554,9 @@ export default {
     EpaisseurPapierCanaux(){ 
         return this.projet.canauxNbrPapier*this.projet.EpfeuillePapier;
          },
+    j1(){
+        return this.projet.PrimaireIPhase/this.projet.scu1;
+    }
   }
 };
 </script>
