@@ -13,6 +13,7 @@ import notFound from "../components/NotFound.vue";
 import Connexion from "../components/Auth/Connexion.vue";
 import updateGarantie from "../components/donnees/garantie/update.vue";
 import updateGradin from "../components/calcul/gradin/update.vue";
+import tole from "../components/calcul/gradin/tole.vue";
 import updateVolt from "../components/calcul/voltspire/update.vue";
 
 import Bobine from "../components/donnees/bobinage/update.vue";
@@ -48,6 +49,11 @@ const routes = [
     path: "/profil",
     name: "profil",
     component: Profile,
+  },
+  {
+    path: "/tole",
+    name: "tole",
+    component: tole,
   },
   {
     path: "/garantie24",

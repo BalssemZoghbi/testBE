@@ -221,6 +221,8 @@ export default {
         children: [
           { icon: "list", text: "Bobinages", route: "/saillie" },
           { icon: "reorder", text: "Garanties", route: "/garantie24" },
+          { icon: "mdi-wrench", text: "Tole Magnetique", route: "/tole" },
+          
         ],
       },
     ],
