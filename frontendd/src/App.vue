@@ -5,6 +5,9 @@
       <!-- <h1 >transparent</h1> -->
       <!-- <login/> -->
       <router-view />
+      <!-- <div class="loading">
+      <font-awesome-icon icon="spinner" spin class="mr-3" /> loading...
+    </div> -->
     </v-main>
   </v-app>
 </template>
