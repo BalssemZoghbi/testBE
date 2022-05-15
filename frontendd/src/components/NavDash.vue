@@ -126,8 +126,9 @@
       <v-toolbar-title 
       class="text"
       >
-       <navbarUpdate :conducteur="this.conducteur" :conducteurSec="this.conducteurSec"  />
-        <!-- <span class="hidden-sm-and-down">SacemAutocite</span> -->
+         <span class="hidden-sm-and-down" v-if="((this.$route.path).indexOf('projet'))<=0" >SacemAutocite</span>
+       <navbarUpdate :conducteur="this.conducteur" :conducteurSec="this.conducteurSec" v-else />
+     
       </v-toolbar-title>
       <v-spacer />
           <v-btn icon v-on:click="logout()"  class="clickable">
@@ -298,6 +299,7 @@ import { mapGetters } from 'vuex';
     this.$store.dispatch('user',response.data);
 
   this.user=response.data;
+  console.log((this.$route.path).indexOf('projet'));
 },
 computed: {
   ...mapGetters(['user'])

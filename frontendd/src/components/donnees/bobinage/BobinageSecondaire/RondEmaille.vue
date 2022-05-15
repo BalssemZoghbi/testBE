@@ -446,7 +446,13 @@ export default {
         .then(
           (response) => ((this.id = response.data.id), console.log(projets))
         );
-      this.$router.push("/pccucc/"+this.$route.params.id);
+      if(this.projet.conducteur=="Rond emaille"){
+      this.$router.push("/projet/bobinagePrimaireRond/"+this.$route.params.id);
+    }else if(this.projet.conducteur=="feuillard"){
+      this.$router.push("/projet/bobinagePrimaireFeuillard/"+this.$route.params.id);
+    }else if(this.projet.conducteur=="meplat guipé"){
+      this.$router.push("/projet/bobinagePrimaireMeplat/"+this.$route.params.id);
+    }
     },
   },
   async mounted() {
