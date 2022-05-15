@@ -99,9 +99,14 @@
                         outlined
                       ></v-text-field>
                     </div>
-                    <div class="field10">
+                    <div class="graph">
                      
-                      <p>graphe</p>
+                       <!-- <div  :v-for="index in 3" :style="{width: epaisseur[index]+'%', 'height':'30%','background-color':blue}"> -->
+                       <div  :v-for="item in largeur"  v-bind:style="{width: item+'px', height:item+'px','background-color': 'blue'}">
+                      {{item}}
+                      <!-- :v-for="(item, index) in this.largeur"-->
+                      <!-- width: epaisseur[index]+'px', -->
+                       </div>
                     </div>
                   </div>
                 </div>
@@ -178,6 +183,7 @@
             </v-card>
           </v-col>
         </v-row>
+       
       </template>
          </v-card>
       <!-- </v-col> -->
@@ -398,6 +404,9 @@ return somme;
 };
 </script>
 <style scoped>
+#graph{
+    width: 80%;
+}
 .field10 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

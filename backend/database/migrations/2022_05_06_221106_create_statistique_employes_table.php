@@ -17,6 +17,8 @@ class CreateStatistiqueEmployesTable extends Migration
             $table->id();
             $table->json('ProjetChart')->nullable();
             $table->json('NbreProjet')->nullable();
+            $table->integer('NbreCuivre')->nullable();
+            $table->integer('NbreAlu')->nullable();
             $table->timestamps();
         });
     }

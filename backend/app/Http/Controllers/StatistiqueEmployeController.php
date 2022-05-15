@@ -69,17 +69,30 @@ class StatistiqueEmployeController extends Controller
             $countProjet[$j] = $count;
             $count = 0;
         }
+
+        $cuivreP =count( DB::table('bobinages')->where('materiau', 'cuivre')->get());
+        $cuivreS = count(DB::table('bobinage_secs')->where('materiauSec', 'cuivre')->get());
+        $alumuniumP = count(DB::table('bobinages')->where('materiau', 'alumunium')->get());
+        $alumuniumS = count(DB::table('bobinage_secs')->where('materiauSec', 'alumunium')->get());
+// dd($cuivreP+$cuivreS);
         $statistiquecount = count(DB::table('statistique_employes')->get());
         if($statistiquecount==0){
         $stat = StatistiqueEmploye::create([
             'ProjetChart' => $ProjetChart,
             'NbreProjet' => $countProjet,
+            'NbreCuivre' => $cuivreP+$cuivreS,
+            'NbreAlu' => $alumuniumP+$alumuniumS,
         ]);
+
+
+
     }else{
         $stat= StatistiqueEmploye::FindOrFail(1);
         $stat->update([
             'ProjetChart' => $ProjetChart,
             'NbreProjet' => $countProjet,
+            'NbreCuivre' => $cuivreP+$cuivreS,
+            'NbreAlu' => $alumuniumP+$alumuniumS,
         ]);
     }
         if ($stat->save()) {

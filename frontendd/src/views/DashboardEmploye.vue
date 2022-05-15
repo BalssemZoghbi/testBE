@@ -1,22 +1,22 @@
 <template>
   <div>
     <NavDashEmp  />
-      <v-layout style="margin-left:4%">
+      <v-layout>
     <v-row class="clickable">
-      <!-- <v-col cols="12" md="10">
-        <v-card  class="ml-5 mr-5"> -->
+      <!-- <v-col cols="12" md="10"> -->
+        <!-- <v-card  class="ml-5 mr-5"> -->
           <!-- <v-app-bar
           dark
           color="rgb(5 48 96)"
           >
           <v-btn icon>
             <v-icon>mdi-finance</v-icon>
-          </v-btn>
+          </v-btn>style="margin-left:-12%;margin-bottom:1%"
           <v-toolbar-title>Statistiques</v-toolbar-title>
           </v-app-bar> -->
         <v-container>
-          <v-row style="margin-left:-12%;margin-bottom:1%">
-            <v-col cols="12" sm="6">
+          <v-row >
+            <v-col cols="12" sm="4">
               <v-hover
         v-slot:default="{ hover }"
         open-delay="200"
@@ -24,7 +24,7 @@
        <v-card
        :elevation="hover ? 16 : 2"
         class="mx-auto"
-        max-width="344"
+        max-width="260"
         outlined
 
   >
@@ -46,6 +46,82 @@
     <v-card-actions>
       <v-icon flab color="blue darken-2">apps</v-icon>
       <v-btn text >{{projetCount}}</v-btn>
+      <v-spacer></v-spacer>
+      <!-- <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon> -->
+<router-link to="/" style="text-decoration:none">  <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon></router-link>
+    </v-card-actions>
+  </v-card>
+      </v-hover>
+
+            </v-col>
+            <v-col cols="10" sm="4">
+              <v-hover
+        v-slot:default="{ hover }"
+        open-delay="200"
+      >
+       <v-card
+       :elevation="hover ? 16 : 2"
+        class="mx-auto"
+        max-width="260"
+        outlined
+
+  >
+    <v-list-item three-line>
+      <v-list-item-content>
+        <v-list-item-title class="headline mb-1">Cuivre</v-list-item-title>
+
+      </v-list-item-content>
+
+      <v-list-item-avatar
+        tile
+        size="80"
+       color="blue darken-2"
+      >
+        <v-icon dark>fas fa-project-diagram</v-icon>
+      </v-list-item-avatar>
+    </v-list-item>
+    <v-divider></v-divider>
+    <v-card-actions>
+      <v-icon flab color="blue darken-2">apps</v-icon>
+      <v-btn text >{{NbreCuivre}}</v-btn>
+      <v-spacer></v-spacer>
+      <!-- <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon> -->
+<router-link to="/" style="text-decoration:none">  <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon></router-link>
+    </v-card-actions>
+  </v-card>
+      </v-hover>
+
+            </v-col>
+            <v-col cols="12" sm="4">
+              <v-hover
+        v-slot:default="{ hover }"
+        open-delay="200"
+      >
+       <v-card
+       :elevation="hover ? 16 : 2"
+        class="mx-auto"
+        max-width="260"
+        outlined
+
+  >
+    <v-list-item three-line>
+      <v-list-item-content>
+        <v-list-item-title class="headline mb-1">Aluminium</v-list-item-title>
+
+      </v-list-item-content>
+
+      <v-list-item-avatar
+        tile
+        size="80"
+       color="blue darken-2"
+      >
+        <v-icon dark>fas fa-project-diagram</v-icon>
+      </v-list-item-avatar>
+    </v-list-item>
+    <v-divider></v-divider>
+    <v-card-actions>
+      <v-icon flab color="blue darken-2">apps</v-icon>
+      <v-btn text >{{NbreAlu}}</v-btn>
       <v-spacer></v-spacer>
       <!-- <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon> -->
 <router-link to="/" style="text-decoration:none">  <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon></router-link>
@@ -263,7 +339,8 @@ LinearScale,LineElement,PointElement)
   },
   },
   data: () => ({
-    // userCount:"",
+    NbreCuivre:"",
+    NbreAlu:"",
     projetCount:"",
     // UserChart:[],
     // UserProjet:[],
@@ -289,8 +366,8 @@ LinearScale,LineElement,PointElement)
      axios
         .post("/statEmploye")
         .then((response) => (this.ProjetChart=response.data.ProjetChart,
- 
-        console.log(this.ProjetChart),
+        this.NbreAlu=response.data.NbreAlu,
+        this.NbreCuivre=response.data.NbreCuivre,
         this.chartDataDonut={
         labels: ['Vierge', 'Feuillard&Emaille', 'Feuillard&Meplat', 'Meplat&Emaille'],
         datasets: [

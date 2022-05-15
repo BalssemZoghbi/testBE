@@ -15,5 +15,7 @@ class StatistiqueEmploye extends Model
     protected $fillable = [
         'ProjetChart',
         'NbreProjet',
+        'NbreCuivre',
+        'NbreAlu',
     ];
 }
