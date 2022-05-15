@@ -84,7 +84,7 @@
             <router-link
               class="nav-link"
               :to="
-                '/cm/update/' + projet.id 
+                '/projet/cm/update/' + projet.id 
               "
               > <v-btn
         color="primary mb-8"
@@ -156,7 +156,7 @@ export default {
           (response) => (this.id = response.data.id,console.log(response.data)),
           
         );
-      this.$router.push( '/cm/' + this.$route.params.id);
+      this.$router.push( '/projet/cm/' + this.$route.params.id);
     },
   },
   async mounted() {

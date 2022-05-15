@@ -8,8 +8,6 @@
      dark
       app
     >
-    <!-- rgb(29 48 117) -->
-    <!-- rgb(5 48 96) -->
     <v-list-item class="px-2 pt-1">
         <v-list-item-avatar>
             <v-img src="../assets/sacem.jpg" width="900px" alt="admin" class="mx-auto" />
@@ -128,8 +126,9 @@
       <v-toolbar-title 
       class="text"
       >
-       <navbarUpdate :conducteur="this.conducteur" :conducteurSec="this.conducteurSec"  />
-        <!-- <span class="hidden-sm-and-down">SacemAutocite</span> -->
+         <span class="hidden-sm-and-down" v-if="((this.$route.path).indexOf('projet'))<=0" >SacemAutocite</span>
+       <navbarUpdate :conducteur="this.conducteur" :conducteurSec="this.conducteurSec" v-else />
+     
       </v-toolbar-title>
       <v-spacer />
           <v-btn icon v-on:click="logout()"  class="clickable">
@@ -300,6 +299,7 @@ import { mapGetters } from 'vuex';
     this.$store.dispatch('user',response.data);
 
   this.user=response.data;
+  console.log((this.$route.path).indexOf('projet'));
 },
 computed: {
   ...mapGetters(['user'])

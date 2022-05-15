@@ -132,7 +132,7 @@
                 </div>
               </form>
             </v-card>
-            <router-link class="nav-link" :to="'/projet/update/' + projet.id"
+            <router-link class="nav-link" :to="'/projet/VoltSpires/update/' + projet.id"
               ><v-btn color="primary mb-16" @click="updateprojet">
                 précédent
               </v-btn></router-link
@@ -441,15 +441,7 @@ export default {
         .then(
           (response) => ((this.id = response.data.id), console.log(this.projet))
         );
-      if (this.projet.conducteurSec == "Rond emaille") {
-        this.$router.push("/bobinageSecondaireRond/" + this.$route.params.id);
-      } else if (this.projet.conducteurSec == "feuillard") {
-        this.$router.push(
-          "/bobinageSecondaireFeuillard/" + this.$route.params.id
-        );
-      } else if (this.projet.conducteurSec == "meplat guipé") {
-        this.$router.push("/bobinageSecondaireMeplat/" + this.$route.params.id);
-      }
+     this.$router.push("/projet/pccucc/"+this.$route.params.id); 
     },
   },
   async mounted() {

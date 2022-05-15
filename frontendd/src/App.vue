@@ -3,22 +3,23 @@
  
     <v-main>
       <!-- <h1 >transparent</h1> -->
-      <!-- <login/> -->
+      <NavDash />
       <router-view />
     </v-main>
   </v-app>
 </template>
 
 <script>
-import login from "./views/Login.vue"
+import NavDash from "./components/NavDash.vue";
 export default {
   name: "App",
   component:{
-    login,
+    NavDash,
   },
   data: () => ({
     //
   }),
+  
 };
 </script>
 <style >
