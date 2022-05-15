@@ -198,8 +198,9 @@ export default {
         confirmButtonText: "Supprimer",
       }).then((result) => {
         if (result.isConfirmed) {
-          Swal.fire("Supprimé!", "Cette colonne a été supprimé", "success");
+          
           axios.delete("/deleteBarre/" + id).then(() => {
+            Swal.fire("Supprimé!", "Cette colonne a été supprimé", "success");
             this.get36();
           });
         }

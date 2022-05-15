@@ -249,8 +249,8 @@ export default {
         confirmButtonText: "Supprimer",
       }).then((result) => {
         if (result.isConfirmed) {
-          Swal.fire("Supprimé!", "Cette colonne a été supprimé", "success");
           axios.delete("/garantie24/delete/" + id).then(() => {
+            Swal.fire("Supprimé!", "Cette colonne a été supprimé", "success");
             this.get24();
           });
         }

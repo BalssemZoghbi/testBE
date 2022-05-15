@@ -55,6 +55,55 @@ class BobinageStatiqueController extends Controller
         $saillie->delete();
         return response()->json($saillie);
      }
+    public function getToles()
+    {
+        $Tole = Tole::all();
+        return response()->json($Tole);
+    }
+    public function getoneTole($id)
+    {
+        $Tole = Tole::FindOrFail($id);
+        return response()->json($Tole);
+    }
+
+    public function createTole(Request $request){
+
+        $Tole = Tole::create([
+            'tole' =>$request->tole,
+            'coef0' =>$request->coef0,
+            'coef1' =>$request->coef1,
+            'coef2' =>$request->coef2,
+            'coef3' =>$request->coef3,
+            'coef4' =>$request->coef4,
+            'coef5' =>$request->coef5,
+            'coef6' =>$request->coef6,
+            ]);
+        if($Tole->save()){
+            return response()->json($Tole);
+        }
+    }
+
+    public function updateTole($id,Request $request){
+        $Tole = Tole::FindOrFail($id);
+        $Tole->update([
+            'tole' =>$request->tole,
+            'coef0' =>$request->coef0,
+            'coef1' =>$request->coef1,
+            'coef2' =>$request->coef2,
+            'coef3' =>$request->coef3,
+            'coef4' =>$request->coef4,
+            'coef5' =>$request->coef5,
+            'coef6' =>$request->coef6,
+            ]);
+        if($Tole->save()){
+            return response()->json($Tole);
+        }
+    }
+    public function deleteTole($id){
+        $Tole= Tole::FindOrFail($id);
+        $Tole->delete();
+        return response()->json($Tole);
+     }
     public function getHbrin()
     {
         $hbrin = Hbrin::all();

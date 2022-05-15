@@ -349,8 +349,8 @@ vm.isDisabled = true;
         confirmButtonText: "Supprimer",
       }).then((result) => {
         if (result.isConfirmed) {
-          Swal.fire("Supprimé!", "Ce projet a été supprimé", "success");
           axios.delete("projets/delete/" + id).then(() => {
+                      Swal.fire("Supprimé!", "Ce projet a été supprimé", "success");
             this.getprojet();
           });
         }
