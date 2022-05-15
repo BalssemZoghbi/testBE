@@ -72,7 +72,7 @@
                         dense
                         id="filobtenueNue"
                         readonly
-                        v-model="projet.filobtenueNueBT"
+                        v-model="filobtenueNueBT"
                         outlined
                       ></v-text-field>
                       <v-text-field
@@ -80,7 +80,7 @@
                         dense
                        id="filobtenueIsoler"
                             readonly
-                            v-model="projet.filobtenueIsolerBT"
+                            v-model="filobtenueIsolerBT"
                         outlined
                       ></v-text-field>
                     </div>
@@ -347,6 +347,7 @@ export default {
   data() {
     return {
       barre: [],
+      emaille: [],
       conducteur: ["meplat guipé", "Rond emaille", "feuillard"],
       materiau: ["cuivre", "aluminium"],
       typeCanaux: ["complet", "lune"],
@@ -462,6 +463,10 @@ export default {
     axios
       .get("/getValeurSaillie")
       .then((response) => (this.saillie = response.data));
+       axios
+      .get("/emaille")
+      .then((response) => (this.emaille = response.data));
+
   },
    computed:{
     scu2d(){
@@ -552,6 +557,26 @@ export default {
     j2(){
       console.log(this.projet.scu2)
       return this.projet.secondaireIPhase/this.projet.scu2;
+    },
+      filobtenueIsolerBT(){
+         let emaille=this.emaille;
+      for(let i=0;i<emaille.length;i++){
+        if(this.filobtenueNueBT==emaille[i].Designation){
+            return emaille[i].Isole;}
+      }
+      return 0;
+    },
+    filobtenueNueBT(){
+       let emaille=this.emaille;
+      let des=[];
+      for(let i=0;i<emaille.length;i++){
+          des[i]= emaille[i].Designation;
+      }
+      const needle = this.D2d;
+      const closest = des.reduce((a, b) => {
+          return Math.abs(b - needle) < Math.abs(a - needle) ? b : a;
+      });
+      return closest;
     }
    }
 };

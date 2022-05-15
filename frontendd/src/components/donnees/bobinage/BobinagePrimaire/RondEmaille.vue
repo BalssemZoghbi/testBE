@@ -510,8 +510,6 @@ export default {
         return (this.projet.SpchB*this.projet.filobtenueIsoler*this.projet.brinParallele);
     },
     DintMT(){
-        // console.log(this.projet.DextMT,this.projet.BextMT);
-        // return parseFloat(Math.ceil(parseFloat(this.projet.DextMT)+(2*parseFloat(this.projet.DistanceBTMT))));
         let dint=this.projet.DintMT;
         dint=(parseFloat(this.projet.DistanceBTMT)*2)+parseFloat(this.projet.DextMT);
         console.log(parseFloat(this.projet.DextMT));
@@ -567,27 +565,12 @@ export default {
        return spires[0];
     },
     filobtenueIsoler(){
-      // let emaille=this.emaille;
          let emaille=this.emaille;
-      // let des=[];
-      // let closest=0;
-      //  const needle = this.D1d;
-      // for(let i=0;i<emaille.length;i++){
-      //    closest = emaille[i].Designation.reduce((a, b) => {
-      //     return Math.abs(b - needle) < Math.abs(a - needle) ? b : a;  });
-      //      return closest.Designation;
-      //     // des[i]= emaille[i].Designation;
-      // }
-    //  return 0;
-      let des=[];
       for(let i=0;i<emaille.length;i++){
-          des[i]= emaille[i].Designation;
+        if(this.filobtenueNue==emaille[i].Designation){
+            return emaille[i].Isole;}
       }
-      const needle = this.D1d;  
-      const closest = des.reduce((a, b) => {
-          return Math.abs(b - needle) < Math.abs(a - needle) ? b : a;
-      });
-      return closest;
+      return 0;
     },
     filobtenueNue(){
        let emaille=this.emaille;
