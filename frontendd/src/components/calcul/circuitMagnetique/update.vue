@@ -366,7 +366,7 @@ export default {
   },
   data() {
     return {
-      // tole:[],
+      tole:[],
       projet: {
         id: undefined,
         masseFertot: "",
@@ -440,8 +440,8 @@ export default {
     },
    async getTole(){
     await  axios.get('/gettole').then(response => (
-      this.tole = response.data.data,
-      console.log(response.data)
+      this.tole = response.data
+      // console.log(response.data.data)
       ));
       
     //     const result = await axios.get("/gettole" );
@@ -523,7 +523,33 @@ hauteurcuve(){
   hauteurcuve=parseFloat(this.projet.HbobineBtSec)+(2*(parseFloat(this.projet.Ebc)))+(2*parseFloat(lmax))+parseFloat(this.projet.Eh)+parseFloat(this.projet.E4);
   return hauteurcuve;
   },
-//   pferspecifique(){
+  pferspecifique(){
+    let coef0=0;
+    let coef1=0;
+    let coef2=0;
+    let coef3=0;
+    let coef4=0;
+    let coef5=0;
+    let coef6=0;
+     let tole=this.tole;
+      console.log(tole);
+      for(let i=0;i<tole.length;i++){
+        if(tole[i].tole==this.projet.tole){
+          coef0=tole[i].coef0;
+          coef1=tole[i].coef1;
+          coef2=tole[i].coef2;
+          coef3=tole[i].coef3;
+          coef4=tole[i].coef4;
+          coef5=tole[i].coef5;
+          coef6=tole[i].coef6;
+          return coef6*Math.pow(this.projet.Bmax, 6)-coef5*Math.pow(this.projet.Bmax, 5)+coef4*Math.pow(this.projet.Bmax, 4)-coef3*Math.pow(this.projet.Bmax, 3)+coef2*Math.pow(this.projet.Bmax, 2)-coef1*this.projet.Bmax+coef0;
+
+        }
+      }
+      return 0 ;
+
+
+
 //    let tole=this.tole.replace("[","",this.tole.length-1).replace("]","").split(",");
 // //     let tole = [];
 // // for(let i=0;i<tole.length;i++){
@@ -533,7 +559,7 @@ hauteurcuve(){
 //   // let pfs=this.tole.coef6;
 //   //  console.log(pfs);
 //    return tole;
-//   }
+  }
   }
 
 };

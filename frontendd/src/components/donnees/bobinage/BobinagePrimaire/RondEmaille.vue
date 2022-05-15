@@ -567,7 +567,18 @@ export default {
        return spires[0];
     },
     filobtenueIsoler(){
-      let emaille=this.emaille;
+      // let emaille=this.emaille;
+         let emaille=this.emaille;
+      // let des=[];
+      // let closest=0;
+      //  const needle = this.D1d;
+      // for(let i=0;i<emaille.length;i++){
+      //    closest = emaille[i].Designation.reduce((a, b) => {
+      //     return Math.abs(b - needle) < Math.abs(a - needle) ? b : a;  });
+      //      return closest.Designation;
+      //     // des[i]= emaille[i].Designation;
+      // }
+    //  return 0;
       let des=[];
       for(let i=0;i<emaille.length;i++){
           des[i]= emaille[i].Designation;
@@ -579,14 +590,6 @@ export default {
       return closest;
     },
     filobtenueNue(){
-      // let emaille=this.emaille;
-      // console.log(emaille);
-      // for(let i=0;i<emaille.length;i++){
-      //   if(emaille[i].Designation==this.projet.D1d){
-      //     return emaille[i].Designation;
-      //   }
-      // }
-      // return 0 ;
        let emaille=this.emaille;
       let des=[];
       for(let i=0;i<emaille.length;i++){

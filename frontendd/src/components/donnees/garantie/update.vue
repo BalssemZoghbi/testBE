@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NavDash :conducteur="projet.conducteur" :conducteurSec="projet.conducteurSec"/>
+    <NavDash :conducteur="projet1.conducteur" :conducteurSec="projet1.conducteurSec"/>
     <!-- <NavDashEmp v-if="this.usertype == 'employe'" /> -->
     <!-- <navbarUpdate :elec_id='projet.electrique_id' :id='projet.id'/> -->
     <div class="body">
@@ -203,7 +203,7 @@
                             placeholder=" "
                             id="echauffementHuile"
                             
-                            v-model="this.projet.echauffementHuile"
+                            v-model="echauffementHuile"
                           />
                           <label for="" class="form__label">Echauffement Huile</label>
                         </div>
@@ -214,7 +214,7 @@
                             placeholder=" "
                             id="echauffementEnroulement"
                             
-                            v-model="this.projet.echauffementEnroulement"
+                            v-model="echauffementEnroulement"
                           />
                           <label for="" class="form__label">Echauffement Enroulement</label>
                         </div>
@@ -269,6 +269,7 @@ export default {
           { state: 'Automatique'},
           { state: 'Manuel' },
         ],
+        projet1:[],
       projet: {
         id:undefined,
       option: "",
@@ -380,18 +381,18 @@ export default {
       //   echauffementEnroulement: this.projet.echauffementEnroulement,
       // };
     await axios.get('getGarantie/'+this.$route.params.id).then(
-        (response) => ( this.projet=response.data,console.log(this.projet))
+        (response) => ( this.projet=response.data)
         
       );
     }
   },
   async mounted() {
     const result = await axios.get('projets/'+this.$route.params.id);
-    this.projet = result.data;
+    this.projet1 = result.data;
   },
   async created(){
      const result = await axios.get('projets/'+this.$route.params.id);
-    this.projet = result.data;
+    this.projet1 = result.data;
     console.log(this.projet);
    this.getGarantie();
     
@@ -413,10 +414,11 @@ export default {
       return parseFloat(this.projet.Pccg)+parseFloat(this.projet.Pog)+(((parseFloat(this.projet.Pccg)+parseFloat(this.projet.Pog))*10)/100);
     },
     echauffementHuile(){
-      return 100-parseInt(this.projet.temperatureMax);
+      console.log(this.projet.temperatureMax);
+      return 100-parseInt(this.projet1.temperatureMax);
     },
     echauffementEnroulement(){
-      return 105-parseInt(this.projet.temperatureMax);
+      return 105-parseInt(this.projet1.temperatureMax);
     },
     Ptot(){
       return parseInt(this.projet.Pccg)+parseInt(this.projet.Pog);
