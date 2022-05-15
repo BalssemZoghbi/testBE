@@ -217,8 +217,8 @@ export default {
         confirmButtonText: "Supprimer",
       }).then((result) => {
         if (result.isConfirmed) {
-          Swal.fire("Supprimé!", "Cette colonne a été supprimé", "success");
           axios.delete("/garantie36/delete/" + id).then(() => {
+            Swal.fire("Supprimé!", "Cette colonne a été supprimé", "success");
             this.get36();
           });
         }
@@ -228,29 +228,7 @@ export default {
       this.editedIndex = this.gar36.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
-      //     update() {
-      // let user = {
-      //   email: this.editedItem.email,
-      //   type: this.editedItem.type,
-      //   name: this.editedItem.name,
-      //   password: this.password,
-      // }
-      // axios.put('/user/update/'+item.id, user,{ headers: { token: localStorage.getItem('token')}})
-      //   .then(res => {
-      //     //if successfull
-      //     if (res.status === 200) {
-      //       localStorage.setItem('token', res.data.token);
-      //       console.log(res)
-            
-      //     }
-      //   }, err => {
-      //     console.log(err.response);
-      //     this.error = err.response.data.error
-      //   })
-    
-    //    axios.put("/user/update/"+this.id, gar36).then(
-    //     (response) => (this.id = response.data.id)
-    // );
+      
     },
    
     close() {
