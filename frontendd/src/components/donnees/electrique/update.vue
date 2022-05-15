@@ -443,14 +443,14 @@ export default {
         nbrePosition: this.projet.nbrePosition,
       };
       axios
-        .put("electrique/edit/" + this.$route.params.id, projets)
+        .put("/projet/electrique/edit/" + this.$route.params.id, projets)
         .then(
           (response) => (
             (this.id = response.data.id), console.log(response.data.id)
           )
         );
 
-      this.$router.push("/garantie/" + this.$route.params.id);
+      this.$router.push("/projet/garantie/" + this.$route.params.id);
     },
     classeu(){
           //  let classeU1=0;

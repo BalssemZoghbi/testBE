@@ -228,7 +228,7 @@
             <router-link
               class="nav-link"
               :to="
-                '/electrique/update/' + projet.id 
+                '/projet/electrique/update/' + projet.id 
               "
               > <v-btn
         color="primary mb-14"
@@ -339,7 +339,7 @@ export default {
       //   (response) => (this.id = response.data.id, console.log(response.data))
         
       // );
-       this.$router.push('/bobine/'+this.$route.params.id);
+       this.$router.push('/projet/bobine/'+this.$route.params.id);
     },
    async automatique(){
        const projets = {

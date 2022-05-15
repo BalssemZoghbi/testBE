@@ -117,7 +117,7 @@
             <router-link
               class="nav-link"
               :to="
-                '/garantie/' + projet.id 
+                '/projet/bobine/' + projet.id 
               "
               > <v-btn
         color="primary mb-14"
@@ -314,7 +314,7 @@ export default {
           ),
           
         );
-      this.$router.push("/VoltSpires/"+ this.$route.params.id);
+      this.$router.push("/projet/VoltSpires/"+ this.$route.params.id);
     },
   },
   async mounted() {

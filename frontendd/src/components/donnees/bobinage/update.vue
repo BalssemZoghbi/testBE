@@ -88,7 +88,7 @@
        <router-link
               class="nav-link"
               :to="
-                '/garantie/' + projet.id 
+                '/projet/garantie/' + projet.id 
               "
               > <v-btn
         color="primary mb-8"
@@ -151,7 +151,7 @@ export default {
         (response) => (this.id = response.data.id)
         
       );
- this.$router.push('/gradin/'+this.$route.params.id);    },
+ this.$router.push('/projet/gradin/'+this.$route.params.id);    },
   
   },
   beforeCreate(){

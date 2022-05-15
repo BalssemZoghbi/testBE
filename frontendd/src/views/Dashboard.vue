@@ -196,7 +196,7 @@ import {
 
 ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale,BarElement,  LinearScale)
 
-  import NavDash from '@/components/NavDashboard';
+  import NavDash from '@/components/NavDash.vue';
 import axios from "axios";
 
   export default {

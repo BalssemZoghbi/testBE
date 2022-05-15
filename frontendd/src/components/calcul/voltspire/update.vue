@@ -110,7 +110,7 @@
             </div>
           </v-card>
 
-          <router-link class="nav-link" :to="'/gradin/' + projet.id">
+          <router-link class="nav-link" :to="'/projet/gradin/' + projet.id">
             <v-btn color="primary mb-14" @click="e1 = 2"> précédent </v-btn>
           </router-link>
           <v-btn color="success mb-14" @click="updateprojet"> Valider </v-btn>
@@ -167,12 +167,12 @@ export default {
             (this.id = response.data.id), console.log(response.data)
           )
         );
-        if(this.projet.conducteur=="Rond emaille"){
-      this.$router.push("/bobinagePrimaireRond/"+this.$route.params.id);
-    }else if(this.projet.conducteur=="feuillard"){
-      this.$router.push("/bobinagePrimaireFeuillard/"+this.$route.params.id);
-    }else if(this.projet.conducteur=="meplat guipé"){
-      this.$router.push("/bobinagePrimaireMeplat/"+this.$route.params.id);
+        if(this.projet.conducteurSec=="Rond emaille"){
+      this.$router.push("/projet/bobinageSecondaireRond/"+this.$route.params.id);
+    }else if(this.projet.conducteurSec=="feuillard"){
+      this.$router.push("/projet/bobinageSecondaireFeuillard/"+this.$route.params.id);
+    }else if(this.projet.conducteurSec=="meplat guipé"){
+      this.$router.push("/projet/bobinageSecondaireMeplat/"+this.$route.params.id);
     }
     },
   },

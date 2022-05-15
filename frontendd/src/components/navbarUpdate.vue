@@ -15,13 +15,13 @@
                                             <router-link :to="'/projet/update/'+this.$route.params.id">  Generale</router-link>
                                     </li>
                                     <li class="dropdown-link">
-                                            <router-link :to="'/electrique/update/'+ this.$route.params.id ">  Electriques</router-link>
+                                            <router-link :to="'/projet/electrique/update/'+ this.$route.params.id ">  Electriques</router-link>
                                     </li>
                                     <li class="dropdown-link">
-                                            <router-link :to="'/garantie/'+ this.$route.params.id">  Garantie</router-link>
+                                            <router-link :to="'/projet/garantie/'+ this.$route.params.id">  Garantie</router-link>
                                     </li>
                                      <li class="dropdown-link">
-                                                <router-link :to="'/bobine/'+ this.$route.params.id"> Bobinage </router-link>
+                                                <router-link :to="'/projet/bobine/'+ this.$route.params.id"> Bobinage </router-link>
                                                 </li>
                                     <!-- <li class="dropdown-link">
                                         <a href="#">Bobinages<i class="fas fa-caret-down"></i></a>
@@ -48,20 +48,34 @@
                             <div class="dropdown">
                                 <ul>
                                     <li class="dropdown-link">
-                                      <router-link :to="'/gradin/'+ this.$route.params.id">Gradin</router-link>
+                                      <router-link :to="'/projet/gradin/'+ this.$route.params.id">Gradin</router-link>
                                     </li>
                                     
                                     <li class="dropdown-link">
-                                      <router-link :to="'/VoltSpires/'+ this.$route.params.id">Volt Spires</router-link>
+                                      <router-link :to="'/projet/VoltSpires/'+ this.$route.params.id">Volt Spires</router-link>
                                     </li>
+                                    
+                                    <li class="dropdown-link"  v-if="conducteurSec=='Rond emaille'">
+                                      <router-link :to="'/projet/bobinageSecondaireRond/'+ this.$route.params.id" >Bobine Secondaire</router-link>
+                                     </li>
+                                    <li class="dropdown-link" v-else-if="conducteurSec=='feuillard'">
+                                      <router-link :to="'/projet/bobinageSecondaireFeuillard/'+ this.$route.params.id" >Bobine Secondaire</router-link>
+                                    </li>
+                                    <li class="dropdown-link" v-else-if="conducteurSec=='meplat guipé'">
+                                      <router-link :to="'/projet/bobinageSecondaireMeplat/'+ this.$route.params.id" >Bobine Secondaire</router-link>
+                                    </li>
+                                    <li class="dropdown-link" v-else>
+                                      <router-link  to="/notfound">Bobine Secondaire</router-link>
+                                    </li>
+
                                     <li class="dropdown-link"  v-if="conducteur=='Rond emaille'">
-                                      <router-link :to="'/bobinagePrimaireRond/'+ this.$route.params.id" >Bobine Primaire</router-link>
+                                      <router-link :to="'/projet/bobinagePrimaireRond/'+ this.$route.params.id" >Bobine Primaire</router-link>
                                      </li>
                                     <li class="dropdown-link" v-else-if="conducteur=='feuillard'">
-                                      <router-link :to="'/bobinagePrimaireFeuillard/'+ this.$route.params.id" >Bobine Primaire</router-link>
+                                      <router-link :to="'/projet/bobinagePrimaireFeuillard/'+ this.$route.params.id" >Bobine Primaire</router-link>
                                     </li>
                                     <li class="dropdown-link" v-else-if="conducteur=='meplat guipé'">
-                                      <router-link :to="'/bobinagePrimaireMeplat/'+ this.$route.params.id" >Bobine Primaire</router-link>
+                                      <router-link :to="'/projet/bobinagePrimaireMeplat/'+ this.$route.params.id" >Bobine Primaire</router-link>
                                     </li>
                                     <li class="dropdown-link" v-else>
                                       <router-link  to="/notfound">Bobine Primaire</router-link>
@@ -69,23 +83,12 @@
                                     <!-- <li class="dropdown-link">
                                       <router-link :to="'/bobinageSecondaireRond/'+ this.$route.params.id">Bobine Secondaire</router-link>
                                     </li> -->
-                                    <li class="dropdown-link"  v-if="conducteurSec=='Rond emaille'">
-                                      <router-link :to="'/bobinageSecondaireRond/'+ this.$route.params.id" >Bobine Secondaire</router-link>
-                                     </li>
-                                    <li class="dropdown-link" v-else-if="conducteurSec=='feuillard'">
-                                      <router-link :to="'/bobinageSecondaireFeuillard/'+ this.$route.params.id" >Bobine Secondaire</router-link>
-                                    </li>
-                                    <li class="dropdown-link" v-else-if="conducteurSec=='meplat guipé'">
-                                      <router-link :to="'/bobinageSecondaireMeplat/'+ this.$route.params.id" >Bobine Secondaire</router-link>
-                                    </li>
-                                    <li class="dropdown-link" v-else>
-                                      <router-link  to="/notfound">Bobine Secondaire</router-link>
+                                    
+                                    <li class="dropdown-link">
+                                         <router-link :to="'/projet/pccucc/'+ this.$route.params.id" >PCC et UCC</router-link>
                                     </li>
                                     <li class="dropdown-link">
-                                         <router-link :to="'/pccucc/'+ this.$route.params.id" >PCC et UCC</router-link>
-                                    </li>
-                                    <li class="dropdown-link">
-                                         <router-link :to="'/cm/'+ this.$route.params.id" >Circuit Magnetique</router-link>
+                                         <router-link :to="'/projet/cm/'+ this.$route.params.id" >Circuit Magnetique</router-link>
                                     </li>
                                 
                                     <div class="arrow"></div>
