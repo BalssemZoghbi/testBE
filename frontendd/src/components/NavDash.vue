@@ -8,8 +8,6 @@
      dark
       app
     >
-    <!-- rgb(29 48 117) -->
-    <!-- rgb(5 48 96) -->
     <v-list-item class="px-2 pt-1">
         <v-list-item-avatar>
             <v-img src="../assets/sacem.jpg" width="900px" alt="admin" class="mx-auto" />
