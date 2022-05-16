@@ -1,6 +1,7 @@
 <template>
   <div>
     <NavDash />
+    <Loading/>
     <v-data-table
       :headers="headers"
       :items="gar36"
@@ -153,9 +154,11 @@
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import NavDash from "@/components/NavDashboard.vue";
 import axios from "axios";
+import Loading from "@/components/Loading.vue";
 export default {
    components: {
     NavDash,
+    Loading
   },
   data: () => ({
     search: "",
@@ -170,7 +173,7 @@ export default {
 { text: "Coefficient 4", value: "coef4" },
 { text: "Coefficient 5", value: "coef5" },
 { text: "Coefficient 6", value: "coef6" },
-      { text: "Operation", value: "actions" , sortable: false},
+{ text: "Operation", value: "actions" , sortable: false},
      
     ],
     gar36: [],

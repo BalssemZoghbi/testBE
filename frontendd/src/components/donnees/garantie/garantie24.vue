@@ -1,6 +1,7 @@
 <template>
   <div>
     <NavDash />
+    
         <v-tabs
       v-model="tab"
       background-color="transparent"
@@ -13,6 +14,7 @@
         {{ itemtab }}
       </v-tab>
     </v-tabs>
+    <Loading/>
        <v-tabs-items v-model="tab">
       <v-tab-item>
         <v-card flat>
@@ -23,6 +25,7 @@
       class="elevation-1"
       :search="search"
     >
+    
       <template v-slot:top>
         <v-toolbar flat>
           <v-card-title>Garantie24</v-card-title>
@@ -170,11 +173,14 @@
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import NavDash from "@/components/NavDashboard.vue";
 import garantie36 from "../garantie/garantie36.vue";
+import Loading from "@/components/Loading.vue";
+
 import axios from "axios";
 export default {
    components: {
     NavDash,
     garantie36,
+    Loading
   },
   data: () => ({
      tab: null,

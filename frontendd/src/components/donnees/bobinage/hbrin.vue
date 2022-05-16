@@ -1,6 +1,7 @@
 <template>
   <div>
     <!-- <NavDash /> -->
+    <Loading/>
     <v-data-table
       :headers="headers"
       :items="gar36"
@@ -119,10 +120,13 @@
 <script>
 import Swal from "sweetalert2/dist/sweetalert2.js";
 // import NavDash from "@/components/NavDash.vue";
+import Loading from "@/components/Loading.vue";
+
 import axios from "axios";
 export default {
    components: {
     // NavDash,
+    Loading
   },
   data: () => ({
     search: "",
