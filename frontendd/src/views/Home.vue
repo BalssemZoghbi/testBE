@@ -3,7 +3,7 @@
     <!-- <navbar /> -->
     <NavDash v-if="this.usertype == 'admin'" />
     <NavDashEmp v-if="this.usertype == 'employe'" />
-
+<Loading/>
     <!-- <button class="nav-link" @click="create()" >Crée</button> -->
     <div class="body panel left-panel">
       <v-data-table
@@ -146,11 +146,13 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 // import navbar from "../components/navbar.vue";
 import NavDash from "../components/NavDashboard.vue";
 import NavDashEmp from "../components/NavDashboardEmploye.vue";
+import Loading  from '@/components/Loading.vue';
 export default {
   components: {
     NavDash,
     NavDashEmp,
     Footer,
+    Loading,
     // navbar
   },
   data: () => ({
