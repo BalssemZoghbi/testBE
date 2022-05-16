@@ -1,6 +1,7 @@
 <template>
   <div>
     <NavDash />
+    <Loading/>
      <v-tabs
       v-model="tab"
       background-color="transparent"
@@ -155,12 +156,15 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import NavDash from "@/components/NavDashboard.vue";
 import barre from "../bobinage/barre.vue";
 import hbrin from "../bobinage/hbrin.vue";
+import Loading from "@/components/Loading.vue";
+
 import axios from "axios";
 export default {
    components: {
     NavDash,
     barre,
     hbrin,
+    Loading
   },
   data: () => ({
      tab: null,
