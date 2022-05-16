@@ -1,12 +1,6 @@
 <template>
   <div>
-    <!-- <NavDash /> -->
-    <!-- <v-tabs center-active style="margin-left: 33%;">
-           <v-tab>Demande d'inscription</v-tab>
-
-    <v-tab><router-link class="nav-link" to="/user" style="text-decoration:none;" v-model="model" centered>Utilisateurs</router-link></v-tab>
-  </v-tabs> -->
-
+    <Loading/>
     <v-data-table
       :headers="headers"
       :items="users"
@@ -29,94 +23,34 @@
 
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-spacer></v-spacer>
-          <!-- <v-dialog v-model="dialog" max-width="700px">
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
-                Ajouter utilisateur
-              </v-btn>
-            </template>
-            <v-card>
-              <v-card-title>
-                <span class="text-h5">
-                  {{ formTitle }}
-                  </span>
-              </v-card-title>
-
-              <v-card-text>
-                <v-container>
-                  <v-col>
-                    <v-row cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.name"
-                        label="Name"
-                      ></v-text-field>
-                    </v-row>
-                 
-                    <v-row cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.email"
-                        label="Email"
-                      ></v-text-field>
-                    </v-row>
-                    <v-row cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.type"
-                        label="type"
-                      ></v-text-field>
-                    </v-row>
-                  
-                    
-                  </v-col>
-                </v-container>
-              </v-card-text>
-
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="close">
-                  Cancel
-                </v-btn>
-                <v-btn color="blue darken-1" text @click="addUser">
-                  Save
-                </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog> -->
-          <!-- <v-dialog v-model="dialogDelete" max-width="500px">
-            <v-card>
-              <v-card-title class="text-h5"
-                >Are you sure you want to delete this user?</v-card-title
-              >
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="closeDelete"
-                  >Cancel</v-btn
-                >
-                <v-btn color="red darken-1" text @click="deleteItemConfirm"
-                  >OK</v-btn
-                >
-                <v-spacer></v-spacer>
-              </v-card-actions>
-            </v-card>
-          </v-dialog> -->
+         
         </v-toolbar>
       </template>
       <template v-slot:[`item.actions`]="{ item }">
         <v-btn class="ma-2" color="primary" dark>
           Accepter
+          <v-progress-circular
+      :width="3"
+      color="white"
+      indeterminate
+      v-if="snackbar"
+    ></v-progress-circular>
           <v-icon dark right @click="accept(item.id)">
             mdi-checkbox-marked-circle
           </v-icon>
         </v-btn>
-        <!-- <v-icon small color="green" class="mr-2" v-on:click="accept(item.id)">
-          mdi-pencil
-        </v-icon> -->
         <v-btn class="ma-2" color="red" dark>
           Refuser
+           <v-progress-circular
+      :width="3"
+      color="white"
+      indeterminate
+      v-if="!snackbar"
+    ></v-progress-circular>
           <v-icon dark right @click="decline(item.id)">
             mdi-cancel
           </v-icon>
         </v-btn>
-        <!-- <v-icon small color="red" v-on:click="decline(item.id)" > mdi-delete </v-icon> -->
         <v-snackbar v-model="snackbarDecline">
           {{ textDecline }}
 
@@ -141,14 +75,14 @@
 </template>
 
 <script>
-// import Swal from "sweetalert2/dist/sweetalert2.js";
-// import NavDash from "../NavDash.vue";
 import axios from "axios";
+import Loading from "@/components/Loading.vue";
 export default {
   components: {
-    // NavDash,
+    Loading,
   },
   data: () => ({
+    
     snackbar: false,
     text: `L'utilisateur a été accepté`,
     snackbarDecline: false,
@@ -189,11 +123,9 @@ export default {
      async getuser() {
       await axios.get("/users/p").then((resp) => {
         this.users = resp.data;
-        console.log(this.users)
       });
     },
     async accept(id) {
-      //  console.log('aa')
       console.log(id);
       await axios.put("/user/accept/" + id).then(() => {
         this.getuser();
@@ -206,11 +138,6 @@ export default {
         this.getuser();
       });
       this.snackbarDecline=true;
-    },
-   
-
-    mounted() {
-      // this.getuser();
     },
   },
 };

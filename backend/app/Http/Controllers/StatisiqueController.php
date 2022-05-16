@@ -25,7 +25,7 @@ class StatisiqueController extends Controller
         $users = DB::table('users')->get();
         $projets = DB::table('projets')->get();
 
-        $userpending=DB::table('users')->where ('type' , 'pending')->get();
+        $userpending=DB::table('users')->where ('type' , 'En Attente')->get();
         $userAdmin=DB::table('users')->where ('type' , 'admin')->get();
         $userEmploye=DB::table('users')->where ('type' , 'employe')->get();
         $userInactive = DB::table('user_inactives')->get();

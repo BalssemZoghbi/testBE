@@ -1,6 +1,8 @@
 <template>
   <div>
+    
     <NavDash/>
+    <Loading/>
     <v-tabs
       v-model="tab"
       background-color="transparent"
@@ -56,35 +58,43 @@
                 <v-container>
                   <v-col>
                     <v-row cols="12" sm="6" md="4">
-                      <v-text-field
+                     <v-col cols="6"> <v-text-field
                         v-model="editedItem.name"
                         label="Nom"
-                      ></v-text-field>
-                    </v-row>
-                 
-                    <v-row cols="12" sm="6" md="4">
-                      <v-text-field
+                      ></v-text-field></v-col>
+                      <v-col cols="6">
+                         <v-text-field
                         v-model="editedItem.email"
                         label="Email"
                       ></v-text-field>
+                      </v-col>
                     </v-row>
                     <v-row cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.type"
-                        label="type"
-                      ></v-text-field>
-                    </v-row>
-                    <v-row cols="12" sm="6" md="4">
-                      <v-text-field
+                      <v-col  cols="6" md="4"> 
+                          <v-select
+                        :items="types"
+                        label="Type"
+                        name="type"
+                            type="text"
+                            v-model="editedItem.type" 
+                        
+                      ></v-select>
+                        </v-col>
+                    
+                            <v-col  cols="6" md="4">  <v-text-field
                         v-model="editedItem.poste"
                         label="poste"
-                      ></v-text-field>
-                    </v-row>
-                    <v-row cols="12" sm="6" md="4">
-                      <v-text-field
+                      ></v-text-field></v-col>
+                            <v-col  cols="6" md="4"> <v-text-field
                         v-model="editedItem.numero"
                         label="numero"
-                      ></v-text-field>
+                      ></v-text-field></v-col>
+                    </v-row>
+                    <v-row cols="12" sm="6" md="4">
+                    
+                    </v-row>
+                    <v-row cols="12" sm="6" md="4">
+                     
                     </v-row>
                     <v-row cols="12" sm="6" md="4">
                       <v-text-field
@@ -110,23 +120,7 @@
             </v-card>
           </v-dialog>
           
-          <!-- <v-dialog v-model="dialogDelete" max-width="500px">
-            <v-card>
-              <v-card-title class="text-h5"
-                >Are you sure you want to delete this user?</v-card-title
-              >
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="closeDelete"
-                  >Cancel</v-btn
-                >
-                <v-btn color="red darken-1" text @click="deleteItemConfirm"
-                  >OK</v-btn
-                >
-                <v-spacer></v-spacer>
-              </v-card-actions>
-            </v-card>
-          </v-dialog> -->
+       
         </v-toolbar>
       </template>
       <template v-slot:[`item.actions`]="{ item }">
@@ -193,14 +187,17 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 import NavDash from "../NavDashboard.vue";
 import demande from "../user/demande.vue";
 import Inactive from "../user/userInactive.vue";
+import Loading from "@/components/Loading.vue";
 import axios from "axios";
 export default {
    components: {
     NavDash,
     demande,
+    Loading,
     Inactive
   },
   data: () => ({
+    types:['employe','admin','En Attente'],
     tab: null,
         itemstab: [
           'Utilisateur', 'Demande Inscription','Utilisateur Inactive'

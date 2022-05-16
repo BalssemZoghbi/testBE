@@ -26,15 +26,15 @@ class StatistiqueEmployeController extends Controller
     public function create()
     {
 
-        $Vierge = DB::table('projets')->where('modele', 'Document Vierge')->get();
-        $FE = DB::table('projets')->where('modele', 'Modele Feuillard Emaille')->get();
-        $ME = DB::table('projets')->where('modele', 'Modele Meplat Emaille')->get();
-        $FM = DB::table('projets')->where('modele', 'Modele Feuillard Meplat')->get();
-        $ProjetChart = [];
-        $ProjetChart[0] = count($Vierge);
-        $ProjetChart[1] = count($FE);
-        $ProjetChart[2] = count($FM);
-        $ProjetChart[3] = count($ME);
+        // $Vierge = DB::table('projets')->where('modele', 'Document Vierge')->get();
+        // $FE = DB::table('projets')->where('modele', 'Modele Feuillard Emaille')->get();
+        // $ME = DB::table('projets')->where('modele', 'Modele Meplat Emaille')->get();
+        // $FM = DB::table('projets')->where('modele', 'Modele Feuillard Meplat')->get();
+        // $ProjetChart = [];
+        // $ProjetChart[0] = count($Vierge);
+        // $ProjetChart[1] = count($FE);
+        // $ProjetChart[2] = count($FM);
+        // $ProjetChart[3] = count($ME);
 
 
         $projets = DB::table('projets')->get();
@@ -78,7 +78,7 @@ class StatistiqueEmployeController extends Controller
         $statistiquecount = count(DB::table('statistique_employes')->get());
         if($statistiquecount==0){
         $stat = StatistiqueEmploye::create([
-            'ProjetChart' => $ProjetChart,
+            'ProjetChart' => [0,5,6,8],
             'NbreProjet' => $countProjet,
             'NbreCuivre' => $cuivreP+$cuivreS,
             'NbreAlu' => $alumuniumP+$alumuniumS,
@@ -89,7 +89,7 @@ class StatistiqueEmployeController extends Controller
     }else{
         $stat= StatistiqueEmploye::FindOrFail(1);
         $stat->update([
-            'ProjetChart' => $ProjetChart,
+            'ProjetChart' => [0,5,6,8],
             'NbreProjet' => $countProjet,
             'NbreCuivre' => $cuivreP+$cuivreS,
             'NbreAlu' => $alumuniumP+$alumuniumS,

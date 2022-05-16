@@ -1,22 +1,6 @@
 <template>
   <div>
-    <!-- <NavDash/>
-    <v-tabs
-      v-model="tab"
-      background-color="transparent"
-      grow
-    >
-      <v-tab
-        v-for="itemtab in itemstab"
-        :key="itemtab"
-      >
-        {{ itemtab }}
-      </v-tab>
-    </v-tabs> -->
-
-    <!-- <v-tabs-items v-model="tab">
-      <v-tab-item>
-        <v-card flat> -->
+    <Loading/>
         <v-data-table
       :headers="headers"
       :items="users"
@@ -55,36 +39,38 @@
               <v-card-text>
                 <v-container>
                   <v-col>
-                    <v-row cols="12" sm="6" md="4">
-                      <v-text-field
+                   <v-row cols="12" sm="6" md="4">
+                     <v-col cols="6"> <v-text-field
                         v-model="editedItem.name"
                         label="Nom"
-                      ></v-text-field>
-                    </v-row>
-                 
-                    <v-row cols="12" sm="6" md="4">
-                      <v-text-field
+                      ></v-text-field></v-col>
+                      <v-col cols="6">
+                         <v-text-field
                         v-model="editedItem.email"
                         label="Email"
                       ></v-text-field>
+                      </v-col>
                     </v-row>
                     <v-row cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.type"
-                        label="type"
-                      ></v-text-field>
-                    </v-row>
-                    <v-row cols="12" sm="6" md="4">
-                      <v-text-field
+                      <v-col  cols="6" md="4"> 
+                          <v-select
+                        :items="types"
+                        label="Type"
+                        name="type"
+                            type="text"
+                            v-model="editedItem.type" 
+                        
+                      ></v-select>
+                        </v-col>
+                    
+                            <v-col  cols="6" md="4">  <v-text-field
                         v-model="editedItem.poste"
                         label="poste"
-                      ></v-text-field>
-                    </v-row>
-                    <v-row cols="12" sm="6" md="4">
-                      <v-text-field
+                      ></v-text-field></v-col>
+                            <v-col  cols="6" md="4"> <v-text-field
                         v-model="editedItem.numero"
                         label="numero"
-                      ></v-text-field>
+                      ></v-text-field></v-col>
                     </v-row>
                     <v-row cols="12" sm="6" md="4">
                       <v-text-field
@@ -92,8 +78,6 @@
                         label="Mot de passe"
                       ></v-text-field>
                     </v-row>
-                  
-                    
                   </v-col>
                 </v-container>
               </v-card-text>
@@ -110,29 +94,9 @@
             </v-card>
           </v-dialog>
           
-          <!-- <v-dialog v-model="dialogDelete" max-width="500px">
-            <v-card>
-              <v-card-title class="text-h5"
-                >Are you sure you want to delete this user?</v-card-title
-              >
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="closeDelete"
-                  >Cancel</v-btn
-                >
-                <v-btn color="red darken-1" text @click="deleteItemConfirm"
-                  >OK</v-btn
-                >
-                <v-spacer></v-spacer>
-              </v-card-actions>
-            </v-card>
-          </v-dialog> -->
         </v-toolbar>
       </template>
       <template v-slot:[`item.actions`]="{ item }">
-        <!-- <v-icon small color="green" class="mr-2" @click="editItem(item)">
-          mdi-pencil
-        </v-icon> -->
     <v-btn
       class="mx-2"
       fab
@@ -155,46 +119,26 @@
         mdi-delete
       </v-icon>
     </v-btn>
-               <!-- <v-icon small color="red" @click="deleteutilisateur(item.id)"> mdi-delete </v-icon> -->
 
       </template>
 
      
     </v-data-table>
-        <!-- </v-card>
-        </v-tab-item>
-        <v-tab-item>
-        <v-card
-          flat
-        > -->
-         <!-- <demande/> -->
-        <!-- </v-card>
-
-      </v-tab-item>
-    </v-tabs-items> -->
-     <!-- <v-tabs center-active style="margin-left: 33%;">
-    <v-tab>Utilisateurs</v-tab>
-    <v-tab><router-link class="nav-link" to="/demande"  style="text-decoration:none;">Demande d'inscription</router-link></v-tab>
-  </v-tabs> -->
+      
      </div>
 
 </template>
 
 <script>
 import Swal from "sweetalert2/dist/sweetalert2.js";
-// import NavDash from "../NavDashboard.vue";
-// import demande from "../user/demande.vue";
 import axios from "axios";
+import Loading from "@/components/Loading.vue";
 export default {
    components: {
-    // NavDash,
-    // demande,
+     Loading
   },
   data: () => ({
-    // tab: null,
-        // itemstab: [
-        //   'Utilisateur', 'Demande Inscription','Utilisateur Inactive'
-        // ],
+    types:['employe','admin','En Attente','Décliné','Bloqué'],
     search: "",
     dialog: false,
     dialogDelete: false,
@@ -251,7 +195,7 @@ export default {
      async  getuser() {
     await axios.get("/usersInactive").then((resp) => {
         this.users = resp.data;
-        // console.log(resp.data);
+        console.log(resp.data);
       });
     },
          deleteutilisateur(id) {
@@ -276,29 +220,7 @@ export default {
       this.editedIndex = this.users.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
-      //     update() {
-      // let user = {
-      //   email: this.editedItem.email,
-      //   type: this.editedItem.type,
-      //   name: this.editedItem.name,
-      //   password: this.password,
-      // }
-      // axios.put('/user/update/'+item.id, user,{ headers: { token: localStorage.getItem('token')}})
-      //   .then(res => {
-      //     //if successfull
-      //     if (res.status === 200) {
-      //       localStorage.setItem('token', res.data.token);
-      //       console.log(res)
-            
-      //     }
-      //   }, err => {
-      //     console.log(err.response);
-      //     this.error = err.response.data.error
-      //   })
-    
-    //    axios.put("/user/update/"+this.id, users).then(
-    //     (response) => (this.id = response.data.id)
-    // );
+      
     },
    
     close() {
@@ -330,24 +252,6 @@ export default {
       this.close();
     },
   
-  //     updateUser(id) {
-  //    axios.put("user/update/" + id).then(() => {
-  //           this.getuser();
-  //         });
-  // },
- 
-
-  // mounted() {
-  //   axios.get("/users").then((res) => {
-  //     this.users = res.data.data;
-  //     console.log(res.data);
-  //   });
-  //   axios.post("/user/creat").then((res) => {
-  //     this.users = res.data.data;
-  //     console.log(res.data);
-  //   });
-     
-  // },
 }}
 </script>
 <style scoped>

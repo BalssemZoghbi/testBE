@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->integer('numero')->unique();
-            $table->enum('type',['employe','admin','pending']);
+            $table->enum('type',['employe','admin','En Attente','Décliné','Bloqué']);
             $table->string('poste');
             $table->string('password');
             $table->timestamps();

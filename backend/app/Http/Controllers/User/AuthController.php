@@ -19,8 +19,7 @@ class AuthController extends Controller
     {
 
         $user= User::where('email', $request->email)->first();
-        // dd($user->type);
-        if($user->type!=='pending'){
+        if($user->type!=='En Attente'){
             if (!$user || !Hash::check($request->password, $user->password)) {
                 return response([
                     'message' => ['These credentials do not match our records.']
@@ -58,7 +57,7 @@ class AuthController extends Controller
         $password = $request->password;
         $poste = $request->poste;
         $numero = $request->numero;
-        $user     = User::create(['name' => $name, 'email' => $email,'type'=>'pending', 'password' => Hash::make($password),'poste' => $poste,'numero' => $numero,]);
+        $user     = User::create(['name' => $name, 'email' => $email,'type'=>'En Attente', 'password' => Hash::make($password),'poste' => $poste,'numero' => $numero,]);
         return response()->json($user);
     }
 
@@ -78,7 +77,7 @@ class AuthController extends Controller
     {
         $user=User::FindOrFail($id);
         Mail::to($user->email)->send(new Userdecline($user->email));
-        $userr = UserInactive::create(['name' => $user->name, 'email' => $user->email,'type'=>$user->type, 'password' => $user->password,'poste' => $user->poste,'numero' => $user->numero,]);
+        $userr = UserInactive::create(['name' => $user->name, 'email' => $user->email,'type'=>'Décliné', 'password' => $user->password,'poste' => $user->poste,'numero' => $user->numero,]);
         if($user->delete()) {
             return $userr;
            }

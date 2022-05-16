@@ -27,14 +27,14 @@ class UserController extends Controller
     }
     public function getup()
     {
-        $users=DB::table('users')->where ('type' , 'pending')->get();
+        $users=DB::table('users')->where ('type' , 'En Attente')->get();
         return $users;
 
     }
     public function getuser()
     {
         $users=DB::table('users')
-        ->where ('type' ,'!=','pending')
+        ->where ('type' ,'!=','En Attente')
         ->get();
         return $users;
 
@@ -81,7 +81,7 @@ class UserController extends Controller
 
     public function delete($id){
         $user=User::FindOrFail($id);
-        $userr = UserInactive::create(['name' => $user->name, 'email' => $user->email,'type'=>$user->type, 'password' => $user->password,'poste' => $user->poste,'numero' => $user->numero,]);
+        $userr = UserInactive::create(['name' => $user->name, 'email' => $user->email,'type'=>'Bloqué', 'password' => $user->password,'poste' => $user->poste,'numero' => $user->numero,]);
 
        if($user->delete()) {
         return response()->json($userr);;
@@ -108,9 +108,7 @@ class UserController extends Controller
              'poste' =>$request->poste,
              'numero' =>$request->numero
          ]);
-         // if($user->save){
          return response()->json($user);
-     // }
      }
      public function updateinactive($id,Request $request){
         $user=UserInactive::FindOrFail($id);

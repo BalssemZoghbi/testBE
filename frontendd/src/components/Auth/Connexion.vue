@@ -225,7 +225,7 @@ Error
     email:'',
      EmailRules: [
         v => !!v || 'E-mail est obligatoire',
-        v => /.+@sacemindustries.+/.test(v) || 'E-mail doit inclure @sacemindustries',
+        // v => /.+@sacemindustries.+/.test(v) || 'E-mail doit inclure @sacemindustries',
       ],
        nameRules: [
         v => !!v || 'Champs Obligatoire',

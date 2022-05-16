@@ -161,6 +161,38 @@
     :height="heightBar"
   />
   </div>
+   <!-- style="margin-top: 1%;
+    width: 54%;
+    margin-left: 2%;" -->
+   <div style="margin-top: 5%;
+    width: 50%;
+    margin-left: 39%;" >
+   <LineChartGenerator
+    :chart-options="chartOptionsLine"
+    :chart-data="chartDataLine"
+    :chart-id="chartId"
+    :dataset-id-key="datasetIdKey"
+    :plugins="plugins"
+    :css-classes="cssClasses"
+    :styles="styles"
+    :width="width"
+    :height="height"
+  />
+  </div>
+  <!-- style="margin-top: -32%;width: 150%;" -->
+  <div style="margin-top: -37%;width: 139%;margin-left:-50%">
+  <Doughnut
+    :chart-options="chartOptionsDonut"
+    :chart-data="chartDataDonut"
+    :chart-id="chartIdDonut"
+    :dataset-id-key="datasetIdKey"
+    :plugins="plugins"
+    :css-classes="cssClasses"
+    :styles="styles"
+    :width="width"
+    :height="height"
+  />
+  </div>
         </v-container>
         <!-- </v-card>
       </v-col> -->
@@ -182,7 +214,8 @@
 
 <script>
 import { Pie ,Bar} from 'vue-chartjs/legacy'
-// import { Bar } from 'vue-chartjs/legacy'
+import { Doughnut } from 'vue-chartjs/legacy'
+import { Line as LineChartGenerator } from 'vue-chartjs/legacy'
 import {
   Chart as ChartJS,
   Title,
@@ -191,10 +224,12 @@ import {
   ArcElement,
   CategoryScale,
   BarElement,
-  LinearScale
+  LinearScale,
+   LineElement,
+  PointElement
 } from 'chart.js'
 
-ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale,BarElement,  LinearScale)
+ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale,BarElement,  LinearScale,LineElement,PointElement)
 
   import NavDash from '@/components/NavDash.vue';
 import axios from "axios";
@@ -204,12 +239,18 @@ import axios from "axios";
     components: {
       Pie,
       Bar,
+      Doughnut,
+      LineChartGenerator,
       NavDash
     },
       props: {
     chartId: {
       type: String,
       default: 'pie-chart'
+    },
+    chartLineChartId: {
+      type: String,
+      default: 'line-chart'
     },
     datasetIdKey: {
       type: String,
@@ -239,6 +280,10 @@ import axios from "axios";
       type: String,
       default: 'bar-chart'
     },
+      chartIdDonut: {
+      type: String,
+      default: 'doughnut-chart'
+    },
     datasetIdKeyBar: {
       type: String,
       default: 'label'
@@ -267,6 +312,8 @@ import axios from "axios";
   data: () => ({
     userCount:"",
     projetCount:"",
+    NbreCuivre:"",
+    NbreAlu:"",
     UserChart:[],
     UserProjet:[],
     UserName:[],
@@ -274,6 +321,10 @@ import axios from "axios";
     chartOptions:{},
     chartDataBar:{},
     chartOptionsBar:{},
+    chartDataLine:{},
+    chartOptionsLine:{},
+    chartDataDonut:{},
+    chartOptionsDonut:{},
     // chartDataBar: {
     //     labels: [
     //       'Utilisateur1',
@@ -304,7 +355,53 @@ import axios from "axios";
     }
   },
   created(){
-    
+      axios
+        .post("/statEmploye")
+        .then((response) => (this.ProjetChart=response.data.ProjetChart,
+        this.NbreAlu=response.data.NbreAlu,
+        this.NbreCuivre=response.data.NbreCuivre,
+        this.chartDataDonut={
+        labels: ['Vierge', 'Feuillard&Emaille', 'Feuillard&Meplat', 'Meplat&Emaille'],
+        datasets: [
+          {
+            backgroundColor: ['#3358FF', '#0628C4', '#00D8FF', '#1DA1B0'],
+            data: response.data.ProjetChart
+          }
+        ]
+      },
+      this.chartOptionsDonut= {
+        responsive: true,
+        maintainAspectRatio: false
+      },
+     this. chartDataLine= {
+        labels: [
+          'Janvier',
+          'Fevrier',
+          'Mas',
+          'Avril',
+          'Mai',
+          'Juin',
+          'Juillet',
+          'Aout',
+          'Septembre',
+          'Octobre',
+          'Novembre',
+          'Decembre',
+        ],
+        datasets: [
+          {
+            label: 'Projets',
+            backgroundColor: '#448DD3',
+            data: response.data.NbreProjet
+          }
+        ]
+      },
+     this. chartOptionsLine={
+        responsive: true,
+        maintainAspectRatio: false
+      }
+      ),);
+  
      axios
         .post("/stat")
         .then((response) => (this.userCount=response.data.userCount,
