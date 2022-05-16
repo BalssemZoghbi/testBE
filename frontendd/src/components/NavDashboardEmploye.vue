@@ -82,9 +82,9 @@
         <span class="hidden-sm-and-down">SacemAutocite</span>
       </v-toolbar-title>
       <v-spacer />
-          <v-btn icon v-on:click="logout()"  class="clickable">
+          <!-- <v-btn icon v-on:click="logout()"  class="clickable">
         <v-icon>mdi-file-import</v-icon>
-      </v-btn>
+      </v-btn> -->
        <v-menu offset-y>
       <template v-slot:activator="{ on }">
       <!-- <v-icon v-on="on" dark>mdi-account-circle</v-icon> -->

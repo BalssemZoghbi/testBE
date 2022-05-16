@@ -180,17 +180,7 @@
                       outlined
                     ></v-select>
                   </div>
-                  <div class="form__div framei">
-                    <input
-                      type="text"
-                      class="form__input"
-                      placeholder=" "
-                      id="Modele"
-                      v-model="projet.Modele"
-                      readonly
-                    />
-                    <label for="" class="form__label">Modele</label>
-                  </div>
+               
                 </div>
               </form>
             </div>
@@ -259,7 +249,6 @@ export default {
         fonctionnement: "",
         refroidissement: "",
         elaborateur: "",
-        Modele: "",
         user_id: "",
         garantie_id: "",
         electrique_id: "",
@@ -302,7 +291,6 @@ export default {
         pcc_uccs_id: this.projet.pcc_uccs_id,
         circuitmagnetiques_id: this.projet.circuitmagnetiques_id,
         elaborateur: this.projet.elaborateur,
-        Modele: this.projet.Modele,
       };
       axios
         .put("projets/edit/" + this.$route.params.id, projets, {
