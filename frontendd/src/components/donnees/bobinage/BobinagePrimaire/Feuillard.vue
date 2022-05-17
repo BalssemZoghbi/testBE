@@ -530,20 +530,15 @@ export default {
 .field10 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  /* grid-template-rows: repeat(3, 1fr); */
   grid-gap: 10px;
   width: 80%;
-  /* margin-right: 5%; */
 }
 .div2 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  /* grid-template-rows: repeat(2, 1fr); */
   grid-gap: 10px;
   width: 56%;
-  /* margin-right: 5%; */
 }
-
 .div {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -557,12 +552,6 @@ export default {
   align-content: space-between;
   justify-content: space-evenly;
   flex-wrap: wrap;
-}
-.l-form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
 }
 .form {
   width: 360px;
@@ -603,22 +592,6 @@ export default {
   font-size: 1rem;
   transition: 0.3s;
 }
-.form__button {
-  display: block;
-  margin-left: auto;
-  padding: 0.75rem 2rem;
-  outline: none;
-  border: none;
-  background-color: #4797d1;
-  color: #fff;
-  font-size: 1rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.form__button:hover {
-  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.15);
-}
 
 /*Input focus move up label*/
 .form__input:focus + .form__label {
@@ -646,29 +619,13 @@ export default {
 
 .body {
   height: 100%;
-  /* display: flex; */
-  /* justify-content: center;
-  align-items: center; */
   padding: 20px;
   max-height: calc(100vh - 50px);
+}
 
-  /* margin: 0.5%; */
-  /* background: linear-gradient(135deg,#71b7e675, #71b7e675); */
-}
-.container {
-  max-width: 98%;
-  /* height: 80%; */
-  margin-top: 2%;
-  width: 100%;
-  background-color: #fff;
-  padding: 25px 30px;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px rgb(0 0 0 / 15%);
-}
 .title {
   font-size: 25px;
   font-weight: 500;
-  /* margin-top:-1% ; */
   margin-bottom: 3.5%;
   position: relative;
 }
@@ -680,7 +637,6 @@ export default {
   height: 3px;
   width: 250px;
   border-radius: 5px;
-
   background: linear-gradient(135deg, #0b65a0, #71b7e6);
 }
 .titles {
@@ -698,7 +654,6 @@ export default {
   height: 3px;
   width: 150px;
   border-radius: 5px;
-
   background: linear-gradient(135deg, #0b65a0, #71b7e6);
 }
 .content form .user-details {
@@ -707,7 +662,6 @@ export default {
   justify-content: space-between;
   margin: 10px 0 12px 0;
 }
-
 form .user-details .input-box {
   margin-bottom: 15px;
   width: calc(100% / 2 - 20px);
@@ -724,8 +678,6 @@ form .input-box span.details {
   font-size: 16px;
   border-radius: 5px;
   padding-left: 15px;
-  /* border: 1px solid #ccc; */
-  /* border-bottom-width: 2px; */
   transition: all 0.3s ease;
 }
 
@@ -767,43 +719,14 @@ form .button {
   margin-top: 10px;
   margin-left: 80%;
 }
-form .button input {
-  height: 100%;
-  width: 100%;
-  border-radius: 5px;
-  border: none;
-  color: #fff;
-  font-size: 18px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  background: linear-gradient(135deg, #4797d1, #4797d1);
-}
-form .button input:hover {
-  /* transform: scale(0.99); */
-  background: linear-gradient(-135deg, #71b7e6, #71b7e6);
-}
-.framei {
-  width: 22%;
-  justify-content: space-between;
-}
-.frame {
-  width: 250px;
-  justify-content: space-between;
-}
-.frameii {
-  /* width: calc(100% /1 - 2px); */
-  width: 100%;
-  border-color: #000;
-}
+
 .v-sheet.v-card:not(.v-sheet--outlined) {
   box-shadow: 0px 0px 0px 0px;
 }
 .v-stepper--vertical {
   padding-bottom: 0px;
 }
-@media (max-width: 584px) {
+@media (max-width: 400px) {
   .container {
     max-width: 100%;
   }
@@ -821,10 +744,45 @@ form .button input:hover {
   .user-details::-webkit-scrollbar {
     width: 5px;
   }
+  .field10 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    width: 80%;
+  }
+  .div2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    width: 56%;
+  }
+
+  .div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+  }
 }
-@media (max-width: 459px) {
+@media (max-width: 1000px) {
   .container .content .category {
     flex-direction: column;
+  }
+  .field10 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    width: 80%;
+  }
+  .div2 {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 10px;
+    width: 56%;
+  }
+  .div {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
   }
 }
 .v-btn:not(.v-btn--round).v-size--default {

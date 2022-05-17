@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <navbarUpdate /> -->
     <NavDash
       :conducteur="projet.conducteur"
       :conducteurSec="projet.conducteurSec"
@@ -132,7 +131,9 @@
                 </div>
               </form>
             </v-card>
-            <router-link class="nav-link" :to="'/projet/VoltSpires/update/' + projet.id"
+            <router-link
+              class="nav-link"
+              :to="'/projet/VoltSpires/update/' + projet.id"
               ><v-btn color="primary mb-16" @click="updateprojet">
                 précédent
               </v-btn></router-link
@@ -141,27 +142,14 @@
           </v-stepper-content>
 
           <v-stepper-step :complete="e1 > 2" step="2">
-            Couplage
+            Hauteur/caneaux
           </v-stepper-step>
 
           <v-stepper-content step="2">
             <v-card class="mb-4">
               <div class="title">Hauteur/caneaux</div>
-              <!-- <div class="content"> -->
               <form v-on:submit.prevent="updateprojet">
                 <div class="user-details">
-                  <!-- <div style="margin-bottom:2%">
-                         <v-chip
-                      >N2c :
-                      {{ projet.N2c }}
-                    </v-chip>
-                    <v-chip style="margin-left:2%" 
-                      >I2ph :
-                      {{ projet.secondaireIPhase }}
-                    </v-chip>
-                    </div>
-                       -->
-
                   <div class="div">
                     <div class="div2">
                       <v-text-field
@@ -245,7 +233,6 @@
                   </div>
                 </div>
               </form>
-              <!-- </div> -->
             </v-card>
             <v-btn color="primary" @click="e1 = 1"> précédent </v-btn>
             <v-btn color="success" @click="e1 = 3"> suivant </v-btn>
@@ -441,7 +428,7 @@ export default {
         .then(
           (response) => ((this.id = response.data.id), console.log(this.projet))
         );
-     this.$router.push("/projet/pccucc/"+this.$route.params.id); 
+      this.$router.push("/projet/pccucc/" + this.$route.params.id);
     },
   },
   async mounted() {
@@ -509,35 +496,28 @@ export default {
       return this.hbobt - this.hfs - this.projet.collierBT;
     },
     poid() {
-      // let coefPoid;
-      // if (this.projet.materiau == "cuivre") {
-      //   coefPoid = 8.9;
-      // } else if (this.projet.materiau == "aluminium") {
-      //   coefPoid = 2.7;
-      // }
-      // console.log(coefPoid);
-      // return Math.pow(10, -6)*(
-      //  coefPoid*
-      //   this.projet.N1c *
-      //   this.scu1 *
-      //   (this.DintBint + this.Epx) *
-      //   parseFloat(Math.PI) *
-      //   3 *
-      //   ((100 + this.projet.majPoid) / 100)
-      // );
-      let coefPoid=0;
-         if(this.projet.materiau=='cuivre'){
-                coefPoid=8.9;
-            }else if(this.projet.materiau=='aluminium'){
-                coefPoid=2.7;
-            }
- return Math.pow(10, -6)*(coefPoid*parseFloat(this.projet.N1c)*parseFloat(this.projet.scu1)*(parseFloat(this.projet.DintMT)+parseFloat(this.projet.EpxMT))*Math.PI*3*((100+parseFloat(this.projet.majPoid))/100));
+      let coefPoid = 0;
+      if (this.projet.materiau == "cuivre") {
+        coefPoid = 8.9;
+      } else if (this.projet.materiau == "aluminium") {
+        coefPoid = 2.7;
+      }
+      return (
+        Math.pow(10, -6) *
+        (coefPoid *
+          parseFloat(this.projet.N1c) *
+          parseFloat(this.projet.scu1) *
+          (parseFloat(this.projet.DintMT) + parseFloat(this.projet.EpxMT)) *
+          Math.PI *
+          3 *
+          ((100 + parseFloat(this.projet.majPoid)) / 100))
+      );
     },
     DintBint() {
       return this.projet.diamNominale + 2 * this.projet.CMBT;
     },
     Epx() {
-      let epx=this.projet.EpxMT;
+      let epx = this.projet.EpxMT;
       if (this.projet.typeCanaux == "complet") {
         epx =
           (this.projet.saillieMT + this.projet.e1r) *
@@ -556,9 +536,11 @@ export default {
       return epx;
     },
     Epy() {
-      return(this.projet.saillieMT + this.projet.e1r) *
-          this.projet.etageMT *
-          this.projet.nbcoucheMT;
+      return (
+        (this.projet.saillieMT + this.projet.e1r) *
+        this.projet.etageMT *
+        this.projet.nbcoucheMT
+      );
     },
     Dext() {
       // console.log(this.projet.DintMT,this.projet.EpxMT);
@@ -567,7 +549,6 @@ export default {
     Bext() {
       return this.DintBint + 2 * this.Epy;
     },
-    
   },
 };
 </script>
@@ -575,20 +556,15 @@ export default {
 .field10 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  /* grid-template-rows: repeat(3, 1fr); */
   grid-gap: 10px;
   width: 80%;
-  /* margin-right: 5%; */
 }
 .div2 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  /* grid-template-rows: repeat(2, 1fr); */
   grid-gap: 10px;
   width: 56%;
-  /* margin-right: 5%; */
 }
-
 .div {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -602,12 +578,6 @@ export default {
   align-content: space-between;
   justify-content: space-evenly;
   flex-wrap: wrap;
-}
-.l-form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
 }
 .form {
   width: 360px;
@@ -648,22 +618,6 @@ export default {
   font-size: 1rem;
   transition: 0.3s;
 }
-.form__button {
-  display: block;
-  margin-left: auto;
-  padding: 0.75rem 2rem;
-  outline: none;
-  border: none;
-  background-color: #4797d1;
-  color: #fff;
-  font-size: 1rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.form__button:hover {
-  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.15);
-}
 
 /*Input focus move up label*/
 .form__input:focus + .form__label {
@@ -691,29 +645,13 @@ export default {
 
 .body {
   height: 100%;
-  /* display: flex; */
-  /* justify-content: center;
-  align-items: center; */
   padding: 20px;
   max-height: calc(100vh - 50px);
+}
 
-  /* margin: 0.5%; */
-  /* background: linear-gradient(135deg,#71b7e675, #71b7e675); */
-}
-.container {
-  max-width: 98%;
-  /* height: 80%; */
-  margin-top: 2%;
-  width: 100%;
-  background-color: #fff;
-  padding: 25px 30px;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px rgb(0 0 0 / 15%);
-}
 .title {
   font-size: 25px;
   font-weight: 500;
-  /* margin-top:-1% ; */
   margin-bottom: 3.5%;
   position: relative;
 }
@@ -725,7 +663,6 @@ export default {
   height: 3px;
   width: 250px;
   border-radius: 5px;
-
   background: linear-gradient(135deg, #0b65a0, #71b7e6);
 }
 .titles {
@@ -743,7 +680,6 @@ export default {
   height: 3px;
   width: 150px;
   border-radius: 5px;
-
   background: linear-gradient(135deg, #0b65a0, #71b7e6);
 }
 .content form .user-details {
@@ -752,7 +688,6 @@ export default {
   justify-content: space-between;
   margin: 10px 0 12px 0;
 }
-
 form .user-details .input-box {
   margin-bottom: 15px;
   width: calc(100% / 2 - 20px);
@@ -769,8 +704,6 @@ form .input-box span.details {
   font-size: 16px;
   border-radius: 5px;
   padding-left: 15px;
-  /* border: 1px solid #ccc; */
-  /* border-bottom-width: 2px; */
   transition: all 0.3s ease;
 }
 
@@ -812,43 +745,14 @@ form .button {
   margin-top: 10px;
   margin-left: 80%;
 }
-form .button input {
-  height: 100%;
-  width: 100%;
-  border-radius: 5px;
-  border: none;
-  color: #fff;
-  font-size: 18px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  background: linear-gradient(135deg, #4797d1, #4797d1);
-}
-form .button input:hover {
-  /* transform: scale(0.99); */
-  background: linear-gradient(-135deg, #71b7e6, #71b7e6);
-}
-.framei {
-  width: 22%;
-  justify-content: space-between;
-}
-.frame {
-  width: 250px;
-  justify-content: space-between;
-}
-.frameii {
-  /* width: calc(100% /1 - 2px); */
-  width: 100%;
-  border-color: #000;
-}
+
 .v-sheet.v-card:not(.v-sheet--outlined) {
   box-shadow: 0px 0px 0px 0px;
 }
 .v-stepper--vertical {
   padding-bottom: 0px;
 }
-@media (max-width: 584px) {
+@media (max-width: 400px) {
   .container {
     max-width: 100%;
   }
@@ -866,10 +770,45 @@ form .button input:hover {
   .user-details::-webkit-scrollbar {
     width: 5px;
   }
+  .field10 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    width: 80%;
+  }
+  .div2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    width: 56%;
+  }
+
+  .div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+  }
 }
-@media (max-width: 459px) {
+@media (max-width: 1000px) {
   .container .content .category {
     flex-direction: column;
+  }
+  .field10 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    width: 80%;
+  }
+  .div2 {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 10px;
+    width: 56%;
+  }
+  .div {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
   }
 }
 .v-btn:not(.v-btn--round).v-size--default {
