@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Loading v-if="spinner"/>
+    <Loading v-if="load"/>
     <v-data-table
       :headers="headers"
       :items="users"
@@ -117,6 +117,7 @@ export default {
   },
   data: () => ({
     spinner:false,
+    load:true,
     spinnerDecline:false,
     snackbar: false,
     text: `L'utilisateur a été accepté`,
@@ -159,7 +160,7 @@ export default {
      async getuser() {
       await axios.get("/users/p").then((resp) => {
         this.users = resp.data;
-        this.spinner = false;
+        this.load = false;
       });
     },
     async accept(id) {
