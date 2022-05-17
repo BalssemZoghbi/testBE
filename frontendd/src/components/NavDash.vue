@@ -349,4 +349,5 @@ computed: {
 .theme--dark.v-chip:not(.v-chip--active) {
     background: #063b77;
 }
+
 </style>

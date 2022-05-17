@@ -1,7 +1,7 @@
 <template>
   <div>
     
-    <NavDash/>
+    <!-- <NavDash/> -->
     <Loading v-if="spinner"/>
     <v-tabs
       v-model="tab"
@@ -184,14 +184,14 @@
 
 <script>
 import Swal from "sweetalert2/dist/sweetalert2.js";
-import NavDash from "../NavDashboard.vue";
+// import NavDash from "../NavDashboard.vue";
 import demande from "../user/demande.vue";
 import Inactive from "../user/userInactive.vue";
 import Loading from "@/components/Loading.vue";
 import axios from "axios";
 export default {
    components: {
-    NavDash,
+    // NavDash,
     demande,
     Loading,
     Inactive

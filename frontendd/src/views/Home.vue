@@ -1,8 +1,8 @@
 <template>
   <div>
     <!-- <navbar /> -->
-    <NavDash v-if="this.usertype == 'admin'" />
-    <NavDashEmp v-if="this.usertype == 'employe'" />
+    <!-- <NavDash v-if="this.usertype == 'admin'" />
+    <NavDashEmp v-if="this.usertype == 'employe'" /> -->
 <Loading v-if="spinner"/>
     <!-- <button class="nav-link" @click="create()" >Crée</button> -->
     <div class="body panel left-panel">
@@ -144,13 +144,13 @@ import axios from "axios";
 import Footer from "@/components/Footer";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 // import navbar from "../components/navbar.vue";
-import NavDash from "../components/NavDashboard.vue";
-import NavDashEmp from "../components/NavDashboardEmploye.vue";
+// import NavDash from "../components/NavDashboard.vue";
+// import NavDashEmp from "../components/NavDashboardEmploye.vue";
 import Loading  from '@/components/Loading.vue';
 export default {
   components: {
-    NavDash,
-    NavDashEmp,
+    // NavDash,
+    // NavDashEmp,
     Footer,
     Loading,
     // navbar

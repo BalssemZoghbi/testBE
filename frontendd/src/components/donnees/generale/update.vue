@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NavDash :conducteur="projet.conducteur" :conducteurSec="projet.conducteurSec"/>
+    <!-- <NavDash :conducteur="projet.conducteur" :conducteurSec="projet.conducteurSec"/> -->
     <!-- <navbarUpdate :elec_id='projet.electrique_id' :id='projet.id'/> -->
     <div class="body">
       <v-stepper v-model="e1" vertical>
@@ -210,12 +210,12 @@
 <script>
 // import { reactive } from "vue";
 // import navbarUpdate from '../../navbarUpdate';
-import NavDash from "@/components/NavDash.vue";
+// import NavDash from "@/components/NavDash.vue";
 import axios from "axios";
 export default {
   components: {
     // navbarUpdate
-    NavDash,
+    // NavDash,
   },
   data() {
     return {
