@@ -45,7 +45,6 @@
                         outlined
                       ></v-select>
                     </div>
-
                     <div class="form__div framei">
                       <input
                         type="number"
@@ -197,100 +196,82 @@
           </v-stepper-content>
 
           <v-stepper-step :complete="e1 > 2" step="2">
-            Couplage
+            Couplage/puissance
           </v-stepper-step>
 
           <v-stepper-content step="2">
-            <v-card class="mb-6">
-              <div class="title">Couplage</div>
-              <div class="content">
-                <form v-on:submit.prevent="updateprojet">
-                  <div class="user-details">
-                    <v-row align="center">
-                      <v-col class="d-flex" cols="12" sm="6">
-                        <v-select
+            <v-card class="mb-4">
+              <div class="title">Données Electrique</div>
+              <!-- <div class="content"> -->
+              <form v-on:submit.prevent="updateprojet">
+                <div class="user-details">
+                   <v-chip style="text-align: left; margin-bottom: 2%;"
+                      >Puissance :
+                      {{ projet.puissance }}
+                    </v-chip>
+                  <div class="div">
+                    <div class="div2">
+                    <v-select
                           :items="couplagePrimaire"
                           label="couplage Primaire"
                           v-model="projet.couplagePrimaire"
                           outlined
                           dense
                         ></v-select>
-                      </v-col>
-
-                      <v-col class="d-flex" cols="12" sm="6">
-                        <v-select
+                     <v-select
                           :items="couplageSecondaire"
                           label="couplage Secondaire"
                           v-model="projet.couplageSecondaire"
                           outlined
                           dense
                         ></v-select>
-                      </v-col>
-
-                      <v-col class="d-flex" cols="12" sm="6">
-                        <v-select
+                         <v-select
                           :items="indiceHoraire"
                           label="indice Horaire"
                           v-model="projet.indiceHoraire"
                           outlined
                           dense
                         ></v-select>
-                      </v-col>
-                      <v-col class="d-flex" cols="12" sm="6">
-                        <v-text-field
+                       <v-text-field
                           label="Couplage"
                           id="couplage"
                           readonly
                           outlined
+                          dense
                           v-model="couplage"
                         ></v-text-field>
-                      </v-col>
-                    </v-row>
-                  </div>
-                </form>
-              </div>
-            </v-card>
-            <v-btn color="primary" @click="e1 = 1"> précédent </v-btn>
-            <v-btn color="success" @click="e1 = 3"> suivant </v-btn>
-          </v-stepper-content>
-          <v-stepper-step :complete="e1 > 3" step="3">
-            puissance
-          </v-stepper-step>
-          <v-stepper-content step="3">
-            <v-card class="mb-6">
-              <div class="content">
-                <form v-on:submit.prevent="updateprojet">
-                  <div class="user-details">
-                    <v-chip style="text-align: left"
-                      >Puissance :
-                      {{ projet.puissance }}
-                    </v-chip>
-                    <div class="field10">
+                    </div>
+                    <div class="div2">
                       <v-text-field
                         label="U1ligne"
                         v-model="PrimaireUligne"
                         outlined
+                        dense
                       ></v-text-field>
                       <v-text-field
                         label="U1Phase"
                         v-model="PrimaireUPhase"
+                        dense
                         outlined
                       ></v-text-field>
                       <v-text-field
                         label="I1ligne"
                         v-model="PrimaireIligne"
                         outlined
+                        dense
                       ></v-text-field>
 
                       <v-text-field
                         label="I1Phase"
                         v-model="PrimaireIPhase"
                         outlined
+                        dense
                       ></v-text-field>
                     </div>
-                    <div class="field10">
-                      <v-text-field
+                    <div class="div2">
+                     <v-text-field
                         label="U2ligne"
+                        dense
                         v-model="secondaireUligne"
                         outlined
                       ></v-text-field>
@@ -298,29 +279,32 @@
                         label="U2Phase"
                         v-model="secondaireUPhase"
                         outlined
+                        dense
                       ></v-text-field>
-
                       <v-text-field
                         label="I2ligne"
+                        dense
                         v-model="secondaireIligne"
                         outlined
                       ></v-text-field>
                       <v-text-field
                         label="I2Phase"
+                        dense
                         v-model="secondaireIPhase"
                         outlined
                       ></v-text-field>
                          <v-text-field
                         label="Uz"
+                        dense
                         v-model="Uz"
                         outlined
                       ></v-text-field>
                     </div>
                   </div>
-                </form>
-              </div>
+                </div>
+              </form>
             </v-card>
-            <v-btn color="primary mb-14" @click="e1 = 2"> précédent </v-btn>
+            <v-btn color="primary mb-14" @click="e1 = 1"> précédent </v-btn>
             <v-btn color="success mb-14" @click="updateprojet"> Valider </v-btn>
           </v-stepper-content>
         </v-stepper-items>
@@ -817,6 +801,21 @@ export default {
 };
 </script>
 <style scoped>
+/*  */
+.div2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* grid-template-rows: repeat(2, 1fr); */
+ grid-column-gap: 10px;
+  width: 75%;
+  /* margin-right: 5%; */
+}
+
+.div {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 10px;
+}
 .field10 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -1047,7 +1046,7 @@ form .button input:hover {
 .v-stepper--vertical {
   padding-bottom: 0px;
 }
-@media (max-width: 584px) {
+@media (max-width: 900px) {
   .container {
     max-width: 100%;
   }
@@ -1065,8 +1064,24 @@ form .button input:hover {
   .user-details::-webkit-scrollbar {
     width: 5px;
   }
+ .div2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* grid-template-rows: repeat(2, 1fr); */
+ grid-column-gap: 5px;
+  width: 70%;
+  /* margin-right: 5%; */
 }
-@media (max-width: 459px) {
+
+.div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 5px;
+}
+
+  
+}
+@media (max-width: 668px) {
   .container .content .category {
     flex-direction: column;
   }

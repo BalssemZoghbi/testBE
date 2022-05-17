@@ -501,22 +501,6 @@ export default {
       return this.hbobt - this.hfs - this.projet.collierBTSec;
     },
     poidBT() {
-      // let coefPoid;
-      // if (this.projet.materiau == "cuivre") {
-      //   coefPoid = 8.9;
-      // } else if (this.projet.materiau == "aluminium") {
-      //   coefPoid = 2.7;
-      // }
-      // console.log(coefPoid);
-      // return Math.pow(10, -6)*(
-      //  coefPoid*
-      //   this.projet.N1c *
-      //   this.scu1 *
-      //   (this.DintBint + this.Epx) *
-      //   parseFloat(Math.PI) *
-      //   3 *
-      //   ((100 + this.projet.majPoid) / 100)
-      // );
       let coefPoid=0;
          if(this.projet.materiauSec=='cuivre'){
                 coefPoid=8.9;
