@@ -491,24 +491,36 @@ form .button input:hover {
 .v-stepper--vertical {
     padding-bottom:0px;
 }
-@media (max-width: 584px) {
+@media (max-width:1000px) {
   .container {
     max-width: 100%;
   }
-  form .user-details .input-box {
+  form .field10 .input-box {
     margin-bottom: 15px;
     width: 100%;
   }
   form .category {
     width: 100%;
   }
-  .content form .user-details {
+  .content form .field10 {
     max-height: 300px;
     overflow-y: scroll;
   }
-  .user-details::-webkit-scrollbar {
+  .field10::-webkit-scrollbar {
     width: 5px;
   }
+  .field10 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 10px;
+  margin-right: 5%;
+}
+.div{
+  display: grid; 
+  grid-template-columns: 1fr ;
+  grid-gap: 10px;
+}
 }
 @media (max-width: 459px) {
   .container .content .category {

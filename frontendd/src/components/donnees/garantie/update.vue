@@ -12,8 +12,6 @@
           </v-stepper-step>
            <v-stepper-content step="1">
             <v-card class="mb-6"  >
-              <!-- <div class="body"> -->
-                <!-- <div class="container"> -->
                   <div class="title">Données de Garantie</div>
         
                   <div class="content">
@@ -364,22 +362,7 @@ export default {
       );
     },
    async getGarantie(){
-      //  const projets = {
-      //   id: undefined,
-      //   option: this.projet.option,
-      //   Pog: this.projet.Pog,
-      //   log: this.projet.log,
-      //   Pccg: this.projet.Pccg,
-      //   Uccg:this.projet.Uccg,
-      //   Ptot: this.projet.Ptot,
-      //   Poglimit: this.projet.Poglimit,
-      //   loglimit: this.projet.loglimit,
-      //   Pccglimit: this.projet.Pccglimit,
-      //   Uccglimit: this.projet.Uccglimit,
-      //   Ptotlimit: this.projet.Ptotlimit,
-      //   echauffementHuile: this.projet.echauffementHuile,
-      //   echauffementEnroulement: this.projet.echauffementEnroulement,
-      // };
+
     await axios.get('getGarantie/'+this.$route.params.id).then(
         (response) => ( this.projet=response.data)
         
@@ -443,7 +426,6 @@ h1 {
   width: 360px;
   padding: 4rem 2rem;
   border-radius: 1rem;
-  /* box-shadow: 0 10px 25px rgba(92,99,105,.2); */
 }
 .form__title {
   font-weight: 400;
@@ -677,6 +659,17 @@ form .button input:hover {
   .user-details::-webkit-scrollbar {
     width: 5px;
   }
+  .user-details .input-box input {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  /* border: 1px solid #ccc; */
+  /* border-bottom-width: 2px; */
+  transition: all 0.3s ease;
+}
 }
 @media (max-width: 459px) {
   .container .content .category {
