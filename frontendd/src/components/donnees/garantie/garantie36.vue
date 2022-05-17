@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- <NavDash /> -->
-    <Loading/>
+       <Loading v-if="spinner"/>
     <v-data-table
       :headers="headers"
       :items="gar36"
@@ -153,6 +153,7 @@ export default {
     Loading
   },
   data: () => ({
+     spinner:true,
     search: "",
     dialog: false,
     dialogDelete: false,
@@ -207,6 +208,7 @@ export default {
      async get36() {
     await axios.get("/garantie36").then((resp) => {
         this.gar36 = resp.data;
+        this.spinner=false;
         console.log(resp.data);
       });
     },

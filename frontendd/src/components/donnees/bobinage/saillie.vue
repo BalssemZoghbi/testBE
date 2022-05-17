@@ -1,7 +1,7 @@
 <template>
   <div>
     <NavDash />
-    <Loading/>
+    <Loading v-if="spinner"/>
      <v-tabs
       v-model="tab"
       background-color="transparent"
@@ -167,6 +167,7 @@ export default {
     Loading
   },
   data: () => ({
+    spinner:true,
      tab: null,
       itemstab: ['Saillie', 'Hbrin','Barre'],
     search: "",
@@ -211,6 +212,7 @@ export default {
      async get36() {
     await axios.get("/getSaillie").then((resp) => {
         this.gar36 = resp.data;
+        this.spinner=false;
         // console.log(resp.data);
       });
     },

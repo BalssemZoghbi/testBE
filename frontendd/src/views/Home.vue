@@ -3,7 +3,7 @@
     <!-- <navbar /> -->
     <NavDash v-if="this.usertype == 'admin'" />
     <NavDashEmp v-if="this.usertype == 'employe'" />
-<Loading/>
+<Loading v-if="spinner"/>
     <!-- <button class="nav-link" @click="create()" >Crée</button> -->
     <div class="body panel left-panel">
       <v-data-table
@@ -156,6 +156,7 @@ export default {
     // navbar
   },
   data: () => ({
+    spinner:true,
     usertype: "",
     projet: Object,
     appareil:"",
@@ -247,7 +248,7 @@ vm.isDisabled = true;
    var blob=new Blob([response.data.data],{type:headers['content-type']});
    var link = document.createElement('a');
    link.href = window.URL.createObjectURL(blob);
-    link.download = vm.appareil;
+    link.download = vm.templateProjet;
     link.click();
     link.remove();
     vm.isDisabled = false;
@@ -338,6 +339,7 @@ vm.isDisabled = true;
     getprojet() {
       axios.get("/projets").then((resp) => {
         this.projets = resp.data;
+        this.spinner=false;
       });
     },
     deleteprojet(id) {

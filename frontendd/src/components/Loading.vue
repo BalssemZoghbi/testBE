@@ -1,29 +1,17 @@
 <template>
-  <transition name="fade">
-    <div v-if="show" class="preloader">
-      <div class="logo"></div>
-    </div>
-  </transition>
+  <!-- <transition name="fade"> -->
+    <div class="preloader">
+      <!-- <div class="logo"></div>
+    
+  </transition> -->
+<v-progress-circular  
+      :size="50"
+      class="logo"
+      color="primary"
+      indeterminate
+    ></v-progress-circular></div>
 </template>
-<script>
-export default {
-  data() {
-    return {
-      show: true,
-    };
-  },
-  mounted() {
-    this.showToggles();
-  },
-  methods: {
-    showToggles() {
-      setTimeout(() => {
-        this.show = false;
-      }, 300);
-    },
-  },
-};
-</script>
+
 <style scoped>
 .preloader {
   position: fixed;
@@ -37,8 +25,9 @@ export default {
 .logo {
   width: 100%;
   height: 100%;
-  margin-left: 25%;
-  background-image: url(../assets/loading.gif);
+  margin: 16%;
+  margin-left: 39%;
+  /* background-image: url(../assets/loading.gif); */
 }
 p {
   font: 600 1.5rem;

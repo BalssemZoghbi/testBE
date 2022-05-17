@@ -14,7 +14,7 @@
         {{ itemtab }}
       </v-tab>
     </v-tabs>
-    <Loading/>
+    <Loading v-if="spinner"/>
        <v-tabs-items v-model="tab">
       <v-tab-item>
         <v-card flat>
@@ -183,6 +183,7 @@ export default {
     Loading
   },
   data: () => ({
+     spinner:true,
      tab: null,
       itemstab: [
       'Garantie 24', 'Garantie 36'
@@ -241,6 +242,7 @@ export default {
      async get24() {
     await axios.get("/garantie24").then((resp) => {
         this.gar24 = resp.data;
+        this.spinner=false;
         console.log(resp.data);
       });
     },

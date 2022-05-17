@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Loading/>
+    <Loading v-if="spinner"/>
         <v-data-table
       :headers="headers"
       :items="users"
@@ -138,6 +138,7 @@ export default {
      Loading
   },
   data: () => ({
+    spinner:true,
     types:['employe','admin','En Attente','Décliné','Bloqué'],
     search: "",
     dialog: false,
@@ -195,6 +196,7 @@ export default {
      async  getuser() {
     await axios.get("/usersInactive").then((resp) => {
         this.users = resp.data;
+       this.spinner=false;
         console.log(resp.data);
       });
     },

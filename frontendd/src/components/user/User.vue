@@ -2,7 +2,7 @@
   <div>
     
     <NavDash/>
-    <Loading/>
+    <Loading v-if="spinner"/>
     <v-tabs
       v-model="tab"
       background-color="transparent"
@@ -197,6 +197,7 @@ export default {
     Inactive
   },
   data: () => ({
+    spinner:true,
     types:['employe','admin','En Attente'],
     tab: null,
         itemstab: [
@@ -258,6 +259,7 @@ export default {
      async  getuser() {
     await axios.get("/users/get").then((resp) => {
         this.users = resp.data;
+        this.spinner=false;
         console.log(resp.data);
       });
     },
@@ -283,29 +285,7 @@ export default {
       this.editedIndex = this.users.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
-      //     update() {
-      // let user = {
-      //   email: this.editedItem.email,
-      //   type: this.editedItem.type,
-      //   name: this.editedItem.name,
-      //   password: this.password,
-      // }
-      // axios.put('/user/update/'+item.id, user,{ headers: { token: localStorage.getItem('token')}})
-      //   .then(res => {
-      //     //if successfull
-      //     if (res.status === 200) {
-      //       localStorage.setItem('token', res.data.token);
-      //       console.log(res)
-            
-      //     }
-      //   }, err => {
-      //     console.log(err.response);
-      //     this.error = err.response.data.error
-      //   })
-    
-    //    axios.put("/user/update/"+this.id, users).then(
-    //     (response) => (this.id = response.data.id)
-    // );
+
     },
    
     close() {

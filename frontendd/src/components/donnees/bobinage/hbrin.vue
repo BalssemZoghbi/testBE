@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- <NavDash /> -->
-    <Loading/>
+    <Loading v-if="spinner"/>
     <v-data-table
       :headers="headers"
       :items="gar36"
@@ -125,10 +125,12 @@ import Loading from "@/components/Loading.vue";
 import axios from "axios";
 export default {
    components: {
+    
     // NavDash,
     Loading
   },
   data: () => ({
+     spinner:true,
     search: "",
     dialog: false,
     dialogDelete: false,
@@ -148,7 +150,7 @@ export default {
     },
   }),
     async created() {
-    this.get36();
+   await this.get36();
   },
   computed: {
     formTitle() {
@@ -171,7 +173,7 @@ export default {
      async get36() {
     await axios.get("/getHbrin").then((resp) => {
         this.gar36 = resp.data;
-        // console.log(resp.data);
+        this.spinner=false;
       });
     },
          deletegar(id) {
