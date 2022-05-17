@@ -721,21 +721,18 @@ form .button {
   padding-bottom: 0px;
 }
 @media (max-width: 400px) {
-  .container {
-    max-width: 100%;
-  }
-  form .user-details .input-box {
+  form .field10 .input-box {
     margin-bottom: 15px;
     width: 100%;
   }
   form .category {
     width: 100%;
   }
-  .content form .user-details {
+  .content form .field10 {
     max-height: 300px;
     overflow-y: scroll;
   }
-  .user-details::-webkit-scrollbar {
+  .field10::-webkit-scrollbar {
     width: 5px;
   }
   .field10 {
