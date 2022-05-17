@@ -1,30 +1,20 @@
 <template>
   <div>
-    <NavDash :conducteur="projet.conducteur" :conducteurSec="projet.conducteurSec"/>
-    <!-- <navbarUpdate :elec_id='projet.electrique_id' :id='projet.id'/> -->
+    <NavDash
+      :conducteur="projet.conducteur"
+      :conducteurSec="projet.conducteurSec"
+    />
     <div class="body">
       <v-stepper v-model="e1" vertical>
-        <!-- <v-stepper-header> -->
-        <v-stepper-step :complete="e1 > 1" step="1">
-          Données Generale
-        </v-stepper-step>
-
-        <!-- <v-divider></v-divider> -->
-
-        <!-- <v-divider></v-divider> -->
-
-        <!-- </v-stepper-header> -->
-
-        <!-- <v-stepper-items> -->
+        <v-stepper-step step=""> Données Generale </v-stepper-step>
         <v-stepper-content step="1">
           <v-card class="mb-6">
-            <!-- <div class="body"> -->
-            <!-- <div class="container"> -->
             <div class="title">Données Generale</div>
             <div class="content">
               <form v-on:submit.prevent="updateprojet">
-                <div class="user-details">
-                  <div class="form__div framei">
+                <!-- <div class="user-details"> -->
+                <div class="grid">
+                  <div class="form__div">
                     <input
                       type="text"
                       class="form__input"
@@ -34,7 +24,7 @@
                     />
                     <label for="" class="form__label">Appareil</label>
                   </div>
-                  <div class="form__div framei">
+                  <div class="form__div">
                     <input
                       type="text"
                       class="form__input"
@@ -44,7 +34,6 @@
                     />
                     <label for="" class="form__label">Reference</label>
                   </div>
-
                   <div class="input-box">
                     <div class="form__div">
                       <input
@@ -57,8 +46,7 @@
                       <label for="" class="form__label">refClient</label>
                     </div>
                   </div>
-
-                  <div class="form__div framei">
+                  <div class="form__div">
                     <input
                       type="text"
                       class="form__input"
@@ -68,8 +56,7 @@
                     />
                     <label for="" class="form__label">Client</label>
                   </div>
-
-                  <div class="form__div framei">
+                  <div class="form__div">
                     <input
                       type="text"
                       class="form__input"
@@ -78,15 +65,8 @@
                       v-model="projet.elaborateur"
                     />
                     <label for="" class="form__label">Elaboré par</label>
-                    <!-- <v-select
-                                :items="frequences"
-                                label="frequence"
-                                v-model="projet.frequence"
-                                dense
-                                outlined
-                              ></v-select> -->
                   </div>
-                  <div class="form__div framei">
+                  <div class="form__div">
                     <input
                       type="number"
                       class="form__input"
@@ -96,7 +76,7 @@
                     />
                     <label for="" class="form__label">temperatureMax</label>
                   </div>
-                  <div class="form__div framei">
+                  <div class="form__div">
                     <input
                       type="number"
                       class="form__input"
@@ -106,7 +86,7 @@
                     />
                     <label for="" class="form__label">attitudeMax</label>
                   </div>
-                  <div class="form__div framei">
+                  <div class="form__div">
                     <v-select
                       :items="types"
                       label="type"
@@ -115,7 +95,7 @@
                       outlined
                     ></v-select>
                   </div>
-                  <div class="form__div framei">
+                  <div class="form__div">
                     <v-select
                       :items="remplissages"
                       label="remplissage"
@@ -124,7 +104,7 @@
                       outlined
                     ></v-select>
                   </div>
-                  <div class="form__div framei">
+                  <div class="form__div">
                     <v-select
                       :items="installations"
                       label="installation"
@@ -133,7 +113,7 @@
                       outlined
                     ></v-select>
                   </div>
-                  <div class="form__div framei">
+                  <div class="form__div">
                     <v-select
                       :items="montages"
                       label="montage"
@@ -142,7 +122,7 @@
                       outlined
                     ></v-select>
                   </div>
-                  <div class="form__div framei">
+                  <div class="form__div">
                     <v-select
                       :items="dielectriques"
                       label="dielectrique"
@@ -151,7 +131,7 @@
                       outlined
                     ></v-select>
                   </div>
-                  <div class="form__div framei">
+                  <div class="form__div">
                     <v-select
                       :items="fonctionnements"
                       label="fonctionnement"
@@ -160,8 +140,7 @@
                       outlined
                     ></v-select>
                   </div>
-
-                  <div class="form__div framei">
+                  <div class="form__div">
                     <v-select
                       :items="echangeurs"
                       label="Echangeurs"
@@ -170,8 +149,7 @@
                       outlined
                     ></v-select>
                   </div>
-
-                  <div class="form__div framei">
+                  <div class="form__div">
                     <v-select
                       :items="refroidissements"
                       label="Refroidissement"
@@ -180,41 +158,27 @@
                       outlined
                     ></v-select>
                   </div>
-               
                 </div>
               </form>
             </div>
-            <!-- </div> -->
-            <!-- </div> -->
           </v-card>
-
           <router-link
             class="nav-link"
             :to="'/projet/electrique/update/' + projet.id"
-            ><v-btn
-              color="primary"
-              @click="updateprojet"
-              style="margin-top: -3% !important; margin-bottom: 5% !important"
-            >
+            ><v-btn color="primary mb-14" @click="updateprojet">
               Valider
             </v-btn></router-link
           >
         </v-stepper-content>
-        <!-- <v-stepper-content >
-        </v-stepper-content> -->
       </v-stepper>
     </div>
   </div>
 </template>
-
 <script>
-// import { reactive } from "vue";
-// import navbarUpdate from '../../navbarUpdate';
 import NavDash from "@/components/NavDash.vue";
 import axios from "axios";
 export default {
   components: {
-    // navbarUpdate
     NavDash,
   },
   data() {
@@ -264,7 +228,7 @@ export default {
   },
   methods: {
     updateprojet() {
-  let token = localStorage.getItem("token");  
+      let token = localStorage.getItem("token");
       const projets = {
         id: undefined,
         appareil: this.projet.appareil,
@@ -294,10 +258,10 @@ export default {
       };
       axios
         .put("projets/edit/" + this.$route.params.id, projets, {
-            headers: {
-              Authorization: token,
-            },
-          })
+          headers: {
+            Authorization: token,
+          },
+        })
         .then((response) => (this.id = response.data.id));
     },
     getbarre() {
@@ -311,28 +275,19 @@ export default {
   async mounted() {
     const result = await axios.get("projets/" + this.$route.params.id);
     this.projet = result.data;
-
   },
-
 };
 </script>
 <style scoped>
-h1 {
-  margin: 0;
-}
-
-/*===== FORM =====*/
-.l-form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 3fr);
+  grid-gap: 2%;
 }
 .form {
   width: 360px;
   padding: 4rem 2rem;
   border-radius: 1rem;
-  /* box-shadow: 0 10px 25px rgba(92,99,105,.2); */
 }
 .form__title {
   font-weight: 400;
@@ -348,10 +303,10 @@ h1 {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 89%;
   font-size: 1rem;
-  border: 1px solid #dadce0;
-  border-radius: 0.5rem;
+  border: 1px solid rgb(152, 149, 149);
+  border-radius:0.3rem;
   outline: none;
   padding: 1rem;
   background: none;
@@ -366,22 +321,6 @@ h1 {
   color: #000000ad;
   font-size: 1rem;
   transition: 0.3s;
-}
-.form__button {
-  display: block;
-  margin-left: auto;
-  padding: 0.75rem 2rem;
-  outline: none;
-  border: none;
-  background-color: #4797d1;
-  color: #fff;
-  font-size: 1rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.form__button:hover {
-  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.15);
 }
 
 /*Input focus move up label*/
@@ -403,36 +342,18 @@ h1 {
   z-index: 1;
 }
 
-/*Input focus*/
 .form__input:focus {
   border: 1.5px solid #4797d1;
 }
 
 .body {
   height: 100%;
-  /* display: flex; */
-  /* justify-content: center;
-  align-items: center; */
   padding: 20px;
   max-height: calc(100vh - 50px);
-
-  /* margin: 0.5%; */
-  /* background: linear-gradient(135deg,#71b7e675, #71b7e675); */
-}
-.container {
-  max-width: 98%;
-  /* height: 80%; */
-  margin-top: 2%;
-  width: 100%;
-  background-color: #fff;
-  padding: 25px 30px;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px rgb(0 0 0 / 15%);
 }
 .title {
   font-size: 25px;
   font-weight: 500;
-  /* margin-top:-1% ; */
   margin-bottom: 3.5%;
   position: relative;
 }
@@ -444,7 +365,6 @@ h1 {
   height: 3px;
   width: 250px;
   border-radius: 5px;
-
   background: linear-gradient(135deg, #0b65a0, #71b7e6);
 }
 .content form .user-details {
@@ -469,11 +389,8 @@ form .input-box span.details {
   font-size: 16px;
   border-radius: 5px;
   padding-left: 15px;
-  /* border: 1px solid #ccc; */
-  /* border-bottom-width: 2px; */
   transition: all 0.3s ease;
 }
-
 form .gender-details .gender-title {
   font-size: 20px;
   font-weight: 500;
@@ -507,11 +424,6 @@ form .category label .dot {
 form input[type="radio"] {
   display: none;
 }
-form .button {
-  height: 45px;
-  margin-top: 10px;
-  margin-left: 80%;
-}
 form .button input {
   height: 100%;
   width: 100%;
@@ -526,33 +438,22 @@ form .button input {
   background: linear-gradient(135deg, #4797d1, #4797d1);
 }
 form .button input:hover {
-  /* transform: scale(0.99); */
   background: linear-gradient(-135deg, #71b7e6, #71b7e6);
 }
 .framei {
   width: 22%;
   justify-content: space-between;
 }
-.frameii {
-  /* width: calc(100% /1 - 2px); */
-  width: 100%;
-  border-color: #000;
-}
+
 .v-sheet.v-card:not(.v-sheet--outlined) {
   box-shadow: 0px 0px 0px 0px;
 }
 .v-stepper--vertical {
   padding-bottom: 0px;
 }
-@media (max-width: 584px) {
-  .container {
-    max-width: 100%;
-  }
+@media (max-width: 1000px) {
   form .user-details .input-box {
     margin-bottom: 15px;
-    width: 100%;
-  }
-  form .category {
     width: 100%;
   }
   .content form .user-details {
@@ -562,10 +463,29 @@ form .button input:hover {
   .user-details::-webkit-scrollbar {
     width: 5px;
   }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 2%;
+  }
+  .v-btn:not(.v-btn--round).v-size--default {
+    height: 36px;
+    margin-top: 15%;
+    min-width: 64px;
+    padding: 0 16px;
+  }
 }
 @media (max-width: 459px) {
-  .container .content .category {
-    flex-direction: column;
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2%;
+  }
+  .v-btn:not(.v-btn--round).v-size--default {
+    height: 36px;
+    margin-top: 15%;
+    min-width: 64px;
+    padding: 0 16px;
   }
 }
 </style>

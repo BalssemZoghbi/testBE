@@ -1,10 +1,13 @@
 <template>
   <div>
-   <NavDash :conducteur="projet.conducteur" :conducteurSec="projet.conducteurSec"/>
+    <NavDash
+      :conducteur="projet.conducteur"
+      :conducteurSec="projet.conducteurSec"
+    />
     <div class="body">
       <v-stepper v-model="e1" vertical>
         <v-stepper-step :complete="e1 > 1" step="1">
-          Données Generale
+          Données Electrique
         </v-stepper-step>
         <v-stepper-items>
           <v-stepper-content step="1">
@@ -12,7 +15,7 @@
               <div class="title">Données Electrique</div>
               <div class="content">
                 <form v-on:submit.prevent="updateprojet">
-                  <div class="user-details">
+                  <div class="col">
                     <div class="input-box">
                       <div class="form__div">
                         <v-select
@@ -25,7 +28,7 @@
                         ></v-select>
                       </div>
                     </div>
-                    <div class="form__div framei">
+                    <div class="form__div">
                       <input
                         type="number"
                         class="form__input"
@@ -36,7 +39,7 @@
                       <label for="" class="form__label">pn</label>
                     </div>
 
-                    <div class="form__div framei">
+                    <div class="form__div">
                       <v-select
                         :items="frequences"
                         label="frequence"
@@ -45,123 +48,7 @@
                         outlined
                       ></v-select>
                     </div>
-                    <div class="form__div framei">
-                      <input
-                        type="number"
-                        class="form__input"
-                        placeholder=" "
-                        id="u1n"
-                        v-model="projet.u1n"
-                      />
-                      <label for="" class="form__label">u1n</label>
-                    </div>
-                    <div class="form__div framei">
-                      <input
-                        type="number"
-                        class="form__input"
-                        placeholder=" "
-                        id="classeU1"
-                        v-model="classeU1"
-                      />
-                      <label for="" class="form__label">classeU1</label>
-                      
-                    </div>
-                    <div class="form__div framei">
-                      <input
-                        type="number"
-                        class="form__input"
-                        placeholder=" "
-                        id="tenueFr1"
-                        v-model="tenueFr1"
-                      />
-                      <label for="" class="form__label">tenueFr1</label>
-                    </div>
-                    <div class="form__div framei">
-                      <input
-                        type="number"
-                        class="form__input"
-                        placeholder=" "
-                        id="tenueChoc1"
-                        v-model="tenueChoc1"
-                      />
-                      <label for="" class="form__label">tenueChoc1</label>
-                    </div>
-                    <div class="form__div framei">
-                      <input
-                        type="number"
-                        class="form__input"
-                        placeholder=" "
-                        id="u2o"
-                        v-model="projet.u2o"
-                      />
-                      <label for="" class="form__label">u2o</label>
-                    </div>
-                    <div class="form__div framei">
-                      <input
-                        type="number"
-                        class="form__input"
-                        placeholder=" "
-                        id="classeU2"
-                        v-model="classeU2"
-                      />
-                      <label for="" class="form__label">classeU2</label>
-                    </div>
-                    <div class="form__div framei">
-                      <input
-                        type="number"
-                        class="form__input"
-                        placeholder=" "
-                        id="tenueFr2"
-                        v-model="tenueFr2"
-                      />
-                      <label for="" class="form__label">tenueFr2</label>
-                    </div>
-                    <div class="form__div framei">
-                      <input
-                        type="number"
-                        class="form__input"
-                        placeholder=" "
-                        id="tenueChoc2"
-                        v-model="tenueChoc2"
-                      />
-                      <label for="" class="form__label">tenueChoc2</label>
-                    </div>
-                    <div class="form__div framei">
-                      <input
-                        type="number"
-                        class="form__input"
-                        placeholder=" "
-                        id="priseSoustractive"
-                        v-model="projet.priseSoustractive"
-                      />
-                      <label for="" class="form__label"
-                        >Prise soustractive</label
-                      >
-                    </div>
-                   
-                    <div class="form__div framei">
-                      <input
-                        type="number"
-                        class="form__input"
-                        placeholder=" "
-                        id="priseAdditive"
-                        v-model="projet.priseAdditive"
-                      />
-                      <label for="" class="form__label">Prise additive</label>
-                    </div>
-                     <div class="form__div framei">
-                      <input
-                        type="number"
-                        class="form__input"
-                        placeholder=" "
-                        id="nbrePosition"
-                        v-model="nbrePosition"
-                      />
-                      <label for="" class="form__label"
-                        >Nbre de Position</label
-                      >
-                    </div>
-                    <div class="form__div framei">
+                    <div class="form__div">
                       <input
                         type="number"
                         class="form__input"
@@ -173,7 +60,7 @@
                         >Echelon Sousctractive</label
                       >
                     </div>
-                    <div class="form__div framei">
+                    <div class="form__div">
                       <input
                         type="number"
                         class="form__input"
@@ -182,6 +69,121 @@
                         v-model="projet.echelonAdditive"
                       />
                       <label for="" class="form__label">echelon Additive</label>
+                    </div>
+                  </div>
+                  <div class="grid">
+                    <div class="form__div">
+                      <input
+                        type="number"
+                        class="form__input"
+                        placeholder=" "
+                        id="u1n"
+                        v-model="projet.u1n"
+                      />
+                      <label for="" class="form__label">u1n</label>
+                    </div>
+                    <div class="form__div">
+                      <input
+                        type="number"
+                        class="form__input"
+                        placeholder=" "
+                        id="classeU1"
+                        v-model="classeU1"
+                      />
+                      <label for="" class="form__label">classeU1</label>
+                    </div>
+                    <div class="form__div">
+                      <input
+                        type="number"
+                        class="form__input"
+                        placeholder=" "
+                        id="tenueFr1"
+                        v-model="tenueFr1"
+                      />
+                      <label for="" class="form__label">tenueFr1</label>
+                    </div>
+                    <div class="form__div">
+                      <input
+                        type="number"
+                        class="form__input"
+                        placeholder=" "
+                        id="tenueChoc1"
+                        v-model="tenueChoc1"
+                      />
+                      <label for="" class="form__label">tenueChoc1</label>
+                    </div>
+                    <div class="form__div">
+                      <input
+                        type="number"
+                        class="form__input"
+                        placeholder=" "
+                        id="u2o"
+                        v-model="projet.u2o"
+                      />
+                      <label for="" class="form__label">u2o</label>
+                    </div>
+                    <div class="form__div">
+                      <input
+                        type="number"
+                        class="form__input"
+                        placeholder=" "
+                        id="classeU2"
+                        v-model="classeU2"
+                      />
+                      <label for="" class="form__label">classeU2</label>
+                    </div>
+                    <div class="form__div">
+                      <input
+                        type="number"
+                        class="form__input"
+                        placeholder=" "
+                        id="tenueFr2"
+                        v-model="tenueFr2"
+                      />
+                      <label for="" class="form__label">tenueFr2</label>
+                    </div>
+                    <div class="form__div">
+                      <input
+                        type="number"
+                        class="form__input"
+                        placeholder=" "
+                        id="tenueChoc2"
+                        v-model="tenueChoc2"
+                      />
+                      <label for="" class="form__label">tenueChoc2</label>
+                    </div>
+                    <div class="form__div">
+                      <input
+                        type="number"
+                        class="form__input"
+                        placeholder=" "
+                        id="priseSoustractive"
+                        v-model="projet.priseSoustractive"
+                      />
+                      <label for="" class="form__label"
+                        >Prise soustractive</label
+                      >
+                    </div>
+
+                    <div class="form__div">
+                      <input
+                        type="number"
+                        class="form__input"
+                        placeholder=" "
+                        id="priseAdditive"
+                        v-model="projet.priseAdditive"
+                      />
+                      <label for="" class="form__label">Prise additive</label>
+                    </div>
+                    <div class="form__div">
+                      <input
+                        type="number"
+                        class="form__input"
+                        placeholder=" "
+                        id="nbrePosition"
+                        v-model="nbrePosition"
+                      />
+                      <label for="" class="form__label">Nbre de Position</label>
                     </div>
                   </div>
                 </form>
@@ -198,48 +200,46 @@
           <v-stepper-step :complete="e1 > 2" step="2">
             Couplage/puissance
           </v-stepper-step>
-
           <v-stepper-content step="2">
             <v-card class="mb-4">
               <div class="title">Données Electrique</div>
-              <!-- <div class="content"> -->
               <form v-on:submit.prevent="updateprojet">
                 <div class="user-details">
-                   <v-chip style="text-align: left; margin-bottom: 2%;"
-                      >Puissance :
-                      {{ projet.puissance }}
-                    </v-chip>
+                  <v-chip style="text-align: left; margin-bottom: 2%"
+                    >Puissance :
+                    {{ projet.puissance }}
+                  </v-chip>
                   <div class="div">
                     <div class="div2">
-                    <v-select
-                          :items="couplagePrimaire"
-                          label="couplage Primaire"
-                          v-model="projet.couplagePrimaire"
-                          outlined
-                          dense
-                        ></v-select>
-                     <v-select
-                          :items="couplageSecondaire"
-                          label="couplage Secondaire"
-                          v-model="projet.couplageSecondaire"
-                          outlined
-                          dense
-                        ></v-select>
-                         <v-select
-                          :items="indiceHoraire"
-                          label="indice Horaire"
-                          v-model="projet.indiceHoraire"
-                          outlined
-                          dense
-                        ></v-select>
-                       <v-text-field
-                          label="Couplage"
-                          id="couplage"
-                          readonly
-                          outlined
-                          dense
-                          v-model="couplage"
-                        ></v-text-field>
+                      <v-select
+                        :items="couplagePrimaire"
+                        label="couplage Primaire"
+                        v-model="projet.couplagePrimaire"
+                        outlined
+                        dense
+                      ></v-select>
+                      <v-select
+                        :items="couplageSecondaire"
+                        label="couplage Secondaire"
+                        v-model="projet.couplageSecondaire"
+                        outlined
+                        dense
+                      ></v-select>
+                      <v-select
+                        :items="indiceHoraire"
+                        label="indice Horaire"
+                        v-model="projet.indiceHoraire"
+                        outlined
+                        dense
+                      ></v-select>
+                      <v-text-field
+                        label="Couplage"
+                        id="couplage"
+                        readonly
+                        outlined
+                        dense
+                        v-model="couplage"
+                      ></v-text-field>
                     </div>
                     <div class="div2">
                       <v-text-field
@@ -260,7 +260,6 @@
                         outlined
                         dense
                       ></v-text-field>
-
                       <v-text-field
                         label="I1Phase"
                         v-model="PrimaireIPhase"
@@ -269,7 +268,7 @@
                       ></v-text-field>
                     </div>
                     <div class="div2">
-                     <v-text-field
+                      <v-text-field
                         label="U2ligne"
                         dense
                         v-model="secondaireUligne"
@@ -293,7 +292,7 @@
                         v-model="secondaireIPhase"
                         outlined
                       ></v-text-field>
-                         <v-text-field
+                      <v-text-field
                         label="Uz"
                         dense
                         v-model="Uz"
@@ -313,15 +312,10 @@
   </div>
 </template>
 <script>
-// import { reactive } from "vue";
 import NavDash from "@/components/NavDash.vue";
-
-// import navbarUpdate from "../../navbarUpdate.vue";
-
 import axios from "axios";
 export default {
   components: {
-    // navbarUpdate
     NavDash,
   },
   data() {
@@ -436,30 +430,25 @@ export default {
 
       this.$router.push("/projet/garantie/" + this.$route.params.id);
     },
-    classeu(){
-          //  let classeU1=0;
-          let u1=this.projet.u1n;
-          let id=this.$route.params.id;
-     const  r=   axios.get(`/electrique/tension/${id}/${u1}`) 
-     .then(response => response.data)
-            .then(data => {
-                this.dataFromServer = data;
-            });
-        // .then(
-        //   (response) => (console.log(response.data.tensionEleve), this.projet.classeU1= response.data.tensionEleve)
-        //  )
-         return r;
-        //  , (this.projet.classeU1 = response.data)
-    }
+    classeu() {
+      let u1 = this.projet.u1n;
+      let id = this.$route.params.id;
+      const r = axios
+        .get(`/electrique/tension/${id}/${u1}`)
+        .then((response) => response.data)
+        .then((data) => {
+          this.dataFromServer = data;
+        });
+      return r;
+    },
   },
   async mounted() {
     const result = await axios.get("projets/" + this.$route.params.id);
     this.projet = result.data;
   },
- async created(){  
-     const result = await  axios.get("projets/" + this.$route.params.id);
+  async created() {
+    const result = await axios.get("projets/" + this.$route.params.id);
     this.projet = result.data;
-      //  console.log(Math.PI);
   },
   computed: {
     couplage() {
@@ -469,348 +458,313 @@ export default {
         this.projet.indiceHoraire
       );
     },
-    nbrePosition(){
-        return parseInt(this.projet.priseSoustractive)+parseInt(this.projet.priseAdditive)+1;
+    nbrePosition() {
+      return (
+        parseInt(this.projet.priseSoustractive) +
+        parseInt(this.projet.priseAdditive) +
+        1
+      );
     },
     classeU1() {
-    const u1=parseInt(this.projet.u1n)/1000;
-      if(u1<1.1){
+      const u1 = parseInt(this.projet.u1n) / 1000;
+      if (u1 < 1.1) {
         return 1.1;
-      }else if(u1<3.60){
-        return 3.6;   
-        }
-        else if(u1<7.20){
+      } else if (u1 < 3.6) {
+        return 3.6;
+      } else if (u1 < 7.2) {
         return 7.2;
-        } 
-        else if(u1<12.00){
+      } else if (u1 < 12.0) {
         return 12;
-        } 
-        else if(u1<17.50){
+      } else if (u1 < 17.5) {
         return 17.5;
-        } 
-        else if(u1<24.0){
+      } else if (u1 < 24.0) {
         return 24.0;
-        } 
-        else if(u1<36.0){
+      } else if (u1 < 36.0) {
         return 36.0;
-        } 
-        else if(u1<52.0){
+      } else if (u1 < 52.0) {
         return 52.0;
-        } 
-        else if(u1<72.5){
+      } else if (u1 < 72.5) {
         return 72.5;
-        } 
-        else if(u1<100){
+      } else if (u1 < 100) {
         return 72.5;
-        } 
-        else if(u1<123.0){
+      } else if (u1 < 123.0) {
         return 123.0;
-        } 
-        else if(u1<145.0){
+      } else if (u1 < 145.0) {
         return 145.0;
-        } 
-        else if(u1<170.0){
+      } else if (u1 < 170.0) {
         return 170.0;
-        } 
-        else if(u1<245.0){
+      } else if (u1 < 245.0) {
         return 245.0;
-        } 
-        else{
+      } else {
         return 0;
-        }
-        },
+      }
+    },
     tenueChoc1() {
-    const u1=parseInt(this.projet.u1n)/1000;
-      if(u1<1.1){
+      const u1 = parseInt(this.projet.u1n) / 1000;
+      if (u1 < 1.1) {
         return 0;
-      }else if(u1<3.60){
-        return 20;   
-        }
-        else if(u1<7.20){
+      } else if (u1 < 3.6) {
+        return 20;
+      } else if (u1 < 7.2) {
         return 60;
-        } 
-        else if(u1<12.00){
+      } else if (u1 < 12.0) {
         return 75;
-        } 
-        else if(u1<17.50){
+      } else if (u1 < 17.5) {
         return 95;
-        } 
-        else if(u1<24.0){
+      } else if (u1 < 24.0) {
         return 125;
-        } 
-        else if(u1<36.0){
+      } else if (u1 < 36.0) {
         return 170;
-        } 
-        else if(u1<52.0){
+      } else if (u1 < 52.0) {
         return 250;
-        } 
-        else if(u1<72.5){
+      } else if (u1 < 72.5) {
         return 325;
-        } 
-        else if(u1<100){
+      } else if (u1 < 100) {
         return 450;
-        } 
-        else if(u1<123.0){
+      } else if (u1 < 123.0) {
         return 550;
-        } 
-        else if(u1<145.0){
+      } else if (u1 < 145.0) {
         return 550;
-        } 
-        else if(u1<170.0){
+      } else if (u1 < 170.0) {
         return 650;
-        } 
-        else if(u1<245.0){
+      } else if (u1 < 245.0) {
         return 850;
-        } 
-        else{
+      } else {
         return 0;
-        }
-        },
+      }
+    },
     tenueFr1() {
-    const u1=parseInt(this.projet.u1n)/1000;
-      if(u1<1.1){
+      const u1 = parseInt(this.projet.u1n) / 1000;
+      if (u1 < 1.1) {
         return 3;
-      }else if(u1<3.60){
-        return 10;   
-        }
-        else if(u1<7.20){
+      } else if (u1 < 3.6) {
+        return 10;
+      } else if (u1 < 7.2) {
         return 20;
-        } 
-        else if(u1<12.00){
+      } else if (u1 < 12.0) {
         return 28;
-        } 
-        else if(u1<17.50){
+      } else if (u1 < 17.5) {
         return 38;
-        } 
-        else if(u1<24.0){
+      } else if (u1 < 24.0) {
         return 50;
-        } 
-        else if(u1<36.0){
+      } else if (u1 < 36.0) {
         return 70;
-        } 
-        else if(u1<52.0){
+      } else if (u1 < 52.0) {
         return 95;
-        } 
-        else if(u1<72.5){
+      } else if (u1 < 72.5) {
         return 140;
-        } 
-        else if(u1<100){
+      } else if (u1 < 100) {
         return 185;
-        } 
-        else if(u1<123.0){
+      } else if (u1 < 123.0) {
         return 230;
-        } 
-        else if(u1<145.0){
+      } else if (u1 < 145.0) {
         return 230;
-        } 
-        else if(u1<170.0){
+      } else if (u1 < 170.0) {
         return 275;
-        } 
-        else if(u1<245.0){
+      } else if (u1 < 245.0) {
         return 360;
-        } 
-        else{
+      } else {
         return 0;
-        }
-        },
+      }
+    },
     classeU2() {
-    const u1=parseInt(this.projet.u2o)/1000;
-      if(u1<1.1){
+      const u1 = parseInt(this.projet.u2o) / 1000;
+      if (u1 < 1.1) {
         return 1.1;
-      }else if(u1<3.60){
-        return 3.6;   
-        }
-        else if(u1<7.20){
+      } else if (u1 < 3.6) {
+        return 3.6;
+      } else if (u1 < 7.2) {
         return 7.2;
-        } 
-        else if(u1<12.00){
+      } else if (u1 < 12.0) {
         return 12;
-        } 
-        else if(u1<17.50){
+      } else if (u1 < 17.5) {
         return 17.5;
-        } 
-        else if(u1<24.0){
+      } else if (u1 < 24.0) {
         return 24.0;
-        } 
-        else if(u1<36.0){
+      } else if (u1 < 36.0) {
         return 36.0;
-        } 
-        else if(u1<52.0){
+      } else if (u1 < 52.0) {
         return 52.0;
-        } 
-        else if(u1<72.5){
+      } else if (u1 < 72.5) {
         return 72.5;
-        } 
-        else if(u1<100){
+      } else if (u1 < 100) {
         return 72.5;
-        } 
-        else if(u1<123.0){
+      } else if (u1 < 123.0) {
         return 123.0;
-        } 
-        else if(u1<145.0){
+      } else if (u1 < 145.0) {
         return 145.0;
-        } 
-        else if(u1<170.0){
+      } else if (u1 < 170.0) {
         return 170.0;
-        } 
-        else if(u1<245.0){
+      } else if (u1 < 245.0) {
         return 245.0;
-        } 
-        else{
+      } else {
         return 0;
-        }
-        },
+      }
+    },
     tenueChoc2() {
-    const u1=parseInt(this.projet.u2o)/1000;
-      if(u1<1.1){
+      const u1 = parseInt(this.projet.u2o) / 1000;
+      if (u1 < 1.1) {
         return 0;
-      }else if(u1<3.60){
-        return 20;   
-        }
-        else if(u1<7.20){
-        return 60;
-        } 
-        else if(u1<12.00){
-        return 75;
-        } 
-        else if(u1<17.50){
-        return 95;
-        } 
-        else if(u1<24.0){
-        return 125;
-        } 
-        else if(u1<36.0){
-        return 170;
-        } 
-        else if(u1<52.0){
-        return 250;
-        } 
-        else if(u1<72.5){
-        return 325;
-        } 
-        else if(u1<100){
-        return 450;
-        } 
-        else if(u1<123.0){
-        return 550;
-        } 
-        else if(u1<145.0){
-        return 550;
-        } 
-        else if(u1<170.0){
-        return 650;
-        } 
-        else if(u1<245.0){
-        return 850;
-        } 
-        else{
-        return 0;
-        }
-        },
-    tenueFr2() {
-    const u1=parseInt(this.projet.u2o)/1000;
-      if(u1<1.1){
-        return 3;
-      }else if(u1<3.60){
-        return 10;   
-        }
-        else if(u1<7.20){
+      } else if (u1 < 3.6) {
         return 20;
-        } 
-        else if(u1<12.00){
-        return 28;
-        } 
-        else if(u1<17.50){
-        return 38;
-        } 
-        else if(u1<24.0){
-        return 50;
-        } 
-        else if(u1<36.0){
-        return 70;
-        } 
-        else if(u1<52.0){
+      } else if (u1 < 7.2) {
+        return 60;
+      } else if (u1 < 12.0) {
+        return 75;
+      } else if (u1 < 17.5) {
         return 95;
-        } 
-        else if(u1<72.5){
-        return 140;
-        } 
-        else if(u1<100){
-        return 185;
-        } 
-        else if(u1<123.0){
-        return 230;
-        } 
-        else if(u1<145.0){
-        return 230;
-        } 
-        else if(u1<170.0){
-        return 275;
-        } 
-        else if(u1<245.0){
-        return 360;
-        } 
-        else{
+      } else if (u1 < 24.0) {
+        return 125;
+      } else if (u1 < 36.0) {
+        return 170;
+      } else if (u1 < 52.0) {
+        return 250;
+      } else if (u1 < 72.5) {
+        return 325;
+      } else if (u1 < 100) {
+        return 450;
+      } else if (u1 < 123.0) {
+        return 550;
+      } else if (u1 < 145.0) {
+        return 550;
+      } else if (u1 < 170.0) {
+        return 650;
+      } else if (u1 < 245.0) {
+        return 850;
+      } else {
         return 0;
-        }
-        },
-        PrimaireUligne(){
-           return this.projet.u1n;
-        },
-        PrimaireUPhase(){
-          if((this.projet.couplagePrimaire=="D")||(this.projet.couplagePrimaire=="d")){
-             return this.projet.u1n;
-          }else{
-            return parseInt(this.projet.u1n)/Math.sqrt(3);
-        }},
-        PrimaireIPhase(){
-          if((this.projet.couplagePrimaire=="D")||(this.projet.couplagePrimaire=="d")){
-             return this.projet.PrimaireIligne/Math.sqrt(3);
-          }else{
-            return (parseInt(this.projet.puissance)*1000)/(parseInt(this.projet.u1n)*Math.sqrt(3));
-        }},
-        PrimaireIligne(){
-            return (parseInt(this.projet.puissance)*1000)/(parseInt(this.projet.u1n)*Math.sqrt(3));
-        },
-        secondaireUligne(){
-           return this.projet.u2o;
-        },
-      secondaireUPhase(){
-          if((this.projet.couplageSecondaire=="D")||(this.projet.couplageSecondaire=="d")){
-             return this.projet.u2o;
-          }else{
-            return parseInt(this.projet.u2o)/Math.sqrt(3);
-        }},
-        secondaireIPhase(){
-          if((this.projet.couplageSecondaire=="D")||(this.projet.couplageSecondaire=="d")){
-             return this.projet.secondaireIligne/Math.sqrt(3);
-          }else{
-            return (parseInt(this.projet.puissance)*1000)/(parseInt(this.projet.u2o)*Math.sqrt(3));
-        }},
-        secondaireIligne(){
-            return (parseInt(this.projet.puissance)*1000)/(parseInt(this.projet.u2o)*Math.sqrt(3));
-        },
-        Uz(){
-           if((this.projet.couplageSecondaire=="zn")||(this.projet.couplageSecondaire=="z")){
-            return (2*(this.projet.puissance)/3)/2;
-           }else{
-             return 0;
-           }
-        },
+      }
+    },
+    tenueFr2() {
+      const u1 = parseInt(this.projet.u2o) / 1000;
+      if (u1 < 1.1) {
+        return 3;
+      } else if (u1 < 3.6) {
+        return 10;
+      } else if (u1 < 7.2) {
+        return 20;
+      } else if (u1 < 12.0) {
+        return 28;
+      } else if (u1 < 17.5) {
+        return 38;
+      } else if (u1 < 24.0) {
+        return 50;
+      } else if (u1 < 36.0) {
+        return 70;
+      } else if (u1 < 52.0) {
+        return 95;
+      } else if (u1 < 72.5) {
+        return 140;
+      } else if (u1 < 100) {
+        return 185;
+      } else if (u1 < 123.0) {
+        return 230;
+      } else if (u1 < 145.0) {
+        return 230;
+      } else if (u1 < 170.0) {
+        return 275;
+      } else if (u1 < 245.0) {
+        return 360;
+      } else {
+        return 0;
+      }
+    },
+    PrimaireUligne() {
+      return this.projet.u1n;
+    },
+    PrimaireUPhase() {
+      if (
+        this.projet.couplagePrimaire == "D" ||
+        this.projet.couplagePrimaire == "d"
+      ) {
+        return this.projet.u1n;
+      } else {
+        return parseInt(this.projet.u1n) / Math.sqrt(3);
+      }
+    },
+    PrimaireIPhase() {
+      if (
+        this.projet.couplagePrimaire == "D" ||
+        this.projet.couplagePrimaire == "d"
+      ) {
+        return this.projet.PrimaireIligne / Math.sqrt(3);
+      } else {
+        return (
+          (parseInt(this.projet.puissance) * 1000) /
+          (parseInt(this.projet.u1n) * Math.sqrt(3))
+        );
+      }
+    },
+    PrimaireIligne() {
+      return (
+        (parseInt(this.projet.puissance) * 1000) /
+        (parseInt(this.projet.u1n) * Math.sqrt(3))
+      );
+    },
+    secondaireUligne() {
+      return this.projet.u2o;
+    },
+    secondaireUPhase() {
+      if (
+        this.projet.couplageSecondaire == "D" ||
+        this.projet.couplageSecondaire == "d"
+      ) {
+        return this.projet.u2o;
+      } else {
+        return parseInt(this.projet.u2o) / Math.sqrt(3);
+      }
+    },
+    secondaireIPhase() {
+      if (
+        this.projet.couplageSecondaire == "D" ||
+        this.projet.couplageSecondaire == "d"
+      ) {
+        return this.projet.secondaireIligne / Math.sqrt(3);
+      } else {
+        return (
+          (parseInt(this.projet.puissance) * 1000) /
+          (parseInt(this.projet.u2o) * Math.sqrt(3))
+        );
+      }
+    },
+    secondaireIligne() {
+      return (
+        (parseInt(this.projet.puissance) * 1000) /
+        (parseInt(this.projet.u2o) * Math.sqrt(3))
+      );
+    },
+    Uz() {
+      if (
+        this.projet.couplageSecondaire == "zn" ||
+        this.projet.couplageSecondaire == "z"
+      ) {
+        return (2 * this.projet.puissance) / 3 / 2;
+      } else {
+        return 0;
+      }
+    },
   },
 };
 </script>
 <style scoped>
-/*  */
+.col {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 2%;
+  width: 100%;
+  margin-left: -1%;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 2fr);
+  grid-gap: 2%;
+}
 .div2 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  /* grid-template-rows: repeat(2, 1fr); */
- grid-column-gap: 10px;
+  grid-column-gap: 10px;
   width: 75%;
-  /* margin-right: 5%; */
 }
-
 .div {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -826,10 +780,7 @@ export default {
 /*===== FORM =====*/
 
 .form {
-  /* width: 360px; */
-  /* padding: 4rem 2rem; */
   border-radius: 1rem;
-  /* box-shadow: 0 10px 25px rgba(92,99,105,.2); */
 }
 .form__title {
   font-weight: 400;
@@ -845,10 +796,10 @@ export default {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 89%;
   font-size: 1rem;
-  border: 1px solid #dadce0;
-  border-radius: 0.5rem;
+  border: 1px solid rgb(152, 149, 149);
+  border-radius: 0.3rem;
   outline: none;
   padding: 1rem;
   background: none;
@@ -904,21 +855,13 @@ export default {
 .form__input:focus {
   border: 1.5px solid #4797d1;
 }
-
 .body {
   height: 100%;
-  /* display: flex; */
-  /* justify-content: center;
-  align-items: center; */
   padding: 20px;
   max-height: calc(100vh - 50px);
-
-  /* margin: 0.5%; */
-  /* background: linear-gradient(135deg,#71b7e675, #71b7e675); */
 }
 .container {
   max-width: 98%;
-  /* height: 80%; */
   margin-top: 2%;
   width: 100%;
   background-color: #fff;
@@ -967,8 +910,6 @@ form .input-box span.details {
   font-size: 16px;
   border-radius: 5px;
   padding-left: 15px;
-  /* border: 1px solid #ccc; */
-  /* border-bottom-width: 2px; */
   transition: all 0.3s ease;
 }
 
@@ -1024,29 +965,20 @@ form .button input {
   background: linear-gradient(135deg, #4797d1, #4797d1);
 }
 form .button input:hover {
-  /* transform: scale(0.99); */
   background: linear-gradient(-135deg, #71b7e6, #71b7e6);
 }
 .framei {
-  width: 22%;
-  justify-content: space-between;
+  width: 30%;
+  /* justify-content: space-between; */
 }
-.frame {
-  width: 250px;
-  justify-content: space-between;
-}
-.frameii {
-  /* width: calc(100% /1 - 2px); */
-  width: 100%;
-  border-color: #000;
-}
+
 .v-sheet.v-card:not(.v-sheet--outlined) {
   box-shadow: 0px 0px 0px 0px;
 }
 .v-stepper--vertical {
   padding-bottom: 0px;
 }
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
   .container {
     max-width: 100%;
   }
@@ -1064,26 +996,62 @@ form .button input:hover {
   .user-details::-webkit-scrollbar {
     width: 5px;
   }
- .div2 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  /* grid-template-rows: repeat(2, 1fr); */
- grid-column-gap: 5px;
-  width: 70%;
-  /* margin-right: 5%; */
-}
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 2%;
+  }
+  .col {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2%;
+    width: 80%;
+    margin-right: -40%;
+  }
+  .div2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 5px;
+    width: 70%;
+  }
 
-.div {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 5px;
-}
-
-  
+  .div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 5px;
+  }
+  .v-btn:not(.v-btn--round).v-size--default[data-v-81f620d4] {
+    height: 36px;
+    min-width: 64px;
+    padding: 16px;
+    margin: 3px;
+    margin-top: 14%;
+  }
 }
 @media (max-width: 668px) {
-  .container .content .category {
-    flex-direction: column;
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 2%;
+  }
+  .div2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 5px;
+    width: 70%;
+  }
+
+  .div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 5px;
+  }
+  .v-btn:not(.v-btn--round).v-size--default[data-v-81f620d4] {
+    height: 36px;
+    min-width: 64px;
+    padding: 16px;
+    margin: 3px;
+    margin-top: 14%;
   }
 }
 .v-btn:not(.v-btn--round).v-size--default {
