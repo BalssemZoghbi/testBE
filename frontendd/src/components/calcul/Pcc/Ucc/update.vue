@@ -526,6 +526,18 @@ form .button input:hover {
   .container .content .category {
     flex-direction: column;
   }
+  .field10 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 10px;
+  margin-right: 5%;
+}
+.div{
+  display: grid; 
+  grid-template-columns: 1fr ;
+  grid-gap: 10px;
+}
 }
 .v-btn:not(.v-btn--round).v-size--default {
     /* height: 36px; */
