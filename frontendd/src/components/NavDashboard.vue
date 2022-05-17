@@ -219,8 +219,8 @@ export default {
         text: "Parametres",
         model: false,
         children: [
-          { icon: "list", text: "Bobinages", route: "/saillie" },
-          { icon: "reorder", text: "Garanties", route: "/garantie24" },
+          { icon: "reorder", text: "Bobinages", route: "/saillie" },
+          { icon: "widgets", text: "Garanties", route: "/garantie24" },
           { icon: "mdi-wrench", text: "Tole Magnetique", route: "/tole" },
           
         ],

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Loading/>
+    <Loading v-if="spinner"/>
     <v-data-table
       :headers="headers"
       :items="users"
@@ -27,30 +27,64 @@
         </v-toolbar>
       </template>
       <template v-slot:[`item.actions`]="{ item }">
-        <v-btn class="ma-2" color="primary" dark>
+           <v-btn
+      :loading="spinner"
+      :disabled="spinner"
+      color="blue"
+      class="ma-2 white--text"
+      @click="accept(item.id)"
+    >
+      Accepter
+      <v-icon
+        right
+        dark
+      >
+        mdi-checkbox-marked-circle
+      </v-icon>
+    </v-btn>
+        <!-- <v-btn class="ma-2" color="primary" v-if="!spinner"  dark>
           Accepter
-          <v-progress-circular
-      :width="3"
-      color="white"
-      indeterminate
-      v-if="snackbar"
-    ></v-progress-circular>
           <v-icon dark right @click="accept(item.id)">
             mdi-checkbox-marked-circle
           </v-icon>
-        </v-btn>
-        <v-btn class="ma-2" color="red" dark>
-          Refuser
+        </v-btn> -->
+        <!-- <v-btn class="ma-2" color="primary"  v-if="spinner"  dark>
+          Accepter
            <v-progress-circular
-      :width="3"
       color="white"
       indeterminate
-      v-if="!snackbar"
+     
     ></v-progress-circular>
+        </v-btn> -->
+        <!-- <v-btn class="ma-2" color="red" v-if="!spinnerDecline" dark>
+          Refuser
           <v-icon dark right @click="decline(item.id)">
             mdi-cancel
           </v-icon>
         </v-btn>
+        <v-btn class="ma-2" color="red" v-if="spinnerDecline" dark>
+          Refuser
+           <v-progress-circular
+      color="white"
+      indeterminate
+      
+    ></v-progress-circular>
+        </v-btn> -->
+                  <v-btn
+      :loading="spinnerDecline"
+      :disabled="spinnerDecline"
+      color="red"
+      class="ma-2 white--text"
+      @click="decline(item.id)"
+    >
+      Refuser
+      <v-icon
+        right
+        dark
+      >
+        mdi-cancel
+      </v-icon>
+    </v-btn>
         <v-snackbar v-model="snackbarDecline">
           {{ textDecline }}
 
@@ -82,7 +116,8 @@ export default {
     Loading,
   },
   data: () => ({
-    
+    spinner:false,
+    spinnerDecline:false,
     snackbar: false,
     text: `L'utilisateur a été accepté`,
     snackbarDecline: false,
@@ -119,23 +154,29 @@ export default {
   created() {
     this.getuser();
   },
+   
   methods: {
      async getuser() {
       await axios.get("/users/p").then((resp) => {
         this.users = resp.data;
+        this.spinner = false;
       });
     },
     async accept(id) {
-      console.log(id);
+      // console.log(id);
+       this.spinner=true,
       await axios.put("/user/accept/" + id).then(() => {
-        this.getuser();
+        this.getuser()
+          this.spinner=false;
       });
       this.snackbar=true;
     },
     async decline(id) {
+       this.spinnerDecline=true,
       console.log(id);
       await axios.delete("/user/decline/" + id).then(() => {
-        this.getuser();
+        this.getuser(),  
+          this.spinnerDecline=false;
       });
       this.snackbarDecline=true;
     },
