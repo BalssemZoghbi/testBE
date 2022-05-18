@@ -226,7 +226,7 @@
             <router-link
               class="nav-link"
               :to="
-                '/projet/electrique/update/' + projet.id 
+                '/projet/electrique/update/' + this.$route.params.id
               "
               > <v-btn
         color="primary mb-14"
@@ -356,7 +356,7 @@ export default {
       //   echauffementHuile: this.projet.echauffementHuile,
       //   echauffementEnroulement: this.projet.echauffementEnroulement,
       // };
-    await axios.put('garantie/edit/'+this.$route.params.id).then(
+    await axios.put('/garantie/edit/'+this.$route.params.id).then(
         (response) => (this.id = response.data.id, console.log(response.data),this.getGarantie())
         
       );
