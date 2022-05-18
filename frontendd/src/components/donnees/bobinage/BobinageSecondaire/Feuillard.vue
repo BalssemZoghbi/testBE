@@ -76,7 +76,7 @@
                       ></v-text-field>
                       <v-text-field
                         label="epFeuillard"
-                        v-model="projet.epFeuillardBT"
+                        v-model="epFeuillardBT"
                         dense
                         outlined
                       ></v-text-field>
@@ -88,7 +88,7 @@
                       ></v-text-field>
                       <v-text-field
                         label="collierBT"
-                        v-model="collierBTSec"
+                        v-model="projet.collierBTSec"
                         dense
                         outlined
                       ></v-text-field>
@@ -111,7 +111,7 @@
                         label="nbrPap1"
                         dense
                         id="nbrPap1"
-                        readonly
+                        
                         v-model="projet.nbrPap1BT"
                         outlined
                       ></v-text-field>
@@ -119,7 +119,7 @@
                         label="ep2Papier"
                         dense
                         id="ep2Papier"
-                        readonly
+                        
                         v-model="projet.ep2PapierBT"
                         outlined
                       ></v-text-field>
@@ -182,14 +182,14 @@
                       <v-text-field
                         label="CanauxBT"
                         id="canauxBT"
-                        readonly
+                        
                         v-model="projet.canauxBT"
                         outlined
                       ></v-text-field>
                       <v-text-field
                         label="Lrg Cales"
                         id="lgCalesBT"
-                        readonly
+                        
                         v-model="projet.lgCalesBT"
                         outlined
                       ></v-text-field>
@@ -472,44 +472,41 @@ export default {
     },
     computed:{
     HbobineBt(){
-      console.log(this.projet.HfeuillardBT,this.projet.collierBTSec);
-      return this.projet.HfeuillardBT+2*this.projet.collierBTSec;
+      return parseFloat(this.projet.HfeuillardBT)+2*parseFloat(this.projet.collierBTSec);
     },
     epFeuillardBT(){
-      return this.projet.epFeuil1BT+this.projet.epFeuil2BT;
+      return parseFloat(this.projet.epFeuil1BT)+parseFloat(this.projet.epFeuil2BT);
     },
     epFeuilPapBT(){
-      return this.projet.epFeuilPapBT*this.projet.nbrPapierBT;
+      return parseFloat(this.projet.epFeuilPapBT)*parseFloat(this.projet.nbrPapierBT);
     },
     EpPapierBT(){
-      return this.epFeuilPapBT*this.projet.nbrPapierBT;
+      return this.epFeuilPapBT*parseFloat(this.projet.nbrPapierBT);
     },
     scu2(){
       return this.projet.HfeuillardBT*this.epFeuillardBT;
     },
     j2(){
-            return this.projet.secondaireIPhase/this.projet.scu2;
+            return parseFloat(this.projet.secondaireIPhase)/this.scu2;
         },
     ePapBT(){
       return (parseFloat(this.projet.ep1PapierBT)*parseFloat(this.projet.nbrPap1BT))+(parseFloat(this.projet.ep2PapierBT)*parseFloat(this.projet.nbrPap2BT));
     },
     DintBT(){
-        // console.log(this.projet.DextMT,this.projet.BextMT);
-        // return parseFloat(Math.ceil(parseFloat(this.projet.DextMT)+(2*parseFloat(this.projet.DistanceBTMT))));
         let dint=this.projet.DintBT;
         dint=(parseFloat(this.projet.CMBT)*2)+parseFloat(this.projet.diamNominale);
-        // console.log(parseFloat(this.projet.DextMT));
         return dint;
     },
     DextBT(){
         return Math.round(this.DintBT+(2*this.EpxBT));
     },
     BextBT(){
-        return Math.round(this.DintBT+(2*this.EpxBT)+this.epaisseurBarreBT);
+      console.log(Math.round(this.DintBT+(2*this.EpxBT)+this.epaisseurBarreBT));
+        return Math.round(this.DintBT+(2*this.EpxBT)+parseFloat(this.epaisseurBarreBT));
     },
     EpxBT(){
          if(this.projet.typeCanauxBT=='complet'){
-        return ((this.projet.N2c*this.projet.epFeuillardBT)+(this.projet.N2c-1)*this.projet.ePapBT+(this.projet.canauxBTSec*this.projet.lgCalesBT));
+        return ((parseFloat(this.projet.N2c)*this.epFeuillardBT)+(parseFloat(this.projet.N2c)-1)*this.ePapBT+(parseFloat(this.projet.canauxBT)*parseFloat(this.projet.lgCalesBT)));
         }else if(this.projet.typeCanauxBT=='lune'){
             return (this.projet.N2c*this.projet.epFeuillardBT+(this.projet.N2c-1)*(this.projet.ePapBT));
         }else {
@@ -524,7 +521,7 @@ export default {
             }else if(this.projet.materiauSec=='aluminium'){
                 coefPoid=2.7;
             }
-            return Math.pow(10, -6)*(coefPoid*parseFloat(this.projet.N2c)*parseFloat(this.projet.scu2)*Math.PI*3)*((parseFloat(this.projet.DintBT)+parseFloat(this.projet.BintBT)+parseFloat(this.projet.DextBT)+parseFloat(this.projet.BextBT))/4)*(100+parseFloat(this.projet.majPoidBT))/100;
+            return Math.pow(10, -6)*(coefPoid*parseFloat(this.projet.N2c)*parseFloat(this.scu2)*Math.PI*3)*((parseFloat(this.DintBT)+parseFloat(this.DintBT)+parseFloat(this.DextBT)+parseFloat(this.BextBT))/4)*(100+parseFloat(this.projet.majPoidBT))/100;
     },
     JbarreBT(){
       return this.projet.secondaireIPhase/this.SbarreBT;

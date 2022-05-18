@@ -456,7 +456,7 @@ export default {
       return (
         2 *
         Math.sqrt(
-          this.projet.scu1d / (Math.PI * parseFloat(this.projet.brinParallele))
+          this.scu1d / (Math.PI * parseFloat(this.projet.brinParallele))
         )
       );
     },
@@ -473,28 +473,28 @@ export default {
     },
     NchA() {
       return Math.floor(
-        this.projet.nbcoucheMT * this.projet.SpchB - this.projet.N1cmax
+        this.projet.nbcoucheMT * this.SpchB - this.N1cmax
       );
     },
     SpchA() {
-      return Math.ceil(this.projet.SpchB - 1);
+      return Math.ceil(this.SpchB - 1);
     },
     NchB() {
-      return this.projet.nbcoucheMT - this.projet.NchA;
+      return this.projet.nbcoucheMT - this.NchA;
     },
     SpchB() {
-      return Math.ceil(this.projet.N1cmax / this.projet.nbcoucheMT);
+      return Math.ceil(this.N1cmax / this.projet.nbcoucheMT);
     },
     HbobineBt() {
       return this.projet.HbobineBtSec;
     },
     HCollier() {
-      return (this.projet.HbobineBtSec - this.projet.HCondMt) / 2;
+      return Math.round((this.projet.HbobineBtSec - this.HCondMt) / 2);
     },
     HCondMt() {
       return (
-        this.projet.SpchB *
-        this.projet.filobtenueIsoler *
+        this.SpchB *
+        this.filobtenueIsoler *
         this.projet.brinParallele
       );
     },
@@ -572,10 +572,11 @@ export default {
       );
     },
     scu1() {
+      console.log(this.filobtenueIsoler,(this.projet.brinParallele))
       return (
         (Math.PI *
-          Math.pow(this.projet.filobtenueIsoler, 2) *
-          this.projet.brinParallele) /
+          Math.pow(this.filobtenueIsoler, 2) *
+          parseInt(this.projet.brinParallele)) /
         4
       );
     },
