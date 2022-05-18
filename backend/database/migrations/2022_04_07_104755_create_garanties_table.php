@@ -20,6 +20,7 @@ class CreateGarantiesTable extends Migration
             $table->float('log')->nullable();
             $table->integer('Pccg')->nullable();
             $table->float('Uccg')->nullable();
+            $table->float('UccgMin')->nullable();
             $table->integer('Ptot')->nullable();
             $table->integer('Poglimit')->nullable();
             $table->float('loglimit')->nullable();

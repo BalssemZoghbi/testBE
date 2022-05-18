@@ -134,6 +134,7 @@ class GarantieController extends Controller
              'loglimit' => $calcul->lo+(($calcul->lo*30)/100),
              'Pccglimit' =>$calcul->pcc+(($calcul->pcc*15)/100),
              'Uccglimit' =>$calcul->ucc+(($calcul->ucc*10)/100),
+             'UccgMin' =>$calcul->ucc-(($calcul->ucc*10)/100),
              'Ptotlimit' =>$calcul->pcc+$calcul->po+((($calcul->pcc+$calcul->po)*10)/100),
              'echauffementHuile' =>100 - $projet->temperatureMax,
              'echauffementEnroulement' =>105 - $projet->temperatureMax,

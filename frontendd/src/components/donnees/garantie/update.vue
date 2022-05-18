@@ -15,7 +15,7 @@
                   <div class="title">Données de Garantie</div>
         
                   <div class="content">
-                               <v-col cols="2" style="    margin-top: -8%;margin-left: 28%;">
+                               <v-col cols="2" style="    margin-top: -7%;margin-left: 28%;">
                                  <v-menu transition="slide-x-transition" offset-x>
               <template v-slot:activator="{ on, attrs }">
                 <v-btn v-bind="attrs" v-on="on" color="primary"> Automatique </v-btn>
@@ -181,7 +181,18 @@
                             
                             v-model="Uccglimit"
                           />
-                          <label for="" class="form__label">Uccglimit</label>
+                          <label for="" class="form__label">Uccglimit Max</label>
+                        </div>
+                       <div class="form__div framei">
+                          <input
+                            type="number"
+                            class="form__input"
+                            placeholder=" "
+                            id="Uccglimit"
+                            
+                            v-model="UccgMin"
+                          />
+                          <label for="" class="form__label">Uccglimit Min</label>
                         </div>
                         <div class="form__div framei">
                           <input
@@ -280,6 +291,7 @@ export default {
       loglimit: "",
       Pccglimit: "",
       Uccglimit: "",
+      UccgMin: "",
       Ptotlimit: "",
       echauffementHuile: "",
       echauffementEnroulement: "",
@@ -303,6 +315,7 @@ export default {
         loglimit: this.projet.loglimit,
         Pccglimit: this.projet.Pccglimit,
         Uccglimit: this.projet.Uccglimit,
+        UccgMin: this.projet.UccgMin,
         Ptotlimit: this.projet.Ptotlimit,
         echauffementHuile: this.projet.echauffementHuile,
         echauffementEnroulement: this.projet.echauffementEnroulement,
@@ -399,9 +412,10 @@ export default {
       return parseFloat(this.projet.Pccg)+((parseFloat(this.projet.Pccg)*15)/100);
     },
     Uccglimit(){
-      // min -10%
-      // console.log(parseFloat(this.projet.Uccg)-((parseFloat(this.projet.Uccg)*10)/100))
       return parseFloat(this.projet.Uccg)+((parseFloat(this.projet.Uccg)*10)/100);
+    },
+    UccgMin(){
+      return parseFloat(this.projet.Uccg)-((parseFloat(this.projet.Uccg)*10)/100);
     },
     Ptotlimit(){
       return parseFloat(this.projet.Pccg)+parseFloat(this.projet.Pog)+(((parseFloat(this.projet.Pccg)+parseFloat(this.projet.Pog))*10)/100);

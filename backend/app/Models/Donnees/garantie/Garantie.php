@@ -14,6 +14,7 @@ class Garantie extends Model
         'log',
         'Pccg',
         'Uccg',
+        'UccgMin',
         'Ptot',
         'Poglimit',
         'loglimit',
@@ -23,7 +24,7 @@ class Garantie extends Model
         'echauffementHuile',
         'echauffementEnroulement',
     ];
-   
+
     public function projets(){
         return $this->hasMany(Projet::class);
     }

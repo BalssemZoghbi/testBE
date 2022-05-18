@@ -179,6 +179,10 @@ export default {
   async mounted() {
     const result = await axios.get("projets/" + this.$route.params.id);
     this.projet = result.data;
+  },async created() {
+    const result = await axios.get("projets/" + this.$route.params.id);
+    this.projet = result.data;
+  
   },
   computed: {
     spires() {
@@ -209,14 +213,24 @@ export default {
         .split(",");
         
     },
+      bmax(){
+let bmax=this.projet.Bmax;
+if(this.projet.couplageSecondaire=="zn"){
+  bmax=(parseFloat(this.projet.secondaireUligne)*2/3)*parseFloat(Math.pow(10,6))/(parseFloat(Math.PI)*parseFloat(this.projet.frequence)*parseFloat(Math.sqrt(2))*parseFloat(this.projet.Snette)*parseFloat(this.n2c));
+}else{
+  console.log(this.n2c)
+  bmax=parseFloat(this.projet.secondaireUPhase)*parseFloat(Math.pow(10,6))/(parseFloat(Math.PI)*parseFloat(this.projet.frequence)*parseFloat(Math.sqrt(2))*parseFloat(this.projet.Snette)*parseFloat(this.n2c));
+     }
+        return bmax;
+  },
        n2c(){
     let  n2c=parseFloat(this.projet.N2c);
-
+// console.log(this.bmax);
 if(this.projet.couplageSecondaire=="zn"){
-    n2c=(parseFloat(this.projet.secondaireUligne)*2/3)*parseFloat(Math.pow(10,6))/(parseFloat(Math.PI)*parseFloat(this.projet.frequence)*parseFloat(Math.sqrt(2))*parseFloat(this.projet.Snette)*parseFloat(this.projet.Bmax));
+    n2c=(parseFloat(this.projet.secondaireUligne)*2/3)*parseFloat(Math.pow(10,6))/(parseFloat(Math.PI)*parseFloat(this.projet.frequence)*parseFloat(Math.sqrt(2))*parseFloat(this.projet.Snette)*(this.projet.Bmax));
     }
     else{
-    n2c=parseFloat(this.projet.secondaireUPhase)*(parseFloat(Math.pow(10,6)))/(parseFloat(Math.PI)*parseFloat(this.projet.frequence)*parseFloat(Math.sqrt(2))*parseFloat(this.projet.Snette)*parseFloat(this.projet.Bmax));
+    n2c=parseFloat(this.projet.secondaireUPhase)*(parseFloat(Math.pow(10,6)))/(parseFloat(Math.PI)*parseFloat(this.projet.frequence)*parseFloat(Math.sqrt(2))*parseFloat(this.projet.Snette)*(this.projet.Bmax));
 
     }
     return Math.floor(n2c);
@@ -235,16 +249,7 @@ if(this.projet.couplageSecondaire=="zn"){
         }
 return vsp;
   },
-  bmax(){
-let bmax=this.projet.Bmax;
-if(this.projet.couplageSecondaire=="zn"){
-  bmax=(parseFloat(this.projet.secondaireUligne)*2/3)*parseFloat(Math.pow(10,6))/(parseFloat(Math.PI)*parseFloat(this.projet.frequence)*parseFloat(Math.sqrt(2))*parseFloat(this.projet.Snette)*parseFloat(this.n2c));
-}else{
-  console.log(this.n2c)
-  bmax=parseFloat(this.projet.secondaireUPhase)*parseFloat(Math.pow(10,6))/(parseFloat(Math.PI)*parseFloat(this.projet.frequence)*parseFloat(Math.sqrt(2))*parseFloat(this.projet.Snette)*parseFloat(this.n2c));
-     }
-        return bmax;
-  },
+
   }
 
 };

@@ -13,7 +13,7 @@
           <v-stepper-content step="1">
             <v-card class="mb-4">
               <div class="title">Bobine haute tension</div>
-              <form v-on:submit.prevent="updateprojet">
+              <form>
                 <div class="user-details">
                   <div style="margin-bottom: 2%">
                     <v-chip
@@ -74,7 +74,7 @@
                       ></v-text-field>
                       <v-text-field
                         label="epFeuilPap"
-                        v-model="epFeuilPap"
+                        v-model="projet.epFeuilPap"
                         dense
                         outlined
                       ></v-text-field>
@@ -150,7 +150,7 @@
             <v-card class="mb-4">
               <div class="title">Canaux/Diamétre</div>
               <!-- <div class="content"> -->
-              <form v-on:submit.prevent="updateprojet">
+              <form >
                 <div class="user-details">
                   <div style="margin-bottom: 2%">
                     <v-chip
@@ -469,11 +469,13 @@ export default {
     epFeuillard(){
       return parseFloat(this.projet.epFeuil1)+parseFloat(this.projet.epFeuil2);
     },
-    epFeuilPap(){
-      return parseFloat(this.projet.epFeuilPap)*parseFloat(this.projet.nbrPapierMT);
-    },
+    //  resoudre probleme 
+    // epFeuilPap(){
+    //   return parseFloat(this.projet.epFeuilPap)*parseFloat(this.projet.nbrPapierMT);
+    // },
     EpPapier(){
-      return  this.epFeuilPap*parseFloat(this.projet.nbrPapierMT);
+      console.log(this.projet.epFeuilPap,this.projet.nbrPapierMT);
+      return  this.projet.epFeuilPap*parseFloat(this.projet.nbrPapierMT);
     },
 
     scu1(){
@@ -500,9 +502,9 @@ export default {
     },
     EpxMT(){
          if(this.projet.typeCanaux=='complet'){
-        return ((this.projet.N2c*this.epFeuillard)+(this.projet.N2c-1)*this.ePap+(this.projet.canauxBT*this.projet.lgCales));
+        return ((this.projet.N1c*this.epFeuillard)+(this.projet.N1c-1)*this.ePap+(this.projet.canauxMT*this.projet.lgCales));
         }else if(this.projet.typeCanaux=='lune'){
-            return (this.projet.N2c*this.epFeuillard+(this.projet.N2c-1)*(this.ePap));
+            return (this.projet.N1c*this.epFeuillard+(this.projet.N1c-1)*(this.ePap));
         }else {
             return 0;
         }
@@ -515,7 +517,7 @@ export default {
             }else if(this.projet.materiau=='aluminium'){
                 coefPoid=2.7;
             }
-            return Math.pow(10, -6)*(coefPoid*parseFloat(this.projet.N2c)*parseFloat(this.projet.scu1)*Math.PI*3)*((parseFloat(this.projet.DintMT)+parseFloat(this.projet.BintMT)+parseFloat(this.projet.DextMT)+parseFloat(this.projet.BextMT))/4)*(100+parseFloat(this.projet.majPoid))/100;
+            return Math.pow(10, -6)*(coefPoid*parseFloat(this.projet.N1c)*parseFloat(this.projet.scu1)*Math.PI*3)*((parseFloat(this.DintMT)+parseFloat(this.DintMT)+parseFloat(this.DextMT)+parseFloat(this.BextMT))/4)*(100+parseFloat(this.projet.majPoid))/100;
     },
     Jbarre(){
       return this.projet.secondaireIPhase/this.Sbarre;
