@@ -1,6 +1,5 @@
 <template>
   <div>
-    <navbarUpdate />
     <NavDash
       :conducteur="projet.conducteur"
       :conducteurSec="projet.conducteurSec"
@@ -45,6 +44,12 @@
                       <v-text-field
                         label="HbobineBt"
                         v-model="HbobineBt"
+                        dense
+                        outlined
+                      ></v-text-field>
+                      <v-text-field
+                        label="collierBT"
+                        v-model="projet.collierBT"
                         dense
                         outlined
                       ></v-text-field>
@@ -106,7 +111,7 @@
                         label="ep2Papier"
                         dense
                         id="ep2Papier"
-                        readonly
+                        
                         v-model="projet.ep2Papier"
                         outlined
                       ></v-text-field>
@@ -443,7 +448,7 @@ export default {
     const result = await axios.get("projets/" + this.$route.params.id);
     this.projet = result.data;
   },
-  created() {
+  async created() {
     axios
       .get("/getdesignationBarre")
       .then((response) => (this.barre = response.data));
@@ -453,48 +458,51 @@ export default {
     axios
       .get("/getValeurSaillie")
       .then((response) => (this.saillie = response.data));
+      const result = await axios.get("projets/" + this.$route.params.id);
+    this.projet = result.data;
+    console.log(this.projet);
   },
   computed: {
     HbobineBt(){
       return this.projet.Hfeuillard+2*this.projet.collierBT;
     },
     epFeuillard(){
-      return this.projet.epFeuil1+this.projet.epFeuil2;
+      return parseFloat(this.projet.epFeuil1)+parseFloat(this.projet.epFeuil2);
     },
     epFeuilPap(){
-      return this.projet.epFeuilPap*this.projet.ep2Papier;
+      return parseFloat(this.projet.epFeuilPap)*parseFloat(this.projet.nbrPapierMT);
     },
     EpPapier(){
-      return this.projet.epFeuilPap*this.projet.nbrPapierMT;
+      return  this.epFeuilPap*parseFloat(this.projet.nbrPapierMT);
     },
+
     scu1(){
-      return this.projet.Hfeuillard*this.projet.epFeuillard;
+      return parseFloat(this.projet.Hfeuillard)*(this.epFeuillard);
     },
     j1(){
-            return this.projet.PrimaireIPhase/this.projet.scu1;
+      
+            return this.projet.PrimaireIPhase/this.scu1;
         },
     ePap(){
       return (parseFloat(this.projet.ep1PapierMT)*parseFloat(this.projet.nbrPap1))+(parseFloat(this.projet.ep2Papier)*parseFloat(this.projet.nbrPap2));
     },
     DintMT(){
-        // console.log(this.projet.DextMT,this.projet.BextMT);
-        // return parseFloat(Math.ceil(parseFloat(this.projet.DextMT)+(2*parseFloat(this.projet.DistanceBTMT))));
         let dint=this.projet.DintMT;
         dint=(parseFloat(this.projet.CMBT)*2)+parseFloat(this.projet.diamNominale);
-        // console.log(parseFloat(this.projet.DextMT));
         return dint;
     },
     DextMT(){
         return Math.round(this.DintMT+(2*this.EpxMT));
     },
     BextMT(){
-        return Math.round(this.DintMT+(2*this.EpxMT)+this.epaisseurBarre);
+    
+        return Math.round(this.DextMT+parseFloat(this.epaisseurBarre));
     },
     EpxMT(){
          if(this.projet.typeCanaux=='complet'){
-        return ((this.projet.N2c*this.projet.epFeuillard)+(this.projet.N2c-1)*this.projet.ePap+(this.projet.canauxBT*this.projet.lgCales));
+        return ((this.projet.N2c*this.epFeuillard)+(this.projet.N2c-1)*this.ePap+(this.projet.canauxBT*this.projet.lgCales));
         }else if(this.projet.typeCanaux=='lune'){
-            return (this.projet.N2c*this.projet.epFeuillard+(this.projet.N2c-1)*(this.projet.ePap));
+            return (this.projet.N2c*this.epFeuillard+(this.projet.N2c-1)*(this.ePap));
         }else {
             return 0;
         }
@@ -515,7 +523,17 @@ export default {
     Sbarre(){
       return this.epaisseurBarre*this.largeurBarre;
     },
-    epaisseurBarre(){
+    // epaisseurBarre(){
+     
+    //   let barre=this.projet.Epbarre;
+    //    console.log(barre.split("*")[0]);
+    //   return barre.split("*")[0];
+    // },
+    // largeurBarre(){
+    //   let barre=this.projet.Epbarre;
+    //   return barre.split("*")[1];
+    // },
+       epaisseurBarre(){
       let barre=this.projet.Epbarre;
       return barre.split("*")[0];
     },
@@ -727,9 +745,6 @@ form .button {
   padding-bottom: 0px;
 }
 @media (max-width: 400px) {
-  .container {
-    max-width: 100%;
-  }
   form .field10 .input-box {
     margin-bottom: 15px;
     width: 100%;

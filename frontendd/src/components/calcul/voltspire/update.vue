@@ -182,23 +182,23 @@ export default {
   },
   computed: {
     spires() {
-      let spires=[];
-      let spires1=[];
-      console.log(this.projet.priseSoustractive,this.projet.priseSoustractive)
-        for(let i=0;i<this.projet.priseSoustractive;i++){
-            spires[i]=this.n1c-Math.abs((i-this.projet.priseSoustractive)*this.n1c*this.projet.echelonSoustractive/100);
-        }
-        for(let i=this.projet.priseSoustractive;i<this.projet.priseSoustractive+this.projet.priseAdditive+1;i++){
-            spires[i]=this.n1c+Math.abs((i-this.projet.priseSoustractive)*this.n1c*this.projet.echelonAdditive/100);
-        }
-        for(let i=0;i<this.projet.priseSoustractive+this.projet.priseAdditive+1;i++){
-            spires1[i]=spires[this.projet.priseSoustractive+this.projet.priseAdditive-i];
-        }
-      // return this.projet.spire
-      //   .replace("[", "", this.projet.spire.length - 1)
-      //   .replace("]", "")
-      //   .split(",");
-      return spires1;
+      // let spires=[];
+      // let spires1=[];
+      // console.log(this.projet.priseSoustractive,this.projet.priseSoustractive)
+      //   for(let i=0;i<this.projet.priseSoustractive;i++){
+      //       spires[i]=this.n1c-Math.abs((i-this.projet.priseSoustractive)*this.n1c*this.projet.echelonSoustractive/100);
+      //   }
+      //   for(let i=this.projet.priseSoustractive;i<this.projet.priseSoustractive+this.projet.priseAdditive+1;i++){
+      //       spires[i]=this.n1c+Math.abs((i-this.projet.priseSoustractive)*this.n1c*this.projet.echelonAdditive/100);
+      //   }
+      //   for(let i=0;i<this.projet.priseSoustractive+this.projet.priseAdditive+1;i++){
+      //       spires1[i]=spires[this.projet.priseSoustractive+this.projet.priseAdditive-i];
+      //   }
+      return this.projet.spire
+        .replace("[", "", this.projet.spire.length - 1)
+        .replace("]", "")
+        .split(",");
+      // return spires1;
         
     },
     prises() {
