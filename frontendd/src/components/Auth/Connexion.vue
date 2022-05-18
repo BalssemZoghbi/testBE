@@ -333,7 +333,13 @@ this.error='une erreur s\'est produite';
   }
   
   }
-}
+},
+  mounted() {
+    let user = localStorage.getItem("user");
+    if (user) {
+      this.$router.push("/");
+    }
+  },
 };
 </script>
 <style scoped>

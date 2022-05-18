@@ -683,11 +683,13 @@ export default {
       }
     },
     PrimaireIPhase() {
+      console.log(this.PrimaireIligne/Math.sqrt(3), this.projet.couplagePrimaire)
       if (
-        this.projet.couplagePrimaire == "D" ||
-        this.projet.couplagePrimaire == "d"
+        this.projet.couplagePrimaire == 'D' ||
+        this.projet.couplageSecondaire == "d"
       ) {
-        return this.projet.PrimaireIligne / Math.sqrt(3);
+        
+        return parseFloat(this.PrimaireIligne) / Math.sqrt(3);
       } else {
         return (
           (parseInt(this.projet.puissance) * 1000) /

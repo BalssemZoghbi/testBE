@@ -340,23 +340,23 @@ export default {
        this.$router.push('/projet/bobine/'+this.$route.params.id);
     },
    async automatique(){
-       const projets = {
-        id: undefined,
-        option: this.projet.option,
-        Pog: this.projet.Pog,
-        log: this.projet.log,
-        Pccg: this.projet.Pccg,
-        Uccg:this.projet.Uccg,
-        Ptot: this.projet.Ptot,
-        Poglimit: this.projet.Poglimit,
-        loglimit: this.projet.loglimit,
-        Pccglimit: this.projet.Pccglimit,
-        Uccglimit: this.projet.Uccglimit,
-        Ptotlimit: this.projet.Ptotlimit,
-        echauffementHuile: this.projet.echauffementHuile,
-        echauffementEnroulement: this.projet.echauffementEnroulement,
-      };
-    await axios.put('garantie/edit/'+this.$route.params.id, projets).then(
+      //  const projets = {
+      //   id: undefined,
+      //   option: this.projet.option,
+      //   Pog: this.projet.Pog,
+      //   log: this.projet.log,
+      //   Pccg: this.projet.Pccg,
+      //   Uccg:this.projet.Uccg,
+      //   Ptot: this.projet.Ptot,
+      //   Poglimit: this.projet.Poglimit,
+      //   loglimit: this.projet.loglimit,
+      //   Pccglimit: this.projet.Pccglimit,
+      //   Uccglimit: this.projet.Uccglimit,
+      //   Ptotlimit: this.projet.Ptotlimit,
+      //   echauffementHuile: this.projet.echauffementHuile,
+      //   echauffementEnroulement: this.projet.echauffementEnroulement,
+      // };
+    await axios.put('garantie/edit/'+this.$route.params.id).then(
         (response) => (this.id = response.data.id, console.log(response.data),this.getGarantie())
         
       );
@@ -377,10 +377,18 @@ export default {
      const result = await axios.get('projets/'+this.$route.params.id);
     this.projet1 = result.data;
     console.log(this.projet);
-   this.getGarantie();
+  await this.getGarantie();
+  await this.automatique();
     
   },
   computed:{
+    // Pog(){
+    //   if(max(this.projet.u1n,this.projet.u2o)<24000){
+
+    //   }else{
+
+    //   }
+    // },
     Poglimit(){
       return parseFloat(this.projet.Pog)+(parseFloat(this.projet.Pog)*0.15);
     },
@@ -391,6 +399,8 @@ export default {
       return parseFloat(this.projet.Pccg)+((parseFloat(this.projet.Pccg)*15)/100);
     },
     Uccglimit(){
+      // min -10%
+      // console.log(parseFloat(this.projet.Uccg)-((parseFloat(this.projet.Uccg)*10)/100))
       return parseFloat(this.projet.Uccg)+((parseFloat(this.projet.Uccg)*10)/100);
     },
     Ptotlimit(){
