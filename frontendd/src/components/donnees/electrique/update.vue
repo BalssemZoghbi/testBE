@@ -14,7 +14,7 @@
             <v-card class="mb-6">
               <div class="title">Données Electrique</div>
               <div class="content">
-                <form v-on:submit.prevent="updateprojet">
+                <form >
                   <div class="col">
                     <div class="input-box">
                       <div class="form__div">
@@ -421,7 +421,7 @@ export default {
         nbrePosition: this.projet.nbrePosition,
       };
       axios
-        .put("/projet/electrique/edit/" + this.$route.params.id, projets)
+        .put("/electrique/edit/" + this.$route.params.id, projets)
         .then(
           (response) => (
             (this.id = response.data.id), console.log(response.data.id)
@@ -443,11 +443,11 @@ export default {
     },
   },
   async mounted() {
-    const result = await axios.get("projets/" + this.$route.params.id);
+    const result = await axios.get("/projets/" + this.$route.params.id);
     this.projet = result.data;
   },
   async created() {
-    const result = await axios.get("projets/" + this.$route.params.id);
+    const result = await axios.get("/projets/" + this.$route.params.id);
     this.projet = result.data;
   },
   computed: {
