@@ -182,10 +182,22 @@ export default {
   },
   computed: {
     spires() {
-      return this.projet.spire
-        .replace("[", "", this.projet.spire.length - 1)
-        .replace("]", "")
-        .split(",");
+      let spires=[];
+      let spires1=[];
+        for(let i=0;i<this.projet.priseSoustractive;i++){
+            spires[i]=this.n1c-Math.abs((i-this.projet.priseSoustractive)*this.n1c*this.projet.echelonAdditive/100);
+        }
+        for(let i=this.projet.priseSoustractive;i<this.projet.priseSoustractive+this.projet.priseAdditive;i++){
+            spires[i]=this.n1c+Math.abs((i-this.projet.priseSoustractive)*this.n1c*this.projet.echelonAdditive/100);
+        }
+        for(let i=0;i<this.projet.priseSoustractive+this.projet.priseAdditive+1;i++){
+            spires1[i]=spires[this.projet.priseSoustractive+this.projet.priseAdditive-i];
+        }
+      // return this.projet.spire
+      //   .replace("[", "", this.projet.spire.length - 1)
+      //   .replace("]", "")
+      //   .split(",");
+      return spires1;
         
     },
     prises() {
@@ -206,28 +218,29 @@ if(this.projet.couplageSecondaire=="zn"){
     n2c=parseFloat(this.projet.secondaireUPhase)*(parseFloat(Math.pow(10,6)))/(parseFloat(Math.PI)*parseFloat(this.projet.frequence)*parseFloat(Math.sqrt(2))*parseFloat(this.projet.Snette)*parseFloat(this.projet.Bmax));
 
     }
-    return n2c;
+    return Math.floor(n2c);
   },
   n1c(){
     let  n1c=parseFloat(this.projet.N1c);
-     n1c=parseFloat(this.projet.PrimaireUPhase)/(parseFloat(this.projet.Vsp));
+     n1c=parseFloat(this.projet.PrimaireUPhase)/(parseFloat(this.vsp));
      return n1c;
   },
   vsp(){
 let vsp=this.projet.Vsp;
 if(this.projet.couplageSecondaire=="zn"){
-  vsp=(parseFloat(this.projet.secondaireUligne)*2/3)/parseFloat(this.projet.N2c);
+  vsp=(parseFloat(this.projet.secondaireUligne)*2/3)/parseFloat(this.n2c);
 }else{
-        vsp=parseFloat(this.projet.secondaireUPhase)/parseFloat(this.projet.N2c);
+        vsp=parseFloat(this.projet.secondaireUPhase)/parseFloat(this.n2c);
         }
 return vsp;
   },
   bmax(){
 let bmax=this.projet.Bmax;
 if(this.projet.couplageSecondaire=="zn"){
-  bmax=(parseFloat(this.projet.secondaireUligne)*2/3)*parseFloat(Math.pow(10,6))/(parseFloat(Math.PI)*parseFloat(this.projet.frequence)*parseFloat(Math.sqrt(2))*parseFloat(this.projet.Snette)*parseFloat(this.projet.N2c));
+  bmax=(parseFloat(this.projet.secondaireUligne)*2/3)*parseFloat(Math.pow(10,6))/(parseFloat(Math.PI)*parseFloat(this.projet.frequence)*parseFloat(Math.sqrt(2))*parseFloat(this.projet.Snette)*parseFloat(this.n2c));
 }else{
-  bmax=parseFloat(this.projet.secondaireUPhase)*parseFloat(Math.pow(10,6))/(parseFloat(Math.PI)*parseFloat(this.projet.frequence)*parseFloat(Math.sqrt(2))*parseFloat(this.projet.Snette)*parseFloat(this.projet.N2c));
+  console.log(this.n2c)
+  bmax=parseFloat(this.projet.secondaireUPhase)*parseFloat(Math.pow(10,6))/(parseFloat(Math.PI)*parseFloat(this.projet.frequence)*parseFloat(Math.sqrt(2))*parseFloat(this.projet.Snette)*parseFloat(this.n2c));
      }
         return bmax;
   },

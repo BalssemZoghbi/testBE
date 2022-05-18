@@ -19,7 +19,7 @@ class AuthController extends Controller
     {
 
         $user= User::where('email', $request->email)->first();
-        if($user->type!=='En Attente'){
+        if(($user->type=='employe')||($user->type=='admin')){
             if (!$user || !Hash::check($request->password, $user->password)) {
                 return response([
                     'message' => ['These credentials do not match our records.']
