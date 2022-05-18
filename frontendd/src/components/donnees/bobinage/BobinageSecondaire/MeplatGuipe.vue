@@ -65,7 +65,12 @@
                         dense
                         outlined
                       ></v-select>
-
+                        <v-text-field
+                        label="NbBrin 2BT"
+                        v-model="projet.nbBrin2BT"
+                        dense
+                        outlined
+                      ></v-text-field>
                       <v-text-field
                         label="scu2"
                         dense
@@ -206,7 +211,7 @@
                         label="CanauxBT"
                         dense
                         id="canauxBT"
-                        readonly
+                        
                         v-model="projet.canauxBT"
                         outlined
                       ></v-text-field>
@@ -475,9 +480,10 @@ export default {
       return this.projet.N2c / this.projet.nbcoucheBT;
     },
     hSpire() {
+      console.log(this.projet.hbrin1BT , this.projet.e2ax);
       return (
-        (this.projet.hbrin1BT + this.projet.e2ax) * this.projet.nbBrin1BT +
-        (this.projet.hbrin2BT + this.projet.e2ax) * this.projet.nbBrin2BT
+        (parseFloat(this.projet.hbrin1BT) + parseFloat(this.projet.e2ax)) * parseFloat(this.projet.nbBrin1BT) +
+        (parseFloat(this.projet.hbrin2BT) + parseFloat(this.projet.e2ax)) * parseFloat(this.projet.nbBrin2BT)
       );
     },
     hsfs() {
@@ -495,9 +501,9 @@ export default {
         );
       } else {
         return (
-          this.hSpire * this.spCouche +
-          (this.projet.etageBT - 1) *
-            (this.projet.hbrin1BT + this.projet.hbrin2BT + this.projet.e2ax * 2)
+          this.hSpire * (this.spCouche +1) +
+          (parseFloat(this.projet.etageBT) - 1) *
+            (parseFloat(this.projet.hbrin1BT) + parseFloat(this.projet.hbrin2BT) + parseFloat(this.projet.e2ax )* 2)
         );
       }
     },
@@ -505,7 +511,7 @@ export default {
       return this.hfs + this.projet.collierBTSec * 2;
     },
     collierBt2() {
-      return this.hbobt - this.hfs - this.projet.collierBTSec;
+      return this.hbobt - this.hfs - parseFloat(this.projet.collierBTSec);
     },
     poidBT() {
       let coefPoid = 0;
@@ -518,8 +524,8 @@ export default {
         Math.pow(10, -6) *
         (coefPoid *
           parseFloat(this.projet.N2c) *
-          parseFloat(this.projet.scu2) *
-          (parseFloat(this.projet.DintBT) + parseFloat(this.projet.EpxBT)) *
+          parseFloat(this.scu2) *
+          (parseFloat(this.DintBint) + (this.Epx)) *
           Math.PI *
           3 *
           ((100 + parseFloat(this.projet.majPoidBT)) / 100))
@@ -548,18 +554,19 @@ export default {
       return epx;
     },
     Epy() {
-      return (
-        (this.projet.saillieBT + this.projet.e2r) *
-        this.projet.etageBT *
-        this.projet.nbcoucheBT
-      );
+      return   (this.projet.saillieBT + this.projet.e2r) *
+            this.projet.etageBT *
+            this.projet.nbcoucheBT +
+          this.projet.canauxBT * this.projet.lgCalesBT +
+          this.projet.nbrPapierBT * this.projet.canauxEp1PapierBT;
+      
     },
     Dext() {
       // console.log(this.Epx);
-      return this.projet.DintBT + 2 * this.Epx;
+      return this.DintBint + 2 * this.Epx;
     },
     Bext() {
-      return this.projet.BintBT + 2 * this.projet.EpyBT;
+      return this.DintBint + 2 * this.Epy;
     },
   },
 };
