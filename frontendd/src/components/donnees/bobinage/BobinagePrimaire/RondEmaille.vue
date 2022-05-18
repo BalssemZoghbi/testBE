@@ -469,7 +469,7 @@ export default {
       );
     },
     EpaiseurPapier() {
-      return this.projet.EpfeuillePapier * this.projet.nbrPapierMT;
+      return parseFloat(this.projet.EpfeuillePapier) * this.nbrPapierMt;
     },
     NchA() {
       return Math.floor(
@@ -498,19 +498,16 @@ export default {
         this.projet.brinParallele
       );
     },
+    
     DintMT() {
-      let dint = this.projet.DintMT;
-      dint =
-        parseFloat(this.projet.DistanceBTMT) * 2 +
-        parseFloat(this.projet.DextMT);
-      console.log(parseFloat(this.projet.DextMT));
-      return dint;
+      return  parseFloat(this.projet.DistanceBTMT) * 2 + this.DextMT;
     },
     BintMT() {
       return Math.ceil(this.projet.BextMT + 2 * this.projet.DistanceBTMT);
     },
     DextMT() {
-      return Math.round(this.projet.DintMT + 2 * this.projet.EpxMT);
+      console.log("dext");
+      return Math.round(this.projet.DintMT + 2 * parseFloat(this.projet.EpxMT));
     },
     BextMT() {
       return Math.round(this.projet.BintMT + 2 * this.projet.EpyMT);
@@ -518,16 +515,16 @@ export default {
     EpxMT() {
       if (this.projet.typeCanaux == "complet") {
         return (
-          this.projet.nbcoucheMT * this.projet.filobtenueIsoler +
-          this.projet.EpaiseurPapier *
+         Math.round( this.projet.nbcoucheMT * this.filobtenueIsoler +
+          this.EpaiseurPapier *
             (this.projet.nbcoucheMT - 1 - this.projet.canauxMT) +
           this.projet.canauxMT * this.projet.lgCales +
-          this.projet.canauxMT * this.projet.EpaisseurPapierCanaux
+          this.projet.canauxMT * this.EpaisseurPapierCanaux)
         );
       } else if (this.projet.typeCanaux == "lune") {
-        return (
-          this.projet.nbcoucheMT * this.projet.filobtenueIsoler +
-          this.projet.EpaiseurPapier * (this.projet.nbcoucheMT - 1)
+        return Math.ceil(
+          this.projet.nbcoucheMT * this.filobtenueIsoler +
+          this.EpaiseurPapier * (this.projet.nbcoucheMT - 1)
         );
       } else {
         return 0;
@@ -535,12 +532,12 @@ export default {
     },
     EpyMT() {
       if (this.projet.typeCanaux == "complet") {
-        return this.projet.EpxMT;
+        return this.EpxMT;
       } else if (this.projet.typeCanaux == "lune") {
-        return parseFloat(
+        return Math.round(
           parseFloat(this.projet.nbcoucheMT) *
-            parseFloat(this.projet.filobtenueIsoler) +
-            parseFloat(this.projet.EpaiseurPapier) *
+            this.filobtenueIsoler +
+            this.EpaiseurPapier *
               (parseFloat(this.projet.nbcoucheMT) - 1) +
             parseFloat(this.projet.canauxMT) * parseFloat(this.projet.lgCales)
         );
@@ -562,17 +559,16 @@ export default {
             parseFloat(this.projet.scu1) *
             Math.PI *
             3) *
-          ((parseFloat(this.projet.DintMT) +
-            parseFloat(this.projet.BintMT) +
-            parseFloat(this.projet.DextMT) +
-            parseFloat(this.projet.BextMT)) /
+          ((this.DintMT +
+            this.BintMT +
+            this.DextMT +
+            this.BextMT) /
             4) *
           (100 + parseFloat(this.projet.majPoid))) /
         100
       );
     },
     scu1() {
-      console.log(this.filobtenueIsoler,(this.projet.brinParallele))
       return (
         (Math.PI *
           Math.pow(this.filobtenueIsoler, 2) *
