@@ -35,6 +35,7 @@
                         label="Diametre propose"
                         v-model="diamPropose"
                         dense
+                        readonly
                         outlined
                       ></v-text-field>
                     
@@ -43,7 +44,7 @@
                         label="Diametre Nominale"
                         dense
                         id="diamNominale"
-                        readonly
+                        
                         v-model="projet.diamNominale"
                         outlined
                       ></v-text-field>
@@ -372,16 +373,17 @@ epaisseur(){
             j++;
             prec+=epaisseur[i];
         }
-        console.log(prec);
+        // console.log(prec);
         return epaisseur;
     
   // return this.projet.epaisseur.replace("[","",this.projet.epaisseur.length-1).replace("]","").split(",");
 },
 Snette(){
-  return parseFloat(this.projet.Sbrut)*parseFloat(this.projet.coeffRemplissage);
+  return parseFloat(this.Sbrut)*parseFloat(this.projet.coeffRemplissage);
 },
 EpaisseurTot(){
- let epaisseur=this.projet.epaisseur.replace("[","",this.projet.epaisseur.length-1).replace("]","").split(",");
+//  let epaisseur=this.projet.epaisseur.replace("[","",this.projet.epaisseur.length-1).replace("]","").split(",");
+ let epaisseur=this.epaisseur;
   let somme=0;
   for(let i=0;i<epaisseur.length;i++){
     somme+=parseFloat(epaisseur[i]);
@@ -389,13 +391,16 @@ EpaisseurTot(){
   return somme;
 },
 Sbrut(){
-let brut=[];
+// let brut=[];
 let somme=0;
-   let epaisseur=this.projet.epaisseur.replace("[","",this.projet.epaisseur.length-1).replace("]","").split(",");
-   let largeur=this.projet.largeur.replace("[","",this.projet.largeur.length-1).replace("]","").split(",");
+// console.log(this.epaisseur,this.largeur);
+  //  let epaisseur=this.projet.epaisseur.replace("[","",this.projet.epaisseur.length-1).replace("]","").split(",");
+  //  let largeur=this.projet.largeur.replace("[","",this.projet.largeur.length-1).replace("]","").split(",");
+   let epaisseur=this.epaisseur;
+   let largeur=this.largeur;
    for(let i=0;i<largeur.length;i++){
-    brut[i]=parseFloat(largeur[i])*parseFloat(epaisseur[i]);
-    somme+=brut[i];
+   somme+=parseFloat(largeur[i])*parseFloat(epaisseur[i]);
+    // somme+=brut[i];
     }
 return somme;
 }
@@ -403,6 +408,7 @@ return somme;
 
 };
 </script>
+
 <style scoped>
 #graph{
     width: 80%;
