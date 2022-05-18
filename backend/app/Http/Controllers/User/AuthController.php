@@ -34,7 +34,7 @@ class AuthController extends Controller
              return response($response, 200);
         }else{
             return response([
-                'message' => ['pending.']
+                'message' => ['En Attente.']
             ], 404);
         }
 

@@ -36,6 +36,19 @@
                   </div>
                   <div class="div">
                     <div class="field10">
+                       <!-- <v-text-field
+                        label="scu2d"
+                        v-model="scu2d"
+                        dense
+                        outlined
+                      ></v-text-field>
+
+                      <v-text-field
+                        label="J2D"
+                        v-model="projet.J2D"
+                        outlined
+                        dense
+                      ></v-text-field> -->
                       <v-text-field
                         label="Hfeuillard"
                         v-model="projet.HfeuillardBT"
@@ -70,6 +83,12 @@
                       <v-text-field
                         label="scu2"
                         v-model="scu2"
+                        dense
+                        outlined
+                      ></v-text-field>
+                      <v-text-field
+                        label="collierBT"
+                        v-model="collierBTSec"
                         dense
                         outlined
                       ></v-text-field>
@@ -344,6 +363,8 @@ export default {
         typeCanauxBT:"",
         canauxBT:"",
         lgCalesBT:"",
+        // scu2d: "",
+        // J2D: "",
         collierBT:"",
         collierBT2:"",
         CMBTSec:"",
@@ -372,6 +393,7 @@ export default {
         largeurBarreBT:"",
         SbarreBT:"", 
         JbarreBT:"",
+        collierBTSec:"",
       },
       e1:1
     };
@@ -384,6 +406,8 @@ export default {
         conducteurSec: this.projet.conducteurSec,
         scu2: this.projet.scu2,
         j2: this.projet.j2,
+        // scu2d: this.projet.scu2d,
+        // J2D: this.projet.J2D,
         ep1PapierBT: this.projet.ep1PapierBT,
         nbrPapierBT: this.projet.nbrPapierBT,
         typeCanauxBT: this.projet.typeCanauxBT,
@@ -416,6 +440,7 @@ export default {
         largeurBarreBT: this.projet.largeurBarreBT,
         SbarreBT: this.projet.SbarreBT,
         JbarreBT: this.projet.JbarreBT,
+        collierBTSec: this.projet.collierBTSec,
       };
       axios.put('bobinesec/update/'+this.$route.params.id, projets).then(
         (response) => (this.id = response.data.id, console.log(projets))

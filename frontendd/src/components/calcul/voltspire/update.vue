@@ -184,10 +184,11 @@ export default {
     spires() {
       let spires=[];
       let spires1=[];
+      console.log(this.projet.priseSoustractive,this.projet.priseSoustractive)
         for(let i=0;i<this.projet.priseSoustractive;i++){
-            spires[i]=this.n1c-Math.abs((i-this.projet.priseSoustractive)*this.n1c*this.projet.echelonAdditive/100);
+            spires[i]=this.n1c-Math.abs((i-this.projet.priseSoustractive)*this.n1c*this.projet.echelonSoustractive/100);
         }
-        for(let i=this.projet.priseSoustractive;i<this.projet.priseSoustractive+this.projet.priseAdditive;i++){
+        for(let i=this.projet.priseSoustractive;i<this.projet.priseSoustractive+this.projet.priseAdditive+1;i++){
             spires[i]=this.n1c+Math.abs((i-this.projet.priseSoustractive)*this.n1c*this.projet.echelonAdditive/100);
         }
         for(let i=0;i<this.projet.priseSoustractive+this.projet.priseAdditive+1;i++){
