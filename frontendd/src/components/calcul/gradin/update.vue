@@ -695,7 +695,7 @@ form .button input:hover {
     overflow-y: scroll;
   }
   .field10::-webkit-scrollbar {
-    width: 15px;
+    width: 8px;
   }
   .field10 {
   display: grid;
