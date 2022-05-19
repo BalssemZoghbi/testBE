@@ -2,8 +2,8 @@
   <div>
     <!-- <navbarUpdate /> -->
     <NavDash
-      :conducteur="projet.conducteur"
-      :conducteurSec="projet.conducteurSec"
+      :conducteurMT="projet.conducteurMT"
+      :conducteurBT="projet.conducteurBT"
     />
     <div class="body">
       <v-stepper v-model="e1" vertical>
@@ -339,14 +339,14 @@ export default {
       saillie: [],
       hbrin: [],
       barre: [],
-      conducteur: ["meplat guipé", "Rond emaille", "feuillard"],
-      materiauSec: ["cuivre", "aluminium"],
+      conducteurMT: ["meplat guipé", "Rond emaille", "feuillard"],
+      materiauBT: ["cuivre", "aluminium"],
       etage: ["1", "2"],
       typeCanaux: ["complet", "lune"],
       projet: {
         id: undefined,
-        materiauSec: "",
-        conducteurSec: "",
+        materiauBT: "",
+        conducteurBT: "",
         etageBT: "",
         saillieBT: "",
         hbrin1BT: "",
@@ -390,8 +390,8 @@ export default {
     updateprojet() {
       const projets = {
         id: undefined,
-        materiauSec: this.projet.materiauSec,
-        conducteurSec: this.projet.conducteurSec,
+        materiauBT: this.projet.materiauBT,
+        conducteurBT: this.projet.conducteurBT,
         etageBT: this.projet.etageBT,
         saillieBT: this.projet.saillieBT,
         hbrin1BT: this.projet.hbrin1BT,
@@ -433,19 +433,13 @@ export default {
         .then(
           (response) => ((this.id = response.data.id), console.log(projets))
         );
-      if (this.projet.conducteur == "Rond emaille") {
-        this.$router.push(
-          "/projet/bobinagePrimaireRond/" + this.$route.params.id
-        );
-      } else if (this.projet.conducteur == "feuillard") {
-        this.$router.push(
-          "/projet/bobinagePrimaireFeuillard/" + this.$route.params.id
-        );
-      } else if (this.projet.conducteur == "meplat guipé") {
-        this.$router.push(
-          "/projet/bobinagePrimaireMeplat/" + this.$route.params.id
-        );
-      }
+  if(this.projet.conducteurMT=="Rond emaille"){
+      this.$router.push("/projet/bobinagePrimaireRond/"+this.$route.params.id);
+    }else if(this.projet.conducteurMT=="feuillard"){
+      this.$router.push("/projet/bobinagePrimaireFeuillard/"+this.$route.params.id);
+    }else if(this.projet.conducteurMT=="meplat guipé"){
+      this.$router.push("/projet/bobinagePrimaireMeplat/"+this.$route.params.id);
+    }  
     },
   },
   async mounted() {
@@ -515,9 +509,9 @@ export default {
     },
     poidBT() {
       let coefPoid = 0;
-      if (this.projet.materiauSec == "cuivre") {
+      if (this.projet.materiauBT == "cuivre") {
         coefPoid = 8.9;
-      } else if (this.projet.materiauSec == "aluminium") {
+      } else if (this.projet.materiauBT == "aluminium") {
         coefPoid = 2.7;
       }
       return (

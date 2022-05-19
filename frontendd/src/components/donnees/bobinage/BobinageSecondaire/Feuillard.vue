@@ -2,8 +2,8 @@
   <div>
     <navbarUpdate />
     <NavDash
-      :conducteur="projet.conducteur"
-      :conducteurSec="projet.conducteurSec"
+      :conducteurMT="projet.conducteurMT"
+      :conducteurBT="projet.conducteurBT"
     />
     <div class="body">
       <v-stepper v-model="e1" vertical>
@@ -19,11 +19,11 @@
                   <div style="margin-bottom: 2%">
                     <v-chip
                       >materiau :
-                      {{ projet.materiauSec }}
+                      {{ projet.materiauBT }}
                     </v-chip>
                     <v-chip style="margin-left: 1%"
                       >conducteur :
-                      {{ projet.conducteurSec }}
+                      {{ projet.conducteurBT }}
                     </v-chip>
                     <v-chip style="margin-left: 1%"
                       >N2c :
@@ -279,12 +279,12 @@
                 <div class="user-details">
                   <div style="margin-bottom: 2%">
                     <v-chip
-                      >materiauSec :
-                      {{ projet.materiauSec }}
+                      >materiauBT :
+                      {{ projet.materiauBT }}
                     </v-chip>
                     <v-chip style="margin-left: 1%"
-                      >conducteur :
-                      {{ projet.conducteurSec }}
+                      >conducteurBT :
+                      {{ projet.conducteurBT }}
                     </v-chip>
                   </div>
 
@@ -347,14 +347,14 @@ export default {
       saillie:[],
       barre:[],
       hbrin:[],
-      conducteurSec: ['meplat guipé','Rond emaille','feuillard'], 
+      conducteurBT: ['meplat guipé','Rond emaille','feuillard'], 
       materiauSec: ['cuivre','aluminium'], 
        etage: ['1','2'], 
       typeCanaux: ['complet','lune'],
       projet: {
          id:undefined,
-      materiauSec:"",
-      conducteurSec:"",
+      materiauBT:"",
+      conducteurBT:"",
         scu2:"",
         j2:"",
         EpfeuillePapierBT:"",
@@ -402,8 +402,8 @@ export default {
     updateprojet() {
       const projets = {
         id: undefined,
-        materiauSec: this.projet.materiauSec,
-        conducteurSec: this.projet.conducteurSec,
+        materiauBT: this.projet.materiauBT,
+        conducteurBT: this.projet.conducteurBT,
         scu2: this.projet.scu2,
         j2: this.projet.j2,
         // scu2d: this.projet.scu2d,
@@ -446,11 +446,11 @@ export default {
         (response) => (this.id = response.data.id, console.log(projets))
         
       );
-  if(this.projet.conducteur=="Rond emaille"){
+  if(this.projet.conducteurMT=="Rond emaille"){
       this.$router.push("/projet/bobinagePrimaireRond/"+this.$route.params.id);
-    }else if(this.projet.conducteur=="feuillard"){
+    }else if(this.projet.conducteurMT=="feuillard"){
       this.$router.push("/projet/bobinagePrimaireFeuillard/"+this.$route.params.id);
-    }else if(this.projet.conducteur=="meplat guipé"){
+    }else if(this.projet.conducteurMT=="meplat guipé"){
       this.$router.push("/projet/bobinagePrimaireMeplat/"+this.$route.params.id);
     }  },
   
@@ -516,9 +516,9 @@ export default {
 
     poidBT(){ 
         let coefPoid=0;
-         if(this.projet.materiauSec=='cuivre'){
+         if(this.projet.materiauBT=='cuivre'){
                 coefPoid=8.9;
-            }else if(this.projet.materiauSec=='aluminium'){
+            }else if(this.projet.materiauBT=='aluminium'){
                 coefPoid=2.7;
             }
             return Math.pow(10, -6)*(coefPoid*parseFloat(this.projet.N2c)*parseFloat(this.scu2)*Math.PI*3)*((parseFloat(this.DintBT)+parseFloat(this.DintBT)+parseFloat(this.DextBT)+parseFloat(this.BextBT))/4)*(100+parseFloat(this.projet.majPoidBT))/100;

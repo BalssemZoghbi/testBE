@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\ProjetResource;
 use App\Models\Donnees\bobinage\Bobinage;
 use App\Models\Donnees\bobinage\BobinageSec;
+use App\Models\Donnees\bobinage\DonneBobine;
 use App\Models\Donnees\Circuitmagnetique;
 use App\Models\Donnees\electrique\Electrique;
 use App\Models\Donnees\garantie\Garantie;
@@ -272,6 +273,12 @@ class ProjetController extends Controller
             'surfaceCM' => null,
             'Hauteurcuve' => null,
         ]);
+        $donnebobines=DonneBobine::create([
+            'materiauMT' => 'cuivre',
+            'conducteurMT' => 'feuillard',
+            'materiauBT' => 'cuivre',
+            'conducteurBT' => 'Rond emaille',
+        ]);
         $reference = "PC " . date("m/d/y");
         $projet = Projet::create([
             'appareil' => '',
@@ -298,6 +305,7 @@ class ProjetController extends Controller
             'volt_spires_id' => $VoltSpire->id,
             'pcc_uccs_id' => $pccUcc->id,
             'circuitmagnetiques_id' => $circuitMagnetique->id,
+            'donne_bobines_id' => $donnebobines->id,
 
         ]);
 
@@ -576,6 +584,12 @@ class ProjetController extends Controller
             "Hauteurcuve" => 774,
             "coeffPoid" => 0.964,
         ]);
+        $donnebobines=DonneBobine::create([
+            'materiauMT' => 'cuivre',
+            'conducteurMT' => 'feuillard',
+            'materiauBT' => 'cuivre',
+            'conducteurBT' => 'Rond emaille',
+        ]);
         $reference = "PC " . date("m/d/y");
         $projet = Projet::create([
             'appareil' => 'Transfo Triphasé',
@@ -602,6 +616,7 @@ class ProjetController extends Controller
             'volt_spires_id' => $VoltSpire->id,
             'pcc_uccs_id' => $pccUcc->id,
             'circuitmagnetiques_id' => $circuitMagnetique->id,
+            'donne_bobines_id' => $donnebobines->id,
         ]);
 
         if ($projet->save()) {
@@ -878,6 +893,12 @@ class ProjetController extends Controller
             'surfaceCM' => 6,
             'Hauteurcuve' => 6,
         ]);
+        $donnebobines=DonneBobine::create([
+            'materiauMT' => 'cuivre',
+            'conducteurMT' => 'feuillard',
+            'materiauBT' => 'cuivre',
+            'conducteurBT' => 'Rond emaille',
+        ]);
         $reference = "PC " . date("m/d/y");
         $projet = Projet::create([
             'appareil' => 'Transfo Triphasé',
@@ -904,6 +925,8 @@ class ProjetController extends Controller
             'volt_spires_id' => $VoltSpire->id,
             'pcc_uccs_id' => $pccUcc->id,
             'circuitmagnetiques_id' => $circuitMagnetique->id,
+            'donne_bobines_id' => $donnebobines->id,
+
         ]);
 
         if ($projet->save()) {
@@ -922,8 +945,9 @@ class ProjetController extends Controller
             ->join('bobinage_secs', 'bobinage_secs.id', '=', 'projets.bobinage_secs_id')
             ->join('pcc_uccs', 'pcc_uccs.id', '=', 'projets.pcc_uccs_id')
             ->join('circuitmagnetiques', 'circuitmagnetiques.id', '=', 'projets.circuitmagnetiques_id')
+            ->join('donne_bobines', 'donne_bobines.id', '=', 'projets.donne_bobines_id')
             ->where('projets.id', $id)
-            ->select('electriques.*', 'electriques.id as elec_id', 'circuitmagnetiques.*', 'circuitmagnetiques.id as circuitmagnetiqus_id', 'garanties.*', 'garanties.id as garenti_id', 'bobinages.*', 'bobinages.id as bobine_id', 'bobinage_secs.*', 'bobinage_secs.id as bobinesec_id', 'gradins.*', 'gradins.id as gradins_id', 'volt_Spires.*', 'volt_Spires.id as volt_id', 'pcc_uccs.*', 'pcc_uccs.id as pucc_id', 'projets.*')
+            ->select('electriques.*', 'electriques.id as elec_id', 'circuitmagnetiques.*', 'circuitmagnetiques.id as circuitmagnetiqus_id','donne_bobines.*', 'donne_bobines.id as donne_bob_id', 'garanties.*', 'garanties.id as garenti_id', 'bobinages.*', 'bobinages.id as bobine_id', 'bobinage_secs.*', 'bobinage_secs.id as bobinesec_id', 'gradins.*', 'gradins.id as gradins_id', 'volt_Spires.*', 'volt_Spires.id as volt_id', 'pcc_uccs.*', 'pcc_uccs.id as pucc_id', 'projets.*')
             ->get()->first();
 
 
@@ -943,8 +967,9 @@ class ProjetController extends Controller
             ->join('bobinage_secs', 'bobinage_secs.id', '=', 'projets.bobinage_secs_id')
             ->join('pcc_uccs', 'pcc_uccs.id', '=', 'projets.pcc_uccs_id')
             ->join('circuitmagnetiques', 'circuitmagnetiques.id', '=', 'projets.circuitmagnetiques_id')
+            ->join('donne_bobines', 'donne_bobines.id', '=', 'projets.donne_bobines_id')
             ->where('projets.id', $id)
-            ->select('electriques.*', 'electriques.id as elec_id', 'circuitmagnetiques.*', 'circuitmagnetiques.id as circuitmagnetiqus_id', 'garanties.*', 'garanties.id as garenti_id', 'bobinages.*', 'bobinages.id as bobine_id', 'bobinage_secs.*', 'bobinage_secs.id as bobinesec_id', 'gradins.*', 'gradins.id as gradins_id', 'volt_Spires.*', 'volt_Spires.id as volt_id', 'pcc_uccs.*', 'pcc_uccs.id as pucc_id', 'projets.*')
+            ->select('electriques.*', 'electriques.id as elec_id', 'circuitmagnetiques.*', 'circuitmagnetiques.id as circuitmagnetiqus_id','donne_bobines.*', 'donne_bobines.id as donne_bob_id', 'garanties.*', 'garanties.id as garenti_id', 'bobinages.*', 'bobinages.id as bobine_id', 'bobinage_secs.*', 'bobinage_secs.id as bobinesec_id', 'gradins.*', 'gradins.id as gradins_id', 'volt_Spires.*', 'volt_Spires.id as volt_id', 'pcc_uccs.*', 'pcc_uccs.id as pucc_id', 'projets.*')
             ->get()->first();
         $reference = "PC " . date("m/d/y");
         $projet1 = Projet::FindOrFail($id);
@@ -1219,6 +1244,12 @@ class ProjetController extends Controller
             'surfaceCM' => 6,
             'Hauteurcuve' => 6,
         ]);
+        $donnebobines=DonneBobine::create([
+            'materiauMT' => 'cuivre',
+            'conducteurMT' => 'feuillard',
+            'materiauBT' => 'cuivre',
+            'conducteurBT' => 'Rond emaille',
+        ]);
         $reference = "PC " . date("m/d/y");
         $projet = Projet::create([
             'appareil' => 'Transfo Triphasé',
@@ -1245,6 +1276,7 @@ class ProjetController extends Controller
             'volt_spires_id' => $VoltSpire->id,
             'pcc_uccs_id' => $pccUcc->id,
             'circuitmagnetiques_id' => $circuitMagnetique->id,
+            'donne_bobines_id' => $donnebobines->id,
         ]);
 
         if ($projet->save()) {
@@ -1264,8 +1296,10 @@ class ProjetController extends Controller
             ->join('volt_Spires', 'volt_Spires.id', '=', 'projets.volt_spires_id')
             ->join('bobinage_secs', 'bobinage_secs.id', '=', 'projets.bobinage_secs_id')
             ->join('pcc_uccs', 'pcc_uccs.id', '=', 'projets.pcc_uccs_id')
-            ->select('electriques.*', 'electriques.id as elec_id', 'garanties.*', 'garanties.id as garenti_id', 'bobinages.*', 'bobinages.id as bobine_id', 'bobinage_secs.*', 'bobinage_secs.id as bobinesec_id', 'gradins.*', 'gradins.id as gradins_id', 'volt_Spires.*', 'volt_Spires.id as volt_id', 'pcc_uccs.*', 'pcc_uccs.id as pucc_id', 'projets.*')
-            ->get()->first();
+            ->join('circuitmagnetiques', 'circuitmagnetiques.id', '=', 'projets.circuitmagnetiques_id')
+            ->join('donne_bobines', 'donne_bobines.id', '=', 'projets.donne_bobines_id')
+            ->select('electriques.*', 'electriques.id as elec_id', 'circuitmagnetiques.*', 'circuitmagnetiques.id as circuitmagnetiqus_id','donne_bobines.*', 'donne_bobines.id as donne_bob_id', 'garanties.*', 'garanties.id as garenti_id', 'bobinages.*', 'bobinages.id as bobine_id', 'bobinage_secs.*', 'bobinage_secs.id as bobinesec_id', 'gradins.*', 'gradins.id as gradins_id', 'volt_Spires.*', 'volt_Spires.id as volt_id', 'pcc_uccs.*', 'pcc_uccs.id as pucc_id', 'projets.*')
+             ->get()->first();
         $reference = "PC " . date("m/d/y");
         $projet = Projet::create([
             'appareil' => 'Transfo Triphasé',

@@ -55,26 +55,26 @@
                                       <router-link :to="'/projet/VoltSpires/'+ this.$route.params.id">Volt Spires</router-link>
                                     </li>
                                     
-                                    <li class="dropdown-link"  v-if="conducteurSec=='Rond emaille'">
+                                    <li class="dropdown-link"  v-if="conducteurBT=='Rond emaille'">
                                       <router-link :to="'/projet/bobinageSecondaireRond/'+ this.$route.params.id" >Bobine Secondaire</router-link>
                                      </li>
-                                    <li class="dropdown-link" v-else-if="conducteurSec=='feuillard'">
+                                    <li class="dropdown-link" v-else-if="conducteurBT=='feuillard'">
                                       <router-link :to="'/projet/bobinageSecondaireFeuillard/'+ this.$route.params.id" >Bobine Secondaire</router-link>
                                     </li>
-                                    <li class="dropdown-link" v-else-if="conducteurSec=='meplat guipé'">
+                                    <li class="dropdown-link" v-else-if="conducteurBT=='meplat guipé'">
                                       <router-link :to="'/projet/bobinageSecondaireMeplat/'+ this.$route.params.id" >Bobine Secondaire</router-link>
                                     </li>
                                     <li class="dropdown-link" v-else>
                                       <router-link  to="/notfound">Bobine Secondaire</router-link>
                                     </li>
 
-                                    <li class="dropdown-link"  v-if="conducteur=='Rond emaille'">
+                                    <li class="dropdown-link"  v-if="conducteurMT=='Rond emaille'">
                                       <router-link :to="'/projet/bobinagePrimaireRond/'+ this.$route.params.id" >Bobine Primaire</router-link>
                                      </li>
-                                    <li class="dropdown-link" v-else-if="conducteur=='feuillard'">
+                                    <li class="dropdown-link" v-else-if="conducteurMT=='feuillard'">
                                       <router-link :to="'/projet/bobinagePrimaireFeuillard/'+ this.$route.params.id" >Bobine Primaire</router-link>
                                     </li>
-                                    <li class="dropdown-link" v-else-if="conducteur=='meplat guipé'">
+                                    <li class="dropdown-link" v-else-if="conducteurMT=='meplat guipé'">
                                       <router-link :to="'/projet/bobinagePrimaireMeplat/'+ this.$route.params.id" >Bobine Primaire</router-link>
                                     </li>
                                     <li class="dropdown-link" v-else>
@@ -118,9 +118,9 @@ export default {
   data: () => ({
     id:undefined,
    }),
-  props:['conducteur','conducteurSec'],
+  props:['conducteurMT','conducteurBT'],
   mounted(){
-      console.log(this.conducteur,this.conducteurSec);
+      console.log(this.conducteurMT,this.conducteurBT);
   }
 };
 </script>

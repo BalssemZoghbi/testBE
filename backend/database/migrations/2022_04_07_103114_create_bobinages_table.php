@@ -15,8 +15,8 @@ class CreateBobinagesTable extends Migration
     {
         Schema::create('bobinages', function (Blueprint $table) {
             $table->id();
-            $table->enum('materiau',['cuivre','aluminium'])->nullable();
-            $table->enum('conducteur',['meplat guipé','Rond emaille','feuillard'])->nullable();
+            $table->string('materiau')->nullable();
+            $table->string('conducteur')->nullable();
             $table->enum('etageMT',['1','2'])->nullable();
             $table->float('saillieMT')->nullable();
             $table->float('hbrin1MT')->nullable();
