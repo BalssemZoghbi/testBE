@@ -30,7 +30,7 @@
                 <v-select
                 :items="materiau"
                 label="materiau"
-                v-model="projet.materiau"
+                v-model="projet.materiauMT"
                 dense
                 outlined
               ></v-select>
@@ -45,7 +45,7 @@
                      <v-select
                 :items="materiau"
                 label="materiau"
-                v-model="projet.materiauSec"
+                v-model="projet.materiauBT"
                 dense
                 outlined
               ></v-select>
@@ -60,7 +60,7 @@
               <v-select
                 :items="conducteur"
                 label="conducteur"
-                v-model="projet.conducteur"
+                v-model="projet.conducteurMT"
                 dense
                 outlined
               ></v-select>
@@ -73,7 +73,7 @@
                <v-select
                :items="conducteur"
                 label="conducteur"
-                v-model="projet.conducteurSec"
+                v-model="projet.conducteurBT"
                 dense
                 outlined
               ></v-select>
@@ -107,16 +107,12 @@
 </template>
 
 <script>
-// import { reactive } from "vue";
-// import navbarUpdate from '../../navbarUpdate';
 import NavDash from "@/components/NavDash.vue";
 
 import axios from "axios";
 export default {
-    components: { 
-      // navbarUpdate 
-                NavDash,
-
+    components: {
+     NavDash,
       },
   data() {
     return {
@@ -125,157 +121,12 @@ export default {
       conducteur: ['meplat guipé','Rond emaille','feuillard'], 
       materiau: ['cuivre','aluminium'], 
       projet: {
-         id:undefined,
-      materiau:"",
-      conducteur:"",
-        materiauSec:"",
-      conducteurSec:"",
-      // primaire meplat
-       etageMT: "",
-        saillieMT: "",
-        hbrin1MT: "",
-        hbrin2MT: "",
-        nbBrin1MT: "",
-        nbBrin2MT: "",
-        scu1: "",
-        j1: "",
-        nbcoucheMT: "",
-        spCoucheMT: "",
-        e1ax: "",
-        e1r: "",
-        rigiditePapierMT: "",
-        ep1PapierMT: "",
-        nbrPapierMT: "",
-        typeCanaux: "",
-        canauxMT: "",
-        lgCales: "",
-        canauxEp1Papier: "",
-        canauxNbrPapier: "",
-        Hspire: "",
-        HSFS: "",
-        HFS: "",
-        collierBT: "",
-        collierBT2: "",
-        CMBT: "",
-        DintMT: "",
-        BintMT: "",
-        EpxMT: "",
-        EpyMT: "",
-        DextMT: "",
-        BextMT: "",
-        poidMT: "",
-        majPoid: "",
-        nbrPapier: "",
-        // primaire feuillard
-        Hfeuillard: "",
-        HbobineBt: "",
-        epFeuil1: "",
-        epFeuil2: "",
-        epFeuillard: "",
-        ep2Papier: "",
-        nbrPap2: "",
-        ePap: "",
-        epFeuilPap: "",
-        nbrPap1: "",
-        EpPapier: "",
-        EpCylindre: "",
-        Epbarre: "",
-        epaisseurBarre: "",
-        largeurBarre: "",
-        Sbarre: "",
-        Jbarre: "",
-        // rond
-        nbrPapierMt: "",
-        scu1d: "",
-        J1D: "",
-        D1d: "",
-        filobtenueNue: "",
-        filobtenueIsoler: "",
-        choix: "",
-        brinParallele: "",
-        SpchB: "",
-        NchB: "",
-        SpchA: "",
-        NchA: "",
-        HCondMt: "",
-        DistanceBTMT: "",
-        HCollier: "",
-        EpfeuillePapier: "",
-        EpaiseurPapier: "",
-        EpaisseurPapierCanaux: "",
-        N1cmax: "",
-        // sec feuillard
-         scu2:"",
-        j2:"",
-        EpfeuillePapierBT:"",
-        nbrPapierBT:"",
-        typeCanauxBT:"",
-        canauxBT:"",
-        lgCalesBT:"",
-        CMBTSec:"",
-        DintBT:"",
-        BintBT:"",
-        EpxBT:"",
-        EpyBT:"",
-        DextBT:"",
-        BextBT:"",
-        poidBT:"",
-        majPoidBT:"",
-        HfeuillardBT:"",
-        HbobineBtSec:"",
-        epFeuil1BT:"",
-        epFeuil2BT:"",
-        epFeuillardBT:"",
-        ep2PapierBT:"",
-        nbrPap2BT:"",
-        ePapBT:"",
-        epFeuilPapBT:"",
-        nbrPap1BT:"",
-        EpPapierBT:"",
-        EpCylindreBT:"",
-        EpbarreBT:"",
-        epaisseurBarreBT:"",
-        largeurBarreBT:"",
-        SbarreBT:"", 
-        JbarreBT:"",
-        collierBTSec:"",
-        // meplat sec
-          etageBT: "",
-        saillieBT: "",
-        hbrin1BT: "",
-        hbrin2BT: "",
-        nbBrin1BT: "",
-        nbBrin2BT: "",
-        nbcoucheBT: "",
-        spCoucheBT: "",
-        e2ax: "",
-        e2r: "",
-        rigiditePapierBT: "",
-        ep1PapierBT: "",
-        canauxEp1PapierBT: "",
-        canauxNbrPapierBT: "",
-        HspireBT: "",
-        HSFSBT: "",
-        HFSBT: "",
-        collierBT2Sec: "",
-        // rond sec
-        N2cmax: "",
-        scu2d: "",
-        J2D: "",
-        D2d: "",
-        filobtenueNueBT: "",
-        filobtenueIsolerBT: "",
-        choixBT: "",
-        brinParalleleBT: "",
-        SpchBBT: "",
-        NchBBT: "",
-        SpchABT: "",
-        NchABT: "",
-        HCondBt: "",
-        DistanceBTMTSec: "",
-        HCollierBT: "",
-        EpaiseurPapierBT: "",
-        EpaisseurPapierCanauxBT: "",
+      id:undefined,
+      materiauMT:"",
+      conducteurMT:"",
+      materiauBT:"",
+      conducteurBT:"",
+  
       },
       e1:1
     };
@@ -284,164 +135,17 @@ export default {
     updateprojet() {
       const projets = {
         id: undefined,
-        materiau: this.projet.materiau,
-        conducteur: this.projet.conducteur,
-        materiauSec: this.projet.materiauSec,
-        conducteurSec: this.projet.conducteurSec,
-        // primaire meplat
-         etageMT: this.projet.etageMT,
-        saillieMT: this.projet.saillieMT,
-        hbrin1MT: this.projet.hbrin1MT,
-        hbrin2MT: this.projet.hbrin2MT,
-        nbBrin1MT: this.projet.nbBrin1MT,
-        nbBrin2MT: this.projet.nbBrin2MT,
-        scu1: this.projet.scu1,
-        j1: this.projet.j1,
-        nbcoucheMT: this.projet.nbcoucheMT,
-        spCoucheMT: this.projet.spCoucheMT,
-        e1ax: this.projet.e1ax,
-        e1r: this.projet.e1r,
-        rigiditePapierMT: this.projet.rigiditePapierMT,
-        ep1PapierMT: this.projet.ep1PapierMT,
-        nbrPapierMt: this.projet.nbrPapierMt,
-        nbrPapier: this.projet.nbrPapier,
-        typeCanaux: this.projet.typeCanaux,
-        canauxMT: this.projet.canauxMT,
-        lgCales: this.projet.lgCales,
-        canauxEp1Papier: this.projet.canauxEp1Papier,
-        canauxNbrPapier: this.projet.canauxNbrPapier,
-        Hspire: this.projet.Hspire,
-        HSFS: this.projet.HSFS,
-        HFS: this.projet.HFS,
-        HbobineBt: this.projet.HbobineBt,
-        collierBT: this.projet.collierBT,
-        collierBT2: this.projet.collierBT2,
-        CMBT: this.projet.CMBT,
-        DintMT: this.projet.DintMT,
-        BintMT: this.projet.BintMT,
-        EpxMT: this.projet.EpxMT,
-        EpyMT: this.projet.EpyMT,
-        DextMT: this.projet.DextMT,
-        BextMT: this.projet.BextMT,
-        poidMT: this.projet.poidMT,
-        majPoid: this.projet.majPoid,
-        // feuillard
-               Hfeuillard: this.projet.Hfeuillard,
-        epFeuil1: this.projet.epFeuil1,
-        epFeuil2: this.projet.epFeuil2,
-        epFeuillard: this.projet.epFeuillard,
-        ep2Papier: this.projet.ep2Papier,
-        nbrPap2: this.projet.nbrPap2,
-        ePap: this.projet.ePap,
-        epFeuilPap: this.projet.epFeuilPap,
-        EpPapier: this.projet.EpPapier,
-        EpCylindre: this.projet.EpCylindre,
-        Epbarre: this.projet.Epbarre,
-        designationBarre: this.projet.designationBarre,
-        epaisseurBarre: this.projet.epaisseurBarre,
-        largeurBarre: this.projet.largeurBarre,
-        Sbarre: this.projet.Sbarre,
-        Jbarre: this.projet.Jbarre,
-        // rondp
-         scu1d: this.projet.scu1d,
-        J1D: this.projet.J1D,
-        filobtenueNue: this.projet.filobtenueNue,
-        filobtenueIsoler: this.projet.filobtenueIsoler,
-        choix: this.projet.choix,
-        brinParallele: this.projet.brinParallele,
-        SpchB: this.projet.SpchB,
-        NchB: this.projet.NchB,
-        SpchA: this.projet.SpchA,
-        NchA: this.projet.NchA,
-        HCondMt: this.projet.HCondMt,
-        DistanceBTMT: this.projet.DistanceBTMT,
-        HCollier: this.projet.HCollier,
-        EpfeuillePapier: this.projet.EpfeuillePapier,
-        EpaiseurPapier: this.projet.EpaiseurPapier,
-        EpaisseurPapierCanaux: this.projet.EpaisseurPapierCanaux,
-        N1cmax: this.projet.N1cmax,
-        // feuiilar sec
-          ep1PapierBT: this.projet.ep1PapierBT,
-        nbrPapierBT: this.projet.nbrPapierBT,
-        typeCanauxBT: this.projet.typeCanauxBT,
-        canauxBT: this.projet.canauxBT,
-        lgCalesBT: this.projet.lgCalesBT,
-        CMBTSec: this.projet.CMBTSec,
-        DintBT: this.projet.DintBT,
-        BintBT:this.projet.BintBT,
-        EpxBT: this.projet.EpxBT,
-        EpyBT: this.projet.EpyBT,
-        DextBT: this.projet.DextBT,
-        BextBT: this.projet.BextBT,
-        poidBT: this.projet.poidBT,
-        majPoidBT: this.projet.majPoidBT,
-        HfeuillardBT: this.projet.HfeuillardBT,
-        HbobineBtSec: this.projet.HbobineBtSec,
-        epFeuil1BT: this.projet.epFeuil1BT,
-        epFeuil2BT: this.projet.epFeuil2BT,
-        epFeuillardBT: this.projet.epFeuillardBT,
-        ep2PapierBT: this.projet.ep2PapierBT,
-        nbrPap2BT: this.projet.nbrPap2BT,
-        ePapBT: this.projet.ePapBT,
-        epFeuilPapBT: this.projet.epFeuilPapBT,
-        EpPapierBT: this.projet.EpPapierBT,
-        EpCylindreBT: this.projet.EpCylindreBT,
-        EpbarreBT: this.projet.EpbarreBT,
-        epaisseurBarreBT: this.projet.epaisseurBarreBT,
-        largeurBarreBT: this.projet.largeurBarreBT,
-        SbarreBT: this.projet.SbarreBT,
-        JbarreBT: this.projet.JbarreBT,
-        scu2: this.projet.scu2,
-        j2: this.projet.j2,
-        // meplat sec
-         etageBT: this.projet.etageBT,
-        saillieBT: this.projet.saillieBT,
-        hbrin1BT: this.projet.hbrin1BT,
-        hbrin2BT: this.projet.hbrin2BT,
-        nbBrin1BT: this.projet.nbBrin1BT,
-        nbBrin2BT: this.projet.nbBrin2BT,
-        nbcoucheBT: this.projet.nbcoucheBT,
-        spCoucheBT: this.projet.spCoucheBT,
-        e2ax: this.projet.e2ax,
-        e2r: this.projet.e2r,
-        rigiditePapierBT: this.projet.rigiditePapierBT,
-        canauxNbrPapierBT: this.projet.canauxNbrPapierBT,
-        HspireBT: this.projet.HspireBT,
-        HSFSBT: this.projet.HSFSBT,
-        HFSBT: this.projet.HFSBT,
-        canauxEp1PapierBT: this.projet.canauxEp1PapierBT,
-        collierBTSec: this.projet.collierBTSec,
-        collierBT2Sec: this.projet.collierBT2Sec,
-        N2cmax: this.projet.N2cmax,
-        scu2d: this.projet.scu2d,
-        J2D: this.projet.J2D,
-        filobtenueNueBT: this.projet.filobtenueNueBT,
-        filobtenueIsolerBT: this.projet.filobtenueIsolerBT,
-        choixBT: this.projet.choixBT,
-        brinParalleleBT: this.projet.brinParalleleBT,
-        SpchBBT: this.projet.SpchBBT,
-        NchBBT: this.projet.NchBBT,
-        SpchABT: this.projet.SpchABT,
-        NchABT: this.projet.NchABT,
-        HCondBt: this.projet.HCondBt,
-        DistanceBTMTSec: this.projet.DistanceBTMTSec,
-        HCollierBT: this.projet.HCollier,
-        EpfeuillePapierBT: this.projet.EpfeuillePapierBT,
-        EpaiseurPapierBT: this.projet.EpaiseurPapierBT,
-        EpaisseurPapierCanauxBT: this.projet.EpaisseurPapierCanauxBT,
-        
-        
-      
+        materiauMT: this.projet.materiauMT,
+        conducteurMT: this.projet.conducteurMT,
+        materiauBT: this.projet.materiauBT,
+        conducteurBT: this.projet.conducteurBT,
         
       };
-      axios.put('bobine/update/'+this.$route.params.id, projets).then(
+      axios.put('donnebobine/update/'+this.$route.params.id, projets).then(
         (response) => (this.id = response.data.id)
         
       );
-       axios.put('bobinesec/update/'+this.$route.params.id, projets).then(
-        (response) => (this.id = response.data.id)
-        
-      );
+
  this.$router.push('/projet/gradin/'+this.$route.params.id);    },
   
   },

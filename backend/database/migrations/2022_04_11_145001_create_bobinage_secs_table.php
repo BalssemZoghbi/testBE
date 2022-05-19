@@ -15,8 +15,8 @@ class CreateBobinageSecsTable extends Migration
     {
         Schema::create('bobinage_secs', function (Blueprint $table) {
             $table->id();
-            $table->enum('materiauSec',['cuivre','aluminium'])->nullable();
-            $table->enum('conducteurSec',['meplat guipé','Rond emaille','feuillard'])->nullable();
+            $table->string('materiauSec')->nullable();
+            $table->string('conducteurSec')->nullable();
             $table->enum('etageBT',['1','2'])->nullable();
             $table->float('saillieBT')->nullable();
             $table->float('hbrin1BT')->nullable();

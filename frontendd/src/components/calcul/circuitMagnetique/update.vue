@@ -1,7 +1,9 @@
 <template>
   <div>
-    <NavDash :conducteur="projet.conducteur" :conducteurSec="projet.conducteurSec"/>
-    <Loading v-if="spinner" />
+    <NavDash
+      :conducteurMT="projet.conducteurMT"
+      :conducteurBT="projet.conducteurBT"
+    />    <Loading v-if="spinner" />
     <div class="body">
       <v-stepper v-model="e1" vertical>
            

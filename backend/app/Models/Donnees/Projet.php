@@ -4,6 +4,7 @@ namespace App\Models\Donnees;
 
 use App\Models\Donnees\bobinage\Bobinage;
 use App\Models\Donnees\bobinage\BobinageSec;
+use App\Models\Donnees\bobinage\DonneBobine;
 use App\Models\Donnees\electrique\Electrique;
 use App\Models\Donnees\garantie\Garantie;
 use App\Models\Gradin;
@@ -41,6 +42,7 @@ class Projet extends Model
     'volt_spires_id',
     'pcc_uccs_id',
     'circuitmagnetiques_id',
+    'donne_bobines_id',
     ];
 
      public function user(){
@@ -77,5 +79,9 @@ class Projet extends Model
     public function modele()
     {
         return $this->hasOne(Modele::class);
+    }
+    public function donnebobin()
+    {
+        return $this->belongsTo(DonneBobine::class);
     }
 }

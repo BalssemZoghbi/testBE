@@ -2,8 +2,8 @@
   <div>
     <navbarUpdate />
     <NavDash
-      :conducteur="projet.conducteur"
-      :conducteurSec="projet.conducteurSec"
+      :conducteurMT="projet.conducteurMT"
+      :conducteurBT="projet.conducteurBT"
     />
     <div class="body">
       <v-stepper v-model="e1" vertical>
@@ -19,11 +19,11 @@
                   <div style="margin-bottom: 2%">
                     <v-chip
                       >materiau :
-                      {{ projet.materiauSec }}
+                      {{ projet.materiauBT }}
                     </v-chip>
                     <v-chip style="margin-left: 2%"
                       >conducteur :
-                      {{ projet.conducteurSec }}
+                      {{ projet.conducteurBT }}
                     </v-chip>
                   </div>
                   <div class="div">
@@ -338,13 +338,13 @@ export default {
     return {
       barre: [],
       emaille: [],
-      conducteur: ["meplat guipé", "Rond emaille", "feuillard"],
-      materiau: ["cuivre", "aluminium"],
+      conducteurMT: ["meplat guipé", "Rond emaille", "feuillard"],
+      materiauMT: ["cuivre", "aluminium"],
       typeCanaux: ["complet", "lune"],
       projet: {
         id: undefined,
-        materiauSec: "",
-        conducteurSec: "",
+        materiauBT: "",
+        conducteurBT: "",
 
         scu2: "",
         j2: "",
@@ -392,8 +392,8 @@ export default {
     updateprojet() {
       const projets = {
         id: undefined,
-        materiauSec: this.projet.materiauSec,
-        conducteurSec: this.projet.conducteurSec,
+        materiauBT: this.projet.materiauBT,
+        conducteurBT: this.projet.conducteurBT,
         scu2: this.projet.scu2,
         j2: this.projet.j2,
         nbcoucheBT: this.projet.nbcoucheBT,
@@ -436,20 +436,13 @@ export default {
         .then(
           (response) => ((this.id = response.data.id), console.log(projets))
         );
-      if (this.projet.conducteur == "Rond emaille") {
-        this.$router.push(
-          "/projet/bobinagePrimaireRond/" + this.$route.params.id
-        );
-      } else if (this.projet.conducteur == "feuillard") {
-        this.$router.push(
-          "/projet/bobinagePrimaireFeuillard/" + this.$route.params.id
-        );
-      } else if (this.projet.conducteur == "meplat guipé") {
-        this.$router.push(
-          "/projet/bobinagePrimaireMeplat/" + this.$route.params.id
-        );
-      }
-    },
+  if(this.projet.conducteurMT=="Rond emaille"){
+      this.$router.push("/projet/bobinagePrimaireRond/"+this.$route.params.id);
+    }else if(this.projet.conducteurMT=="feuillard"){
+      this.$router.push("/projet/bobinagePrimaireFeuillard/"+this.$route.params.id);
+    }else if(this.projet.conducteurMT=="meplat guipé"){
+      this.$router.push("/projet/bobinagePrimaireMeplat/"+this.$route.params.id);
+    }  },
   },
   async mounted() {
     const result = await axios.get("projets/" + this.$route.params.id);
@@ -576,9 +569,9 @@ export default {
     },
     poidBT() {
       let coefPoid = 0;
-      if (this.projet.materiauSec == "cuivre") {
+      if (this.projet.materiauBT == "cuivre") {
         coefPoid = 8.9;
-      } else if (this.projet.materiauSec == "aluminium") {
+      } else if (this.projet.materiauBT == "aluminium") {
         coefPoid = 2.7;
       }
       return (

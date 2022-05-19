@@ -2,8 +2,8 @@
   <div>
     <navbarUpdate />
     <NavDash
-      :conducteur="projet.conducteur"
-      :conducteurSec="projet.conducteurSec"
+      :conducteurMT="projet.conducteurMT"
+      :conducteurBT="projet.conducteurBT"
     />
     <div class="body">
       <v-stepper v-model="e1" vertical>
@@ -19,11 +19,11 @@
                   <div style="margin-bottom: 2%">
                     <v-chip
                       >materiau :
-                      {{ projet.materiau }}
+                      {{ projet.materiauMT }}
                     </v-chip>
                     <v-chip style="margin-left: 2%"
                       >conducteur :
-                      {{ projet.conducteur }}
+                      {{ projet.conducteurMT }}
                     </v-chip>
                   </div>
                   <div class="div">
@@ -327,13 +327,13 @@ export default {
     return {
       barre: [],
       emaille: [],
-      conducteur: ["meplat guipé", "Rond emaille", "feuillard"],
-      materiau: ["cuivre", "aluminium"],
+      conducteurMT: ["meplat guipé", "Rond emaille", "feuillard"],
+      materiauMT: ["cuivre", "aluminium"],
       typeCanaux: ["complet", "lune"],
       projet: {
         id: undefined,
-        materiau: "",
-        conducteur: "",
+        materiauMT: "",
+        conducteurMT: "",
         scu1: "",
         j1: "",
         nbcoucheMT: "",
@@ -379,8 +379,8 @@ export default {
     updateprojet() {
       const projets = {
         id: undefined,
-        materiau: this.projet.materiau,
-        conducteur: this.projet.conducteur,
+        materiauMT: this.projet.materiauMT,
+        conducteurMT: this.projet.conducteurMT,
         scu1: this.projet.scu1,
         j1: this.projet.j1,
         nbcoucheMT: this.projet.nbcoucheMT,
@@ -547,9 +547,9 @@ export default {
     },
     poidMT() {
       let coefPoid = 0;
-      if (this.projet.materiau == "cuivre") {
+      if (this.projet.materiauMT == "cuivre") {
         coefPoid = 8.9;
-      } else if (this.projet.materiau == "aluminium") {
+      } else if (this.projet.materiauMT == "aluminium") {
         coefPoid = 2.7;
       }
       return (

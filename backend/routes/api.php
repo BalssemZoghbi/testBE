@@ -3,6 +3,7 @@
 use App\Http\Controllers\Calcul\Bobinage\BobinageController;
 use App\Http\Controllers\Calcul\Bobinage\BobinageSecController;
 use App\Http\Controllers\Calcul\Bobinage\BobinageStatiqueController;
+use App\Http\Controllers\Calcul\Bobinage\DonneBobineController;
 use App\Http\Controllers\Calcul\CircuitmagnetiqueController;
 use App\Http\Controllers\Calcul\GradinController;
 use App\Http\Controllers\Calcul\PccUccController;
@@ -106,6 +107,7 @@ Route::get('/bobinesec/{id}',[BobinageSecController::class ,'getOneBobineS']);
 Route::put('pucc/update/{id}',[PccUccController::class ,'updatePUCC']);
 
 Route::put('/update36/{id}',[GarantieController::class ,'update36']);
+Route::put('/donnebobine/update/{id}',[DonneBobineController::class ,'update']);
 Route::put('/bobine/updatecond/{id}',[BobinageController::class ,'updateBobine']);
 Route::put('/bobine/update/{id}',[BobinageController::class ,'updateBobinage']);
 Route::put('/bobinesec/update/{id}',[BobinageSecController::class ,'updateBobinage']);

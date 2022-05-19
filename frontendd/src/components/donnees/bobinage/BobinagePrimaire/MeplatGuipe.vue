@@ -1,8 +1,8 @@
 <template>
   <div>
     <NavDash
-      :conducteur="projet.conducteur"
-      :conducteurSec="projet.conducteurSec"
+      :conducteurMT="projet.conducteurMT"
+      :conducteurBT="projet.conducteurBT"
     />
     <div class="body">
       <v-stepper v-model="e1" vertical>
@@ -331,14 +331,14 @@ export default {
       barre: [],
       hbrin: [],
       saillie: [],
-      conducteur: ["meplat guipé", "Rond emaille", "feuillard"],
-      materiau: ["cuivre", "aluminium"],
+      conducteurMT: ["meplat guipé", "Rond emaille", "feuillard"],
+      materiauMT: ["cuivre", "aluminium"],
       etage: ["1", "2"],
       typeCanaux: ["complet", "lune"],
       projet: {
         id: undefined,
-        materiau: "",
-        conducteur: "",
+        materiauMT: "",
+        conducteurMT: "",
         etageMT: "",
         saillieMT: "",
         hbrin1MT: "",
@@ -383,8 +383,8 @@ export default {
     updateprojet() {
       const projets = {
         id: undefined,
-        materiau: this.projet.materiau,
-        conducteur: this.projet.conducteur,
+        materiauMT: this.projet.materiauMT,
+        conducteurMT: this.projet.conducteurMT,
         etageMT: this.projet.etageMT,
         saillieMT: this.projet.saillieMT,
         hbrin1MT: this.projet.hbrin1MT,
@@ -497,9 +497,9 @@ export default {
     },
     poid() {
       let coefPoid = 0;
-      if (this.projet.materiau == "cuivre") {
+      if (this.projet.materiauMT == "cuivre") {
         coefPoid = 8.9;
-      } else if (this.projet.materiau == "aluminium") {
+      } else if (this.projet.materiauMT == "aluminium") {
         coefPoid = 2.7;
       }
       return (

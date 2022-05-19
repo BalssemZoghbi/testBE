@@ -282,7 +282,10 @@ public function EpxMt($typecanaux,$nbreCoucheMt,$fileisole,$epaisseurPapier,$can
 public function dintMt($dext,$distance){
     return ($distance*2)+$dext;
 }
-public function bintMt($bext,$distance){
+public function bintMt($bext,$distance,$epbarre,$conducteurmt){
+    if ($conducteurmt=="feuillard"){
+        return ($distance*2)+$bext+$epbarre;
+     }
     return ($distance*2)+$bext;
 }
 public function dextMt($dint,$epxmt){
@@ -306,15 +309,15 @@ public function BextMt($bint,$epy){
             ->join('electriques', 'electriques.id', '=', 'projets.electrique_id')
             ->join('volt_Spires', 'volt_Spires.id', '=', 'projets.volt_spires_id')
             ->join('gradins', 'gradins.id', '=', 'projets.gradin_id')
+            ->join('donne_bobines', 'donne_bobines.id', '=', 'projets.donne_bobines_id')
             ->where('projets.id',$id)
-            ->select('bobinage_secs.*','bobinage_secs.id as bobine_id','volt_Spires.N2c','bobinages.HbobineBt','volt_Spires.Vsp','volt_Spires.spire','gradins.diamNominale','gradins.CMBT','electriques.secondaireIPhase', 'projets.*')
+            ->select('bobinage_secs.*','bobinage_secs.id as bobine_id','donne_bobines.materiauBT','bobinages.epaisseurBarre','donne_bobines.conducteurBT','donne_bobines.conducteurMT','volt_Spires.N2c','bobinages.HbobineBt','volt_Spires.Vsp','volt_Spires.spire','gradins.diamNominale','gradins.CMBT','electriques.secondaireIPhase', 'projets.*')
             ->get()->first();
             $Bobinage=BobinageSec::FindOrFail($projet->bobine_id );
 
-            $su1d=$this->su1d($request->conducteurSec,$projet->secondaireIPhase,$request->J2D);
+            $su1d=$this->su1d($request->conducteurBT,$projet->secondaireIPhase,$request->J2D);
 
-            if($request->conducteurSec=='Rond emaille'){
-                // dd($request->conducteurSec);
+            if($projet->conducteurBT=='Rond emaille'){
                 $D1d=$this->D1d($su1d,$request->brinParalleleBT);
                 $filobtenue=$this->filobtenue($D1d);
                 $Designation=$filobtenue->Designation;
@@ -324,9 +327,9 @@ public function BextMt($bint,$epy){
                 $Isole=0;
             }
             $epFeuillard=$this->epFeuillard($request->epFeuil1BT,$request->epFeuil2BT);
-            $scu2=$this->Scu2($request->conducteurSec,$request->hbrin1BT, $request->hbrin2BT,$request->nbBrin1BT, $request->nbBrin2BT, $request->etageBT, $request->saillieBT,$request->HfeuillardBT,$epFeuillard,$Designation,$request->brinParalleleBT);
+            $scu2=$this->Scu2($projet->conducteurBT,$request->hbrin1BT, $request->hbrin2BT,$request->nbBrin1BT, $request->nbBrin2BT, $request->etageBT, $request->saillieBT,$request->HfeuillardBT,$epFeuillard,$Designation,$request->brinParalleleBT);
             $j2=$this->j2($projet->secondaireIPhase, $scu2);
-            $spCouche=$this->spCouche($request->conducteurSec,$projet->N2c,$request->nbcoucheBT);
+            $spCouche=$this->spCouche($projet->conducteurBT,$projet->N2c,$request->nbcoucheBT);
             $hSpire=$this->hSpire($request->hbrin1BT,$request->e2ax,$request->nbBrin1BT,$request->hbrin2BT,$request->nbBrin2BT);
             $hsfs=$this->hsfs($hSpire,$spCouche,$request->etageBT,$request->hbrin1BT,$request->hbrin2BT,$request->e2ax);
             $hfs=$this->hfs($hSpire,$spCouche,$request->etageBT,$request->hbrin1BT,$request->hbrin2BT,$request->e2ax);
@@ -338,7 +341,7 @@ public function BextMt($bint,$epy){
             $epyMeplat=$this->Epy($request->saillieBT,$request->e2r,$request->etageBT,$request->nbcoucheBT,$request->canauxBt,$request->lgCalesBT,$request->nbPapierBT,$request->ep1PapierBT);
             $dext=$this->Dext($DintBint,$epx);
             $bext=$this->Bext($DintBint,$epyMeplat);
-            $poid=$this->Poid($request->materiauSec,$projet->N2c,$scu2,$DintBint,$epx,$request->majPoidBT);
+            $poid=$this->Poid($projet->materiauBT,$projet->N2c,$scu2,$DintBint,$epx,$request->majPoidBT);
 
             $barre=$this->calculBarre($request->EpbarreBT);
             // dd($barre);
@@ -349,27 +352,27 @@ public function BextMt($bint,$epy){
             $epPapier=$this->epPapier($epFeuilpap,$request->nbPapierBT);
 
             if($barre!=null){
-            $Sbarre=$this->Sbarre($request->conducteurSec,$barre->epaisseur,$barre->largeur);
-            $Jbarre=$this->Jbarre($request->conducteurSec,$projet->secondaireIPhase,$Sbarre);
+            $Sbarre=$this->Sbarre($projet->conducteurBT,$barre->epaisseur,$barre->largeur);
+            $Jbarre=$this->Jbarre($projet->conducteurBT,$projet->secondaireIPhase,$Sbarre);
             $dextfeui=$this->Dext($DintBint,$epxfeui);
             $Bextfeui=$this->Bextfeui($DintBint,$epxfeui,$barre->epaisseur);
-            $PoidFeui=$this->PoidFeui($request->materiauSec,$dextfeui,$DintBint,$DintBint,$request->majPoidBT,$Bextfeui,$projet->N2c,$scu2);
+            $PoidFeui=$this->PoidFeui($projet->materiauBT,$dextfeui,$DintBint,$DintBint,$request->majPoidBT,$Bextfeui,$projet->N2c,$scu2);
         }
         $N1cmax=$this->N1cmax($projet->spire);
 
-        $spchb=$this->spchb($request->conducteurSec,$N1cmax,$request->nbcoucheBT);
+        $spchb=$this->spchb($projet->conducteurBT,$N1cmax,$request->nbcoucheBT);
         $ncha=$this->ncha($request->nbcoucheBT,$spchb,$N1cmax);
         $nchb=$this->nchb($request->nbcoucheBT,$ncha);
         $spcha=$this->spcha($spchb);
         $HcondMt=$this->hcondMt($Isole,$spchb,$request->brinParalleleBT);
 
         $Hcollier=$this->Hcollier($projet->HbobineBt,$HcondMt);
-        $nbrPapierMT=$this->NbrePapier($request->conducteurSec,$request->rigiditePapierBT,$spchb,$projet->Vsp,$Isole,$Designation,$request->EpfeuillePapierBT);
+        $nbrPapierMT=$this->NbrePapier($projet->conducteurBT,$request->rigiditePapierBT,$spchb,$projet->Vsp,$Isole,$Designation,$request->EpfeuillePapierBT);
       $epaisseurPapier=$this->epaisseurPapier($request->EpfeuillePapierBT, $nbrPapierMT);
 
         $EpxMt=$this->EpxMt($request->typeCanauxBT,$request->nbcoucheBT,$Isole,$epaisseurPapier,$request->canauxMT,$request->lgCalesBT,$request->EpaisseurPapierCanauxBT);
        $dintMt=$this->dintMt($projet->DextBT,$request->DistanceBTMTSec);
-        $bintMt=$this->bintMt($projet->BextBT,$request->DistanceBTMTSec);
+        $bintMt=$this->bintMt($projet->BextBT,$request->DistanceBTMTSec,$projet->epaisseurBarre,$projet->conducteurMT);
 if($request->typeCanauxBT=="complet"){
 
             $epy=$EpxMt;
@@ -379,11 +382,11 @@ if($request->typeCanauxBT=="complet"){
         }
         $dextMt=$this->dextMt($dintMt,$EpxMt);
         $BextMt=$this->BextMt($bintMt,$epy);
-        $poidEmaille=$this->poidEmaille($request->materiauSec,$dextMt,$dintMt,$dintMt,$request->majPoidBT,$dextMt,$N1cmax,$scu2);
-          if($request->conducteurSec=='meplat guipé'){
+        $poidEmaille=$this->poidEmaille($projet->materiauBT,$dextMt,$dintMt,$dintMt,$request->majPoidBT,$dextMt,$N1cmax,$scu2);
+          if($projet->conducteurBT=='meplat guipé'){
                 $Bobinage->update([
-                        'materiauSec'=> $request->materiauSec,
-                        'conducteurSec'=> $request->conducteurSec,
+                        'materiauSec'=> $projet->materiauBT,
+                        'conducteurSec'=> $projet->conducteurBT,
                         'etageBT'=> $request->etageBT,
                         'saillieBT'=> $request->saillieBT,
                         'hbrin1BT'=> $request->hbrin1BT,
@@ -420,11 +423,11 @@ if($request->typeCanauxBT=="complet"){
                         'majPoidBT'=>$request->majPoidBT,
                         'HbobineBtSec'=>$hbobt,
                         ]);
-            }else if($request->conducteurSec=='feuillard'){
+            }else if($projet->conducteurBT=='feuillard'){
 
                 $Bobinage->update([
-                    'materiauSec'=> $request->materiauSec,
-                    'conducteurSec'=> $request->conducteurSec,
+                    'materiauSec'=> $projet->materiauBT,
+                    'conducteurSec'=> $projet->conducteurBT,
                     'scu2'=>$scu2 ,
                     'j2'=>$j2 ,
                     'ep1PapierBT'=>$request->ep1PapierBT ,
@@ -462,11 +465,11 @@ if($request->typeCanauxBT=="complet"){
                     'SbarreBT'=>$Sbarre ,
                     'JbarreBT'=>$Jbarre ,
                     ]);
-            }else if($request->conducteurSec=='Rond emaille'){
+            }else if($projet->conducteurBT=='Rond emaille'){
 
                 $Bobinage->update([
-                    'materiauSec'=> $request->materiauSec,
-                    'conducteurSec'=> $request->conducteurSec,
+                    'materiauSec'=> $projet->materiauBT,
+                    'conducteurSec'=> $projet->conducteurBT,
                     'scu2'=>$scu2 ,
                     'j2'=>$j2 ,
                     'nbrPapierBT'=>$nbrPapierMT ,
@@ -513,89 +516,5 @@ if($request->typeCanauxBT=="complet"){
             $Bobinage->delete();
             return response()->json('deleted');
         }
-        public function updateBobine($id,Request $request){
-            DB::table('projets')
-            ->join('bobinages', 'bobinages.id', '=', 'projets.bobinage_id')
-            ->join('bobinage_secs', 'bobinage_secs.id', '=', 'projets.bobinage_secs_id')
-            ->where('projets.id',$id)
-            ->select()
-            ->get()->first();
-            $Bobinage = BobinageSec::FindOrFail($id);
-            $Bobinage->update([
-                'materiauSec'=> $request->materiauSec,
-                'conducteurSec'=> $request->conducteurSec,
-                'etageBT'=>null,
-                'saillieBT'=>null,
-                'hbrin1BT'=>null,
-                'hbrin2BT'=>null,
-                'nbBrin1BT'=>null,
-                'nbBrin2BT'=>null,
-                'scu2'=>null,
-                'j2'=>null,
-                'nbcoucheBT'=>null,
-                'spCoucheBT'=>null,
-                'e2ax'=>null,
-                'e2r'=>null,
-                'rigiditePapierBT'=>null,
-                'ep1PapierBT'=>null,
-                'nbrPapierBT'=>null,
-                'typeCanauxBT'=>null,
-                'canauxBT'=>null,
-                'lgCalesBT'=>null,
-                'canauxEp1PapierBT'=>null,
-                'canauxNbrPapierBT'=>null,
-                'HspireBT'=>null,
-                'HSFSBT'=>null,
-                'HFSBT'=>null,
-                'collierBTSec'=>null,
-                'collierBT2Sec'=>null,
-                'CMBTSec'=>null,
-                'DintBT'=>null,
-                'BintBT'=>null,
-                'EpxBT'=>null,
-                'EpyBT'=>null,
-                'DextBT'=>null,
-                'BextBT'=>null,
-                'poidBT'=>null,
-                'majPoidBT'=>null,
-                'HfeuillardBT'=>null,
-                'HbobineBtSec'=>null,
-                'epFeuil1BT'=>null,
-                'epFeuil2BT'=>null,
-                'epFeuillardBT'=>null,
-                'ep2PapierBT'=>null,
-                'nbrPap2BT'=>null,
-                'ePapBT'=>null,
-                'epFeuilPapBT'=>null,
-                'nbrPap1BT'=>null,
-                'EpPapierBT'=>null,
-                'EpCylindreBT'=>null,
-                'EpbarreBT'=>null,
-                'epaisseurBarreBT'=>null,
-                'largeurBarreBT'=>null,
-                'SbarreBT'=>null,
-                'JbarreBT'=>null,
-                'scu2d'=>null,
-                'J2D'=>null,
-                'D2d'=>null,
-                'filobtenueNueBT'=>null,
-                'filobtenueIsolerBT'=>null,
-                'choixBT'=>null,
-                'brinParalleleBT'=>null,
-                'nbCoucheBT'=>null,
-                'SpchBBT'=>null,
-                'NchBBT'=>null,
-                'SpchABT'=>null,
-                'NchABT'=>null,
-                'HCondBt'=>null,
-                'HCollierBT'=>null,
-                'EpfeuillePapierBT'=>null,
-                'nbrPapierBT'=>null,
-                'EpaiseurPapierBT'=>null,
-                'N2cmax'=>null,
-                'DistanceBTMTSec'=>null,
-                'EpaisseurPapierCanauxBT'=>null,
-            ]);
-            return response()->json($Bobinage);
-        }
+
 }

@@ -1,8 +1,8 @@
 <template>
   <div>
     <NavDash
-      :conducteur="projet.conducteur"
-      :conducteurSec="projet.conducteurSec"
+      :conducteurMT="projet.conducteurMT"
+      :conducteurBT="projet.conducteurBT"
     />
     <div class="body">
       <v-stepper v-model="e1" vertical>
@@ -18,11 +18,11 @@
                   <div style="margin-bottom: 2%">
                     <v-chip
                       >materiau :
-                      {{ projet.materiau }}
+                      {{ projet.materiauMT }}
                     </v-chip>
                     <v-chip style="margin-left: 1%"
                       >conducteur :
-                      {{ projet.conducteur }}
+                      {{ projet.conducteurMT }}
                     </v-chip>
                     <v-chip style="margin-left: 1%"
                       >N1c :
@@ -339,14 +339,14 @@ export default {
   data() {
     return {
       barre: [],
-      conducteur: ["meplat guipé", "Rond emaille", "feuillard"],
-      materiau: ["cuivre", "aluminium"],
+      conducteurMT: ["meplat guipé", "Rond emaille", "feuillard"],
+      materiauMT: ["cuivre", "aluminium"],
       etage: ["1", "2"],
       typeCanaux: ["complet", "lune"],
       projet: {
         id: undefined,
-        materiau: "",
-        conducteur: "",
+        materiauMT: "",
+        conducteurMT: "",
         scu1: "",
         j1: "",
         ep1PapierMT: "",
@@ -390,8 +390,8 @@ export default {
     updateprojet() {
       const projets = {
         id: undefined,
-        materiau: this.projet.materiau,
-        conducteur: this.projet.conducteur,
+        materiauMT: this.projet.materiauMT,
+        conducteurMT: this.projet.conducteurMT,
         scu1: this.projet.scu1,
         j1: this.projet.j1,
         ep1PapierMT: this.projet.ep1PapierMT,
@@ -434,11 +434,11 @@ export default {
           (response) => ((this.id = response.data.id), console.log(projets))
         );
 
-      if(this.projet.conducteurSec=="Rond emaille"){
+      if(this.projet.conducteurBT=="Rond emaille"){
       this.$router.push("/bobinageSecondaireRond/"+this.$route.params.id);
-    }else if(this.projet.conducteurSec=="feuillard"){
+    }else if(this.projet.conducteurBT=="feuillard"){
       this.$router.push("/bobinageSecondaireFeuillard/"+this.$route.params.id);
-    }else if(this.projet.conducteurSec=="meplat guipé"){
+    }else if(this.projet.conducteurBT=="meplat guipé"){
       this.$router.push("/bobinageSecondaireMeplat/"+this.$route.params.id);
     }
     }
@@ -512,9 +512,9 @@ export default {
 
     poidMT(){ 
         let coefPoid=0;
-         if(this.projet.materiau=='cuivre'){
+         if(this.projet.materiauMT=='cuivre'){
                 coefPoid=8.9;
-            }else if(this.projet.materiau=='aluminium'){
+            }else if(this.projet.materiauMT=='aluminium'){
                 coefPoid=2.7;
             }
             return Math.pow(10, -6)*(coefPoid*parseFloat(this.projet.N1c)*parseFloat(this.projet.scu1)*Math.PI*3)*((parseFloat(this.DintMT)+parseFloat(this.DintMT)+parseFloat(this.DextMT)+parseFloat(this.BextMT))/4)*(100+parseFloat(this.projet.majPoid))/100;

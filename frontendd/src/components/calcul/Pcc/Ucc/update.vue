@@ -1,7 +1,10 @@
 <template>
   <div>
-  <NavDash :conducteur="projet.conducteur" :conducteurSec="projet.conducteurSec"/>
-    <div class="body">
+    <NavDash
+      :conducteurMT="projet.conducteurMT"
+      :conducteurBT="projet.conducteurBT"
+    />
+        <div class="body">
       <v-stepper v-model="e1"  vertical>
         <Loading v-if="spinner" style="margin-right: -52%;"/>
       <v-stepper-step step="">
