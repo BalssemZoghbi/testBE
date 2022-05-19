@@ -145,7 +145,7 @@
       small
       color="red"
     >
-      <v-icon dark v-on:click="deleteutilisateur(item.id)">
+      <v-icon dark v-on:click="deleteutilisateur(item.id)" :disabled="disable">
         mdi-delete
       </v-icon>
     </v-btn>
@@ -198,6 +198,7 @@ export default {
   },
   data: () => ({
     spinner:true,
+    disable:false,
     types:['employe','admin','En Attente'],
     tab: null,
         itemstab: [
@@ -215,6 +216,7 @@ export default {
       { text: "Operation", value: "actions" , sortable: false},
      
     ],
+    userloc:'',
     users: [],
     editedIndex: -1,
     editedItem: {
@@ -235,10 +237,35 @@ export default {
 
     },
   }),
-    async created() {
+     async created() {
+    //      let user =  JSON.stringify(localStorage.getItem('user'));
+    //      console.log(user.email);
+    //      this.disable=false;
+    // if (user) {
+    //    this.disable=true;
+    // }
+    
+      const response=await axios.get('user');
+    this.$store.dispatch('user',response.data);
+    
+    let vm=this;
+    vm.disable=false;
+  let user=response.data;
+
+    if(user){
+       console.log(user);
+      vm.disable=false;
+    }
+    else{
+      vm.disable=true
+    }
     this.getuser();
   },
-  computed: {
+  
+  
+  computed: {  // if(response.status===200){
+  //   vm.disable=true;
+  // }
     formTitle() {
       return this.editedIndex === -1
         ? "Ajouter un nouveau utilisateur"
@@ -260,7 +287,7 @@ export default {
     await axios.get("/users/get").then((resp) => {
         this.users = resp.data;
         this.spinner=false;
-        console.log(resp.data);
+        // console.log(resp.data);
       });
     },
          deleteutilisateur(id) {
@@ -324,17 +351,22 @@ export default {
   // },
  
 
-  // mounted() {
-  //   axios.get("/users").then((res) => {
-  //     this.users = res.data.data;
-  //     console.log(res.data);
-  //   });
-  //   axios.post("/user/creat").then((res) => {
-  //     this.users = res.data.data;
-  //     console.log(res.data);
-  //   });
+ async mounted() {
+   
+    // console.log(JSON.stringify(localStorage.getItem("user")));
+    //  let userloc = localStorage.getItem("user");
+    // if (userloc) {
+    //    this.disable=true;
+    // }
+  // const response=await axios.get('user');
+  //   this.$store.dispatch('user',response.data);
+  //     this.userloc=response.data;
+  //   if (userloc) {
+  //      this.disable=true;
+  //   }
+
      
-  // },
+  },
 }}
 </script>
 <style scoped>

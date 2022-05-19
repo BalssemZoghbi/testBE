@@ -34,11 +34,13 @@ class UserController extends Controller
     public function getuser()
     {
         $users=DB::table('users')
-        ->where ('type' ,'!=','En Attente')
+        ->whereIn ('type' ,['admin','employe'])
         ->get();
+
         return $users;
 
     }
+    
     public function store(Request $request){
        $user= User::create([
             'name' => $request->name,
