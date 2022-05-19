@@ -23,21 +23,21 @@ class CreateCircuitmagnetiquesTable extends Migration
             $table->integer('Majfer')->nullable();//manuelle
             $table->integer('pFer')->nullable();
             $table->integer('pFergarantie')->nullable();
-            $table->integer('Ex')->nullable();
-            $table->integer('Hc')->nullable();
-            $table->integer('E1')->nullable();//manuelle
-            $table->integer('E2')->nullable();//manuelle
-            $table->integer('E3')->nullable();//manuelle
-            $table->integer('E4')->nullable();//manuelle
-            $table->integer('Eh')->nullable();
-            $table->integer('Ebc')->nullable();//manuelle
-            $table->integer('Longeurcuve')->nullable();
-            $table->integer('Largeurcuve')->nullable();
+            $table->float('Ex')->nullable();
+            $table->float('Hc')->nullable();
+            $table->float('E1')->nullable();//manuelle
+            $table->float('E2')->nullable();//manuelle
+            $table->float('E3')->nullable();//manuelle
+            $table->float('E4')->nullable();//manuelle
+            $table->float('Eh')->nullable();
+            $table->float('Ebc')->nullable();//manuelle
+            $table->float('Longeurcuve')->nullable();
+            $table->float('Largeurcuve')->nullable();
             $table->json('LCM')->nullable();
             $table->json('masseFerCM')->nullable();
             $table->json('surfaceCM')->nullable();
             $table->integer('Hauteurcuve')->nullable();
-            $table->integer('coeffPoid')->nullable();
+            $table->float('coeffPoid')->nullable();
             $table->timestamps();
         });
     }

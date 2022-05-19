@@ -1,16 +1,17 @@
 <template>
   <div>
     <NavDash :conducteur="projet.conducteur" :conducteurSec="projet.conducteurSec"/>
-
+    <Loading v-if="spinner" />
     <div class="body">
       <v-stepper v-model="e1" vertical>
+           
         <v-stepper-step :complete="e1 > 1" step="1"> Calcul </v-stepper-step>
         <v-stepper-content step="1">
           <v-card class="mb-14" >
             <div class="title">Circuit Magnetique</div>
             
  <img src="..\..\..\..\..\frontendd\src\assets\cm1.png" class="mt-1"/>
-  <form v-on:submit.prevent="updateprojet">
+  <form >
                       <div class="user-details">
 <!--   <div class="form__div field1">
                           <input
@@ -123,13 +124,13 @@
            <div class="field9">      
                           <input
                             type="text"
-                            v-model="largeurcuve"/>
+                            v-model="longeurcuve"/>
                         </div>
           <div  class="field10">
            <v-text-field
        
             label="Masse Fer"
-            v-model="projet.masseFertot"
+            v-model="masseFertot"
             outlined
           ></v-text-field>
              <v-text-field
@@ -147,7 +148,7 @@
                <v-text-field
        
             label="pFer"
-            v-model="projet.pFer"
+            v-model="pFer"
             outlined
           ></v-text-field>
                <v-text-field
@@ -165,7 +166,7 @@
                <v-text-field
        
             label="Lcuve"
-            v-model="longeurcuve"
+            v-model="largeurcuve"
             outlined
           ></v-text-field>
                <v-text-field
@@ -175,7 +176,6 @@
             outlined
           ></v-text-field>
                <v-text-field
-       
             label="Hc"
             v-model="hc"
             outlined
@@ -189,24 +189,21 @@
           </div>
           <div class="field11">
                      <v-chip
-               active-class="primary--text"      
-
+               active-class="primary--text"     
             >BMax :
              {{projet.Bmax}}
             </v-chip>
                   <v-chip
                active-class="primary--text"      
-
             >Tole :
              {{projet.tole}}
             </v-chip>
-             
           </div>
                       </div>
                       </form>
           </v-card>
 
-          <router-link class="nav-link" :to="'/cm/update/' + projet.id">
+          <router-link class="nav-link" :to="'/projet/pccucc/' + projet.id">
             <v-btn color="primary mt-4 " > précédent </v-btn>
           </router-link>
           <v-btn color="success mt-4" @click="e1 = 2"> suivant </v-btn>
@@ -221,6 +218,7 @@
     <v-stepper-content step="2">
                  <!-- <v-card class="mb-6"  > -->
                   <div class="title">Circuit Magnetique</div>
+                   <Loading v-if="spinner" style="margin-right: -52%;"/>
                   <div class="content">
           
  <v-row
@@ -359,13 +357,16 @@
 <script>
 import NavDash from "@/components/NavDash.vue";
 import axios from "axios";
+import Loading  from '@/components/Loading.vue';
+
 export default {
   components: {
-    // navbarUpdate
+    Loading,
     NavDash,
   },
   data() {
     return {
+      spinner: false,
       tole:[],
       projet: {
         id: undefined,
@@ -453,7 +454,9 @@ export default {
   async created(){
       const result = await axios.get("projets/" + this.$route.params.id);
     this.projet = result.data;
+   
     this.getTole();
+     this.spinner =false;
   },
   
   async mounted() {
@@ -462,7 +465,14 @@ export default {
   },
   computed: {
 
-    
+    masseFertot(){
+ let masse=this.masse;
+  let somme=0;
+  for(let i=0;i<masse.length;i++){
+    somme+=parseFloat(masse[i]);
+  }
+  return somme;
+},
   ex(){
 let ex;
 ex=parseFloat(this.projet.DextMT)+parseFloat(this.projet.E1);
@@ -494,7 +504,7 @@ return surfaceCM;
 masse(){
   let masse = [];
 for(let i=0;i<this.lcm.length;i++){
- masse[i]=this.lcm[i]*this.surface[i]*7.65*parseFloat(this.projet.coeffPoid)*parseFloat(Math.pow(10,-5));
+ masse[i]=this.lcm[i]*this.surface[i]*7.65*parseFloat(this.projet.coeffPoid)*(Math.pow(10,-5));
 }
 return masse;
   // return this.projet.masseFerCM.replace("[","",this.projet.masseFerCM.length-1).replace("]","").split(",");
@@ -547,18 +557,9 @@ hauteurcuve(){
         }
       }
       return 0 ;
-
-
-
-//    let tole=this.tole.replace("[","",this.tole.length-1).replace("]","").split(",");
-// //     let tole = [];
-// // for(let i=0;i<tole.length;i++){
-// //  tole[i];
-// // }
-// console.log("hhhh",this.tole);
-//   // let pfs=this.tole.coef6;
-//   //  console.log(pfs);
-//    return tole;
+  },
+  pFer(){
+return this.pferspecifique*this.masseFertot*(100+this.projet.Majfer)/100;
   }
   }
 
@@ -576,21 +577,21 @@ input[data-v-c569fce0] {
 }
 .field1[data-v-c569fce0]{
   /* max-width: 35px; */
-  width: 4%;
+  width: 5%;
   margin-left:16.6%;
   margin-top: -19%;
   /* position: relative; */
 }
 .field2 {
-   max-width: 48px;
+   max-width: 5%;
   margin-left:27%;
   /* margin-top: -10%; */
   margin-top: -4%;
   position: relative;
 }
 .field3 {
-   max-width: 48px;
-  margin-left:27.6%;
+   max-width: 5%;
+  margin-left:27.4%;
   /* margin-bottom:5%; */
   margin-top: 1%;
   position: relative;
@@ -603,7 +604,7 @@ input[data-v-c569fce0] {
   position: relative;
 }
 .field5 {
-  max-width: 48px;
+  max-width: 5%;
   margin-left:49%;
   margin-top:-15%;
   position: relative;

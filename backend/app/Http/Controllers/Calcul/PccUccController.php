@@ -73,8 +73,9 @@ public function Ucca($pccMaj,$puissance){
 
     $pccMaj=$this->pccMaj($pcc1,$pcc2);
     $CMoy=$this->comoy($projet->DintBT,$projet->BintBT,$projet->DextBT,$projet->BextBT,$projet->DintMT,$projet->BintMT,$projet->DextMT,$projet->BextMT);
+
     $delta=$this->delta($projet->DistanceBTMT,$projet->EpxBT,$projet->EpxMT);
-    $Hmoy=$this->Hmoy($projet->conducteurSec,$projet->HCondMt,$projet->HSFSBT,$projet->HfeuillardBT);
+   $Hmoy=$this->Hmoy($projet->conducteurSec,$projet->HCondMt,$projet->HSFSBT,$projet->HfeuillardBT);
     $Uccr=$this->Uccr($CMoy,$delta,$projet->N1c,$projet->PrimaireIPhase,$projet->PrimaireUPhase,$Hmoy);
     $Ucca=$this->Ucca($pccMaj,$projet->puissance);
     $Ucc=$this->Ucc($Uccr,$Ucca);
