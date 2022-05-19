@@ -10,7 +10,7 @@
             <v-card class="mb-6"  >
                   <div class="title">Gradin</div>
                   <div class="content">
-                  <form v-on:submit.prevent="updateprojet">
+                  <form >
                 <div class="user-details">
                   <div class="div">
                     <div class="field10">
@@ -48,14 +48,7 @@
                         v-model="projet.diamNominale"
                         outlined
                       ></v-text-field>
-                      <!-- <v-text-field
-                        label="j1"
-                        dense
-                        id="j1"
-                        readonly
-                        v-model="projet.j1"
-                        outlined
-                      ></v-text-field> -->
+           
                        <v-text-field
                         label="coeffRemplissage"
                         v-model="projet.coeffRemplissage"
@@ -68,9 +61,15 @@
                         outlined
                         dense
                       ></v-text-field>
-                      <v-text-field
+                             <v-text-field
                         label="demiGradin"
+                        dense
                         v-model="projet.demiGradin"
+                        outlined
+                      ></v-text-field>
+                      <v-text-field
+                        label="CMBT"
+                        v-model="projet.CMBT"
                         outlined
                         dense
                       ></v-text-field>
@@ -282,6 +281,7 @@ export default {
         Snette: "",
         EpaisseurTot: "",
         largeurMin: "",
+        CMBT: "",
       },
       e1: 1,
     };
@@ -304,6 +304,7 @@ export default {
         EpaisseurTot: this.projet.EpaisseurTot,
         echauffementEnroulement: this.projet.echauffementEnroulement,
         largeurMin: this.projet.largeurMin,
+        CMBT: this.projet.CMBT,
       };
             console.log(this.projets);
 
