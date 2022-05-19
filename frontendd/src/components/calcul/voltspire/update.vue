@@ -1,9 +1,13 @@
 <template>
   <div>
-    <NavDash :conducteur="projet.conducteur" :conducteurSec="projet.conducteurSec"/>
+    <NavDash
+      :conducteur="projet.conducteur"
+      :conducteurSec="projet.conducteurSec"
+    />
     <div class="body">
       <v-stepper v-model="e1" vertical>
-        <v-stepper-step :complete="e1 > 1" step="1"> Calcul </v-stepper-step>
+        <Loading v-if="spinner"/>
+        <v-stepper-step step=""> Calcul </v-stepper-step>
         <v-stepper-content step="1">
           <v-card class="mb-12">
             <div class="title">Volt/Spires</div>
@@ -48,7 +52,7 @@
                         class="form__input"
                         placeholder=" "
                         id="N2c"
-                        v-model="n2c"
+                        v-model="N2c"
                       />
                       <label for="" class="form__label">N2c</label>
                     </div>
@@ -66,7 +70,7 @@
                   </div>
                   <v-row cols="2" md="4" class="ml-4">
                     <v-card outlined tile>
-                      <template >
+                      <template>
                         <v-card>
                           <v-card-title class="subheading font-weight-bold">
                             prise
@@ -75,8 +79,14 @@
                           <v-divider></v-divider>
 
                           <v-list dense>
-                            <v-list-item v-for="item in prises"  :key="item" style="width: 176%!important;">
-                              <v-list-item-content>{{item}}</v-list-item-content>
+                            <v-list-item
+                              v-for="item in prises"
+                              :key="item"
+                              style="width: 176% !important"
+                            >
+                              <v-list-item-content>{{
+                                item
+                              }}</v-list-item-content>
                               <v-list-item-content class="align-end">
                               </v-list-item-content>
                             </v-list-item>
@@ -94,10 +104,14 @@
                         <v-divider></v-divider>
 
                         <v-list dense>
-                          <v-list-item v-for="item in spires"  :key="item" style="width: 176%!important;">
-                            <v-list-item-content vertical
-                              >{{item}}</v-list-item-content
-                            >
+                          <v-list-item
+                            v-for="item in spires"
+                            :key="item"
+                            style="width: 176% !important"
+                          >
+                            <v-list-item-content vertical>{{
+                              item
+                            }}</v-list-item-content>
                             <v-list-item-content class="align-end">
                             </v-list-item-content>
                           </v-list-item>
@@ -125,15 +139,17 @@
 // import navbarUpdate from "../../navbarUpdate.vue";
 
 import NavDash from "@/components/NavDash.vue";
+import Loading  from '@/components/Loading.vue';
 
 import axios from "axios";
 export default {
   components: {
-    // navbarUpdate
+    Loading,
     NavDash,
   },
   data() {
     return {
+      spinner:true,
       projet: {
         id: undefined,
         Bmaxdesire: "",
@@ -167,90 +183,180 @@ export default {
             (this.id = response.data.id), console.log(response.data)
           )
         );
-        if(this.projet.conducteurSec=="Rond emaille"){
-      this.$router.push("/projet/bobinageSecondaireRond/"+this.$route.params.id);
-    }else if(this.projet.conducteurSec=="feuillard"){
-      this.$router.push("/projet/bobinageSecondaireFeuillard/"+this.$route.params.id);
-    }else if(this.projet.conducteurSec=="meplat guipé"){
-      this.$router.push("/projet/bobinageSecondaireMeplat/"+this.$route.params.id);
-    }
+      if (this.projet.conducteurSec == "Rond emaille") {
+        this.$router.push(
+          "/projet/bobinageSecondaireRond/" + this.$route.params.id
+        );
+      } else if (this.projet.conducteurSec == "feuillard") {
+        this.$router.push(
+          "/projet/bobinageSecondaireFeuillard/" + this.$route.params.id
+        );
+      } else if (this.projet.conducteurSec == "meplat guipé") {
+        this.$router.push(
+          "/projet/bobinageSecondaireMeplat/" + this.$route.params.id
+        );
+      }
     },
   },
   async mounted() {
     const result = await axios.get("projets/" + this.$route.params.id);
     this.projet = result.data;
-  },async created() {
+  },
+  async created() {
     const result = await axios.get("projets/" + this.$route.params.id);
     this.projet = result.data;
-  
+    this.spinner=false;
+
   },
   computed: {
     spires() {
-      let spires=[];
-      let spires1=[];
-      console.log(this.projet.priseSoustractive,this.projet.priseSoustractive)
-        for(let i=0;i<this.projet.priseSoustractive;i++){
-            spires[i]=this.n1c-Math.abs((i-this.projet.priseSoustractive)*this.n1c*this.projet.echelonSoustractive/100);
-        }
-        for(let i=this.projet.priseSoustractive;i<this.projet.priseSoustractive+this.projet.priseAdditive+1;i++){
-            spires[i]=this.n1c+Math.abs((i-this.projet.priseSoustractive)*this.n1c*this.projet.echelonAdditive/100);
-        }
-        for(let i=0;i<this.projet.priseSoustractive+this.projet.priseAdditive+1;i++){
-            spires1[i]=spires[this.projet.priseSoustractive+this.projet.priseAdditive-i];
-        }
-      // return this.projet.spire
-      //   .replace("[", "", this.projet.spire.length - 1)
-      //   .replace("]", "")
-      //   .split(",");
+      let spires = [];
+      let spires1 = [];
+      for (let i = 0; i < this.projet.priseSoustractive; i++) {
+        spires[i] =
+         this.n1c -
+          Math.abs(
+            ((i - this.projet.priseSoustractive) *
+              this.n1c *
+              this.projet.echelonSousctractive) /
+              100
+          );
+      }
+      
+   console.log( this.projet.echelonSousctractive);
+      for (
+        let i = this.projet.priseSoustractive;
+        i < this.projet.priseSoustractive + this.projet.priseAdditive + 1;
+        i++
+      ) {
+        spires[i] =
+          this.n1c +
+          Math.abs(
+            ((i - this.projet.priseSoustractive) *
+              this.n1c *
+              this.projet.echelonAdditive) /
+              100
+          );
+      }
+         console.log( this.n1c);
+      for (
+        let i = 0;
+        i < this.projet.priseSoustractive + this.projet.priseAdditive + 1;
+        i++
+      ) {
+        spires1[i] =
+          spires[this.projet.priseSoustractive + this.projet.priseAdditive - i];
+      }
       return spires1;
-        
     },
     prises() {
-      // let newElem = document.createElement("BR")
-      return this.projet.prise
-        .replace("[", "", this.projet.prise.length - 1)
-         .replace("]", "")
-        .split(",");
-        
+   let spires = [];
+      let spires1 = [];
+      for (let i = 0; i < this.projet.priseSoustractive; i++) {
+        spires[i] ='Prise'+(i-this.projet.priseSoustractive);
+      }
+      for (
+        let i = this.projet.priseSoustractive;
+        i < this.projet.priseSoustractive + this.projet.priseAdditive + 1;
+        i++
+      ) {
+          spires[i] ='Prise+'+(i-this.projet.priseSoustractive);
+
+      }
+      for (
+        let i = 0;
+        i < this.projet.priseSoustractive + this.projet.priseAdditive + 1;
+        i++
+      ) {
+        spires1[i] =
+          spires[this.projet.priseSoustractive + this.projet.priseAdditive - i];
+      }
+      return spires1;   
     },
-      bmax(){
-let bmax;
-if(this.projet.couplageSecondaire=="zn"){
-  bmax=(parseFloat(this.projet.secondaireUligne)*2/3)*parseFloat(Math.pow(10,6))/(parseFloat(Math.PI)*parseFloat(this.projet.frequence)*parseFloat(Math.sqrt(2))*parseFloat(this.projet.Snette)*this.n2c);
-}else{
-  console.log(this.n2c)
-  bmax=parseFloat(this.projet.secondaireUPhase)*parseFloat(Math.pow(10,6))/(parseFloat(Math.PI)*parseFloat(this.projet.frequence)*parseFloat(Math.sqrt(2))*parseFloat(this.projet.Snette)*this.n2c);
-     }
-        return bmax;
+    bmax() {
+      let bmax;
+      if (this.projet.couplageSecondaire == "zn") {
+        bmax =
+          (((parseFloat(this.projet.secondaireUligne) * 2) / 3) *
+            Math.pow(10, 6)) /
+          (Math.PI *
+            parseFloat(this.projet.frequence) *
+            Math.sqrt(2) *
+            parseFloat(this.projet.Snette) *
+            this.n2cDesire);
+      } else {
+        console.log(this.n2cDesire);
+        bmax =
+          (parseFloat(this.projet.secondaireUPhase) * Math.pow(10, 6)) /
+          (Math.PI *
+            parseFloat(this.projet.frequence) *
+            Math.sqrt(2) *
+            parseFloat(this.projet.Snette) *
+            this.n2cDesire);
+      }
+      return bmax;
+    },
+    N2c() {
+      let n2c;
+      if (this.projet.couplageSecondaire == "zn") {
+        n2c =
+          (((parseFloat(this.projet.secondaireUligne) * 2) / 3) *
+            parseFloat(Math.pow(10, 6))) /
+          (parseFloat(Math.PI) *
+            parseFloat(this.projet.frequence) *
+            parseFloat(Math.sqrt(2)) *
+            parseFloat(this.projet.Snette) *
+            this.bmax);
+      } else {
+        n2c =
+          (parseFloat(this.projet.secondaireUPhase) *
+            parseFloat(Math.pow(10, 6))) /
+          (parseFloat(Math.PI) *
+            parseFloat(this.projet.frequence) *
+            parseFloat(Math.sqrt(2)) *
+            parseFloat(this.projet.Snette) *
+            this.bmax);
+      }
+      return Math.floor(n2c);
+    },
+    n2cDesire() {
+      let n2c;
+      if (this.projet.couplageSecondaire == "zn") {
+        n2c =
+          (((parseFloat(this.projet.secondaireUligne) * 2) / 3) *
+            parseFloat(Math.pow(10, 6))) /
+          (parseFloat(Math.PI) *
+            parseFloat(this.projet.frequence) *
+            parseFloat(Math.sqrt(2)) *
+            parseFloat(this.projet.Snette) *
+            this.projet.Bmaxdesire);
+      } else {
+        n2c =
+          (parseFloat(this.projet.secondaireUPhase) *
+            parseFloat(Math.pow(10, 6))) /
+          (parseFloat(Math.PI) *
+            parseFloat(this.projet.frequence) *
+            parseFloat(Math.sqrt(2)) *
+            parseFloat(this.projet.Snette) *
+            this.projet.Bmaxdesire);
+      }
+      return Math.floor(n2c);
+    },
+    n1c() {
+      let n1c = parseFloat(this.projet.N1c);
+      n1c = parseFloat(this.projet.PrimaireUPhase) / this.vsp;
+      return n1c;
+    },
+    vsp() {
+      let vsp = this.projet.Vsp;
+      if (this.projet.couplageSecondaire == "zn") {
+        vsp = (parseFloat(this.projet.secondaireUligne) * 2) / 3 / this.N2c;
+      } else {
+        vsp = parseFloat(this.projet.secondaireUPhase) / this.N2c;
+      }
+      return vsp;
+    },
   },
-       n2c(){
-    let  n2c;
-if(this.projet.couplageSecondaire=="zn"){
-    n2c=(parseFloat(this.projet.secondaireUligne)*2/3)*parseFloat(Math.pow(10,6))/(parseFloat(Math.PI)*parseFloat(this.projet.frequence)*parseFloat(Math.sqrt(2))*parseFloat(this.projet.Snette)*(this.projet.Bmax));
-    }
-    else{
-    n2c=parseFloat(this.projet.secondaireUPhase)*(parseFloat(Math.pow(10,6)))/(parseFloat(Math.PI)*parseFloat(this.projet.frequence)*parseFloat(Math.sqrt(2))*parseFloat(this.projet.Snette)*(this.projet.Bmax));
-
-    }
-    return Math.floor(n2c);
-  },
-  n1c(){
-    let  n1c=parseFloat(this.projet.N1c);
-     n1c=parseFloat(this.projet.PrimaireUPhase)/this.vsp;
-     return n1c;
-  },
-  vsp(){
-let vsp=this.projet.Vsp;
-if(this.projet.couplageSecondaire=="zn"){
-  vsp=(parseFloat(this.projet.secondaireUligne)*2/3)/this.n2c;
-}else{
-        vsp=parseFloat(this.projet.secondaireUPhase)/this.n2c;
-        }
-return vsp;
-  },
-
-  }
-
 };
 </script>
 <style scoped>

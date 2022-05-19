@@ -62,7 +62,7 @@ class VoltspireController extends Controller
 
         }else{
             $Bmax=($U2ph*(pow(10,6))/(pi()*$frequence*sqrt(2)*$Snette*$N2c));
-           
+
         }
         // dd($N2c);
     return $Bmax;
@@ -115,7 +115,8 @@ class VoltspireController extends Controller
         $N2c = $this->N2c($projet->secondaireUPhase,$projet->Snette,$Bmax,$projet->frequence,$projet->secondaireUligne,$projet->couplageSecondaire);
 
         $Vsp=$this->Vsp($projet->secondaireUPhase,$projet->Snette,$Bmax,$projet->frequence,$projet->secondaireUligne,$projet->couplageSecondaire);
-        $N1c=$this->N1c($projet->PrimaireUPhase,$projet->Vsp);
+    //    dd($projet->Vsp);
+        $N1c=$this->N1c($projet->PrimaireUPhase,$Vsp);
         // $largeur=$this->largeur($request->diamNominale,$request->nbrGradin,$request->pas);
         // $epaisseur=$this->epaisseur($request->diamNominale,$largeur,$request->nbrGradin);
         // $epaisseurfeuillard=$this->epaisseurfeuillard($request->diamNominale,$largeur,$request->nbrGradin,$request->demiGradin);
