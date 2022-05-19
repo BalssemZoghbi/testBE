@@ -21,13 +21,13 @@
                         outlined
                       ></v-text-field>
            <div style="margin-bottom:2%">
-                         <v-chip style=""
+                         <v-chip 
                       >Pccg :
                       {{ projet.Pccg }}
                     </v-chip>
                     <v-chip style="text-align: left;margin-left: 42%;"
                       >Uccg :
-                      {{ projet.Uccg }}
+                      {{ this.projet.Uccg }}
                     </v-chip>
                     </div>
                       
@@ -163,14 +163,18 @@ export default {
     const result = await axios.get("projets/" + this.$route.params.id);
     this.projet = result.data;
   },
+  async created() {
+    const result = await axios.get("projets/" + this.$route.params.id);
+    this.projet = result.data;
+  },
    computed:{
    pcc1(){
     
-     let pcc1=this.projet.pcc1;
+     let pcc1;
      if(this.projet.materiau=='cuivre'){
-     pcc1=2.286*parseFloat(Math.pow(parseFloat(this.projet.j1),2))*parseFloat(this.projet.poidMT)*(100+parseInt(this.projet.MajourationU))/100;
+     pcc1=2.286*Math.pow(parseFloat(this.projet.j1),2)*parseFloat(this.projet.poidMT)*(100+parseInt(this.projet.MajourationU))/100;
      }else if(this.projet.materiau=='aluminium'){
-      pcc1=12.18*parseFloat(Math.pow(parseFloat(this.projet.j1),2))*parseFloat(this.projet.poidMT)*(100+parseInt(this.projet.MajourationU))/100;
+      pcc1=12.18*Math.pow(parseFloat(this.projet.j1),2)*parseFloat(this.projet.poidMT)*(100+parseInt(this.projet.MajourationU))/100;
      }
      return pcc1;
      },
@@ -178,14 +182,14 @@ export default {
      let m2=this.projet.materiauSec;
      let pcc2=this.projet.pcc2;
      if(m2=='cuivre'){
-     pcc2=2.286*parseFloat(Math.pow(parseFloat(this.projet.j2),2))*parseFloat(this.projet.poidBT)*(100+parseInt(this.projet.MajourationU))/100;
+     pcc2=2.286*Math.pow(parseFloat(this.projet.j2),2)*parseFloat(this.projet.poidBT)*(100+parseInt(this.projet.MajourationU))/100;
      }else if(m2=='aluminium'){
-      pcc2=12.18*parseFloat(Math.pow(parseFloat(this.projet.j2),2))*parseFloat(this.projet.poidBT)*(100+parseInt(this.projet.MajourationU))/100;
+      pcc2=12.18*Math.pow(parseFloat(this.projet.j2),2)*parseFloat(this.projet.poidBT)*(100+parseInt(this.projet.MajourationU))/100;
      }
      return pcc2;
      },
      somme(){
-       return parseFloat(this.projet.pcc1) + parseFloat(this.projet.pcc2);
+       return parseFloat(this.pcc1) + parseFloat(this.pcc2);
 },
 hmoy()
 {
@@ -216,8 +220,8 @@ ucca(){
   return ucca;
 },
 ucc(){
-  let ucc=parseFloat(this.projet.Ucc);
-  ucc=parseFloat(Math.sqrt(parseFloat(Math.pow(this.projet.Uccr,2))+parseFloat(Math.pow(this.projet.Ucca,2))));
+  let ucc;
+  ucc=parseFloat(Math.sqrt(Math.pow(this.uccr,2)+Math.pow(this.ucca,2)));
 
   return ucc;
 },

@@ -450,7 +450,9 @@ export default {
     
     }
   },
-  created(){
+  async created(){
+      const result = await axios.get("projets/" + this.$route.params.id);
+    this.projet = result.data;
     this.getTole();
   },
   
@@ -459,13 +461,11 @@ export default {
     this.projet = result.data;
   },
   computed: {
-    somme() {
-      return parseInt(this.projet.pcc1) + parseInt(this.projet.pcc2);
-    },
+
     
   ex(){
-let ex=this.projet.Ex;
-ex=parseFloat(Math.round(parseFloat(this.projet.DextMT)+parseFloat(this.projet.E1)));
+let ex;
+ex=parseFloat(this.projet.DextMT)+parseFloat(this.projet.E1);
 return ex;
   },
    lcm(){
@@ -512,7 +512,7 @@ return masse;
 
   },
   longeurcuve(){
-    let longeurcuve=this.projet.Longeurcuve;
+    let longeurcuve;
     longeurcuve=2*this.ex+parseFloat(this.projet.DextMT)+2*(parseFloat(this.projet.E2));
     return longeurcuve;
   },

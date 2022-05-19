@@ -186,23 +186,23 @@ export default {
   },
   computed: {
     spires() {
-      // let spires=[];
-      // let spires1=[];
-      // console.log(this.projet.priseSoustractive,this.projet.priseSoustractive)
-      //   for(let i=0;i<this.projet.priseSoustractive;i++){
-      //       spires[i]=this.n1c-Math.abs((i-this.projet.priseSoustractive)*this.n1c*this.projet.echelonSoustractive/100);
-      //   }
-      //   for(let i=this.projet.priseSoustractive;i<this.projet.priseSoustractive+this.projet.priseAdditive+1;i++){
-      //       spires[i]=this.n1c+Math.abs((i-this.projet.priseSoustractive)*this.n1c*this.projet.echelonAdditive/100);
-      //   }
-      //   for(let i=0;i<this.projet.priseSoustractive+this.projet.priseAdditive+1;i++){
-      //       spires1[i]=spires[this.projet.priseSoustractive+this.projet.priseAdditive-i];
-      //   }
-      return this.projet.spire
-        .replace("[", "", this.projet.spire.length - 1)
-        .replace("]", "")
-        .split(",");
-      // return spires1;
+      let spires=[];
+      let spires1=[];
+      console.log(this.projet.priseSoustractive,this.projet.priseSoustractive)
+        for(let i=0;i<this.projet.priseSoustractive;i++){
+            spires[i]=this.n1c-Math.abs((i-this.projet.priseSoustractive)*this.n1c*this.projet.echelonSoustractive/100);
+        }
+        for(let i=this.projet.priseSoustractive;i<this.projet.priseSoustractive+this.projet.priseAdditive+1;i++){
+            spires[i]=this.n1c+Math.abs((i-this.projet.priseSoustractive)*this.n1c*this.projet.echelonAdditive/100);
+        }
+        for(let i=0;i<this.projet.priseSoustractive+this.projet.priseAdditive+1;i++){
+            spires1[i]=spires[this.projet.priseSoustractive+this.projet.priseAdditive-i];
+        }
+      // return this.projet.spire
+      //   .replace("[", "", this.projet.spire.length - 1)
+      //   .replace("]", "")
+      //   .split(",");
+      return spires1;
         
     },
     prises() {
@@ -214,18 +214,17 @@ export default {
         
     },
       bmax(){
-let bmax=this.projet.Bmax;
+let bmax;
 if(this.projet.couplageSecondaire=="zn"){
-  bmax=(parseFloat(this.projet.secondaireUligne)*2/3)*parseFloat(Math.pow(10,6))/(parseFloat(Math.PI)*parseFloat(this.projet.frequence)*parseFloat(Math.sqrt(2))*parseFloat(this.projet.Snette)*parseFloat(this.n2c));
+  bmax=(parseFloat(this.projet.secondaireUligne)*2/3)*parseFloat(Math.pow(10,6))/(parseFloat(Math.PI)*parseFloat(this.projet.frequence)*parseFloat(Math.sqrt(2))*parseFloat(this.projet.Snette)*this.n2c);
 }else{
   console.log(this.n2c)
-  bmax=parseFloat(this.projet.secondaireUPhase)*parseFloat(Math.pow(10,6))/(parseFloat(Math.PI)*parseFloat(this.projet.frequence)*parseFloat(Math.sqrt(2))*parseFloat(this.projet.Snette)*parseFloat(this.n2c));
+  bmax=parseFloat(this.projet.secondaireUPhase)*parseFloat(Math.pow(10,6))/(parseFloat(Math.PI)*parseFloat(this.projet.frequence)*parseFloat(Math.sqrt(2))*parseFloat(this.projet.Snette)*this.n2c);
      }
         return bmax;
   },
        n2c(){
-    let  n2c=parseFloat(this.projet.N2c);
-// console.log(this.bmax);
+    let  n2c;
 if(this.projet.couplageSecondaire=="zn"){
     n2c=(parseFloat(this.projet.secondaireUligne)*2/3)*parseFloat(Math.pow(10,6))/(parseFloat(Math.PI)*parseFloat(this.projet.frequence)*parseFloat(Math.sqrt(2))*parseFloat(this.projet.Snette)*(this.projet.Bmax));
     }
@@ -237,15 +236,15 @@ if(this.projet.couplageSecondaire=="zn"){
   },
   n1c(){
     let  n1c=parseFloat(this.projet.N1c);
-     n1c=parseFloat(this.projet.PrimaireUPhase)/(parseFloat(this.vsp));
+     n1c=parseFloat(this.projet.PrimaireUPhase)/this.vsp;
      return n1c;
   },
   vsp(){
 let vsp=this.projet.Vsp;
 if(this.projet.couplageSecondaire=="zn"){
-  vsp=(parseFloat(this.projet.secondaireUligne)*2/3)/parseFloat(this.n2c);
+  vsp=(parseFloat(this.projet.secondaireUligne)*2/3)/this.n2c;
 }else{
-        vsp=parseFloat(this.projet.secondaireUPhase)/parseFloat(this.n2c);
+        vsp=parseFloat(this.projet.secondaireUPhase)/this.n2c;
         }
 return vsp;
   },
