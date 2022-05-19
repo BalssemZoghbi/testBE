@@ -6,6 +6,7 @@
     />
     <div class="body">
       <v-stepper v-model="e1" vertical>
+        <Loading v-if="spinner" />
         <v-stepper-step :complete="e1 > 1" step="1">
           Données Electrique
         </v-stepper-step>
@@ -14,7 +15,7 @@
             <v-card class="mb-6">
               <div class="title">Données Electrique</div>
               <div class="content">
-                <form >
+                <form>
                   <div class="col">
                     <div class="input-box">
                       <div class="form__div">
@@ -313,13 +314,16 @@
 </template>
 <script>
 import NavDash from "@/components/NavDash.vue";
+import Loading from "@/components/Loading.vue";
 import axios from "axios";
 export default {
   components: {
     NavDash,
+    Loading,
   },
   data() {
     return {
+      spinner: true,
       frequences: ["50", "60"],
       couplagePrimaire: ["YN", "Y", "D"],
       couplageSecondaire: ["d", "zn", "z", "yn", "y"],
@@ -375,7 +379,6 @@ export default {
         secondaireIligne: "",
         secondaireIPhase: "",
         Uz: "",
-        // nbrePosition: "",
         tenueFr2: "",
         tenueChoc2: "",
         classeU2: "",
@@ -422,11 +425,7 @@ export default {
       };
       axios
         .put("electrique/edit/" + this.$route.params.id, projets)
-        .then(
-          (response) => (
-            (this.id = response.data.id), console.log(response.data.id)
-          )
-        );
+        .then((response) => (this.id = response.data.id));
 
       this.$router.push("/projet/garantie/" + this.$route.params.id);
     },
@@ -441,7 +440,9 @@ export default {
         });
       return r;
     },
-    
+    DeuxChiffre(x) {
+      return Math.round(x * 100) / 100;
+    },
   },
   async mounted() {
     const result = await axios.get("/projets/" + this.$route.params.id);
@@ -450,23 +451,16 @@ export default {
   async created() {
     const result = await axios.get("/projets/" + this.$route.params.id);
     this.projet = result.data;
+    this.spinner = false;
   },
   computed: {
     couplage() {
       return (
         this.projet.couplagePrimaire +
-        this.projet.couplageSecondaire
+        this.projet.couplageSecondaire +
+        this.projet.indiceHoraire
       );
     },
-    // indice(){
-    //   let couplage= this.projet.couplagePrimaire + this.projet.couplageSecondaire;
-    //   let mylist=['Yz','YNzn','Dyn','Yzn','Dy'];
-    //   if(mylist.includes(this.couplage ) ){
-    //     return ['1','5','7','11'];
-    //   }else{
-    //     return ['1','5','7','11','13'];
-    //   }
-    // },
     nbrePosition() {
       return (
         parseInt(this.projet.priseSoustractive) +
@@ -692,24 +686,26 @@ export default {
       }
     },
     PrimaireIPhase() {
-      console.log(this.PrimaireIligne/Math.sqrt(3), this.projet.couplagePrimaire)
+      console.log(
+        this.PrimaireIligne / Math.sqrt(3),
+        this.projet.couplagePrimaire
+      );
       if (
-        this.projet.couplagePrimaire == 'D' ||
+        this.projet.couplagePrimaire == "D" ||
         this.projet.couplageSecondaire == "d"
       ) {
-        
-        return parseFloat(this.PrimaireIligne) / Math.sqrt(3);
+        return this.DeuxChiffre(parseFloat(this.PrimaireIligne) / Math.sqrt(3));
       } else {
-        return (
+        return this.DeuxChiffre(
           (parseInt(this.projet.puissance) * 1000) /
-          (parseInt(this.projet.u1n) * Math.sqrt(3))
+            (parseInt(this.projet.u1n) * Math.sqrt(3))
         );
       }
     },
     PrimaireIligne() {
-      return (
+      return this.DeuxChiffre(
         (parseInt(this.projet.puissance) * 1000) /
-        (parseInt(this.projet.u1n) * Math.sqrt(3))
+          (parseInt(this.projet.u1n) * Math.sqrt(3))
       );
     },
     secondaireUligne() {
@@ -722,7 +718,7 @@ export default {
       ) {
         return this.projet.u2o;
       } else {
-        return parseInt(this.projet.u2o) / Math.sqrt(3);
+        return this.DeuxChiffre(parseInt(this.projet.u2o) / Math.sqrt(3));
       }
     },
     secondaireIPhase() {
@@ -730,18 +726,18 @@ export default {
         this.projet.couplageSecondaire == "D" ||
         this.projet.couplageSecondaire == "d"
       ) {
-        return this.projet.secondaireIligne / Math.sqrt(3);
+        return this.DeuxChiffre(this.projet.secondaireIligne / Math.sqrt(3));
       } else {
-        return (
+        return this.DeuxChiffre(
           (parseInt(this.projet.puissance) * 1000) /
-          (parseInt(this.projet.u2o) * Math.sqrt(3))
+            (parseInt(this.projet.u2o) * Math.sqrt(3))
         );
       }
     },
     secondaireIligne() {
-      return (
+      return this.DeuxChiffre(
         (parseInt(this.projet.puissance) * 1000) /
-        (parseInt(this.projet.u2o) * Math.sqrt(3))
+          (parseInt(this.projet.u2o) * Math.sqrt(3))
       );
     },
     Uz() {
@@ -749,7 +745,7 @@ export default {
         this.projet.couplageSecondaire == "zn" ||
         this.projet.couplageSecondaire == "z"
       ) {
-        return (2 * this.projet.puissance) / 3 / 2;
+        return this.DeuxChiffre((2 * this.projet.puissance) / 3 / 2);
       } else {
         return 0;
       }

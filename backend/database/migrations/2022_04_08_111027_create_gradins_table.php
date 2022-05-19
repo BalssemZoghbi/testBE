@@ -18,8 +18,8 @@ class CreateGradinsTable extends Migration
             $table->string('tole')->nullable();
             $table->integer('diamPropose')->nullable();
             $table->integer('diamNominale')->nullable();
-            $table->enum('pas',['10','20'])->nullable();
-            $table->float('coeffRemplissage')->nullable();
+            $table->enum('pas', ['10', '20'])->nullable();
+            $table->double('coeffRemplissage', 12, 7)->nullable();
             $table->integer('nbrGradin')->nullable();
             $table->integer('demiGradin')->nullable();
             $table->json('largeur')->nullable();

@@ -1,315 +1,281 @@
 <template>
   <div>
-    <NavDash :conducteur="projet1.conducteur" :conducteurSec="projet1.conducteurSec"/>
-    <!-- <NavDashEmp v-if="this.usertype == 'employe'" /> -->
-    <!-- <navbarUpdate :elec_id='projet.electrique_id' :id='projet.id'/> -->
+    <NavDash
+      :conducteur="projet1.conducteur"
+      :conducteurSec="projet1.conducteurSec"
+    />
     <div class="body">
-      <v-stepper v-model="e1"  vertical>
-        <!-- <v-stepper-header> -->
-          <v-stepper-step :complete="e1 > 1" step="1">
-           Données de Garantie
-          
-          </v-stepper-step>
-           <v-stepper-content step="1">
-            <v-card class="mb-6"  >
-                  <div class="title">Données de Garantie</div>
-        
-                  <div class="content">
-                               <v-col cols="2" style="    margin-top: -7%;margin-left: 28%;">
-                                 <v-menu transition="slide-x-transition" offset-x>
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn v-bind="attrs" v-on="on" color="primary"> Automatique </v-btn>
-              </template>
+      <v-stepper v-model="e1" vertical>
+        <Loading v-if="spinner" />
+        <v-stepper-step :complete="e1 > 1" step="1">
+          Données de Garantie
+        </v-stepper-step>
+        <v-stepper-content step="1">
+          <v-card class="mb-6">
+            <div class="title">Données de Garantie</div>
 
-              <v-list>
-                <v-list-item-group v-model="model" mandatory color="blue">
-                  <v-list-item @click="onClick" color="blue">
-                    <v-list-item-title @click="automatique()"
-                      >Automatique</v-list-item-title
-                    >
-                  </v-list-item>
+            <div class="content">
+              <v-col cols="2" style="margin-top: -7%; margin-left: 28%">
+                <v-menu transition="slide-x-transition" offset-x>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn v-bind="attrs" v-on="on" color="primary">
+                      Automatique
+                    </v-btn>
+                  </template>
 
-                  <v-list-item>
-                    <v-list-item-title @click="manuel()"
-                      >Manuel</v-list-item-title
-                    >
-                  </v-list-item>
-                </v-list-item-group>
-              </v-list>
-            </v-menu>
-            <!-- <v-switch
-      v-model="people"
-      color="primary"
-      label="Automatique"
-      value="Automatique"
-    ></v-switch> -->
-           <!-- <v-sheet class="pa-5">
-    <v-switch
-      v-model="switch1"
-      inset
-      :label="`Switch 1: ${switch1.toString()}`"
-    >
-    <p v-if="switch1.toString()=='true'">Manuel</p>
-    <p v-if="switch1.toString()=='false'">Automatique</p>
-    </v-switch>
-   
-  </v-sheet> -->
-        <!-- <v-select
-          v-model="select"
-          :items="items"
-          item-text="state"
-          label="Select"
-          persistent-hint
-          return-object
-          single-line
-        ></v-select> -->
-         <!-- v-if="this.select.state=='automatique'" -->
-      </v-col>
-                    <form v-on:submit.prevent="updateprojet" style="margin-top:-1%">
-                      <div class="user-details">
-                        <div class="form__div framei">
-                          
-                          <input
-                            type="text"
-                            class="form__input"
-                            placeholder=" "
-                            id="option"
-                            v-model="projet.option"
-                          />
-                          <label for="" class="form__label">Option</label>
-                        </div>
-                        <div class="form__div framei">
-                          <input
-                            type="text"
-                            class="form__input"
-                            placeholder=" "
-                            id="Pog"
-                            v-model="projet.Pog"
-                            
-                          />
-                          <label for="" class="form__label">Pog</label>
-                        </div>
-                       
-                     <div class="input-box">
-                           <div class="form__div ">
-                            <input
-                              type="text"
-                              class="form__input"
-                              placeholder=" "
-                              id="log"
-                              
-                              v-model="projet.log"
-                            />
-                            <label for="" class="form__label">log</label>
-                          </div>
-                        </div>
-                       
-                         <div class="form__div framei">
-                          <input
-                            type="text"
-                            class="form__input"
-                            placeholder=" "
-                            id="Pccg"
-                            
-                            v-model="projet.Pccg"
-                          />
-                          <label for="" class="form__label">Pccg</label>
-                        </div>
+                  <v-list>
+                    <v-list-item-group v-model="model" mandatory color="blue">
+                      <v-list-item @click="onClick" color="blue">
+                        <v-list-item-title @click="automatique()"
+                          >Automatique</v-list-item-title
+                        >
+                      </v-list-item>
 
-                        <div class="form__div framei">
-                            <input
-                            
-                              type="text"
-                              class="form__input"
-                              placeholder=" "
-                              id="Uccg"
-                              v-model="projet.Uccg"
-                            />
-                            <label for="" class="form__label">Uccg</label>
-                       
-                        </div>
-                        <div class="form__div framei">
-                          <input
-                            type="number"
-                            class="form__input"
-                            placeholder=" "
-                            id="Ptot"
-                            v-model="Ptot"
-                            
-                          />
-                          <label for="" class="form__label">Ptot</label>
-                        </div>
-                        <div class="form__div framei">
-                          <input
-                            type="number"
-                            class="form__input"
-                            placeholder=" "
-                            id="Poglimit"
-                            
-                            v-model="Poglimit"
-                          />
-                          <label for="" class="form__label">Poglimite</label>
-                        </div>
-                          <div class="form__div framei">
-                          <input
-                            type="number"
-                            class="form__input"
-                            placeholder=" "
-                            id="Pccglimit"
-                            
-                            v-model="Pccglimit"
-                          />
-                          <label for="" class="form__label">Pccglimite</label>
-                        </div>
-                          <div class="form__div framei">
-                          <input
-                            type="number"
-                            class="form__input"
-                            placeholder=" "
-                            id="loglimit"
-                            
-                            v-model="loglimit"
-                          />
-                          <label for="" class="form__label">loglimit</label>
-                        </div>
-                       <div class="form__div framei">
-                          <input
-                            type="number"
-                            class="form__input"
-                            placeholder=" "
-                            id="Uccglimit"
-                            
-                            v-model="Uccglimit"
-                          />
-                          <label for="" class="form__label">Uccglimit Max</label>
-                        </div>
-                       <div class="form__div framei">
-                          <input
-                            type="number"
-                            class="form__input"
-                            placeholder=" "
-                            id="Uccglimit"
-                            
-                            v-model="UccgMin"
-                          />
-                          <label for="" class="form__label">Uccglimit Min</label>
-                        </div>
-                        <div class="form__div framei">
-                          <input
-                            type="number"
-                            class="form__input"
-                            placeholder=" "
-                            id="Ptotlimit"
-                            
-                            v-model="Ptotlimit"
-                          />
-                          <label for="" class="form__label">Ptotlimit</label>
-                        </div>
-                           <div class="form__div framei" style="  width: 48%;">
-                          <input
-                            type="number"
-                            class="form__input"
-                            placeholder=" "
-                            id="echauffementHuile"
-                            
-                            v-model="echauffementHuile"
-                          />
-                          <label for="" class="form__label">Echauffement Huile</label>
-                        </div>
-                       <div class="form__div frame" style="  width: 48%;">
-                          <input
-                            type="number"
-                            class="form__input"
-                            placeholder=" "
-                            id="echauffementEnroulement"
-                            
-                            v-model="echauffementEnroulement"
-                          />
-                          <label for="" class="form__label">Echauffement Enroulement</label>
-                        </div>
-                      </div>
-                    </form>
+                      <v-list-item>
+                        <v-list-item-title @click="manuel()"
+                          >Manuel</v-list-item-title
+                        >
+                      </v-list-item>
+                    </v-list-item-group>
+                  </v-list>
+                </v-menu>
+              </v-col>
+              <form style="margin-top: -1%">
+                <div class="user-details">
+                  <div class="form__div framei">
+                    <input
+                      type="text"
+                      class="form__input"
+                      placeholder=" "
+                      id="option"
+                      v-model="projet.option"
+                    />
+                    <label for="" class="form__label">Option</label>
                   </div>
-                <!-- </div> -->
-              <!-- </div> -->
-            </v-card>
-   
-            <router-link
-              class="nav-link"
-              :to="
-                '/projet/electrique/update/' + this.$route.params.id
-              "
-              > <v-btn
-        color="primary mb-14"
-        @click="e1 = 2"
-      >
-        précédent
-      </v-btn> </router-link>
-                   <v-btn color="success mb-14" @click="updateprojet">
-          Valider
-        </v-btn>
-          </v-stepper-content>
-          <!-- <v-stepper-content >
-        </v-stepper-content> -->
+                  <div class="form__div framei">
+                    <input
+                      type="text"
+                      class="form__input"
+                      placeholder=" "
+                      id="Pog"
+                      v-model="projet.Pog"
+                    />
+                    <label for="" class="form__label">Pog</label>
+                  </div>
+
+                  <div class="input-box">
+                    <div class="form__div">
+                      <input
+                        type="text"
+                        class="form__input"
+                        placeholder=" "
+                        id="log"
+                        v-model="projet.log"
+                      />
+                      <label for="" class="form__label">log</label>
+                    </div>
+                  </div>
+
+                  <div class="form__div framei">
+                    <input
+                      type="text"
+                      class="form__input"
+                      placeholder=" "
+                      id="Pccg"
+                      v-model="projet.Pccg"
+                    />
+                    <label for="" class="form__label">Pccg</label>
+                  </div>
+
+                  <div class="form__div framei">
+                    <input
+                      type="text"
+                      class="form__input"
+                      placeholder=" "
+                      id="Uccg"
+                      v-model="projet.Uccg"
+                    />
+                    <label for="" class="form__label">Uccg</label>
+                  </div>
+                  <div class="form__div framei">
+                    <input
+                      type="number"
+                      class="form__input"
+                      placeholder=" "
+                      id="Ptot"
+                      v-model="Ptot"
+                    />
+                    <label for="" class="form__label">Ptot</label>
+                  </div>
+                  <div class="form__div framei">
+                    <input
+                      type="number"
+                      class="form__input"
+                      placeholder=" "
+                      id="Poglimit"
+                      v-model="Poglimit"
+                    />
+                    <label for="" class="form__label">Poglimite</label>
+                  </div>
+                  <div class="form__div framei">
+                    <input
+                      type="number"
+                      class="form__input"
+                      placeholder=" "
+                      id="Pccglimit"
+                      v-model="Pccglimit"
+                    />
+                    <label for="" class="form__label">Pccglimite</label>
+                  </div>
+                  <div class="form__div framei">
+                    <input
+                      type="number"
+                      class="form__input"
+                      placeholder=" "
+                      id="loglimit"
+                      v-model="loglimit"
+                    />
+                    <label for="" class="form__label">loglimit</label>
+                  </div>
+                  <div class="form__div framei">
+                    <input
+                      type="number"
+                      class="form__input"
+                      placeholder=" "
+                      id="Uccglimit"
+                      v-model="Uccglimit"
+                    />
+                    <label for="" class="form__label">Uccglimit Max</label>
+                  </div>
+                  <div class="form__div framei">
+                    <input
+                      type="number"
+                      class="form__input"
+                      placeholder=" "
+                      id="Uccglimit"
+                      v-model="UccgMin"
+                    />
+                    <label for="" class="form__label">Uccglimit Min</label>
+                  </div>
+                  <div class="form__div framei">
+                    <input
+                      type="number"
+                      class="form__input"
+                      placeholder=" "
+                      id="Ptotlimit"
+                      v-model="Ptotlimit"
+                    />
+                    <label for="" class="form__label">Ptotlimit</label>
+                  </div>
+                  <div class="form__div framei" style="width: 48%">
+                    <input
+                      type="number"
+                      class="form__input"
+                      placeholder=" "
+                      id="echauffementHuile"
+                      v-model="echauffementHuile"
+                    />
+                    <label for="" class="form__label">Echauffement Huile</label>
+                  </div>
+                  <div class="form__div frame" style="width: 48%">
+                    <input
+                      type="number"
+                      class="form__input"
+                      placeholder=" "
+                      id="echauffementEnroulement"
+                      v-model="echauffementEnroulement"
+                    />
+                    <label for="" class="form__label"
+                      >Echauffement Enroulement</label
+                    >
+                  </div>
+                </div>
+              </form>
+            </div>
+          </v-card>
+
+          <router-link
+            class="nav-link"
+            :to="'/projet/electrique/update/' + this.$route.params.id"
+          >
+            <v-btn color="primary mb-14" @click="e1 = 2"> précédent </v-btn>
+          </router-link>
+          <router-link
+            :to="'/projet/bobine/' + this.$route.params.id"
+            style="text-decoration: none"
+          >
+            <v-btn
+              color="success mb-14"
+              @click="automatique"
+              v-if="this.garantie == true"
+              style="text-decoration: none"
+            >
+              Valider
+            </v-btn></router-link
+          >
+          <router-link
+            :to="'/projet/bobine/' + this.$route.params.id"
+            style="text-decoration: none"
+            ><v-btn
+              color="success mb-14"
+              @click="manuel"
+              v-if="this.garantie == false"
+            >
+              Valider
+            </v-btn></router-link
+          >
+        </v-stepper-content>
       </v-stepper>
     </div>
   </div>
 </template>
 <script>
-// import { reactive } from "vue";
-// import navbarUpdate from '../../navbarUpdate.vue';
 import NavDash from "@/components/NavDash.vue";
-// import NavDashEmp from "@/components/NavDashboardEmploye.vue";
+import Loading from "@/components/Loading.vue";
 
 import axios from "axios";
 export default {
-    components: { 
-      // navbarUpdate 
-                NavDash,
-
-      },
+  components: {
+    Loading,
+    NavDash,
+  },
   data() {
     return {
-      // switch1: "Automatique",
-      // people: ['Automatique','Manuel'],
-        // switch2: false,
-       select: { state: 'Automatique'},
-        items: [
-          { state: 'Automatique'},
-          { state: 'Manuel' },
-        ],
-        projet1:[],
+      spinner: true,
+      garantie: true,
+      select: { state: "Automatique" },
+      items: [{ state: "Automatique" }, { state: "Manuel" }],
+      projet1: [],
       projet: {
-        id:undefined,
-      option: "",
-      Pog: "",
-      log: "",
-      Pccg: "",
-      Uccg: "",
-      Ptot: "",
-      Poglimit: "",
-      loglimit: "",
-      Pccglimit: "",
-      Uccglimit: "",
-      UccgMin: "",
-      Ptotlimit: "",
-      echauffementHuile: "",
-      echauffementEnroulement: "",
-      
+        id: undefined,
+        option: "",
+        Pog: "",
+        log: "",
+        Pccg: "",
+        Uccg: "",
+        Ptot: "",
+        Poglimit: "",
+        loglimit: "",
+        Pccglimit: "",
+        Uccglimit: "",
+        UccgMin: "",
+        Ptotlimit: "",
+        echauffementHuile: "",
+        echauffementEnroulement: "",
       },
-      e1:1
+      e1: 1,
     };
   },
   methods: {
-   async manuel(){
-      console.log("manuel")
+    async manuel() {
+      this.garantie = false;
       const projets = {
         id: undefined,
         option: this.projet.option,
         Pog: this.projet.Pog,
         log: this.projet.log,
         Pccg: this.projet.Pccg,
-        Uccg:this.projet.Uccg,
+        Uccg: this.projet.Uccg,
         Ptot: this.projet.Ptot,
         Poglimit: this.projet.Poglimit,
         loglimit: this.projet.loglimit,
@@ -320,121 +286,86 @@ export default {
         echauffementHuile: this.projet.echauffementHuile,
         echauffementEnroulement: this.projet.echauffementEnroulement,
       };
-   await  axios.put('garantie/manuelle/'+this.$route.params.id, projets).then(
-        (response) => (this.id = response.data.id, console.log(response.data),
-        // window.location.reload()
-        this.getGarantie()
-        )
-        
-      );
+      await axios
+        .put("/garantie/manuelle/" + this.$route.params.id, projets)
+        .then(
+          (response) => (
+            (this.id = response.data.id),
+            console.log(response.data),
+            this.getGarantie()
+          )
+        );
     },
     updateprojet() {
-     
-      // const projets = {
-      //   id: undefined,
-      //   option: this.projet.option,
-      //   Pog: this.projet.Pog,
-      //   log: this.projet.log,
-      //   Pccg: this.projet.Pccg,
-      //   Uccg:this.projet.Uccg,
-      //   Ptot: this.projet.Ptot,
-      //   Poglimit: this.projet.Poglimit,
-      //   loglimit: this.projet.loglimit,
-      //   Pccglimit: this.projet.Pccglimit,
-      //   Uccglimit: this.projet.Uccglimit,
-      //   Ptotlimit: this.projet.Ptotlimit,
-      //   echauffementHuile: this.projet.echauffementHuile,
-      //   echauffementEnroulement: this.projet.echauffementEnroulement,
-      // };
-      // axios.put('garantie/edit/'+this.$route.params.id, projets).then(
-      //   (response) => (this.id = response.data.id, console.log(response.data))
-        
-      // );
-       this.$router.push('/projet/bobine/'+this.$route.params.id);
+      this.$router.push("/projet/bobine/" + this.$route.params.id);
     },
-   async automatique(){
-      //  const projets = {
-      //   id: undefined,
-      //   option: this.projet.option,
-      //   Pog: this.projet.Pog,
-      //   log: this.projet.log,
-      //   Pccg: this.projet.Pccg,
-      //   Uccg:this.projet.Uccg,
-      //   Ptot: this.projet.Ptot,
-      //   Poglimit: this.projet.Poglimit,
-      //   loglimit: this.projet.loglimit,
-      //   Pccglimit: this.projet.Pccglimit,
-      //   Uccglimit: this.projet.Uccglimit,
-      //   Ptotlimit: this.projet.Ptotlimit,
-      //   echauffementHuile: this.projet.echauffementHuile,
-      //   echauffementEnroulement: this.projet.echauffementEnroulement,
-      // };
-    await axios.put('/garantie/edit/'+this.$route.params.id).then(
-        (response) => (this.id = response.data.id, console.log(response.data),this.getGarantie())
-        
-      );
+    async automatique() {
+      this.garantie = true;
+      await axios
+        .put("/garantie/edit/" + this.$route.params.id)
+        .then((response) => ((this.id = response.data.id), this.getGarantie()));
     },
-   async getGarantie(){
-
-    await axios.get('getGarantie/'+this.$route.params.id).then(
-        (response) => ( this.projet=response.data)
-        
-      );
-    }
+    async getGarantie() {
+      await axios
+        .get("getGarantie/" + this.$route.params.id)
+        .then((response) => (this.projet = response.data));
+    },
   },
   async mounted() {
-    const result = await axios.get('projets/'+this.$route.params.id);
+    const result = await axios.get("projets/" + this.$route.params.id);
     this.projet1 = result.data;
   },
-  async created(){
-     const result = await axios.get('projets/'+this.$route.params.id);
+  async created() {
+    const result = await axios.get("projets/" + this.$route.params.id);
     this.projet1 = result.data;
-    console.log(this.projet);
-  await this.getGarantie();
-  await this.automatique();
-    
+    await this.getGarantie();
+    this.spinner = false;
   },
-  computed:{
-    // Pog(){
-    //   if(max(this.projet.u1n,this.projet.u2o)<24000){
-
-    //   }else{
-
-    //   }
-    // },
-    Poglimit(){
-      return parseFloat(this.projet.Pog)+(parseFloat(this.projet.Pog)*0.15);
+  computed: {
+    Poglimit() {
+      return parseFloat(this.projet.Pog) + parseFloat(this.projet.Pog) * 0.15;
     },
-    loglimit(){
-      return parseFloat(this.projet.log)+((parseFloat(this.projet.log)*30)/100);
+    loglimit() {
+      return (
+        parseFloat(this.projet.log) + (parseFloat(this.projet.log) * 30) / 100
+      );
     },
-    Pccglimit(){
-      return parseFloat(this.projet.Pccg)+((parseFloat(this.projet.Pccg)*15)/100);
+    Pccglimit() {
+      return (
+        parseFloat(this.projet.Pccg) + (parseFloat(this.projet.Pccg) * 15) / 100
+      );
     },
-    Uccglimit(){
-      return parseFloat(this.projet.Uccg)+((parseFloat(this.projet.Uccg)*10)/100);
+    Uccglimit() {
+      return (
+        parseFloat(this.projet.Uccg) + (parseFloat(this.projet.Uccg) * 10) / 100
+      );
     },
-    UccgMin(){
-      return parseFloat(this.projet.Uccg)-((parseFloat(this.projet.Uccg)*10)/100);
+    UccgMin() {
+      return (
+        parseFloat(this.projet.Uccg) - (parseFloat(this.projet.Uccg) * 10) / 100
+      );
     },
-    Ptotlimit(){
-      return parseFloat(this.projet.Pccg)+parseFloat(this.projet.Pog)+(((parseFloat(this.projet.Pccg)+parseFloat(this.projet.Pog))*10)/100);
+    Ptotlimit() {
+      return (
+        parseFloat(this.projet.Pccg) +
+        parseFloat(this.projet.Pog) +
+        ((parseFloat(this.projet.Pccg) + parseFloat(this.projet.Pog)) * 10) /
+          100
+      );
     },
-    echauffementHuile(){
-      console.log(this.projet.temperatureMax);
-      return 100-parseInt(this.projet1.temperatureMax);
+    echauffementHuile() {
+      return 100 - parseInt(this.projet1.temperatureMax);
     },
-    echauffementEnroulement(){
-      return 105-parseInt(this.projet1.temperatureMax);
+    echauffementEnroulement() {
+      return 105 - parseInt(this.projet1.temperatureMax);
     },
-    Ptot(){
-      return parseInt(this.projet.Pccg)+parseInt(this.projet.Pog);
+    Ptot() {
+      return parseInt(this.projet.Pccg) + parseInt(this.projet.Pog);
     },
-  }
+  },
 };
 </script>
 <style scoped>
-
 h1 {
   margin: 0;
 }
@@ -553,7 +484,7 @@ h1 {
   margin-bottom: 3.5%;
   position: relative;
 }
- .title::before {
+.title::before {
   content: "";
   position: absolute;
   left: 0;
@@ -561,7 +492,7 @@ h1 {
   height: 3px;
   width: 250px;
   border-radius: 5px;
-  
+
   background: linear-gradient(135deg, #0b65a0, #71b7e6);
 }
 .content form .user-details {
@@ -660,10 +591,10 @@ form .button input:hover {
   border-color: #000;
 }
 .v-sheet.v-card:not(.v-sheet--outlined) {
-    box-shadow: 0px 0px 0px 0px;
+  box-shadow: 0px 0px 0px 0px;
 }
 .v-stepper--vertical {
-    padding-bottom:0px;
+  padding-bottom: 0px;
 }
 @media (max-width: 584px) {
   .container {
@@ -684,16 +615,16 @@ form .button input:hover {
     width: 5px;
   }
   .user-details .input-box input {
-  height: 45px;
-  width: 100%;
-  outline: none;
-  font-size: 16px;
-  border-radius: 5px;
-  padding-left: 15px;
-  /* border: 1px solid #ccc; */
-  /* border-bottom-width: 2px; */
-  transition: all 0.3s ease;
-}
+    height: 45px;
+    width: 100%;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+    padding-left: 15px;
+    /* border: 1px solid #ccc; */
+    /* border-bottom-width: 2px; */
+    transition: all 0.3s ease;
+  }
 }
 @media (max-width: 459px) {
   .container .content .category {
@@ -701,9 +632,9 @@ form .button input:hover {
   }
 }
 .v-btn:not(.v-btn--round).v-size--default {
-    height: 36px;
-    min-width: 64px;
-    padding: 16px;
-    margin: 3px;
+  height: 36px;
+  min-width: 64px;
+  padding: 16px;
+  margin: 3px;
 }
 </style>
