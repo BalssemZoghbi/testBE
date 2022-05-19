@@ -421,7 +421,7 @@ export default {
         nbrePosition: this.projet.nbrePosition,
       };
       axios
-        .put("/electrique/edit/" + this.$route.params.id, projets)
+        .put("electrique/edit/" + this.$route.params.id, projets)
         .then(
           (response) => (
             (this.id = response.data.id), console.log(response.data.id)
@@ -441,6 +441,7 @@ export default {
         });
       return r;
     },
+    
   },
   async mounted() {
     const result = await axios.get("/projets/" + this.$route.params.id);
@@ -454,10 +455,18 @@ export default {
     couplage() {
       return (
         this.projet.couplagePrimaire +
-        this.projet.couplageSecondaire +
-        this.projet.indiceHoraire
+        this.projet.couplageSecondaire
       );
     },
+    // indice(){
+    //   let couplage= this.projet.couplagePrimaire + this.projet.couplageSecondaire;
+    //   let mylist=['Yz','YNzn','Dyn','Yzn','Dy'];
+    //   if(mylist.includes(this.couplage ) ){
+    //     return ['1','5','7','11'];
+    //   }else{
+    //     return ['1','5','7','11','13'];
+    //   }
+    // },
     nbrePosition() {
       return (
         parseInt(this.projet.priseSoustractive) +

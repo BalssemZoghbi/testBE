@@ -212,7 +212,7 @@ class ElectriqueController extends Controller
         list($SecondaireuLigne,$SecondaireuPhase,$SecondaireiLigne,$SecondaireiPhase,$Uz)=$this->couplage($request->couplageSecondaire,$request->u2o,$request->puissance);
         $couplage=$request->couplagePrimaire.$request->couplageSecondaire;
         $indice=$this->indice($couplage);
-         if(in_array($request->indiceHoraire, $indice)  ){
+        //  if(in_array($request->indiceHoraire, $indice)  ){
         $electrique->update([
             'colonnes' => $request->colonnes,
             'frequence' =>$request->frequence,
@@ -249,10 +249,10 @@ class ElectriqueController extends Controller
         if($electrique->save()){
             return new ElectriqueResource($electrique);
         }
-    }
-    else{
-        return 'parametre incorrect';
-    }
+    // }
+    // else{
+    //     return 'parametre incorrect';
+    // }
     }
 
      public function delete($id){
