@@ -353,8 +353,8 @@ export default {
       typeCanaux: ['complet','lune'],
       projet: {
          id:undefined,
-      materiauBT:"",
-      conducteurBT:"",
+      materiauSec:"",
+      conducteurSec:"",
         scu2:"",
         j2:"",
         EpfeuillePapierBT:"",
@@ -402,8 +402,8 @@ export default {
     updateprojet() {
       const projets = {
         id: undefined,
-        materiauBT: this.projet.materiauBT,
-        conducteurBT: this.projet.conducteurBT,
+        materiauSec: this.projet.materiauSec,
+        conducteurSec: this.projet.conducteurSec,
         scu2: this.projet.scu2,
         j2: this.projet.j2,
         // scu2d: this.projet.scu2d,

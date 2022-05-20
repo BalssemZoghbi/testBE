@@ -3,7 +3,8 @@
     <NavDash
       :conducteurMT="projet.conducteurMT"
       :conducteurBT="projet.conducteurBT"
-    />    <Loading v-if="spinner" />
+    /> 
+       <Loading v-if="spinner" />
     <div class="body">
       <v-stepper v-model="e1" vertical>
            

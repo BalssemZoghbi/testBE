@@ -118,11 +118,9 @@
                 </div>
               </form>
             </v-card>
-            <router-link class="nav-link" :to="'/projet/update/' + projet.id"
-              ><v-btn color="primary mb-16" @click="updateprojet">
+           <v-btn color="primary mb-16" @click="routeur">
                 précédent
-              </v-btn></router-link
-            >
+              </v-btn>
             <v-btn color="success mb-16" @click="e1 = 2"> suivant </v-btn>
           </v-stepper-content>
           <v-stepper-step :complete="e1 > 2" step="2">
@@ -327,13 +325,13 @@ export default {
     return {
       barre: [],
       emaille: [],
-      conducteurMT: ["meplat guipé", "Rond emaille", "feuillard"],
-      materiauMT: ["cuivre", "aluminium"],
+      conducteur: ["meplat guipé", "Rond emaille", "feuillard"],
+      materiau: ["cuivre", "aluminium"],
       typeCanaux: ["complet", "lune"],
       projet: {
         id: undefined,
-        materiauMT: "",
-        conducteurMT: "",
+        materiau: "",
+        conducteur: "",
         scu1: "",
         j1: "",
         nbcoucheMT: "",
@@ -379,8 +377,8 @@ export default {
     updateprojet() {
       const projets = {
         id: undefined,
-        materiauMT: this.projet.materiauMT,
-        conducteurMT: this.projet.conducteurMT,
+        materiau: this.projet.materiau,
+        conducteur: this.projet.conducteur,
         scu1: this.projet.scu1,
         j1: this.projet.j1,
         nbcoucheMT: this.projet.nbcoucheMT,
@@ -425,6 +423,21 @@ export default {
         );
       this.$router.push("/projet/pccucc/" + this.$route.params.id);
     },
+      routeur(){
+     if (this.projet.conducteurBT == "Rond emaille") {
+        this.$router.push(
+          "/projet/bobinageSecondaireRond/" + this.$route.params.id
+        );
+      } else if (this.projet.conducteurBT == "feuillard") {
+        this.$router.push(
+          "/projet/bobinageSecondaireFeuillard/" + this.$route.params.id
+        );
+      } else if (this.projet.conducteurBT == "meplat guipé") {
+        this.$router.push(
+          "/projet/bobinageSecondaireMeplat/" + this.$route.params.id
+        );
+    }
+    }
   },
   async mounted() {
     const result = await axios.get("projets/" + this.$route.params.id);
