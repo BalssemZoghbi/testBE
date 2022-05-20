@@ -274,10 +274,10 @@ class ProjetController extends Controller
             'Hauteurcuve' => null,
         ]);
         $donnebobines=DonneBobine::create([
-            'materiauMT' => 'cuivre',
-            'conducteurMT' => 'feuillard',
-            'materiauBT' => 'cuivre',
-            'conducteurBT' => 'Rond emaille',
+            'materiauMT' => null,
+            'conducteurMT' => null,
+            'materiauBT' => null,
+            'conducteurBT' => null,
         ]);
         $reference = "PC " . date("m/d/y");
         $projet = Projet::create([

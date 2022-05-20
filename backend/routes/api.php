@@ -11,6 +11,7 @@ use App\Http\Controllers\Calcul\VoltspireController;
 use App\Http\Controllers\Donnees\ElectriqueController;
 use App\Http\Controllers\Donnees\GarantieController;
 use App\Http\Controllers\projet\EmailleController;
+use App\Http\Controllers\projet\ModeleController;
 use App\Http\Controllers\projet\ProjetController;
 use App\Http\Controllers\projet\TensionElectriqueController;
 use App\Http\Controllers\projet\WordExportController;
@@ -168,6 +169,10 @@ Route::post('/statEmploye',[StatistiqueEmployeController::class ,'create']);
 
 
 Route::get('/electrique/tension/{id}/{u1nRange}',[ElectriqueController::class ,'tension']);
+Route::get('/modele/{id}', [ModeleController::class ,'showModele']);
+Route::get('/modeles', [ModeleController::class ,'index']);
+Route::post('/modeles/create', [ModeleController::class ,'createModele']);
+Route::delete('/modeles/delete/{id}', [ModeleController::class ,'deleteModele']);
 
 
 
