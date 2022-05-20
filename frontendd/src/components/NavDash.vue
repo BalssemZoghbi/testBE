@@ -260,7 +260,8 @@ import { mapGetters } from 'vuex';
       fab: false,
       items: [
         { icon: 'mdi-home', text: 'Tableau de bord' , route:'/dashboard'},
-         { icon: "fas fa-charging-station", text: "projet", route: "/" },
+         { icon: "fas fa-charging-station", text: "Projet", route: "/" },
+         { icon: "fas fa-charging-station", text: "Modele", route: "/modele" },
          { icon: "mdi-account", text: "Utilisateur", route: "/user" },
         // {
         //   icon: 'mdi-chevron-up',

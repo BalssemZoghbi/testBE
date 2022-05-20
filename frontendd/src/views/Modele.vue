@@ -16,44 +16,8 @@
       >
         <template v-slot:top>
           <v-toolbar flat>
-            <!-- <v-toolbar-title>Projets</v-toolbar-title> -->
 
-            <!-- <v-btn
-        color="primary"
-        class="ma-2"
-        dark
-        @click="dialog2 = true"
-      >
-        Creer
-      </v-btn>
-        <v-dialog
-        v-model="dialog2"
-        max-width="500px"
-      >
-        <v-card>
-          <v-card-title>
-            Creer
-          </v-card-title>
-          <v-card-text>
-            <v-select
-              :items="select"
-              label="Creer depuis un "
-              item-value="text"
-            ></v-select>
-          </v-card-text>
-          <v-card-actions>
-            <v-btn
-              color="primary"
-              text
-              @click="dialog2 = false"
-            >
-              Fermer
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog> -->
-
-            <v-menu transition="slide-x-transition" offset-x>
+            <!-- <v-menu transition="slide-x-transition" offset-x>
               <template v-slot:activator="{ on, attrs }">
                 <v-btn v-bind="attrs" v-on="on" color="primary"> Creer </v-btn>
               </template>
@@ -82,11 +46,11 @@
                   </v-list-item>
                 </v-list-item-group>
               </v-list>
-            </v-menu>
+            </v-menu> -->
 
-            <!-- <v-btn color="primary"  @click="create()" dark class="mb-2">
-                Ajouter 
-              </v-btn> -->
+            <v-btn color="primary"  @click="create()" dark class="mb-2">
+                Ajouter un Modele
+              </v-btn>
             <v-divider class="mx-4" inset vertical></v-divider>
             <v-spacer></v-spacer>
             <v-card-title>
@@ -101,26 +65,18 @@
           </v-toolbar>
         </template>
         <template v-slot:[`item.actions`]="{ item }">
-          <router-link :to="'/projet/update/' + item.id">
-            <!-- <v-btn
-              color="cyan"
-              
-    dark
-    fab 
- small
-    class="clickable"
-    > <v-icon > mdi-pencil </v-icon></v-btn> -->
+          <router-link :to="'/projet/update/' + item.projets_id">
             <v-btn class="mx-2" fab dark small color="primary">
               <v-icon dark> mdi-pencil </v-icon>
             </v-btn>
           </router-link>
           <v-btn class="mx-2" fab dark small color="red">
-            <v-icon dark v-on:click="deleteprojet(item.id)">
+            <v-icon dark v-on:click="deleteModele(item.id)">
               mdi-delete
             </v-icon>
           </v-btn>
           <!-- <v-form ref="form"> -->
-          <v-btn
+          <!-- <v-btn
             class="mx-2"
             fab
             dark
@@ -129,7 +85,7 @@
              @click="exportword(item.id)"
           >
             <v-icon dark> mdi-cloud-download </v-icon>
-          </v-btn>
+          </v-btn> -->
           <!-- </v-form> -->
           <!-- <v-icon small > mdi-delete </v-icon> -->
         </template>
@@ -156,8 +112,7 @@ export default {
     // navbar
   },
   data: () => ({
-    Modele:[],
-    Projet:[],
+     
     spinner:true,
     usertype: "",
     projet: Object,
@@ -175,12 +130,12 @@ export default {
     dialogDelete: false,
     headers: [
       {
-        text: "Reference",
-        value: "reference",
+        text: "Modele",
+        value: "modele",
         align: "start",
         sortable: true,
       },
-      { text: "Appareil", value: "appareil" },
+      { text: "projets_id", value: "projets_id" },
       { text: "Puissance", value: "puissance" },
       { text: "Tension Primaire", value: "u1n" },
       { text: "Tension Secondaire", value: "u2o" },
@@ -209,14 +164,12 @@ export default {
   }),
 
   async created() {
-    
     this.usertype = JSON.parse(localStorage.getItem("user")).type;
     console.log(this.usertype);
     const response = await axios.get("user");
     this.$store.dispatch("user", response.data);
     this.user = response.data;
-    this.getprojet();
-    this.Modeles();
+    this.getModele();
   },
   computed: {
     formTitle() {
@@ -228,7 +181,7 @@ export default {
     if (!user) {
       this.$router.push("/Connexion");
     }
-    this.getprojet();
+    this.getModele();
   },
 
   watch: {
@@ -241,34 +194,12 @@ export default {
   },
 
   methods: {
-    exportword(id) {
-
- var vm=this;
-vm.isDisabled = true;
   
- axios.post('documents/'+id,{responseType:'blob'}).then(function(response){
-   var headers = response.headers;
-   console.log(headers);
-   var blob=new Blob([response.data.data],{type:headers['content-type']});
-   var link = document.createElement('a');
-   link.href = window.URL.createObjectURL(blob);
-    link.download = vm.templateProjet;
-    link.click();
-    link.remove();
-    vm.isDisabled = false;
-
- }).catch(error=>{
-   if(error)
-      //  vm.isDisabled = false;
-      console.log("error");
-              });
-
-    },
     create() {
       let token = localStorage.getItem("token");
       axios
         .post(
-          "projets/add",
+          "/modeles/create",
           {},
           {
             headers: {
@@ -278,94 +209,22 @@ vm.isDisabled = true;
         )
         .then(
           (response) => (
-            (this.createprojet = response.data),
-            this.$router.push("/projet/update/" + response.data.id)
+            this.$router.push("/projet/update/"+ response.data.projets_id)
           )
         );
     },
-    createModeleFeuillardEmaille() {
-      let token = localStorage.getItem("token");
-      axios
-        .post(
-          "projets/storeFeuillardEmaille",
-          {},
-          {
-            headers: {
-              Authorization: token,
-            },
-          }
-        )
-        .then(
-          (response) => (
-            (this.createprojet = response.data),
-            this.$router.push("/projet/update/" + response.data.id)
-          )
-        );
-    },
-    createModeleFeuillardMeplat() {
-      let token = localStorage.getItem("token");
-      axios
-        .post(
-          "projets/storeFeuillardMeplat",
-          {},
-          {
-            headers: {
-              Authorization: token,
-            },
-          }
-        )
-        .then(
-          (response) => (
-            (this.createprojet = response.data),
-            this.$router.push("/projet/update/" + response.data.id)
-          )
-        );
-    },
-    createModeleMeplatEmaille() {
-      let token = localStorage.getItem("token");
-      axios
-        .post(
-          "projets/storeMeplatEmaille",
-          {},
-          {
-            headers: {
-              Authorization: token,
-            },
-          }
-        )
-        .then(
-          (response) => (
-            (this.createprojet = response.data),
-            this.$router.push("/projet/update/" + response.data.id)
-          )
-        );
-    },
-    Modeles(){
-      axios.get("/modeleProjetId").then((resp) => {
-        this.Modele = resp.data
-      });
-    },
-    getprojet() {
-      axios.get("/projets").then((resp) => {
-        this.projets = resp.data
-        //get Projet where Projet id not in this.Modeles
-        // this.Projet.forEach(element => {
-        //   if(element.id!=this.Modeles){
-        //     this.projets.push(element);
-        //   }
-        // });
-        //   console.log(this.projets);
-        // this.projets = this.Projet.filter(
-        //   (Projet) => !this.Modele.some((modele) => modele.projet_id == Projet.id)
-        // );
-      
+
+    getModele() {
+      axios.get("modeles").then((resp) => {
+        this.projets = resp.data;
         this.spinner=false;
       });
     },
-    deleteprojet(id) {
+    deleteModele(id) {
+        console.log(id);
       Swal.fire({
         title: "Supprimer",
-        text: "Vous êtes sure de supprimer ce projet?",
+        text: "Vous êtes sure de supprimer ce modele?",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -373,9 +232,9 @@ vm.isDisabled = true;
         confirmButtonText: "Supprimer",
       }).then((result) => {
         if (result.isConfirmed) {
-          axios.delete("projets/delete/" + id).then(() => {
-                      Swal.fire("Supprimé!", "Ce projet a été supprimé", "success");
-            this.getprojet();
+        axios.delete("modeles/delete/" + id).then(() => {
+        Swal.fire("Supprimé!", "Ce Modele a été supprimé", "success");
+        this.getModele();
           });
         }
       });

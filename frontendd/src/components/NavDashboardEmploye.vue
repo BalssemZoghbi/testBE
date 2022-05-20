@@ -210,7 +210,8 @@ import { mapGetters } from 'vuex';
         
       itemsemploye: [
         { icon: 'mdi-home', text: 'Tableau de bord' , route:'/dashboardEmploye'},
-         { icon: "fas fa-charging-station", text: "projet", route: "/" },
+        { icon: "fas fa-charging-station", text: "projet", route: "/" },
+        { icon: "fas fa-charging-station", text: "Modele", route: "/modele" },
        
       ],
     }),

@@ -158,6 +158,15 @@
                       outlined
                     ></v-select>
                   </div>
+                      <div class="form__div">
+                    <input
+                      type="text"
+                      class="form__input"
+                      placeholder=" "
+                      id="modele"
+                    />
+                    <label for="" class="form__label">Nom Modele</label>
+                  </div>
                 </div>
               </form>
             </div>
@@ -183,6 +192,7 @@ export default {
   },
   data() {
     return {
+      show:true,
       barre: [],
       types: ["cabine", "poteau", "h61", "h59", "sec"],
       remplissages: ["à matelas d`air", "integral", "respirant"],

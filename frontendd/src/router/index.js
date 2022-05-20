@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import Modele from "../views/Modele.vue";
 import Dashboard from "../views/Dashboard.vue";
 import DashboardEmploye from "../views/DashboardEmploye.vue";
 import about from "../views/About.vue";
@@ -104,6 +105,11 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home,
+  },
+  {
+    path: "/modele",
+    name: "Modele",
+    component: Modele,
   },
   {
     path: "/dashboard",
