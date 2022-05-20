@@ -7,7 +7,7 @@
     <div class="body">
       <v-stepper v-model="e1" vertical>
         <Loading v-if="spinner" />
-        <v-stepper-step :complete="e1 > 1" step="1">
+        <v-stepper-step step="">
           Données de Garantie
         </v-stepper-step>
         <v-stepper-content step="1">

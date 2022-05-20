@@ -18,9 +18,10 @@
   z-index: 9999999;
   align-items: center;
   background: #fff;
+  /* background-size:2% ; */
   justify-content: center;
   width: 100%;
-  height: 100%;
+  height: 79%;
 }
 .logo {
   width: 100%;

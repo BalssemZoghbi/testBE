@@ -1,28 +1,19 @@
 <template>
    <div>
-  <!-- <navbarUpdate :conducteur="projet.conducteur" :conducteurSec="this.projet.conducteurSec"/> -->
    <NavDash
       :conducteurMT="projet.conducteurMT"
       :conducteurBT="projet.conducteurBT"
     />
 <div class="body">
       <v-stepper v-model="e1"  vertical>
-   
+    <Loading v-if="spinner" />
       <v-stepper-step
-        :complete="e1 > 1"
-        step="1"
+        step=""
       >
        Données Bobinage
       </v-stepper-step>
  <v-stepper-content step="1">
-
-    <!-- <v-stepper-items>
-      <v-stepper-content step="1"> -->
   <v-card class="mb-14"  >
-        <!-- <div class="body">
-          
-<div class="container"> -->
-  
     <div class="content">
       <form  v-on:submit.prevent="updateprojet">
         <div class="user-details">
@@ -42,9 +33,7 @@
            <div class="input-box">
              <div class="title">bobine secondaire</div>
                <div class="form__div">
-                    <!-- <input type="text" class="form__input" placeholder=" " id="materiauSec" v-model="projet.materiauSec">
-                    <label for="" class="form__label">materiauSec</label> -->
-                     <v-select
+                <v-select
                 :items="materiau"
                 label="materiau"
                 v-model="projet.materiauBT"
@@ -57,9 +46,7 @@
          
              <div class="input-box">
             <div class="form__div">
-              <!-- <input type="text" class="form__input" placeholder=" " id="conducteur" v-model="projet.conducteur">
-              <label for="" class="form__label">conducteur</label> -->
-              <v-select
+            <v-select
                 :items="conducteur"
                 label="conducteur"
                 v-model="projet.conducteurMT"
@@ -70,9 +57,7 @@
           </div>
             <div class="input-box">
             <div class="form__div">
-              <!-- <input type="text" class="form__input" placeholder=" " id="conducteurSec" v-model="projet.conducteurSec">
-              <label for="" class="form__label">conducteurSec</label> -->
-               <v-select
+           <v-select
                :items="conducteur"
                 label="conducteur"
                 v-model="projet.conducteurBT"
@@ -83,14 +68,12 @@
           </div>
         </div>
       </form>
-    <!-- </div>
-</div> -->
         </div>
   </v-card>   
        <router-link
               class="nav-link"
               :to="
-                '/projet/garantie/' + projet.id 
+                '/projet/garantie/' + this.$route.params.id
               "
               > <v-btn
         color="primary mb-8"
@@ -110,14 +93,16 @@
 
 <script>
 import NavDash from "@/components/NavDash.vue";
-
 import axios from "axios";
+import Loading from '../../Loading.vue';
 export default {
     components: {
      NavDash,
+        Loading
       },
   data() {
     return {
+      spinner:false,
       cond1: "meplat guipé",
       cond2: "feuillard",
       conducteur: ['meplat guipé','Rond emaille','feuillard'], 
@@ -156,6 +141,11 @@ export default {
     this.cond1=result.data.conducteur;
     this.cond2=result.data.conducteurSec;
  },
+   async created() {
+    const result = await axios.get("/projets/" + this.$route.params.id);
+    this.projet = result.data;
+    this.spinner = false;
+  },
   async mounted() {
     const result = await axios.get('projets/'+this.$route.params.id);
     this.projet = result.data;
