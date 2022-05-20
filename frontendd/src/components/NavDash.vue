@@ -127,7 +127,7 @@
       class="text"
       >
          <span class="hidden-sm-and-down" v-if="((this.$route.path).indexOf('projet'))<=0" >SacemAutocite</span>
-       <navbarUpdate :conducteur="this.conducteur" :conducteurSec="this.conducteurSec" v-else />
+       <navbarUpdate :conducteurMT="this.conducteurMT" :conducteurBT="this.conducteurBT" v-else />
      
       </v-toolbar-title>
       <v-spacer />
@@ -299,9 +299,8 @@ import { mapGetters } from 'vuex';
    async created() {
   const response=await axios.get('user');
     this.$store.dispatch('user',response.data);
-
   this.user=response.data;
-  console.log((this.$route.path).indexOf('projet'));
+  // console.log((this.$route.path).indexOf('projet'));
 },
 computed: {
   ...mapGetters(['user'])
@@ -322,7 +321,7 @@ computed: {
         this.$vuetify.goTo(0)
       }
     },
-     props:['conducteur','conducteurSec'],
+     props:['conducteurMT','conducteurBT'],
     
   }
 </script>
