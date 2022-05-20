@@ -136,21 +136,20 @@ class GradinController extends Controller
             ->join('electriques', 'electriques.id', '=', 'projets.electrique_id')
             ->join('gradins', 'gradins.id', '=', 'projets.gradin_id')
             ->join('bobinage_secs', 'bobinage_secs.id', '=', 'projets.bobinage_id')
+            ->join('donne_bobines', 'donne_bobines.id', '=', 'projets.donne_bobines_id')
             ->where('projets.id', $id)
-            ->select('projets.gradin_id', 'electriques.puissance', 'bobinage_secs.materiauSec', 'bobinage_secs.conducteurSec')
+            ->select('projets.gradin_id', 'electriques.puissance', 'donne_bobines.materiauBT','donne_bobines.materiauMT','donne_bobines.conducteurBT','donne_bobines.conducteurMT','bobinage_secs.materiauSec', 'bobinage_secs.conducteurSec')
             ->get()->first();
         $Gradin = Gradin::FindOrFail($projet->gradin_id);
         $oldnbreGradin = $Gradin->getOriginal('nbrGradin');
         $oldlargGradin = $Gradin->getOriginal('largeur');
-        // dd($oldlargGradin);
-        $diamPropose = $this->diametre($projet->materiauSec, $projet->puissance);
+        $diamPropose = $this->diametre($projet->materiauBT, $projet->puissance);
         $largeur=$this->largeur($request->diamNominale,$request->pas,$request->nbrGradin,$request->largeurMin,$oldlargGradin,$oldnbreGradin);
         $epaisseur=$this->epaisseur($request->diamNominale,$largeur,$request->nbrGradin);
         $epaisseurfeuillard=$this->epaisseurfeuillard($request->diamNominale,$largeur,$request->nbrGradin,$request->demiGradin,$request->largeurMin,$oldlargGradin,$oldnbreGradin);
-        // dd($epaisseurfeuillard);
         $brut=array_sum(array_map(function($a, $b) { return $a * $b; }, $largeur, $epaisseur));
         $brutFeuillard=array_sum(array_map(function($a, $b) { return $a * $b; }, $largeur, $epaisseurfeuillard));
-        if($projet->conducteurSec=='feuillard'){
+        if($projet->conducteurBT=='feuillard'){
             $Gradin->update([
                 'tole' =>  $request->tole,
                 'diamPropose' => $diamPropose,
