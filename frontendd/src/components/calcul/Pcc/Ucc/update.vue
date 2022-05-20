@@ -73,17 +73,12 @@
                   </div>
       </form>
   </v-card>  
-            <router-link
-              class="nav-link"
-              :to="
-                '/projet/cm/update/' + projet.id 
-              "
-              > <v-btn
+          <v-btn
         color="primary  mb-10"
-        @click="e1 = 2"
+        @click="routeur"
       >
         précédent
-      </v-btn> </router-link>
+      </v-btn> 
                    <v-btn color="success mb-10" @click="updateprojet">
           Valider
         </v-btn>
@@ -143,6 +138,15 @@ export default {
         );
       this.$router.push( '/projet/cm/' + this.$route.params.id);
     },
+    routeur(){
+        if(this.projet.conducteurMT=="Rond emaille"){
+      this.$router.push("/projet/bobinagePrimaireRond/"+this.$route.params.id);
+    }else if(this.projet.conducteurMT=="feuillard"){
+      this.$router.push("/projet/bobinagePrimaireFeuillard/"+this.$route.params.id);
+    }else if(this.projet.conducteurMT=="meplat guipé"){
+      this.$router.push("/projet/bobinagePrimaireMeplat/"+this.$route.params.id);
+    }  },
+    
   },
   async mounted() {
     const result = await axios.get("projets/" + this.$route.params.id);

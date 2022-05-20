@@ -1,8 +1,10 @@
 <template>
    <div>
   <!-- <navbarUpdate :conducteur="projet.conducteur" :conducteurSec="this.projet.conducteurSec"/> -->
-        <NavDash :conducteur="projet.conducteur" :conducteurSec="projet.conducteurSec"/>
-
+   <NavDash
+      :conducteurMT="projet.conducteurMT"
+      :conducteurBT="projet.conducteurBT"
+    />
 <div class="body">
       <v-stepper v-model="e1"  vertical>
    

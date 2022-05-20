@@ -339,14 +339,14 @@ export default {
       saillie: [],
       hbrin: [],
       barre: [],
-      conducteurMT: ["meplat guipé", "Rond emaille", "feuillard"],
+      conducteurSec: ["meplat guipé", "Rond emaille", "feuillard"],
       materiauBT: ["cuivre", "aluminium"],
       etage: ["1", "2"],
       typeCanaux: ["complet", "lune"],
       projet: {
         id: undefined,
-        materiauBT: "",
-        conducteurBT: "",
+        materiauSec: "",
+        conducteurSec: "",
         etageBT: "",
         saillieBT: "",
         hbrin1BT: "",
@@ -390,8 +390,8 @@ export default {
     updateprojet() {
       const projets = {
         id: undefined,
-        materiauBT: this.projet.materiauBT,
-        conducteurBT: this.projet.conducteurBT,
+        materiauSec: this.projet.materiauBT,
+        conducteurSec: this.projet.conducteurBT,
         etageBT: this.projet.etageBT,
         saillieBT: this.projet.saillieBT,
         hbrin1BT: this.projet.hbrin1BT,

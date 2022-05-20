@@ -1,8 +1,8 @@
 <template>
   <div>
-    <NavDash
-      :conducteur="projet.conducteur"
-      :conducteurSec="projet.conducteurSec"
+     <NavDash
+      :conducteurMT="projet.conducteurMT"
+      :conducteurBT="projet.conducteurBT"
     />
     <div class="body">
       <v-stepper v-model="e1" vertical>
@@ -183,15 +183,15 @@ export default {
             (this.id = response.data.id), console.log(response.data)
           )
         );
-      if (this.projet.conducteurSec == "Rond emaille") {
+  if (this.projet.conducteurBT == "Rond emaille") {
         this.$router.push(
           "/projet/bobinageSecondaireRond/" + this.$route.params.id
         );
-      } else if (this.projet.conducteurSec == "feuillard") {
+      } else if (this.projet.conducteurBT == "feuillard") {
         this.$router.push(
           "/projet/bobinageSecondaireFeuillard/" + this.$route.params.id
         );
-      } else if (this.projet.conducteurSec == "meplat guipé") {
+      } else if (this.projet.conducteurBT == "meplat guipé") {
         this.$router.push(
           "/projet/bobinageSecondaireMeplat/" + this.$route.params.id
         );

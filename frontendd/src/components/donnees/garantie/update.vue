@@ -1,8 +1,8 @@
 <template>
   <div>
     <NavDash
-      :conducteur="projet1.conducteur"
-      :conducteurSec="projet1.conducteurSec"
+      :conducteurMT="projet.conducteurMT"
+      :conducteurBT="projet.conducteurBT"
     />
     <div class="body">
       <v-stepper v-model="e1" vertical>
