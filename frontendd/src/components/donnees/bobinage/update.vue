@@ -1,8 +1,8 @@
 <template>
    <div>
    <NavDash
-      :conducteurMT="projet.conducteurMT"
-      :conducteurBT="projet.conducteurBT"
+      :conducteurMT="this.cond1"
+      :conducteurBT="this.cond2"
     />
 <div class="body">
       <v-stepper v-model="e1"  vertical>
@@ -138,8 +138,9 @@ export default {
   },
   beforeCreate(){
      const result =  axios.get('projets/'+this.$route.params.id);
-    this.cond1=result.data.conducteur;
-    this.cond2=result.data.conducteurSec;
+    this.cond1=result.data.conducteurMT;
+    this.cond2=result.data.conducteurBT;
+
  },
    async created() {
     const result = await axios.get("/projets/" + this.$route.params.id);
@@ -149,8 +150,8 @@ export default {
   async mounted() {
     const result = await axios.get('projets/'+this.$route.params.id);
     this.projet = result.data;
-    this.cond1=result.data.conducteur;
-    this.cond2=result.data.conducteurSec;
+    this.cond1=result.data.conducteurMT;
+    this.cond2=result.data.conducteurBT;
   },
  
 };
