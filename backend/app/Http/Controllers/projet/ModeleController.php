@@ -66,9 +66,9 @@ class ModeleController extends Controller
             ->get()->first();
         return response()->json($modele);
     }
-    public function updateModele($id,Request $request)
+    public function ProjetDevenirModele($id,Request $request)
     {
-        $modele = DB::table('projets')
+         DB::table('projets')
             ->join('modeles', 'modeles.projets_id', '=', 'projets.id')
             ->join('electriques', 'electriques.id', '=', 'projets.electrique_id')
             ->join('garanties', 'garanties.id', '=', 'projets.garantie_id')
@@ -83,12 +83,39 @@ class ModeleController extends Controller
             ->where('projets.id', $id)
             ->select()
             ->get()->first();
-            $projet1 = Modele::FindOrFail($id);
+            $modelecreate = Modele::create([
+                'modele'=>$request->modele,
+                'projets_id'=>$id,
+            ]);
+        return response()->json($modelecreate);
+    }
+    public function updateModele($id,Request $request)
+    {
+        $modele = DB::table('modeles')
+            ->join('projets', 'projets.id', '=', 'modeles.projets_id')->where('modeles.projets_id', $id)
+            ->select('modeles.*', 'modeles.id as modele_id','projets.*')
+            ->get()->first();
+
+            $projet1 = Modele::FindOrFail($modele->modele_id);
             $projet1->update([
                 'modele'=>$request->modele,
                 'projets_id'=>$modele->id,
             ]);
-        return response()->json($projet1);
+            $modele1 = DB::table('modeles')
+            ->join('projets', 'projets.id', '=', 'modeles.projets_id')
+            ->join('electriques', 'electriques.id', '=', 'projets.electrique_id')
+            ->join('garanties', 'garanties.id', '=', 'projets.garantie_id')
+            ->join('bobinages', 'bobinages.id', '=', 'projets.bobinage_id')
+            ->join('gradins', 'gradins.id', '=', 'projets.gradin_id')
+            ->join('volt_Spires', 'volt_Spires.id', '=', 'projets.volt_spires_id')
+            ->join('bobinage_secs', 'bobinage_secs.id', '=', 'projets.bobinage_secs_id')
+            ->join('pcc_uccs', 'pcc_uccs.id', '=', 'projets.pcc_uccs_id')
+            ->join('circuitmagnetiques', 'circuitmagnetiques.id', '=', 'projets.circuitmagnetiques_id')
+            ->join('donne_bobines', 'donne_bobines.id', '=', 'projets.donne_bobines_id')
+            ->select('modeles.*', 'modeles.id as modeles_id', 'electriques.*', 'electriques.id as elec_id','circuitmagnetiques.*', 'circuitmagnetiques.id as circuitmagnetiqus_id','donne_bobines.*', 'donne_bobines.id as donne_bob_id', 'garanties.*', 'garanties.id as garenti_id', 'bobinages.*', 'bobinages.id as bobine_id', 'bobinage_secs.*', 'bobinage_secs.id as bobinesec_id', 'gradins.*', 'gradins.id as gradins_id', 'volt_Spires.*', 'volt_Spires.id as volt_id', 'pcc_uccs.*', 'pcc_uccs.id as pucc_id', 'projets.*')
+            ->where('modeles.id', $modele->modele_id)
+            ->get()->first();
+        return response()->json($modele1);
     }
     public function createModele(Request $request)
     {

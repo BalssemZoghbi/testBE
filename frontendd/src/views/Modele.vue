@@ -33,7 +33,7 @@
           </v-toolbar>
         </template>
         <template v-slot:[`item.actions`]="{ item }">
-          <router-link :to="'/projet/update/' + item.projets_id">
+          <router-link :to="'/projet/updateModele/' + item.projets_id">
             <v-btn class="mx-2" fab dark small color="primary">
               <v-icon dark> mdi-pencil </v-icon>
             </v-btn>
@@ -165,7 +165,7 @@ export default {
         )
         .then(
           (response) => (
-            this.$router.push("/projet/update/"+ response.data.projets_id)
+            this.$router.push("/projet/updateModele/"+ response.data.projets_id)
           )
         );
     },

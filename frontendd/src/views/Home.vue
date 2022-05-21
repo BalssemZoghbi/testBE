@@ -217,6 +217,50 @@
           >
             <v-icon dark> mdi-cloud-download </v-icon>
           </v-btn>
+          <!-- dialogInfo = true -->
+           <v-btn class="mx-2" fab dark small color="green" @click="getId(item.id)">
+            <v-icon dark >
+              info
+            </v-icon>
+          </v-btn>
+            <v-dialog
+        v-model="dialogInfo"
+        max-width="500px"
+      >
+        <v-card>
+          <v-card-title>
+            Modele
+          </v-card-title>
+          <v-card-text>
+           
+            <!-- <div class="form__div" > -->
+               <v-text-field
+                  label="Nom du Modele*"
+                  type="text"
+                  required
+                   v-model="modeles.modele"
+                ></v-text-field>
+                    <!-- <input
+                      type="text"
+                      class="form__input"
+                      placeholder=" "
+                      id="modele"
+                       v-model="modeles.modele"
+                    />
+                    <label for="" class="form__label">Nom Modele</label>
+                  </div> -->
+          </v-card-text>
+          <v-card-actions>
+            <v-btn
+              color="primary"
+              text
+              @click="DevenirModele()"
+            >
+              Valider
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
         </template>
       </v-data-table>
     </div>
@@ -238,6 +282,8 @@ export default {
     Loading,
   },
   data: () => ({
+    DevenirModeleId:"",
+    dialogInfo: false,
     dialogm1: "",
     dialog: false,
     dialogModele: false,
@@ -245,6 +291,9 @@ export default {
     Projet: [],
     spinner: true,
     usertype: "",
+    modeles:{
+      modele: "",
+      },
     projet: Object,
     appareil: "",
     isDisabled: false,
@@ -340,6 +389,23 @@ export default {
   },
 
   methods: {
+    getId(id){
+      this.dialogInfo = true ;
+      this.DevenirModeleId=id;
+    },
+    DevenirModele() {
+      const modeles={
+        modele:this.modeles.modele
+      }
+      axios
+        .post(
+          "/ProjetDevenirModele/"+this.DevenirModeleId, modeles)
+        .then(
+        
+          this.dialogInfo = false,
+          this.getprojet()
+        );
+    },
     exportword(id) {
       var vm = this;
       vm.isDisabled = true;

@@ -945,6 +945,28 @@ class ProjetController extends Controller
     public function showProjet($id)
     {
         //  $projet= Projet::FindOrFail($id);
+        $tab=[];
+        $modele=DB::table('modeles')->get('projets_id');
+        foreach ($modele as $valeur){
+            array_push($tab, $valeur->projets_id);
+        }
+        if(in_array($id, $tab)){
+            $projet = DB::table('projets')
+            ->join('modeles', 'modeles.projets_id', '=', 'projets.id')
+            ->join('electriques', 'electriques.id', '=', 'projets.electrique_id')
+            ->join('garanties', 'garanties.id', '=', 'projets.garantie_id')
+            ->join('bobinages', 'bobinages.id', '=', 'projets.bobinage_id')
+            ->join('gradins', 'gradins.id', '=', 'projets.gradin_id')
+            ->join('volt_Spires', 'volt_Spires.id', '=', 'projets.volt_spires_id')
+            ->join('bobinage_secs', 'bobinage_secs.id', '=', 'projets.bobinage_secs_id')
+            ->join('pcc_uccs', 'pcc_uccs.id', '=', 'projets.pcc_uccs_id')
+            ->join('circuitmagnetiques', 'circuitmagnetiques.id', '=', 'projets.circuitmagnetiques_id')
+            ->join('donne_bobines', 'donne_bobines.id', '=', 'projets.donne_bobines_id')
+            ->select('electriques.*', 'electriques.id as elec_id', 'circuitmagnetiques.*', 'circuitmagnetiques.id as circuitmagnetiqus_id','donne_bobines.*', 'donne_bobines.id as donne_bob_id', 'garanties.*', 'garanties.id as garenti_id', 'bobinages.*', 'bobinages.id as bobine_id', 'bobinage_secs.*', 'bobinage_secs.id as bobinesec_id', 'gradins.*', 'gradins.id as gradins_id', 'volt_Spires.*', 'volt_Spires.id as volt_id', 'pcc_uccs.*', 'pcc_uccs.id as pucc_id', 'projets.*')
+            ->where('projets.id', $id)
+            ->select()
+            ->get()->first();
+        }else{
         $projet = DB::table('projets')
             ->join('electriques', 'electriques.id', '=', 'projets.electrique_id')
             ->join('garanties', 'garanties.id', '=', 'projets.garantie_id')
@@ -955,11 +977,10 @@ class ProjetController extends Controller
             ->join('pcc_uccs', 'pcc_uccs.id', '=', 'projets.pcc_uccs_id')
             ->join('circuitmagnetiques', 'circuitmagnetiques.id', '=', 'projets.circuitmagnetiques_id')
             ->join('donne_bobines', 'donne_bobines.id', '=', 'projets.donne_bobines_id')
-            ->join('modeles', 'modeles.projets_id', '=', 'projets.id')
             ->where('projets.id', $id)
-            ->select('modeles.*', 'modeles.id as modeles_id','electriques.*', 'electriques.id as elec_id', 'circuitmagnetiques.*', 'circuitmagnetiques.id as circuitmagnetiqus_id','donne_bobines.*', 'donne_bobines.id as donne_bob_id', 'garanties.*', 'garanties.id as garenti_id', 'bobinages.*', 'bobinages.id as bobine_id', 'bobinage_secs.*', 'bobinage_secs.id as bobinesec_id', 'gradins.*', 'gradins.id as gradins_id', 'volt_Spires.*', 'volt_Spires.id as volt_id', 'pcc_uccs.*', 'pcc_uccs.id as pucc_id', 'projets.*')
+            ->select('electriques.*', 'electriques.id as elec_id', 'circuitmagnetiques.*', 'circuitmagnetiques.id as circuitmagnetiqus_id','donne_bobines.*', 'donne_bobines.id as donne_bob_id', 'garanties.*', 'garanties.id as garenti_id', 'bobinages.*', 'bobinages.id as bobine_id', 'bobinage_secs.*', 'bobinage_secs.id as bobinesec_id', 'gradins.*', 'gradins.id as gradins_id', 'volt_Spires.*', 'volt_Spires.id as volt_id', 'pcc_uccs.*', 'pcc_uccs.id as pucc_id', 'projets.*')
             ->get()->first();
-
+        }
 
         return response()->json($projet);
     }
@@ -978,7 +999,6 @@ class ProjetController extends Controller
             ->join('pcc_uccs', 'pcc_uccs.id', '=', 'projets.pcc_uccs_id')
             ->join('circuitmagnetiques', 'circuitmagnetiques.id', '=', 'projets.circuitmagnetiques_id')
             ->join('donne_bobines', 'donne_bobines.id', '=', 'projets.donne_bobines_id')
-            ->join('modeles', 'modeles.projets_id', '=', 'projets.id')
             ->where('projets.id', $id)
             ->select('electriques.*', 'electriques.id as elec_id', 'circuitmagnetiques.*', 'circuitmagnetiques.id as circuitmagnetiqus_id','donne_bobines.*', 'donne_bobines.id as donne_bob_id', 'garanties.*', 'garanties.id as garenti_id', 'bobinages.*', 'bobinages.id as bobine_id', 'bobinage_secs.*', 'bobinage_secs.id as bobinesec_id', 'gradins.*', 'gradins.id as gradins_id', 'volt_Spires.*', 'volt_Spires.id as volt_id', 'pcc_uccs.*', 'pcc_uccs.id as pucc_id', 'projets.*')
             ->get()->first();

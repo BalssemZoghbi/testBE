@@ -8,6 +8,7 @@ import about from "../views/About.vue";
 import Forgot from "../components/Auth/Forgot.vue";
 import Reset from "../components/Auth/Reset.vue";
 import updateProjet from "../components/donnees/generale/update.vue";
+import updateProjetModele from "../components/donnees/generale/updateModele.vue";
 import updateElec from "../components/donnees/electrique/update.vue";
 import Uni from "../views/Untitled-1.vue";
 import notFound from "../components/NotFound.vue";
@@ -151,6 +152,11 @@ const routes = [
     path: "/projet/update/:id",
     name: "projet.update",
     component: updateProjet,
+  },
+  {
+    path: "/projet/updateModele/:id",
+    name: "projet.updateProjetModele",
+    component: updateProjetModele,
   },
   {
     path: "/projet/electrique/update/:id",

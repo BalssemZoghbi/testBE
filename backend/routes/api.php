@@ -176,6 +176,7 @@ Route::get('/modeleProjetId', [ModeleController::class ,'ModeleProjetId']);
 Route::post('/modeles/create', [ModeleController::class ,'createModele']);
 Route::post('/projet/modeles/create/{id}', [ModeleController::class ,'ProjetModele']);
 Route::post('/projet/projet/create/{id}', [ModeleController::class ,'ProjetProjet']);
+Route::post('/ProjetDevenirModele/{id}', [ModeleController::class ,'ProjetDevenirModele']);
 Route::put('/modeles/update/{id}', [ModeleController::class ,'updateModele']);
 Route::delete('/modeles/delete/{id}', [ModeleController::class ,'deleteModele']);
 

@@ -158,7 +158,7 @@
                       outlined
                     ></v-select>
                   </div>
-                      <div class="form__div" v-if="this.show">
+                      <div class="form__div" >
                     <input
                       type="text"
                       class="form__input"
@@ -208,6 +208,9 @@ export default {
       ],
       fonctionnements: ["abaisseur", "elevateur", "isolement"],
       refroidissements: ["onan", "onaf"],
+      modeles:{
+      modele: "",
+      },
       projet: {
         appareil: "",
         reference: "",
@@ -267,6 +270,12 @@ export default {
         circuitmagnetiques_id: this.projet.circuitmagnetiques_id,
         elaborateur: this.projet.elaborateur,
       };
+      const modeles={
+        modele:this.modeles.modele
+      }
+      axios
+        .put("/modeles/update/" + this.$route.params.id, modeles)
+        .then();
       axios
         .put("projets/edit/" + this.$route.params.id, projets, {
           headers: {
