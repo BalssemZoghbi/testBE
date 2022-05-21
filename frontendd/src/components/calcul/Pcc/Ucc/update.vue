@@ -48,6 +48,7 @@
                         label="Pcc Maj"
                        id="pccMaj"
                             readonly
+                            success
                             v-model="somme"
                         outlined
                       ></v-text-field>
@@ -55,17 +56,20 @@
                     <div class="field10">
                       <v-text-field
                         label="Uccr"
+                        success
                         v-model="uccr"
                         outlined
                       ></v-text-field>
                       <v-text-field
                         label="Ucca"
+                        success
                         v-model="ucca"
                         outlined
                       ></v-text-field>
                       <v-text-field
                         label="Ucc"
                         v-model="ucc"
+                        success
                         outlined
                       ></v-text-field>
                     </div>

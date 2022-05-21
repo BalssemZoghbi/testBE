@@ -72,6 +72,7 @@
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="scu2"
                         dense
                         id="scu2"
@@ -80,6 +81,7 @@
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="j2"
                         dense
                         id="j2"
@@ -96,6 +98,7 @@
                         dense
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="Sp/CoucheBT"
                         v-model="spCouche"
                         outlined
@@ -160,6 +163,7 @@
                   <div class="div">
                     <div class="div2">
                       <v-text-field
+                      success
                         label="HspireBT"
                         v-model="hSpire"
                         dense
@@ -167,6 +171,7 @@
                       ></v-text-field>
 
                       <v-text-field
+                      success
                         label="HSFS"
                         v-model="hsfs"
                         dense
@@ -174,12 +179,14 @@
                       ></v-text-field>
 
                       <v-text-field
+                      success
                         label="HFS"
                         v-model="hfs"
                         dense
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="HbobineBt"
                         v-model="hbobt"
                         dense
@@ -193,6 +200,7 @@
                       ></v-text-field>
 
                       <v-text-field
+                      success
                         label="CollierBT2"
                         dense
                         v-model="collierBt2"
@@ -211,7 +219,6 @@
                         label="CanauxBT"
                         dense
                         id="canauxBT"
-                        
                         v-model="projet.canauxBT"
                         outlined
                       ></v-text-field>
@@ -265,6 +272,7 @@
 
                   <div class="div2">
                     <v-text-field
+                    success
                       label="DintBT"
                       v-model="DintBint"
                       dense
@@ -272,6 +280,7 @@
                     ></v-text-field>
 
                     <v-text-field
+                    success
                       label="BintBT"
                       v-model="DintBint"
                       dense
@@ -279,18 +288,21 @@
                     ></v-text-field>
 
                     <v-text-field
+                    success
                       label="EpxBT"
                       v-model="Epx"
                       dense
                       outlined
                     ></v-text-field>
                     <v-text-field
+                    success
                       label="EpyBT"
                       v-model="Epy"
                       dense
                       outlined
                     ></v-text-field>
                     <v-text-field
+                    success
                       label="DextBT"
                       v-model="Dext"
                       outlined
@@ -298,6 +310,7 @@
                     ></v-text-field>
 
                     <v-text-field
+                    success
                       label="BextBT"
                       dense
                       v-model="Bext"
@@ -314,6 +327,7 @@
                       dense
                       v-model="poidBT"
                       outlined
+                      success
                     ></v-text-field>
                   </div>
                 </div>
