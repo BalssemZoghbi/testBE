@@ -171,8 +171,11 @@ Route::post('/statEmploye',[StatistiqueEmployeController::class ,'create']);
 Route::get('/electrique/tension/{id}/{u1nRange}',[ElectriqueController::class ,'tension']);
 Route::get('/modele/{id}', [ModeleController::class ,'showModele']);
 Route::get('/modeles', [ModeleController::class ,'index']);
+Route::get('/getModele', [ModeleController::class ,'getModele']);
 Route::get('/modeleProjetId', [ModeleController::class ,'ModeleProjetId']);
 Route::post('/modeles/create', [ModeleController::class ,'createModele']);
+Route::post('/projet/modeles/create/{id}', [ModeleController::class ,'ProjetModele']);
+Route::post('/projet/projet/create/{id}', [ModeleController::class ,'ProjetProjet']);
 Route::put('/modeles/update/{id}', [ModeleController::class ,'updateModele']);
 Route::delete('/modeles/delete/{id}', [ModeleController::class ,'deleteModele']);
 

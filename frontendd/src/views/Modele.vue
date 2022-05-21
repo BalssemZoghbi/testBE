@@ -4,8 +4,8 @@
     <NavDash v-if="this.usertype == 'admin'" />
     <NavDashEmp v-if="this.usertype == 'employe'" />
 <Loading v-if="spinner"/>
-    <!-- <button class="nav-link" @click="create()" >Crée</button> -->
-    <div class="body panel left-panel">
+ 
+     <div class="body panel left-panel">
       <v-data-table
         :headers="headers"
         :items="projets"
@@ -16,38 +16,6 @@
       >
         <template v-slot:top>
           <v-toolbar flat>
-
-            <!-- <v-menu transition="slide-x-transition" offset-x>
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn v-bind="attrs" v-on="on" color="primary"> Creer </v-btn>
-              </template>
-
-              <v-list>
-                <v-list-item-group v-model="model" mandatory color="blue">
-                  <v-list-item @click="onClick" color="blue">
-                    <v-list-item-title @click="create()"
-                      >Document Vierge</v-list-item-title
-                    >
-                  </v-list-item>
-
-                  <v-list-item>
-                    <v-list-item-title @click="createModeleFeuillardEmaille()"
-                      >Modele Feuillard Emaille</v-list-item-title
-                    >
-                  </v-list-item>
-
-                  <v-list-item @click="createModeleMeplatEmaille()">
-                    <v-list-item-title>Modele Emaille Meplat</v-list-item-title>
-                  </v-list-item>
-                  <v-list-item @click="createModeleFeuillardMeplat()">
-                    <v-list-item-title
-                      >Modele Feuillard Meplat</v-list-item-title
-                    >
-                  </v-list-item>
-                </v-list-item-group>
-              </v-list>
-            </v-menu> -->
-
             <v-btn color="primary"  @click="create()" dark class="mb-2">
                 Ajouter un Modele
               </v-btn>
@@ -75,20 +43,7 @@
               mdi-delete
             </v-icon>
           </v-btn>
-          <!-- <v-form ref="form"> -->
-          <!-- <v-btn
-            class="mx-2"
-            fab
-            dark
-            small
-            color="orange"
-             @click="exportword(item.id)"
-          >
-            <v-icon dark> mdi-cloud-download </v-icon>
-          </v-btn> -->
-          <!-- </v-form> -->
-          <!-- <v-icon small > mdi-delete </v-icon> -->
-        </template>
+          </template>
       </v-data-table>
     </div>
     <Footer />
@@ -135,12 +90,12 @@ export default {
         align: "start",
         sortable: true,
       },
-      { text: "projets_id", value: "projets_id" },
       { text: "Puissance", value: "puissance" },
       { text: "Tension Primaire", value: "u1n" },
       { text: "Tension Secondaire", value: "u2o" },
       { text: "Couplage", value: "couplage" },
-      { text: "Frequence", value: "frequence" },
+      { text: "Materiau Primaire", value: "materiauMT" },
+      { text: "Materiau Secondaire", value: "materiauBT" },
       { text: "Actions", value: "actions", sortable: false },
     ],
     projets: [],
@@ -170,6 +125,7 @@ export default {
     this.$store.dispatch("user", response.data);
     this.user = response.data;
     this.getModele();
+    
   },
   computed: {
     formTitle() {

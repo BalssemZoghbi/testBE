@@ -29,25 +29,22 @@ class ProjetController extends Controller
 {
     public function getProjets()
     {
-        $projets = DB::table('projets')
-        ->join('electriques', 'electriques.id', '=', 'projets.electrique_id')
-        ->select('electriques.*', 'electriques.id as elec_id', 'projets.*')
+        $tab=[];
+        $modele=DB::table('modeles')->get('projets_id');
+        foreach ($modele as $valeur){
+            array_push($tab, $valeur->projets_id);
+        }
+        $projet=[];
+        $projets = DB::table('projets')->join('electriques', 'electriques.id', '=', 'projets.electrique_id')
+        ->join('donne_bobines', 'donne_bobines.id', '=', 'projets.donne_bobines_id')
+        ->select('electriques.*', 'electriques.id as elec_id','donne_bobines.*', 'donne_bobines.id as donne_bob_id', 'projets.*')
         ->get();
-        // $tab=[];
-        // $modele=DB::table('modeles')->get('projets_id');
-        // foreach ($modele as $valeur){
-        //     array_push($tab, $valeur->projets_id);
-        // }
-        // $projet=[];
-        // $projets = DB::table('projets')->get();
-        // for($i=0;$i<count($projets);$i++){
-        //     //get projet where id not in tab
-        //     if(!in_array($projets[$i]->id,$tab)){
-        //         $projet[$i]=$projets[$i];
-        //     }
-        // }
-        // // dd($projet);
-        return response()->json($projets);
+        for($i=0;$i<count($projets);$i++){
+            if(!in_array($projets[$i]->id,$tab)){
+                array_push( $projet,$projets[$i]);
+            }
+        }
+        return response()->json($projet);
     }
 
     public function addProjet(Request $request)
@@ -958,8 +955,9 @@ class ProjetController extends Controller
             ->join('pcc_uccs', 'pcc_uccs.id', '=', 'projets.pcc_uccs_id')
             ->join('circuitmagnetiques', 'circuitmagnetiques.id', '=', 'projets.circuitmagnetiques_id')
             ->join('donne_bobines', 'donne_bobines.id', '=', 'projets.donne_bobines_id')
+            ->join('modeles', 'modeles.projets_id', '=', 'projets.id')
             ->where('projets.id', $id)
-            ->select('electriques.*', 'electriques.id as elec_id', 'circuitmagnetiques.*', 'circuitmagnetiques.id as circuitmagnetiqus_id','donne_bobines.*', 'donne_bobines.id as donne_bob_id', 'garanties.*', 'garanties.id as garenti_id', 'bobinages.*', 'bobinages.id as bobine_id', 'bobinage_secs.*', 'bobinage_secs.id as bobinesec_id', 'gradins.*', 'gradins.id as gradins_id', 'volt_Spires.*', 'volt_Spires.id as volt_id', 'pcc_uccs.*', 'pcc_uccs.id as pucc_id', 'projets.*')
+            ->select('modeles.*', 'modeles.id as modeles_id','electriques.*', 'electriques.id as elec_id', 'circuitmagnetiques.*', 'circuitmagnetiques.id as circuitmagnetiqus_id','donne_bobines.*', 'donne_bobines.id as donne_bob_id', 'garanties.*', 'garanties.id as garenti_id', 'bobinages.*', 'bobinages.id as bobine_id', 'bobinage_secs.*', 'bobinage_secs.id as bobinesec_id', 'gradins.*', 'gradins.id as gradins_id', 'volt_Spires.*', 'volt_Spires.id as volt_id', 'pcc_uccs.*', 'pcc_uccs.id as pucc_id', 'projets.*')
             ->get()->first();
 
 

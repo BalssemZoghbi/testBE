@@ -220,7 +220,7 @@ Error
   data: () => ({
     step: 1,
     user:[],
-    Poste:['Directeur','Employe','Autre'],
+    Poste:['Directeur','Technicien','Ingenieur'],
      valid: false,
     email:'',
      EmailRules: [

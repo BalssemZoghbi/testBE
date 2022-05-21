@@ -158,12 +158,13 @@
                       outlined
                     ></v-select>
                   </div>
-                      <div class="form__div">
+                      <div class="form__div" v-if="this.show">
                     <input
                       type="text"
                       class="form__input"
                       placeholder=" "
                       id="modele"
+                       v-model="modeles.modele"
                     />
                     <label for="" class="form__label">Nom Modele</label>
                   </div>
@@ -173,7 +174,7 @@
           </v-card>
           <router-link
             class="nav-link"
-            :to="'/projet/electrique/update/' + projet.id"
+            :to="'/projet/electrique/update/' + this.$route.params.id"
             ><v-btn color="primary mb-14" @click="updateprojet">
               Valider
             </v-btn></router-link
@@ -192,7 +193,7 @@ export default {
   },
   data() {
     return {
-      show:true,
+      show:false,
       barre: [],
       types: ["cabine", "poteau", "h61", "h59", "sec"],
       remplissages: ["à matelas d`air", "integral", "respirant"],
@@ -207,6 +208,9 @@ export default {
       ],
       fonctionnements: ["abaisseur", "elevateur", "isolement"],
       refroidissements: ["onan", "onaf"],
+      modeles:{
+      modele: "",
+      },
       projet: {
         appareil: "",
         reference: "",
@@ -266,6 +270,12 @@ export default {
         circuitmagnetiques_id: this.projet.circuitmagnetiques_id,
         elaborateur: this.projet.elaborateur,
       };
+      const modeles={
+        modele:this.modeles.modele
+      }
+      axios
+        .put("/modeles/update/" + this.$route.params.id, modeles)
+        .then();
       axios
         .put("projets/edit/" + this.$route.params.id, projets, {
           headers: {
@@ -273,6 +283,7 @@ export default {
           },
         })
         .then((response) => (this.id = response.data.id));
+      
     },
     getbarre() {
       axios
@@ -285,6 +296,8 @@ export default {
   async mounted() {
     const result = await axios.get("projets/" + this.$route.params.id);
     this.projet = result.data;
+     this.modeles.modele=result.data.modele;
+     console.log(window.history.back());
   },
 };
 </script>
