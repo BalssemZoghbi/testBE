@@ -67,6 +67,7 @@
 
                       <v-text-field
                         label="Scu1"
+                        success
                         dense
                         id="scu1"
                         readonly
@@ -74,6 +75,7 @@
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="j1"
                         dense
                         id="j1"
@@ -91,6 +93,7 @@
                       ></v-text-field>
                       <v-text-field
                         label="spCoucheMT"
+                        success
                         v-model="spCouche"
                         outlined
                         dense
@@ -151,6 +154,7 @@
                       <v-text-field
                         label="Hspire"
                         v-model="hSpire"
+                        success
                         dense
                         outlined
                       ></v-text-field>
@@ -158,17 +162,20 @@
                       <v-text-field
                         label="HSFS"
                         v-model="hsfs"
+                        success
                         dense
                         outlined
                       ></v-text-field>
 
                       <v-text-field
                         label="HFS"
+                        success
                         v-model="hfs"
                         dense
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="HbobineMt"
                         v-model="hbobt"
                         dense
@@ -184,6 +191,7 @@
                       <v-text-field
                         label="CollierBT2"
                         dense
+                        success
                         v-model="collierBt2"
                         outlined
                       ></v-text-field>
@@ -255,6 +263,7 @@
                     <v-text-field
                       label="DintMT"
                       v-model="DintBint"
+                      success
                       dense
                       outlined
                     ></v-text-field>
@@ -262,6 +271,7 @@
                     <v-text-field
                       label="BintMT"
                       v-model="DintBint"
+                      success
                       dense
                       outlined
                     ></v-text-field>
@@ -269,6 +279,7 @@
                     <v-text-field
                       label="EpxMT"
                       v-model="Epx"
+                      success
                       dense
                       outlined
                     ></v-text-field>
@@ -276,10 +287,12 @@
                       label="EpyMT"
                       v-model="Epy"
                       dense
+                      success
                       outlined
                     ></v-text-field>
                     <v-text-field
                       label="DextMT"
+                      success
                       v-model="Dext"
                       outlined
                       dense
@@ -287,6 +300,7 @@
 
                     <v-text-field
                       label="BextMT"
+                      success
                       dense
                       v-model="Bext"
                       outlined
@@ -299,6 +313,7 @@
                     ></v-text-field>
                     <v-text-field
                       label="poidMT"
+                      success
                       dense
                       v-model="poid"
                       outlined

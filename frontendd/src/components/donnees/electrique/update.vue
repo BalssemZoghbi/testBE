@@ -86,32 +86,32 @@
                     <div class="form__div">
                       <input
                         type="number"
-                        class="form__input"
+                        class="form__input auto"
                         placeholder=" "
                         id="classeU1"
                         v-model="classeU1"
                       />
-                      <label for="" class="form__label">classeU1</label>
+                      <label for="" class="form__label autol">classeU1</label>
                     </div>
                     <div class="form__div">
                       <input
                         type="number"
-                        class="form__input"
+                        class="form__input auto"
                         placeholder=" "
                         id="tenueFr1"
                         v-model="tenueFr1"
                       />
-                      <label for="" class="form__label">tenueFr1</label>
+                      <label for="" class="form__label autol">tenueFr1</label>
                     </div>
                     <div class="form__div">
                       <input
                         type="number"
-                        class="form__input"
+                        class="form__input auto"
                         placeholder=" "
                         id="tenueChoc1"
                         v-model="tenueChoc1"
                       />
-                      <label for="" class="form__label">tenueChoc1</label>
+                      <label for="" class="form__label autol">tenueChoc1</label>
                     </div>
                     <div class="form__div">
                       <input
@@ -126,32 +126,32 @@
                     <div class="form__div">
                       <input
                         type="number"
-                        class="form__input"
+                        class="form__input auto"
                         placeholder=" "
                         id="classeU2"
                         v-model="classeU2"
                       />
-                      <label for="" class="form__label">classeU2</label>
+                      <label for="" class="form__label autol">classeU2</label>
                     </div>
                     <div class="form__div">
                       <input
                         type="number"
-                        class="form__input"
+                        class="form__input auto"
                         placeholder=" "
                         id="tenueFr2"
                         v-model="tenueFr2"
                       />
-                      <label for="" class="form__label">tenueFr2</label>
+                      <label for="" class="form__label autol">tenueFr2</label>
                     </div>
                     <div class="form__div">
                       <input
                         type="number"
-                        class="form__input"
+                        class="form__input auto"
                         placeholder=" "
                         id="tenueChoc2"
                         v-model="tenueChoc2"
                       />
-                      <label for="" class="form__label">tenueChoc2</label>
+                      <label for="" class="form__label autol">tenueChoc2</label>
                     </div>
                     <div class="form__div">
                       <input
@@ -179,12 +179,12 @@
                     <div class="form__div">
                       <input
                         type="number"
-                        class="form__input"
+                        class="form__input auto"
                         placeholder=" "
                         id="nbrePosition"
                         v-model="nbrePosition"
                       />
-                      <label for="" class="form__label">Nbre de Position</label>
+                      <label for="" class="form__label autol">Nbre de Position</label>
                     </div>
                   </div>
                 </form>
@@ -234,6 +234,7 @@
                         dense
                       ></v-select>
                       <v-text-field
+                       success
                         label="Couplage"
                         id="couplage"
                         readonly
@@ -244,24 +245,28 @@
                     </div>
                     <div class="div2">
                       <v-text-field
+                      success
                         label="U1ligne"
                         v-model="PrimaireUligne"
                         outlined
                         dense
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="U1Phase"
                         v-model="PrimaireUPhase"
                         dense
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="I1ligne"
                         v-model="PrimaireIligne"
                         outlined
                         dense
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="I1Phase"
                         v-model="PrimaireIPhase"
                         outlined
@@ -270,30 +275,35 @@
                     </div>
                     <div class="div2">
                       <v-text-field
+                      success
                         label="U2ligne"
                         dense
                         v-model="secondaireUligne"
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="U2Phase"
                         v-model="secondaireUPhase"
                         outlined
                         dense
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="I2ligne"
                         dense
                         v-model="secondaireIligne"
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="I2Phase"
                         dense
                         v-model="secondaireIPhase"
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="Uz"
                         dense
                         v-model="Uz"
@@ -754,6 +764,22 @@ export default {
 };
 </script>
 <style scoped>
+.theme--light.v-text-field--outlined:not(.v-input--is-focused):not(.v-input--has-state) > .v-input__control > .v-input__slot fieldset {
+    color:red;
+}
+.auto{
+    border: 1px solid rgb(14, 163, 163) !important;
+        border-color: rgb(14, 163, 163) !important;
+        caret-color: rgb(14, 163, 163) !important;
+
+}
+
+ .autol{
+ color: rgb(14, 163, 163) !important;
+}
+/* .v-application .primary--text {
+    
+} */
 .col {
   display: grid;
   grid-template-columns: repeat(5, 1fr);

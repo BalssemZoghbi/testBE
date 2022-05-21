@@ -46,6 +46,7 @@
                         v-model="HbobineBt"
                         dense
                         outlined
+                        success
                       ></v-text-field>
                       <v-text-field
                         label="collierBT"
@@ -69,6 +70,7 @@
                       <v-text-field
                         label="epFeuillard"
                         v-model="epFeuillard"
+                        success
                         dense
                         outlined
                       ></v-text-field>
@@ -82,6 +84,7 @@
                         label="scu1"
                         v-model="scu1"
                         dense
+                        success
                         outlined
                       ></v-text-field>
                     </div>
@@ -90,6 +93,7 @@
                         label="j1"
                         v-model="j1"
                         dense
+                        success
                         outlined
                       ></v-text-field>
                       <v-text-field
@@ -111,7 +115,6 @@
                         label="ep2Papier"
                         dense
                         id="ep2Papier"
-                        
                         v-model="projet.ep2Papier"
                         outlined
                       ></v-text-field>
@@ -124,6 +127,7 @@
                       ></v-text-field>
                       <v-text-field
                         label="ePap"
+                        success
                         v-model="ePap"
                         readonly
                         outlined
@@ -197,6 +201,7 @@
                       ></v-text-field>
                       <v-text-field
                         label="EpPapier"
+                        success
                         v-model="EpPapier"
                         outlined
                       ></v-text-field>
@@ -204,6 +209,7 @@
 
                     <div class="div2">
                       <v-text-field
+                      success
                         label="DintMT"
                         v-model="DintMT"
                         dense
@@ -212,6 +218,7 @@
 
                       <v-text-field
                         label="BintMT"
+                        success
                         v-model="DintMT"
                         dense
                         outlined
@@ -219,11 +226,13 @@
 
                       <v-text-field
                         label="EpxMT"
+                        success
                         v-model="EpxMT"
                         dense
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="EpyMT"
                         v-model="EpxMT"
                         dense
@@ -231,6 +240,7 @@
                       ></v-text-field>
                       <v-text-field
                         label="DextMT"
+                        success
                         v-model="DextMT"
                         outlined
                         dense
@@ -238,6 +248,7 @@
 
                       <v-text-field
                         label="BextMT"
+                        success
                         dense
                         v-model="BextMT"
                         outlined
@@ -249,6 +260,7 @@
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="poidMT"
                         dense
                         v-model="poidMT"
@@ -271,17 +283,18 @@
                   <div style="margin-bottom: 2%">
                     <v-chip
                       >materiau :
-                      {{ projet.materiau }}
+                      {{ projet.materiauMT }}
                     </v-chip>
                     <v-chip style="margin-left: 1%"
                       >conducteur :
-                      {{ projet.conducteur }}
+                      {{ projet.conducteurMT }}
                     </v-chip>
                   </div>
 
                   <div class="div">
                     <div class="div2">
                       <v-text-field
+                      success
                         label="largeurBarre"
                         v-model="largeurBarre"
                         dense
@@ -289,6 +302,7 @@
                       ></v-text-field>
 
                       <v-text-field
+                      success
                         label="epaisseurBarre"
                         v-model="epaisseurBarre"
                         dense
@@ -298,6 +312,7 @@
                       <v-select
                         :items="barre"
                         label="barre"
+                        success
                         v-model="projet.Epbarre"
                         dense
                         outlined
@@ -305,6 +320,7 @@
                       <v-text-field
                         label="Sbarre"
                         v-model="Sbarre"
+                        success
                         dense
                         outlined
                       ></v-text-field>
@@ -312,6 +328,7 @@
                       <v-text-field
                         label="Jbarre"
                         v-model="Jbarre"
+                        success
                         outlined
                         dense
                       ></v-text-field>

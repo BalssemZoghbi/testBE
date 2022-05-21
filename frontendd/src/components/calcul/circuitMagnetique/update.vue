@@ -134,11 +134,13 @@
        
             label="Masse Fer"
             v-model="masseFertot"
+            success
             outlined
           ></v-text-field>
              <v-text-field
        
             label="pFerspecif"
+            success
             v-model="pferspecifique"
             outlined
           ></v-text-field>
@@ -149,7 +151,7 @@
             outlined
           ></v-text-field>
                <v-text-field
-       
+       success
             label="pFer"
             v-model="pFer"
             outlined
@@ -167,7 +169,7 @@
             outlined
           ></v-text-field>
                <v-text-field
-       
+       success
             label="Lcuve"
             v-model="largeurcuve"
             outlined
@@ -179,12 +181,13 @@
             outlined
           ></v-text-field>
                <v-text-field
+               success
             label="Hc"
             v-model="hc"
             outlined
           ></v-text-field>
                <v-text-field
-       
+       success
             label="Hcuve"
             v-model="hauteurcuve"
             outlined

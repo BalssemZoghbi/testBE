@@ -30,11 +30,13 @@
                     <div class="field10">
                       <v-text-field
                         label="N2cmax"
+                        success
                         v-model="N2cmax"
                         dense
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="scu2d"
                         v-model="scu2d"
                         dense
@@ -48,12 +50,14 @@
                         dense
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="D2d"
                         v-model="D2d"
                         dense
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="scu2"
                         v-model="scu2"
                         dense
@@ -61,6 +65,7 @@
                       ></v-text-field>
                       <v-text-field
                         label="j2"
+                        success
                         v-model="j2"
                         outlined
                         dense
@@ -74,6 +79,7 @@
                     </div>
                     <div class="field10">
                       <v-text-field
+                      success
                         label="filobtenueNue"
                         dense
                         id="filobtenueNue"
@@ -82,6 +88,7 @@
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="filobtenueIsoler"
                         dense
                         id="filobtenueIsoler"
@@ -102,13 +109,15 @@
                         dense
                       ></v-text-field>
                       <v-text-field
-                        label="nbrPapierMt"
+                      success
+                        label="nbrPapierBt"
                         v-model="nbrPapierBT"
                         outlined
                         dense
                       ></v-text-field>
                       <v-text-field
                         label="EpaiseurPapier"
+                        success
                         v-model="EpaiseurPapierBT"
                         outlined
                         dense
@@ -150,12 +159,14 @@
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="NchA"
                         v-model="NchABT"
                         dense
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="SpchA"
                         v-model="SpchABT"
                         dense
@@ -163,6 +174,7 @@
                       ></v-text-field>
                       <v-text-field
                         label="NchB"
+                        success
                         v-model="NchBBT"
                         outlined
                         dense
@@ -170,6 +182,7 @@
 
                       <v-text-field
                         label="SpchB"
+                        success
                         dense
                         v-model="SpchBBT"
                         outlined
@@ -178,23 +191,27 @@
                     <div class="div3">
                       <v-text-field
                         label="HCondBt"
+                        success
                         dense
                         v-model="HCondBt"
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="HCollier"
                         dense
                         v-model="HCollierBT"
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="Hbobine"
                         dense
                         v-model="HbobineBtSec"
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="EpaisseurPapierCanauxBT"
                         dense
                         v-model="EpaisseurPapierCanauxBT"
@@ -239,11 +256,6 @@
                           outlined
                         ></v-text-field>
                         <v-text-field
-                          label="EpaisseurPapierCanaux"
-                          v-model="EpaisseurPapierCanauxBT"
-                          outlined
-                        ></v-text-field>
-                        <v-text-field
                           label="canauxNbrPapier"
                           v-model="projet.canauxNbrPapierBT"
                           outlined
@@ -257,12 +269,14 @@
                       <div class="field10">
                         <v-text-field
                           label="DintBT"
+                          success
                           v-model="DintBT"
                           dense
                           outlined
                         ></v-text-field>
 
                         <v-text-field
+                        success
                           label="BintBT"
                           v-model="BintBT"
                           dense
@@ -284,24 +298,28 @@
 
                         <v-text-field
                           label="EpxBT"
+                          success
                           v-model="EpxBT"
                           dense
                           outlined
                         ></v-text-field>
                         <v-text-field
                           label="EpyBT"
+                          success
                           v-model="EpyBT"
                           dense
                           outlined
                         ></v-text-field>
                         <v-text-field
                           label="DextBT"
+                          success
                           v-model="DextBT"
                           outlined
                           dense
                         ></v-text-field>
 
                         <v-text-field
+                        success
                           label="BextBT"
                           dense
                           v-model="BextBT"
@@ -310,6 +328,7 @@
 
                         <v-text-field
                           label="poidBT"
+                          success
                           dense
                           v-model="poidBT"
                           outlined
@@ -470,83 +489,83 @@ export default {
       return (
         2 *
         Math.sqrt(
-          this.projet.scu2d /
+          this.scu2d /
             (Math.PI * parseFloat(this.projet.brinParalleleBT))
         )
       );
     },
     nbrPapierBT() {
       return Math.ceil(
-        ((this.projet.SpchBBT * this.projet.Vsp * 4) /
+        ((this.SpchBBT * this.projet.Vsp * 4) /
           this.projet.rigiditePapierBT -
-          (this.projet.filobtenueIsolerBT - this.projet.filobtenueNueBT)) /
+          (this.filobtenueIsolerBT - this.filobtenueNueBT)) /
           this.projet.EpfeuillePapierBT
       );
     },
     EpaiseurPapierBT() {
-      return this.projet.EpfeuillePapierBT * this.projet.nbrPapierBT;
+      return this.projet.EpfeuillePapierBT * this.nbrPapierBT;
+    }, 
+      SpchBBT() {
+      return Math.ceil(this.N2cmax / this.projet.nbcoucheBT);
     },
     NchABT() {
       return Math.floor(
-        this.projet.nbcoucheBT * this.projet.SpchBBT - this.projet.N2cmax
+        this.projet.nbcoucheBT * this.SpchBBT - this.N2cmax
       );
     },
     SpchABT() {
-      return Math.ceil(parseFloat(this.projet.SpchBBT) - 1);
+      return Math.ceil(this.SpchBBT - 1);
     },
     NchBBT() {
-      return this.projet.nbcoucheBT - this.projet.NchABT;
+      return this.projet.nbcoucheBT - this.NchABT;
     },
-    SpchBBT() {
-      return Math.ceil(this.projet.N2cmax / this.projet.nbcoucheBT);
-    },
+ 
     HbobineBtSec() {
-      // console.log(this.projet.HbobineBt);
       return this.projet.HbobineBt;
-    },
-    HCollierBT() {
-      console.log(this.projet.HCondBt);
-      return (this.projet.HbobineBtSec - this.projet.HCondBt) / 2;
-    },
-    HCondBt() {
+    }, 
+     HCondBt() {
       return (
-        this.projet.SpchBBT *
-        this.projet.filobtenueIsolerBT *
+        this.SpchBBT *
+        this.filobtenueIsolerBT *
         this.projet.brinParalleleBT
       );
     },
+    HCollierBT() {
+      return (this.HbobineBtSec - this.HCondBt) / 2;
+    },
+  
     DintBT() {
       // console.log(this.projet.DextMT,this.projet.BextMT);
       // return parseFloat(Math.ceil(parseFloat(this.projet.DextMT)+(2*parseFloat(this.projet.DistanceBTMT))));
       let dint = this.projet.DintBT;
       dint =
         parseFloat(this.projet.DistanceBTMTSec) * 2 +
-        parseFloat(this.projet.DextBT);
+       this.DextBT;
       // console.log(parseFloat(this.projet.DextBT));
       return dint;
     },
     BintBT() {
-      return Math.ceil(this.projet.BextBT + 2 * this.projet.DistanceBTMTSec);
+      return Math.ceil(this.BextBT + 2 * this.projet.DistanceBTMTSec);
     },
     DextBT() {
-      return this.projet.DintBT + 2 * this.projet.EpxBT;
+      return this.projet.DintBT + 2 * this.EpxBT;
     },
     BextBT() {
-      return this.projet.BintBT + 2 * this.projet.EpyBT;
+      return this.projet.BintBT + 2 * this.EpyBT;
     },
     EpxBT() {
       if (this.projet.typeCanauxBT == "complet") {
         return (
           this.projet.nbcoucheBT * this.projet.filobtenueIsolerBT +
-          this.projet.EpaiseurPapierBT *
+          this.EpaiseurPapierBT *
             (this.projet.nbcoucheBT - 1 - this.projet.canauxBT) +
           this.projet.canauxBT * this.projet.lgCalesBT +
-          this.projet.canauxBT * this.projet.EpaisseurPapierCanauxBT
+          this.projet.canauxBT * this.EpaisseurPapierCanauxBT
         );
       } else if (this.projet.typeCanauxBT == "lune") {
         return (
-          this.projet.nbcoucheBT * this.projet.filobtenueIsolerBT +
-          this.projet.EpaiseurPapierBT * (this.projet.nbcoucheBT - 1)
+          this.projet.nbcoucheBT * this.filobtenueIsolerBT +
+          this.EpaiseurPapierBT * (this.projet.nbcoucheBT - 1)
         );
       } else {
         return 0;
@@ -554,12 +573,12 @@ export default {
     },
     EpyBT() {
       if (this.projet.typeCanauxBT == "complet") {
-        return this.projet.EpxBT;
+        return this.EpxBT;
       } else if (this.projet.typeCanauxBT == "lune") {
         return parseFloat(
           parseFloat(this.projet.nbcoucheBT) *
-            parseFloat(this.projet.filobtenueIsolerBT) +
-            parseFloat(this.projet.EpaiseurPapierBT) *
+            parseFloat(this.filobtenueIsolerBT) +
+            parseFloat(this.EpaiseurPapierBT) *
               (parseFloat(this.projet.nbcoucheBT) - 1) +
             parseFloat(this.projet.canauxBT) * parseFloat(this.projet.lgCalesBT)
         );
@@ -577,14 +596,14 @@ export default {
       return (
         (Math.pow(10, -6) *
           (coefPoid *
-            parseFloat(this.projet.N2cmax) *
-            parseFloat(this.projet.scu2) *
+            parseFloat(this.N2cmax) *
+            parseFloat(this.scu2) *
             Math.PI *
             3) *
-          ((parseFloat(this.projet.DintBT) +
-            parseFloat(this.projet.BintBT) +
-            parseFloat(this.projet.DextBT) +
-            parseFloat(this.projet.BextBT)) /
+          ((this.DintBT +
+            this.BintBT +
+            this.DextBT +
+            this.BextBT) /
             4) *
           (100 + parseFloat(this.projet.majPoidBT))) /
         100
@@ -593,7 +612,7 @@ export default {
     scu2() {
       return (
         (Math.PI *
-          Math.pow(this.projet.filobtenueNueBT, 2) *
+          Math.pow(this.filobtenueNueBT, 2) *
           this.projet.brinParalleleBT) /
         4
       );
@@ -602,8 +621,7 @@ export default {
       return this.projet.canauxNbrPapierBT * this.projet.EpfeuillePapierBT;
     },
     j2() {
-      console.log(this.projet.scu2);
-      return this.projet.secondaireIPhase / this.projet.scu2;
+      return this.projet.secondaireIPhase / this.scu2;
     },
     N2cmax() {
       let spires = this.projet.spire
