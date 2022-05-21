@@ -435,12 +435,21 @@ vm.isDisabled = true;
 };
 </script>
 <style scoped>
+.v-application .justify-center {
+    justify-content: center ;
+}
+.v-application .align-center {
+    align-items: center ;
+}
 .body {
   /* background-color: #a2c7ff77; */
-  /* padding: 20px; */
-  margin-top: 8%;
-  margin-left: 3%;
-  margin-right: -20%;
+  padding: 2px;
+    /* justify-content: left ; */
+  width: 100%;
+  /* margin: 1%; */
+  /* margin-top: 8%; */
+  /* margin-left: -5%; */
+  /* margin-right: -15%; */
 }
 .v-card {
   /* margin-left: 85%; */
@@ -477,12 +486,12 @@ vm.isDisabled = true;
 /* .theme--light.v-icon {
   color: #2196f3;
 } */
-.v-menu_content {
+/* .v-menu_content {
   min-width: 82px;
   top: 173px !important;
   left: 395px !important;
   transform-origin: left top;
   z-index: 8;
-}
+} */
 
 </style>
