@@ -29,12 +29,14 @@
                   <div class="div">
                     <div class="field10">
                       <v-text-field
+                      success
                         label="N1cmax"
                         v-model="N1cmax"
                         dense
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="scu1d"
                         v-model="scu1d"
                         dense
@@ -48,18 +50,21 @@
                         dense
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="D1d"
                         v-model="D1d"
                         dense
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="scu1"
                         v-model="scu1"
                         dense
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="j1"
                         v-model="j1"
                         outlined
@@ -74,6 +79,7 @@
                     </div>
                     <div class="field10">
                       <v-text-field
+                      success
                         label="filobtenueNue"
                         dense
                         id="filobtenueNue"
@@ -82,6 +88,7 @@
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="filobtenueIsoler"
                         dense
                         id="filobtenueIsoler"
@@ -102,12 +109,14 @@
                         dense
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="nbrPapierMt"
                         v-model="nbrPapierMt"
                         outlined
                         dense
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="EpaiseurPapier"
                         v-model="EpaiseurPapier"
                         outlined
@@ -148,11 +157,13 @@
                       ></v-text-field>
                       <v-text-field
                         label="NchA"
+                        success
                         v-model="NchA"
                         dense
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="SpchA"
                         v-model="SpchA"
                         dense
@@ -160,12 +171,14 @@
                       ></v-text-field>
                       <v-text-field
                         label="NchB"
+                        success
                         v-model="NchB"
                         outlined
                         dense
                       ></v-text-field>
 
                       <v-text-field
+                      success
                         label="SpchB"
                         dense
                         v-model="SpchB"
@@ -174,16 +187,19 @@
                     </div>
                     <div class="div3">
                       <v-text-field
+                      success
                         label="HCondMt"
                         v-model="HCondMt"
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="HCollier"
                         v-model="HCollier"
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="Hbobine"
                         v-model="HbobineBt"
                         outlined
@@ -227,6 +243,7 @@
                           outlined
                         ></v-text-field>
                         <v-text-field
+                        success
                           label="EpaisseurPapierCanaux"
                           v-model="EpaisseurPapierCanaux"
                           outlined
@@ -244,6 +261,7 @@
                       </div>
                       <div class="field10">
                         <v-text-field
+                        success
                           label="DintMT"
                           v-model="DintMT"
                           dense
@@ -254,6 +272,7 @@
                           label="BintMT"
                           v-model="BintMT"
                           dense
+                          success
                           outlined
                         ></v-text-field>
 
@@ -271,6 +290,7 @@
                         ></v-text-field>
 
                         <v-text-field
+                        success
                           label="EpxMT"
                           v-model="EpxMT"
                           dense
@@ -283,6 +303,7 @@
                           outlined
                         ></v-text-field>
                         <v-text-field
+                        success
                           label="DextMT"
                           v-model="DextMT"
                           outlined
@@ -290,6 +311,7 @@
                         ></v-text-field>
 
                         <v-text-field
+                        success
                           label="BextMT"
                           dense
                           v-model="BextMT"
@@ -299,6 +321,7 @@
                         <v-text-field
                           label="poidMT"
                           dense
+                          success
                           v-model="poidMT"
                           outlined
                         ></v-text-field>

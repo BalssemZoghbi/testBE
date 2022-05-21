@@ -56,6 +56,7 @@
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="HbobineBt"
                         v-model="HbobineBt"
                         dense
@@ -75,12 +76,14 @@
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="epFeuillard"
                         v-model="epFeuillardBT"
                         dense
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="scu2"
                         v-model="scu2"
                         dense
@@ -95,12 +98,14 @@
                     </div>
                     <div class="field10">
                       <v-text-field
+                      success
                         label="j2"
                         v-model="j2"
                         dense
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      
                         label="ep1PapierBT"
                         dense
                         id="ep1PapierBT"
@@ -111,7 +116,6 @@
                         label="nbrPap1"
                         dense
                         id="nbrPap1"
-                        
                         v-model="projet.nbrPap1BT"
                         outlined
                       ></v-text-field>
@@ -119,7 +123,6 @@
                         label="ep2Papier"
                         dense
                         id="ep2Papier"
-                        
                         v-model="projet.ep2PapierBT"
                         outlined
                       ></v-text-field>
@@ -131,6 +134,7 @@
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="ePap"
                         v-model="ePapBT"
                         readonly
@@ -182,14 +186,12 @@
                       <v-text-field
                         label="CanauxBT"
                         id="canauxBT"
-                        
                         v-model="projet.canauxBT"
                         outlined
                       ></v-text-field>
                       <v-text-field
                         label="Lrg Cales"
                         id="lgCalesBT"
-                        
                         v-model="projet.lgCalesBT"
                         outlined
                       ></v-text-field>
@@ -205,6 +207,7 @@
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="EpPapier"
                         v-model="EpPapierBT"
                         outlined
@@ -213,6 +216,7 @@
 
                     <div class="div2">
                       <v-text-field
+                      success
                         label="DintBT"
                         v-model="DintBT"
                         dense
@@ -220,6 +224,7 @@
                       ></v-text-field>
 
                       <v-text-field
+                      success
                         label="BintBT"
                         v-model="DintBT"
                         dense
@@ -227,18 +232,21 @@
                       ></v-text-field>
 
                       <v-text-field
+                      success
                         label="EpxBT"
                         v-model="EpxBT"
                         dense
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="EpyBT"
                         v-model="EpxBT"
                         dense
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="DextBT"
                         v-model="DextBT"
                         outlined
@@ -246,6 +254,7 @@
                       ></v-text-field>
 
                       <v-text-field
+                      success
                         label="BextBT"
                         dense
                         v-model="BextBT"
@@ -258,6 +267,7 @@
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="poidBT"
                         dense
                         v-model="poidBT"
@@ -291,6 +301,7 @@
                   <div class="div">
                     <div class="div2">
                       <v-text-field
+                      success
                         label="largeurBarre"
                         v-model="largeurBarreBT"
                         dense
@@ -298,6 +309,7 @@
                       ></v-text-field>
 
                       <v-text-field
+                      success
                         label="epaisseurBarre"
                         v-model="epaisseurBarreBT"
                         dense
@@ -312,12 +324,14 @@
                         outlined
                       ></v-select>
                       <v-text-field
+                      success
                         label="Sbarre"
                         v-model="SbarreBT"
                         dense
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="Jbarre"
                         v-model="JbarreBT"
                         outlined

@@ -31,29 +31,31 @@
                         dense
                         outlined
                       ></v-select>
-
-                      <v-text-field
-                        label="Diametre propose"
-                        v-model="diamPropose"
-                        dense
-                        readonly
-                        outlined
-                      ></v-text-field>
-
-                      <v-text-field
-                        label="Diametre Nominale"
-                        dense
-                        id="diamNominale"
-                        v-model="projet.diamNominale"
-                        outlined
-                      ></v-text-field>
-
+                      
                       <v-text-field
                         label="coeffRemplissage"
                         v-model="projet.coeffRemplissage"
                         outlined
                         dense
                       ></v-text-field>
+ <v-text-field
+                        label="Diametre Nominale"
+                        dense
+                        id="diamNominale"
+                        v-model="projet.diamNominale"
+                        outlined
+                      ></v-text-field>
+                      <v-text-field
+                        label="Diametre propose"
+                        v-model="diamPropose"
+                        success
+                        dense
+                        readonly
+                        outlined
+                      ></v-text-field>
+
+                     
+
                       <v-text-field
                         label="nbrGradin"
                         v-model="projet.nbrGradin"
@@ -66,6 +68,12 @@
                         v-model="projet.demiGradin"
                         outlined
                       ></v-text-field>
+                          <v-text-field
+                        label="largeurMin"
+                        dense
+                        v-model="projet.largeurMin"
+                        outlined
+                      ></v-text-field>
                       <v-text-field
                         label="CMBT"
                         v-model="projet.CMBT"
@@ -74,26 +82,24 @@
                       ></v-text-field>
 
                       <v-text-field
+                      success
                         label="Sbrut"
                         dense
                         v-model="Sbrut"
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      success
                         label="Snette"
                         dense
                         v-model="Snette"
                         outlined
                       ></v-text-field>
-                      <v-text-field
-                        label="largeurMin"
-                        dense
-                        v-model="projet.largeurMin"
-                        outlined
-                      ></v-text-field>
+                  
                       <v-text-field
                         label="EpaisseurTot"
                         dense
+                        success
                         v-model="EpaisseurTot"
                         outlined
                       ></v-text-field>
