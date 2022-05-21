@@ -1,36 +1,36 @@
 <template>
   <v-app>
- 
     <v-main>
-      <!-- <h1 >transparent</h1> -->
-      <NavDash />
-      <router-view />
-      <!-- <div class="loading">
-      <font-awesome-icon icon="spinner" spin class="mr-3" /> loading...
-    </div> -->
-    </v-main>
+      <!-- <h1>balssem</h1> -->
+      <NavDash  v-if="((this.$route.path).indexOf('Connexion'))<0"  />
+    <!-- <NavDashEmp v-if="user.type== 'employe'&&((this.$route.path).indexOf('Connexion'))<0" /> -->
+      <!-- <NavDash v-if="((this.$route.path).indexOf('Connexion'))<0" /> -->
+      <Connexion v-if="((this.$route.path).indexOf('Connexion'))>0" />
+      <!-- <router-view /> -->
+       </v-main>
   </v-app>
 </template>
 
 <script>
+// import NavDash from "./components/NavDash.vue";
 import NavDash from "./components/NavDash.vue";
+import Connexion from "./components/Auth/Connexion.vue";
+
 export default {
   name: "App",
-  component:{
+  components:{
     NavDash,
+    Connexion
   },
   data: () => ({
     //
   }),
-   mounted() {
-    let user = localStorage.getItem("user");
-    if (!user) {
-      this.$router.push("/Connexion");
-    }
-  },
+ mounted(){
+   
+ }
+  
 };
 </script>
-<style >
-
+<style scoped>
 
 </style>

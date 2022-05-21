@@ -301,7 +301,7 @@ import { mapGetters } from 'vuex';
   const response=await axios.get('user');
     this.$store.dispatch('user',response.data);
   this.user=response.data;
-  // console.log((this.$route.path).indexOf('projet'));
+  console.log((this.$route.path).indexOf('projet'));
 },
 computed: {
   ...mapGetters(['user'])

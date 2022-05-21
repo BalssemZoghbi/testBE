@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NavDashEmp  />
+    <!-- <NavDashEmp  /> -->
       <v-layout>
     <v-row class="clickable">
       <!-- <v-col cols="12" md="10"> -->
@@ -273,7 +273,7 @@
 
 <script>
 import axios from "axios";
-import NavDashEmp from "../components/NavDashboardEmploye.vue";
+// import NavDashEmp from "../components/NavDashboardEmploye.vue";
 import { Doughnut } from 'vue-chartjs/legacy'
 import { Line as LineChartGenerator } from 'vue-chartjs/legacy'
 import {
@@ -299,7 +299,7 @@ LinearScale,LineElement,PointElement)
     components: {
        Doughnut,
       LineChartGenerator,
-        NavDashEmp,
+        // NavDashEmp,
     },
       props: {
      props: {

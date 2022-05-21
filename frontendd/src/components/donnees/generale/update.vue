@@ -1,9 +1,9 @@
 <template>
   <div>
-    <NavDash
+    <!-- <NavDash
       :conducteurMT="projet.conducteurMT"
       :conducteurBT="projet.conducteurBT"
-    />
+    /> -->
     <div class="body">
       <v-stepper v-model="e1" vertical>
         <v-stepper-step step=""> Données Generale </v-stepper-step>
@@ -184,11 +184,11 @@
   </div>
 </template>
 <script>
-import NavDash from "@/components/NavDash.vue";
+// import NavDash from "@/components/NavDash.vue";
 import axios from "axios";
 export default {
   components: {
-    NavDash,
+    // NavDash,
   },
   data() {
     return {

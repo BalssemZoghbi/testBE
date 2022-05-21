@@ -1,9 +1,9 @@
 <template>
    <div>
-   <NavDash
+   <!-- <NavDash
       :conducteurMT="this.cond1"
       :conducteurBT="this.cond2"
-    />
+    /> -->
 <div class="body">
       <v-stepper v-model="e1"  vertical>
     <Loading v-if="spinner" />
@@ -92,12 +92,12 @@
 </template>
 
 <script>
-import NavDash from "@/components/NavDash.vue";
+// import NavDash from "@/components/NavDash.vue";
 import axios from "axios";
 import Loading from '../../Loading.vue';
 export default {
     components: {
-     NavDash,
+    //  NavDash,
         Loading
       },
   data() {

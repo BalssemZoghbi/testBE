@@ -1,10 +1,10 @@
 <template>
   <div>
     <!-- <navbarUpdate /> -->
-    <NavDash
+    <!-- <NavDash
       :conducteurMT="projet.conducteurMT"
       :conducteurBT="projet.conducteurBT"
-    />
+    /> -->
     <div class="body">
       <v-stepper v-model="e1" vertical>
         <v-stepper-step :complete="e1 > 1" step="1">
@@ -329,11 +329,11 @@
 </template>
 
 <script>
-import NavDash from "@/components/NavDash.vue";
+// import NavDash from "@/components/NavDash.vue";
 
 import axios from "axios";
 export default {
-  components: { NavDash },
+  // components: { NavDash },
   data() {
     return {
       saillie: [],

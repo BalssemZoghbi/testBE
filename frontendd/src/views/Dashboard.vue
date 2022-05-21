@@ -1,6 +1,6 @@
 <template>
   <div>
-      <NavDash/>  
+      <!-- <NavDash/>   -->
         <v-layout style="margin-left:4%">
     <v-row class="clickable">
       <!-- <v-col cols="12" md="10">
@@ -231,7 +231,7 @@ import {
 
 ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale,BarElement,  LinearScale,LineElement,PointElement)
 
-  import NavDash from '@/components/NavDash.vue';
+  // import NavDash from '@/components/NavDash.vue';
 import axios from "axios";
 
   export default {
@@ -241,7 +241,6 @@ import axios from "axios";
       Bar,
       Doughnut,
       LineChartGenerator,
-      NavDash
     },
       props: {
     chartId: {
