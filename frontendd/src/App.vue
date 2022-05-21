@@ -3,8 +3,6 @@
     <v-main>
       <!-- <h1>balssem</h1> -->
       <NavDash  v-if="((this.$route.path).indexOf('Connexion'))<0"  />
-    <!-- <NavDashEmp v-if="user.type== 'employe'&&((this.$route.path).indexOf('Connexion'))<0" /> -->
-      <!-- <NavDash v-if="((this.$route.path).indexOf('Connexion'))<0" /> -->
       <Connexion v-if="((this.$route.path).indexOf('Connexion'))>0" />
       <!-- <router-view /> -->
        </v-main>
