@@ -145,10 +145,14 @@
       small
       color="red"
     >
-      <v-icon dark v-on:click="deleteutilisateur(item.id)" :disabled="disable">
+      <v-icon dark v-on:click="deleteutilisateur(item.id)" 
+      :disabled="disable" 
+      >
         mdi-delete
       </v-icon>
     </v-btn>
+    <!-- :disabled="!disable" 
+       :class="{'disabled': !validateFields}"-->
                <!-- <v-icon small color="red" @click="deleteutilisateur(item.id)"> mdi-delete </v-icon> -->
 
       </template>
@@ -198,7 +202,8 @@ export default {
   },
   data: () => ({
     spinner:true,
-    disable:false,
+    disable:true,
+    // disabled: 0,
     types:['employe','admin','En Attente'],
     tab: null,
         itemstab: [
@@ -238,26 +243,36 @@ export default {
     },
   }),
      async created() {
-    //      let user =  JSON.stringify(localStorage.getItem('user'));
-    //      console.log(user.email);
+    //      let user1 =  JSON.stringify(localStorage.getItem('user'));
+    //      console.log(user1.email);
     //      this.disable=false;
-    // if (user) {
+    // if (user1) {
     //    this.disable=true;
     // }
     
+// let user=response.data;
+
+//     if(!user){
+//        console.log(user);
+//       this.disabled=1;
+//     }
+//     else{
+//       this.disabled=0;
+//     }
+
       const response=await axios.get('user');
     this.$store.dispatch('user',response.data);
     
     let vm=this;
     vm.disable=false;
   let user=response.data;
-
+ console.log(user);
     if(user){
-       console.log(user);
+      
       vm.disable=false;
     }
     else{
-      vm.disable=true
+      vm.disable=true;
     }
     this.getuser();
   },
@@ -271,6 +286,19 @@ export default {
         ? "Ajouter un nouveau utilisateur"
         : "Editer utilisateur";
     },
+  //   validateFields:function(){
+  //      const response= axios.get('user');
+  //   this.$store.dispatch('user',response.data);
+  // let user=response.data;
+
+  //   if(user){
+  //      console.log(user);
+  //     return true;
+  //   }
+  //   else{
+  //     return false;
+  //   }
+  //   },
   },
   watch: {
     dialog(val) {
@@ -291,6 +319,17 @@ export default {
       });
     },
          deleteutilisateur(id) {
+  //          const response= axios.get('user');
+  //   this.$store.dispatch('user',response.data);
+  // let user=response.data;
+
+  //   if(user.id==id){
+  //      console.log(user);
+  //     this.disable= true;
+  //   }
+  //   else{
+  //     this.disable= false;
+  //   }
       Swal.fire({
         title: "Supprimer",
         text: "Vous êtes sure de supprimer cette utilisateur?",

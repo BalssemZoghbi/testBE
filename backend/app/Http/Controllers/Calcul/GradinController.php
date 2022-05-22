@@ -70,7 +70,7 @@ class GradinController extends Controller
     }
     public function largeur($diam,$pas,$nbrGradin,$largMin,$oldlargGradin,$oldnbreGradin)
     {
-        $marge=count($oldlargGradin)-$nbrGradin;
+        // $marge=count($oldlargGradin)-$nbrGradin;
 
         // if($nbrGradin>=$oldnbreGradin){
         $diam=floor($diam/10);

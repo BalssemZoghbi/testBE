@@ -197,6 +197,9 @@ export default {
         );
       }
     },
+     DeuxChiffre(x) {
+      return Math.round(x * 100) / 100;
+    },
   },
   async mounted() {
     const result = await axios.get("projets/" + this.$route.params.id);
@@ -214,16 +217,15 @@ export default {
       let spires1 = [];
       for (let i = 0; i < this.projet.priseSoustractive; i++) {
         spires[i] =
-         this.n1c -
+         (this.n1c -
           Math.abs(
             ((i - this.projet.priseSoustractive) *
               this.n1c *
               this.projet.echelonSousctractive) /
               100
-          );
+          ));
       }
       
-   console.log( this.projet.echelonSousctractive);
       for (
         let i = this.projet.priseSoustractive;
         i < this.projet.priseSoustractive + this.projet.priseAdditive + 1;
@@ -245,7 +247,7 @@ export default {
         i++
       ) {
         spires1[i] =
-          spires[this.projet.priseSoustractive + this.projet.priseAdditive - i];
+          this.DeuxChiffre(spires[this.projet.priseSoustractive + this.projet.priseAdditive - i]);
       }
       return spires1;
     },
@@ -276,23 +278,22 @@ export default {
     bmax() {
       let bmax;
       if (this.projet.couplageSecondaire == "zn") {
-        bmax =
+        bmax =this.DeuxChiffre(
           (((parseFloat(this.projet.secondaireUligne) * 2) / 3) *
             Math.pow(10, 6)) /
           (Math.PI *
             parseFloat(this.projet.frequence) *
             Math.sqrt(2) *
             parseFloat(this.projet.Snette) *
-            this.n2cDesire);
+            this.n2cDesire));
       } else {
-        console.log(this.n2cDesire);
         bmax =
-          (parseFloat(this.projet.secondaireUPhase) * Math.pow(10, 6)) /
+          this.DeuxChiffre((parseFloat(this.projet.secondaireUPhase) * Math.pow(10, 6)) /
           (Math.PI *
             parseFloat(this.projet.frequence) *
             Math.sqrt(2) *
             parseFloat(this.projet.Snette) *
-            this.n2cDesire);
+            this.n2cDesire));
       }
       return bmax;
     },
@@ -345,7 +346,7 @@ export default {
     n1c() {
       let n1c = parseFloat(this.projet.N1c);
       n1c = parseFloat(this.projet.PrimaireUPhase) / this.vsp;
-      return n1c;
+      return this.DeuxChiffre(n1c);
     },
     vsp() {
       let vsp = this.projet.Vsp;
@@ -354,7 +355,7 @@ export default {
       } else {
         vsp = parseFloat(this.projet.secondaireUPhase) / this.N2c;
       }
-      return vsp;
+      return this.DeuxChiffre(vsp);
     },
   },
 };

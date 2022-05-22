@@ -31,14 +31,14 @@
                         dense
                         outlined
                       ></v-select>
-                      
+
                       <v-text-field
                         label="coeffRemplissage"
                         v-model="projet.coeffRemplissage"
                         outlined
                         dense
                       ></v-text-field>
- <v-text-field
+                      <v-text-field
                         label="Diametre Nominale"
                         dense
                         id="diamNominale"
@@ -54,8 +54,6 @@
                         outlined
                       ></v-text-field>
 
-                     
-
                       <v-text-field
                         label="nbrGradin"
                         v-model="projet.nbrGradin"
@@ -68,7 +66,7 @@
                         v-model="projet.demiGradin"
                         outlined
                       ></v-text-field>
-                          <v-text-field
+                      <v-text-field
                         label="largeurMin"
                         dense
                         v-model="projet.largeurMin"
@@ -82,20 +80,20 @@
                       ></v-text-field>
 
                       <v-text-field
-                      success
+                        success
                         label="Sbrut"
                         dense
                         v-model="Sbrut"
                         outlined
                       ></v-text-field>
                       <v-text-field
-                      success
+                        success
                         label="Snette"
                         dense
                         v-model="Snette"
                         outlined
                       ></v-text-field>
-                  
+
                       <v-text-field
                         label="EpaisseurTot"
                         dense
@@ -104,20 +102,114 @@
                         outlined
                       ></v-text-field>
                     </div>
-                    <div class="graph">
-                      <!-- <div  :v-for="index in 3" :style="{width: epaisseur[index]+'%', 'height':'30%','background-color':blue}"> -->
-                      <div
+                    <div class="grid2">
+                      <div style="transform: rotate(-180deg)">
+                        <div
+                          v-for="item in projet.nbrGradin"
+                          :key="item"
+                          :style="{
+                            width: largeur[projet.nbrGradin - item] + 'px',
+                            height: epaisseur[projet.nbrGradin - item] + 'px',
+                            'background-color': 'blue',
+                          }"
+                        ></div>
+                        <div
+                          v-for="item in projet.nbrGradin"
+                          :key="item"
+                          v-bind:style="{
+                            width: largeur[item - 1] + 'px',
+                            height: epaisseur[item - 1] + 'px',
+                            'background-color': 'blue',
+                          }"
+                        ></div>
+                      </div>
+                      <div>
+                        <div
+                          v-for="item in projet.nbrGradin"
+                          :key="item"
+                          v-bind:style="{
+                            width: largeur[projet.nbrGradin - item] + 'px',
+                            height: epaisseur[projet.nbrGradin - item] + 'px',
+                            'background-color': 'blue',
+                          }"
+                        ></div>
+                        <div
+                          v-for="item in projet.nbrGradin"
+                          :key="item"
+                          v-bind:style="{
+                            width: largeur[item - 1] + 'px',
+                            height: epaisseur[item - 1] + 'px',
+                            'background-color': 'blue',
+                          }"
+                        ></div>
+                      </div>
+                      <!-- <div  :v-for="index in 3" this.largeur.length :style="{width:'30%', 'height':'30%','background-color':blue}"> -->
+                      <!-- <div
                         :v-for="item in largeur"
                         v-bind:style="{
                           width: item + 'px',
                           height: item + 'px',
                           'background-color': 'blue',
                         }"
-                      >
-                        {{ item }}
-                        <!-- :v-for="(item, index) in this.largeur"-->
-                        <!-- width: epaisseur[index]+'px', -->
+                      > -->
+                      <!-- {{ item }} -->
+                      <!-- :v-for="(item, index) in this.largeur"-->
+                      <!-- width: epaisseur[index]+'px', -->
+                      <!-- </div> -->
+                      <!-- </div> -->
+
+                      <!-- <div class="grid2">
+                          <div style="transform : rotate(-180deg)">
+                          <div>
+                        <div  v-bind:style="{'background-color':'blue', width: this.largeur[7] + 'px', height: this.epaisseur[7] + 'px'}"  > </div>
+                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[6] + 'px', height: this.epaisseur[6] + 'px'}"  > </div>
+                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[5] + 'px', height: this.epaisseur[5] + 'px'}"  > </div>
+                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[4] + 'px', height: this.epaisseur[4] + 'px'}"  > </div>
+                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[3] + 'px', height: this.epaisseur[3] + 'px'}"  > </div>
+                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[2] + 'px', height: this.epaisseur[2] + 'px'}"  > </div>
+                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[1] + 'px', height: this.epaisseur[1] + 'px'}"  > </div>
+                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[0] + 'px', height: this.epaisseur[0] + 'px'}"  > </div>
+                    
+                     </div>
+                          <div>
+                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[0] + 'px', height: this.epaisseur[0] + 'px'}"  > </div>
+                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[1] + 'px', height: this.epaisseur[1] + 'px'}"  > </div>
+                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[2] + 'px', height: this.epaisseur[2] + 'px'}"  > </div>
+                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[3] + 'px', height: this.epaisseur[3] + 'px'}"  > </div>
+                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[4] + 'px', height: this.epaisseur[4] + 'px'}"  > </div>
+                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[5] + 'px', height: this.epaisseur[5] + 'px'}"  > </div>
+                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[6] + 'px', height: this.epaisseur[6] + 'px'}"  > </div>
+                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[7] + 'px', height: this.epaisseur[7] + 'px'}"  > </div>
+                     </div>
                       </div>
+
+
+<div>
+                          <div  >
+                        <div  v-bind:style="{'background-color':'blue', width: this.largeur[7] + 'px', height: this.epaisseur[7] + 'px'}"  > </div>
+                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[6] + 'px', height: this.epaisseur[6] + 'px'}"  > </div>
+                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[5] + 'px', height: this.epaisseur[5] + 'px'}"  > </div>
+                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[4] + 'px', height: this.epaisseur[4] + 'px'}"  > </div>
+                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[3] + 'px', height: this.epaisseur[3] + 'px'}"  > </div>
+                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[2] + 'px', height: this.epaisseur[2] + 'px'}"  > </div>
+                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[1] + 'px', height: this.epaisseur[1] + 'px'}"  > </div>
+                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[0] + 'px', height: this.epaisseur[0] + 'px'}"  > </div>
+                    
+                     </div>
+                          <div>
+                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[0] + 'px', height: this.epaisseur[0] + 'px'}"  > </div>
+                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[1] + 'px', height: this.epaisseur[1] + 'px'}"  > </div>
+                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[2] + 'px', height: this.epaisseur[2] + 'px'}"  > </div>
+                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[3] + 'px', height: this.epaisseur[3] + 'px'}"  > </div>
+                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[4] + 'px', height: this.epaisseur[4] + 'px'}"  > </div>
+                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[5] + 'px', height: this.epaisseur[5] + 'px'}"  > </div>
+                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[6] + 'px', height: this.epaisseur[6] + 'px'}"  > </div>
+                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[7] + 'px', height: this.epaisseur[7] + 'px'}"  > </div>
+                     </div>
+                      </div>
+
+
+                     </div> -->
                     </div>
                   </div>
                 </div>
@@ -210,6 +302,8 @@ export default {
   },
   data() {
     return {
+      epaisseurGraph: 100,
+      largeurGraph: 150,
       spinner: true,
       toles: [],
       pas: ["10", "20"],
@@ -271,18 +365,18 @@ export default {
   async created() {
     const result = await axios.get("/projets/" + this.$route.params.id);
     this.projet = result.data;
- 
+
     axios.get("/getTole").then((response) => (this.toles = response.data));
-       this.spinner = false;
+    this.spinner = false;
   },
   computed: {
     diamPropose() {
-      if (this.projet.materiau == "cuivre") {
+      if (this.projet.materiauMT == "cuivre") {
         return (
           parseFloat(Math.pow(parseInt(this.projet.puissance) / 1000, 0.2316)) *
           220
         );
-      } else if (this.projet.materiau == "aluminium") {
+      } else if (this.projet.materiauMT == "aluminium") {
         return (
           parseFloat(Math.pow(parseInt(this.projet.puissance) / 1000, 0.2316)) *
           205
@@ -311,9 +405,11 @@ export default {
       let epaisseur = [];
       let precedent = 0;
       for (let i = 0; i < this.largeur.length; i++) {
-        epaisseur[i] = this.DeuxChiffre(Math.sqrt(
-          Math.pow(this.projet.diamNominale, 2) - Math.pow(this.largeur[i], 2)
-        ));
+        epaisseur[i] = this.DeuxChiffre(
+          Math.sqrt(
+            Math.pow(this.projet.diamNominale, 2) - Math.pow(this.largeur[i], 2)
+          )
+        );
         epaisseur[i] -= precedent;
         precedent += epaisseur[i];
       }
@@ -328,12 +424,13 @@ export default {
         i < this.largeur.length;
         i++
       ) {
-        epaisseur[i] =
-          this.DeuxChiffre((Math.sqrt(
+        epaisseur[i] = this.DeuxChiffre(
+          (Math.sqrt(
             Math.pow(this.projet.diamNominale, 2) - Math.pow(this.largeur[i], 2)
           ) -
             prec) *
-          coeff[j]);
+            coeff[j]
+        );
         j++;
         prec += epaisseur[i];
       }
@@ -362,13 +459,24 @@ export default {
       }
       return this.DeuxChiffre(somme);
     },
+    // epaisseurGraph(){
+    //   return 100;
+    // },
+    // largeurGraph(){
+    //   return 150;
+    // }
   },
 };
 </script>
 
 <style scoped>
+.grid2 {
+  display: flex;
+}
 #graph {
   width: 80%;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
 }
 .field10 {
   display: grid;
