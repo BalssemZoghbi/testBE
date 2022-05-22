@@ -1,7 +1,7 @@
 <template>
   <v-app id="inspire">
     <v-main>
-      <v-container class="fill-height" fluid>
+      <v-container class="fill-height image" fluid>
         <v-row align="center" justify="center">
           <v-col cols="12" sm="8" md="8">
             <v-card class="elevation-12">
@@ -113,6 +113,14 @@ this.error='';
 };
 </script>
 <style scoped>
+.image{
+  /* background-image:  url("../../assets/backgroundai.jpg"); */
+  /* background-image:  url("../../assets/ai-technology-brain-background-digital-transformation-concept.jpg"); */
+  background-image:  url("../../assets/rm373batch2-04.jpg");
+   background-position: center; 
+  background-repeat: no-repeat; 
+  background-size: cover; 
+}
 .row {
     display: flex;
     flex-wrap: wrap;
