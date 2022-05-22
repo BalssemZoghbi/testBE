@@ -158,6 +158,7 @@
                       outlined
                     ></v-select>
                   </div>
+                  <p :disabled="true">prefs:{{prefs}}</p>
                       <!-- <div class="form__div" v-if="this.show">
                     <input
                       type="text"
@@ -298,6 +299,73 @@ export default {
      this.modeles.modele=result.data.modele;
      console.log( result.data);
   },
+  created:function(){
+    var load=JSON.stringify(localStorage.getItem('myprefs'));
+    //  let load = JSON.stringify(this.projets);
+    // localStorage.getItem("projet");
+     
+    if(load){
+        this.projet.appareil=load.appareil;
+        this.projet.reference=load.reference;
+        this.projet.client=load.client;
+       this.projet.refClient=load.refClient;
+        this.projet.temperatureMax=load.temperatureMax;
+        this.projet.attitudeMax=load.attitudeMax;
+         this.projet.type=load.type;
+        this.projet.remplissage=load.remplissage;
+         this.projet.installation=load.installation;
+         this.projet.montage=load.montage;
+        this.projet.echangeurs=load.echangeurs;
+         this.projet.dielectrique=load.dielectrique;
+       this.projet.fonctionnement=load.fonctionnement;
+        this.projet.refroidissement=load.refroidissement;
+         this.projet.user_id=load.user_id;
+         this.projet.garantie_id=load.garantie_id;
+       this.projet.electrique_id=load.electrique_id;
+        this.projet.bobinage_id=load.bobinage_id;
+         this.projet.gradin_id=load.gradin_id;
+        this.projet.bobinage_secs_id=load.bobinage_secs_id;
+       this.projet.volt_spires_id=load.volt_spires_id;
+         this.projet.pcc_uccs_id=load.pcc_uccs_id;
+         this.projet.circuitmagnetiques_id=load.circuitmagnetiques_id;
+         this.projet.elaborateur=load.elaborateur;
+    }else{
+      console.log(load);
+    }
+     
+  },
+  computed:{
+    prefs:function(){
+      var p={
+        appareil:this.projet.appareil,
+        reference:this.projet.reference,
+        client:this.projet.client,
+        refClient:this.projet.refClient,
+        temperatureMax:this.projet.temperatureMax,
+        attitudeMax:this.projet.attitudeMax,
+        type:this.projet.type,
+        remplissage:this.projet.remplissage,
+        installation:this.projet.installation,
+       montage:this.projet.montage,
+       echangeurs:this.projet.echangeurs,
+       dielectrique:this.projet.dielectrique,
+       fonctionnement:this.projet.fonctionnement,
+       refroidissement:this.projet.refroidissement,
+       user_id:this.projet.user_id,
+       garantie_id:this.projet.garantie_id,
+       electrique_id:this.projet.electrique_id,
+       bobinage_id:this.projet.bobinage_id,
+       gradin_id:this.projet.gradin_id,
+       bobinage_secs_id:this.projet.bobinage_secs_id,
+       volt_spires_id:this.projet.volt_spires_id,
+       pcc_uccs_id:this.projet.pcc_uccs_id,
+       circuitmagnetiques_id:this.projet.circuitmagnetiques_id,
+       elaborateur:this.projet.elaborateur,
+      };
+      localStorage.setItem('myprefs',JSON.stringify(p));
+      return p;
+    }
+  }
 };
 </script>
 <style scoped>
