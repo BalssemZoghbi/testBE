@@ -234,6 +234,8 @@ export default {
     const response = await axios.get("user");
     this.$store.dispatch("user", response.data);
     this.user = response.data;
+  
+
   },
       mounted(){
   let user=JSON.parse(localStorage.getItem('user'));

@@ -198,7 +198,7 @@
         </template>
         <template v-slot:[`item.actions`]="{ item }">
           <router-link :to="'/projet/update/' + item.id">
-            <v-btn class="mx-2" fab dark small color="primary">
+            <v-btn class="mx-2" fab dark small color="primary" v-on:click="update(item.id)">
               <v-icon dark> mdi-pencil </v-icon>
             </v-btn>
           </router-link>
@@ -355,6 +355,7 @@ export default {
       couplage: "",
       frequence: "",
     },
+    getProjet:[],
   }),
 
   async created() {
@@ -451,6 +452,13 @@ export default {
           )
         );
     },
+    async update(id){
+const result = await axios.get("projets/" + id);
+this.$store.dispatch("projet", result.data);
+    this.getProjet = result.data;
+     let load = JSON.stringify(this.getProjet);
+    localStorage.setItem("projet",load);
+    },
     ProjetModele(id) {
       let token = localStorage.getItem("token");
       axios
@@ -494,11 +502,17 @@ export default {
         this.Modele = resp.data;
       });
     },
-    getprojet() {
-      axios.get("/projets").then((resp) => {
+    async getprojet() {
+     await axios.get("/projets").then((resp) => {
+         this.$store.dispatch("projet", resp.data);
         this.projets = resp.data;
+        console.log(this.projet);
+        let parsed = JSON.stringify(this.projets);
+    localStorage.setItem("projets", parsed);
+      //  localStorage.setItem("projet", this.projets);
         this.spinner = false;
       });
+
     },
     deleteprojet(id) {
       Swal.fire({
