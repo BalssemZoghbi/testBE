@@ -8,21 +8,31 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    user:null
+    user:null,
+    projet:null
   },
   getters:{
     user:(state)=>{
       return state.user;
+    },
+    projet:(state)=>{
+      return state.projet;
     }
   },
   mutations: {
     user(state,user){
       state.user=user
+    },
+    projet(state,projet){
+      state.projet=projet
     }
   },
   actions: {
     user(context,user){
       context.commit('user',user)
+    },
+    projet(context,projet){
+      context.commit('projet',projet)
     }
   },
   modules: {},

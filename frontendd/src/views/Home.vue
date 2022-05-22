@@ -454,6 +454,7 @@ export default {
     },
     async update(id){
 const result = await axios.get("projets/" + id);
+this.$store.dispatch("projet", result.data);
     this.getProjet = result.data;
      let load = JSON.stringify(this.getProjet);
     localStorage.setItem("projet",load);
@@ -501,14 +502,17 @@ const result = await axios.get("projets/" + id);
         this.Modele = resp.data;
       });
     },
-    getprojet() {
-      axios.get("/projets").then((resp) => {
+    async getprojet() {
+     await axios.get("/projets").then((resp) => {
+         this.$store.dispatch("projet", resp.data);
         this.projets = resp.data;
+        console.log(this.projet);
         let parsed = JSON.stringify(this.projets);
-    localStorage.setItem("projetes", parsed);
+    localStorage.setItem("projets", parsed);
       //  localStorage.setItem("projet", this.projets);
         this.spinner = false;
       });
+
     },
     deleteprojet(id) {
       Swal.fire({
