@@ -190,11 +190,12 @@
                 </form>
               </div>
             </v-card>
-            <router-link class="nav-link" :to="'/projet/update/' + projet.id"
-              ><v-btn color="primary" @click="updateprojet">
+            <router-link class="nav-link" :to="'/projet/update/' + projet.id"><v-btn color="primary" @click="updateprojet" v-if="this.show=='false'">
                 précédent
-              </v-btn></router-link
-            >
+              </v-btn></router-link>
+            <router-link class="nav-link" :to="'/projet/updateModele/' + projet.id"><v-btn color="primary" @click="updateprojet" v-if="this.show=='true'">
+                précédent
+              </v-btn></router-link>
             <v-btn color="success" @click="e1 = 2"> suivant </v-btn>
           </v-stepper-content>
 
@@ -333,6 +334,7 @@ export default {
   },
   data() {
     return {
+       show:false,
       spinner: true,
       frequences: ["50", "60"],
       couplagePrimaire: ["YN", "Y", "D"],
@@ -461,7 +463,9 @@ export default {
   async created() {
     const result = await axios.get("/projets/" + this.$route.params.id);
     this.projet = result.data;
+    this.show=localStorage.getItem("show");
     this.spinner = false;
+    
   },
   computed: {
     couplage() {

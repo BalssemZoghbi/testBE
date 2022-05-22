@@ -11,8 +11,11 @@
                             <a href="#">Données <i class="fas fa-caret-down"></i></a>
                             <div class="dropdown">
                                 <ul>
-                                    <li class="dropdown-link">
-                                            <router-link :to="'/projet/update/'+this.$route.params.id">  Generale</router-link>
+                                    <li class="dropdown-link" v-if="this.show=='false'">
+                                            <router-link :to="'/projet/update/'+this.$route.params.id"  >  Generale</router-link>
+                                    </li>
+                                    <li class="dropdown-link" v-if="this.show=='true'">
+                                            <router-link :to="'/projet/updateModele/'+this.$route.params.id" >  Generale</router-link>
                                     </li>
                                     <li class="dropdown-link">
                                             <router-link :to="'/projet/electrique/update/'+ this.$route.params.id ">  Electriques</router-link>
@@ -117,10 +120,12 @@ export default {
   name: "navbarcreate",
   data: () => ({
     id:undefined,
+    show:false,
    }),
   props:['conducteurMT','conducteurBT'],
-  mounted(){
-      console.log(this.conducteurMT,this.conducteurBT);
+  created(){
+      this.show=localStorage.getItem("show")
+      console.log(this.conducteurMT,this.conducteurBT,this.show);
   }
 };
 </script>

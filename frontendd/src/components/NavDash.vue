@@ -127,7 +127,7 @@
       class="text"
       >
          <span class="hidden-sm-and-down" v-if="((this.$route.path).indexOf('projet'))<=0" >SacemAutocite</span>
-       <navbarUpdate :conducteurMT="this.conducteurMT" :conducteurBT="this.conducteurBT" v-else />
+       <navbarUpdate :conducteurMT="this.conducteurMT" :conducteurBT="this.conducteurBT" :show="this.show" v-else />
      
       </v-toolbar-title>
       <v-spacer />
@@ -322,7 +322,7 @@ computed: {
         this.$vuetify.goTo(0)
       }
     },
-     props:['conducteurMT','conducteurBT'],
+     props:['conducteurMT','conducteurBT','show'],
     
   }
 </script>

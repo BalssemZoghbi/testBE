@@ -964,7 +964,6 @@ class ProjetController extends Controller
             ->join('donne_bobines', 'donne_bobines.id', '=', 'projets.donne_bobines_id')
             ->select('electriques.*', 'electriques.id as elec_id', 'circuitmagnetiques.*', 'circuitmagnetiques.id as circuitmagnetiqus_id','donne_bobines.*', 'donne_bobines.id as donne_bob_id', 'garanties.*', 'garanties.id as garenti_id', 'bobinages.*', 'bobinages.id as bobine_id', 'bobinage_secs.*', 'bobinage_secs.id as bobinesec_id', 'gradins.*', 'gradins.id as gradins_id', 'volt_Spires.*', 'volt_Spires.id as volt_id', 'pcc_uccs.*', 'pcc_uccs.id as pucc_id', 'projets.*')
             ->where('projets.id', $id)
-            ->select()
             ->get()->first();
         }else{
         $projet = DB::table('projets')

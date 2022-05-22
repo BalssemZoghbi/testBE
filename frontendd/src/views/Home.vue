@@ -28,7 +28,7 @@
                   </v-list-item>
 
                   <v-list-item>
-                    <v-dialog v-model="dialogModele" scrollable max-width="60%" >
+                    <v-dialog v-model="dialogModele" scrollable max-width="63%"  max-heigth="30%" style="heigth:30%!important">
                       <template v-slot:activator="{ on, attrs }">
                         <v-btn v-bind="attrs" v-on="on" class="bouton">
                           A Partir D'un Modele
@@ -363,8 +363,9 @@ export default {
     const response = await axios.get("user");
     this.$store.dispatch("user", response.data);
     this.user = response.data;
-    this.getprojet();
     this.Modeles();
+    localStorage.setItem('show',false);
+    this.getprojet();
   },
   computed: {
     formTitle() {

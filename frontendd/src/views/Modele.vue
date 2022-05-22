@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- <navbar /> -->
-    <NavDash v-if="this.usertype == 'admin'" />
+    <NavDash v-if="this.usertype == 'admin'"  :show="this.show"/>
     <NavDashEmp v-if="this.usertype == 'employe'" />
 <Loading v-if="spinner"/>
  
@@ -116,9 +116,11 @@ export default {
       couplage: "",
       frequence: "",
     },
+    show:"true",
   }),
 
   async created() {
+    localStorage.setItem('show',true);
     this.usertype = JSON.parse(localStorage.getItem("user")).type;
     console.log(this.usertype);
     const response = await axios.get("user");

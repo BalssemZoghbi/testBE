@@ -158,7 +158,7 @@
                       outlined
                     ></v-select>
                   </div>
-                      <div class="form__div" v-if="this.show">
+                      <!-- <div class="form__div" v-if="this.show">
                     <input
                       type="text"
                       class="form__input"
@@ -167,7 +167,7 @@
                        v-model="modeles.modele"
                     />
                     <label for="" class="form__label">Nom Modele</label>
-                  </div>
+                  </div> -->
                 </div>
               </form>
             </div>
@@ -193,7 +193,10 @@ export default {
   },
   data() {
     return {
-      show:false,
+      // show:false,
+       modeles:{
+      modele: "",
+      },
       barre: [],
       types: ["cabine", "poteau", "h61", "h59", "sec"],
       remplissages: ["à matelas d`air", "integral", "respirant"],
@@ -274,7 +277,12 @@ export default {
           },
         })
         .then((response) => (this.id = response.data.id));
-      
+      //  const modeles={
+      //   modele:this.modeles.modele
+      // }
+      // axios
+      //   .put("/modeles/update/" + this.$route.params.id, modeles)
+      //   .then();
     },
     getbarre() {
       axios
