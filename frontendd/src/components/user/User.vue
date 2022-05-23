@@ -146,7 +146,7 @@
       color="red"
     >
       <v-icon dark v-on:click="deleteutilisateur(item.id)" 
-      :disabled="disable" 
+      
       >
         mdi-delete
       </v-icon>
@@ -202,7 +202,7 @@ export default {
   },
   data: () => ({
     spinner:true,
-    disable:true,
+    isdisable:false,
     // disabled: 0,
     types:['employe','admin','En Attente'],
     tab: null,
@@ -260,20 +260,20 @@ export default {
 //       this.disabled=0;
 //     }
 
-      const response=await axios.get('user');
-    this.$store.dispatch('user',response.data);
+//       const response=await axios.get('user');
+//     this.$store.dispatch('user',response.data);
     
-    let vm=this;
-    vm.disable=false;
-  let user=response.data;
- console.log(user);
-    if(user){
+//     let vm=this;
+//     vm.disable=false;
+//   let user=response.data;
+//  console.log(user);
+//     if(user){
       
-      vm.disable=false;
-    }
-    else{
-      vm.disable=true;
-    }
+//       vm.disable=false;
+//     }
+//     else{
+//       vm.disable=true;
+//     }
     this.getuser();
   },
   
@@ -310,7 +310,18 @@ export default {
   },
  
   methods: {
-  
+ async dis(){
+    this.disable=true;
+    await axios.get("user").then((response) => {
+      this.$store.dispatch("user", response.data);
+    this.user = response.data;
+    }) .catch((error) => {
+          if (error)
+             this.disable = false;
+            // console.log("error");
+        });
+    
+  },
      async  getuser() {
     await axios.get("/users/get").then((resp) => {
         this.users = resp.data;

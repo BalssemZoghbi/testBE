@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 use App\Http\Resources\UserResource;
 use App\Models\user\User;
@@ -40,7 +41,7 @@ class UserController extends Controller
         return $users;
 
     }
-    
+
     public function store(Request $request){
        $user= User::create([
             'name' => $request->name,
@@ -87,6 +88,10 @@ class UserController extends Controller
 
        if($user->delete()) {
         return response()->json($userr);;
+       }
+       $auth=Auth::user();
+       if($auth){
+        return response()->json('error');
        }
     }
 
