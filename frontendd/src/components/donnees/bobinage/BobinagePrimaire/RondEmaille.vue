@@ -619,11 +619,12 @@ export default {
       return this.projet.PrimaireIPhase / this.scu1;
     },
     N1cmax() {
+      console.log(this.projet.spire);
       let spires = this.projet.spire
         .replace("[", "", this.projet.spire.length - 1)
         .replace("]", "")
         .split(",");
-      return Math.floor(spires[0]);
+      return Math.ceil(spires[0]);
     },
     filobtenueIsoler() {
       let emaille = this.emaille;

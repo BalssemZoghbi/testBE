@@ -562,7 +562,7 @@ hauteurcuve(){
       return 0 ;
   },
   pFer(){
-return this.pferspecifique*this.masseFertot*(100+this.projet.Majfer)/100;
+return this.pferspecifique*this.masseFertot*(100+parseFloat(this.projet.Majfer))/100;
   }
   }
 

@@ -473,7 +473,7 @@ export default {
     const result = await axios.get('projets/'+this.$route.params.id);
     this.projet = result.data;
   },
-   created(){
+   async created(){
        axios.get('/getdesignationBarre').then(
         (response) => (this.barre = response.data)
       );
@@ -483,6 +483,9 @@ export default {
        axios.get('/getValeurSaillie').then(
         (response) => (this.saillie = response.data)
       );
+    const result = await axios.get("projets/" +this.$route.params.id);
+    this.$store.dispatch("projet", result.data);
+    this.projet = result.data;
     },
     computed:{
     HbobineBt(){

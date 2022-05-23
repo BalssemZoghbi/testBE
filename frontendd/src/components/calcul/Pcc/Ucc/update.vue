@@ -160,11 +160,13 @@ export default {
     const result = await axios.get("projets/" + this.$route.params.id);
     this.projet = result.data;
     this.spinner=false;
+    console.log(this.projet.Pccg);
   },
    computed:{
    pcc1(){
      let pcc1;
      if(this.projet.materiauMT=='cuivre'){
+       console.log(this.projet.poidMT);
      pcc1=2.286*Math.pow(parseFloat(this.projet.j1),2)*parseFloat(this.projet.poidMT)*(100+parseInt(this.projet.MajourationU))/100;
      }else if(this.projet.materiauMT=='aluminium'){
       pcc1=12.18*Math.pow(parseFloat(this.projet.j1),2)*parseFloat(this.projet.poidMT)*(100+parseInt(this.projet.MajourationU))/100;
