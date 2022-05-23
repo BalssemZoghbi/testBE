@@ -52,7 +52,7 @@
                         class="form__input"
                         placeholder=" "
                         id="N2c"
-                        v-model="N2c"
+                        v-model="n2cDesire"
                       />
                       <label for="" class="form__label">N2c</label>
                     </div>
@@ -247,7 +247,7 @@ export default {
         i++
       ) {
         spires1[i] =
-          this.DeuxChiffre(spires[this.projet.priseSoustractive + this.projet.priseAdditive - i]);
+          Math.floor(spires[this.projet.priseSoustractive + this.projet.priseAdditive - i]);
       }
       return spires1;
     },
@@ -297,34 +297,35 @@ export default {
       }
       return bmax;
     },
-    N2c() {
-      let n2c;
-      if (this.projet.couplageSecondaire == "zn") {
-        n2c =
-          (((parseFloat(this.projet.secondaireUligne) * 2) / 3) *
-            parseFloat(Math.pow(10, 6))) /
-          (parseFloat(Math.PI) *
-            parseFloat(this.projet.frequence) *
-            parseFloat(Math.sqrt(2)) *
-            parseFloat(this.projet.Snette) *
-            this.bmax);
-      } else {
-        n2c =
-          (parseFloat(this.projet.secondaireUPhase) *
-            parseFloat(Math.pow(10, 6))) /
-          (parseFloat(Math.PI) *
-            parseFloat(this.projet.frequence) *
-            parseFloat(Math.sqrt(2)) *
-            parseFloat(this.projet.Snette) *
-            this.bmax);
-      }
-      return Math.floor(n2c);
-    },
+    // N2c() {
+    //   let n2c;
+    //   if (this.projet.couplageSecondaire == "zn") {
+    //     n2c =
+    //       (((parseFloat(this.projet.secondaireUligne) * 2) / 3) *
+    //         parseFloat(Math.pow(10, 6))) /
+    //       (parseFloat(Math.PI) *
+    //         parseFloat(this.projet.frequence) *
+    //         parseFloat(Math.sqrt(2)) *
+    //         parseFloat(this.projet.Snette) *
+    //         this.bmax);
+    //   } else {
+    //     n2c =
+    //       (parseFloat(this.projet.secondaireUPhase) *
+    //         parseFloat(Math.pow(10, 6))) /
+    //       (parseFloat(Math.PI) *
+    //         parseFloat(this.projet.frequence) *
+    //         parseFloat(Math.sqrt(2)) *
+    //         parseFloat(this.projet.Snette) *
+    //         this.bmax);
+    //   }
+    //   return Math.floor(n2c);
+    // },
     n2cDesire() {
-      let n2c;
+      console.log(this.projet.secondaireUPhase,this.projet.Snette,this.projet.Bmaxdesire,this.projet.frequence,this.projet.secondaireUligne);
+            let n2c;
       if (this.projet.couplageSecondaire == "zn") {
         n2c =
-          (((parseFloat(this.projet.secondaireUligne) * 2) / 3) *
+          ((parseFloat(this.projet.secondaireUligne) * 2 / 3) *
             parseFloat(Math.pow(10, 6))) /
           (parseFloat(Math.PI) *
             parseFloat(this.projet.frequence) *
@@ -341,19 +342,23 @@ export default {
             parseFloat(this.projet.Snette) *
             this.projet.Bmaxdesire);
       }
-      return Math.floor(n2c);
+      // if(n2c%2==0){
+                return Math.round(n2c);
+                // else{
+                //     return Math.ceil(n2c);
+                // }
     },
     n1c() {
       let n1c = parseFloat(this.projet.N1c);
       n1c = parseFloat(this.projet.PrimaireUPhase) / this.vsp;
-      return this.DeuxChiffre(n1c);
+      return Math.ceil(n1c);
     },
     vsp() {
       let vsp = this.projet.Vsp;
       if (this.projet.couplageSecondaire == "zn") {
-        vsp = (parseFloat(this.projet.secondaireUligne) * 2) / 3 / this.N2c;
+        vsp = (parseFloat(this.projet.secondaireUligne) * 2) / 3 / this.n2cDesire;
       } else {
-        vsp = parseFloat(this.projet.secondaireUPhase) / this.N2c;
+        vsp = parseFloat(this.projet.secondaireUPhase) / this.n2cDesire;
       }
       return this.DeuxChiffre(vsp);
     },

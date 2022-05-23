@@ -231,14 +231,14 @@
                         <v-text-field
                           label="CanauxMT"
                           id="canauxMT"
-                          readonly
+                          
                           v-model="projet.canauxMT"
                           outlined
                         ></v-text-field>
                         <v-text-field
                           label="Lrg Cales"
                           id="lgCales"
-                          readonly
+                          
                           v-model="projet.lgCales"
                           outlined
                         ></v-text-field>
@@ -498,14 +498,14 @@ export default {
     },
     nbrPapierMt() {
       return Math.ceil(
-        ((this.projet.SpchB * this.projet.Vsp * 4) /
+        ((this.SpchB * this.projet.Vsp * 4) /
           this.projet.rigiditePapierMT -
-          (this.projet.filobtenueIsoler - this.projet.filobtenueNue)) /
+          (this.filobtenueIsoler - this.filobtenueNue)) /
           this.projet.EpfeuillePapier
       );
     },
     EpaiseurPapier() {
-      return parseFloat(this.projet.EpfeuillePapier) * this.nbrPapierMt;
+      return (parseFloat(this.projet.EpfeuillePapier) * this.nbrPapierMt);
     },
     NchA() {
       return Math.floor(
@@ -536,17 +536,17 @@ export default {
     },
     
     DintMT() {
-      return  parseFloat(this.projet.DistanceBTMT) * 2 + this.DextMT;
+      console.log(this.projet.DextBT);
+      return  Math.round((parseFloat(this.projet.DistanceBTMT) * 2) + this.projet.DextBT);
     },
     BintMT() {
-      return Math.ceil(this.projet.BextMT + 2 * this.projet.DistanceBTMT);
+      return Math.round(this.projet.BextBT +( 2 * this.projet.DistanceBTMT));
     },
     DextMT() {
-      console.log("dext");
-      return Math.round(this.projet.DintMT + 2 * parseFloat(this.projet.EpxMT));
+      return Math.round(this.DintMT + 2 * parseFloat(this.EpxMT));
     },
     BextMT() {
-      return Math.round(this.projet.BintMT + 2 * this.projet.EpyMT);
+      return Math.round(this.BintMT + 2 * this.EpyMT);
     },
     EpxMT() {
       if (this.projet.typeCanaux == "complet") {
@@ -592,7 +592,7 @@ export default {
         (Math.pow(10, -6) *
           (coefPoid *
             parseFloat(this.projet.N1c) *
-            parseFloat(this.projet.scu1) *
+            parseFloat(this.scu1) *
             Math.PI *
             3) *
           ((this.DintMT +
@@ -607,7 +607,7 @@ export default {
     scu1() {
       return (
         (Math.PI *
-          Math.pow(this.filobtenueIsoler, 2) *
+          Math.pow(this.filobtenueNue, 2) *
           parseInt(this.projet.brinParallele)) /
         4
       );
@@ -616,14 +616,14 @@ export default {
       return this.projet.canauxNbrPapier * this.projet.EpfeuillePapier;
     },
     j1() {
-      return this.projet.PrimaireIPhase / this.projet.scu1;
+      return this.projet.PrimaireIPhase / this.scu1;
     },
     N1cmax() {
       let spires = this.projet.spire
         .replace("[", "", this.projet.spire.length - 1)
         .replace("]", "")
         .split(",");
-      return spires[0];
+      return Math.floor(spires[0]);
     },
     filobtenueIsoler() {
       let emaille = this.emaille;

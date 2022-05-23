@@ -23,7 +23,7 @@
                     </v-chip>
                     <v-chip style="margin-left: 2%"
                       >I2ph :
-                      {{ projet.secondaireIPhase }}
+                      {{ projet.secondaireUPhase }}
                     </v-chip>
                   </div>
 
@@ -226,7 +226,7 @@
                         label="Lrg Cales"
                         dense
                         id="lgCales"
-                        readonly
+                        
                         v-model="projet.lgCalesBT"
                         outlined
                       ></v-text-field>
@@ -519,7 +519,7 @@ export default {
       return this.hfs + this.projet.collierBTSec * 2;
     },
     collierBt2() {
-      return this.hbobt - this.hfs - parseFloat(this.projet.collierBTSec);
+      return Math.round((this.hbobt - this.hsfs) / 2);
     },
     poidBT() {
       let coefPoid = 0;
@@ -545,6 +545,7 @@ export default {
     Epx() {
       let epx = this.projet.EpxBT;
       if (this.projet.typeCanauxBT == "complet") {
+        console.log(epx);
         epx =
           (this.projet.saillieBT + this.projet.e2r) *
             this.projet.etageBT *

@@ -78,24 +78,34 @@ class BobinageSecController extends Controller
                 return $hfs+($collierBT*2);
                 // timchi 5
             }
-            public function collierBt2($hbobt,$hsfs,$collierBT){
-                return $hbobt-$hsfs-$collierBT;
+            public function collierBt2($hbobt,$hsfs){
+                return ($hbobt-$hsfs)/2;
             }
             public function DintBint($dn,$cmbt){
+
                 return $dn+(2*$cmbt);
             }
-            public function Epx($typeCanaux,$saillie,$e2r,$etage,$nbCouche,$canauxBt,$lgCales,$nbPapier,$ep1Papier){
+            public function Epx($typeCanaux,$saillie,$e2r,$etage,$nbCouche,$canauxBt,$lgCales,$nbrPapierMT,$ep1Papier){
                 if($typeCanaux=='complet'){
-                    return ($saillie+$e2r)*$etage*$nbCouche+($canauxBt*$lgCales)+$nbPapier*$ep1Papier;
+                    return ($saillie+$e2r)*$etage*$nbCouche+($canauxBt*$lgCales)+$nbrPapierMT*$ep1Papier;
                 }else if($typeCanaux=='lune'){
                     return ($saillie+$e2r)*$etage*$nbCouche;
                 }
             }
+            // public function Epx($typeCanaux,$saillie,$e2r,$etage,$nbCouche,$canauxBt,$lgCales,$nbPapier,$ep1Papier){
+            //     if($typeCanaux=='complet'){
+            //         // dd($saillie);
+            //         return ($saillie+$e2r)*$etage*$nbCouche+$canauxBt*$lgCales+$nbPapier*$ep1Papier;
+            //     }else if($typeCanaux=='lune'){
+            //         return ($saillie+$e2r)*$etage*$nbCouche;
+            //     }
+            // }
             public function Epy($saillie,$e2r,$etage,$nbCouche,$canauxBt,$lgCales,$nbPapier,$ep1Papier){
                return ($saillie+$e2r)*$etage*$nbCouche+($canauxBt*$lgCales)+$nbPapier*$ep1Papier;
 
             }
             public function Dext($dint,$epx){
+
                 return $dint+2*$epx;
             }
             public function Bext($dint,$epy){
@@ -334,11 +344,10 @@ public function BextMt($bint,$epy){
             $hsfs=$this->hsfs($hSpire,$spCouche,$request->etageBT,$request->hbrin1BT,$request->hbrin2BT,$request->e2ax);
             $hfs=$this->hfs($hSpire,$spCouche,$request->etageBT,$request->hbrin1BT,$request->hbrin2BT,$request->e2ax);
             $hbobt=$this->hbobt($hfs,$request->collierBTSec);
-            $collierBt2=$this->collierBt2($hbobt,$hsfs,$request->collierBTSec);
+            $collierBt2=$this->collierBt2($hbobt,$hsfs);
             $DintBint=$this->DintBint($projet->diamNominale,$projet->CMBT);
-
-            $epx=$this->Epx($request->typeCanauxBT,$request->saillieBT,$request->e2r,$request->etageBT,$request->nbcoucheBT,$request->canauxBt,$request->lgCalesBT,$request->nbPapierBT,$request->ep1PapierBT);
-            $epyMeplat=$this->Epy($request->saillieBT,$request->e2r,$request->etageBT,$request->nbcoucheBT,$request->canauxBt,$request->lgCalesBT,$request->nbPapierBT,$request->ep1PapierBT);
+            $epx=$this->Epx($request->typeCanauxBT,$request->saillieBT,$request->e2r,$request->etageBT,$request->nbcoucheBT,$request->canauxBT,$request->lgCalesBT,$request->nbrPapierBT,$request->canauxEp1PapierBT);
+            $epyMeplat=$this->Epy($request->saillieBT,$request->e2r,$request->etageBT,$request->nbcoucheBT,$request->canauxBT,$request->lgCalesBT,$request->nbrPapierBT,$request->canauxEp1PapierBT);
             $dext=$this->Dext($DintBint,$epx);
             $bext=$this->Bext($DintBint,$epyMeplat);
             $poid=$this->Poid($projet->materiauBT,$projet->N2c,$scu2,$DintBint,$epx,$request->majPoidBT);
@@ -346,7 +355,7 @@ public function BextMt($bint,$epy){
             $barre=$this->calculBarre($request->EpbarreBT);
             // dd($barre);
             $HbobineBt= $this->Hbobine($request->HfeuillardBT,$request->collierBTSec);
-            $ePap=$this->ePap($request->ep1PapierBT,$request->nbrPap1BT,$request->ep2PapierBT,$request->nbrPap2BT);
+            $ePap=$this->ePap($request->ep1PapierBT,$request->nbrPap1BT,$request->ep1PapierBT,$request->nbrPap2BT);
             $epxfeui=$this->Epxfeui($request->typeCanauxBT,$projet->N2c,$request->canauxBt,$request->lgCalesBT,$epFeuillard,$ePap);
             $epFeuilpap=$this->epPapier($request->epFeuilPapBT,$request->nbrPapierBT);
             $epPapier=$this->epPapier($epFeuilpap,$request->nbPapierBT);

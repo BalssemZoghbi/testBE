@@ -144,12 +144,7 @@
             v-model="pferspecifique"
             outlined
           ></v-text-field>
-               <v-text-field
-       
-            label="Maj fer prop"
-            v-model="projet.Majferprop"
-            outlined
-          ></v-text-field>
+             
                <v-text-field
        success
             label="pFer"
@@ -163,9 +158,9 @@
             outlined
           ></v-text-field>
                <v-text-field
-       
+       success
             label="pFerg"
-            v-model="projet.pFergarantie"
+            v-model="pFergarantie"
             outlined
           ></v-text-field>
                <v-text-field
@@ -470,7 +465,9 @@ export default {
     this.projet = result.data;
   },
   computed: {
-
+pFergarantie(){
+  return this.projet.Pog;
+},
     masseFertot(){
  let masse=this.masse;
   let somme=0;

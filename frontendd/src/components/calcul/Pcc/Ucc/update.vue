@@ -164,15 +164,15 @@ export default {
    computed:{
    pcc1(){
      let pcc1;
-     if(this.projet.materiau=='cuivre'){
+     if(this.projet.materiauMT=='cuivre'){
      pcc1=2.286*Math.pow(parseFloat(this.projet.j1),2)*parseFloat(this.projet.poidMT)*(100+parseInt(this.projet.MajourationU))/100;
-     }else if(this.projet.materiau=='aluminium'){
+     }else if(this.projet.materiauMT=='aluminium'){
       pcc1=12.18*Math.pow(parseFloat(this.projet.j1),2)*parseFloat(this.projet.poidMT)*(100+parseInt(this.projet.MajourationU))/100;
      }
      return Math.round(pcc1 * 100) / 100;
      },
        pcc2(){
-     let m2=this.projet.materiauSec;
+     let m2=this.projet.materiauBT;
      let pcc2=this.projet.pcc2;
      if(m2=='cuivre'){
      pcc2=2.286*Math.pow(parseFloat(this.projet.j2),2)*parseFloat(this.projet.poidBT)*(100+parseInt(this.projet.MajourationU))/100;
@@ -187,7 +187,7 @@ export default {
 hmoy()
 {
    let hmoy;
-if(this.projet.conducteurSec=='feuillard'){
+if(this.projet.conducteurBT=='feuillard'){
  hmoy=(parseFloat(this.projet.HCondMt)+parseFloat(this.projet.HfeuillardBT))/2;
 }else{
   hmoy=(parseFloat(this.projet.HCondMt)+parseFloat(this.projet.HSFSBT))/2;

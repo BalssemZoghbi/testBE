@@ -38,14 +38,7 @@
                         outlined
                         dense
                       ></v-text-field>
-                      <v-text-field
-                        label="Diametre Nominale"
-                        dense
-                        id="diamNominale"
-                        v-model="projet.diamNominale"
-                        outlined
-                      ></v-text-field>
-                      <v-text-field
+                            <v-text-field
                         label="Diametre propose"
                         v-model="diamPropose"
                         success
@@ -53,6 +46,14 @@
                         readonly
                         outlined
                       ></v-text-field>
+                      <v-text-field
+                        label="Diametre Nominale"
+                        dense
+                        id="diamNominale"
+                        v-model="projet.diamNominale"
+                        outlined
+                      ></v-text-field>
+                
 
                       <v-text-field
                         label="nbrGradin"

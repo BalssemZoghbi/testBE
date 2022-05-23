@@ -759,7 +759,7 @@ export default {
         this.projet.couplageSecondaire == "zn" ||
         this.projet.couplageSecondaire == "z"
       ) {
-        return this.DeuxChiffre((2 * this.projet.puissance) / 3 / 2);
+        return ((2 * this.projet.puissance) / 3) / 2;
       } else {
         return 0;
       }

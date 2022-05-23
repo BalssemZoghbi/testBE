@@ -33,11 +33,15 @@ class VoltspireController extends Controller
         }else{
           $N2c=$U2ph*(pow(10,6))/(pi()*$frequence*sqrt(2)*$Snette*$B);
         }
-          if($N2c%2==0){
-                return floor($N2c);}
-                else{
-                    return Ceil($N2c);
-                }
+        return round($N2c);
+        // dd(Ceil($N2c),$N2c);
+        //   if($N2c%2==0){
+        //         return floor($N2c);
+        //     }else{
+
+        //             return Ceil($N2c);
+
+        //         }
 
 
 
@@ -112,8 +116,8 @@ class VoltspireController extends Controller
             ->get()->first();
         $VoltSpire = VoltSpire::FindOrFail($projet->volt_spires_id);
         $Bmax=$this->Bmax($projet->secondaireUPhase,$projet->Snette,$request->Bmaxdesire,$projet->frequence,$projet->secondaireUligne,$projet->couplageSecondaire);
-        $N2c = $this->N2c($projet->secondaireUPhase,$projet->Snette,$Bmax,$projet->frequence,$projet->secondaireUligne,$projet->couplageSecondaire);
-
+        $N2c = $this->N2c($projet->secondaireUPhase,$projet->Snette,$request->Bmaxdesire,$projet->frequence,$projet->secondaireUligne,$projet->couplageSecondaire);
+// dd($N2c);
         $Vsp=$this->Vsp($projet->secondaireUPhase,$projet->Snette,$Bmax,$projet->frequence,$projet->secondaireUligne,$projet->couplageSecondaire);
     //    dd($projet->Vsp);
         $N1c=$this->N1c($projet->PrimaireUPhase,$Vsp);
