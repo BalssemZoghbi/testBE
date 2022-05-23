@@ -214,6 +214,7 @@
             small
             color="orange"
             @click="exportword(item.id)"
+            
           >
             <v-icon dark> mdi-cloud-download </v-icon>
           </v-btn>
@@ -408,31 +409,23 @@ export default {
           this.getprojet()
         );
     },
-    exportword(id) {
-      var vm = this;
-      vm.isDisabled = true;
-
-      axios
-        .post("documents/" + id, { responseType: "blob" })
-        .then(function (response) {
-          var headers = response.headers;
-          console.log(headers);
-          var blob = new Blob([response.data.data], {
-            type: headers["content-type"],
-          });
-          var link = document.createElement("a");
-          link.href = window.URL.createObjectURL(blob);
-          link.download = vm.templateProjet;
-          link.click();
-          link.remove();
-          vm.isDisabled = false;
-        })
-        .catch((error) => {
-          if (error)
-            //  vm.isDisabled = false;
-            console.log("error");
-        });
-    },
+      exportword(id) {
+      axios({
+    url: 'http://localhost:8000/api/documents/' + id,
+    method: 'GET',
+    responseType: 'blob',
+}).then((response) => {
+  var headers = response.headers;
+  console.log(headers);
+     var fileURL = window.URL.createObjectURL(new Blob([response.data], {type: headers["content-type"],})); 
+     var fileLink = document.createElement('a');
+     fileLink.href = fileURL;
+     fileLink.setAttribute('download','conceptionTransfo.doc');
+     document.body.appendChild(fileLink);
+   
+     fileLink.click();
+});
+      },
     create() {
       let token = localStorage.getItem("token");
       axios
