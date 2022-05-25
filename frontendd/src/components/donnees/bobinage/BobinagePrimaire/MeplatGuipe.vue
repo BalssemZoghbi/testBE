@@ -208,7 +208,7 @@
                         label="CanauxMT"
                         dense
                         id="canauxMT"
-                        readonly
+                        
                         v-model="projet.canauxMT"
                         outlined
                       ></v-text-field>
@@ -482,11 +482,18 @@ export default {
           this.projet.hbrin2MT * this.projet.nbBrin2MT)
       );
     },
+      N1cmax() {
+      let spires = this.projet.spire
+        .replace("[", "", this.projet.spire.length - 1)
+        .replace("]", "")
+        .split(",");
+      return spires[0];
+    },
     j1() {
       return this.projet.PrimaireIPhase / this.scu1;
     },
     spCouche() {
-      return this.projet.N1c / this.projet.nbcoucheMT;
+      return Math.ceil( this.N1cmax / this.projet.nbcoucheMT);
     },
     hSpire() {
       return (
@@ -563,9 +570,11 @@ export default {
     },
     Epy() {
       return (
-        (this.projet.saillieMT + this.projet.e1r) *
-        this.projet.etageMT *
-        this.projet.nbcoucheMT
+         (this.projet.saillieMT + this.projet.e1r) *
+            this.projet.etageMT *
+            this.projet.nbcoucheMT +
+          this.projet.canauxMT * this.projet.lgCales +
+          this.projet.nbrPapierMT * this.projet.canauxEp1Papier
       );
     },
     Dext() {
