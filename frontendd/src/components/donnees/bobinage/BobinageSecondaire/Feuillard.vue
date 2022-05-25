@@ -546,15 +546,26 @@ export default {
     SbarreBT(){
       return parseFloat(this.epaisseurBarreBT)*parseFloat(this.largeurBarreBT);
     },
-    epaisseurBarreBT(){
-      let barre=this.projet.EpbarreBT;
+   epaisseurBarreBT(){
+      
+      if(this.projet.EpbarreBT == null){
+        return 0;
+      }else{
+          let barre=this.projet.EpbarreBT;
       return barre.split("*")[0];
+      }
+    
     },
     largeurBarreBT(){
-      let barre=this.projet.EpbarreBT;
+    console.log(this.projet.EpbarreBT);
+       if(this.projet.EpbarreBT == null){
+        return 0;
+      }else{
+        let barre=this.projet.EpbarreBT;
       return barre.split("*")[1];
-    },
+      }
   
+    }
     }
  
 };

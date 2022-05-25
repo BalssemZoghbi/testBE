@@ -411,7 +411,7 @@ export default {
         rigiditePapierMT: this.projet.rigiditePapierMT,
         ep1PapierMT: this.projet.ep1PapierMT,
 
-        nbrPapierMt: this.projet.nbrPapierMt,
+        nbrPapierMT: this.projet.nbrPapierMT,
         nbrPapier: this.projet.nbrPapier,
         typeCanaux: this.projet.typeCanaux,
         canauxMT: this.projet.canauxMT,
