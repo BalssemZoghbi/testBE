@@ -156,30 +156,38 @@
              <div class="user-details">
                   <div class="div">
                     <div class="field">
-                      
-
-                      <v-text-field
-                        success
-                        label="Sbrut"
-                        dense
-                        v-model="Sbrut"
-                        outlined
-                      ></v-text-field>
-                      <v-text-field
-                        success
-                        label="Snette"
-                        dense
+                          <div class="form__div">
+                      <input
+                        type="number"
+                        class="form__input auto"
+                        placeholder=" "
+                        id="Snette"
                         v-model="Snette"
-                        outlined
-                      ></v-text-field>
-
-                      <v-text-field
-                        label="EpaisseurTot"
-                        dense
-                        success
+                      />
+                      <label for="" class="form__label autol">Snette</label>
+                    </div>
+                          <div class="form__div">
+                      <input
+                        type="number"
+                        class="form__input auto"
+                        placeholder=" "
+                        id="Sbrut"
+                        v-model="Sbrut"
+                      />
+                      <label for="" class="form__label autol">Sbrut</label>
+                    </div>
+                          <div class="form__div">
+                      <input
+                        type="number"
+                        class="form__input auto"
+                        placeholder=" "
+                        id="EpaisseurTot"
                         v-model="EpaisseurTot"
-                        outlined
-                      ></v-text-field>
+                      />
+                      <label for="" class="form__label autol">EpaisseurTot</label>
+                    </div>
+
+           
                     </div>
                    
             
@@ -481,6 +489,17 @@ export default {
 </script>
 
 <style scoped>
+.auto{
+    border: 1px solid green !important;
+        border-color: green !important;
+        caret-color: green !important;
+        color: rgb(7, 134, 7) !important;
+
+}
+
+ .autol{
+ color: green !important;
+}
 .grid2 {
   display: flex;
 }
