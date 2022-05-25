@@ -548,23 +548,25 @@ export default {
     Sbarre(){
       return this.epaisseurBarre*this.largeurBarre;
     },
-    // epaisseurBarre(){
-     
-    //   let barre=this.projet.Epbarre;
-    //    console.log(barre.split("*")[0]);
-    //   return barre.split("*")[0];
-    // },
-    // largeurBarre(){
-    //   let barre=this.projet.Epbarre;
-    //   return barre.split("*")[1];
-    // },
        epaisseurBarre(){
-      let barre=this.projet.Epbarre;
-      return barre.split("*")[0];
+      
+      if(this.projet.Epbarre == null){
+        return 0;
+      }else{
+        let barre=this.projet.Epbarre;
+          return barre.split("*")[0];
+      }
+    
     },
     largeurBarre(){
-      let barre=this.projet.Epbarre;
-      return barre.split("*")[1];
+    console.log(this.projet.Epbarre);
+       if(this.projet.Epbarre == null){
+        return 0;
+      }else{
+        let barre=this.projet.Epbarre;
+         return barre.split("*")[1];
+      }
+     
     },
   },
 };

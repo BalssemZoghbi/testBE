@@ -141,6 +141,7 @@ Route::get('/getSaillie', [BobinageStatiqueController::class ,'getSaillie']);
 Route::get('/getSaillie/{id}', [BobinageStatiqueController::class ,'getoneSaillie']);
 Route::post('/addSaillie', [BobinageStatiqueController::class ,'createSaillie']);
 Route::put('/updateSaillie/{id}', [BobinageStatiqueController::class ,'updateSaillie']);
+Route::delete('/deleteSaillie/{id}', [BobinageStatiqueController::class ,'deleteSaillie']);
 Route::get('/getToles', [BobinageStatiqueController::class ,'getToles']);
 Route::get('/getoneTole/{id}', [BobinageStatiqueController::class ,'getoneTole']);
 Route::post('/addTole', [BobinageStatiqueController::class ,'createTole']);
