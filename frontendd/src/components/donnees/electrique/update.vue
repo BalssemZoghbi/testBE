@@ -772,14 +772,15 @@ export default {
     color:red;
 }
 .auto{
-    border: 1px solid rgb(14, 163, 163) !important;
-        border-color: rgb(14, 163, 163) !important;
-        caret-color: rgb(14, 163, 163) !important;
+    border: 1px solid green !important;
+        border-color: green !important;
+        caret-color: green !important;
+        color: rgb(7, 134, 7) !important;
 
 }
 
  .autol{
- color: rgb(14, 163, 163) !important;
+ color: green !important;
 }
 /* .v-application .primary--text {
     

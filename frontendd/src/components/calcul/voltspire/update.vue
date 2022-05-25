@@ -476,6 +476,7 @@ export default {
     border: 1px solid green !important;
         border-color: green !important;
         caret-color: green !important;
+        color: rgb(7, 134, 7) !important;
 
 }
 
