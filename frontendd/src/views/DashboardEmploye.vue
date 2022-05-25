@@ -16,7 +16,8 @@
           </v-app-bar> -->
         <v-container>
           <v-row >
-            <v-col cols="12" sm="4">
+             <div class="flex3">
+            <v-col >
               <v-hover
         v-slot:default="{ hover }"
         open-delay="200"
@@ -54,7 +55,7 @@
       </v-hover>
 
             </v-col>
-            <v-col cols="10" sm="4">
+            <v-col >
               <v-hover
         v-slot:default="{ hover }"
         open-delay="200"
@@ -75,14 +76,14 @@
       <v-list-item-avatar
         tile
         size="80"
-       color="blue darken-2"
+       color="#009432"
       >
-        <v-icon dark>fas fa-project-diagram</v-icon>
+        <v-icon dark>business</v-icon>
       </v-list-item-avatar>
     </v-list-item>
     <v-divider></v-divider>
     <v-card-actions>
-      <v-icon flab color="blue darken-2">apps</v-icon>
+      <v-icon flab color="#009432">business</v-icon>
       <v-btn text >{{NbreCuivre}}</v-btn>
       <v-spacer></v-spacer>
       <!-- <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon> -->
@@ -92,7 +93,7 @@
       </v-hover>
 
             </v-col>
-            <v-col cols="12" sm="4">
+            <v-col >
               <v-hover
         v-slot:default="{ hover }"
         open-delay="200"
@@ -115,12 +116,12 @@
         size="80"
        color="blue darken-2"
       >
-        <v-icon dark>fas fa-project-diagram</v-icon>
+        <v-icon dark>dialpad</v-icon>
       </v-list-item-avatar>
     </v-list-item>
     <v-divider></v-divider>
     <v-card-actions>
-      <v-icon flab color="blue darken-2">apps</v-icon>
+      <v-icon flab color="blue darken-2">dialpad</v-icon>
       <v-btn text >{{NbreAlu}}</v-btn>
       <v-spacer></v-spacer>
       <!-- <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon> -->
@@ -130,112 +131,14 @@
       </v-hover>
 
             </v-col>
+             </div>
           </v-row>
         </v-container>
     </v-row>
       </v-layout>
-        <!-- <v-layout style="margin-left:4%">
-    <v-row class="clickable"> -->
-      
-        <!-- <v-container>
-          <v-row style="margin-left:-2%">
-            <v-col cols="12" sm="6">
-              <v-hover
-        v-slot:default="{ hover }"
-        open-delay="200"
-      >
-       <v-card
-       :elevation="hover ? 16 : 2"
-        class="mx-auto"
-        max-width="344"
-        outlined
-
-  >
-    <v-list-item three-line>
-      <v-list-item-content>
-        <v-list-item-title class="headline mb-1">Projets</v-list-item-title>
-
-      </v-list-item-content>
-
-      <v-list-item-avatar
-        tile
-        size="80"
-       color="blue darken-2"
-      >
-        <v-icon dark>fas fa-project-diagram</v-icon>
-      </v-list-item-avatar>
-    </v-list-item>
-    <v-divider></v-divider>
-    <v-card-actions>
-      <v-icon flab color="blue darken-2">apps</v-icon>
-      <v-btn text >{{projetCount}}</v-btn>
-      <v-spacer></v-spacer>
-      <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon>
-
-    </v-card-actions>
-  </v-card>
-      </v-hover>
-
-            </v-col>
-            <v-col cols="12" sm="4">
-              <v-hover
-        v-slot:default="{ hover }"
-        open-delay="200"
-      >
-       <v-card
-       :elevation="hover ? 16 : 2"
-        class="mx-auto"
-        max-width="344"
-        outlined
-
-  >
-    <v-list-item three-line>
-      <v-list-item-content>
-        <v-list-item-title class="headline mb-1">Utilisateurs</v-list-item-title>
-
-      </v-list-item-content>
-
-      <v-list-item-avatar
-        tile
-        size="80"
-       color="#009432"
-      >
-        <v-icon dark>mdi-account</v-icon>
-      </v-list-item-avatar>
-    </v-list-item>
-    <v-divider></v-divider>
-    <v-card-actions>
-      <v-icon flab color="#009432">directions_walk</v-icon>
-      <v-btn text >{{userCount}}</v-btn> -->
-      <!-- <v-spacer></v-spacer>
-      <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon>
-
-    </v-card-actions>
-  </v-card>
-      </v-hover>
-
-            </v-col> -->
-          
-          <!-- </v-row>
-              <div style="margin-top: 4%;width: 139%;">
-   <Pie
-    :chart-options="chartOptions"
-    :chart-data="chartData"
-    :chart-id="chartId"
-    :dataset-id-key="datasetIdKey"
-    :plugins="plugins"
-    :css-classes="cssClasses"
-    :styles="styles"
-    :width="width"
-    :height="height"
-  />
-  </div> -->
-   <!-- style="    margin-top: -35%;
-    width: 51%;
-    margin-left: -2%;" -->
-  <div style="margin-top: 1%;
-    width: 54%;
-    margin-left: 2%;">
+     
+     <div class="flex">
+  <div >
    <LineChartGenerator
     :chart-options="chartOptions"
     :chart-data="chartData"
@@ -248,7 +151,7 @@
     :height="height"
   />
   </div>
-  <div style="margin-top: -32%;width: 150%;">
+  <div >
   <Doughnut
     :chart-options="chartOptionsDonut"
     :chart-data="chartDataDonut"
@@ -261,11 +164,7 @@
     :height="height"
   />
   </div>
-        <!-- </v-container>
-    </v-row>
-   
-  </v-layout>
-  -->
+  </div>
   </div>
   
   
@@ -412,3 +311,25 @@ LinearScale,LineElement,PointElement)
   }
   }
 </script>
+<style scoped>
+.flex{
+  display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 10px;
+}
+.flex3{
+  display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    margin-top: 10px;
+    margin-left: 10%;
+}
+@media (max-width: 1245px) {
+  .flex {
+    grid-template-columns: repeat(1, 1fr);
+    }
+  .flex3 {
+    grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -354,10 +354,9 @@ class ModeleController extends Controller
             'materiauBT' => null,
             'conducteurBT' => null,
         ]);
-        $reference = "PC " . date("m/d/y");
         $projet = Projet::create([
             'appareil' => '',
-            'reference' => $reference,
+            'reference' => null,
             'client' => null,
             'refClient' => null,
             'temperatureMax' => null,
@@ -659,10 +658,9 @@ class ModeleController extends Controller
             'materiauBT' => $modele->materiauBT,
             'conducteurBT' => $modele->conducteurBT,
         ]);
-        $reference = "PC " . date("m/d/y");
         $projet = Projet::create([
             'appareil' => $modele->appareil,
-            'reference' => $reference,
+            'reference' => $modele->reference,
             'client' => $modele->client,
             'refClient' => $modele->refClient,
             'temperatureMax' => $modele->temperatureMax,
@@ -944,10 +942,9 @@ class ModeleController extends Controller
             'materiauBT' => $projet->materiauBT,
             'conducteurBT' => $projet->conducteurBT,
         ]);
-        $reference = "PC " . date("m/d/y");
         $projet = Projet::create([
             'appareil' => $projet->appareil,
-            'reference' => $reference,
+            'reference' => $projet->reference,
             'client' => $projet->client,
             'refClient' => $projet->refClient,
             'temperatureMax' => $projet->temperatureMax,

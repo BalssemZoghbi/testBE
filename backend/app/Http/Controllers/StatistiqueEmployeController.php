@@ -25,6 +25,11 @@ class StatistiqueEmployeController extends Controller
      */
     public function create()
     {
+        // $Modele=[];
+        // $modele=DB::table('modeles')->get('modele');
+        // foreach ($modele as $valeur){
+        //     array_push($Modele, $valeur->modele);
+        // }
 
         // $Vierge = DB::table('projets')->where('modele', 'Document Vierge')->get();
         // $FE = DB::table('projets')->where('modele', 'Modele Feuillard Emaille')->get();

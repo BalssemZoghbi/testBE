@@ -3,20 +3,164 @@
       <NavDash/>  
         <v-layout style="margin-left:4%">
     <v-row class="clickable">
-      <!-- <v-col cols="12" md="10">
-        <v-card  class="ml-5 mr-5"> -->
-          <!-- <v-app-bar
-          dark
-          color="rgb(5 48 96)"
-          >
-          <v-btn icon>
-            <v-icon>mdi-finance</v-icon>
-          </v-btn>
-          <v-toolbar-title>Statistiques</v-toolbar-title>
-          </v-app-bar> -->
         <v-container>
-          <v-row style="margin-left:-2%">
-            <v-col cols="12" sm="6">
+          <v-row style="margin-left:-4%">
+              <div class="flex4">
+            <v-col >
+              <v-hover
+        v-slot:default="{ hover }"
+        open-delay="200"
+      >
+       <v-card
+       :elevation="hover ? 16 : 2"
+        class="mx-auto"
+        max-width="260"
+        outlined
+
+  >
+    <v-list-item three-line>
+      <v-list-item-content>
+        <v-list-item-title class="headline mb-1">Projets</v-list-item-title>
+
+      </v-list-item-content>
+
+      <v-list-item-avatar
+        tile
+        size="80"
+       color="blue darken-2"
+      >
+        <v-icon dark>fas fa-project-diagram</v-icon>
+      </v-list-item-avatar>
+    </v-list-item>
+    <v-divider></v-divider>
+    <v-card-actions>
+      <v-icon flab color="blue darken-2">apps</v-icon>
+      <v-btn text >{{projetCount}}</v-btn>
+      <v-spacer></v-spacer>
+      <!-- <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon> -->
+<router-link to="/" style="text-decoration:none">  <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon></router-link>
+    </v-card-actions>
+  </v-card>
+      </v-hover>
+
+            </v-col>
+             <v-col >
+              <v-hover
+        v-slot:default="{ hover }"
+        open-delay="200"
+      >
+       <v-card
+       :elevation="hover ? 16 : 2"
+        class="mx-auto"
+        max-width="344"
+        outlined
+
+  >
+    <v-list-item three-line>
+      <v-list-item-content>
+        <v-list-item-title class="headline mb-1">Utilisateurs</v-list-item-title>
+
+      </v-list-item-content>
+
+      <v-list-item-avatar
+        tile
+        size="80"
+       color="#009432"
+      >
+        <v-icon dark>mdi-account</v-icon>
+      </v-list-item-avatar>
+    </v-list-item>
+    <v-divider></v-divider>
+    <v-card-actions>
+      <v-icon flab color="#009432">directions_walk</v-icon>
+      <v-btn text >{{userCount}}</v-btn>
+      <v-spacer></v-spacer>
+<router-link to="/user" style="text-decoration:none"><v-icon flab color="#2C3A47">mdi-chevron-right</v-icon></router-link>
+    </v-card-actions>
+  </v-card>
+  
+      </v-hover>
+
+            </v-col>
+            <v-col >
+              <v-hover
+        v-slot:default="{ hover }"
+        open-delay="200"
+      >
+       <v-card
+       :elevation="hover ? 16 : 2"
+        class="mx-auto"
+        max-width="260"
+        outlined
+
+  >
+    <v-list-item three-line>
+      <v-list-item-content>
+        <v-list-item-title class="headline mb-1">Cuivre</v-list-item-title>
+
+      </v-list-item-content>
+
+      <v-list-item-avatar
+        tile
+        size="80"
+       color="blue darken-2"
+      >
+        <v-icon dark medium>business</v-icon>
+      </v-list-item-avatar>
+    </v-list-item>
+    <v-divider></v-divider>
+    <v-card-actions>
+      <v-icon flab color="blue darken-2">business</v-icon>
+      <v-btn text >{{NbreCuivre}}</v-btn>
+      <v-spacer></v-spacer>
+      <!-- <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon> -->
+<router-link to="/" style="text-decoration:none">  <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon></router-link>
+    </v-card-actions>
+  </v-card>
+      </v-hover>
+
+            </v-col>
+            <v-col >
+              <v-hover
+        v-slot:default="{ hover }"
+        open-delay="200"
+      >
+       <v-card
+       :elevation="hover ? 16 : 2"
+        class="mx-auto"
+        max-width="260"
+        outlined
+
+  >
+    <v-list-item three-line>
+      <v-list-item-content>
+        <v-list-item-title class="headline mb-1">Aluminium</v-list-item-title>
+
+      </v-list-item-content>
+
+      <v-list-item-avatar
+        tile
+        size="80"
+       color="#009432"
+      >
+        <v-icon dark>dialpad</v-icon>
+      </v-list-item-avatar>
+    </v-list-item>
+    <v-divider></v-divider>
+    <v-card-actions>
+      <v-icon flab color="#009432">dialpad</v-icon>
+      <v-btn text >{{NbreAlu}}</v-btn>
+      <v-spacer></v-spacer>
+      <!-- <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon> -->
+<router-link to="/" style="text-decoration:none">  <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon></router-link>
+    </v-card-actions>
+  </v-card>
+      </v-hover>
+
+            </v-col>
+
+             <!-- <div class="flex">
+            <v-col >
               <v-hover
         v-slot:default="{ hover }"
         open-delay="200"
@@ -47,14 +191,13 @@
       <v-icon flab color="blue darken-2">apps</v-icon>
       <v-btn text >{{projetCount}}</v-btn>
       <v-spacer></v-spacer>
-      <!-- <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon> -->
 <router-link to="/" style="text-decoration:none">  <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon></router-link>
     </v-card-actions>
   </v-card>
       </v-hover>
 
-            </v-col>
-            <v-col cols="12" sm="4">
+            </v-col> -->
+            <!-- <v-col >
               <v-hover
         v-slot:default="{ hover }"
         open-delay="200"
@@ -84,56 +227,19 @@
     <v-card-actions>
       <v-icon flab color="#009432">directions_walk</v-icon>
       <v-btn text >{{userCount}}</v-btn>
-      <!-- <v-btn text v-model="userCount">{{userCount}}</v-btn> -->
       <v-spacer></v-spacer>
-      <!-- <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon> -->
 <router-link to="/user" style="text-decoration:none"><v-icon flab color="#2C3A47">mdi-chevron-right</v-icon></router-link>
     </v-card-actions>
   </v-card>
   
       </v-hover>
 
-            </v-col>
-             <!-- <v-col cols="12" sm="4">
-              <v-hover
-        v-slot:default="{ hover }"
-        open-delay="200"
-      >
-       <v-card
-       :elevation="hover ? 16 : 2"
-        class="mx-auto"
-        max-width="344"
-        outlined
-
-  >
-    <v-list-item three-line>
-      <v-list-item-content>
-        <v-list-item-title class="headline mb-1">Devices</v-list-item-title>
-
-      </v-list-item-content>
-
-      <v-list-item-avatar
-        tile
-        size="80"
-       color="#F79F1F"
-      >
-        <v-icon dark>fas fa-laptop-house</v-icon>
-      </v-list-item-avatar>
-    </v-list-item>
-    <v-divider></v-divider>
-    <v-card-actions>
-      <v-icon flab color="#F79F1F">description</v-icon>
-      <v-btn text>300k</v-btn>
-      <v-spacer></v-spacer>
-      <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon>
-
-    </v-card-actions>
-  </v-card>
-      </v-hover>
-
             </v-col> -->
+             </div>
           </v-row>
-              <div style="margin-top: 4%;width: 139%;">
+          <div class="flex">
+            <!-- style="margin-top: 4%;width: 139%;" -->
+              <div >
    <Pie
     :chart-options="chartOptions"
     :chart-data="chartData"
@@ -146,9 +252,10 @@
     :height="height"
   />
   </div>
-  <div style="    margin-top: -35%;
+  <!-- style="    margin-top: -35%;
     width: 51%;
-    margin-left: -2%;">
+    margin-left: -2%;" -->
+  <div >
     <Bar
     :chart-options="chartOptionsBar"
     :chart-data="chartDataBar"
@@ -161,12 +268,12 @@
     :height="heightBar"
   />
   </div>
-   <!-- style="margin-top: 1%;
-    width: 54%;
-    margin-left: 2%;" -->
-   <div style="margin-top: 5%;
+  </div>
+   <!-- style="margin-top: 5%;
     width: 50%;
-    margin-left: 39%;" >
+    margin-left: 39%;" -->
+    <div class="flex">
+   <div >
    <LineChartGenerator
     :chart-options="chartOptionsLine"
     :chart-data="chartDataLine"
@@ -179,8 +286,8 @@
     :height="height"
   />
   </div>
-  <!-- style="margin-top: -32%;width: 150%;" -->
-  <div style="margin-top: -37%;width: 139%;margin-left:-50%">
+  <!-- style="margin-top: -37%;width: 139%;margin-left:-50%"-->
+  <div >
   <Doughnut
     :chart-options="chartOptionsDonut"
     :chart-data="chartDataDonut"
@@ -192,6 +299,7 @@
     :width="width"
     :height="height"
   />
+  </div>
   </div>
         </v-container>
         <!-- </v-card>
@@ -442,3 +550,27 @@ import axios from "axios";
   }
   }
 </script>
+<style scoped>
+.flex{
+  display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* grid-gap: 10px; */
+    margin-top: 10px;
+}
+.flex4{
+  display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* grid-gap: 10px; */
+    margin-top: 10px;
+}
+@media (max-width: 1245px) {
+  .flex {
+    grid-template-columns: repeat(1, 1fr);
+    /* margin-left: 0%; */
+    }
+  .flex4 {
+    grid-template-columns: repeat(2, 1fr);
+    margin-left: 4%;
+    }
+  }
+</style>

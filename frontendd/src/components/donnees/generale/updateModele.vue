@@ -12,7 +12,6 @@
             <div class="title">Données Generale</div>
             <div class="content">
               <form v-on:submit.prevent="updateprojet">
-                <!-- <div class="user-details"> -->
                 <div class="grid">
                   <div class="form__div">
                     <input
@@ -158,13 +157,13 @@
                       outlined
                     ></v-select>
                   </div>
-                      <div class="form__div" >
+                  <div class="form__div">
                     <input
                       type="text"
                       class="form__input"
                       placeholder=" "
                       id="modele"
-                       v-model="modeles.modele"
+                      v-model="modeles.modele"
                     />
                     <label for="" class="form__label">Nom Modele</label>
                   </div>
@@ -193,7 +192,7 @@ export default {
   },
   data() {
     return {
-      show:false,
+      show: false,
       barre: [],
       types: ["cabine", "poteau", "h61", "h59", "sec"],
       remplissages: ["à matelas d`air", "integral", "respirant"],
@@ -208,8 +207,8 @@ export default {
       ],
       fonctionnements: ["abaisseur", "elevateur", "isolement"],
       refroidissements: ["onan", "onaf"],
-      modeles:{
-      modele: "",
+      modeles: {
+        modele: "",
       },
       projet: {
         appareil: "",
@@ -270,12 +269,10 @@ export default {
         circuitmagnetiques_id: this.projet.circuitmagnetiques_id,
         elaborateur: this.projet.elaborateur,
       };
-      const modeles={
-        modele:this.modeles.modele
-      }
-      axios
-        .put("/modeles/update/" + this.$route.params.id, modeles)
-        .then();
+      const modeles = {
+        modele: this.modeles.modele,
+      };
+      axios.put("/modeles/update/" + this.$route.params.id, modeles).then();
       axios
         .put("projets/edit/" + this.$route.params.id, projets, {
           headers: {
@@ -283,7 +280,6 @@ export default {
           },
         })
         .then((response) => (this.id = response.data.id));
-      
     },
     getbarre() {
       axios
@@ -296,8 +292,9 @@ export default {
   async mounted() {
     const result = await axios.get("projets/" + this.$route.params.id);
     this.projet = result.data;
-     this.modeles.modele=result.data.modele;
-     console.log( result.data);
+    const resultModele = await axios.get("/modele/" + this.$route.params.id);
+    this.projet = result.data;
+    this.modeles.modele = resultModele.data.modele;
   },
 };
 </script>
@@ -329,7 +326,7 @@ export default {
   height: 89%;
   font-size: 1rem;
   border: 1px solid rgb(152, 149, 149);
-  border-radius:0.3rem;
+  border-radius: 0.3rem;
   outline: none;
   padding: 1rem;
   background: none;
