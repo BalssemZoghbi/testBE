@@ -18,54 +18,54 @@
                     <div class="form__div frame">
                       <input
                         type="text"
-                        class="form__input"
+                        class="form__input "
                         placeholder=" "
                         id="Bmaxdesire"
                         v-model="projet.Bmaxdesire"
                       />
-                      <label for="" class="form__label">Bmax desire</label>
+                      <label for="" class="form__label ">Bmax desire</label>
                     </div>
 
                     <div class="form__div frame">
                       <input
                         type="number"
-                        class="form__input"
+                        class="form__input auto"
                         placeholder=" "
                         id="Bmax"
                         v-model="bmax"
                       />
-                      <label for="" class="form__label">Bmax</label>
+                      <label for="" class="form__label autol">Bmax</label>
                     </div>
                     <div class="form__div frame">
                       <input
                         type="number"
-                        class="form__input"
+                        class="form__input auto"
                         placeholder=" "
                         id="N1c"
                         v-model="n1c"
                       />
-                      <label for="" class="form__label">N1c</label>
+                      <label for="" class="form__label autol">N1c</label>
                     </div>
                     <div class="form__div frame">
                       <input
                         type="number"
-                        class="form__input"
+                        class="form__input auto"
                         placeholder=" "
                         id="N2c"
                         v-model="n2cDesire"
                       />
-                      <label for="" class="form__label">N2c</label>
+                      <label for="" class="form__label autol">N2c</label>
                     </div>
 
                     <div class="form__div frame">
                       <input
                         type="text"
-                        class="form__input"
+                        class="form__input auto"
                         placeholder=" "
                         id="Vsp"
                         v-model="vsp"
                       />
-                      <label for="" class="form__label">Vsp</label>
+                      <label for="" class="form__label autol">Vsp</label>
                     </div>
                   </div>
                   <v-row cols="2" md="4" class="ml-4">
@@ -472,6 +472,16 @@ export default {
   border-radius: 5px;
   box-shadow: 0 5px 10px rgb(0 0 0 / 15%);
 }
+.auto{
+    border: 1px solid green !important;
+        border-color: green !important;
+        caret-color: green !important;
+
+}
+
+ .autol{
+ color: green !important;
+}
 .title {
   font-size: 25px;
   font-weight: 500;
@@ -595,7 +605,7 @@ form .button input:hover {
 .v-stepper--vertical {
   padding-bottom: 0px;
 }
-@media (max-width: 584px) {
+@media (max-width:1382px) {
   .container {
     max-width: 100%;
   }
@@ -614,7 +624,7 @@ form .button input:hover {
     width: 5px;
   }
 }
-@media (max-width: 459px) {
+@media (max-width: 600px) {
   .container .content .category {
     flex-direction: column;
   }
