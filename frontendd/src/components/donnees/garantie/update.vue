@@ -14,7 +14,7 @@
           <v-card class="mb-6">
             <div class="title">Données de Garantie</div>
 
-            <div class="content">
+            <!-- <div class="content"> -->
               <v-col cols="2" style="margin-top: -7%; margin-left: 28%">
                 <v-menu transition="slide-x-transition" offset-x>
                   <template v-slot:activator="{ on, attrs }">
@@ -40,175 +40,131 @@
                   </v-list>
                 </v-menu>
               </v-col>
-              <form style="margin-top: -1%">
-                <div class="user-details">
-                  <div class="form__div framei">
-                    <input
-                      type="text"
-                      class="form__input"
-                      placeholder=" "
-                      id="option"
-                      v-model="projet.option"
-                    />
-                    <label for="" class="form__label">Option</label>
-                  </div>
-                  <div class="form__div framei">
-                    <input
-                      type="text"
-                      class="form__input"
-                      placeholder=" "
-                      id="Pog"
-                      v-model="projet.Pog"
-                    />
-                    <label for="" class="form__label">Pog</label>
-                  </div>
-
-                  <div class="input-box">
-                    <div class="form__div">
-                      <input
-                        type="text"
-                        class="form__input"
-                        placeholder=" "
-                        id="log"
-                        v-model="projet.log"
-                      />
-                      <label for="" class="form__label">log</label>
+                 <form  v-on:submit.prevent="updateprojet">
+         <div class="user-details">
+              <v-text-field
+              success
+                         class="frame"
+                        label="Option"
+                        v-model="projet.option"
+                        outlined
+                      ></v-text-field>
+                    <div class="div">
+                    <div class="field10">
+                      <v-text-field
+                      success
+                        label="Pog"
+                        v-model="projet.Pog"
+                        outlined
+                      ></v-text-field>
+                      <v-text-field
+                      success
+                        label="Poglimit"
+                        v-model="Poglimit"
+                        outlined
+                      ></v-text-field>
+                    </div>
+                    <div class="field10">
+                      <v-text-field
+                        label="Iog"
+                       id="log"
+                            
+                            success
+                            v-model="projet.log"
+                        outlined
+                      ></v-text-field>
+                      <v-text-field
+                        label="Ioglimit"
+                       id="loglimit"
+                            readonly
+                            success
+                            v-model="loglimit"
+                        outlined
+                      ></v-text-field>
+                    </div>
+                    <div class="field10">
+                      <v-text-field
+                        label="Pccg"
+                        success
+                        v-model="projet.Pccg"
+                        outlined
+                      ></v-text-field>
+                      <v-text-field
+                        label="Pccglimit"
+                        success
+                        v-model="Pccglimit"
+                        outlined
+                      ></v-text-field>
+                    </div>
+                        <div class="field10">
+                      <v-text-field
+                        label="Ptot"
+                        v-model="Ptot"
+                        success
+                        outlined
+                      ></v-text-field>
+                      <v-text-field
+                        label="Ptotlimit"
+                        v-model="Ptotlimit"
+                        success
+                        outlined
+                      ></v-text-field>
+                    </div>
+                    <div class="field10">
+                      <v-text-field
+                        label="Uccg"
+                        success
+                        v-model="projet.Uccg"
+                        outlined
+                      ></v-text-field>
+                      <v-text-field
+                        label="UccMax"
+                        v-model="Uccglimit"
+                        success
+                        outlined
+                      ></v-text-field>
+                      <v-text-field
+                        label="UccMin"
+                        v-model="UccgMin"
+                        success
+                        outlined
+                      ></v-text-field>
+                    </div>
+                
+                    <div class="field10">
+                      <v-text-field
+                        label="Echauffement Enroul"
+                        v-model="echauffementEnroulement"
+                        success
+                        outlined
+                      ></v-text-field>
+                      <v-text-field
+                        label="Echauffement Huile"
+                        v-model="echauffementHuile"
+                        success
+                        outlined
+                      ></v-text-field>
                     </div>
                   </div>
-
-                  <div class="form__div framei">
-                    <input
-                      type="text"
-                      class="form__input"
-                      placeholder=" "
-                      id="Pccg"
-                      v-model="projet.Pccg"
-                    />
-                    <label for="" class="form__label">Pccg</label>
                   </div>
-
-                  <div class="form__div framei">
-                    <input
-                      type="text"
-                      class="form__input"
-                      placeholder=" "
-                      id="Uccg"
-                      v-model="projet.Uccg"
-                    />
-                    <label for="" class="form__label">Uccg</label>
-                  </div>
-                  <div class="form__div framei">
-                    <input
-                      type="number"
-                      class="form__input"
-                      placeholder=" "
-                      id="Ptot"
-                      v-model="Ptot"
-                    />
-                    <label for="" class="form__label">Ptot</label>
-                  </div>
-                  <div class="form__div framei">
-                    <input
-                      type="number"
-                      class="form__input"
-                      placeholder=" "
-                      id="Poglimit"
-                      v-model="Poglimit"
-                    />
-                    <label for="" class="form__label">Poglimite</label>
-                  </div>
-                  <div class="form__div framei">
-                    <input
-                      type="number"
-                      class="form__input"
-                      placeholder=" "
-                      id="Pccglimit"
-                      v-model="Pccglimit"
-                    />
-                    <label for="" class="form__label">Pccglimite</label>
-                  </div>
-                  <div class="form__div framei">
-                    <input
-                      type="number"
-                      class="form__input"
-                      placeholder=" "
-                      id="loglimit"
-                      v-model="loglimit"
-                    />
-                    <label for="" class="form__label">loglimit</label>
-                  </div>
-                  <div class="form__div framei">
-                    <input
-                      type="number"
-                      class="form__input"
-                      placeholder=" "
-                      id="Uccglimit"
-                      v-model="Uccglimit"
-                    />
-                    <label for="" class="form__label">Uccglimit Max</label>
-                  </div>
-                  <div class="form__div framei">
-                    <input
-                      type="number"
-                      class="form__input"
-                      placeholder=" "
-                      id="Uccglimit"
-                      v-model="UccgMin"
-                    />
-                    <label for="" class="form__label">Uccglimit Min</label>
-                  </div>
-                  <div class="form__div framei">
-                    <input
-                      type="number"
-                      class="form__input"
-                      placeholder=" "
-                      id="Ptotlimit"
-                      v-model="Ptotlimit"
-                    />
-                    <label for="" class="form__label">Ptotlimit</label>
-                  </div>
-                  <div class="form__div framei" style="width: 48%">
-                    <input
-                      type="number"
-                      class="form__input"
-                      placeholder=" "
-                      id="echauffementHuile"
-                      v-model="echauffementHuile"
-                    />
-                    <label for="" class="form__label">Echauffement Huile</label>
-                  </div>
-                  <div class="form__div frame" style="width: 48%">
-                    <input
-                      type="number"
-                      class="form__input"
-                      placeholder=" "
-                      id="echauffementEnroulement"
-                      v-model="echauffementEnroulement"
-                    />
-                    <label for="" class="form__label"
-                      >Echauffement Enroulement</label
-                    >
-                  </div>
-                </div>
-              </form>
-            </div>
+      </form>
           </v-card>
 
           <router-link
             class="nav-link"
             :to="'/projet/electrique/update/' + this.$route.params.id"
           >
-            <v-btn color="primary mb-14" @click="e1 = 2"> précédent </v-btn>
+            <v-btn color="primary "  style="margin-top: -7%;" @click="e1 = 2"> précédent </v-btn>
           </router-link>
           <router-link
             :to="'/projet/bobine/' + this.$route.params.id"
             style="text-decoration: none"
           >
             <v-btn
-              color="success mb-14"
+              color="success " 
               @click="automatique"
               v-if="this.garantie == true"
-              style="text-decoration: none"
+              style="text-decoration: none;margin-top: -7%;"
             >
               Valider
             </v-btn></router-link
@@ -217,7 +173,7 @@
             :to="'/projet/bobine/' + this.$route.params.id"
             style="text-decoration: none"
             ><v-btn
-              color="success mb-14"
+              color="success" style="margin-top: -7%;"
               @click="manuel"
               v-if="this.garantie == false"
             >
@@ -366,11 +322,42 @@ export default {
 };
 </script>
 <style scoped>
-h1 {
-  margin: 0;
+.field10 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* grid-template-rows: 1fr 1fr; */
+  grid-gap: 10px;
+  /* margin-right: 5%; */
+  width:400px;
 }
-
-/*===== FORM =====*/
+.div{
+  display: grid; 
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+}
+.v-sheet.v-stepper:not(.v-sheet--outlined) {
+    box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+    /* margin: 5%; */
+    /* padding: 5%; */
+     padding-left: 5%;
+     padding-right: 5%;
+    /* margin-right: 20%;
+    margin-left:10%;*/
+    margin-top: -2%; 
+    /* margin-bottom: 60%; */
+}
+.v-stepper--vertical .v-stepper__step {
+    padding: 24px 0px 10px;
+}
+.row {
+    display: flex;
+    flex: 1 1 auto;
+    margin: -12px;
+    flex-direction: row;
+    align-content: space-between;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
 .l-form {
   display: flex;
   justify-content: center;
@@ -382,74 +369,6 @@ h1 {
   padding: 4rem 2rem;
   border-radius: 1rem;
 }
-.form__title {
-  font-weight: 400;
-  margin-bottom: 3rem;
-}
-.form__div {
-  position: relative;
-  height: 48px;
-  margin-bottom: 1.5rem;
-}
-.form__input {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  font-size: 1rem;
-  border: 1px solid #dadce0;
-  border-radius: 0.5rem;
-  outline: none;
-  padding: 1rem;
-  background: none;
-  z-index: 1;
-}
-.form__label {
-  position: absolute;
-  left: 1rem;
-  top: 0.7rem;
-  padding: 0 0.25rem;
-  background-color: #fff;
-  color: #000000ad;
-  font-size: 1rem;
-  transition: 0.3s;
-}
-.form__button {
-  display: block;
-  margin-left: auto;
-  padding: 0.75rem 2rem;
-  outline: none;
-  border: none;
-  background-color: #4797d1;
-  color: #fff;
-  font-size: 1rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.form__button:hover {
-  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.15);
-}
-
-/*Input focus move up label*/
-.form__input:focus + .form__label {
-  top: -0.5rem;
-  left: 0.8rem;
-  color: #4797d1;
-  font-size: 0.75rem;
-  font-weight: 500;
-  z-index: 10;
-}
-
-/*Input focus sticky top label*/
-.form__input:not(:placeholder-shown).form__input:not(:focus) + .form__label {
-  top: -0.5rem;
-  left: 0.8rem;
-  font-size: 0.75rem;
-  font-weight: 500;
-  z-index: 1;
-}
 
 /*Input focus*/
 .form__input:focus {
@@ -458,33 +377,17 @@ h1 {
 
 .body {
   height: 100%;
-  /* display: flex; */
-  /* justify-content: center;
-  align-items: center; */
   padding: 20px;
   max-height: calc(100vh - 50px);
+}
 
-  /* margin: 0.5%; */
-  /* background: linear-gradient(135deg,#71b7e675, #71b7e675); */
-}
-.container {
-  max-width: 98%;
-  /* height: 80%; */
-  margin-top: 2%;
-  width: 100%;
-  background-color: #fff;
-  padding: 25px 30px;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px rgb(0 0 0 / 15%);
-}
 .title {
   font-size: 25px;
   font-weight: 500;
-  /* margin-top:-1% ; */
   margin-bottom: 3.5%;
   position: relative;
 }
-.title::before {
+ .title::before {
   content: "";
   position: absolute;
   left: 0;
@@ -492,24 +395,37 @@ h1 {
   height: 3px;
   width: 250px;
   border-radius: 5px;
-
+  background: linear-gradient(135deg, #0b65a0, #71b7e6);
+}
+.titles {
+  font-size: 20px;
+  font-weight: 500;
+  margin-top:-14% ;
+  margin-bottom: 55%;
+  position: relative;
+}
+ .titles::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 3px;
+  width: 150px;
+  border-radius: 5px;
   background: linear-gradient(135deg, #0b65a0, #71b7e6);
 }
 .content form .user-details {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap-reverse;
   justify-content: space-between;
-  margin: 20px 0 12px 0;
+  margin: 10px 0 12px 0;
 }
+
 form .user-details .input-box {
   margin-bottom: 15px;
   width: calc(100% / 2 - 20px);
 }
-form .input-box span.details {
-  display: block;
-  font-weight: 500;
-  margin-bottom: 5px;
-}
+
 .user-details .input-box input {
   height: 45px;
   width: 100%;
@@ -517,124 +433,71 @@ form .input-box span.details {
   font-size: 16px;
   border-radius: 5px;
   padding-left: 15px;
-  /* border: 1px solid #ccc; */
-  /* border-bottom-width: 2px; */
   transition: all 0.3s ease;
 }
 
-form .gender-details .gender-title {
-  font-size: 20px;
-  font-weight: 500;
-}
-form .category {
-  display: flex;
-  width: 80%;
-  margin: 14px 0;
-  justify-content: space-between;
-}
-form .category label {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-form .category label .dot {
-  height: 18px;
-  width: 18px;
-  border-radius: 50%;
-  margin-right: 10px;
-  background: #d9d9d9;
-  border: 5px solid transparent;
-  transition: all 0.3s ease;
-}
-#dot-1:checked ~ .category label .one,
-#dot-2:checked ~ .category label .two,
-#dot-3:checked ~ .category label .three {
-  background: #71b7e6;
-  border-color: #d9d9d9;
-}
-form input[type="radio"] {
-  display: none;
-}
-form .button {
-  height: 45px;
-  margin-top: 10px;
-  margin-left: 80%;
-}
-form .button input {
-  height: 100%;
-  width: 100%;
-  border-radius: 5px;
-  border: none;
-  color: #fff;
-  font-size: 18px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  background: linear-gradient(135deg, #4797d1, #4797d1);
-}
-form .button input:hover {
-  /* transform: scale(0.99); */
-  background: linear-gradient(-135deg, #71b7e6, #71b7e6);
-}
-.framei {
-  width: 22%;
-  justify-content: space-between;
-}
 .frame {
-  width: 250px;
-  justify-content: space-between;
+   width:15%;
 }
-.frameii {
-  /* width: calc(100% /1 - 2px); */
-  width: 100%;
-  border-color: #000;
-}
+
 .v-sheet.v-card:not(.v-sheet--outlined) {
-  box-shadow: 0px 0px 0px 0px;
+    box-shadow: 0px 0px 0px 0px;
 }
 .v-stepper--vertical {
-  padding-bottom: 0px;
+    padding-bottom:0px;
 }
-@media (max-width: 584px) {
+@media (max-width:1000px) {
   .container {
     max-width: 100%;
   }
-  form .user-details .input-box {
+  form .field10 .input-box {
     margin-bottom: 15px;
     width: 100%;
   }
   form .category {
     width: 100%;
   }
-  .content form .user-details {
+  .content form .field10 {
     max-height: 300px;
     overflow-y: scroll;
   }
-  .user-details::-webkit-scrollbar {
-    width: 5px;
+  .field10::-webkit-scrollbar {
+    width: 15px;
   }
-  .user-details .input-box input {
-    height: 45px;
-    width: 100%;
-    outline: none;
-    font-size: 16px;
-    border-radius: 5px;
-    padding-left: 15px;
-    /* border: 1px solid #ccc; */
-    /* border-bottom-width: 2px; */
-    transition: all 0.3s ease;
-  }
+  .field10 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 10px;
+  margin-right: 5%;
+}
+.div{
+  display: grid; 
+  grid-template-columns: 1fr ;
+  grid-gap: 10px;
+}
 }
 @media (max-width: 459px) {
   .container .content .category {
     flex-direction: column;
   }
+  .field10 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 10px;
+  margin-right: 5%;
+}
+.div{
+  display: grid; 
+  grid-template-columns: 1fr ;
+  grid-gap: 10px;
+}
 }
 .v-btn:not(.v-btn--round).v-size--default {
-  height: 36px;
-  min-width: 64px;
-  padding: 16px;
-  margin: 3px;
+    /* height: 36px; */
+    /* min-width: 64px; */
+    padding: 16px;
+    margin: 3px;
 }
 </style>
