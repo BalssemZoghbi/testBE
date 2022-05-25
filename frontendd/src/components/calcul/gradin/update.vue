@@ -61,12 +61,7 @@
                         outlined
                         dense
                       ></v-text-field>
-                      <v-text-field
-                        label="demiGradin"
-                        dense
-                        v-model="projet.demiGradin"
-                        outlined
-                      ></v-text-field>
+                 
                       <v-text-field
                         label="largeurMin"
                         dense
@@ -79,31 +74,124 @@
                         outlined
                         dense
                       ></v-text-field>
-
-                      <v-text-field
-                        success
-                        label="Sbrut"
+                           <v-text-field
+                        label="demiGradin"
                         dense
-                        v-model="Sbrut"
-                        outlined
-                      ></v-text-field>
-                      <v-text-field
-                        success
-                        label="Snette"
-                        dense
-                        v-model="Snette"
+                        v-model="projet.demiGradin"
                         outlined
                       ></v-text-field>
 
-                      <v-text-field
-                        label="EpaisseurTot"
-                        dense
-                        success
-                        v-model="EpaisseurTot"
-                        outlined
-                      ></v-text-field>
                     </div>
-                    <div class="grid2">
+                      <v-row cols="2" md="4" class="mr-4">
+              <v-card outlined tile>
+                <template>
+                  <v-row>
+                    <v-col>
+                      <v-card>
+                        <v-card-title class="subheading font-weight-bold">
+                          Largeur
+                        </v-card-title>
+
+                        <v-divider></v-divider>
+
+                        <v-list dense>
+                          <v-list-item v-for="item in largeur" :key="item">
+                            <v-list-item-content>{{
+                              item
+                            }}</v-list-item-content>
+                            <v-list-item-content class="align-end">
+                            </v-list-item-content>
+                          </v-list-item>
+                        </v-list>
+                      </v-card>
+                    </v-col>
+                  </v-row>
+                </template>
+              </v-card>
+              <v-card cols="2" md="4" class="ml-4" outlined tile>
+                <template style="width: 33%">
+                  <v-card-title class="subheading font-weight-bold">
+                    Epaisseur
+                  </v-card-title>
+
+                  <v-divider></v-divider>
+
+                  <v-list dense>
+                    <v-list-item
+                      v-for="item in epaisseur"
+                      :key="item"
+                      style="width: 176% !important"
+                    >
+                      <v-list-item-content vertical>{{
+                        item
+                      }}</v-list-item-content>
+                      <v-list-item-content
+                        class="align-end"
+                        v-model="projet.spire"
+                      >
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list>
+                </template>
+              </v-card>
+            </v-row>
+                   
+                  </div>
+                </div>
+              </form>
+            </div>
+          </v-card>
+
+          <router-link class="nav-link" :to="'/projet/bobine/' + projet.id">
+            <v-btn color="primary mb-14" @click="e1 = 2"> précédent </v-btn>
+          </router-link>
+          <v-btn color="success mb-14" @click="e1 = 2"> suivant </v-btn>
+        </v-stepper-content>
+
+        <v-stepper-step :complete="e1 > 2" step="2"> Gadin </v-stepper-step>
+
+        <v-stepper-content step="2">
+          <div class="title">Gadin</div>
+          <div class="content">
+             <div class="user-details">
+                  <div class="div">
+                    <div class="field">
+                          <div class="form__div">
+                      <input
+                        type="number"
+                        class="form__input auto"
+                        placeholder=" "
+                        id="Snette"
+                        v-model="Snette"
+                      />
+                      <label for="" class="form__label autol">Snette</label>
+                    </div>
+                          <div class="form__div">
+                      <input
+                        type="number"
+                        class="form__input auto"
+                        placeholder=" "
+                        id="Sbrut"
+                        v-model="Sbrut"
+                      />
+                      <label for="" class="form__label autol">Sbrut</label>
+                    </div>
+                          <div class="form__div">
+                      <input
+                        type="number"
+                        class="form__input auto"
+                        placeholder=" "
+                        id="EpaisseurTot"
+                        v-model="EpaisseurTot"
+                      />
+                      <label for="" class="form__label autol">EpaisseurTot</label>
+                    </div>
+
+           
+                    </div>
+                   
+            
+            <div class="grid2">
                       <div style="transform: rotate(-180deg)">
                         <div
                           v-for="item in projet.nbrGradin"
@@ -212,77 +300,7 @@
 
                      </div> -->
                     </div>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </v-card>
-
-          <router-link class="nav-link" :to="'/projet/bobine/' + projet.id">
-            <v-btn color="primary mb-14" @click="e1 = 2"> précédent </v-btn>
-          </router-link>
-          <v-btn color="success mb-14" @click="e1 = 2"> suivant </v-btn>
-        </v-stepper-content>
-
-        <v-stepper-step :complete="e1 > 2" step="2"> Gadin </v-stepper-step>
-
-        <v-stepper-content step="2">
-          <div class="title">Gadin</div>
-          <div class="content">
-            <v-row cols="2" md="4" class="ml-4">
-              <v-card outlined tile>
-                <template>
-                  <v-row>
-                    <v-col>
-                      <v-card>
-                        <v-card-title class="subheading font-weight-bold">
-                          Largeur
-                        </v-card-title>
-
-                        <v-divider></v-divider>
-
-                        <v-list dense>
-                          <v-list-item v-for="item in largeur" :key="item">
-                            <v-list-item-content>{{
-                              item
-                            }}</v-list-item-content>
-                            <v-list-item-content class="align-end">
-                            </v-list-item-content>
-                          </v-list-item>
-                        </v-list>
-                      </v-card>
-                    </v-col>
-                  </v-row>
-                </template>
-              </v-card>
-              <v-card cols="2" md="4" class="ml-4" outlined tile>
-                <template style="width: 33%">
-                  <v-card-title class="subheading font-weight-bold">
-                    Epaisseur
-                  </v-card-title>
-
-                  <v-divider></v-divider>
-
-                  <v-list dense>
-                    <v-list-item
-                      v-for="item in epaisseur"
-                      :key="item"
-                      style="width: 176% !important"
-                    >
-                      <v-list-item-content vertical>{{
-                        item
-                      }}</v-list-item-content>
-                      <v-list-item-content
-                        class="align-end"
-                        v-model="projet.spire"
-                      >
-                      </v-list-item-content>
-                    </v-list-item>
-                  </v-list>
-                </template>
-              </v-card>
-            </v-row>
-          </div>
+          </div></div></div>
           <v-btn color="primary mb-14" @click="e1 = 1"> précédent </v-btn>
           <v-btn color="success mb-14" @click="updateprojet"> Valider </v-btn>
         </v-stepper-content>
@@ -471,6 +489,17 @@ export default {
 </script>
 
 <style scoped>
+.auto{
+    border: 1px solid green !important;
+        border-color: green !important;
+        caret-color: green !important;
+        color: rgb(7, 134, 7) !important;
+
+}
+
+ .autol{
+ color: green !important;
+}
 .grid2 {
   display: flex;
 }
@@ -485,6 +514,13 @@ export default {
   /* grid-template-rows: repeat(3, 1fr); */
   grid-gap: 10px;
   width: 80%;
+  /* margin-right: 5%; */
+}
+.field {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 10px;
+  width: 60%;
   /* margin-right: 5%; */
 }
 .div2 {

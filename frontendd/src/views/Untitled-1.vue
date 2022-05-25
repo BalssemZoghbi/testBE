@@ -1,367 +1,376 @@
 <template>
   <div>
-    <NavDash />
+    <NavDash
+      :conducteurMT="projet.conducteurMT"
+      :conducteurBT="projet.conducteurBT"
+    />
     <div class="body">
-      <v-stepper v-model="e1"  vertical>
-          <v-stepper-step :complete="e1 > 1" step="1">
-           Calcul
-          </v-stepper-step>
-           <v-stepper-content step="1">
-            <v-card class="mb-6"  >
-                  <div class="title">Gradin</div>
-                  <div class="content">
-                    <form v-on:submit.prevent="updateprojet">
-                      <div class="user-details">
-                        <div class="form__div framei">
-                            <v-select :items="toles"
-                              label="tole"
-                              v-model="projet.tole"
-                              dense
-                              outlined
-                            ></v-select>
-                        </div>
-                        <div class="form__div framei">
-                          <input
-                            type="text"
-                            class="form__input"
-                            placeholder=" "
-                            id="diamPropose"
-                            v-model="projet.diamPropose"
-                            
-                          />
-                          <label for="" class="form__label">Diametre Proposé</label>
-                        </div>
-                       
-                           <div class="form__div frame">
-                            <input
-                              type="text"
-                              class="form__input"
-                              placeholder=" "
-                              id="diamNominale"
-                              readonly
-                              v-model="projet.diamNominale"
-                            />
-                            <label for="" class="form__label">Diametre Nominale</label>
-                          </div>
-                       
-                         <div class="form__div frame">
-                            <v-select :items="pas"
-                              label="pas"
-                              v-model="projet.pas"
-                              dense
-                              outlined
-                            ></v-select>
-                        </div>
+      <v-stepper v-model="e1" vertical>
+        <Loading v-if="spinner" />
+        <v-stepper-step step="">
+          Données de Garantie
+        </v-stepper-step>
+        <v-stepper-content step="1">
+          <v-card class="mb-6">
+            <div class="title">Données de Garantie</div>
 
-                        <div class="form__div framei">
-                            <input
-                            readonly
-                              type="text"
-                              class="form__input"
-                              placeholder=" "
-                              id="coeffRemplissage"
-                              v-model="projet.coeffRemplissage"
-                            />
-                            <label for="" class="form__label">Coeff de Remplissage</label>
-                       
-                        </div>
-                        <div class="form__div framei">
-                          <input
-                            type="number"
-                            class="form__input"
-                            placeholder=" "
-                            id="nbrGradin"
-                            v-model="projet.nbrGradin"
-                            readonly
-                          />
-                          <label for="" class="form__label">nbrGradin</label>
-                        </div>
-                        <div class="form__div framei">
-                          <input
-                            type="number"
-                            class="form__input"
-                            placeholder=" "
-                            id="demiGradin"
-                            readonly
-                            v-model="projet.demiGradin"
-                          />
-                          <label for="" class="form__label">demiGradine</label>
-                        </div>
-                          <div class="form__div framei">
-                          <input
-                            type="number"
-                            class="form__input"
-                            placeholder=" "
-                            id="Snette"
-                            readonly
-                            v-model="projet.Snette"
-                          />
-                          <label for="" class="form__label">Snette</label>
-                        </div>
-                         <div class="input-box">
-                          <div class="form__div">
-                          <input
-                            type="number"
-                            class="form__input"
-                            placeholder=" "
-                            id="Sbrut"
-                            readonly
-                            v-model="projet.Sbrut"
-                          />
-                          <label for="" class="form__label">Sbrut</label>
-                        </div></div>
-                         <div class="input-box">
-                       <div class="form__div">
-                          <input
-                            type="number"
-                            class="form__input"
-                            placeholder=" "
-                            id="EpaisseurTot"
-                            readonly
-                            v-model="projet.EpaisseurTot"
-                          />
-                          <label for="" class="form__label">Epaisseur Totale</label>
-                        </div>
-                    </div></div>
-                     <div class="form__div framei">
-                          <input
-                            type="number"
-                            class="form__input"
-                            placeholder=" "
-                            id="largeurMin"
-                            readonly
-                            v-model="projet.largeurMin"
-                          />
-                          <label for="" class="form__label">largeur Minimale</label>
-                        </div>
-                    </form>
+            <div class="content">
+              <v-col cols="2" style="margin-top: -7%; margin-left: 28%">
+                <v-menu transition="slide-x-transition" offset-x>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn v-bind="attrs" v-on="on" color="primary">
+                      Automatique
+                    </v-btn>
+                  </template>
+
+                  <v-list>
+                    <v-list-item-group v-model="model" mandatory color="blue">
+                      <v-list-item @click="onClick" color="blue">
+                        <v-list-item-title @click="automatique()"
+                          >Automatique</v-list-item-title
+                        >
+                      </v-list-item>
+
+                      <v-list-item>
+                        <v-list-item-title @click="manuel()"
+                          >Manuel</v-list-item-title
+                        >
+                      </v-list-item>
+                    </v-list-item-group>
+                  </v-list>
+                </v-menu>
+              </v-col>
+              <form style="margin-top: -1%">
+                <div class="user-details">
+                  <div class="form__div framei">
+                    <input
+                      type="text"
+                      class="form__input"
+                      placeholder=" "
+                      id="option"
+                      v-model="projet.option"
+                    />
+                    <label for="" class="form__label">Option</label>
                   </div>
-            </v-card>
-   
-            <router-link
-              class="nav-link"
-              :to="
-                '/garantie/' + projet.id 
-              "
-              > <v-btn
-        color="primary mb-14"
-        @click="e1 = 2"
-      >
-        précédent
-      </v-btn> </router-link>
-           <v-btn
-        color="success mb-14"
-        @click="e1 = 2"
-      >
-        suivant
-      </v-btn>
-          </v-stepper-content>
-        
-             <v-stepper-step
-      :complete="e1 > 2"
-      step="2"
-    >
-      Gadin
-    </v-stepper-step>
-
-    <v-stepper-content step="2">
-                  <div class="title">Gadin</div>
-                  <div class="content">
-          
- <v-row
-              cols="2"
-        md="4"
-          class="ml-4"
-              >
-        <!-- <v-col md="4">
-        </v-col> -->
-        <!-- <v-col
-          cols="6"
-        md="4"
-        > -->
-         <v-card
-          outlined
-          tile
-        >
-          <template>
-        <!-- <v-row>
-          <v-col
-          
-          > -->
-            <v-card>
-              <v-card-title class="subheading font-weight-bold">
-              Largeur
-              </v-card-title>
-
-              <v-divider></v-divider>
-
-              <v-list dense>
-                <v-list-item>
-                  <v-list-item-content>{{largeur}}</v-list-item-content>
-                  <v-list-item-content class="align-end"  >
-                  
-                  </v-list-item-content>
-                </v-list-item>
-
-              </v-list>
-            </v-card>
-          <!-- </v-col>
-        </v-row> -->
-      </template>
-         </v-card>
-      <!-- </v-col> -->
-      <!-- <v-col
-        cols="4"
-        md="4"
-      > -->
-        <v-card
-            cols="2"
-        md="4"
-          class="ml-4"
-          outlined
-          tile
-        >
-          <template >
-        <!-- <v-row>
-          <v-col
-         
-          > -->
-            <!-- <v-card> -->
-              <v-card-title class="subheading font-weight-bold" >
-               Epaisseur
-              </v-card-title>
-
-              <v-divider></v-divider>
-
-              <v-list dense>
-                <v-list-item>
-                  <v-list-item-content vertical>{{epaisseur}}</v-list-item-content>
-                  <v-list-item-content class="align-end"  v-model="projet.spire">
-                  
-                  </v-list-item-content>
-                </v-list-item>
-
-                
-              </v-list>
-            <!-- </v-card> -->
-          <!-- </v-col>
-        </v-row> -->
-      </template>
-        </v-card>
-        <!-- </v-col> -->
-      </v-row>
-                     
+                  <div class="form__div framei">
+                    <input
+                      type="text"
+                      class="form__input"
+                      placeholder=" "
+                      id="Pog"
+                      v-model="projet.Pog"
+                    />
+                    <label for="" class="form__label">Pog</label>
                   </div>
-                <!-- </div> -->
-              <!-- </div> -->
-            <!-- </v-card> -->
-           <v-btn
-        color="primary mb-14"
-        @click="e1 = 1"
-      >
-        précédent
-      </v-btn>
-       <v-btn color="success mb-14" @click="updateprojet">
-          Valider
-        </v-btn>
-     
-   
-    </v-stepper-content>
+
+                  <div class="input-box">
+                    <div class="form__div">
+                      <input
+                        type="text"
+                        class="form__input"
+                        placeholder=" "
+                        id="log"
+                        v-model="projet.log"
+                      />
+                      <label for="" class="form__label">log</label>
+                    </div>
+                  </div>
+
+                  <div class="form__div framei">
+                    <input
+                      type="text"
+                      class="form__input"
+                      placeholder=" "
+                      id="Pccg"
+                      v-model="projet.Pccg"
+                    />
+                    <label for="" class="form__label">Pccg</label>
+                  </div>
+
+                  <div class="form__div framei">
+                    <input
+                      type="text"
+                      class="form__input"
+                      placeholder=" "
+                      id="Uccg"
+                      v-model="projet.Uccg"
+                    />
+                    <label for="" class="form__label">Uccg</label>
+                  </div>
+                  <div class="form__div framei">
+                    <input
+                      type="number"
+                      class="form__input"
+                      placeholder=" "
+                      id="Ptot"
+                      v-model="Ptot"
+                    />
+                    <label for="" class="form__label">Ptot</label>
+                  </div>
+                  <div class="form__div framei">
+                    <input
+                      type="number"
+                      class="form__input"
+                      placeholder=" "
+                      id="Poglimit"
+                      v-model="Poglimit"
+                    />
+                    <label for="" class="form__label">Poglimite</label>
+                  </div>
+                  <div class="form__div framei">
+                    <input
+                      type="number"
+                      class="form__input"
+                      placeholder=" "
+                      id="Pccglimit"
+                      v-model="Pccglimit"
+                    />
+                    <label for="" class="form__label">Pccglimite</label>
+                  </div>
+                  <div class="form__div framei">
+                    <input
+                      type="number"
+                      class="form__input"
+                      placeholder=" "
+                      id="loglimit"
+                      v-model="loglimit"
+                    />
+                    <label for="" class="form__label">loglimit</label>
+                  </div>
+                  <div class="form__div framei">
+                    <input
+                      type="number"
+                      class="form__input"
+                      placeholder=" "
+                      id="Uccglimit"
+                      v-model="Uccglimit"
+                    />
+                    <label for="" class="form__label">Uccglimit Max</label>
+                  </div>
+                  <div class="form__div framei">
+                    <input
+                      type="number"
+                      class="form__input"
+                      placeholder=" "
+                      id="Uccglimit"
+                      v-model="UccgMin"
+                    />
+                    <label for="" class="form__label">Uccglimit Min</label>
+                  </div>
+                  <div class="form__div framei">
+                    <input
+                      type="number"
+                      class="form__input"
+                      placeholder=" "
+                      id="Ptotlimit"
+                      v-model="Ptotlimit"
+                    />
+                    <label for="" class="form__label">Ptotlimit</label>
+                  </div>
+                  <div class="form__div framei" style="width: 48%">
+                    <input
+                      type="number"
+                      class="form__input"
+                      placeholder=" "
+                      id="echauffementHuile"
+                      v-model="echauffementHuile"
+                    />
+                    <label for="" class="form__label">Echauffement Huile</label>
+                  </div>
+                  <div class="form__div frame" style="width: 48%">
+                    <input
+                      type="number"
+                      class="form__input"
+                      placeholder=" "
+                      id="echauffementEnroulement"
+                      v-model="echauffementEnroulement"
+                    />
+                    <label for="" class="form__label"
+                      >Echauffement Enroulement</label
+                    >
+                  </div>
+                </div>
+              </form>
+            </div>
+          </v-card>
+
+          <router-link
+            class="nav-link"
+            :to="'/projet/electrique/update/' + this.$route.params.id"
+          >
+            <v-btn color="primary mb-14" @click="e1 = 2"> précédent </v-btn>
+          </router-link>
+          <router-link
+            :to="'/projet/bobine/' + this.$route.params.id"
+            style="text-decoration: none"
+          >
+            <v-btn
+              color="success mb-14"
+              @click="automatique"
+              v-if="this.garantie == true"
+              style="text-decoration: none"
+            >
+              Valider
+            </v-btn></router-link
+          >
+          <router-link
+            :to="'/projet/bobine/' + this.$route.params.id"
+            style="text-decoration: none"
+            ><v-btn
+              color="success mb-14"
+              @click="manuel"
+              v-if="this.garantie == false"
+            >
+              Valider
+            </v-btn></router-link
+          >
+        </v-stepper-content>
       </v-stepper>
     </div>
   </div>
 </template>
-
 <script>
-// import { reactive } from "vue";
-// import navbarUpdate from "../../navbarUpdate.vue";
-
 import NavDash from "@/components/NavDash.vue";
+import Loading from "@/components/Loading.vue";
 
 import axios from "axios";
 export default {
-    components: { 
-      // navbarUpdate 
-                NavDash,
-
-      },
+  components: {
+    Loading,
+    NavDash,
+  },
   data() {
     return {
-      toles:['M110-23','M120-27','M130-30','H75-23','H80-23','H85-23','H95-27','H105-30'],
-      pas:['10','20'],
+      spinner: true,
+      garantie: true,
+      select: { state: "Automatique" },
+      items: [{ state: "Automatique" }, { state: "Manuel" }],
+      projet1: [],
       projet: {
         id: undefined,
-        tole: "",
-        diamPropose: "",
-        diamNominale: "",
-        pas: "",
-        coeffRemplissage: "",
-        nbrGradin: "",
-        demiGradin: "",
-        largeur: "",
-        epaisseur: "",
-        Sbrut: "",
-        Snette: "",
-        EpaisseurTot: "",
-        largeurMin: "",
+        option: "",
+        Pog: "",
+        log: "",
+        Pccg: "",
+        Uccg: "",
+        Ptot: "",
+        Poglimit: "",
+        loglimit: "",
+        Pccglimit: "",
+        Uccglimit: "",
+        UccgMin: "",
+        Ptotlimit: "",
+        echauffementHuile: "",
+        echauffementEnroulement: "",
       },
       e1: 1,
     };
   },
   methods: {
-    updateprojet() {
+    async manuel() {
+      this.garantie = false;
       const projets = {
         id: undefined,
-        tole: this.projet.tole,
-        diamPropose: this.projet.diamPropose,
-        diamNominale: this.projet.diamNominale,
-        pas: this.projet.pas,
-        coeffRemplissage: this.projet.coeffRemplissage,
-        nbrGradin: this.projet.nbrGradin,
-        demiGradin: this.projet.demiGradin,
-        largeur: this.projet.largeur,
-        epaisseur: this.projet.epaisseur,
-        Sbrut: this.projet.Sbrut,
-        Snette: this.projet.Snette,
-        EpaisseurTot: this.projet.EpaisseurTot,
+        option: this.projet.option,
+        Pog: this.projet.Pog,
+        log: this.projet.log,
+        Pccg: this.projet.Pccg,
+        Uccg: this.projet.Uccg,
+        Ptot: this.projet.Ptot,
+        Poglimit: this.projet.Poglimit,
+        loglimit: this.projet.loglimit,
+        Pccglimit: this.projet.Pccglimit,
+        Uccglimit: this.projet.Uccglimit,
+        UccgMin: this.projet.UccgMin,
+        Ptotlimit: this.projet.Ptotlimit,
+        echauffementHuile: this.projet.echauffementHuile,
         echauffementEnroulement: this.projet.echauffementEnroulement,
-        largeurMin: this.projet.largeurMin,
       };
-            console.log(this.projets);
-
-      axios
-        .put("/gradin/update/" + this.$route.params.id, projets)
+      await axios
+        .put("/garantie/manuelle/" + this.$route.params.id, projets)
         .then(
-          (response) => (this.id = response.data.id
-          // , console.log(response.data)
-          ),
-          
+          (response) => (
+            (this.id = response.data.id),
+            console.log(response.data),
+            this.getGarantie()
+          )
         );
-      this.$router.push("/VoltSpires/"+ this.$route.params.id);
+    },
+    updateprojet() {
+      this.$router.push("/projet/bobine/" + this.$route.params.id);
+    },
+    async automatique() {
+      this.garantie = true;
+      await axios
+        .put("/garantie/edit/" + this.$route.params.id)
+        .then((response) => ((this.id = response.data.id), this.getGarantie()));
+    },
+    async getGarantie() {
+      await axios
+        .get("getGarantie/" + this.$route.params.id)
+        .then((response) => (this.projet = response.data));
     },
   },
   async mounted() {
     const result = await axios.get("projets/" + this.$route.params.id);
-    this.projet = result.data;
+    this.projet1 = result.data;
   },
-   created() {
-                console.log(this.projets);
-
+  async created() {
+    const result = await axios.get("projets/" + this.$route.params.id);
+    this.projet1 = result.data;
+    await this.getGarantie();
+    this.spinner = false;
   },
-     computed:{
-     largeur(){
-       
-  return this.projet.largeur.replace("[","",this.projet.largeur.length-1).split(",").join("").replace("]","");
-},
-epaisseur(){
-  return this.projet.epaisseur.replace("[","",this.projet.epaisseur.length-1).split(",").join("").replace("]","");
-}
-},
+  computed: {
+    Poglimit() {
+      return parseFloat(this.projet.Pog) + parseFloat(this.projet.Pog) * 0.15;
+    },
+    loglimit() {
+      return (
+        parseFloat(this.projet.log) + (parseFloat(this.projet.log) * 30) / 100
+      );
+    },
+    Pccglimit() {
+      return (
+        parseFloat(this.projet.Pccg) + (parseFloat(this.projet.Pccg) * 15) / 100
+      );
+    },
+    Uccglimit() {
+      return (
+        parseFloat(this.projet.Uccg) + (parseFloat(this.projet.Uccg) * 10) / 100
+      );
+    },
+    UccgMin() {
+      return (
+        parseFloat(this.projet.Uccg) - (parseFloat(this.projet.Uccg) * 10) / 100
+      );
+    },
+    Ptotlimit() {
+      return (
+        parseFloat(this.projet.Pccg) +
+        parseFloat(this.projet.Pog) +
+        ((parseFloat(this.projet.Pccg) + parseFloat(this.projet.Pog)) * 10) /
+          100
+      );
+    },
+    echauffementHuile() {
+      return 100 - parseInt(this.projet1.temperatureMax);
+    },
+    echauffementEnroulement() {
+      return 105 - parseInt(this.projet1.temperatureMax);
+    },
+    Ptot() {
+      return parseInt(this.projet.Pccg) + parseInt(this.projet.Pog);
+    },
+  },
 };
 </script>
 <style scoped>
+h1 {
+  margin: 0;
+}
 
-
+/*===== FORM =====*/
 .l-form {
   display: flex;
   justify-content: center;
@@ -372,7 +381,6 @@ epaisseur(){
   width: 360px;
   padding: 4rem 2rem;
   border-radius: 1rem;
-  /* box-shadow: 0 10px 25px rgba(92,99,105,.2); */
 }
 .form__title {
   font-weight: 400;
@@ -476,7 +484,7 @@ epaisseur(){
   margin-bottom: 3.5%;
   position: relative;
 }
- .title::before {
+.title::before {
   content: "";
   position: absolute;
   left: 0;
@@ -484,7 +492,7 @@ epaisseur(){
   height: 3px;
   width: 250px;
   border-radius: 5px;
-  
+
   background: linear-gradient(135deg, #0b65a0, #71b7e6);
 }
 .content form .user-details {
@@ -583,10 +591,10 @@ form .button input:hover {
   border-color: #000;
 }
 .v-sheet.v-card:not(.v-sheet--outlined) {
-    box-shadow: 0px 0px 0px 0px;
+  box-shadow: 0px 0px 0px 0px;
 }
 .v-stepper--vertical {
-    padding-bottom:0px;
+  padding-bottom: 0px;
 }
 @media (max-width: 584px) {
   .container {
@@ -606,6 +614,17 @@ form .button input:hover {
   .user-details::-webkit-scrollbar {
     width: 5px;
   }
+  .user-details .input-box input {
+    height: 45px;
+    width: 100%;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+    padding-left: 15px;
+    /* border: 1px solid #ccc; */
+    /* border-bottom-width: 2px; */
+    transition: all 0.3s ease;
+  }
 }
 @media (max-width: 459px) {
   .container .content .category {
@@ -613,9 +632,9 @@ form .button input:hover {
   }
 }
 .v-btn:not(.v-btn--round).v-size--default {
-    height: 36px;
-    min-width: 64px;
-    padding: 16px;
-    margin: 3px;
+  height: 36px;
+  min-width: 64px;
+  padding: 16px;
+  margin: 3px;
 }
 </style>
