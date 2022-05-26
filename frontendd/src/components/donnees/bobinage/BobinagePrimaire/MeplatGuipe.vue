@@ -224,7 +224,13 @@
                         outlined
                         dense
                       ></v-text-field>
-                      
+                         <v-text-field
+                      success
+                        label="Sp/CoucheBT"
+                        v-model="spCouche"
+                        outlined
+                        dense
+                      ></v-text-field>
                        <v-text-field
                         label="NchA"
                         success
@@ -604,10 +610,10 @@ export default {
       }
     },
     hbobt() {
-      return this.hfs + this.projet.collierBT * 2;
+      return this.hfs +( this.projet.collierBT * 2);
     },
     collierBt2() {
-      return this.hbobt - this.hfs - this.projet.collierBT;
+      return Math.round((this.hbobt - this.hsfs) / 2);
     },
     poid() {
       let coefPoid = 0;

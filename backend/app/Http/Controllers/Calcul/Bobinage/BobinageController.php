@@ -79,8 +79,8 @@ class BobinageController extends Controller
             public function hbobt($hfs,$collierBT){
                 return $hfs+($collierBT*2);
             }
-            public function collierBt2($hbobt,$hsfs,$collierBT){
-                return $hbobt-$hsfs-$collierBT;
+            public function collierBt2($hbobt,$hsfs){
+                return ($hbobt-$hsfs)/2;
             }
 
             public function DintBint($dn,$cmbt){
@@ -308,16 +308,14 @@ return $barre;
             $Isole=0;
         }
         $epFeuillard=$this->epFeuillard($request->epFeuil1,$request->epFeuil2);
-// dd($request);
             $scu1=$this->Scu1($projet->conducteurMT,$request->hbrin1MT, $request->hbrin2MT,$request->nbBrin1MT, $request->nbBrin2MT, $request->etageMT, $request->saillieMT,$Designation,$request->Hfeuillard,$epFeuillard,$request->brinParallele);
-            // dd($projet->conducteurMT);
             $j1=$this->j1($projet->PrimaireIPhase, $scu1);
             $spCouche=$this->spCouche($projet->conducteurMT,$projet->N1c,$request->nbcoucheMT);
             $hSpire=$this->hSpire($request->hbrin1MT,$request->e1ax,$request->nbBrin1MT,$request->hbrin2MT,$request->nbBrin2MT);
             $hsfs=$this->hsfs($hSpire,$spCouche,$request->etageMT,$request->hbrin1MT,$request->hbrin2MT,$request->e1ax);
             $hfs=$this->hfs($hSpire,$spCouche,$request->etageMT,$request->hbrin1MT,$request->hbrin2MT,$request->e1ax);
             $hbobt=$this->hbobt($hfs,$request->collierBT);
-            $collierBt2=$this->collierBt2($hbobt,$hsfs,$request->collierBT);
+            $collierBt2=$this->collierBt2($hbobt,$hsfs);
             $DintBint=$this->DintBint($projet->diamNominale,$projet->CMBT);
             $epx=$this->Epx($request->typeCanaux,$request->saillieMT,$request->e1r,$request->etageMT,$request->nbcoucheMT,$request->canauxMT,$request->lgCales,$request->nbrPapierMT,$request->ep1PapierMT);
             $epy=$this->Epy($request->saillieMT,$request->e1r,$request->etageMT,$request->nbcoucheMT,$request->canauxBt,$request->lgCales,$request->nbrPapierMT,$request->ep1PapierMT);
