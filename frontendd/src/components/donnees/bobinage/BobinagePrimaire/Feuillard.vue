@@ -54,7 +54,6 @@
                         dense
                         outlined
                       ></v-text-field>
-
                       <v-text-field
                         label="epFeuil1"
                         v-model="projet.epFeuil1"
@@ -74,12 +73,12 @@
                         dense
                         outlined
                       ></v-text-field>
-                      <v-text-field
+                      <!-- <v-text-field
                         label="epFeuilPap"
                         v-model="projet.epFeuilPap"
                         dense
                         outlined
-                      ></v-text-field>
+                      ></v-text-field> -->
                       <v-text-field
                         label="scu1"
                         v-model="scu1"
@@ -87,9 +86,7 @@
                         success
                         outlined
                       ></v-text-field>
-                    </div>
-                    <div class="field10">
-                      <v-text-field
+                          <v-text-field
                         label="j1"
                         v-model="j1"
                         dense
@@ -103,6 +100,9 @@
                         v-model="projet.ep1PapierMT"
                         outlined
                       ></v-text-field>
+                    </div>
+                    <div class="field10">
+                  
                       <v-text-field
                         label="nbrPap1"
                         dense
@@ -130,6 +130,45 @@
                         success
                         v-model="ePap"
                         readonly
+                        outlined
+                        dense
+                      ></v-text-field>
+                              <v-text-field
+                      success
+                        label="largeurBarre"
+                        v-model="largeurBarre"
+                        dense
+                        outlined
+                      ></v-text-field>
+
+                      <v-text-field
+                      success
+                        label="epaisseurBarre"
+                        v-model="epaisseurBarre"
+                        dense
+                        outlined
+                      ></v-text-field>
+
+                      <v-select
+                        :items="barre"
+                        label="barre"
+                        success
+                        v-model="projet.Epbarre"
+                        dense
+                        outlined
+                      ></v-select>
+                      <v-text-field
+                        label="Sbarre"
+                        v-model="Sbarre"
+                        success
+                        dense
+                        outlined
+                      ></v-text-field>
+
+                      <v-text-field
+                        label="Jbarre"
+                        v-model="Jbarre"
+                        success
                         outlined
                         dense
                       ></v-text-field>
@@ -272,8 +311,8 @@
               </form>
               <!-- </div> -->
             </v-card>
-            <v-btn color="primary" @click="e1 = 1"> précédent </v-btn>
-            <v-btn color="success" @click="e1 = 3"> suivant </v-btn>
+            <v-btn color="primary mb-4" @click="e1 = 1"> précédent </v-btn>
+            <!-- <v-btn color="success" @click="e1 = 3"> suivant </v-btn>
           </v-stepper-content>
           <v-stepper-step :complete="e1 > 3" step="3"> Barre </v-stepper-step>
           <v-stepper-content step="3">
@@ -337,7 +376,7 @@
                 </div>
               </form>
             </v-card>
-            <v-btn color="primary mb-4" @click="e1 = 2"> précédent </v-btn>
+            <v-btn color="primary mb-4" @click="e1 = 2"> précédent </v-btn> -->
             <v-btn color="success mb-4" @click="updateprojet"> Valider </v-btn>
           </v-stepper-content>
         </v-stepper-items>

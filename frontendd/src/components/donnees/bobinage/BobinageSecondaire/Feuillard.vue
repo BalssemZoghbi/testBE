@@ -62,7 +62,12 @@
                         dense
                         outlined
                       ></v-text-field>
-
+                    <v-text-field
+                        label="collierBT"
+                        v-model="projet.collierBTSec"
+                        dense
+                        outlined
+                      ></v-text-field>
                       <v-text-field
                         label="epFeuil1"
                         v-model="projet.epFeuil1BT"
@@ -89,12 +94,7 @@
                         dense
                         outlined
                       ></v-text-field>
-                      <v-text-field
-                        label="collierBT"
-                        v-model="projet.collierBTSec"
-                        dense
-                        outlined
-                      ></v-text-field>
+                      
                           <v-text-field
                       success
                         label="j2"
@@ -102,18 +102,18 @@
                         dense
                         outlined
                       ></v-text-field>
-                    </div>
-                    
-                    <div class="field10">
-                  
-                      <v-text-field
-                      
+                       <v-text-field
                         label="ep1PapierBT"
                         dense
                         id="ep1PapierBT"
                         v-model="projet.ep1PapierBT"
                         outlined
                       ></v-text-field>
+                    </div>
+                    
+                    <div class="field10">
+                  
+                     
                       <v-text-field
                         label="nbrPap1"
                         dense
@@ -318,71 +318,8 @@
               </form>
               <!-- </div> -->
             </v-card>
-            <v-btn color="primary" @click="e1 = 1"> précédent </v-btn>
-            <v-btn color="success" @click="e1 = 3"> suivant </v-btn>
-          </v-stepper-content>
-          <v-stepper-step :complete="e1 > 3" step="3"> Barre </v-stepper-step>
-          <v-stepper-content step="3">
-            <v-card class="mb-4">
-              <form v-on:submit.prevent="updateprojet">
-                <div class="user-details">
-                  <div style="margin-bottom: 2%">
-                    <v-chip
-                      >materiauBT :
-                      {{ projet.materiauBT }}
-                    </v-chip>
-                    <v-chip style="margin-left: 1%"
-                      >conducteurBT :
-                      {{ projet.conducteurBT }}
-                    </v-chip>
-                  </div>
-
-                  <div class="div">
-                    <div class="div2">
-                      <v-text-field
-                      success
-                        label="largeurBarre"
-                        v-model="largeurBarreBT"
-                        dense
-                        outlined
-                      ></v-text-field>
-
-                      <v-text-field
-                      success
-                        label="epaisseurBarre"
-                        v-model="epaisseurBarreBT"
-                        dense
-                        outlined
-                      ></v-text-field>
-
-                      <v-select
-                        :items="barre"
-                        label="barre"
-                        v-model="projet.EpbarreBT"
-                        dense
-                        outlined
-                      ></v-select>
-                      <v-text-field
-                      success
-                        label="Sbarre"
-                        v-model="SbarreBT"
-                        dense
-                        outlined
-                      ></v-text-field>
-                      <v-text-field
-                      success
-                        label="Jbarre"
-                        v-model="JbarreBT"
-                        outlined
-                        dense
-                      ></v-text-field>
-                    </div>
-                  </div>
-                </div>
-              </form>
-            </v-card>
-            <v-btn color="primary mb-4" @click="e1 = 2"> précédent </v-btn>
-            <v-btn color="success mb-4" @click="updateprojet"> Valider </v-btn>
+            <v-btn color="primary mb-4" @click="e1 = 1"> précédent </v-btn>
+           <v-btn color="success mb-4" @click="updateprojet"> Valider </v-btn>
           </v-stepper-content>
         </v-stepper-items>
       </v-stepper>
