@@ -25,21 +25,43 @@
                       {{ projet.PrimaireIPhase }}
                     </v-chip>
                   </div>
-
                   <div class="div">
-                    <div class="field10">
-                      <v-select
-                        :items="etage"
-                        label="Etages"
-                        v-model="projet.etageMT"
+                    
+                      <div class="field1">
+                        <div class="field10">
+                      <v-text-field
+                      success
+                        label="N1cmax"
+                        v-model="N1cmax"
                         dense
                         outlined
-                      ></v-select>
-
+                      ></v-text-field>
+                       <v-text-field
+                        label="J1D"
+                        v-model="projet.J1D"
+                        outlined
+                        dense
+                      ></v-text-field>
+                      <v-text-field
+                      success
+                        label="scu1d"
+                        v-model="scu1d"
+                        dense
+                        outlined
+                      ></v-text-field>
+                   </div>
+                      <div class="div2">
                       <v-select
                         :items="saillie"
                         label="saillieMT"
                         v-model="projet.saillieMT"
+                        dense
+                        outlined
+                      ></v-select>
+                      <v-select
+                        :items="etage"
+                        label="Etages"
+                        v-model="projet.etageMT"
                         dense
                         outlined
                       ></v-select>
@@ -50,9 +72,8 @@
                         dense
                         outlined
                       ></v-select>
-
                       <v-text-field
-                        label="NbBrin 1MT"
+                        label="NbBrin 1"
                         v-model="projet.nbBrin1MT"
                         dense
                         outlined
@@ -64,8 +85,17 @@
                         dense
                         outlined
                       ></v-select>
-
                       <v-text-field
+                        label="NbBrin 2"
+                        v-model="projet.nbBrin2MT"
+                        dense
+                        outlined
+                      ></v-text-field>
+                   
+                    </div> 
+                    </div>
+                    <div class="div2">
+                         <v-text-field
                         label="Scu1"
                         success
                         dense
@@ -83,29 +113,14 @@
                         v-model="j1"
                         outlined
                       ></v-text-field>
-                    </div>
-                    <div class="field10">
                       <v-text-field
-                        label="nbcoucheMT"
-                        v-model="projet.nbcoucheMT"
-                        outlined
-                        dense
-                      ></v-text-field>
-                      <v-text-field
-                        label="spCoucheMT"
-                        success
-                        v-model="spCouche"
-                        outlined
-                        dense
-                      ></v-text-field>
-                      <v-text-field
-                        label="e1ax"
+                        label="Eguip ax"
                         v-model="projet.e1ax"
                         outlined
                         dense
                       ></v-text-field>
                       <v-text-field
-                        label="e1r"
+                        label="Eguip rad"
                         v-model="projet.e1r"
                         outlined
                         dense
@@ -116,7 +131,12 @@
                         outlined
                         dense
                       ></v-text-field>
-
+                          <v-text-field
+                        label="EpfeuillePapier"
+                        v-model="projet.EpfeuillePapier"
+                        outlined
+                        dense
+                      ></v-text-field>
                       <v-text-field
                         label="ep1PapierMT"
                         dense
@@ -151,6 +171,7 @@
                 <div class="user-details">
                   <div class="div">
                     <div class="div2">
+                    
                       <v-text-field
                         label="Hspire"
                         v-model="hSpire"
@@ -182,14 +203,14 @@
                         outlined
                       ></v-text-field>
                       <v-text-field
-                        label="CollierBT"
+                        label="CollierMT"
                         v-model="projet.collierBT"
                         outlined
                         dense
                       ></v-text-field>
 
                       <v-text-field
-                        label="CollierBT2"
+                        label="CollierMT2"
                         dense
                         success
                         v-model="collierBt2"
@@ -197,7 +218,75 @@
                       ></v-text-field>
                     </div>
                     <div class="div2">
-                      <v-select
+                          <v-text-field
+                        label="nbcoucheMT"
+                        v-model="projet.nbcoucheMT"
+                        outlined
+                        dense
+                      ></v-text-field>
+                         <v-text-field
+                      success
+                        label="Sp/CoucheBT"
+                        v-model="spCouche"
+                        outlined
+                        dense
+                      ></v-text-field>
+                       <v-text-field
+                        label="NchA"
+                        success
+                        v-model="NchA"
+                        dense
+                        outlined
+                      ></v-text-field>
+                      <v-text-field
+                      success
+                        label="SpchA"
+                        v-model="SpchA"
+                        dense
+                        outlined
+                      ></v-text-field>
+                      <v-text-field
+                        label="NchB"
+                        success
+                        v-model="NchB"
+                        outlined
+                        dense
+                      ></v-text-field>
+
+                      <v-text-field
+                      success
+                        label="SpchB"
+                        dense
+                        v-model="SpchB"
+                        outlined
+                      ></v-text-field>       </div>
+                  </div>
+                </div>
+              </form>
+            </v-card>
+            <v-btn color="primary" @click="e1 = 1"> précédent </v-btn>
+            <v-btn color="success" @click="e1 = 3"> suivant </v-btn>
+          </v-stepper-content>
+          <v-stepper-step :complete="e1 > 3" step="3">
+            Diamétre
+          </v-stepper-step>
+          <v-stepper-content step="3">
+            <v-card class="mb-4">
+              <form v-on:submit.prevent="updateprojet">
+                <div class="user-details">
+                  <div style="margin-bottom: 2%">
+                    <v-chip
+                      >Dn :
+                      {{ projet.diamNominale }}
+                    </v-chip>
+                    <v-chip style="margin-left: 2%"
+                      >CMBT :
+                      {{ projet.CMBT }}
+                    </v-chip>
+                  </div>
+ <div class="div">
+                      <div class="div2">
+                        <v-select
                         :items="typeCanaux"
                         label="typeCanaux"
                         v-model="projet.typeCanaux"
@@ -233,92 +322,82 @@
                         outlined
                         dense
                       ></v-text-field>
+                        <v-text-field
+                          label="majPoid"
+                          v-model="projet.majPoid"
+                          outlined
+                          dense
+                        ></v-text-field>
+                           <v-text-field
+                          label="DistanceBTMT"
+                          v-model="projet.DistanceBTMT"
+                          dense
+                          outlined
+                        ></v-text-field>
+                        <v-text-field
+                          label="EpCylindre"
+                          v-model="projet.EpCylindre"
+                          dense
+                          outlined
+                        ></v-text-field>
+                      </div>
+                      <div class="div2">
+                      
+                        <v-text-field
+                        success
+                          label="DintMT"
+                          v-model="DintBint"
+                          dense
+                          outlined
+                        ></v-text-field>
+
+                        <v-text-field
+                          label="BintMT"
+                          v-model="DintBint"
+                          dense
+                          success
+                          outlined
+                        ></v-text-field>
+
+                        <v-text-field
+                        success
+                          label="EpxMT"
+                          v-model="Epx"
+                          dense
+                          outlined
+                        ></v-text-field>
+                        <v-text-field
+                        success
+                          label="EpyMT"
+                          v-model="Epy"
+                          dense
+                          outlined
+                        ></v-text-field>
+                        <v-text-field
+                        success
+                          label="DextMT"
+                          v-model="Dext"
+                          outlined
+                          dense
+                        ></v-text-field>
+
+                        <v-text-field
+                        success
+                          label="BextMT"
+                          dense
+                          v-model="Bext"
+                          outlined
+                        ></v-text-field>
+
+                        <v-text-field
+                          label="poidMT"
+                          dense
+                          success
+                          v-model="poid"
+                          outlined
+                        ></v-text-field>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              </form>
-            </v-card>
-            <v-btn color="primary" @click="e1 = 1"> précédent </v-btn>
-            <v-btn color="success" @click="e1 = 3"> suivant </v-btn>
-          </v-stepper-content>
-          <v-stepper-step :complete="e1 > 3" step="3">
-            Diamétre
-          </v-stepper-step>
-          <v-stepper-content step="3">
-            <v-card class="mb-4">
-              <form v-on:submit.prevent="updateprojet">
-                <div class="user-details">
-                  <div style="margin-bottom: 2%">
-                    <v-chip
-                      >Dn :
-                      {{ projet.diamNominale }}
-                    </v-chip>
-                    <v-chip style="margin-left: 2%"
-                      >CMBT :
-                      {{ projet.CMBT }}
-                    </v-chip>
-                  </div>
-
-                  <div class="div2">
-                    <v-text-field
-                      label="DintMT"
-                      v-model="DintBint"
-                      success
-                      dense
-                      outlined
-                    ></v-text-field>
-
-                    <v-text-field
-                      label="BintMT"
-                      v-model="DintBint"
-                      success
-                      dense
-                      outlined
-                    ></v-text-field>
-
-                    <v-text-field
-                      label="EpxMT"
-                      v-model="Epx"
-                      success
-                      dense
-                      outlined
-                    ></v-text-field>
-                    <v-text-field
-                      label="EpyMT"
-                      v-model="Epy"
-                      dense
-                      success
-                      outlined
-                    ></v-text-field>
-                    <v-text-field
-                      label="DextMT"
-                      success
-                      v-model="Dext"
-                      outlined
-                      dense
-                    ></v-text-field>
-
-                    <v-text-field
-                      label="BextMT"
-                      success
-                      dense
-                      v-model="Bext"
-                      outlined
-                    ></v-text-field>
-                    <v-text-field
-                      label="majPoid"
-                      dense
-                      v-model="projet.majPoid"
-                      outlined
-                    ></v-text-field>
-                    <v-text-field
-                      label="poidMT"
-                      success
-                      dense
-                      v-model="poid"
-                      outlined
-                    ></v-text-field>
-                  </div>
                 </div>
               </form>
             </v-card>
@@ -386,6 +465,7 @@ export default {
         poidMT: "",
         majPoid: "",
         nbrPapier: "",
+        EpfeuillePapier: "",
       },
       e1: 1,
     };
@@ -433,6 +513,7 @@ export default {
         BextMT: this.projet.BextMT,
         poidMT: this.projet.poidMT,
         majPoid: this.projet.majPoid,
+        EpfeuillePapier: this.projet.EpfeuillePapier,
       };
       axios
         .put("bobine/update/" + this.$route.params.id, projets)
@@ -473,6 +554,12 @@ export default {
       .then((response) => (this.saillie = response.data));
   },
   computed: {
+      scu1d() {
+      return Math.round(
+        (parseFloat(this.projet.PrimaireIPhase) / parseFloat(this.projet.J1D)) *
+          100
+      )/100;
+    },
     scu1() {
       return (
         0.987 *
@@ -487,10 +574,10 @@ export default {
         .replace("[", "", this.projet.spire.length - 1)
         .replace("]", "")
         .split(",");
-      return spires[0];
+      return Math.round(spires[0]*100)/100;
     },
     j1() {
-      return this.projet.PrimaireIPhase / this.scu1;
+      return Math.round(this.projet.PrimaireIPhase / this.scu1*100)/100;
     },
     spCouche() {
       return Math.ceil( this.N1cmax / this.projet.nbcoucheMT);
@@ -523,10 +610,10 @@ export default {
       }
     },
     hbobt() {
-      return this.hfs + this.projet.collierBT * 2;
+      return this.hfs +( this.projet.collierBT * 2);
     },
     collierBt2() {
-      return this.hbobt - this.hfs - this.projet.collierBT;
+      return Math.round((this.hbobt - this.hsfs) / 2);
     },
     poid() {
       let coefPoid = 0;
@@ -579,10 +666,32 @@ export default {
     },
     Dext() {
       // console.log(this.projet.DintMT,this.projet.EpxMT);
-      return this.projet.DintMT + 2 * this.projet.EpxMT;
+      return this.projet.DintMT + 2 * this.Epx;
     },
     Bext() {
       return this.DintBint + 2 * this.Epy;
+    },
+      NchA() {
+      return Math.floor(
+        this.projet.nbcoucheMT * this.SpchB - this.N1cmax
+      );
+    },
+    SpchA() {
+      return Math.ceil(this.SpchB - 1);
+    },
+    NchB() {
+      return this.projet.nbcoucheMT - this.NchA;
+    },
+    SpchB() {
+      return Math.ceil(this.N1cmax / this.projet.nbcoucheMT);
+    },
+    // esel aaleha
+        nbrPapierMt() {
+      return Math.ceil(
+        ((this.SpchB * this.projet.Vsp * 4) /
+          this.projet.rigiditePapierMT ) /
+          this.projet.EpfeuillePapier
+      );
     },
   },
 };
@@ -594,11 +703,19 @@ export default {
   grid-gap: 10px;
   width: 80%;
 }
+
+.field1{
+  display: grid;
+  grid-template-rows: repeat(1, 1fr);
+/*   
+  grid-gap: 10px; */
+  width: 80%;
+}
 .div2 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 10px;
-  width: 56%;
+  width: 350px;
 }
 .div {
   display: grid;
