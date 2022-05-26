@@ -95,15 +95,17 @@
                         dense
                         outlined
                       ></v-text-field>
-                    </div>
-                    <div class="field10">
-                      <v-text-field
+                          <v-text-field
                       success
                         label="j2"
                         v-model="j2"
                         dense
                         outlined
                       ></v-text-field>
+                    </div>
+                    
+                    <div class="field10">
+                  
                       <v-text-field
                       
                         label="ep1PapierBT"
@@ -138,6 +140,43 @@
                         label="ePap"
                         v-model="ePapBT"
                         readonly
+                        outlined
+                        dense
+                      ></v-text-field>
+                      <v-text-field
+                      success
+                        label="largeurBarre"
+                        v-model="largeurBarreBT"
+                        dense
+                        outlined
+                      ></v-text-field>
+
+                      <v-text-field
+                      success
+                        label="epaisseurBarre"
+                        v-model="epaisseurBarreBT"
+                        dense
+                        outlined
+                      ></v-text-field>
+
+                      <v-select
+                        :items="barre"
+                        label="barre"
+                        v-model="projet.EpbarreBT"
+                        dense
+                        outlined
+                      ></v-select>
+                      <v-text-field
+                      success
+                        label="Sbarre"
+                        v-model="SbarreBT"
+                        dense
+                        outlined
+                      ></v-text-field>
+                      <v-text-field
+                      success
+                        label="Jbarre"
+                        v-model="JbarreBT"
                         outlined
                         dense
                       ></v-text-field>
@@ -455,6 +494,7 @@ export default {
         SbarreBT: this.projet.SbarreBT,
         JbarreBT: this.projet.JbarreBT,
         collierBTSec: this.projet.collierBTSec,
+        EpfeuillePapierBT: this.projet.EpfeuillePapierBT,
       };
       axios.put('bobinesec/update/'+this.$route.params.id, projets).then(
         (response) => (this.id = response.data.id, console.log(projets))

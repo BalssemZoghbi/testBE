@@ -146,7 +146,7 @@
                       <v-text-field
                         label="nbrPapierMT"
                         dense
-                        v-model="projet.nbrPapierMT"
+                        v-model="nbrPapierMt"
                         outlined
                       ></v-text-field>
                     </div>
@@ -305,7 +305,6 @@
                         label="Lrg Cales"
                         dense
                         id="lgCales"
-                        readonly
                         v-model="projet.lgCales"
                         outlined
                       ></v-text-field>
@@ -346,14 +345,14 @@
                         <v-text-field
                         success
                           label="DintMT"
-                          v-model="DintBint"
+                          v-model="Dint"
                           dense
                           outlined
                         ></v-text-field>
 
                         <v-text-field
                           label="BintMT"
-                          v-model="DintBint"
+                          v-model="Bint"
                           dense
                           success
                           outlined
@@ -574,7 +573,7 @@ export default {
         .replace("[", "", this.projet.spire.length - 1)
         .replace("]", "")
         .split(",");
-      return Math.round(spires[0]*100)/100;
+      return Math.round(spires[0]);
     },
     j1() {
       return Math.round(this.projet.PrimaireIPhase / this.scu1*100)/100;
@@ -603,14 +602,14 @@ export default {
         );
       } else {
         return (
-          this.hSpire * this.spCouche +
+          this.hSpire *( this.spCouche +1)+
           (this.projet.etageMT - 1) *
             (this.projet.hbrin1MT + this.projet.hbrin2MT + this.projet.e1ax * 2)
         );
       }
     },
     hbobt() {
-      return this.hfs +( this.projet.collierBT * 2);
+      return Math.round(this.hfs +( this.projet.collierBT * 2));
     },
     collierBt2() {
       return Math.round((this.hbobt - this.hsfs) / 2);
@@ -633,8 +632,11 @@ export default {
           ((100 + parseFloat(this.projet.majPoid)) / 100))
       );
     },
-    DintBint() {
-      return this.projet.diamNominale + 2 * this.projet.CMBT;
+    Dint() {
+      return this.projet.DextBT + 2 * this.projet.DistanceBTMT;
+    },
+    Bint() {
+      return this.projet.BextBT + 2 * this.projet.DistanceBTMT;
     },
     Epx() {
       let epx = this.projet.EpxMT;
@@ -666,10 +668,10 @@ export default {
     },
     Dext() {
       // console.log(this.projet.DintMT,this.projet.EpxMT);
-      return this.projet.DintMT + 2 * this.Epx;
+      return this.Dint + 2 * this.Epx;
     },
     Bext() {
-      return this.DintBint + 2 * this.Epy;
+      return this.Bint + 2 * this.Epy;
     },
       NchA() {
       return Math.floor(
@@ -685,11 +687,10 @@ export default {
     SpchB() {
       return Math.ceil(this.N1cmax / this.projet.nbcoucheMT);
     },
-    // esel aaleha
         nbrPapierMt() {
       return Math.ceil(
         ((this.SpchB * this.projet.Vsp * 4) /
-          this.projet.rigiditePapierMT ) /
+         ( this.projet.rigiditePapierMT )-this.projet.e1r) /
           this.projet.EpfeuillePapier
       );
     },
