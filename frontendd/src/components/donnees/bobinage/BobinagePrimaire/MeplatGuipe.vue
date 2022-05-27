@@ -467,6 +467,10 @@ export default {
         majPoid: "",
         nbrPapier: "",
         EpfeuillePapier: "",
+        NchA: "",
+        NchB: "",
+        SpchB: "",
+        SpchA: "",
       },
       e1: 1,
     };
@@ -518,6 +522,10 @@ export default {
         J1D: this.projet.J1D,
         majPoid: this.projet.majPoid,
         EpfeuillePapier: this.projet.EpfeuillePapier,
+        NchA: this.projet.NchA,
+        NchB: this.projet.NchB,
+        SpchB: this.projet.SpchB,
+        SpchA: this.projet.SpchA,
       };
       axios
         .put("bobine/update/" + this.$route.params.id, projets)
@@ -596,7 +604,7 @@ export default {
       return (
         this.hSpire * this.spCouche +
         (this.projet.etageMT - 1) *
-          (this.projet.hbrin1MT + this.projet.hbrin2MT + this.projet.e1ax * 2)
+          (this.projet.hbrin1MT + this.projet.hbrin2MT +( this.projet.e1ax * 2))
       );
     },
     hfs() {
@@ -646,17 +654,22 @@ export default {
     Epx() {
       let epx = this.projet.EpxMT;
       if (this.projet.typeCanaux == "complet") {
+        console.log(parseFloat(this.projet.saillieMT) , parseFloat(this.projet.e1r),
+            parseFloat(this.projet.etageMT),
+            parseFloat(this.projet.nbcoucheMT) ,
+          parseFloat(this.projet.canauxMT), parseFloat(this.projet.lgCales) ,
+          parseFloat(this.nbrPapierMt), parseFloat(this.projet.canauxEp1Papier));
         epx =
-          (this.projet.saillieMT + this.projet.e1r) *
-            this.projet.etageMT *
-            this.projet.nbcoucheMT +
-          this.projet.canauxMT * this.projet.lgCales +
-          this.projet.nbrPapierMT * this.projet.canauxEp1Papier;
+          (parseFloat(this.projet.saillieMT) + parseFloat(this.projet.e1r)) *
+            parseFloat(this.projet.etageMT) *
+            parseFloat(this.projet.nbcoucheMT) +
+          parseFloat(this.projet.canauxMT) * parseFloat(this.projet.lgCales) +
+          parseFloat(this.nbrPapierMt) * parseFloat(this.projet.canauxEp1Papier);
       } else if (this.projet.typeCanaux == "lune") {
         epx =
-          (this.projet.saillieMT + this.projet.e1r) *
-          this.projet.etageMT *
-          this.projet.nbcoucheMT;
+          (parseFloat(this.projet.saillieMT) + parseFloat(this.projet.e1r)) *
+          parseFloat(this.projet.etageMT) *
+          parseFloat(this.projet.nbcoucheMT);
       }
 
       // console.log("hhhhh",this.projet.nbrPapier);
@@ -664,11 +677,11 @@ export default {
     },
     Epy() {
       return (
-         (this.projet.saillieMT + this.projet.e1r) *
-            this.projet.etageMT *
-            this.projet.nbcoucheMT +
-          this.projet.canauxMT * this.projet.lgCales +
-          this.projet.nbrPapierMT * this.projet.canauxEp1Papier
+         (parseFloat(this.projet.saillieMT) + parseFloat(this.projet.e1r)) *
+            parseFloat(this.projet.etageMT) *
+           parseFloat( this.projet.nbcoucheMT) +
+          parseFloat(this.projet.canauxMT) * parseFloat(this.projet.lgCales )+
+         parseFloat (this.nbrPapierMt) * parseFloat(this.projet.canauxEp1Papier)
       );
     },
     Dext() {

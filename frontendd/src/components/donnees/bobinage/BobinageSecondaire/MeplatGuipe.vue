@@ -23,7 +23,7 @@
                     </v-chip>
                     <v-chip style="margin-left: 2%"
                       >I2ph :
-                      {{ projet.secondaireUPhase }}
+                      {{ projet.secondaireIPhase }}
                     </v-chip>
                   </div>
 
@@ -545,29 +545,32 @@ export default {
     Epx() {
       let epx = this.projet.EpxBT;
       if (this.projet.typeCanauxBT == "complet") {
-        console.log(epx);
+        console.log(this.projet.saillieBT , this.projet.e2r,this.projet.etageBT ,
+            this.projet.nbcoucheBT ,
+          this.projet.canauxBT ,this.projet.lgCalesBT ,
+          this.projet.nbrPapierBT , this.projet.canauxEp1PapierBT);
         epx =
-          (this.projet.saillieBT + this.projet.e2r) *
-            this.projet.etageBT *
-            this.projet.nbcoucheBT +
-          this.projet.canauxBT * this.projet.lgCalesBT +
-          this.projet.nbrPapierBT * this.projet.canauxEp1PapierBT;
+          (parseFloat(this.projet.saillieBT) + parseFloat(this.projet.e2r)) *
+            parseFloat(this.projet.etageBT) *
+            parseFloat(this.projet.nbcoucheBT) +
+          parseFloat(this.projet.canauxBT) * parseFloat(this.projet.lgCalesBT) +
+         parseFloat( this.projet.nbrPapierBT) * parseFloat(this.projet.canauxEp1PapierBT);
       } else if (this.projet.typeCanauxBT == "lune") {
         epx =
-          (this.projet.saillieBT + this.projet.e2r) *
-          this.projet.etageBT *
-          this.projet.nbcoucheBT;
+          (parseFloat(this.projet.saillieBT )+ parseFloat(this.projet.e2r)) *
+          parseFloat(this.projet.etageBT) *
+          parseFloat(this.projet.nbcoucheBT);
       }
 
       // console.log("hhhhh",this.projet.nbrPapier);
       return epx;
     },
     Epy() {
-      return   (this.projet.saillieBT + this.projet.e2r) *
-            this.projet.etageBT *
-            this.projet.nbcoucheBT +
-          this.projet.canauxBT * this.projet.lgCalesBT +
-          this.projet.nbrPapierBT * this.projet.canauxEp1PapierBT;
+      return   (parseFloat(this.projet.saillieBT) + parseFloat(this.projet.e2r)) *
+            parseFloat(this.projet.etageBT) *
+           parseFloat( this.projet.nbcoucheBT )+
+          parseFloat(this.projet.canauxBT) * parseFloat(this.projet.lgCalesBT) +
+          parseFloat(this.projet.nbrPapierBT) * parseFloat(this.projet.canauxEp1PapierBT);
       
     },
     Dext() {

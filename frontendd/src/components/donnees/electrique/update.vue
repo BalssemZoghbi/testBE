@@ -705,15 +705,14 @@ export default {
         this.projet.couplagePrimaire
       );
       if (
-        this.projet.couplagePrimaire == "D" ||
-        this.projet.couplageSecondaire == "d"
+        this.projet.couplagePrimaire == "D" 
       ) {
         return this.DeuxChiffre(parseFloat(this.PrimaireIligne) / Math.sqrt(3));
       } else {
         return this.DeuxChiffre(
-          (parseInt(this.projet.puissance) * 1000) /
-            (parseInt(this.projet.u1n) * Math.sqrt(3))
-        );
+        (parseInt(this.projet.puissance) * 1000) /
+          (parseInt(this.projet.u1n) * Math.sqrt(3))
+      );
       }
     },
     PrimaireIligne() {
@@ -737,7 +736,6 @@ export default {
     },
     secondaireIPhase() {
       if (
-        this.projet.couplageSecondaire == "D" ||
         this.projet.couplageSecondaire == "d"
       ) {
         return this.DeuxChiffre(this.projet.secondaireIligne / Math.sqrt(3));

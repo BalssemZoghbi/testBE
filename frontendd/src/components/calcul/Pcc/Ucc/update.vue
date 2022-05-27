@@ -160,13 +160,12 @@ export default {
     const result = await axios.get("projets/" + this.$route.params.id);
     this.projet = result.data;
     this.spinner=false;
-    console.log(this.projet.Pccg);
   },
    computed:{
    pcc1(){
      let pcc1;
      if(this.projet.materiauMT=='cuivre'){
-     pcc1=2.286*Math.pow(parseFloat(this.projet.j1),2)*parseFloat(this.projet.poidMT)*(100+parseInt(this.projet.MajourationU))/100;
+     pcc1=2.286*Math.pow(parseFloat(this.projet.j1),2)*parseFloat(this.projet.poidMT)*(100+parseFloat(this.projet.MajourationU))/100;
      }else if(this.projet.materiauMT=='aluminium'){
       pcc1=12.18*Math.pow(parseFloat(this.projet.j1),2)*parseFloat(this.projet.poidMT)*(100+parseInt(this.projet.MajourationU))/100;
      }
@@ -190,20 +189,28 @@ hmoy()
    let hmoy;
 if(this.projet.conducteurBT=='feuillard'){
  hmoy=(parseFloat(this.projet.HCondMt)+parseFloat(this.projet.HfeuillardBT))/2;
-}else if(this.projet.conducteurMT=='meplat guipé'){
+}else if((this.projet.conducteurMT=='meplat guipé')&&(this.projet.conducteurBT=='meplat guipé')){
+
+ hmoy=(parseFloat(this.projet.HSFS)+parseFloat(this.projet.HSFSBT))/2;
+}
+else if(this.projet.conducteurMT=='meplat guipé'){
  hmoy=(parseFloat(this.projet.HSFS)+parseFloat(this.projet.HfeuillardBT))/2;
-}else{
+}
+else{
   hmoy=(parseFloat(this.projet.HCondMt)+parseFloat(this.projet.HSFSBT))/2;
 }
     return hmoy;
 },
   uccr(){
+    console.log(parseFloat(this.projet.DintBT),parseFloat(this.projet.BintBT),parseFloat(this.projet.DextBT),parseFloat(this.projet.BextBT));
 let coBt=(parseFloat(this.projet.DintBT)+parseFloat(this.projet.BintBT)+parseFloat(this.projet.DextBT)+parseFloat(this.projet.BextBT))*Math.PI/4;
 let coMt=(parseFloat(this.projet.DintMT)+parseFloat(this.projet.BintMT)+parseFloat(this.projet.DextMT)+parseFloat(this.projet.BextMT))*Math.PI/4;
 let comoy=(coBt+coMt)/2;
+console.log(comoy);
 let delta=(parseFloat(this.projet.EpxBT)+parseFloat(this.projet.EpxMT))/3+this.projet.DistanceBTMT;
+console.log(delta);
 let uccr;
-
+console.log(comoy,"delta",delta,"n1c",this.projet.N1c,"i1ph",parseFloat(this.projet.PrimaireIPhase),"u1ph",parseFloat(this.projet.PrimaireUPhase),"hmoy",this.hmoy);
 uccr=(3.81*(comoy*delta*Math.pow(parseFloat(this.projet.N1c),2)*parseFloat(this.projet.PrimaireIPhase))/(parseFloat(this.projet.PrimaireUPhase)*this.hmoy))*Math.pow(10,-5);
 
 return Math.round(uccr * 100) / 100;
