@@ -309,6 +309,7 @@ return $barre;
             $Designation=0;
             $Isole=0;
         }
+
         $epFeuillard=$this->epFeuillard($request->epFeuil1,$request->epFeuil2);
             $scu1=$this->Scu1($projet->conducteurMT,$request->hbrin1MT, $request->hbrin2MT,$request->nbBrin1MT, $request->nbBrin2MT, $request->etageMT, $request->saillieMT,$Designation,$request->Hfeuillard,$epFeuillard,$request->brinParallele);
             $j1=$this->j1($projet->PrimaireIPhase, $scu1);
@@ -320,15 +321,21 @@ return $barre;
             $hbobt=$this->hbobt($hfs,$request->collierBT);
             $collierBt2=$this->collierBt2($hbobt,$hsfs);
             $DintBint=$this->DintBint($projet->diamNominale,$projet->CMBT);
-            $epx=$this->Epx($request->typeCanaux,$request->saillieMT,$request->e1r,$request->etageMT,$request->nbcoucheMT,$request->canauxMT,$request->lgCales,$request->nbrPapierMT,$request->ep1PapierMT);
-            $epy=$this->Epy($request->saillieMT,$request->e1r,$request->etageMT,$request->nbcoucheMT,$request->canauxBt,$request->lgCales,$request->nbrPapierMT,$request->ep1PapierMT);
-            $dext=$this->Dext($DintBint,$epx);
-            $bext=$this->Bext($DintBint,$epy);
-            $poid=$this->Poid($projet->materiauMT,$projet->N1c,$scu1,$DintBint,$epx,$request->majPoid);
             $EpaisseurPapierCanaux=$request->canauxNbrPapier*$request->EpfeuillePapier;
 
 
             $spchb=$this->spchb($projet->conducteurMT,$N1cmax,$request->nbcoucheMT);
+            $nbrPapierMTGuipe=Ceil((($spchb*$projet->Vsp*4)/( $request->rigiditePapierMT)- $request->e1r) /$request->EpfeuillePapier);
+            $epx=$this->Epx($request->typeCanaux,$request->saillieMT,$request->e1r,$request->etageMT,$request->nbcoucheMT,$request->canauxMT,$request->lgCales,$nbrPapierMTGuipe,$request->canauxEp1Papier);
+            $dintMt=$this->dintMt($projet->DextBT,$request->DistanceBTMT);
+            $bintMt=$this->bintMt($projet->BextBT,$request->DistanceBTMT,$projet->epaisseurBarreBT,$projet->conducteurBT);
+
+            $dext=$this->Dext($dintMt,$epx);
+            $poid=$this->Poid($projet->materiauMT,$projet->N1c,$scu1,$dintMt,$epx,$request->majPoid);
+
+            $epy=$this->Epy($request->saillieMT,$request->e1r,$request->etageMT,$request->nbcoucheMT,$request->canauxMT,$request->lgCales,$nbrPapierMTGuipe,$request->canauxEp1Papier);
+            $bext=$this->Bext($bintMt,$epy);
+
             $ncha=$this->ncha($request->nbcoucheMT,$spchb,$N1cmax);
             $nchb=$this->nchb($request->nbcoucheMT,$ncha);
             $spcha=$this->spcha($spchb);
@@ -338,9 +345,7 @@ return $barre;
 
             $epaisseurPapier=$this->epaisseurPapier($request->EpfeuillePapier, $nbrPapierMT);
             $EpxMt=$this->EpxMt($request->typeCanaux,$request->nbcoucheMT,$Isole,$epaisseurPapier,$request->canauxMT,$request->lgCales,$EpaisseurPapierCanaux);
-            $dintMt=$this->dintMt($projet->DextBT,$request->DistanceBTMT);
-            $bintMt=$this->bintMt($projet->BextBT,$request->DistanceBTMT,$projet->epaisseurBarreBT,$projet->conducteurBT);
-   if($request->typeCanaux=="complet"){
+              if($request->typeCanaux=="complet"){
                 $epyMtLune=$EpxMt;
             }else if($request->typeCanaux=="lune"){
                 $epyMtLune=$this->epyMtLune($request->nbcoucheMT,$Isole,$epaisseurPapier,$request->canauxMT,$request->lgCales);
@@ -348,7 +353,6 @@ return $barre;
             $dextMt=$this->dextMt($dintMt,$EpxMt);
             $BextMt=$this->BextMt($bintMt,$epyMtLune);
             $poidEmaille=$this->poidEmaille($projet->materiauMT,$dextMt,$dintMt,$dintMt,$request->majPoid,$dextMt,$N1cmax,$scu1);
-    $nbrPapierMTGuipe=Ceil((($spchb*$projet->Vsp*4)/( $request->rigiditePapierMT)- $request->e1r) /$request->EpfeuillePapier);
             //FEUILLARD
 $barre=$this->calculBarre($request->Epbarre);
 $HbobineBt= $this->Hbobine($request->Hfeuillard,$request->collierBT);
@@ -398,8 +402,8 @@ $PoidFeui=$this->PoidFeui($projet->materiauMT,$dextfeui,$DintBint,$DintBint,$req
                         'collierBT'=>$request->collierBT ,
                         'collierBT2'=> $collierBt2 ,
                         'CMBT'=>$projet->CMBT ,
-                        'DintMT'=>$DintBint ,
-                        'BintMT'=>$DintBint ,
+                        'DintMT'=>$dintMt ,
+                        'BintMT'=>$bintMt ,
                         'EpxMT'=>$epx ,
                         'EpyMT'=>$epy ,
                         'DextMT'=>$dext ,
