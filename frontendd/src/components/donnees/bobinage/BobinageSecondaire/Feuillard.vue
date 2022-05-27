@@ -476,7 +476,7 @@ export default {
       return parseFloat(this.projet.epFeuilPapBT)*parseFloat(this.projet.nbrPapierBT);
     },
     EpPapierBT(){
-      return this.projet.EpfeuillePapierBT*parseFloat(this.projet.nbrPapierBT);
+      return parseFloat(this.projet.epFeuilPapBT)*parseFloat(this.projet.nbrPapierBT);
     },
     scu2(){
       return this.projet.HfeuillardBT*this.epFeuillardBT;
