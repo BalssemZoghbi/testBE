@@ -49,7 +49,7 @@ class VoltspireController extends Controller
     public function N1c($U1ph,$Vsp){
 
         $N1c=$U1ph/$Vsp;
-        return $N1c;
+        return Ceil($N1c);
     }
     public function Vsp($U2ph,$Snette,$B,$frequence,$u2ligne,$couplage){
         $N2c = $this->N2c($U2ph,$Snette,$B,$frequence,$u2ligne,$couplage);

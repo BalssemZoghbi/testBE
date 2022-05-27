@@ -223,29 +223,72 @@
     </v-stepper-step>
 
     <v-stepper-content step="2">
-                 <!-- <v-card class="mb-6"  > -->
                   <div class="title">Circuit Magnetique</div>
                    <Loading v-if="spinner" style="margin-right: -52%;"/>
                   <div class="content">
           
- <v-row
+ <v-row>
+            <v-card
+          
       
-              >
-        <!-- <v-col md="4">
-        </v-col> -->
-        <!-- <v-col
-          cols="6"
-        md="4"
-        > -->
+          outlined
+          tile
+        >
+          <template >
+              <v-card-title class="subheading font-weight-bold" >
+               Largeur
+              </v-card-title>
+
+              <v-divider></v-divider>
+
+              <v-list dense>
+                <v-list-item v-for="item in largeur"  :key="item" style="width: 176%!important;">
+                  <v-list-item-content vertical>{{item}}</v-list-item-content>
+                  <v-list-item-content class="align-end"  v-model="projet.spire">
+                  
+                  </v-list-item-content>
+                </v-list-item>
+
+                
+              </v-list>
+       
+      </template>
+        </v-card>
+
+        
+         <v-card
+          
+      
+          outlined
+          tile
+        >
+          <template >
+              <v-card-title class="subheading font-weight-bold" >
+               Epaisseur
+              </v-card-title>
+
+              <v-divider></v-divider>
+
+              <v-list dense>
+                <v-list-item v-for="item in epaisseur"  :key="item" style="width: 176%!important;">
+                  <v-list-item-content vertical>{{item}}</v-list-item-content>
+                  <v-list-item-content class="align-end"  v-model="projet.spire">
+                  
+                  </v-list-item-content>
+                </v-list-item>
+
+                
+              </v-list>
+       
+      </template>
+        </v-card>
+   
          <v-card
           outlined
           tile
         >
           <template>
-        <!-- <v-row>
-          <v-col
-          
-          > -->
+       
             <v-card>
               <v-card-title class="subheading font-weight-bold">
               LCM
@@ -263,24 +306,16 @@
 
               </v-list>
             </v-card>
-          <!-- </v-col>
-        </v-row> -->
+      
       </template>
          </v-card>
-      <!-- </v-col> -->
-      <!-- <v-col
-        cols="4"
-        md="4"
-      > -->
+
            <v-card
           outlined
           tile
         >
           <template>
-        <!-- <v-row>
-          <v-col
-          
-          > -->
+       
             <v-card>
               <v-card-title class="subheading font-weight-bold">
               surfaceCM
@@ -298,8 +333,7 @@
 
               </v-list>
             </v-card>
-          <!-- </v-col>
-        </v-row> -->
+      
       </template>
          </v-card>
         <v-card
@@ -309,11 +343,7 @@
           tile
         >
           <template >
-        <!-- <v-row>
-          <v-col
-         
-          > -->
-            <!-- <v-card> -->
+   
               <v-card-title class="subheading font-weight-bold" >
                masseFerCM
               </v-card-title>
@@ -330,18 +360,13 @@
 
                 
               </v-list>
-            <!-- </v-card> -->
-          <!-- </v-col>
-        </v-row> -->
+       
       </template>
         </v-card>
-        <!-- </v-col> -->
+
       </v-row>
                      
                   </div>
-                <!-- </div> -->
-              <!-- </div> -->
-            <!-- </v-card> -->
            <v-btn
         color="primary mb-14" style="margin-top:5%"
         @click="e1 = 1"
@@ -476,6 +501,57 @@ export default {
     I0(){
       return ((2 * this.pFer * 100) / (this.projet.secondaireIPhase * this.projet.secondaireUPhase))
     },
+      largeur() {
+      let diam = parseInt(Math.floor(this.projet.diamNominale / 10));
+      let largeur = [];
+      if (diam % 2 == 0) {
+        diam -= 1;
+      }
+      diam = diam * 10;
+      for (let i = 0; i < parseInt(this.projet.nbrGradin); i++) {
+        largeur[i] = diam;
+        diam -= this.projet.pas;
+        if (largeur[i] == this.projet.largeurMin) {
+          break;
+        }
+      }
+      return largeur;
+    },
+    epaisseur() {
+      let epaisseur = [];
+      let precedent = 0;
+      for (let i = 0; i < this.largeur.length; i++) {
+        epaisseur[i] = (
+          Math.sqrt(
+            Math.pow(this.projet.diamNominale, 2) - Math.pow(this.largeur[i], 2)
+          )
+        );
+        epaisseur[i] -= precedent;
+        precedent += epaisseur[i];
+      }
+      let j = 0;
+      let coeff = [0.5, 0.3, 0.25, 0.2];
+      let prec = 0;
+      for (let i = 0; i < this.largeur.length - this.projet.demiGradin; i++) {
+        prec += epaisseur[i];
+      }
+      for (
+        let i = this.largeur.length - this.projet.demiGradin;
+        i < this.largeur.length;
+        i++
+      ) {
+        epaisseur[i] = (
+          (Math.sqrt(
+            Math.pow(this.projet.diamNominale, 2) - Math.pow(this.largeur[i], 2)
+          ) -
+            prec) *
+            coeff[j]
+        );
+        j++;
+        prec += epaisseur[i];
+      }
+      return epaisseur;
+    },
 pFergarantie(){
   return this.projet.Pog;
 },
@@ -489,6 +565,7 @@ pFergarantie(){
 },
   ex(){
 let ex;
+
 ex=parseFloat(this.projet.DextMT)+parseFloat(this.projet.E1);
 return ex;
   },
@@ -500,14 +577,13 @@ for(let i=0;i<largeur.length;i++){
  lCM[i]=(2*(2*this.ex+parseFloat(largeur[i]))+(3*(this.hc+parseFloat(largeur[0])-parseFloat(largeur[i]))))/10;
 }
 return lCM;  
-  // return this.projet.LCM.replace("[","",this.projet.LCM.length-1).replace("]","").split(",");
 },
 
 surface(){
-  // return this.projet.surfaceCM.replace("[","",this.projet.surfaceCM.length-1).replace("]","").split(",");
+   
  let largeur=this.projet.largeur.replace("[","",this.projet.largeur.length-1).replace("]","").split(",");
  let epaisseur=this.projet.epaisseur.replace("[","",this.projet.epaisseur.length-1).replace("]","").split(",");
-  
+
 let surfaceCM = [];
 for(let i=0;i<largeur.length;i++){
  surfaceCM[i]=parseFloat(largeur[i])*parseFloat(epaisseur[i]);
@@ -523,7 +599,12 @@ for(let i=0;i<this.lcm.length;i++){
 return masse;
   // return this.projet.masseFerCM.replace("[","",this.projet.masseFerCM.length-1).replace("]","").split(",");
 },
-
+// largeur()
+// {let l= this.projet.largeur.replace("[",'', this.projet.largeur.length).replace("]",'', this.projet.largeur.length).split(",").join("");
+// console.log(l);
+//   return l;
+// //  this.projet.largeur.replace("[","",this.projet.largeur.length-1).replace("]","").split(",");
+// },
   hc(){
     let hc=this.projet.Hc;
     hc=parseFloat(this.projet.HbobineBtSec)+2*(parseFloat(this.projet.Ebc));
@@ -946,11 +1027,23 @@ form .button input:hover {
   .user-details::-webkit-scrollbar {
     width: 5px;
   }
+  .v-btn:not(.v-btn--round).v-size--default {
+  height: 36px;
+  min-width: 64px;
+  padding: 16px;
+  margin: 3px;
+}
 }
 @media (max-width: 459px) {
   .container .content .category {
     flex-direction: column;
   }
+  .v-btn:not(.v-btn--round).v-size--default {
+  height: 36px;
+  min-width: 64px;
+  padding: 16px;
+  margin: 3px;
+}
 }
 .v-btn:not(.v-btn--round).v-size--default {
   height: 36px;

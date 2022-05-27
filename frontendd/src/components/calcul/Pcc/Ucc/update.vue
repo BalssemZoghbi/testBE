@@ -202,13 +202,11 @@ else{
     return hmoy;
 },
   uccr(){
-    console.log(parseFloat(this.projet.DintBT),parseFloat(this.projet.BintBT),parseFloat(this.projet.DextBT),parseFloat(this.projet.BextBT));
 let coBt=(parseFloat(this.projet.DintBT)+parseFloat(this.projet.BintBT)+parseFloat(this.projet.DextBT)+parseFloat(this.projet.BextBT))*Math.PI/4;
 let coMt=(parseFloat(this.projet.DintMT)+parseFloat(this.projet.BintMT)+parseFloat(this.projet.DextMT)+parseFloat(this.projet.BextMT))*Math.PI/4;
 let comoy=(coBt+coMt)/2;
 console.log(comoy);
 let delta=(parseFloat(this.projet.EpxBT)+parseFloat(this.projet.EpxMT))/3+this.projet.DistanceBTMT;
-console.log(delta);
 let uccr;
 console.log(comoy,"delta",delta,"n1c",this.projet.N1c,"i1ph",parseFloat(this.projet.PrimaireIPhase),"u1ph",parseFloat(this.projet.PrimaireUPhase),"hmoy",this.hmoy);
 uccr=(3.81*(comoy*delta*Math.pow(parseFloat(this.projet.N1c),2)*parseFloat(this.projet.PrimaireIPhase))/(parseFloat(this.projet.PrimaireUPhase)*this.hmoy))*Math.pow(10,-5);

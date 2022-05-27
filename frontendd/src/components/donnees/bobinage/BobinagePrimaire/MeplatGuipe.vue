@@ -680,7 +680,7 @@ export default {
          (parseFloat(this.projet.saillieMT) + parseFloat(this.projet.e1r)) *
             parseFloat(this.projet.etageMT) *
            parseFloat( this.projet.nbcoucheMT) +
-          parseFloat(this.projet.canauxMT) * parseFloat(this.projet.lgCales )+
+         ( parseFloat(this.projet.canauxMT) * parseFloat(this.projet.lgCales ))+
          parseFloat (this.nbrPapierMt) * parseFloat(this.projet.canauxEp1Papier)
       );
     },
