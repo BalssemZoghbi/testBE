@@ -187,6 +187,12 @@
             v-model="hauteurcuve"
             outlined
           ></v-text-field>
+               <v-text-field
+       success
+            label="I0"
+            v-model="I0"
+            outlined
+          ></v-text-field>
           </div>
           <div class="field11">
                      <v-chip
@@ -394,6 +400,7 @@ export default {
         coeffPoid: "",
         Bmax: "",
         tole: "",
+        I0: "",
         
       },
       e1: 1,
@@ -429,6 +436,7 @@ export default {
         coeffPoid: this.projet.coeffPoid,
         Bmax: this.projet.Bmax,
         tole: this.projet.tole,
+        I0: this.projet.I0,
   
       };
       axios
@@ -465,6 +473,9 @@ export default {
     this.projet = result.data;
   },
   computed: {
+    I0(){
+      return ((2 * this.pFer * 100) / (this.projet.secondaireIPhase * this.projet.secondaireUPhase))
+    },
 pFergarantie(){
   return this.projet.Pog;
 },

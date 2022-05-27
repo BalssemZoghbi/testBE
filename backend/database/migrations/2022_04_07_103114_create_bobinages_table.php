@@ -30,7 +30,7 @@ class CreateBobinagesTable extends Migration
             $table->float('e1ax')->nullable();
             $table->float('e1r')->nullable();
             $table->integer('rigiditePapierMT')->nullable();
-            $table->float('ep1PapierMT')->nullable(); /******** */
+            $table->double('ep1PapierMT', 12, 7)->nullable(); /******** */
             $table->integer('nbrPapierMT')->nullable();
             $table->enum('typeCanaux',['complet','lune'])->nullable();
             $table->integer('canauxMT')->nullable(); /******** */
@@ -75,7 +75,7 @@ class CreateBobinagesTable extends Migration
             $table->float('epFeuil1')->nullable();
             $table->float('epFeuil2')->nullable();
             $table->float('epFeuillard')->nullable();
-            $table->float('ep2Papier')->nullable();
+            $table->double('ep2Papier', 12, 7)->nullable();
             $table->integer('nbrPap2')->nullable();
             $table->float('ePap')->nullable();
             $table->float('epFeuilPap')->nullable();

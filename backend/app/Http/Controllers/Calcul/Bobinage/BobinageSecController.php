@@ -442,7 +442,7 @@ if($request->typeCanauxBT=="complet"){
                     'ep1PapierBT'=>$request->ep1PapierBT ,
                     'nbrPapierBT'=>$request->nbrPapierBT ,
                     'typeCanauxBT'=>$request->typeCanauxBT ,
-                    'canauxBT'=>$request->canauxBt ,
+                    'canauxBT'=>$request->canauxBT ,
                     'lgCalesBT'=>$request->lgCalesBT ,
                     'collierBTSec'=>$request->collierBTSec ,
                     'collierBT2Sec'=> $collierBt2 ,
@@ -496,6 +496,7 @@ if($request->typeCanauxBT=="complet"){
                     'HbobineBtSec'=>$projet->HbobineBt ,
                     'EpCylindreBT'=>$request->EpCylindreBT ,
                     'rigiditePapierBT'=>$request->rigiditePapierBT ,
+                    'canauxNbrPapierBT'=>$request->canauxNbrPapierBT ,
                      'N2cmax'=>$N1cmax,
                     'scu2d'=>$su1d ,
                     'J2D'=>$request->J2D ,
@@ -514,7 +515,7 @@ if($request->typeCanauxBT=="complet"){
                     'HCollierBT'=>$Hcollier ,
                     'EpfeuillePapierBT'=>$request->EpfeuillePapierBT ,
                     'EpaiseurPapierBT'=>$epaisseurPapier ,
-                    'EpaisseurPapierCanauxBT'=>$request->EpaisseurPapierCanauxBT
+                    'EpaisseurPapierCanauxBT'=>$request->canauxNbrPapierBT*$request->EpfeuillePapierBT
                     ]);
             }
             return response()->json($Bobinage);

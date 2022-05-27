@@ -244,14 +244,12 @@
                         <v-text-field
                           label="CanauxBT"
                           id="canauxBT"
-                          readonly
                           v-model="projet.canauxBT"
                           outlined
                         ></v-text-field>
                         <v-text-field
                           label="Lrg Cales"
                           id="lgCales"
-                          readonly
                           v-model="projet.lgCalesBT"
                           outlined
                         ></v-text-field>
@@ -446,6 +444,7 @@ export default {
         HCollierBT: this.projet.HCollier,
         EpfeuillePapierBT: this.projet.EpfeuillePapierBT,
         EpaiseurPapierBT: this.projet.EpaiseurPapierBT,
+        lgCalesBT: this.projet.lgCalesBT,
         EpaisseurPapierCanauxBT: this.projet.EpaisseurPapierCanauxBT,
         HbobineBtSec: this.projet.HbobineBtSec,
         canauxNbrPapierBT: this.projet.canauxNbrPapierBT,

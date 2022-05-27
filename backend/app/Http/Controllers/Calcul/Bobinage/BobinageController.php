@@ -222,10 +222,12 @@ return $barre;
     public function Hcollier($hBobine,$HcondMt){
         return ($hBobine-$HcondMt)/2;
     }
-    public function NbrePapier($conducteur,$rigidite,$spchb,$vsp,$filIsole,$filNue,$epaisseurPapier){
+    public function NbrePapier($conducteur,$rigidite,$spchb,$vsp,$filIsole,$filNue,$epaisseurPapier,$e1r){
         if($conducteur=="Rond emaille"){
 
             return Ceil(((($spchb*$vsp*4)/$rigidite)-($filIsole-$filNue))/$epaisseurPapier);
+         } else if($conducteur=="meplat guipé"){
+            return Ceil(((($spchb*$vsp*4)/$rigidite)-($e1r))/$epaisseurPapier);
         }else{
             return 0;
         }
@@ -331,7 +333,7 @@ return $barre;
             $spcha=$this->spcha($spchb);
             $HcondMt=$this->hcondMt($Isole,$spchb,$request->brinParallele);
             $Hcollier=$this->Hcollier($projet->HbobineBtSec,$HcondMt);
-            $nbrPapierMT=$this->NbrePapier($projet->conducteurMT,$request->rigiditePapierMT,$spchb,$projet->Vsp,$Isole,$Designation,$request->EpfeuillePapier);
+            $nbrPapierMT=$this->NbrePapier($projet->conducteurMT,$request->rigiditePapierMT,$spchb,$projet->Vsp,$Isole,$Designation,$request->EpfeuillePapier,$request->e1r);
 
             $epaisseurPapier=$this->epaisseurPapier($request->EpfeuillePapier, $nbrPapierMT);
             $EpxMt=$this->EpxMt($request->typeCanaux,$request->nbcoucheMT,$Isole,$epaisseurPapier,$request->canauxMT,$request->lgCales,$EpaisseurPapierCanaux);
@@ -363,16 +365,19 @@ $PoidFeui=$this->PoidFeui($projet->materiauMT,$dextfeui,$DintBint,$DintBint,$req
           if($projet->conducteurMT=='meplat guipé'){
                 $Bobinage->update([
                         'materiau'=> $projet->materiauMT,
-
+                        'DistanceBTMT'=>$request->DistanceBTMT ,
                         'conducteur'=> $projet->conducteurMT,
                         'etageMT'=> $request->etageMT ,
                         'saillieMT'=> $request->saillieMT ,
                         'hbrin1MT'=> $request->hbrin1MT ,
                         'hbrin2MT'=> $request->hbrin2MT ,
+                        'EpfeuillePapier'=>$request->EpfeuillePapier ,
                         'nbBrin1MT'=>$request->nbBrin1MT ,
                         'nbBrin2MT'=>$request->nbBrin2MT ,
                         'scu1'=>$scu1 ,
                         'j1'=>$j1 ,
+                        'J1D'=>$request->J1D ,
+                        'scu1d'=>$projet->PrimaireIPhase / $request->J1D ,
                         'nbcoucheMT'=>$request->nbcoucheMT ,
                         'spCoucheMT'=>$spCouche ,
                         'e1ax'=>$request->e1ax ,
@@ -383,6 +388,7 @@ $PoidFeui=$this->PoidFeui($projet->materiauMT,$dextfeui,$DintBint,$DintBint,$req
                         'typeCanaux'=>$request->typeCanaux,
                         'canauxMT'=>$request->canauxMT ,
                         'lgCales'=>$request->lgCales ,
+                        'EpCylindre'=>$request->EpCylindre ,
                         'canauxEp1Papier'=>$request->canauxEp1Papier,
                         'canauxNbrPapier'=>$request->canauxNbrPapier ,
                         'Hspire'=>$hSpire ,

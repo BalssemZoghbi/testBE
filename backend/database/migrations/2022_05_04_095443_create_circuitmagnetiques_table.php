@@ -38,6 +38,7 @@ class CreateCircuitmagnetiquesTable extends Migration
             $table->json('surfaceCM')->nullable();
             $table->integer('Hauteurcuve')->nullable();
             $table->float('coeffPoid')->nullable();
+            $table->float('I0')->nullable();
             $table->timestamps();
         });
     }
