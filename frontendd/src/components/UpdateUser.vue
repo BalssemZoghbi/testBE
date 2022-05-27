@@ -2,7 +2,7 @@
   <v-row justify="center">
     <v-dialog v-model="dialog" max-width="50%" max-height="50%" style="margin-top:30%!important;" >
       <template v-slot:activator="{ on, attrs }">
-        <v-btn color="blue" dark v-bind="attrs" v-on="on"> Mise à jour </v-btn>
+        <v-btn dark v-bind="attrs" color="green darken-1" text v-on="on" style=" background-color:white;margin-left: 20%!important;"  > Mise à jour </v-btn>
       </template>
       <v-card >
         <v-card-title>
