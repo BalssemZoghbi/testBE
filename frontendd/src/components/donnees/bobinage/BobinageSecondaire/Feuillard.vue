@@ -237,7 +237,7 @@
 
                       <v-text-field
                         label="EpfeuillePapier"
-                        v-model="projet.EpfeuillePapierBT"
+                        v-model="projet.epFeuilPapBT"
                         outlined
                       ></v-text-field>
                       <v-text-field
@@ -431,6 +431,7 @@ export default {
         SbarreBT: this.projet.SbarreBT,
         JbarreBT: this.projet.JbarreBT,
         collierBTSec: this.projet.collierBTSec,
+        nbrPap1BT: this.projet.nbrPap1BT,
         EpfeuillePapierBT: this.projet.EpfeuillePapierBT,
       };
       axios.put('bobinesec/update/'+this.$route.params.id, projets).then(

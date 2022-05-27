@@ -25,8 +25,8 @@
                       {{ projet.conducteurMT }}
                     </v-chip>
                     <v-chip style="margin-left: 1%"
-                      >N1c :
-                      {{ projet.N1c }}
+                      >N2c :
+                      {{ projet.N2c }}
                     </v-chip>
                     <v-chip style="margin-left: 1%"
                       >I1ph :
@@ -73,12 +73,7 @@
                         dense
                         outlined
                       ></v-text-field>
-                      <!-- <v-text-field
-                        label="epFeuilPap"
-                        v-model="projet.epFeuilPap"
-                        dense
-                        outlined
-                      ></v-text-field> -->
+                     
                       <v-text-field
                         label="scu1"
                         v-model="scu1"
@@ -107,7 +102,7 @@
                         label="nbrPap1"
                         dense
                         id="nbrPap1"
-                        readonly
+                        
                         v-model="projet.nbrPap1"
                         outlined
                       ></v-text-field>
@@ -216,21 +211,27 @@
                       <v-text-field
                         label="CanauxMT"
                         id="canauxMT"
-                        readonly
+                        
                         v-model="projet.canauxMT"
                         outlined
                       ></v-text-field>
                       <v-text-field
                         label="Lrg Cales"
                         id="lgCales"
-                        readonly
+                        
                         v-model="projet.lgCales"
                         outlined
                       ></v-text-field>
 
-                      <v-text-field
+                      <!-- <v-text-field
                         label="EpfeuillePapier"
                         v-model="projet.EpfeuillePapier"
+                        outlined
+                      ></v-text-field> -->
+                       <v-text-field
+                        label="epFeuilPap"
+                        v-model="projet.epFeuilPap"
+                        
                         outlined
                       ></v-text-field>
                       <v-text-field
@@ -472,6 +473,7 @@ export default {
         epFeuillard: this.projet.epFeuillard,
         ep2Papier: this.projet.ep2Papier,
         nbrPap2: this.projet.nbrPap2,
+        nbrPap1: this.projet.nbrPap1,
         ePap: this.projet.ePap,
         epFeuilPap: this.projet.epFeuilPap,
         EpPapier: this.projet.EpPapier,
@@ -526,7 +528,7 @@ export default {
   },
   computed: {
     HbobineBt(){
-      return this.projet.Hfeuillard+2*this.projet.collierBT;
+      return parseFloat(this.projet.Hfeuillard)+2*parseFloat(this.projet.collierBT);
     },
     epFeuillard(){
       return parseFloat(this.projet.epFeuil1)+parseFloat(this.projet.epFeuil2);
@@ -537,7 +539,7 @@ export default {
     // },
     EpPapier(){
       console.log(this.projet.epFeuilPap,this.projet.nbrPapierMT);
-      return  this.projet.epFeuilPap*parseFloat(this.projet.nbrPapierMT);
+      return  parseFloat(this.projet.epFeuilPap)*parseFloat(this.projet.nbrPapierMT);
     },
 
     scu1(){
@@ -564,9 +566,9 @@ export default {
     },
     EpxMT(){
          if(this.projet.typeCanaux=='complet'){
-        return ((this.projet.N1c*this.epFeuillard)+(this.projet.N1c-1)*this.ePap+(this.projet.canauxMT*this.projet.lgCales));
+        return ((parseFloat(this.projet.N2c)*this.epFeuillard)+(parseFloat(this.projet.N2c)-1)*this.ePap+(parseFloat(this.projet.canauxMT)*parseFloat(this.projet.lgCales)));
         }else if(this.projet.typeCanaux=='lune'){
-            return (this.projet.N1c*this.epFeuillard+(this.projet.N1c-1)*(this.ePap));
+            return (parseFloat(this.projet.N2c)*this.epFeuillard+(parseFloat(this.projet.N2c)-1)*(this.ePap));
         }else {
             return 0;
         }
@@ -579,7 +581,7 @@ export default {
             }else if(this.projet.materiauMT=='aluminium'){
                 coefPoid=2.7;
             }
-            return Math.pow(10, -6)*(coefPoid*parseFloat(this.projet.N1c)*parseFloat(this.projet.scu1)*Math.PI*3)*((parseFloat(this.DintMT)+parseFloat(this.DintMT)+parseFloat(this.DextMT)+parseFloat(this.BextMT))/4)*(100+parseFloat(this.projet.majPoid))/100;
+            return Math.pow(10, -6)*(coefPoid*parseFloat(this.projet.N2c)*parseFloat(this.projet.scu1)*Math.PI*3)*((parseFloat(this.DintMT)+parseFloat(this.DintMT)+parseFloat(this.DextMT)+parseFloat(this.BextMT))/4)*(100+parseFloat(this.projet.majPoid))/100;
     },
     Jbarre(){
       return this.projet.secondaireIPhase/this.Sbarre;
