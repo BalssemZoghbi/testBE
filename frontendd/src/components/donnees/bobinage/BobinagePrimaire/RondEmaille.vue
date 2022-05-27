@@ -525,7 +525,7 @@ export default {
       return this.projet.HbobineBtSec;
     },
     HCollier() {
-      return Math.round((this.projet.HbobineBtSec - this.HCondMt) / 2);
+      return Math.round((this.HbobineBt - this.HCondMt) / 2);
     },
     HCondMt() {
       return (

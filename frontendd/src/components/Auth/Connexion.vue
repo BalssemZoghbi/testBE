@@ -337,8 +337,8 @@ this.error='une erreur s\'est produite';
   mounted() {
     let user = localStorage.getItem("user");
     if (user) {
-      this.$router.push("/");
-      // window.history.back()
+      // this.$router.push("/");
+      window.history.back();
     }
   },
 };
