@@ -96,10 +96,10 @@ class VoltspireController extends Controller
             $spires[$i]=$n1-abs((($i-$priseSoustractive)*$n1*$echelonSous)/100);
         }
         for($i=$priseSoustractive;$i<$priseAdditive+$priseSoustractive+1;$i++){
-            $spires[$i]=$n1+abs((($i-$priseSoustractive)*$n1*$echelonAdd)/100);
+            $spires[$i]=round($n1+abs((($i-$priseSoustractive)*$n1*$echelonAdd)/100));
         }
         for($i=0;$i<$priseAdditive+$priseSoustractive+1;$i++){
-            $spires1[$i]=$spires[$priseAdditive+$priseSoustractive-$i];
+            $spires1[$i]=round($spires[$priseAdditive+$priseSoustractive-$i]);
         }
         // dd($spires1);
         return $spires1;
