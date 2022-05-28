@@ -1,6 +1,5 @@
 <template>
   <div>
-    
     <Loading v-if="spinner" />
     <div class="body panel left-panel">
       <v-data-table
@@ -15,19 +14,25 @@
           <v-toolbar flat>
             <v-menu transition="slide-x-transition" offset-x>
               <template v-slot:activator="{ on, attrs }">
-                <v-btn v-bind="attrs" v-on="on" color="primary"> Creer </v-btn>
+                <v-btn v-bind="attrs" v-on="on" color="primary"> Créer </v-btn>
               </template>
 
               <v-list>
                 <v-list-item-group v-model="model" mandatory color="blue">
                   <v-list-item @click="onClick" color="blue">
                     <v-list-item-title @click="create()"
-                      >Document Vierge</v-list-item-title
+                      >A Partir D'un Projet Vierge</v-list-item-title
                     >
                   </v-list-item>
 
                   <v-list-item>
-                    <v-dialog v-model="dialogModele" scrollable max-width="63%"  max-heigth="30%" style="heigth:30%!important">
+                    <v-dialog
+                      v-model="dialogModele"
+                      scrollable
+                      max-width="63%"
+                      max-heigth="30%"
+                      style="heigth: 30% !important"
+                    >
                       <template v-slot:activator="{ on, attrs }">
                         <v-btn v-bind="attrs" v-on="on" class="bouton">
                           A Partir D'un Modele
@@ -79,103 +84,59 @@
                             </router-link>
                           </template>
                         </v-data-table>
-                        <!-- </div> -->
-
-                        <!-- </v-card-text> -->
-                        <!-- <v-divider></v-divider> -->
-                        <!-- <v-card-actions> -->
-                        <!-- <v-btn
-            color="blue darken-1"
-            text
-            @click="dialogModele = false"
-          >
-            Fermer
-          </v-btn> -->
-                        <!-- <v-btn
-            color="blue darken-1"
-            text
-            @click="dialogModele = false"
-          >
-            Valider
-          </v-btn> -->
-                        <!-- </v-card-actions> -->
                       </v-card>
                     </v-dialog>
                   </v-list-item>
-
                   <v-list-item>
-                    <v-dialog v-model="dialog" max-width="60%" >
+                    <v-dialog v-model="dialog" max-width="60%">
                       <template v-slot:activator="{ on, attrs }">
                         <v-btn class="bouton" v-bind="attrs" v-on="on">
-                          A Partir D'un Projet
+                          A Partir D'un Ancien Projet
                         </v-btn>
                       </template>
                       <v-card class="body panel left-panel">
-                        <!-- <v-card-title>Liste Des Projets</v-card-title>
-                        <v-divider></v-divider>
-                        <v-card-text max-width="80%"> -->
-                          <!-- <div > -->
-                            <v-data-table
-                              :headers="headers"
-                              :items="projets"
-                              sort-by="calories"
-                              class="elevation-1"
-                              :search="search"
-                              :custom-filter="filterOnlyCapsText"
-                            >
-                              <template v-slot:top>
-                                <v-toolbar flat>
-                                  <v-divider
-                                    class="mx-4"
-                                    inset
-                                    vertical
-                                  ></v-divider>
-                                  <v-spacer></v-spacer>
-                                  <v-card-title>
-                                    <v-text-field
-                                      v-model="search"
-                                      append-icon="mdi-magnify"
-                                      label="Recherche"
-                                      single-line
-                                      hide-details
-                                    ></v-text-field>
-                                  </v-card-title>
-                                </v-toolbar>
-                              </template>
-                              <template v-slot:[`item.actions`]="{ item }">
-                                <router-link :to="'/projet/update/' + item.id">
-                                  <v-btn
-                                    class="mx-2"
-                                    fab
-                                    dark
-                                    small
-                                    color="primary"
-                                    @click="ProjetProjet(item.id)"
-                                  >
-                                    <v-icon dark> mdi-pencil </v-icon>
-                                  </v-btn>
-                                </router-link>
-                              </template>
-                            </v-data-table>
-                          <!-- </div>
-                        </v-card-text>
-                        <v-divider></v-divider> -->
-                        <!-- <v-card-actions>
-                          <v-btn
-                            color="blue darken-1"
-                            text
-                            @click="dialog = false"
-                          >
-                            Fermer
-                          </v-btn>
-                          <v-btn
-                            color="blue darken-1"
-                            text
-                            @click="dialog = false"
-                          >
-                            Valider
-                          </v-btn>
-                        </v-card-actions> -->
+                        <v-data-table
+                          :headers="headers"
+                          :items="projets"
+                          sort-by="calories"
+                          class="elevation-1"
+                          :search="search"
+                          :custom-filter="filterOnlyCapsText"
+                        >
+                          <template v-slot:top>
+                            <v-toolbar flat>
+                              <v-divider
+                                class="mx-4"
+                                inset
+                                vertical
+                              ></v-divider>
+                              <v-spacer></v-spacer>
+                              <v-card-title>
+                                <v-text-field
+                                  v-model="search"
+                                  append-icon="mdi-magnify"
+                                  label="Recherche"
+                                  single-line
+                                  hide-details
+                                ></v-text-field>
+                              </v-card-title>
+                            </v-toolbar>
+                          </template>
+                          <template v-slot:[`item.actions`]="{ item }">
+                            <router-link :to="'/projet/update/' + item.id">
+                              <v-btn
+                                class="mx-2"
+                                fab
+                                dark
+                                small
+                                color="primary"
+                                @click="ProjetProjet(item.id)"
+                              >
+                                <v-icon dark> mdi-pencil </v-icon>
+                              </v-btn>
+                            </router-link>
+                          </template>
+                        </v-data-table>
                       </v-card>
                     </v-dialog>
                   </v-list-item>
@@ -197,70 +158,109 @@
         </template>
         <template v-slot:[`item.actions`]="{ item }">
           <router-link :to="'/projet/update/' + item.id">
-            <v-btn class="mx-2" fab dark small color="primary" v-on:click="update(item.id)">
+              <v-tooltip bottom color="primary">
+      <template v-slot:activator="{ on, attrs }">
+         <v-btn
+              class="mx-2"
+              fab
+              dark
+              v-bind="attrs"
+              v-on="on"
+              small
+              color="primary"
+              v-on:click="update(item.id)">
               <v-icon dark> mdi-pencil </v-icon>
             </v-btn>
+      </template>
+      <span>Modifier projet</span>
+    </v-tooltip>
           </router-link>
-          <v-btn class="mx-2" fab dark small color="red">
-            <v-icon dark v-on:click="deleteprojet(item.id)">
-              mdi-delete
-            </v-icon>
-          </v-btn>
-          <v-btn
+    <v-tooltip bottom color="orange">
+      <template v-slot:activator="{ on, attrs }">
+         <v-btn
+              class="mx-2"
+              fab
+              dark
+                v-bind="attrs"
+          v-on="on"
+              small 
+                 color="orange"
+            @click="exportword(item.id)"
+            >
+              <v-icon dark> mdi-cloud-download </v-icon>
+            </v-btn>
+      </template>
+      <span>export votre rapport</span>
+    </v-tooltip>
+          <!-- <v-btn
             class="mx-2"
             fab
             dark
             small
             color="orange"
             @click="exportword(item.id)"
-            
           >
             <v-icon dark> mdi-cloud-download </v-icon>
-          </v-btn>
-          <!-- dialogInfo = true -->
-           <v-btn class="mx-2" fab dark small color="green" @click="getId(item.id)">
-            <v-icon dark >
-              info
-            </v-icon>
-          </v-btn>
-            <v-dialog
-        v-model="dialogInfo"
-        max-width="500px"
-      >
-        <v-card>
-          <v-card-title>
-            Modele
-          </v-card-title>
-          <v-card-text>
-           
-            <!-- <div class="form__div" > -->
-               <v-text-field
+          </v-btn> -->
+          <v-menu>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn fab
+               class="mx-2"
+            dark
+            small
+            v-bind="attrs" v-on="on" color="pink">
+                <v-icon>mdi-dots-vertical</v-icon>
+              </v-btn>
+            </template>
+
+            <v-list>
+              <!-- <v-list-item
+            
+              > -->
+              <v-list-item-title>
+                <v-btn
+                  class="ma-2 white--text"
+                  v-on:click="deleteprojet(item.id)"
+                  outlined
+                  color="red"
+                >
+                  <v-icon dark> mdi-delete </v-icon>
+
+                  Supprimer
+                </v-btn>
+                <br />
+                <v-btn
+                  class="ma-2 white--text"
+                  @click="getId(item.id)"
+                  outlined
+                  color="green"
+                >
+                  <v-icon dark> info </v-icon>
+                  Modele
+                </v-btn>
+              </v-list-item-title>
+              <!-- </v-list-item> -->
+            </v-list>
+          </v-menu>
+
+          <v-dialog v-model="dialogInfo" max-width="500px">
+            <v-card>
+              <v-card-title> Modele </v-card-title>
+              <v-card-text>
+                <v-text-field
                   label="Nom du Modele*"
                   type="text"
                   required
-                   v-model="modeles.modele"
+                  v-model="modeles.modele"
                 ></v-text-field>
-                    <!-- <input
-                      type="text"
-                      class="form__input"
-                      placeholder=" "
-                      id="modele"
-                       v-model="modeles.modele"
-                    />
-                    <label for="" class="form__label">Nom Modele</label>
-                  </div> -->
-          </v-card-text>
-          <v-card-actions>
-            <v-btn
-              color="primary"
-              text
-              @click="DevenirModele()"
-            >
-              Valider
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
+              </v-card-text>
+              <v-card-actions>
+                <v-btn color="primary" text @click="DevenirModele()">
+                  Valider
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
         </template>
       </v-data-table>
     </div>
@@ -278,7 +278,7 @@ export default {
     Loading,
   },
   data: () => ({
-    DevenirModeleId:"",
+    DevenirModeleId: "",
     dialogInfo: false,
     dialogm1: "",
     dialog: false,
@@ -287,9 +287,9 @@ export default {
     Projet: [],
     spinner: true,
     usertype: "",
-    modeles:{
+    modeles: {
       modele: "",
-      },
+    },
     projet: Object,
     appareil: "",
     isDisabled: false,
@@ -302,19 +302,19 @@ export default {
     ],
     dialogDelete: false,
     headers: [
-      {
-        text: "Appareil",
-        value: "appareil",
-        align: "start",
-        sortable: true,
-      },
+      // {
+      //   text: "Appareil",
+      //   value: "appareil",
+      //   align: "start",
+      //   sortable: true,
+      // },
       { text: "Puissance", value: "puissance" },
       { text: "Tension Primaire", value: "u1n" },
       { text: "Tension Secondaire", value: "u2o" },
       { text: "Couplage", value: "couplage" },
       { text: "Materiau Primaire", value: "materiauMT" },
       { text: "Materiau Secondaire", value: "materiauBT" },
-      { text: "Actions", value: "actions", sortable: false },
+      { text: "Actions", value: "actions" },
     ],
     headersModele: [
       {
@@ -351,7 +351,7 @@ export default {
       couplage: "",
       frequence: "",
     },
-    getProjet:[],
+    getProjet: [],
   }),
 
   async created() {
@@ -361,7 +361,7 @@ export default {
     this.$store.dispatch("user", response.data);
     this.user = response.data;
     this.Modeles();
-    localStorage.setItem('show',false);
+    localStorage.setItem("show", false);
     this.getprojet();
   },
   computed: {
@@ -387,40 +387,37 @@ export default {
   },
 
   methods: {
-    getId(id){
-      this.dialogInfo = true ;
-      this.DevenirModeleId=id;
+    getId(id) {
+      this.dialogInfo = true;
+      this.DevenirModeleId = id;
     },
     DevenirModele() {
-      const modeles={
-        modele:this.modeles.modele
-      }
+      const modeles = {
+        modele: this.modeles.modele,
+      };
       axios
-        .post(
-          "/ProjetDevenirModele/"+this.DevenirModeleId, modeles)
-        .then(
-        
-          this.dialogInfo = false,
-          this.getprojet()
-        );
+        .post("/ProjetDevenirModele/" + this.DevenirModeleId, modeles)
+        .then((this.dialogInfo = false), this.getprojet());
     },
-      exportword(id) {
+    exportword(id) {
       axios({
-    url: 'http://localhost:8000/api/documents/' + id,
-    method: 'GET',
-    responseType: 'blob',
-}).then((response) => {
-  var headers = response.headers;
-  console.log(headers);
-     var fileURL = window.URL.createObjectURL(new Blob([response.data], {type: headers["content-type"],})); 
-     var fileLink = document.createElement('a');
-     fileLink.href = fileURL;
-     fileLink.setAttribute('download','conceptionTransfo.doc');
-     document.body.appendChild(fileLink);
-   
-     fileLink.click();
-});
-      },
+        url: "http://localhost:8000/api/documents/" + id,
+        method: "GET",
+        responseType: "blob",
+      }).then((response) => {
+        var headers = response.headers;
+        console.log(headers);
+        var fileURL = window.URL.createObjectURL(
+          new Blob([response.data], { type: headers["content-type"] })
+        );
+        var fileLink = document.createElement("a");
+        fileLink.href = fileURL;
+        fileLink.setAttribute("download", "conceptionTransfo.doc");
+        document.body.appendChild(fileLink);
+
+        fileLink.click();
+      });
+    },
     create() {
       let token = localStorage.getItem("token");
       axios
@@ -440,12 +437,12 @@ export default {
           )
         );
     },
-    async update(id){
-const result = await axios.get("projets/" + id);
-this.$store.dispatch("projet", result.data);
-    this.getProjet = result.data;
-     let load = JSON.stringify(this.getProjet);
-    localStorage.setItem("projet",load);
+    async update(id) {
+      const result = await axios.get("projets/" + id);
+      this.$store.dispatch("projet", result.data);
+      this.getProjet = result.data;
+      let load = JSON.stringify(this.getProjet);
+      localStorage.setItem("projet", load);
     },
     ProjetModele(id) {
       let token = localStorage.getItem("token");
@@ -491,16 +488,15 @@ this.$store.dispatch("projet", result.data);
       });
     },
     async getprojet() {
-     await axios.get("/projets").then((resp) => {
-         this.$store.dispatch("projet", resp.data);
+      await axios.get("/projets").then((resp) => {
+        this.$store.dispatch("projet", resp.data);
         this.projets = resp.data;
         console.log(this.projet);
         let parsed = JSON.stringify(this.projets);
-    localStorage.setItem("projets", parsed);
-      //  localStorage.setItem("projet", this.projets);
+        localStorage.setItem("projets", parsed);
+        //  localStorage.setItem("projet", this.projets);
         this.spinner = false;
       });
-
     },
     deleteprojet(id) {
       Swal.fire({
