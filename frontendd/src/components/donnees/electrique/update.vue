@@ -1,9 +1,5 @@
 <template>
   <div>
-    <NavDash
-      :conducteurMT="projet.conducteurMT"
-      :conducteurBT="projet.conducteurBT"
-    />
     <div class="body">
       <v-stepper v-model="e1" vertical>
         <Loading v-if="spinner" />
@@ -324,12 +320,10 @@
   </div>
 </template>
 <script>
-import NavDash from "@/components/NavDash.vue";
 import Loading from "@/components/Loading.vue";
 import axios from "axios";
 export default {
   components: {
-    NavDash,
     Loading,
   },
   data() {
