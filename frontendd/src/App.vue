@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-main>
-      <NavDash  v-if="((this.$route.path).indexOf('Connexion'))<0"  />
+      <NavDash v-if="((this.$route.path).indexOf('Connexion'))<0" :conducteurMT="projet.conducteurMT"  :conducteurBT="projet.conducteurBT" />
       <router-view />
        </v-main>
   </v-app>
@@ -9,17 +9,19 @@
 
 <script>
 import NavDash from "./components/NavDash.vue";
-
+import axios from "axios";
 export default {
   name: "App",
   components:{
     NavDash,
   },
   data: () => ({
-    //
+    projet:[],
   }),
- mounted(){
-   
+async created(){
+  const result = await axios.get("projets/"  + this.$route.params.id);
+this.$store.dispatch("projet", result.data);
+    this.projet = result.data;
  }
   
 };
