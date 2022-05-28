@@ -1,6 +1,5 @@
 <template>
   <div>
-    <NavDash />
     <Loading v-if="spinner"/>
     <v-data-table
       :headers="headers"
@@ -152,12 +151,10 @@
 
 <script>
 import Swal from "sweetalert2/dist/sweetalert2.js";
-import NavDash from "@/components/NavDashboard.vue";
 import axios from "axios";
 import Loading from "@/components/Loading.vue";
 export default {
    components: {
-    NavDash,
     Loading
   },
   data: () => ({

@@ -1,9 +1,5 @@
 <template>
   <div>
-    <NavDash
-      :conducteurMT="projet.conducteurMT"
-      :conducteurBT="projet.conducteurBT"
-    /> 
        <Loading v-if="spinner" />
     <div class="body">
       <v-stepper v-model="e1" vertical>
@@ -387,14 +383,12 @@
 </template>
 
 <script>
-import NavDash from "@/components/NavDash.vue";
 import axios from "axios";
 import Loading  from '@/components/Loading.vue';
 
 export default {
   components: {
     Loading,
-    NavDash,
   },
   data() {
     return {
@@ -488,14 +482,16 @@ export default {
   async created(){
       const result = await axios.get("projets/" + this.$route.params.id);
     this.projet = result.data;
-   
+   this.spinner =false;
     this.getTole();
-     this.spinner =false;
+     
   },
   
   async mounted() {
     const result = await axios.get("projets/" + this.$route.params.id);
     this.projet = result.data;
+        this.spinner=false;
+
   },
   computed: {
     I0(){

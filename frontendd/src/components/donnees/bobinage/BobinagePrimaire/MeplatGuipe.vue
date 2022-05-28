@@ -1,11 +1,8 @@
 <template>
   <div>
-    <NavDash
-      :conducteurMT="projet.conducteurMT"
-      :conducteurBT="projet.conducteurBT"
-    />
     <div class="body">
       <v-stepper v-model="e1" vertical>
+         <Loading v-if="spinner"/>
         <v-stepper-step :complete="e1 > 1" step="1">
           Bobinage du primaire en fil méplat
         </v-stepper-step>
@@ -410,13 +407,14 @@
 </template>
 
 <script>
-import NavDash from "@/components/NavDash.vue";
-
+import Loading  from '@/components/Loading.vue';
 import axios from "axios";
 export default {
-  components: { NavDash },
+  components: { Loading
+   },
   data() {
     return {
+      spinner:true,
       barre: [],
       hbrin: [],
       saillie: [],
@@ -553,6 +551,7 @@ export default {
   async mounted() {
     const result = await axios.get("projets/" + this.$route.params.id);
     this.projet = result.data;
+        this.spinner=false;
   },
   created() {
     axios
