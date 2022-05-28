@@ -58,7 +58,7 @@
                         label="Coefficient 1"
                       ></v-text-field>
                     </v-col>
-                    <v-col cols="12" md="8">
+                    <v-col>
                          <v-text-field
                         v-model="editedItem.coef2"
                         label="Coefficient 2"
@@ -264,13 +264,12 @@ export default {
         Object.assign(this.gar36[this.editedIndex], this.editedItem);
         console.log('edit');
       axios.put("/updateTole/"+this.editedItem.id, this.editedItem).then(
-          (response) => (this.id = response.data.id)
+          (response) => (this.id = response.data.id,this.get36())
         );
       } else {
         this.gar36.push(this.editedItem);
          axios.post("/addTole", this.editedItem).then(
-          (response) => (this.id = response.data.id,
-          console.log(response.data))
+          (response) => (this.id = response.data.id,this.get36())
         );
    }
       this.close();

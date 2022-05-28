@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Loading v-if="spinner"/>
+    <Loading v-if="spinner" />
     <v-data-table
       :headers="headers"
       :items="gar36"
@@ -26,27 +26,25 @@
           <v-dialog v-model="dialog" max-width="700px">
             <template v-slot:activator="{ on, attrs }">
               <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
-                Ajouter 
+                Ajouter
               </v-btn>
             </template>
             <v-card>
               <v-card-title>
                 <span class="text-h5">
                   {{ formTitle }}
-                  </span>
+                </span>
               </v-card-title>
 
               <v-card-text>
                 <v-container>
                   <v-col>
-                  <v-row cols="12" sm="6" md="4">
+                    <v-row cols="12" sm="6" md="4">
                       <v-text-field
                         v-model="editedItem.valeurHbrin"
                         label="Hbrin"
                       ></v-text-field>
                     </v-row>
-                 
-                  
                   </v-col>
                 </v-container>
               </v-card-text>
@@ -54,64 +52,22 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" text @click="close">
-                  Cancel
+                  Annuler
                 </v-btn>
-                <v-btn color="blue darken-1" text @click="save">
-                  Save
-                </v-btn>
+                <v-btn color="blue darken-1" text @click="save"> Sauvegarder </v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
-          
-          <!-- <v-dialog v-model="dialogDelete" max-width="500px">
-            <v-card>
-              <v-card-title class="text-h5"
-                >Are you sure you want to delete this user?</v-card-title
-              >
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="closeDelete"
-                  >Cancel</v-btn
-                >
-                <v-btn color="red darken-1" text @click="deleteItemConfirm"
-                  >OK</v-btn
-                >
-                <v-spacer></v-spacer>
-              </v-card-actions>
-            </v-card>
-          </v-dialog> -->
         </v-toolbar>
       </template>
       <template v-slot:[`item.actions`]="{ item }">
-        <!-- <v-icon small color="green" class="mr-2" @click="editItem(item)">
-          mdi-pencil
-        </v-icon>
-               <v-icon small color="red" @click="deletegar(item.id)"> mdi-delete </v-icon> -->
-<v-btn
-      class="mx-2"
-      fab
-      dark
-      small
-      color="primary"
-    >
-      <v-icon dark v-on:click="editItem(item)">
-        mdi-pencil
-      </v-icon>
-    </v-btn>
-            <v-btn
-      class="mx-2"
-      fab
-      dark
-      small
-      color="red"
-    >
-      <v-icon dark v-on:click="deletegar(item.id)">
-        mdi-delete
-      </v-icon>
-    </v-btn>
+        <v-btn class="mx-2" fab dark small color="primary">
+          <v-icon dark v-on:click="editItem(item)"> mdi-pencil </v-icon>
+        </v-btn>
+        <v-btn class="mx-2" fab dark small color="red">
+          <v-icon dark v-on:click="deletegar(item.id)"> mdi-delete </v-icon>
+        </v-btn>
       </template>
-
-     
     </v-data-table>
   </div>
 </template>
@@ -122,18 +78,18 @@ import Loading from "@/components/Loading.vue";
 
 import axios from "axios";
 export default {
-   components: {
-    Loading
+  components: {
+    Loading,
   },
   data: () => ({
-     spinner:true,
+    spinner: true,
     search: "",
     dialog: false,
     dialogDelete: false,
     headers: [
-{ text: "Hbrin", value: "valeurHbrin" },
-      { text: "Operation", value: "actions" , sortable: false},
-     
+       { text: "Id Hbrin", value: "id" },
+      { text: "Hbrin", value: "valeurHbrin" },
+      { text: "Operation", value: "actions", sortable: false },
     ],
     gar36: [],
     editedIndex: -1,
@@ -142,17 +98,14 @@ export default {
     },
     defaultItem: {
       valeur: "",
-
     },
   }),
-    async created() {
-   await this.get36();
+  async created() {
+    await this.get36();
   },
   computed: {
     formTitle() {
-      return this.editedIndex === -1
-        ? "Ajouter "
-        : "Editer ";
+      return this.editedIndex === -1 ? "Ajouter " : "Editer ";
     },
   },
   watch: {
@@ -163,16 +116,15 @@ export default {
       val || this.closeDelete();
     },
   },
- 
+
   methods: {
-  
-     async get36() {
-    await axios.get("/getHbrin").then((resp) => {
+    async get36() {
+      await axios.get("/getHbrin").then((resp) => {
         this.gar36 = resp.data;
-        this.spinner=false;
+        this.spinner = false;
       });
     },
-         deletegar(id) {
+    deletegar(id) {
       Swal.fire({
         title: "Supprimer",
         text: "Vous êtes sure de supprimer ?",
@@ -184,7 +136,7 @@ export default {
       }).then((result) => {
         if (result.isConfirmed) {
           axios.delete("/deleteHbrin/" + id).then(() => {
-       Swal.fire("Supprimé!", "Cette colonne a été supprimé", "success");
+            Swal.fire("Supprimé!", "Cette colonne a été supprimé", "success");
             this.get36();
           });
         }
@@ -194,31 +146,8 @@ export default {
       this.editedIndex = this.gar36.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
-      //     update() {
-      // let user = {
-      //   email: this.editedItem.email,
-      //   type: this.editedItem.type,
-      //   name: this.editedItem.name,
-      //   password: this.password,
-      // }
-      // axios.put('/user/update/'+item.id, user,{ headers: { token: localStorage.getItem('token')}})
-      //   .then(res => {
-      //     //if successfull
-      //     if (res.status === 200) {
-      //       localStorage.setItem('token', res.data.token);
-      //       console.log(res)
-            
-      //     }
-      //   }, err => {
-      //     console.log(err.response);
-      //     this.error = err.response.data.error
-      //   })
-    
-    //    axios.put("/user/update/"+this.id, gar36).then(
-    //     (response) => (this.id = response.data.id)
-    // );
     },
-   
+
     close() {
       this.dialog = false;
       this.$nextTick(() => {
@@ -226,30 +155,30 @@ export default {
         this.editedIndex = -1;
       });
     },
-    
+
     save() {
       if (this.editedIndex > -1) {
         Object.assign(this.gar36[this.editedIndex], this.editedItem);
-        console.log('edit');
-      axios.put("/updateHbrin/"+this.editedItem.id, this.editedItem).then(
-          (response) => (this.id = response.data.id)
-        );
+        console.log("edit");
+        axios
+          .put("/updateHbrin/" + this.editedItem.id, this.editedItem)
+          .then((response) => ((this.id = response.data.id), this.get36()));
       } else {
         this.gar36.push(this.editedItem);
-         axios.post("/addHbrin", this.editedItem).then(
-          (response) => (this.id = response.data.id)
-        );
-   }
+        axios
+          .post("/createHbrin", this.editedItem)
+          .then((response) => ((this.id = response.data.id), this.get36()));
+      }
       this.close();
     },
-  
-}}
+  },
+};
 </script>
 <style scoped>
 .v-data-table {
   /* line-height: 1.5; */
   max-width: 1800px;
-  margin: 3%;                                                                                                                                                                                               
+  margin: 3%;
 }
 .theme--light.v-icon {
   color: #2196f3;
