@@ -46,6 +46,7 @@
                         dense
                       ></v-text-field> -->
                       <v-text-field
+                      class="k"
                         label="Hfeuillard"
                         v-model="projet.HfeuillardBT"
                         dense
@@ -59,18 +60,21 @@
                         outlined
                       ></v-text-field>
                     <v-text-field
+                    
                         label="collierBT"
                         v-model="projet.collierBTSec"
                         dense
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      
                         label="epFeuil1"
                         v-model="projet.epFeuil1BT"
                         dense
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      
                         label="epFeuil2"
                         v-model="projet.epFeuil2BT"
                         dense
@@ -99,6 +103,7 @@
                         outlined
                       ></v-text-field>
                        <v-text-field
+                       
                         label="ep1PapierBT"
                         dense
                         id="ep1PapierBT"
@@ -111,6 +116,7 @@
                   
                      
                       <v-text-field
+                      
                         label="nbrPap1"
                         dense
                         id="nbrPap1"
@@ -118,6 +124,7 @@
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      
                         label="ep2Papier"
                         dense
                         id="ep2Papier"
@@ -125,6 +132,7 @@
                         outlined
                       ></v-text-field>
                       <v-text-field
+                      
                         label="nbrPap2"
                         dense
                         id="nbrPap2"
@@ -156,6 +164,7 @@
                       ></v-text-field>
 
                       <v-select
+                      error
                         :items="barre"
                         label="barre"
                         v-model="projet.EpbarreBT"
@@ -212,6 +221,7 @@
                   <div class="div">
                     <div class="div2">
                       <v-select
+                      
                         :items="typeCanaux"
                         label="typeCanaux"
                         v-model="projet.typeCanauxBT"
@@ -546,6 +556,16 @@ export default {
 };
 </script>
 <style scoped>
+/* .theme--light.v-text-field--outlined {
+    color: #0094ff !important;
+} */
+.k[data-v-133d5f08]{
+      color: pink !important;
+
+}
+/* .theme--light.v-text-field--outlined {
+    color: #0094ff !important;
+} */
 .field10 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

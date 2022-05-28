@@ -190,18 +190,8 @@
               <v-icon dark> mdi-cloud-download </v-icon>
             </v-btn>
       </template>
-      <span>export votre rapport</span>
+      <span>exporter votre rapport</span>
     </v-tooltip>
-          <!-- <v-btn
-            class="mx-2"
-            fab
-            dark
-            small
-            color="orange"
-            @click="exportword(item.id)"
-          >
-            <v-icon dark> mdi-cloud-download </v-icon>
-          </v-btn> -->
           <v-menu>
             <template v-slot:activator="{ on, attrs }">
               <v-btn fab
