@@ -1,168 +1,126 @@
 <template>
   <div>
-    
-        <v-tabs
-      v-model="tab"
-      background-color="transparent"
-      grow
-    >
-      <v-tab
-        v-for="itemtab in itemstab"
-        :key="itemtab"
-      >
+    <v-tabs v-model="tab" background-color="transparent" grow>
+      <v-tab v-for="itemtab in itemstab" :key="itemtab">
         {{ itemtab }}
       </v-tab>
     </v-tabs>
-    <Loading v-if="spinner"/>
-       <v-tabs-items v-model="tab">
+    <Loading v-if="spinner" />
+    <v-tabs-items v-model="tab">
       <v-tab-item>
         <v-card flat>
-    <v-data-table
-      :headers="headers"
-      :items="gar24"
-      sort-by="calories"
-      class="elevation-1"
-      :search="search"
-    >
-    
-      <template v-slot:top>
-        <v-toolbar flat>
-          <v-card-title>Garantie24</v-card-title>
-          <v-spacer></v-spacer>
-          <v-text-field
-            v-model="search"
-            append-icon="mdi-magnify"
-            label="Search"
-            single-line
-            hide-details
+          <v-data-table
+            :headers="headers"
+            :items="gar24"
+            sort-by="calories"
+            class="elevation-1"
+            :search="search"
           >
-          </v-text-field>
+            <template v-slot:top>
+              <v-toolbar flat>
+                <v-card-title>Garantie24</v-card-title>
+                <v-spacer></v-spacer>
+                <v-text-field
+                  v-model="search"
+                  append-icon="mdi-magnify"
+                  label="Search"
+                  single-line
+                  hide-details
+                >
+                </v-text-field>
 
-          <v-divider class="mx-4" inset vertical></v-divider>
-          <v-spacer></v-spacer>
-          <v-dialog v-model="dialog" max-width="700px">
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
-                Ajouter 
+                <v-divider class="mx-4" inset vertical></v-divider>
+                <v-spacer></v-spacer>
+                <v-dialog v-model="dialog" max-width="700px">
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                      color="primary"
+                      dark
+                      class="mb-2"
+                      v-bind="attrs"
+                      v-on="on"
+                    >
+                      Ajouter
+                    </v-btn>
+                  </template>
+                  <v-card>
+                    <v-card-title>
+                      <span class="text-h5">
+                        {{ formTitle }}
+                      </span>
+                    </v-card-title>
+
+                    <v-card-text>
+                      <v-container>
+                        <v-col>
+                          <v-row cols="12" md="8">
+                            <v-text-field
+                              v-model="editedItem.pn"
+                              label="Pn"
+                            ></v-text-field>
+                          </v-row>
+                          <v-row>
+                            <v-col cols="6">
+                              <v-text-field
+                                v-model="editedItem.po"
+                                label="Po"
+                              ></v-text-field>
+                            </v-col>
+                            <v-col cols="6">
+                              <v-text-field
+                                v-model="editedItem.lo"
+                                label="lo"
+                              ></v-text-field>
+                            </v-col>
+                          </v-row>
+                          <v-row>
+                            <v-col cols="6">
+                              <v-text-field
+                                v-model="editedItem.pcc"
+                                label="Pcc"
+                              ></v-text-field>
+                            </v-col>
+                            <v-col cols="6">
+                              <v-text-field
+                                v-model="editedItem.ucc"
+                                label="Ucc"
+                              ></v-text-field>
+                            </v-col>
+                          </v-row>
+                        </v-col>
+                      </v-container>
+                    </v-card-text>
+
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn color="blue darken-1" text @click="close">
+                        Annuler
+                      </v-btn>
+                      <v-btn color="blue darken-1" text @click="save">
+                        Sauvegarder
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+              </v-toolbar>
+            </template>
+            <template v-slot:[`item.actions`]="{ item }">
+              <v-btn class="mx-2" fab dark small color="primary">
+                <v-icon dark v-on:click="editItem(item)"> mdi-pencil </v-icon>
+              </v-btn>
+              <v-btn class="mx-2" fab dark small color="red">
+                <v-icon dark v-on:click="deletegar(item.id)">
+                  mdi-delete
+                </v-icon>
               </v-btn>
             </template>
-            <v-card>
-              <v-card-title>
-                <span class="text-h5">
-                  {{ formTitle }}
-                  </span>
-              </v-card-title>
-
-              <v-card-text>
-                <v-container>
-                  <v-col>
-                  <v-row cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.pn"
-                        label="Pn"
-                      ></v-text-field>
-                    </v-row>
-                 <v-row cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.po"
-                        label="Po"
-                      ></v-text-field>
-                    </v-row>
-                    <v-row cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.lo"
-                        label="lo"
-                      ></v-text-field>
-                    </v-row>
-                     <v-row cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.pcc"
-                        label="Pcc"
-                      ></v-text-field>
-                    </v-row>
-                 
-                    <v-row cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.ucc"
-                        label="Ucc"
-                      ></v-text-field>
-                    </v-row>
-                  
-                  </v-col>
-                </v-container>
-              </v-card-text>
-
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="close">
-                  Cancel
-                </v-btn>
-                <v-btn color="blue darken-1" text @click="save">
-                  Save
-                </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-          
-          <!-- <v-dialog v-model="dialogDelete" max-width="500px">
-            <v-card>
-              <v-card-title class="text-h5"
-                >Are you sure you want to delete this user?</v-card-title
-              >
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="closeDelete"
-                  >Cancel</v-btn
-                >
-                <v-btn color="red darken-1" text @click="deleteItemConfirm"
-                  >OK</v-btn
-                >
-                <v-spacer></v-spacer>
-              </v-card-actions>
-            </v-card>
-          </v-dialog> -->
-        </v-toolbar>
-      </template>
-      <template v-slot:[`item.actions`]="{ item }">
-        <!-- <v-icon small color="green" class="mr-2" @click="editItem(item)">
-          mdi-pencil
-        </v-icon>
-               <v-icon small color="red" @click="deletegar(item.id)"> mdi-delete </v-icon> -->
-<v-btn
-      class="mx-2"
-      fab
-      dark
-      small
-      color="primary"
-    >
-      <v-icon dark v-on:click="editItem(item)">
-        mdi-pencil
-      </v-icon>
-    </v-btn>
-            <v-btn
-      class="mx-2"
-      fab
-      dark
-      small
-      color="red"
-    >
-      <v-icon dark v-on:click="deletegar(item.id)">
-        mdi-delete
-      </v-icon>
-    </v-btn>
-      </template>
-
-     
-    </v-data-table>
-      </v-card>
-        </v-tab-item>
-        <v-tab-item>
-        <v-card
-          flat
-        >
-         <garantie36/>
+          </v-data-table>
         </v-card>
-
+      </v-tab-item>
+      <v-tab-item>
+        <v-card flat>
+          <garantie36 />
+        </v-card>
       </v-tab-item>
     </v-tabs-items>
   </div>
@@ -175,27 +133,24 @@ import Loading from "@/components/Loading.vue";
 
 import axios from "axios";
 export default {
-   components: {
+  components: {
     garantie36,
-    Loading
+    Loading,
   },
   data: () => ({
-     spinner:true,
-     tab: null,
-      itemstab: [
-      'Garantie 24', 'Garantie 36'
-      ],
+    spinner: true,
+    tab: null,
+    itemstab: ["Garantie 24", "Garantie 36"],
     search: "",
     dialog: false,
     dialogDelete: false,
     headers: [
-{ text: "Pn", value: "pn" },
+      { text: "Pn", value: "pn" },
       { text: "Po", value: "po" },
       { text: "lo", value: "lo" },
-        { text: "Pcc", value: "pcc" },
+      { text: "Pcc", value: "pcc" },
       { text: "Ucc", value: "ucc" },
-      { text: "Operation", value: "actions" , sortable: false},
-     
+      { text: "Operation", value: "actions", sortable: false },
     ],
     gar24: [],
     editedIndex: -1,
@@ -203,26 +158,23 @@ export default {
       pn: "",
       po: "",
       lo: "",
-      pcc:"",
-      ucc:"",
+      pcc: "",
+      ucc: "",
     },
     defaultItem: {
       pn: "",
       po: "",
       lo: "",
-      pcc:"",
-      ucc:"",
-
+      pcc: "",
+      ucc: "",
     },
   }),
-    async created() {
+  async created() {
     this.get24();
   },
   computed: {
     formTitle() {
-      return this.editedIndex === -1
-        ? "Ajouter "
-        : "Editer ";
+      return this.editedIndex === -1 ? "Ajouter " : "Editer ";
     },
   },
   watch: {
@@ -233,17 +185,16 @@ export default {
       val || this.closeDelete();
     },
   },
- 
+
   methods: {
-  
-     async get24() {
-    await axios.get("/garantie24").then((resp) => {
+    async get24() {
+      await axios.get("/garantie24").then((resp) => {
         this.gar24 = resp.data;
-        this.spinner=false;
+        this.spinner = false;
         console.log(resp.data);
       });
     },
-         deletegar(id) {
+    deletegar(id) {
       Swal.fire({
         title: "Supprimer",
         text: "Vous êtes sure de supprimer ?",
@@ -265,31 +216,8 @@ export default {
       this.editedIndex = this.gar24.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
-      //     update() {
-      // let user = {
-      //   email: this.editedItem.email,
-      //   type: this.editedItem.type,
-      //   name: this.editedItem.name,
-      //   password: this.password,
-      // }
-      // axios.put('/user/update/'+item.id, user,{ headers: { token: localStorage.getItem('token')}})
-      //   .then(res => {
-      //     //if successfull
-      //     if (res.status === 200) {
-      //       localStorage.setItem('token', res.data.token);
-      //       console.log(res)
-            
-      //     }
-      //   }, err => {
-      //     console.log(err.response);
-      //     this.error = err.response.data.error
-      //   })
-    
-    //    axios.put("/user/update/"+this.id, gar24).then(
-    //     (response) => (this.id = response.data.id)
-    // );
     },
-   
+
     close() {
       this.dialog = false;
       this.$nextTick(() => {
@@ -297,30 +225,30 @@ export default {
         this.editedIndex = -1;
       });
     },
-    
+
     save() {
       if (this.editedIndex > -1) {
         Object.assign(this.gar24[this.editedIndex], this.editedItem);
-        console.log('edit');
-      axios.put("/update24/"+this.editedItem.id, this.editedItem).then(
-          (response) => (this.id = response.data.id)
-        );
+        console.log("edit");
+        axios
+          .put("/update24/" + this.editedItem.id, this.editedItem)
+          .then((response) => ((this.id = response.data.id), this.get24()));
       } else {
         this.gar24.push(this.editedItem);
-         axios.post("/create24", this.editedItem).then(
-          (response) => (this.id = response.data.id)
-        );
-   }
+        axios
+          .post("/create24", this.editedItem)
+          .then((response) => ((this.id = response.data.id), this.get24()));
+      }
       this.close();
     },
-  
-}}
+  },
+};
 </script>
 <style scoped>
 .v-data-table {
   /* line-height: 1.5; */
   max-width: 1800px;
-  margin: 3%;                                                                                                                                                                                               
+  margin: 3%;
 }
 .theme--light.v-icon {
   color: #2196f3;
