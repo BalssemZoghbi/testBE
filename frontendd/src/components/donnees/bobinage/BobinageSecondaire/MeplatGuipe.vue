@@ -1,10 +1,6 @@
 <template>
   <div>
-    <!-- <navbarUpdate /> -->
-    <NavDash
-      :conducteurMT="projet.conducteurMT"
-      :conducteurBT="projet.conducteurBT"
-    />
+     <Loading v-if="spinner"/>
     <div class="body">
       <v-stepper v-model="e1" vertical>
         <v-stepper-step :complete="e1 > 1" step="1">
@@ -343,13 +339,13 @@
 </template>
 
 <script>
-import NavDash from "@/components/NavDash.vue";
-
+import Loading from "@/components/Loading.vue";
 import axios from "axios";
 export default {
-  components: { NavDash },
+  components: {  Loading},
   data() {
     return {
+       spinner:true,
       saillie: [],
       hbrin: [],
       barre: [],
@@ -459,6 +455,7 @@ export default {
   async mounted() {
     const result = await axios.get("projets/" + this.$route.params.id);
     this.projet = result.data;
+     this.spinner=false;
   },
   created() {
     axios
