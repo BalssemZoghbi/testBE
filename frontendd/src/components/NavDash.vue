@@ -208,14 +208,14 @@
   
     </v-app-bar>
     <!-- <v-main> -->
-      <v-container
+      <!-- <v-container
        class="scroll-y"
        fluid
       >
        <v-row align="center" justify="center">
            <router-view></router-view>
        </v-row>
-      </v-container>
+      </v-container> -->
     <!-- </v-main> -->
     <v-btn
     v-scroll="onScroll"
