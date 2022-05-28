@@ -346,7 +346,7 @@ import axios from "axios";
       Pie,
       Bar,
       Doughnut,
-      LineChartGeneratorq
+      LineChartGenerator
     },
       props: {
     chartId: {
