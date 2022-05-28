@@ -237,7 +237,7 @@
 <script>
 
 import Footer from '@/components/Footer';
-import Profile from '@/components/Profile';
+import Profile from '../components/user/Profile';
 import navbarUpdate from '@/components/navbarUpdate';
 import axios from 'axios';
 import { mapGetters } from 'vuex';
@@ -245,7 +245,7 @@ import { mapGetters } from 'vuex';
     components: {
     Footer,
     Profile,
-        navbarUpdate
+    navbarUpdate
 
   }, 
     data: () => ({

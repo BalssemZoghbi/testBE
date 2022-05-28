@@ -176,7 +176,7 @@
 
 <script>
 import Footer from "@/components/Footer";
-import Profile from "@/components/Profile";
+import Profile from "../components/user/Profile.vue";
 import axios from "axios";
 import { mapGetters } from "vuex";
 export default {
