@@ -1,6 +1,5 @@
 <template>
   <div>
-      <NavDash/>  
         <v-layout style="margin-left:4%">
     <v-row class="clickable">
         <v-container>
@@ -339,7 +338,6 @@ import {
 
 ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale,BarElement,  LinearScale,LineElement,PointElement)
 
-  import NavDash from '@/components/NavDash.vue';
 import axios from "axios";
 
   export default {
@@ -348,8 +346,7 @@ import axios from "axios";
       Pie,
       Bar,
       Doughnut,
-      LineChartGenerator,
-      NavDash
+      LineChartGeneratorq
     },
       props: {
     chartId: {

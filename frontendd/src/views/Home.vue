@@ -1,7 +1,6 @@
 <template>
   <div>
-    <NavDash v-if="this.usertype == 'admin'" />
-    <NavDashEmp v-if="this.usertype == 'employe'" />
+    
     <Loading v-if="spinner" />
     <div class="body panel left-panel">
       <v-data-table
@@ -272,13 +271,9 @@
 import axios from "axios";
 import Footer from "@/components/Footer";
 import Swal from "sweetalert2/dist/sweetalert2.js";
-import NavDash from "../components/NavDashboard.vue";
-import NavDashEmp from "../components/NavDashboardEmploye.vue";
 import Loading from "@/components/Loading.vue";
 export default {
   components: {
-    NavDash,
-    NavDashEmp,
     Footer,
     Loading,
   },
