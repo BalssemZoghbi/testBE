@@ -55,7 +55,7 @@
 import axios from "axios";
 import { mapGetters } from "vuex";
 
-import Update from "./UpdateUser.vue";
+import Update from "./user/UpdateUser.vue";
 export default {
   name: "Profile",
   components: {

@@ -19,7 +19,6 @@ import tole from "../components/calcul/gradin/tole.vue";
 import updateVolt from "../components/calcul/voltspire/update.vue";
 
 import Bobine from "../components/donnees/bobinage/update.vue";
-import bobinage from "../components/donnees/bobinage/updateCalcul.vue";
 import bobinagePrimaireRond from "../components/donnees/bobinage/BobinagePrimaire/RondEmaille.vue";
 import bobinagePrimaireFeuillard from "../components/donnees/bobinage/BobinagePrimaire/Feuillard.vue";
 import bobinagePrimaireMeplat from "../components/donnees/bobinage/BobinagePrimaire/MeplatGuipe.vue";
@@ -28,7 +27,7 @@ import bobinageSecondaireFeuillard from "../components/donnees/bobinage/Bobinage
 import bobinageSecondaireMeplat from "../components/donnees/bobinage/BobinageSecondaire/MeplatGuipe.vue";
 
 import User from "../components/user/User.vue";
-import Profile from '@/components/Profile';
+import Profile from '../components/user/Profile.vue';
 
 import Demande from "../components/user/demande.vue";
 import garantie24 from "../components/donnees/garantie/garantie24.vue";
@@ -213,11 +212,6 @@ const routes = [
     path: "/projet/bobinageSecondaireMeplat/:id",
     name: "bobinageSecondaireMeplat.update",
     component: bobinageSecondaireMeplat,
-  },
-  {
-    path: "/projet/bobinecal/:id",
-    name: "bobine",
-    component: bobinage,
   },
   {
     path: "/projet/gradin/:id",

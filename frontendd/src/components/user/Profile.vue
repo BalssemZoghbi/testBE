@@ -1,51 +1,33 @@
 <template>
   <v-row justify="center">
-    <v-dialog v-model="dialog" max-width="800px">
+    <v-dialog v-model="dialog" max-width="550px" max-height="850px">
       <template v-slot:activator="{ on, attrs }">
-        <v-btn  color="black" dark v-bind="attrs" v-on="on" style="color: black!important;margin-left: -49%;"
-          >Profile</v-btn>
+        <v-btn  v-bind="attrs" v-on="on" style=" background-color:white;   margin-left: -70%!important;   border: 0px!important ;box-shadow: 0px 0px!important; color:black;text-transform: none;font-weight: 400;font-size: 16px;"  >
+          Profile
+          </v-btn>
       </template>
       <v-card>
         <v-card-title>
-          <span class="text-h5">User Profile</span>
+           <v-avatar
+          color="success"
+          style="margin-left: 41%!important;"
+          size="61"><v-icon large color="white">mdi-account</v-icon></v-avatar>
         </v-card-title>
-        <v-form>
-          <v-container>
-            <v-row>
-              <v-col cols="12" sm="6">
-                <v-text-field
-                  v-model="name"
-                  label="Nom"
-                  readonly
-                ></v-text-field>
-              </v-col>
-           
-              <v-col cols="12" sm="6">
-                <v-text-field
-                  v-model="email"
-                  label="Email"
-                  readonly
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6">
-                <v-text-field
-                  v-model="date"
-                  label="Date"
-                  readonly
-                ></v-text-field>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-form>
-
+        <!-- <v-form> -->
+        <v-container>
+          <h1 style="color:black;margin-left: 25%;"> {{  user.name  }}</h1> <br>
+            <h3><span style="color:green !important;" >Email : </span> {{  user.email  }}</h3>
+         <h3> <span style="color:green !important;" >Poste : </span> {{  user.poste  }}</h3>
+         <h3><span style="color:green !important;" >Numero tel : </span>  {{  user.numero  }}</h3>
+        </v-container>
         <v-form class="px-3" ref="form">
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="red darken-1" text @click="dialog = false"
-              >Close</v-btn
+            <v-btn color="red darken-1" style=" background-color:white;margin-left: 50%!important;" text @click="dialog = false"
+              >Fermer</v-btn
             >
-            <v-flex class="mt-4 mb-4">
-              <!-- <Exemple3 :Data="desserts"/> -->
+            <v-flex>
+              <UpdateUser :Data="user"/>
             </v-flex>
           </v-card-actions>
         </v-form>
@@ -56,50 +38,53 @@
 
 <script>
 import axios from "axios";
-// import Exemple3 from "./UpdateUser.vue";
+import { mapGetters } from "vuex";
+import UpdateUser from '../user/UpdateUser.vue';
+
 export default {
   name: "Profile",
   components: {
-    // Exemple3,
+    UpdateUser
   },
- 
+
   data: () => ({
     dialog: false,
-    // username:'',
-    date:'',
-    name:'',
-    email:'',
-    desserts: [],
+    name: "",
+    email: "",
+    type: "",
+    password: "",
+    user: [],
   }),
   watch: {
     dialog(val) {
       val || this.close();
     },
   },
-  created() {
-    this.initialize();
-  },
   methods: {
-    initialize() {
-      this.desserts = [{ name: this.data.name}];
-    },
     close() {
       this.dialog = false;
     },
   },
+  async created() {
+    const response = await axios.get("user");
+    this.$store.dispatch("user", response.data);
+
+    this.user = response.data;
+  },
+  computed: {
+    ...mapGetters(["user"]),
+  },
   mounted() {
-axios.get('/users/'+this.$route.params.id, 
+axios.get('/user/'+this.$route.params.id, 
 { headers: { token: localStorage.getItem('token')}})
       .then(res => {
-        // this.username = res.data.user.username;
         this.email = res.data.user.email;
-        this.date = res.data.user.date;
+        this.password = res.data.password;
         this.name = res.data.user.name;
-        // this.desserts.username = this.username;
-        this.desserts.email = this.email;
-        this.desserts.date = this.date;
-        this.desserts.name = this.name;
-        console.log(this.desserts)
+        this.user.email = this.email;
+        this.user.password = this.password;
+        this.user.name = this.name;
+        console.log(this.user)
       })   
   },
 };
