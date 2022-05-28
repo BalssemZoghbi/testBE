@@ -189,34 +189,18 @@
                 <!-- <v-flex> --><v-list-item-title>
                   <!-- <a class="nav-link"  @click="logout" >Logout</a> -->
                   
-                  <v-btn icon v-on:click="logout()" class="clickable">
+                  <v-btn icon  class="clickable">
                     <v-icon medium color="black">mdi-logout</v-icon>
-                  </v-btn>
-                  
-     
-                  <!-- </v-flex> --></v-list-item-title>  
-                  <v-list-item-subtitle style="margin-top: -18%;margin-left: 19%;font-weight: 400;font-size: 16px;color:black">
+                  </v-btn></v-list-item-title>  
+                  <v-btn  v-on:click="logout()" style="margin-top: -18%;border: 0px!important ;box-shadow: 0px 0px!important; background-color:transparent;font-weight: 400;font-size: 16px;text-transform: capitalize;color:black">
                   Deconnexion
-                  </v-list-item-subtitle>
+                  </v-btn >
               </v-list-item-content>
             </v-list-item>
-
-           
           </v-list>
         </v-card>
             </v-menu>
-  
     </v-app-bar>
-    <!-- <v-main> -->
-      <!-- <v-container
-       class="scroll-y"
-       fluid
-      >
-       <v-row align="center" justify="center">
-           <router-view></router-view>
-       </v-row>
-      </v-container> -->
-    <!-- </v-main> -->
     <v-btn
     v-scroll="onScroll"
     bottom
@@ -253,8 +237,6 @@ import { mapGetters } from 'vuex';
       token:null,
       user: '',
       email: '',
-      // name:'',
-    // drawer: true,
     drawer: null,
       mini: false,
       fab: false,
@@ -263,17 +245,6 @@ import { mapGetters } from 'vuex';
          { icon: "fas fa-charging-station", text: "Projet", route: "/" },
          { icon: "folder_open", text: "Modele", route: "/modele" },
          { icon: "mdi-account", text: "Utilisateur", route: "/user" },
-        // {
-        //   icon: 'mdi-chevron-up',
-        //   'icon-alt': 'mdi-chevron-down',
-        //   'icon-ctr': 'fa-solid fa-cog',
-        //   text: 'Garanties',
-        //   model: false,
-        //   children: [
-        // { icon: 'style', text: 'Garantie24', route:'/garantie24' },
-        // { icon: 'fa-solid fa-bars-staggered', text: 'Garantie36', route:'/garantie36' },
-        //   ],
-        // },
         {
           icon: 'mdi-chevron-up',
           'icon-alt': 'mdi-chevron-down',
@@ -287,9 +258,6 @@ import { mapGetters } from 'vuex';
 
           ],
         },
-        // { icon: 'mdi-finance', text: 'Revenue', route:'/revenue' },
-        // { icon: 'mdi-chart-pie', text: 'Analytics', route:'/chart' },
-        // { icon: 'mdi-magnify', text: 'Search', route:'/recherches' },
       ],
         itemsemploye: [
         { icon: 'mdi-home', text: 'Tableau de bord' , route:'/dashboard'},
@@ -346,7 +314,8 @@ computed: {
     color: #ffffff !important;
     caret-color: #ff9800 !important;
 }
+
 .theme--dark.v-chip:not(.v-chip--active) {
-    background: #063b77;
+    background: #063b77 !important;
 }
 </style>
