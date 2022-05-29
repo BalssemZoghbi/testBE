@@ -334,13 +334,26 @@ this.error='une erreur s\'est produite';
   
   }
 },
-  mounted() {
-    let user = localStorage.getItem("user");
-    if (user) {
-      // this.$router.push("/");
-      window.history.back();
-    }
-  },
+  // mounted() {
+    
+      
+  // },
+  // beforeEnter: (to, from, next) => {
+  //           if (localStorage.getItem('user')) {
+  //               next();
+  //           } else {
+  //               next('/Connexion');
+  //           }
+
+  //           next();
+  //       },
+//     beforeCreate(){
+// let user = localStorage.getItem("user");
+//     if (user) {
+//       // this.$router.push("/");
+//       window.history.back();
+//     }
+    // }
 };
 </script>
 <style scoped>

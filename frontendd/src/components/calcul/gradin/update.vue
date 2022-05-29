@@ -200,7 +200,7 @@
                         ></div>
                         <div
                           v-for="item in projet.nbrGradin"
-                          :key="item"
+                          :key="'A'+item"
                           v-bind:style="{
                             width: largeur[item - 1] + 'px',
                             height: epaisseur[item - 1] + 'px',
@@ -211,7 +211,7 @@
                       <div>
                         <div
                           v-for="item in projet.nbrGradin"
-                          :key="item"
+                          :key="'B'+item"
                           v-bind:style="{
                             width: largeur[projet.nbrGradin - item] + 'px',
                             height: epaisseur[projet.nbrGradin - item] + 'px',
@@ -220,7 +220,7 @@
                         ></div>
                         <div
                           v-for="item in projet.nbrGradin"
-                          :key="item"
+                          :key="'C'+item"
                           v-bind:style="{
                             width: largeur[item - 1] + 'px',
                             height: epaisseur[item - 1] + 'px',
@@ -360,7 +360,6 @@ export default {
         largeurMin: this.projet.largeurMin,
         CMBT: this.projet.CMBT,
       };
-      console.log(this.projets);
 
       axios
         .put("/gradin/update/" + this.$route.params.id, projets)
@@ -374,6 +373,7 @@ export default {
   async mounted() {
     const result = await axios.get("projets/" + this.$route.params.id);
     this.projet = result.data;
+    
   },
   async created() {
     const result = await axios.get("/projets/" + this.$route.params.id);
@@ -450,7 +450,6 @@ export default {
       return epaisseur;
     },
     Snette() {
-      console.log(this.projet.coeffRemplissage);
       return this.DeuxChiffre(
         parseFloat(this.Sbrut) * parseFloat(this.projet.coeffRemplissage)
       );
@@ -472,12 +471,6 @@ export default {
       }
       return this.DeuxChiffre(somme);
     },
-    // epaisseurGraph(){
-    //   return 100;
-    // },
-    // largeurGraph(){
-    //   return 150;
-    // }
   },
 };
 </script>

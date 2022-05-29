@@ -228,6 +228,16 @@ const routes = [
 const router = new VueRouter({ 
   mode: "history",
   routes,
-});
-
+})
+// router.beforeEach((to, from, next) => {
+//   if (to.path == '/Connexion') { 
+//     let user = JSON.parse(localStorage.getItem('user'));
+//     if (user) {
+//       window.history.back();
+//     } else {
+//       next('/Connexion');
+//     }
+//   } else {
+//     next()
+//   }})
 export default router;
