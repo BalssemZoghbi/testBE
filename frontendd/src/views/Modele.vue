@@ -31,15 +31,66 @@
         </template>
         <template v-slot:[`item.actions`]="{ item }">
           <router-link :to="'/projet/updateModele/' + item.projets_id">
-            <v-btn class="mx-2" fab dark small color="primary">
+            <!-- <v-btn class="mx-2" fab dark small color="primary">
+              <v-icon dark> mdi-pencil </v-icon>
+            </v-btn> -->
+            <v-tooltip bottom color="primary">
+      <template v-slot:activator="{ on, attrs }">
+         <v-btn
+              class="mx-2"
+              fab
+              dark
+              v-bind="attrs"
+              v-on="on"
+              small
+              color="primary">
               <v-icon dark> mdi-pencil </v-icon>
             </v-btn>
+      </template>
+      <span>Modifier Modele</span>
+    </v-tooltip>
           </router-link>
-          <v-btn class="mx-2" fab dark small color="red">
+
+    <v-tooltip bottom color="orange">
+      <template v-slot:activator="{ on, attrs }">
+         <v-btn
+              class="mx-2"
+              fab
+              dark
+                v-bind="attrs"
+          v-on="on"
+              small 
+                 color="orange"
+            @click="exportword(item.id)"
+            >
+              <v-icon dark> mdi-cloud-download </v-icon>
+            </v-btn>
+      </template>
+      <span>exporter Modele</span>
+    </v-tooltip>
+    <v-tooltip bottom color="red">
+      <template v-slot:activator="{ on, attrs }">
+         <v-btn
+              class="mx-2"
+              fab
+              dark
+                v-bind="attrs"
+          v-on="on"
+              small 
+                 color="red"
+            @click="deleteModele(item.id)"
+            >
+              <v-icon dark> mdi-delete </v-icon>
+            </v-btn>
+      </template>
+      <span>Supprimer</span>
+    </v-tooltip>
+
+          <!-- <v-btn class="mx-2" fab dark small color="red">
             <v-icon dark v-on:click="deleteModele(item.id)">
               mdi-delete
             </v-icon>
-          </v-btn>
+          </v-btn> -->
           </template>
       </v-data-table>
     </div>
@@ -142,7 +193,25 @@ export default {
   },
 
   methods: {
-  
+  exportword(id) {
+      axios({
+        url: "documents/" + id,
+        method: "GET",
+        responseType: "blob",
+      }).then((response) => {
+        var headers = response.headers;
+        console.log(headers);
+        var fileURL = window.URL.createObjectURL(
+          new Blob([response.data], { type: headers["content-type"] })
+        );
+        var fileLink = document.createElement("a");
+        fileLink.href = fileURL;
+        fileLink.setAttribute("download", "conceptionTransfo.doc");
+        document.body.appendChild(fileLink);
+
+        fileLink.click();
+      });
+    },
     create() {
       let token = localStorage.getItem("token");
       axios
