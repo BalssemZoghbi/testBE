@@ -304,7 +304,7 @@ export default {
       { text: "Couplage", value: "couplage" },
       { text: "Materiau Primaire", value: "materiauMT" },
       { text: "Materiau Secondaire", value: "materiauBT" },
-      { text: "Actions", value: "actions" },
+      { text: "Actions", value: "actions",sortable: false },
     ],
     headersModele: [
       {
