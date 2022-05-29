@@ -1,26 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Statisique;
 use App\Models\user\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class StatisiqueController extends Controller
 {
-    public function getStatisique()
-    {
-        $statisique = Statisique::all();
-        return response()->json($statisique);
-    }
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Statisique  $statisique
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Statisique $statisique)
+    public function edit()
     {
         $users = DB::table('users')->get();
         $projets = DB::table('projets')->get();
@@ -35,7 +21,6 @@ class StatisiqueController extends Controller
         $UserChart[2]=count($userAdmin);
         $UserChart[3]=count($userInactive);
 
-        // $usersname = DB::table('users')->get('name');
         $usersname=[];
         $useradmin = User::where('type','admin')->get('name');
         $useremploye = User::where('type','employe')->get('name');
@@ -55,53 +40,13 @@ class StatisiqueController extends Controller
             ->get();
             $userprojet[$i]=count($projet);
         }
-        $statistiquecount = count(DB::table('statisiques')->get());
-        // dd($statistiquecount);
-        if($statistiquecount==0){
-        $stat= Statisique::create([
-            'userCount' => count($users),
-            'projetCount' =>count($projets),
-            'UserChart' =>$UserChart,
-            'UserName' =>$usersname,
-            'UserProjet' =>$userprojet,
-        ]);
-        }else{
-            $stat= Statisique::FindOrFail(1);
-            $stat->update([
+            return response()->json([
                 'userCount' => count($users),
-                'projetCount' =>count($projets),
-                'UserChart' =>$UserChart,
-                'UserName' =>$usersname,
-                'UserProjet' =>$userprojet,
-            ]);
-        }
-        if($stat->save()){
-            return response()->json($stat);
-        }
-    }
-
-
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Statisique  $statisique
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Statisique $statisique)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Statisique  $statisique
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Statisique $statisique)
-    {
-        //
+                        'projetCount' =>count($projets),
+                        'UserChart' =>$UserChart,
+                        'UserName' =>$usersname,
+                        'UserProjet' =>$userprojet,
+            ]
+        );
     }
 }
