@@ -15,7 +15,7 @@
                         >
                           Connecter-vous
                         </h1>
-                        <div class="text-center mt-4">
+                        <!-- <div class="text-center mt-4">
                           <v-btn class="mx-2" fab color="black" outlined>
                             <v-icon>fab fa-facebook-f</v-icon>
                           </v-btn>
@@ -26,7 +26,7 @@
                           <v-btn class="mx-2" fab color="black" outlined>
                             <v-icon>fab fa-linkedin-in</v-icon>
                           </v-btn>
-                        </div>
+                        </div> -->
                         <v-form>
                             <error v-if="error" :error="error"/>
                           <v-text-field

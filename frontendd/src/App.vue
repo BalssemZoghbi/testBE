@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-main>
-      <NavDash v-if="((this.$route.path).indexOf('Connexion'))<0" :conducteurMT="projet.conducteurMT"  :conducteurBT="projet.conducteurBT" />
+      <NavDash v-if="((this.$route.path).indexOf('Connexion'))<0&&((this.$route.path).indexOf('forgot'))<0" :conducteurMT="projet.conducteurMT"  :conducteurBT="projet.conducteurBT" />
       <router-view />
        </v-main>
   </v-app>

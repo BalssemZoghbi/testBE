@@ -2,7 +2,7 @@
   <v-row justify="center">
     <v-dialog v-model="dialog" max-width="550px" max-height="850px">
       <template v-slot:activator="{ on, attrs }">
-        <v-btn  v-bind="attrs" v-on="on" style=" background-color:white;   margin-left: -70%!important;   border: 0px!important ;box-shadow: 0px 0px!important; color:black;text-transform: none;font-weight: 400;font-size: 16px;"  >
+        <v-btn  v-bind="attrs" v-on="on" style=" background-color:transparent;margin-left: -70%;   border: 0px!important ;box-shadow: 0px 0px!important; color:black;font-weight: 400;text-transform: capitalize;font-size: 16px;"  >
           Profile
           </v-btn>
       </template>
