@@ -63,14 +63,17 @@
                               cols="6"
                               md="6"
                             >
-                              <v-text-field
-                            label="Poste*"
-                            name="poste"
+                               <v-select
+                        :items="Poste"
+                        label="Poste"
+                        name="poste"
                             prepend-icon="fa fa-user-tie"
                             type="text"
                             v-model="user.poste" 
-                            :rules="Rules"
-                          /> </v-col> 
+                            :rules="nameRules"
+                        
+                      ></v-select>
+                      </v-col> 
                            <v-col
                              cols="6"
                               md="6"
@@ -129,6 +132,7 @@ import { mapGetters } from "vuex";
 export default {
   name: "Profile",
   data: () => ({
+          Poste:['Directeur','Technicien','Ingenieur'],
     id:"",
     dialog: false,
     name: "",
