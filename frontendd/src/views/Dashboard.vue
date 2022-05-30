@@ -12,8 +12,9 @@
       >
        <v-card
        :elevation="hover ? 16 : 2"
-        class="mx-auto"
-        max-width="260"
+        class="mx-auto item"
+        max-width="300"
+        
         outlined
 
   >
@@ -36,13 +37,13 @@
       <v-icon flab color="blue darken-2">apps</v-icon>
       <v-btn text >{{projetCount}}</v-btn>
       <v-spacer></v-spacer>
-      <!-- <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon> -->
 <router-link to="/" style="text-decoration:none">  <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon></router-link>
     </v-card-actions>
   </v-card>
       </v-hover>
 
             </v-col>
+            
              <v-col >
               <v-hover
         v-slot:default="{ hover }"
@@ -50,8 +51,8 @@
       >
        <v-card
        :elevation="hover ? 16 : 2"
-        class="mx-auto"
-        max-width="344"
+        class="mx-auto item"
+        max-width="300"
         outlined
 
   >
@@ -81,15 +82,97 @@
       </v-hover>
 
             </v-col>
-            <v-col >
+             <v-col  style="width:170%!important">
               <v-hover
         v-slot:default="{ hover }"
         open-delay="200"
       >
        <v-card
        :elevation="hover ? 16 : 2"
-        class="mx-auto"
-        max-width="260"
+        class="mx-auto item"
+        max-width="300"
+        outlined
+
+  >
+    <v-list-item three-line>
+      <v-list-item-content>
+        <v-list-item-title class="headline mb-1">Modeles</v-list-item-title>
+
+      </v-list-item-content>
+
+      <v-list-item-avatar
+        tile
+        size="80"
+      color="blue darken-2"
+      >
+        <v-icon dark>folder_open</v-icon>
+      </v-list-item-avatar>
+    </v-list-item>
+    <v-divider></v-divider>
+    <v-card-actions>
+      <v-icon flab color="blue darken-2">folder_open</v-icon>
+      <v-btn text >{{ModeleCount}}</v-btn>
+      <v-spacer></v-spacer>
+<router-link to="/" style="text-decoration:none">  <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon></router-link>
+    </v-card-actions>
+  </v-card>
+      </v-hover>
+
+            </v-col>
+
+            <!--  -->
+            
+          
+             </div>
+             <div class="grid2">
+                 <v-col >
+              <v-hover
+        v-slot:default="{ hover }"
+        open-delay="200"
+      >
+       <v-card
+       :elevation="hover ? 16 : 2"
+        class="mx-auto item"
+        max-width="300"
+        outlined
+        style=" margin-left: 12%;"
+
+  >
+    <v-list-item three-line>
+      <v-list-item-content>
+        <v-list-item-title class="headline mb-1">Aluminium</v-list-item-title>
+
+      </v-list-item-content>
+
+      <v-list-item-avatar
+        tile
+        size="80"
+       color="#009432"
+      >
+        <v-icon dark>dialpad</v-icon>
+      </v-list-item-avatar>
+    </v-list-item>
+    <v-divider></v-divider>
+    <v-card-actions>
+      <v-icon flab color="#009432">dialpad</v-icon>
+      <v-btn text >{{NbreAlu}}</v-btn>
+      <v-spacer></v-spacer>
+<router-link to="/" style="text-decoration:none">  <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon></router-link>
+    </v-card-actions>
+  </v-card>
+      </v-hover>
+
+            </v-col>
+            <!--  -->
+           <v-col >
+              <v-hover
+        v-slot:default="{ hover }"
+        open-delay="200"
+      >
+       <v-card
+       :elevation="hover ? 16 : 2"
+        class="mx-auto item"
+        max-width="300"
         outlined
 
   >
@@ -112,132 +195,15 @@
       <v-icon flab color="blue darken-2">business</v-icon>
       <v-btn text >{{NbreCuivre}}</v-btn>
       <v-spacer></v-spacer>
-      <!-- <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon> -->
 <router-link to="/" style="text-decoration:none">  <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon></router-link>
     </v-card-actions>
   </v-card>
       </v-hover>
 
             </v-col>
-            <v-col >
-              <v-hover
-        v-slot:default="{ hover }"
-        open-delay="200"
-      >
-       <v-card
-       :elevation="hover ? 16 : 2"
-        class="mx-auto"
-        max-width="260"
-        outlined
-
-  >
-    <v-list-item three-line>
-      <v-list-item-content>
-        <v-list-item-title class="headline mb-1">Aluminium</v-list-item-title>
-
-      </v-list-item-content>
-
-      <v-list-item-avatar
-        tile
-        size="80"
-       color="#009432"
-      >
-        <v-icon dark>dialpad</v-icon>
-      </v-list-item-avatar>
-    </v-list-item>
-    <v-divider></v-divider>
-    <v-card-actions>
-      <v-icon flab color="#009432">dialpad</v-icon>
-      <v-btn text >{{NbreAlu}}</v-btn>
-      <v-spacer></v-spacer>
-      <!-- <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon> -->
-<router-link to="/" style="text-decoration:none">  <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon></router-link>
-    </v-card-actions>
-  </v-card>
-      </v-hover>
-
-            </v-col>
-
-             <!-- <div class="flex">
-            <v-col >
-              <v-hover
-        v-slot:default="{ hover }"
-        open-delay="200"
-      >
-       <v-card
-       :elevation="hover ? 16 : 2"
-        class="mx-auto"
-        max-width="344"
-        outlined
-
-  >
-    <v-list-item three-line>
-      <v-list-item-content>
-        <v-list-item-title class="headline mb-1">Projets</v-list-item-title>
-
-      </v-list-item-content>
-
-      <v-list-item-avatar
-        tile
-        size="80"
-       color="blue darken-2"
-      >
-        <v-icon dark>fas fa-project-diagram</v-icon>
-      </v-list-item-avatar>
-    </v-list-item>
-    <v-divider></v-divider>
-    <v-card-actions>
-      <v-icon flab color="blue darken-2">apps</v-icon>
-      <v-btn text >{{projetCount}}</v-btn>
-      <v-spacer></v-spacer>
-<router-link to="/" style="text-decoration:none">  <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon></router-link>
-    </v-card-actions>
-  </v-card>
-      </v-hover>
-
-            </v-col> -->
-            <!-- <v-col >
-              <v-hover
-        v-slot:default="{ hover }"
-        open-delay="200"
-      >
-       <v-card
-       :elevation="hover ? 16 : 2"
-        class="mx-auto"
-        max-width="344"
-        outlined
-
-  >
-    <v-list-item three-line>
-      <v-list-item-content>
-        <v-list-item-title class="headline mb-1">Utilisateurs</v-list-item-title>
-
-      </v-list-item-content>
-
-      <v-list-item-avatar
-        tile
-        size="80"
-       color="#009432"
-      >
-        <v-icon dark>mdi-account</v-icon>
-      </v-list-item-avatar>
-    </v-list-item>
-    <v-divider></v-divider>
-    <v-card-actions>
-      <v-icon flab color="#009432">directions_walk</v-icon>
-      <v-btn text >{{userCount}}</v-btn>
-      <v-spacer></v-spacer>
-<router-link to="/user" style="text-decoration:none"><v-icon flab color="#2C3A47">mdi-chevron-right</v-icon></router-link>
-    </v-card-actions>
-  </v-card>
-  
-      </v-hover>
-
-            </v-col> -->
              </div>
           </v-row>
           <div class="flex">
-            <!-- style="margin-top: 4%;width: 139%;" -->
               <div >
    <Pie
     :chart-options="chartOptions"
@@ -251,9 +217,6 @@
     :height="height"
   />
   </div>
-  <!-- style="    margin-top: -35%;
-    width: 51%;
-    margin-left: -2%;" -->
   <div >
     <Bar
     :chart-options="chartOptionsBar"
@@ -268,9 +231,6 @@
   />
   </div>
   </div>
-   <!-- style="margin-top: 5%;
-    width: 50%;
-    margin-left: 39%;" -->
     <div class="flex">
    <div >
    <LineChartGenerator
@@ -285,7 +245,6 @@
     :height="height"
   />
   </div>
-  <!-- style="margin-top: -37%;width: 139%;margin-left:-50%"-->
   <div >
   <Doughnut
     :chart-options="chartOptionsDonut"
@@ -301,15 +260,6 @@
   </div>
   </div>
         </v-container>
-        <!-- </v-card>
-      </v-col> -->
-      <!-- <v-col cols="10" sm="12">
-    <v-card class="px-2">
-        <Carousel />
-    </v-card>
-
-      </v-col> -->
-    
     </v-row>
    
   </v-layout>
@@ -415,6 +365,7 @@ import axios from "axios";
     }
   },
   data: () => ({
+    ModeleCount:"",
     userCount:"",
     projetCount:"",
     NbreCuivre:"",
@@ -430,28 +381,7 @@ import axios from "axios";
     chartOptionsLine:{},
     chartDataDonut:{},
     chartOptionsDonut:{},
-    // chartDataBar: {
-    //     labels: [
-    //       'Utilisateur1',
-    //       'Utilisateur2',
-    //       'Utilisateur3',
-    //       'Utilisateur4',
-    //       'Utilisateur5',
-    //       'Utilisateur6'
-    //     ],
-    //     datasets: [
-    //       {
-    //         label: 'Projets',
-    //         backgroundColor: '#448DD3',
-    //         data: [40, 20, 12, 39, 10, 40]
-    //       }
-    //     ]
-    //   },
-    //   chartOptionsBar: {
-    //     responsive: true,
-    //     maintainAspectRatio: false
-    //   }
-    
+  
   }),
     mounted(){
   let user=localStorage.getItem('user');
@@ -464,12 +394,13 @@ import axios from "axios";
         .post("/statEmploye")
         .then((response) => (this.ProjetChart=response.data.ProjetChart,
         this.NbreAlu=response.data.NbreAlu,
+        this.ModeleCount=response.data.ModeleCount,
         this.NbreCuivre=response.data.NbreCuivre,
         this.chartDataDonut={
-        labels: ['Vierge', 'Feuillard&Emaille', 'Feuillard&Meplat', 'Meplat&Emaille'],
+        labels: ['Meplat Guipé Primaire', 'Rond Emaillé Primaire', 'Feuillard Primaire', 'Meplat Guipé Secondaire', 'Rond Emaillé Secondaire', 'Feuillard Secondaire'],
         datasets: [
           {
-            backgroundColor: ['#3358FF', '#0628C4', '#00D8FF', '#1DA1B0'],
+            backgroundColor: ['#3358FF', '#0628C4', '#00D8FF', '#1DA1B0','#3358FF', '#0628C4'],
             data: response.data.ProjetChart
           }
         ]
@@ -482,7 +413,7 @@ import axios from "axios";
         labels: [
           'Janvier',
           'Fevrier',
-          'Mas',
+          'Mars',
           'Avril',
           'Mai',
           'Juin',
@@ -530,7 +461,6 @@ import axios from "axios";
       },
       this.chartDataBar= {
         labels: response.data.UserName,
-        // response.data.UserName,
         datasets: [
           {
             label: 'Projets',
@@ -551,23 +481,37 @@ import axios from "axios";
 .flex{
   display: grid;
     grid-template-columns: repeat(2, 1fr);
-    /* grid-gap: 10px; */
     margin-top: 10px;
+}
+.grid2{
+  display: grid;
+    grid-template-columns: repeat(2, 1fr);
+       grid-gap: 10px;
+  margin-top: 10px;
+  margin-left: 20%;
 }
 .flex4{
   display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    /* grid-gap: 10px; */
-    margin-top: 10px;
+    grid-template-columns: repeat(3, 1fr);
+     grid-gap: 10px;
+  margin-top: 10px;
+  margin-left: 8%;
+}
+.item{
+  width: 110%;
 }
 @media (max-width: 1245px) {
   .flex {
     grid-template-columns: repeat(1, 1fr);
-    /* margin-left: 0%; */
     }
   .flex4 {
     grid-template-columns: repeat(2, 1fr);
     margin-left: 4%;
+    }
+  .grid2 {
+    grid-template-columns: repeat(2, 1fr);
+    margin-left: 4%;
+     /* margin-bottom: 4%; */
     }
   }
 </style>

@@ -34,7 +34,7 @@
                         outlined
                         dense
                       ></v-text-field>
-                            <v-text-field
+                      <v-text-field
                         label="Diametre propose"
                         v-model="diamPropose"
                         success
@@ -49,7 +49,6 @@
                         v-model="projet.diamNominale"
                         outlined
                       ></v-text-field>
-                
 
                       <v-text-field
                         label="nbrGradin"
@@ -57,7 +56,7 @@
                         outlined
                         dense
                       ></v-text-field>
-                 
+
                       <v-text-field
                         label="largeurMin"
                         dense
@@ -70,68 +69,71 @@
                         outlined
                         dense
                       ></v-text-field>
-                           <v-text-field
+                      <v-text-field
                         label="demiGradin"
                         dense
                         v-model="projet.demiGradin"
                         outlined
                       ></v-text-field>
-
                     </div>
-                      <v-row cols="2" md="4" class="mr-4">
-              <v-card outlined tile>
-                <template>
-                  <v-row>
-                    <v-col>
-                      <v-card>
-                        <v-card-title class="subheading font-weight-bold">
-                          Largeur
-                        </v-card-title>
+                    <v-row cols="2" md="4" class="mr-4">
+                      <v-card outlined tile>
+                        <template>
+                          <v-row>
+                            <v-col>
+                              <v-card>
+                                <v-card-title
+                                  class="subheading font-weight-bold"
+                                >
+                                  Largeur
+                                </v-card-title>
 
-                        <v-divider></v-divider>
+                                <v-divider></v-divider>
 
-                        <v-list dense>
-                          <v-list-item v-for="item in largeur" :key="item">
-                            <v-list-item-content>{{
-                              item
-                            }}</v-list-item-content>
-                            <v-list-item-content class="align-end">
-                            </v-list-item-content>
-                          </v-list-item>
-                        </v-list>
+                                <v-list dense>
+                                  <v-list-item
+                                    v-for="item in largeur"
+                                    :key="item"
+                                  >
+                                    <v-list-item-content>{{
+                                      item
+                                    }}</v-list-item-content>
+                                    <v-list-item-content class="align-end">
+                                    </v-list-item-content>
+                                  </v-list-item>
+                                </v-list>
+                              </v-card>
+                            </v-col>
+                          </v-row>
+                        </template>
                       </v-card>
-                    </v-col>
-                  </v-row>
-                </template>
-              </v-card>
-              <v-card cols="2" md="4" class="ml-4" outlined tile>
-                <template style="width: 33%">
-                  <v-card-title class="subheading font-weight-bold">
-                    Epaisseur
-                  </v-card-title>
+                      <v-card cols="2" md="4" class="ml-4" outlined tile>
+                        <template style="width: 33%">
+                          <v-card-title class="subheading font-weight-bold">
+                            Epaisseur
+                          </v-card-title>
 
-                  <v-divider></v-divider>
+                          <v-divider></v-divider>
 
-                  <v-list dense>
-                    <v-list-item
-                      v-for="item in epaisseur"
-                      :key="item"
-                      style="width: 176% !important"
-                    >
-                      <v-list-item-content vertical>{{
-                        item
-                      }}</v-list-item-content>
-                      <v-list-item-content
-                        class="align-end"
-                        v-model="projet.spire"
-                      >
-                      </v-list-item-content>
-                    </v-list-item>
-                  </v-list>
-                </template>
-              </v-card>
-            </v-row>
-                   
+                          <v-list dense>
+                            <v-list-item
+                              v-for="item in epaisseur"
+                              :key="item"
+                              style="width: 176% !important"
+                            >
+                              <v-list-item-content vertical>{{
+                                item
+                              }}</v-list-item-content>
+                              <v-list-item-content
+                                class="align-end"
+                                v-model="projet.spire"
+                              >
+                              </v-list-item-content>
+                            </v-list-item>
+                          </v-list>
+                        </template>
+                      </v-card>
+                    </v-row>
                   </div>
                 </div>
               </form>
@@ -149,87 +151,84 @@
         <v-stepper-content step="2">
           <div class="title">Gadin</div>
           <div class="content">
-             <div class="user-details">
-                  <div class="div">
-                    <div class="field">
-                          <div class="form__div">
-                      <input
-                        type="number"
-                        class="form__input auto"
-                        placeholder=" "
-                        id="Snette"
-                        v-model="Snette"
-                      />
-                      <label for="" class="form__label autol">Snette</label>
-                    </div>
-                          <div class="form__div">
-                      <input
-                        type="number"
-                        class="form__input auto"
-                        placeholder=" "
-                        id="Sbrut"
-                        v-model="Sbrut"
-                      />
-                      <label for="" class="form__label autol">Sbrut</label>
-                    </div>
-                          <div class="form__div">
-                      <input
-                        type="number"
-                        class="form__input auto"
-                        placeholder=" "
-                        id="EpaisseurTot"
-                        v-model="EpaisseurTot"
-                      />
-                      <label for="" class="form__label autol">EpaisseurTot</label>
-                    </div>
+            <div class="user-details">
+              <div class="div">
+                <div class="field">
+                  <div class="form__div">
+                    <input
+                      type="number"
+                      class="form__input auto"
+                      placeholder=" "
+                      id="Snette"
+                      v-model="Snette"
+                    />
+                    <label for="" class="form__label autol">Snette</label>
+                  </div>
+                  <div class="form__div">
+                    <input
+                      type="number"
+                      class="form__input auto"
+                      placeholder=" "
+                      id="Sbrut"
+                      v-model="Sbrut"
+                    />
+                    <label for="" class="form__label autol">Sbrut</label>
+                  </div>
+                  <div class="form__div">
+                    <input
+                      type="number"
+                      class="form__input auto"
+                      placeholder=" "
+                      id="EpaisseurTot"
+                      v-model="EpaisseurTot"
+                    />
+                    <label for="" class="form__label autol">EpaisseurTot</label>
+                  </div>
+                </div>
 
-           
-                    </div>
-                   
-            
-            <div class="grid2">
-                      <div style="transform: rotate(-180deg)">
-                        <div
-                          v-for="item in projet.nbrGradin"
-                          :key="item"
-                          :style="{
-                            width: largeur[projet.nbrGradin - item] + 'px',
-                            height: epaisseur[projet.nbrGradin - item] + 'px',
-                            'background-color': 'blue',
-                          }"
-                        ></div>
-                        <div
-                          v-for="item in projet.nbrGradin"
-                          :key="'A'+item"
-                          v-bind:style="{
-                            width: largeur[item - 1] + 'px',
-                            height: epaisseur[item - 1] + 'px',
-                            'background-color': 'blue',
-                          }"
-                        ></div>
-                      </div>
-                      <div>
-                        <div
-                          v-for="item in projet.nbrGradin"
-                          :key="'B'+item"
-                          v-bind:style="{
-                            width: largeur[projet.nbrGradin - item] + 'px',
-                            height: epaisseur[projet.nbrGradin - item] + 'px',
-                            'background-color': 'blue',
-                          }"
-                        ></div>
-                        <div
-                          v-for="item in projet.nbrGradin"
-                          :key="'C'+item"
-                          v-bind:style="{
-                            width: largeur[item - 1] + 'px',
-                            height: epaisseur[item - 1] + 'px',
-                            'background-color': 'blue',
-                          }"
-                        ></div>
-                      </div>
-                      <!-- <div  :v-for="index in 3" this.largeur.length :style="{width:'30%', 'height':'30%','background-color':blue}"> -->
-                      <!-- <div
+                <div class="grid2">
+                  <div style="transform: rotate(-180deg)">
+                    <div
+                      v-for="item in nbGraph"
+                      :key="item"
+                      :style="{
+                        width: largeur[nbGraph - item] + 'px',
+                        height: epaisseur[nbGraph - item] + 'px',
+                        'background-color': 'blue',
+                      }"
+                    ></div>
+                    <div
+                      v-for="item in nbGraph"
+                      :key="'A' + item"
+                      v-bind:style="{
+                        width: largeur[item - 1] + 'px',
+                        height: epaisseur[item - 1] + 'px',
+                        'background-color': 'blue',
+                      }"
+                    ></div>
+                  </div>
+                  <div>
+                    <div
+                      v-for="item in nbGraph"
+                      :key="'B' + item"
+                      v-bind:style="{
+                        width: largeur[nbGraph - item] + 'px',
+                        height: epaisseur[nbGraph - item] + 'px',
+                        'background-color': 'blue',
+                      }"
+                    ></div>
+                    <div
+                      v-for="item in nbGraph"
+                      :key="'C' + item"
+                      v-bind:style="{
+                        width: largeur[item - 1] + 'px',
+                        height: epaisseur[item - 1] + 'px',
+                        'background-color': 'blue',
+                      }"
+                    ></div>
+                  </div>
+                  <!-- <div  :v-for="index in 3" this.largeur.length :style="{width:'30%', 'height':'30%','background-color':blue}"> -->
+                  <!-- <div
                         :v-for="item in largeur"
                         v-bind:style="{
                           width: item + 'px',
@@ -237,13 +236,13 @@
                           'background-color': 'blue',
                         }"
                       > -->
-                      <!-- {{ item }} -->
-                      <!-- :v-for="(item, index) in this.largeur"-->
-                      <!-- width: epaisseur[index]+'px', -->
-                      <!-- </div> -->
-                      <!-- </div> -->
+                  <!-- {{ item }} -->
+                  <!-- :v-for="(item, index) in this.largeur"-->
+                  <!-- width: epaisseur[index]+'px', -->
+                  <!-- </div> -->
+                  <!-- </div> -->
 
-                      <!-- <div class="grid2">
+                  <!-- <div class="grid2">
                           <div style="transform : rotate(-180deg)">
                           <div>
                         <div  v-bind:style="{'background-color':'blue', width: this.largeur[7] + 'px', height: this.epaisseur[7] + 'px'}"  > </div>
@@ -295,8 +294,10 @@
 
 
                      </div> -->
-                    </div>
-          </div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
           <v-btn color="primary mb-14" @click="e1 = 1"> précédent </v-btn>
           <v-btn color="success mb-14" @click="updateprojet"> Valider </v-btn>
         </v-stepper-content>
@@ -315,8 +316,7 @@ export default {
   },
   data() {
     return {
-      epaisseurGraph: 100,
-      largeurGraph: 150,
+      // nbGraph: "",
       spinner: true,
       toles: [],
       pas: ["10", "20"],
@@ -373,7 +373,6 @@ export default {
   async mounted() {
     const result = await axios.get("projets/" + this.$route.params.id);
     this.projet = result.data;
-    
   },
   async created() {
     const result = await axios.get("/projets/" + this.$route.params.id);
@@ -383,6 +382,13 @@ export default {
     this.spinner = false;
   },
   computed: {
+    nbGraph() {
+      console.log(this.projet.nbrGradin);
+      console.log(this.largeur);
+      console.log(this.epaisseur);
+      // this.nbGraph=this.epaisseur.nbrGradin;
+      return this.projet.nbrGradin;
+    },
     diamPropose() {
       if (this.projet.materiauMT == "cuivre") {
         return (
@@ -476,16 +482,15 @@ export default {
 </script>
 
 <style scoped>
-.auto{
-    border: 1px solid green !important;
-        border-color: green !important;
-        caret-color: green !important;
-        color: rgb(7, 134, 7) !important;
-
+.auto {
+  border: 1px solid green !important;
+  border-color: green !important;
+  caret-color: green !important;
+  color: rgb(7, 134, 7) !important;
 }
 
- .autol{
- color: green !important;
+.autol {
+  color: green !important;
 }
 .grid2 {
   display: flex;

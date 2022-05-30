@@ -262,15 +262,15 @@ export default {
       },
     ],
     itemsemploye: [
-      { icon: "mdi-home", text: "Tableau de bord", route: "/dashboard" },
+      { icon: "mdi-home", text: "Tableau de bord", route: "/dashboardEmploye" },
       { icon: "fas fa-charging-station", text: "projet", route: "/" },
+      { icon: "folder_open", text: "Modele", route: "/modele" },
     ],
   }),
   async created() {
     const response = await axios.get("user");
     this.$store.dispatch("user", response.data);
     this.user = response.data;
-    // console.log((this.$route.path).indexOf('projet'));
   },
   computed: {
     ...mapGetters(["user"]),
