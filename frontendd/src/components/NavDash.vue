@@ -170,13 +170,30 @@
             </v-list-item>
             <v-divider />
             <v-spacer></v-spacer>
-            <v-list-item router style="margin-top: 2%; margin-left: 1%">
-              <v-list-item-action>
-                <v-icon medium color="black">mdi-account</v-icon>
-              </v-list-item-action>
-              <v-flex class="mt-4 mb-4">
-                <Profile />
-              </v-flex>
+         <v-list-item router>
+              <v-list-item-content style="margin-top: -3%">
+                <v-list-item-title>
+                  <v-btn icon class="clickable">
+                    <v-icon medium color="black">mdi-account</v-icon>
+                  </v-btn></v-list-item-title
+                >
+                <v-btn
+                @click="$router.push('/profil')"
+                  style="
+                    margin-top: -18%;
+                    margin-left: -20%;
+                    border: 0px !important ;
+                    box-shadow: 0px 0px !important;
+                    background-color: transparent;
+                    font-weight: 400;
+                    font-size: 16px;
+                    text-transform: capitalize;
+                    color: black;
+                  "
+                >
+                  Profile
+                </v-btn>
+              </v-list-item-content>
             </v-list-item>
             <v-list-item router>
               <v-list-item-content style="margin-top: -3%">
@@ -225,14 +242,12 @@
 
 <script>
 import Footer from "@/components/Footer";
-import Profile from "../components/user/Profile";
 import navbarUpdate from "@/components/navbarUpdate";
 import axios from "axios";
 import { mapGetters } from "vuex";
 export default {
   components: {
     Footer,
-    Profile,
     navbarUpdate,
   },
   data: () => ({
