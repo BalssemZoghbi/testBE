@@ -1,9 +1,9 @@
 <template>
   <div>
-       <Loading v-if="spinner" />
+       
     <div class="body">
       <v-stepper v-model="e1" vertical>
-           
+           <Loading v-if="spinner" />
         <v-stepper-step :complete="e1 > 1" step="1"> Calcul </v-stepper-step>
         <v-stepper-content step="1">
           <v-card class="mb-14" >
@@ -392,7 +392,7 @@ export default {
   },
   data() {
     return {
-      spinner: false,
+      spinner: true,
       tole:[],
       projet: {
         id: undefined,
@@ -480,11 +480,11 @@ export default {
     }
   },
   async created(){
-      const result = await axios.get("projets/" + this.$route.params.id);
-    this.projet = result.data;
-   this.spinner =false;
+  const result = await axios.get("projets/" +  this.$route.params.id);
+      this.$store.dispatch("projet", result.data)
+          this.projet = result.data;
     this.getTole();
-     
+      this.spinner =false;
   },
   
   async mounted() {
