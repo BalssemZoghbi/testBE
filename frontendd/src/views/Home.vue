@@ -229,6 +229,18 @@
                   Modele
                 </v-btn>
               </v-list-item-title>
+              <!-- <br> -->
+               <v-btn
+                  class="ma-2 white--text"
+                  v-on:click="exportjson(item.id)"
+                  outlined
+                  color="cyan"
+                >
+                <!-- <i class="fa-solid fa-brackets-curly"></i> -->
+                  <v-icon dark> mdi-download</v-icon>
+
+                  Export json
+                </v-btn>
               <!-- </v-list-item> -->
             </v-list>
           </v-menu>
@@ -403,6 +415,25 @@ export default {
         var fileLink = document.createElement("a");
         fileLink.href = fileURL;
         fileLink.setAttribute("download", "conceptionTransfo.doc");
+        document.body.appendChild(fileLink);
+
+        fileLink.click();
+      });
+    },
+    exportjson(id) {
+      axios({
+        url: "/json/" + id,
+        method: "GET",
+        responseType: "blob",
+      }).then((response) => {
+        var headers = response.headers;
+        console.log(headers);
+        var fileURL = window.URL.createObjectURL(
+          new Blob([response.data], { type: headers["content-type"] })
+        );
+        var fileLink = document.createElement("a");
+        fileLink.href = fileURL;
+        fileLink.setAttribute("download", id+'.json');
         document.body.appendChild(fileLink);
 
         fileLink.click();

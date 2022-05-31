@@ -46,6 +46,24 @@ class ProjetController extends Controller
         }
         return response()->json($projet);
     }
+    public function exportJson($id){
+        $projet = Projet::findOrFail($id);
+        $electrique = Electrique::findOrFail($id);
+        $garantie = Garantie::findOrFail($id);
+        $donnesBobines = DonneBobine::findOrFail($id);
+        $gradin = Gradin::findOrFail($id);
+        $bobineMT = Bobinage::findOrFail($id);
+        $bobineBT = BobinageSec::findOrFail($id);
+        $pcc = PccUcc::findOrFail($id);
+        $cm = Circuitmagnetique::findOrFail($id);
+        $table = collect(['projets' => $projet, 'electriques' => $electrique, 'garanties' => $garantie, 'donnee_bobines' => $donnesBobines, 'gradins' => $gradin, 'bobinages' => $bobineMT, 'bobinage_secs' => $bobineBT, 'pcc_uccs' => $pcc, 'circuitmagnetiques' => $cm]);
+        $filename = $id.".json";
+        $handle = fopen($filename, 'w+');
+        fputs($handle, $table->toJson(JSON_PRETTY_PRINT));
+        fclose($handle);
+        $headers = array('Content-type'=> 'application/json');
+        return response()->download($filename, $id.'.json',$headers);
+    }
 
     public function addProjet(Request $request)
     {
