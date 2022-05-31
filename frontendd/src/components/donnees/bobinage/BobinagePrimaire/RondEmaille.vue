@@ -459,11 +459,12 @@ export default {
     }
     }
   },
-  async mounted() {
-    const result = await axios.get("projets/" + this.$route.params.id);
-    this.projet = result.data;
-        this.spinner=false;
-  },
+  // async mounted() {
+  //     const result = await axios.get("projets/" +  this.$route.params.id);
+  //     this.$store.dispatch("projet", result.data);
+  //   this.projet = result.data;
+  //       this.spinner=false;
+  // },
   async created() {
     axios
       .get("/getdesignationBarre")
@@ -476,8 +477,10 @@ export default {
       .then((response) => (this.saillie = response.data));
     axios.get("/emaille").then((response) => (this.emaille = response.data));
 
-    const result = await axios.get("projets/" + this.$route.params.id);
+      const result = await axios.get("projets/" +  this.$route.params.id);
+      this.$store.dispatch("projet", result.data)
     this.projet = result.data;
+     this.spinner=false;
     console.log(this.projet);
   },
   computed: {
