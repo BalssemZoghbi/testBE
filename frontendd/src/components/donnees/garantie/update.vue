@@ -9,8 +9,6 @@
         <v-stepper-content step="1">
           <v-card class="mb-6">
             <div class="title">Données de Garantie</div>
-
-            <!-- <div class="content"> -->
               <v-col cols="2" style="margin-top: -7%; margin-left: 28%">
                 <v-menu transition="slide-x-transition" offset-x>
                   <template v-slot:activator="{ on, attrs }">
@@ -48,10 +46,9 @@
                     <div class="div">
                     <div class="field10">
                       <v-text-field
-                      success
+                      outlined
                         label="Pog"
                         v-model="projet.Pog"
-                        outlined
                       ></v-text-field>
                       <v-text-field
                       success
@@ -64,9 +61,7 @@
                       <v-text-field
                         label="Iog"
                        id="log"
-                            
-                            success
-                            v-model="projet.log"
+                        v-model="projet.log"
                         outlined
                       ></v-text-field>
                       <v-text-field
@@ -80,8 +75,8 @@
                     </div>
                     <div class="field10">
                       <v-text-field
+                      
                         label="Pccg"
-                        success
                         v-model="projet.Pccg"
                         outlined
                       ></v-text-field>
@@ -96,7 +91,7 @@
                       <v-text-field
                         label="Ptot"
                         v-model="Ptot"
-                        success
+                        
                         outlined
                       ></v-text-field>
                       <v-text-field
@@ -109,7 +104,7 @@
                     <div class="field10">
                       <v-text-field
                         label="Uccg"
-                        success
+                        
                         v-model="projet.Uccg"
                         outlined
                       ></v-text-field>
@@ -131,13 +126,12 @@
                       <v-text-field
                         label="Echauffement Enroul"
                         v-model="echauffementEnroulement"
-                        success
                         outlined
                       ></v-text-field>
                       <v-text-field
                         label="Echauffement Huile"
                         v-model="echauffementHuile"
-                        success
+                        
                         outlined
                       ></v-text-field>
                     </div>
@@ -440,7 +434,7 @@ form .user-details .input-box {
 .v-stepper--vertical {
     padding-bottom:0px;
 }
-@media (max-width:1000px) {
+@media (max-width:834px) {
   .container {
     max-width: 100%;
   }
@@ -461,7 +455,7 @@ form .user-details .input-box {
   .field10 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 1fr 1fr;
+  /* grid-template-rows: 1fr 1fr; */
   grid-gap: 10px;
   margin-right: 5%;
 }
@@ -470,6 +464,12 @@ form .user-details .input-box {
   grid-template-columns: 1fr ;
   grid-gap: 10px;
 }
+.user-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 10px 0 12px 0;
+}
 }
 @media (max-width: 459px) {
   .container .content .category {
@@ -477,10 +477,16 @@ form .user-details .input-box {
   }
   .field10 {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 1fr 1fr;
+  grid-template-columns: repeat(1, 1fr);
+  /* grid-template-rows: 1fr 1fr; */
   grid-gap: 10px;
   margin-right: 5%;
+}
+.user-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 10px 0 12px 0;
 }
 .div{
   display: grid; 
