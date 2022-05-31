@@ -234,9 +234,10 @@
                   class="ma-2 white--text"
                   v-on:click="exportjson(item.id)"
                   outlined
-                  color="yellow"
+                  color="cyan"
                 >
-                  <v-icon dark> mdi-cloud-download </v-icon>
+                <!-- <i class="fa-solid fa-brackets-curly"></i> -->
+                  <v-icon dark> mdi-download</v-icon>
 
                   Export json
                 </v-btn>
