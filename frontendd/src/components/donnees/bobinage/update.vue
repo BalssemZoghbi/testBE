@@ -1,115 +1,103 @@
 <template>
-   <div>
-<div class="body">
-      <v-stepper v-model="e1"  vertical>
-    <Loading v-if="spinner" />
-      <v-stepper-step
-        step=""
-      >
-       Données Bobinage
-      </v-stepper-step>
- <v-stepper-content step="1">
-  <v-card class="mb-14"  >
-    <div class="content">
-      <form  v-on:submit.prevent="updateprojet">
-        <div class="user-details">
-           <div class="input-box">
-               <div class="title">bobine primaire</div>
-               <div class="form__div">
-                <v-select
-                :items="materiau"
-                label="materiau"
-                v-model="projet.materiauMT"
-                dense
-                outlined
-              ></v-select>
+  <div>
+    <div class="body">
+      <v-stepper v-model="e1" vertical>
+        <Loading v-if="spinner" />
+        <v-stepper-step step=""> Données Bobinage </v-stepper-step>
+        <v-stepper-content step="1">
+          <v-card class="mb-14">
+            <div class="content">
+              <form v-on:submit.prevent="updateprojet">
+                <div class="user-details">
+                  <div class="input-box">
+                    <div class="title">bobine primaire</div>
+                    <br>
+                    <div class="form__div">
+                      <v-select
+                        :items="materiau"
+                        label="materiau"
+                        v-model="projet.materiauMT"
+                        dense
+                        outlined
+                      ></v-select>
+                    </div>
+                  </div>
+
+                  <div class="input-box">
+                    <div class="title">bobine secondaire</div>
+                    <br>
+                    <div class="form__div">
+                      <v-select
+                        :items="materiau"
+                        label="materiau"
+                        v-model="projet.materiauBT"
+                        dense
+                        outlined
+                      ></v-select>
+                    </div>
+                  </div>
+
+                  <div class="input-box">
+                    <div class="form__div">
+                      <v-select
+                        :items="conducteur"
+                        label="conducteur"
+                        v-model="projet.conducteurMT"
+                        dense
+                        outlined
+                      ></v-select>
+                    </div>
+                  </div>
+                  <div class="input-box">
+                    <div class="form__div">
+                      <v-select
+                        :items="conducteur"
+                        label="conducteur"
+                        v-model="projet.conducteurBT"
+                        dense
+                        outlined
+                      ></v-select>
+                    </div>
+                  </div>
                 </div>
-          </div>
-           
-           <div class="input-box">
-             <div class="title">bobine secondaire</div>
-               <div class="form__div">
-                <v-select
-                :items="materiau"
-                label="materiau"
-                v-model="projet.materiauBT"
-                dense
-                outlined
-              ></v-select>
-                </div>
-          </div>
-          
-         
-             <div class="input-box">
-            <div class="form__div">
-            <v-select
-                :items="conducteur"
-                label="conducteur"
-                v-model="projet.conducteurMT"
-                dense
-                outlined
-              ></v-select>
-          </div>
-          </div>
-            <div class="input-box">
-            <div class="form__div">
-           <v-select
-               :items="conducteur"
-                label="conducteur"
-                v-model="projet.conducteurBT"
-                dense
-                outlined
-              ></v-select>
-          </div>
-          </div>
-        </div>
-      </form>
-        </div>
-  </v-card>   
-       <router-link
-              class="nav-link"
-              :to="
-                '/projet/garantie/' + this.$route.params.id
-              "
-              > <v-btn
-        color="primary mb-8"
-        @click="e1 = 2"
-      >
-        précédent
-      </v-btn> </router-link>
-                   <v-btn color="success mb-8" @click="updateprojet">
-          Valider
-        </v-btn>
-      </v-stepper-content>
-    <!-- </v-stepper-items> -->
-  </v-stepper>
-</div>
-</div>
+              </form>
+            </div>
+          </v-card>
+          <router-link
+            class="nav-link"
+            :to="'/projet/garantie/' + this.$route.params.id"
+          >
+            <v-btn color="primary mb-8" @click="e1 = 2"> précédent </v-btn>
+          </router-link>
+          <v-btn color="success mb-8" @click="updateprojet"> Valider </v-btn>
+        </v-stepper-content>
+      </v-stepper>
+    </div>
+  </div>
 </template>
 
 <script>
 import axios from "axios";
-import Loading from '../../Loading.vue';
+import Loading  from '@/components/Loading.vue';
 export default {
-    components: {
-        Loading
-      },
+  components: {
+    Loading,
+  },
   data() {
     return {
-      spinner:false,
+      spinner: true,
       cond1: "meplat guipé",
       cond2: "feuillard",
-      conducteur: ['meplat guipé','Rond emaille','feuillard'], 
-      materiau: ['cuivre','aluminium'], 
+      conducteur: ["meplat guipé", "Rond emaille", "feuillard"],
+      materiau: ["cuivre", "aluminium"],
       projet: {
-      id:undefined,
-      materiauMT:"",
-      conducteurMT:"",
-      materiauBT:"",
-      conducteurBT:"",
-  
+        id: undefined,
+        materiauMT: "",
+        conducteurMT: "",
+        materiauBT: "",
+        conducteurBT: "",
       },
-      e1:1
+      e1: 1,
     };
   },
   methods: {
@@ -120,34 +108,32 @@ export default {
         conducteurMT: this.projet.conducteurMT,
         materiauBT: this.projet.materiauBT,
         conducteurBT: this.projet.conducteurBT,
-        
       };
-      axios.put('donnebobine/update/'+this.$route.params.id, projets).then(
-        (response) => (this.id = response.data.id)
-        
-      );
+      axios
+        .put("donnebobine/update/" + this.$route.params.id, projets)
+        .then((response) => (this.id = response.data.id));
 
- this.$router.push('/projet/gradin/'+this.$route.params.id);    },
-  
+      this.$router.push("/projet/gradin/" + this.$route.params.id);
+    },
   },
-  beforeCreate(){
-     const result =  axios.get('projets/'+this.$route.params.id);
-    this.cond1=result.data.conducteurMT;
-    this.cond2=result.data.conducteurBT;
-
- },
-   async created() {
-    const result = await axios.get("/projets/" + this.$route.params.id);
+  beforeCreate() {
+    const result = axios.get("projets/" + this.$route.params.id);
+    this.cond1 = result.data.conducteurMT;
+    this.cond2 = result.data.conducteurBT;
+  },
+  async created() {
+      const result = await axios.get("projets/" + this.$route.params.id);
+      this.$store.dispatch("projet", result.data);
     this.projet = result.data;
     this.spinner = false;
   },
   async mounted() {
-    const result = await axios.get('projets/'+this.$route.params.id);
+    const result = await axios.get("projets/" + this.$route.params.id);
     this.projet = result.data;
-    this.cond1=result.data.conducteurMT;
-    this.cond2=result.data.conducteurBT;
+    this.cond1 = result.data.conducteurMT;
+    this.cond2 = result.data.conducteurBT;
+    this.spinner = false;
   },
- 
 };
 </script>
 <style scoped>
@@ -273,7 +259,7 @@ h1 {
   margin-bottom: 3.5%;
   position: relative;
 }
- .title::before {
+.title::before {
   content: "";
   position: absolute;
   left: 0;
@@ -281,7 +267,7 @@ h1 {
   height: 3px;
   width: 250px;
   border-radius: 5px;
- 
+
   background: linear-gradient(135deg, #0b65a0, #71b7e6);
 }
 .content form .user-details {
@@ -289,7 +275,6 @@ h1 {
   flex-wrap: wrap;
   justify-content: space-between;
   /* margin: 20px 0 12px 0; */
-    
 }
 form .user-details .input-box {
   /* margin-bottom: 15px; */
@@ -377,7 +362,7 @@ form .button input:hover {
   border-color: #000;
 }
 
-@media (max-width: 584px) {
+@media (max-width: 834px) {
   .container {
     max-width: 100%;
   }
@@ -402,12 +387,12 @@ form .button input:hover {
   }
 }
 .v-sheet.v-card:not(.v-sheet--outlined) {
-    box-shadow: 0px 0px 0px 0px;
+  box-shadow: 0px 0px 0px 0px;
 }
 .v-btn:not(.v-btn--round).v-size--default {
-    /* height: 36px; */
-    /* min-width: 64px; */
-    padding: 16px;
-    margin: 3px;
+  /* height: 36px; */
+  /* min-width: 64px; */
+  padding: 16px;
+  margin: 3px;
 }
 </style>
