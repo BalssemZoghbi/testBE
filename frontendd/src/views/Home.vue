@@ -482,9 +482,6 @@ export default {
         this.$store.dispatch("projet", resp.data);
         this.projets = resp.data;
         console.log(this.projet);
-        let parsed = JSON.stringify(this.projets);
-        localStorage.setItem("projets", parsed);
-        //  localStorage.setItem("projet", this.projets);
         this.spinner = false;
       });
     },
