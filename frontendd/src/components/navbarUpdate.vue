@@ -70,10 +70,7 @@
                     v-if="conducteurBT == 'Rond emaille'"
                   >
                     <router-link
-                      :to="
-                        '/projet/bobinageSecondaireRond/' +
-                        this.$route.params.id
-                      "
+                      :to=" '/projet/bobinageSecondaireRond/' +this.$route.params.id"
                       >Bobine Secondaire</router-link
                     >
                   </li>
@@ -82,10 +79,7 @@
                     v-else-if="conducteurBT == 'feuillard'"
                   >
                     <router-link
-                      :to="
-                        '/projet/bobinageSecondaireFeuillard/' +
-                        this.$route.params.id
-                      "
+                      :to="'/projet/bobinageSecondaireFeuillard/' +this.$route.params.id"
                       >Bobine Secondaire</router-link
                     >
                   </li>
@@ -93,13 +87,7 @@
                     class="dropdown-link"
                     v-else-if="conducteurBT == 'meplat guipé'"
                   >
-                    <router-link
-                      :to="
-                        '/projet/bobinageSecondaireMeplat/' +
-                        this.$route.params.id
-                      "
-                      >Bobine Secondaire</router-link
-                    >
+                    <router-link :to="'/projet/bobinageSecondaireMeplat/' +this.$route.params.id">Bobine Secondaire</router-link>
                   </li>
                   <li class="dropdown-link" v-else>
                     <router-link to="/notfound">Bobine Secondaire</router-link>
@@ -110,9 +98,7 @@
                     v-if="conducteurMT == 'Rond emaille'"
                   >
                     <router-link
-                      :to="
-                        '/projet/bobinagePrimaireRond/' + this.$route.params.id
-                      "
+                      :to="'/projet/bobinagePrimaireRond/' + this.$route.params.id"
                       >Bobine Primaire</router-link
                     >
                   </li>
@@ -121,10 +107,7 @@
                     v-else-if="conducteurMT == 'feuillard'"
                   >
                     <router-link
-                      :to="
-                        '/projet/bobinagePrimaireFeuillard/' +
-                        this.$route.params.id
-                      "
+                      :to="'/projet/bobinagePrimaireFeuillard/' +this.$route.params.id"
                       >Bobine Primaire</router-link
                     >
                   </li>
@@ -133,10 +116,7 @@
                     v-else-if="conducteurMT == 'meplat guipé'"
                   >
                     <router-link
-                      :to="
-                        '/projet/bobinagePrimaireMeplat/' +
-                        this.$route.params.id
-                      "
+                      :to="'/projet/bobinagePrimaireMeplat/' + this.$route.params.id"
                       >Bobine Primaire</router-link
                     >
                   </li>
