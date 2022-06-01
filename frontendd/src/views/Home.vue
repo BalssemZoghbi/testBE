@@ -10,7 +10,9 @@
         :search="search"
         :custom-filter="filterOnlyCapsText"
       >
+      
         <template v-slot:top>
+          
           <v-toolbar flat>
             <v-menu transition="slide-x-transition" offset-x>
               <template v-slot:activator="{ on, attrs }">
@@ -24,12 +26,7 @@
                       >A Partir D'un Projet Vierge</v-list-item-title
                     >
                   </v-list-item>
-                  
- <v-list-item color="blue">
-                    <v-list-item-title @click="importer()"
-                      >Importer Projet </v-list-item-title
-                    >
-                  </v-list-item>
+       
 
                   <v-list-item>
                     <v-dialog
@@ -100,6 +97,7 @@
                           A Partir D'un Ancien Projet
                         </v-btn>
                       </template>
+                      
                       <v-card class="body panel left-panel">
                         <v-data-table
                           :headers="headers"
@@ -116,7 +114,9 @@
                                 inset
                                 vertical
                               ></v-divider>
+                              
                               <v-spacer></v-spacer>
+                              
                               <v-card-title>
                                 <v-text-field
                                   v-model="search"
@@ -150,7 +150,13 @@
               </v-list>
             </v-menu>
             <v-divider class="mx-4" inset vertical></v-divider>
+<v-file-input
+  hide-input
+  truncate-length="15"
+  @click="importer()"
+></v-file-input>
             <v-spacer></v-spacer>
+            
             <v-card-title>
               <v-text-field
                 v-model="search"
@@ -408,11 +414,11 @@ export default {
         .then((this.dialogInfo = false), this.getprojet());
     },
     importer() {
-        let token = localStorage.getItem("token");
+       let token = localStorage.getItem("token");
         console.log(token);
       axios
         .get(
-          "/importjson/"+39,
+          "/importjson/"+40,
           {},
           {
             headers: {
@@ -420,24 +426,9 @@ export default {
             },
           }
         )
-        .then(
-          (response) => (
-            this.$router.push("/projet/update/" + response.data.id)
-          )
-        );
-
-      // let token = localStorage.getItem("token");
-      //  axios.get("/importjson/" + 30,
-      //   {
-      //     headers: {
-      //       Authorization: "Bearer " + token,
-      //     },
-      //   }
-       
-      //  )
-      //  .then((res)=>{
-      //   console.log(res.data)
-      // })
+      .then(response => (this.info = response.data))
+      console.log(this.info);
+      
     },
     exportword(id) {
       axios({

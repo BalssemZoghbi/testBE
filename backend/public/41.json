@@ -304,5 +304,17 @@
         "coeffPoid": null,
         "created_at": "2022-05-30T19:55:18.000000Z",
         "updated_at": "2022-05-30T19:55:18.000000Z"
+    },
+    "volt_spires": {
+        "id": 41,
+        "Bmaxdesire": 1.8,
+        "Bmax": 1.83,
+        "Vsp": 19.25,
+        "N2c": 12,
+        "N1c": 572,
+        "prise": "[\"Prise+2\", \"Prise+1\", \"Prise+0\", \"Prise-1\", \"Prise-2\"]",
+        "spire": "[601, 586, 572, 558, 543]",
+        "created_at": "2022-05-30T19:55:18.000000Z",
+        "updated_at": "2022-05-30T19:55:18.000000Z"
     }
 }
