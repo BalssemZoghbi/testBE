@@ -58,6 +58,7 @@ Route::delete('/userInactive/delete/{id}', [UserController::class,'deleteinactiv
 
 Route::get('/projets',[ProjetController::class ,'getProjets']);
 Route::get('/json/{id}',[ProjetController::class ,'exportJson']);
+Route::get('/importjson/{id}',[ProjetController::class ,'importJson']);
 Route::get('/projets/search/{query}',[ProjetController::class ,'getsearch']);
 Route::get('/projets/pagination',[ProjetController::class ,'paginateProjets']);
 Route::post('/projets/add',[ProjetController::class ,'addProjet']);

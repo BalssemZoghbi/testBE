@@ -24,6 +24,12 @@
                       >A Partir D'un Projet Vierge</v-list-item-title
                     >
                   </v-list-item>
+                  
+ <v-list-item color="blue">
+                    <v-list-item-title @click="importer()"
+                      >Importer Projet </v-list-item-title
+                    >
+                  </v-list-item>
 
                   <v-list-item>
                     <v-dialog
@@ -400,6 +406,38 @@ export default {
       axios
         .post("/ProjetDevenirModele/" + this.DevenirModeleId, modeles)
         .then((this.dialogInfo = false), this.getprojet());
+    },
+    importer() {
+        let token = localStorage.getItem("token");
+        console.log(token);
+      axios
+        .get(
+          "/importjson/"+39,
+          {},
+          {
+            headers: {
+              Authorization: token,
+            },
+          }
+        )
+        .then(
+          (response) => (
+            this.$router.push("/projet/update/" + response.data.id)
+          )
+        );
+
+      // let token = localStorage.getItem("token");
+      //  axios.get("/importjson/" + 30,
+      //   {
+      //     headers: {
+      //       Authorization: "Bearer " + token,
+      //     },
+      //   }
+       
+      //  )
+      //  .then((res)=>{
+      //   console.log(res.data)
+      // })
     },
     exportword(id) {
       axios({
