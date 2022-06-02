@@ -151,8 +151,9 @@ export default {
     this.projet = result.data;
   },
   async created() {
-    const result = await axios.get("projets/" + this.$route.params.id);
+    const result = await axios.get("/projets/" + this.$route.params.id);
     this.projet = result.data;
+    // console.log(result.data.Pccg);
     this.spinner=false;
   },
    computed:{
@@ -181,12 +182,20 @@ export default {
 hmoy()
 {
    let hmoy;
-if(this.projet.conducteurBT=='feuillard'){
+ if((this.projet.conducteurMT=='feuillard')&&(this.projet.conducteurBT=='feuillard')){
+   console.log(hmoy);
+ hmoy=(parseFloat(this.projet.Hfeuillard)+parseFloat(this.projet.HfeuillardBT))/2;
+}else if(this.projet.conducteurBT=='feuillard'){
  hmoy=(parseFloat(this.projet.HCondMt)+parseFloat(this.projet.HfeuillardBT))/2;
 }else if((this.projet.conducteurMT=='meplat guipé')&&(this.projet.conducteurBT=='meplat guipé')){
 
  hmoy=(parseFloat(this.projet.HSFS)+parseFloat(this.projet.HSFSBT))/2;
 }
+else if((this.projet.conducteurMT=='Rond emaille')&&(this.projet.conducteurBT=='Rond emaille')){
+
+ hmoy=(parseFloat(this.projet.HCondMt)+parseFloat(this.projet.HCondBt))/2;
+}
+
 else if(this.projet.conducteurMT=='meplat guipé'){
  hmoy=(parseFloat(this.projet.HSFS)+parseFloat(this.projet.HfeuillardBT))/2;
 }

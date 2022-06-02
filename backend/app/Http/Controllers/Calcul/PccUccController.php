@@ -37,13 +37,29 @@ public function delta($disMTBT,$epx,$epy){
     return($epx+$epy)/3+$disMTBT;
 
 }
-public function Hmoy($conducteur,$hcond,$hsfs,$hfeullard){
-   if($conducteur=='feuillard'){
-       return ($hcond+$hfeullard)/2;
-   }else{
+public function Hmoy($conducteurMT,$conducteurBT,$HCondMt,$HCondBt,$HSFS,$HSFSBT,$Hfeuillard,$HfeuillardBT){
 
-       return ($hcond+$hsfs)/2;
+    if(($conducteurMT=='feuillard')&&($conducteurBT=='feuillard')){
+    $hmoy=($Hfeuillard+$HfeuillardBT)/2;
+   }else if($conducteurBT=='feuillard'){
+    $hmoy=($HCondMt+$HfeuillardBT)/2;
+   }else if(($conducteurMT=='meplat guipé')&&($conducteurBT=='meplat guipé')){
+
+    $hmoy=($HSFS+$HSFSBT)/2;
    }
+   else if(($conducteurMT=='Rond emaille')&&($conducteurBT=='Rond emaille')){
+
+    $hmoy=($HCondMt+$HCondBt)/2;
+   }
+
+   else if($conducteurMT=='meplat guipé'){
+    $hmoy=($HSFS+$HfeuillardBT)/2;
+   }
+   else{
+     $hmoy=($HCondMt+$HSFSBT)/2;
+   }
+       return $hmoy;
+
 }
 
 public function Uccr($coMoy,$delta,$n1c,$Iph1,$Uph,$Hmoy){
@@ -62,11 +78,12 @@ public function Ucca($pccMaj,$puissance){
     ->join('pcc_uccs', 'pcc_uccs.id', '=', 'projets.pcc_uccs_id')
     ->join('electriques', 'electriques.id', '=', 'projets.electrique_id')
     ->join('garanties', 'garanties.id', '=', 'projets.garantie_id')
+    ->join('donne_bobines', 'donne_bobines.id', '=', 'projets.donne_bobines_id')
     ->join('volt_Spires', 'volt_Spires.id', '=', 'projets.volt_spires_id')
     ->join('bobinage_secs', 'bobinage_secs.id', '=', 'projets.bobinage_secs_id')
     ->join('bobinages', 'bobinages.id', '=', 'projets.bobinage_id')
     ->where('projets.id',$id)
-    ->select('pcc_uccs.*','garanties.Uccg','garanties.Pccg','pcc_uccs.id as pccucc_id','volt_Spires.N2c','volt_Spires.N1c','electriques.PrimaireIPhase','electriques.PrimaireUPhase','electriques.secondaireUPhase','electriques.secondaireIPhase','electriques.puissance','bobinage_secs.HfeuillardBT','bobinage_secs.j2','bobinage_secs.DintBT','bobinage_secs.*','bobinage_secs.EpxBT','bobinage_secs.materiauBT','bobinage_secs.HSFSBT','bobinage_secs.poidBT','bobinages.j1','bobinages.DintMT','bobinages.DistanceBTMT','bobinages.poidMT','bobinages.HCondMt','bobinages.materiauMT','bobinages.EpyMT','bobinages.BintMT','bobinages.DextMT','bobinages.BextMT','bobinages.EpxMT','projets.*')
+    ->select('pcc_uccs.*','donne_bobines.materiauMT','donne_bobines.conducteurMT','donne_bobines.conducteurBT','garanties.Uccg','garanties.Pccg','pcc_uccs.id as pccucc_id','volt_Spires.N2c','volt_Spires.N1c','electriques.PrimaireIPhase','electriques.PrimaireUPhase','electriques.secondaireUPhase','electriques.secondaireIPhase','electriques.puissance','bobinage_secs.HfeuillardBT','bobinage_secs.j2','bobinage_secs.DextBT','bobinage_secs.BextBT','bobinage_secs.BintBT','bobinage_secs.DintBT','bobinage_secs.HCondBt','bobinage_secs.EpxBT','donne_bobines.materiauBT','bobinage_secs.HSFSBT','bobinage_secs.poidBT','bobinages.j1','bobinages.Hfeuillard','bobinages.HSFS','bobinages.DintMT','bobinages.DistanceBTMT','bobinages.poidMT','bobinages.*','bobinages.HCondMt','bobinages.EpyMT','bobinages.BintMT','bobinages.DextMT','bobinages.BextMT','bobinages.EpxMT','projets.*')
     ->get()->first();
    $pcc1=$this->pcc1($projet->materiauMT,$projet->j1,$projet->poidMT,$request->MajourationU);
    $pcc2=$this->pcc1($projet->materiauBT,$projet->j2,$projet->poidBT,$request->MajourationU);
@@ -75,7 +92,7 @@ public function Ucca($pccMaj,$puissance){
     $CMoy=$this->comoy($projet->DintBT,$projet->BintBT,$projet->DextBT,$projet->BextBT,$projet->DintMT,$projet->BintMT,$projet->DextMT,$projet->BextMT);
 
     $delta=$this->delta($projet->DistanceBTMT,$projet->EpxBT,$projet->EpxMT);
-   $Hmoy=$this->Hmoy($projet->conducteurBT,$projet->HCondMt,$projet->HSFSBT,$projet->HfeuillardBT);
+   $Hmoy=$this->Hmoy($projet->conducteurMT,$projet->conducteurBT,$projet->HCondMt,$projet->HCondBt,$projet->HSFS,$projet->HSFSBT,$projet->Hfeuillard,$projet->HfeuillardBT);
     $Uccr=$this->Uccr($CMoy,$delta,$projet->N1c,$projet->PrimaireIPhase,$projet->PrimaireUPhase,$Hmoy);
     $Ucca=$this->Ucca($pccMaj,$projet->puissance);
     $Ucc=$this->Ucc($Uccr,$Ucca);

@@ -320,12 +320,16 @@ return $barre;
             $hfs=$this->hfs($hSpire,$spCouche,$request->etageMT,$request->hbrin1MT,$request->hbrin2MT,$request->e1ax);
             $hbobt=$this->hbobt($hfs,$request->collierBT);
             $collierBt2=$this->collierBt2($hbobt,$hsfs);
-            $DintBint=$this->DintBint($projet->diamNominale,$projet->CMBT);
+            $DintBint=$this->DintBint($projet->DextBT,$request->DistanceBTMT);
             $EpaisseurPapierCanaux=$request->canauxNbrPapier*$request->EpfeuillePapier;
 
 
             $spchb=$this->spchb($projet->conducteurMT,$N1cmax,$request->nbcoucheMT);
-            $nbrPapierMTGuipe=Ceil((($spchb*$projet->Vsp*4)/( $request->rigiditePapierMT)- $request->e1r) /$request->EpfeuillePapier);
+            if($projet->conducteurMT=='meplat guipé'){
+            $nbrPapierMTGuipe=Ceil((($spchb*$projet->Vsp*4)/( $request->rigiditePapierMT)- $request->e1r) /$request->EpfeuillePapier);}
+            else{
+                $nbrPapierMTGuipe=0;
+            }
             $epx=$this->Epx($request->typeCanaux,$request->saillieMT,$request->e1r,$request->etageMT,$request->nbcoucheMT,$request->canauxMT,$request->lgCales,$nbrPapierMTGuipe,$request->canauxEp1Papier);
             $dintMt=$this->dintMt($projet->DextBT,$request->DistanceBTMT);
             $bintMt=$this->bintMt($projet->BextBT,$request->DistanceBTMT,$projet->epaisseurBarreBT,$projet->conducteurBT);
@@ -500,6 +504,7 @@ $PoidFeui=$this->PoidFeui($projet->materiauMT,$dextfeui,$DintBint,$DintBint,$req
                     'largeurBarre'=>$barre->largeur ,
                     'Sbarre'=>$Sbarre ,
                     'Jbarre'=>$Jbarre ,
+                    'DistanceBTMT'=>$request->DistanceBTMT ,
                     ]);
             }
 
