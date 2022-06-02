@@ -269,17 +269,13 @@ class BobinageSecController extends Controller
 
     public function epaisseurPapier($epfeuille, $nbrepapier)
     {
-
         return ($epfeuille * $nbrepapier);
     }
-    public function dintBt($dext, $distance)
+    public function dintBt($dn, $distance)
     {
-        return ($distance * 2) + $dext;
+        return ($distance * 2) + $dn;
     }
-    public function bintBt($bext, $distance)
-    {
-        return ($distance * 2) + $bext;
-    }
+
     public function EpxBt($typecanaux, $nbreCoucheMt, $fileisole, $epaisseurPapier, $canauxMt, $lrgc, $epaisseurPapierCanaux)
     {
         if ($typecanaux == 'complet') {
@@ -322,6 +318,7 @@ class BobinageSecController extends Controller
     public function EpxMt($typecanaux, $nbreCoucheMt, $fileisole, $epaisseurPapier, $canauxMt, $lrgc, $epaisseurPapierCanaux)
     {
         if ($typecanaux == 'complet') {
+            // dd($nbreCoucheMt, $fileisole ,$epaisseurPapier, $nbreCoucheMt,  $canauxMt, $lrgc , $epaisseurPapierCanaux);
             return $nbreCoucheMt * $fileisole + $epaisseurPapier * ($nbreCoucheMt - 1 - $canauxMt) + $canauxMt * $lrgc + $canauxMt * $epaisseurPapierCanaux;
         } else if ($typecanaux == 'lune') {
 
@@ -369,7 +366,7 @@ class BobinageSecController extends Controller
             ->get()->first();
         $Bobinage = BobinageSec::FindOrFail($projet->bobine_id);
 
-        $su1d = $this->su1d($request->conducteurBT, $projet->secondaireIPhase, $request->J2D);
+        $su1d = $this->su1d($projet->conducteurBT, $projet->secondaireIPhase, $request->J2D);
 
         if ($projet->conducteurBT == 'Rond emaille') {
             $D1d = $this->D1d($su1d, $request->brinParalleleBT);
@@ -413,8 +410,8 @@ class BobinageSecController extends Controller
         }
         $N1cmax = $this->N1cmax($projet->spire);
 
-        $spchb = $this->spchb($projet->conducteurBT, $N1cmax, $request->nbcoucheBT);
-        $ncha = $this->ncha($request->nbcoucheBT, $spchb, $N1cmax);
+        $spchb = $this->spchb($projet->conducteurBT, $projet->N2c, $request->nbcoucheBT);
+        $ncha = $this->ncha($request->nbcoucheBT, $spchb, $projet->N2c);
         $nchb = $this->nchb($request->nbcoucheBT, $ncha);
         $spcha = $this->spcha($spchb);
         $HcondMt = $this->hcondMt($Isole, $spchb, $request->brinParalleleBT);
@@ -422,10 +419,11 @@ class BobinageSecController extends Controller
         $Hcollier = $this->Hcollier($projet->HbobineBt, $HcondMt);
         $nbrPapierMT = $this->NbrePapier($projet->conducteurBT, $request->rigiditePapierBT, $spchb, $projet->Vsp, $Isole, $Designation, $request->EpfeuillePapierBT);
         $epaisseurPapier = $this->epaisseurPapier($request->EpfeuillePapierBT, $nbrPapierMT);
+        $EpaisseurPapierCanauxBT=$request->canauxNbrPapierBT* $request->EpfeuillePapierBT;
+        $EpxMt = $this->EpxMt($request->typeCanauxBT, $request->nbcoucheBT, $Isole, $epaisseurPapier, $request->canauxBT, $request->lgCalesBT, $EpaisseurPapierCanauxBT);
 
-        $EpxMt = $this->EpxMt($request->typeCanauxBT, $request->nbcoucheBT, $Isole, $epaisseurPapier, $request->canauxMT, $request->lgCalesBT, $request->EpaisseurPapierCanauxBT);
-        $dintMt = $this->dintMt($projet->DextBT, $request->DistanceBTMTSec);
-        $bintMt = $this->bintMt($projet->BextBT, $request->DistanceBTMTSec, $projet->epaisseurBarre, $projet->conducteurMT);
+        $dintMt = $this->dintMt($projet->diamNominale, $projet->CMBT);
+        $bintMt = $this->dintMt($projet->diamNominale, $projet->CMBT);
         if ($request->typeCanauxBT == "complet") {
 
             $epy = $EpxMt;
@@ -434,7 +432,7 @@ class BobinageSecController extends Controller
         }
         $dextMt = $this->dextMt($dintMt, $EpxMt);
         $BextMt = $this->BextMt($bintMt, $epy);
-        $poidEmaille = $this->poidEmaille($projet->materiauBT, $dextMt, $dintMt, $dintMt, $request->majPoidBT, $dextMt, $N1cmax, $scu2);
+        $poidEmaille = $this->poidEmaille($projet->materiauBT, $dextMt, $dintMt, $dintMt, $request->majPoidBT, $dextMt, $projet->N2c, $scu2);
         if ($projet->conducteurBT == 'meplat guipé') {
             $Bobinage->update([
                 'materiauSec' => $projet->materiauBT,
@@ -536,7 +534,7 @@ class BobinageSecController extends Controller
                 'BextBT' => $BextMt,
                 'poidBT' => $poidEmaille,
                 'majPoidBT' => $request->majPoidBT,
-                'HbobineBtSec' => $projet->HbobineBt,
+                'HbobineBtSec' => $request->HbobineBtSec,
                 'EpCylindreBT' => $request->EpCylindreBT,
                 'rigiditePapierBT' => $request->rigiditePapierBT,
                 'canauxNbrPapierBT' => $request->canauxNbrPapierBT,
@@ -558,7 +556,7 @@ class BobinageSecController extends Controller
                 'HCollierBT' => $Hcollier,
                 'EpfeuillePapierBT' => $request->EpfeuillePapierBT,
                 'EpaiseurPapierBT' => $epaisseurPapier,
-                'EpaisseurPapierCanauxBT' => $request->canauxNbrPapierBT * $request->EpfeuillePapierBT
+                'EpaisseurPapierCanauxBT' => $EpaisseurPapierCanauxBT
             ]);
         }
         return response()->json($Bobinage);

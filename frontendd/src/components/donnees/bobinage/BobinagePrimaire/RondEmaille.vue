@@ -537,7 +537,6 @@ export default {
     },
     
     DintMT() {
-      console.log(this.projet.DextBT);
       return  Math.round((parseFloat(this.projet.DistanceBTMT) * 2) + this.projet.DextBT);
     },
     BintMT() {

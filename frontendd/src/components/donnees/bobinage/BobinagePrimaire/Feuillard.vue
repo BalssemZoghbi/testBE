@@ -22,8 +22,8 @@
                       {{ projet.conducteurMT }}
                     </v-chip>
                     <v-chip style="margin-left: 1%"
-                      >N2c :
-                      {{ projet.N2c }}
+                      >N1c :
+                      {{ projet.N1c }}
                     </v-chip>
                     <v-chip style="margin-left: 1%"
                       >I1ph :
@@ -245,6 +245,12 @@
                     </div>
 
                     <div class="div2">
+                        <v-text-field
+                          label="DistanceBTMT"
+                          v-model="projet.DistanceBTMT"
+                          dense
+                          outlined
+                        ></v-text-field>
                       <v-text-field
                       success
                         label="DintMT"
@@ -256,7 +262,7 @@
                       <v-text-field
                         label="BintMT"
                         success
-                        v-model="DintMT"
+                        v-model="BintMT"
                         dense
                         outlined
                       ></v-text-field>
@@ -434,6 +440,7 @@ export default {
         largeurBarre: "",
         Sbarre: "",
         Jbarre: "",
+        DistanceBTMT: "",
       },
       e1: 1,
     };
@@ -480,6 +487,7 @@ export default {
         largeurBarre: this.projet.largeurBarre,
         Sbarre: this.projet.Sbarre,
         Jbarre: this.projet.Jbarre,
+        DistanceBTMT: this.projet.DistanceBTMT,
       };
       axios
         .put("bobine/update/" + this.$route.params.id, projets)
@@ -552,7 +560,12 @@ export default {
     },
     DintMT(){
         let dint=this.projet.DintMT;
-        dint=(parseFloat(this.projet.CMBT)*2)+parseFloat(this.projet.diamNominale);
+        dint=(parseFloat(this.projet.DistanceBTMT)*2)+parseFloat(this.projet.DextBT);
+        return dint;
+    },
+    BintMT(){
+        let dint=this.projet.DintMT;
+        dint=(parseFloat(this.projet.DistanceBTMT)*2)+parseFloat(this.projet.BextBT)+parseFloat(this.epaisseurBarre);
         return dint;
     },
     DextMT(){
@@ -560,13 +573,13 @@ export default {
     },
     BextMT(){
     
-        return Math.round(this.DextMT+parseFloat(this.epaisseurBarre));
+        return Math.round(this.BintMT+(2*this.EpxMT)+parseFloat(this.epaisseurBarre));
     },
     EpxMT(){
          if(this.projet.typeCanaux=='complet'){
-        return ((parseFloat(this.projet.N2c)*this.epFeuillard)+(parseFloat(this.projet.N2c)-1)*this.ePap+(parseFloat(this.projet.canauxMT)*parseFloat(this.projet.lgCales)));
+        return ((parseFloat(this.projet.N1c)*this.epFeuillard)+(parseFloat(this.projet.N1c)-1)*this.ePap+(parseFloat(this.projet.canauxMT)*parseFloat(this.projet.lgCales)));
         }else if(this.projet.typeCanaux=='lune'){
-            return (parseFloat(this.projet.N2c)*this.epFeuillard+(parseFloat(this.projet.N2c)-1)*(this.ePap));
+            return (parseFloat(this.projet.N1c)*this.epFeuillard+(parseFloat(this.projet.N1c)-1)*(this.ePap));
         }else {
             return 0;
         }
@@ -579,7 +592,10 @@ export default {
             }else if(this.projet.materiauMT=='aluminium'){
                 coefPoid=2.7;
             }
-            return Math.pow(10, -6)*(coefPoid*parseFloat(this.projet.N2c)*parseFloat(this.projet.scu1)*Math.PI*3)*((parseFloat(this.DintMT)+parseFloat(this.DintMT)+parseFloat(this.DextMT)+parseFloat(this.BextMT))/4)*(100+parseFloat(this.projet.majPoid))/100;
+            console.log();
+            return Math.pow(10, -6)*
+            (coefPoid*parseFloat(this.projet.N1c)
+            *parseFloat(this.scu1)*Math.PI*3)*((parseFloat(this.DintMT)+parseFloat(this.BintMT)+parseFloat(this.DextMT)+parseFloat(this.BextMT))/4)*(100+parseFloat(this.projet.majPoid))/100;
     },
     Jbarre(){
       return this.projet.secondaireIPhase/this.Sbarre;

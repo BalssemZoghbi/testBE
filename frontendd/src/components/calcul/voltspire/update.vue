@@ -339,8 +339,11 @@ export default {
                 // }
     },
     n1c() {
-      let n1c = parseFloat(this.projet.N1c);
-      n1c = parseFloat(this.projet.PrimaireUPhase) / this.vsp;
+      // let n1c = parseFloat(this.projet.N1c);
+      // console.log(this.projet.PrimaireUPhase,"vsp",this.vsp);
+      let n1c =this.projet.PrimaireUPhase / this.vsp;
+          console.log(n1c);
+
       return Math.ceil(n1c);
     },
     vsp() {

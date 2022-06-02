@@ -21,15 +21,18 @@
                       >conducteur :
                       {{ projet.conducteurBT }}
                     </v-chip>
+                    <v-chip style="margin-left: 2%"
+                      >N2c :
+                      {{ projet.N2c }}
+                    </v-chip>
                   </div>
                   <div class="div">
                     <div class="field10">
-                      <v-text-field
-                        label="N2cmax"
-                        success
-                        v-model="N2cmax"
-                        dense
+                         <v-text-field
+                        label="J2D"
+                        v-model="projet.J2D"
                         outlined
+                        dense
                       ></v-text-field>
                       <v-text-field
                       success
@@ -38,12 +41,11 @@
                         dense
                         outlined
                       ></v-text-field>
-
-                      <v-text-field
-                        label="J2D"
-                        v-model="projet.J2D"
-                        outlined
+                         <v-text-field
+                        label="brinParallele"
+                        v-model="projet.brinParalleleBT"
                         dense
+                        outlined
                       ></v-text-field>
                       <v-text-field
                       success
@@ -66,12 +68,7 @@
                         outlined
                         dense
                       ></v-text-field>
-                      <v-text-field
-                        label="brinParallele"
-                        v-model="projet.brinParalleleBT"
-                        dense
-                        outlined
-                      ></v-text-field>
+                   
                     </div>
                     <div class="field10">
                       <v-text-field
@@ -123,7 +120,7 @@
                 </div>
               </form>
             </v-card>
-            <router-link class="nav-link" :to="'/projet/update/' + projet.id"
+            <router-link class="nav-link" :to="'/projet/VoltSpires/' + projet.id"
               ><v-btn color="primary mb-16" @click="updateprojet">
                 précédent
               </v-btn></router-link
@@ -132,7 +129,7 @@
           </v-stepper-content>
 
           <v-stepper-step :complete="e1 > 2" step="2">
-            Couplage
+            Hauteur
           </v-stepper-step>
 
           <v-stepper-content step="2">
@@ -200,10 +197,10 @@
                         outlined
                       ></v-text-field>
                       <v-text-field
-                      success
+                      
                         label="Hbobine"
                         dense
-                        v-model="HbobineBtSec"
+                        v-model="projet.HbobineBtSec"
                         outlined
                       ></v-text-field>
                       <v-text-field
@@ -492,8 +489,8 @@ export default {
     },
     nbrPapierBT() {
       return Math.ceil(
-        ((this.SpchBBT * this.projet.Vsp * 4) /
-          this.projet.rigiditePapierBT -
+        (((this.SpchBBT * this.projet.Vsp * 4) /
+          this.projet.rigiditePapierBT) -
           (this.filobtenueIsolerBT - this.filobtenueNueBT)) /
           this.projet.EpfeuillePapierBT
       );
@@ -502,11 +499,12 @@ export default {
       return this.projet.EpfeuillePapierBT * this.nbrPapierBT;
     }, 
       SpchBBT() {
-      return Math.ceil(this.N2cmax / this.projet.nbcoucheBT);
+
+      return Math.ceil(this.projet.N2c / this.projet.nbcoucheBT);
     },
     NchABT() {
       return Math.floor(
-        this.projet.nbcoucheBT * this.SpchBBT - this.N2cmax
+        this.projet.nbcoucheBT * this.SpchBBT - this.projet.N2c
       );
     },
     SpchABT() {
@@ -516,9 +514,7 @@ export default {
       return this.projet.nbcoucheBT - this.NchABT;
     },
  
-    HbobineBtSec() {
-      return this.projet.HbobineBt;
-    }, 
+ 
      HCondBt() {
       return (
         this.SpchBBT *
@@ -527,7 +523,7 @@ export default {
       );
     },
     HCollierBT() {
-      return (this.HbobineBtSec - this.HCondBt) / 2;
+      return (this.projet.HbobineBtSec - this.HCondBt) / 2;
     },
   
     DintBT() {
@@ -535,24 +531,24 @@ export default {
       // return parseFloat(Math.ceil(parseFloat(this.projet.DextMT)+(2*parseFloat(this.projet.DistanceBTMT))));
       let dint = this.projet.DintBT;
       dint =
-        parseFloat(this.projet.DistanceBTMTSec) * 2 +
-       this.DextBT;
+        parseFloat(this.projet.CMBT) * 2 +
+       this.projet.diamNominale;
       // console.log(parseFloat(this.projet.DextBT));
       return dint;
     },
     BintBT() {
-      return Math.ceil(this.BextBT + 2 * this.projet.DistanceBTMTSec);
+      return this.DintBT;
     },
     DextBT() {
-      return this.projet.DintBT + 2 * this.EpxBT;
+      return this.DintBT + 2 * this.EpxBT;
     },
     BextBT() {
-      return this.projet.BintBT + 2 * this.EpyBT;
+      return this.BintBT + 2 * this.EpyBT;
     },
     EpxBT() {
       if (this.projet.typeCanauxBT == "complet") {
         return (
-          this.projet.nbcoucheBT * this.projet.filobtenueIsolerBT +
+          this.projet.nbcoucheBT * this.filobtenueIsolerBT +
           this.EpaiseurPapierBT *
             (this.projet.nbcoucheBT - 1 - this.projet.canauxBT) +
           this.projet.canauxBT * this.projet.lgCalesBT +
@@ -592,7 +588,7 @@ export default {
       return (
         (Math.pow(10, -6) *
           (coefPoid *
-            parseFloat(this.N2cmax) *
+            parseFloat(this.projet.N2c) *
             parseFloat(this.scu2) *
             Math.PI *
             3) *
