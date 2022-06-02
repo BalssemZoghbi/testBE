@@ -150,11 +150,14 @@
               </v-list>
             </v-menu>
             <v-divider class="mx-4" inset vertical></v-divider>
-<v-file-input
+<!-- <v-file-input
   hide-input
   truncate-length="15"
-  @click="importer()"
-></v-file-input>
+  filled
+  type="file"
+ @change="importer"
+></v-file-input> -->
+ <input type="file" @change="importer" class="file" placeholder="Upload File">
             <v-spacer></v-spacer>
             
             <v-card-title>
@@ -210,7 +213,7 @@
                class="mx-2"
             dark
             small
-            v-bind="attrs" v-on="on" color="pink">
+            v-bind="attrs" v-on="on" color="green">
                 <v-icon>mdi-dots-vertical</v-icon>
               </v-btn>
             </template>
@@ -366,6 +369,7 @@ export default {
       frequence: "",
     },
     getProjet: [],
+    info:""
   }),
 
   async created() {
@@ -413,21 +417,21 @@ export default {
         .post("/ProjetDevenirModele/" + this.DevenirModeleId, modeles)
         .then((this.dialogInfo = false), this.getprojet());
     },
-    importer() {
+    importer(event) {
+      let name =event.target.files[0].name;
+let id=name.replace('.json','');
        let token = localStorage.getItem("token");
-        console.log(token);
+        
       axios
         .get(
-          "/importjson/"+40,
-          {},
+          "/importjson/"+id,
           {
             headers: {
               Authorization: token,
             },
           }
         )
-      .then(response => (this.info = response.data))
-      console.log(this.info);
+      .then(response => (this.info = response.data),this.getprojet())
       
     },
     exportword(id) {
@@ -626,6 +630,12 @@ export default {
 };
 </script>
 <style scoped>
+
+.file{
+  background-color: primary;
+  color: rgb(5, 48, 96);
+  /* rgb(5, 48, 96) */
+}
 .body {
   /* background-color: #a2c7ff77; */
   padding: 20px;
