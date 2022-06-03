@@ -4,9 +4,14 @@
        <v-card class="mx-auto ml-2" max-width="38%"  style=" top: 20px" tile>
           <v-img height="300px" src="../../assets/pres2.jpg"></v-img>
           <v-col>
-            <v-avatar size="100" style="position:absolute; top: 240px">
+            <!-- <v-avatar size="100" style="position:absolute; top: 240px">
               <v-img src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"></v-img>
-            </v-avatar>
+            </v-avatar> -->
+            <v-avatar color="primary" size="90" style="position:absolute; top: 240px">
+      <v-icon dark size="35">
+        mdi-account-circle
+      </v-icon>
+    </v-avatar>
           </v-col>
             <v-list-item color="rgba(0, 0, 0, .4)">
               <v-list-item-content>
