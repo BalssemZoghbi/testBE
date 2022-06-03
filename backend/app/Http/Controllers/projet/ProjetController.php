@@ -21,6 +21,7 @@ use App\Models\Donnees\garantie\Garantie;
 use App\Models\Donnees\gradin\Gradin;
 use App\Models\Donnees\PccUcc;
 use App\Models\Donnees\VoltSpire;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
 use Laravel\Sanctum\PersonalAccessToken;
 
@@ -57,12 +58,15 @@ class ProjetController extends Controller
         $cm = Circuitmagnetique::findOrFail($id);
         $volts = VoltSpire::findOrFail($id);
         $table = collect(['projets' => $projet, 'electriques' => $electrique, 'garanties' => $garantie, 'donnee_bobines' => $donnesBobines, 'gradins' => $gradin, 'bobinages' => $bobineMT, 'bobinage_secs' => $bobineBT, 'pcc_uccs' => $pcc, 'circuitmagnetiques' => $cm,'volt_spires'=> $volts]);
-        $filename = $id.".json";
+        // $current_date_time = Carbon::now();
+        $current_date_time = date("20y_m_d_000");
+        $filename =$current_date_time."_". $id.".json";
+        // dd($filename);
         $handle = fopen($filename, 'w+');
         fputs($handle, $table->toJson(JSON_PRETTY_PRINT));
         fclose($handle);
         $headers = array('Content-type'=> 'application/json');
-        return response()->download($filename, $id.'.json',$headers);
+        return response()->download($filename,$current_date_time.$id.'.json',$headers);
     }
     public function importJson(Request $request,$id){
         $header = $request->header('Authorization');

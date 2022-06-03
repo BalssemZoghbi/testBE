@@ -454,6 +454,8 @@ let id=name.replace('.json','');
       });
     },
     exportjson(id) {
+      let date= new Date();
+      let now_time = (date.getFullYear() + "_" + date.getMonth() + "_" + date.getDay()+"_000").toString()
       axios({
         url: "/json/" + id,
         method: "GET",
@@ -466,7 +468,7 @@ let id=name.replace('.json','');
         );
         var fileLink = document.createElement("a");
         fileLink.href = fileURL;
-        fileLink.setAttribute("download", id+'.json');
+        fileLink.setAttribute("download", now_time+'_'+id+'.json');
         document.body.appendChild(fileLink);
 
         fileLink.click();
