@@ -27,6 +27,7 @@
         </v-toolbar>
       </template>
       <template v-slot:[`item.actions`]="{ item }">
+        <!-- <template v-if="user.id == item.user.id" > -->
            <v-btn
       :loading="spinner"
       :disabled="spinner"
@@ -42,6 +43,7 @@
         mdi-checkbox-marked-circle
       </v-icon>
     </v-btn>
+    <!-- </template> -->
         <!-- <v-btn class="ma-2" color="primary" v-if="!spinner"  dark>
           Accepter
           <v-icon dark right @click="accept(item.id)">

@@ -124,11 +124,13 @@
               <v-btn class="mx-2" fab dark small color="primary">
                 <v-icon dark v-on:click="editItem(item)"> mdi-pencil </v-icon>
               </v-btn>
-              <v-btn class="mx-2" fab dark small color="red">
+              <template v-if="$store.state.user.name != item.name" :disabled="isdisable">
+              <v-btn  class="mx-2" fab dark small color="red">
                 <v-icon dark v-on:click="deleteutilisateur(item.id)">
                   mdi-delete
                 </v-icon>
               </v-btn>
+              </template>
               <!-- :disabled="!disable" 
        :class="{'disabled': !validateFields}"-->
               <!-- <v-icon small color="red" @click="deleteutilisateur(item.id)"> mdi-delete </v-icon> -->
@@ -168,7 +170,7 @@ export default {
   },
   data: () => ({
     spinner: true,
-    isdisable: false,
+    isdisable: true,
     // disabled: 0,
     types: ["employe", "admin", "En Attente"],
     Poste: ["Directeur", "Technicien", "Ingenieur"],
@@ -237,6 +239,9 @@ export default {
     //     else{
     //       vm.disable=true;
     //     }
+    // this.$store.state.userId == user_id;
+    console.log(this.$store.state.user.name);
+    
     this.getuser();
   },
 
