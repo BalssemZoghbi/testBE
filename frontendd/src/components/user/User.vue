@@ -80,11 +80,14 @@
                             </v-col>
 
                             <v-col cols="6" md="4">
-                              <v-text-field
+                              <v-select
+                                :items="Poste"
+                                label="Poste"
+                                name="poste"
+                                type="text"
                                 v-model="editedItem.poste"
-                                label="poste"
-                              ></v-text-field
-                            ></v-col>
+                              ></v-select>
+                            </v-col>
                             <v-col cols="6" md="4">
                               <v-text-field
                                 v-model="editedItem.numero"
@@ -107,10 +110,10 @@
                     <v-card-actions>
                       <v-spacer></v-spacer>
                       <v-btn color="blue darken-1" text @click="close">
-                        Cancel
+                        Annuler
                       </v-btn>
                       <v-btn color="blue darken-1" text @click="save">
-                        Save
+                        Sauvegarder
                       </v-btn>
                     </v-card-actions>
                   </v-card>
@@ -168,6 +171,7 @@ export default {
     isdisable: false,
     // disabled: 0,
     types: ["employe", "admin", "En Attente"],
+    Poste: ["Directeur", "Technicien", "Ingenieur"],
     tab: null,
     itemstab: ["Utilisateur", "Demande Inscription", "Utilisateur Inactive"],
     search: "",

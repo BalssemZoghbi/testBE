@@ -22,6 +22,7 @@ async created(){
   const result = await axios.get("projets/"  + this.$route.params.id);
 this.$store.dispatch("projet", result.data);
     this.projet = result.data;
+    console.log(this.projet.conducteurMT,this.projet.conducteurBT);
  }
   
 };
