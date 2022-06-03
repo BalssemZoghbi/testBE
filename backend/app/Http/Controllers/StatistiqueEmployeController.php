@@ -58,8 +58,8 @@ class StatistiqueEmployeController extends Controller
         $cuivreS = count(DB::table('bobinage_secs')->where('materiauSec', 'cuivre')->get());
         $alumuniumP = count(DB::table('bobinages')->where('materiau', 'alumunium')->get());
         $alumuniumS = count(DB::table('bobinage_secs')->where('materiauSec', 'alumunium')->get());
-
-        $modeles = DB::table('projets')->get();
+        
+        $modeles = DB::table('modeles')->get();
             return response()->json([
                         'ProjetChart' => $bobine,
                         'NbreProjet' => $countProjet,
