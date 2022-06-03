@@ -6,13 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Donnees\bobinage\Bobinage;
 use App\Models\Donnees\bobinage\BobinageSec;
 use App\Models\Donnees\bobinage\DonneBobine;
+use App\Models\Donnees\Circuitmagnetique;
 use App\Models\Donnees\electrique\Electrique;
 use App\Models\Donnees\garantie\Garantie;
 use App\Models\Donnees\gradin\Gradin;
 use App\Models\Donnees\PccUcc;
 use App\Models\Donnees\Projet;
 use App\Models\Donnees\VoltSpire;
-use App\Models\Donnees\Circuitmagnetique;
 use Illuminate\Http\Request;
 use PhpOffice\PhpWord\TemplateProcessor;
 use Illuminate\Support\Facades\DB;
@@ -41,6 +41,7 @@ class WordExportController extends Controller
         $my_template->setValue('elaborateur',$projet->elaborateur);
         //electrique
         $my_template->setValue('frequence', $electrique->frequence);
+        // dd($electrique->frequence);
         $my_template->setValue('u1n', $electrique->u1n);
         $my_template->setValue('u2o', $electrique->u2o);;
         $my_template->setValue('echelonSousctractive', $electrique->echelonSousctractive);
@@ -73,6 +74,9 @@ class WordExportController extends Controller
         $my_template->setValue('materiauMT',$donne_bobines->materiauMT);
         $my_template->setValue('materiauBT',$donne_bobines->materiauBT);
         //bobine MT
+          $conducteurMT =$this->dimention($donne_bobines->conducteurMT,$Bobinage->filobtenueIsoler,$Bobinage->filobtenueNue,$Bobinage->saillieMT,$Bobinage->hbrin1MT,$Bobinage->nbBrin1MT,$Bobinage->epFeuillard,$Bobinage->Hfeuillard);
+       $my_template->setValue('conducteurMT',$conducteurMT);
+// dd($Dimension);
         $my_template->setValue('nbcoucheMT',$Bobinage->nbcoucheMT);
         $my_template->setValue('spCoucheMT',$Bobinage->spCoucheMT);
         $my_template->setValue('nbrPapierMT',$Bobinage->nbrPapierMT);
@@ -95,13 +99,16 @@ class WordExportController extends Controller
         $my_template->setValue('J1D',$Bobinage->J1D);
         $my_template->setValue('Hfeuillard',$Bobinage->Hfeuillard);
         $my_template->setValue('epFeuillard',$Bobinage->epFeuillard);
-        $my_template->setValue('nbBrin1MT',$Bobinage->nbBrin1MT);
+        $my_template->setValue('nbBrin1MT',$Bobinage->nbBrin1MTc);
         $my_template->setValue('saillieMT',$Bobinage->saillieMT);
         $my_template->setValue('hbrin1MT',$Bobinage->hbrin1MT);
         $my_template->setValue('filobtenueIsoler',$Bobinage->filobtenueIsoler);
         $my_template->setValue('filobtenueNue',$Bobinage->filobtenueNue);
         //bobine BT
-        $my_template->setValue('HCondBt',$Bobinagesec->HCondBt);
+        $conducteurBT =$this->dimention($donne_bobines->conducteurBT,$Bobinagesec->filobtenueIsolerBT,$Bobinagesec->filobtenueNueBT,$Bobinagesec->saillieBT,$Bobinagesec->hbrin1BT,$Bobinagesec->nbBrin1BT,$Bobinagesec->epFeuillardBT,$Bobinagesec->HfeuillardBT);
+        $my_template->setValue('conducteurBT',$conducteurBT);
+        $hcond =$this->hcond($donne_bobines->conducteurBT,$Bobinagesec->HCondBt);
+        $my_template->setValue('HCondBt',$hcond);
         $my_template->setValue('spCoucheBT',$Bobinagesec->spCoucheBT);
         $my_template->setValue('canauxEp1PapierBT',$Bobinagesec->canauxEp1PapierBT);
         $my_template->setValue('canauxNbrPapierBT',$Bobinagesec->canauxNbrPapierBT);
@@ -130,45 +137,35 @@ class WordExportController extends Controller
         $my_template->setValue('Vsp',$VoltSpire->Vsp);
         $my_template->setValue('N1c',$VoltSpire->N1c);
         $spire=$this->spire($VoltSpire->spire);
-        $my_template->setValue('spire[0]',$spire[0]);
-        $my_template->setValue('spire[1]',$spire[1]);
+        for($i=0;$i<count($spire);$i++){
+            $my_template->setValue('spire['.$i.']',$spire[$i]);
 
-        $my_template->setValue('spire[2]',$spire[2]);
-        $my_template->setValue('spire[3]',$spire[3]);
-        $my_template->setValue('spire[4]',$spire[4]);
-// dd($spire[4]);
+        }
+        for(count($spire);$i<13;$i++){
+            $my_template->setValue('spire['.$i.']',0);
+        }
+
         //gradin
         $my_template->setValue('CMBT',$Gradin->CMBT);
         $my_template->setValue('EpaisseurTot',$Gradin->EpaisseurTot);
         $my_template->setValue('tole',$Gradin->tole);
         $my_template->setValue('diamNominale',$Gradin->diamNominale);
         $my_template->setValue('Snette',$Gradin->Snette);
-        $my_template->setValue('largeur[0]',$Gradin->largeur[0]);
-        $my_template->setValue('largeur[1]',$Gradin->largeur[1]);
-        $my_template->setValue('largeur[2]',$Gradin->largeur[2]);
-        $my_template->setValue('largeur[3]',$Gradin->largeur[3]);
-        $my_template->setValue('largeur[4]',$Gradin->largeur[4]);
-        $my_template->setValue('largeur[5]',$Gradin->largeur[5]);
-        $my_template->setValue('largeur[6]',$Gradin->largeur[6]);
-        $my_template->setValue('largeur[7]',$Gradin->largeur[7]);
-        $my_template->setValue('largeur[8]',$Gradin->largeur[8]);
-        $my_template->setValue('largeur[9]',$Gradin->largeur[9]);
-        $my_template->setValue('largeur[10]',$Gradin->largeur[10]);
-        $my_template->setValue('largeur[11]',$Gradin->largeur[11]);
-        $my_template->setValue('largeur[12]',$Gradin->largeur[12]);
-        $my_template->setValue('epaisseur [0]',$Gradin->epaisseur [0]);
-        $my_template->setValue('epaisseur [1]',$Gradin->epaisseur [1]);
-        $my_template->setValue('epaisseur [2]',$Gradin->epaisseur [2]);
-        $my_template->setValue('epaisseur [3]',$Gradin->epaisseur [3]);
-        $my_template->setValue('epaisseur [4]',$Gradin->epaisseur [4]);
-        $my_template->setValue('epaisseur [5]',$Gradin->epaisseur [5]);
-        $my_template->setValue('epaisseur [6]',$Gradin->epaisseur [6]);
-        $my_template->setValue('epaisseur [7]',$Gradin->epaisseur [7]);
-        $my_template->setValue('epaisseur [8]',$Gradin->epaisseur [8]);
-        $my_template->setValue('epaisseur [9]',$Gradin->epaisseur [9]);
-        $my_template->setValue('epaisseur [10]',$Gradin->epaisseur [10]);
-        $my_template->setValue('epaisseur [11]',$Gradin->epaisseur [11]);
-        $my_template->setValue('epaisseur [12]',$Gradin->epaisseur [12]);
+$largeur=$this->largeur($Gradin->largeur);
+        for($i=0;$i<count($largeur);$i++){
+            $my_template->setValue('largeur['.$i.']',$largeur[$i]);
+        }
+        for(count($largeur);$i<13;$i++){
+            $my_template->setValue('largeur['.$i.']',0);
+        }
+
+        $epaisseur=$this->epaisseur($Gradin->epaisseur);
+        for($i=0;$i<count($epaisseur);$i++){
+            $my_template->setValue('epaisseur['.$i.']',$epaisseur[$i]);
+        }
+        for(count($epaisseur);$i<13;$i++){
+            $my_template->setValue('epaisseur['.$i.']',0);
+        }
         //pccucc
         $my_template->setValue('Uccr',$pUCC->Uccr);
         $my_template->setValue('pcc1',$pUCC->pcc1);
@@ -186,6 +183,13 @@ class WordExportController extends Controller
         $my_template->setValue('E4',$cm->E4);
         $my_template->setValue('Eh',$cm->Eh);
         $my_template->setValue('Ebc',$cm->Ebc);
+        $masseFerCM=$this->masseFerCM($cm->masseFerCM);
+        for($i=0;$i<count($masseFerCM);$i++){
+            $my_template->setValue('masseFerCM['.$i.']',$masseFerCM[$i]);
+        }
+        for(count($masseFerCM);$i<13;$i++){
+            $my_template->setValue('masseFerCM['.$i.']',0);
+        }
         try{
             $my_template->saveAs(storage_path( $projet->appareil.'.docx'));
             return response()->download(storage_path( $projet->appareil.'.docx'));
@@ -199,7 +203,42 @@ class WordExportController extends Controller
     public function spire($spire){
         $spire = str_replace("[","",$spire);
         $spire = str_replace("]","",$spire);
-        // $spire=explode(',',$spire);
+        $spire = str_replace(",","",$spire);
         return $spire;
     }
+    public function largeur($largeur){
+        $largeur = str_replace("[","",$largeur);
+        $largeur = str_replace("]","",$largeur);
+        $largeur = str_replace(",","",$largeur);
+        return $largeur;
+    }
+    public function epaisseur($epaisseur){
+        $epaisseur = str_replace("[","",$epaisseur);
+        $epaisseur = str_replace("]","",$epaisseur);
+        $epaisseur = str_replace(",","",$epaisseur);
+        return $epaisseur;
+    }
+    public function masseFerCM($masseFerCM){
+        $masseFerCM = str_replace("[","",$masseFerCM);
+        $masseFerCM = str_replace("]","",$masseFerCM);
+        $masseFerCM = str_replace(",","",$masseFerCM);
+        return $masseFerCM;
+    }
+    public function hcond($conducteurBT,$HCondBt){
+        if($conducteurBT=="Rond emaille"){
+            return $HCondBt;
+             }else{
+                 return 0;
+             }
+    }
+    public function dimention($conduct,$filobtenueIsoler,$filobtenueNue,$saillieMT,$hbrin1MT,$nbBrin1MT,$epFeuillard,$Hfeuillard){
+       if($conduct=="Rond emaille"){
+        return  $filobtenueIsoler."*".$filobtenueNue;}
+        elseif($conduct=="meplat guipé"){
+            return  $nbBrin1MT."*".$saillieMT."*".$hbrin1MT;}
+        elseif($conduct=="feuillard"){
+            return $Hfeuillard."*".$epFeuillard;}
+
+    }
+
 }
