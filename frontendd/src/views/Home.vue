@@ -205,7 +205,7 @@
               <v-icon dark> mdi-cloud-download </v-icon>
             </v-btn>
       </template>
-      <span>exporter votre rapport</span>
+      <span>exporter rapport</span>
     </v-tooltip>
           <v-menu>
             <template v-slot:activator="{ on, attrs }">
@@ -213,7 +213,7 @@
                class="mx-2"
             dark
             small
-            v-bind="attrs" v-on="on" color="green">
+            v-bind="attrs" v-on="on" color="success">
                 <v-icon>mdi-dots-vertical</v-icon>
               </v-btn>
             </template>
@@ -254,7 +254,7 @@
                 <!-- <i class="fa-solid fa-brackets-curly"></i> -->
                   <v-icon dark> mdi-download</v-icon>
 
-                  Export json
+                  Exporter
                 </v-btn>
               <!-- </v-list-item> -->
             </v-list>
