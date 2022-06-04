@@ -42,11 +42,6 @@
                         </v-btn>
                       </template>
                       <v-card class="body panel left-panel">
-                        <!-- <v-card-title>Liste Des Modeles</v-card-title> -->
-                        <!-- <v-divider></v-divider> -->
-                        <!-- <v-card-text   max-width="100%"   > -->
-
-                        <!-- <div> -->
                         <v-data-table
                           :headers="headersModele"
                           :items="Modele"
@@ -57,8 +52,6 @@
                         >
                           <template v-slot:top>
                             <v-toolbar flat>
-                              <!-- <v-divider class="mx-4" inset vertical></v-divider> -->
-                              <!-- <v-spacer></v-spacer> -->
                               <v-card-title>
                                 <v-text-field
                                   v-model="searchModele"
@@ -145,19 +138,25 @@
                         </v-data-table>
                       </v-card>
                     </v-dialog>
-                  </v-list-item>
+                     </v-list-item>
+                      <v-list-item>
+                    <v-dialog v-model="dialogImp" max-width="60%">
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn class="bouton" v-bind="attrs" v-on="on" >
+                          Importer un projet
+                        </v-btn>
+                      </template>
+                      
+                      <v-card >
+                       <uploader/>
+                      </v-card>
+                    </v-dialog>
+                      </v-list-item>
+                 
                 </v-list-item-group>
               </v-list>
             </v-menu>
             <v-divider class="mx-4" inset vertical></v-divider>
-<!-- <v-file-input
-  hide-input
-  truncate-length="15"
-  filled
-  type="file"
- @change="importer"
-></v-file-input> -->
- <input type="file" @change="importer" class="file" placeholder="Upload File">
             <v-spacer></v-spacer>
             
             <v-card-title>
@@ -287,18 +286,21 @@
 <script>
 import axios from "axios";
 import Footer from "@/components/Footer";
+import uploader from "@/components/uploader";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import Loading from "@/components/Loading.vue";
 export default {
   components: {
     Footer,
     Loading,
+    uploader,
   },
   data: () => ({
     DevenirModeleId: "",
     dialogInfo: false,
     dialogm1: "",
     dialog: false,
+    dialogImp: false,
     dialogModele: false,
     Modele: [],
     Projet: [],
@@ -416,23 +418,6 @@ export default {
       axios
         .post("/ProjetDevenirModele/" + this.DevenirModeleId, modeles)
         .then((this.dialogInfo = false), this.getprojet());
-    },
-    importer(event) {
-      let name =event.target.files[0].name;
-let id=name.replace('.json','');
-       let token = localStorage.getItem("token");
-        
-      axios
-        .get(
-          "/importjson/"+id,
-          {
-            headers: {
-              Authorization: token,
-            },
-          }
-        )
-      .then(response => (this.info = response.data),this.getprojet())
-      
     },
     exportword(id) {
       axios({
