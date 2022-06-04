@@ -59,7 +59,7 @@ class ProjetController extends Controller
         $volts = VoltSpire::findOrFail($id);
         $table = collect(['projets' => $projet, 'electriques' => $electrique, 'garanties' => $garantie, 'donnee_bobines' => $donnesBobines, 'gradins' => $gradin, 'bobinages' => $bobineMT, 'bobinage_secs' => $bobineBT, 'pcc_uccs' => $pcc, 'circuitmagnetiques' => $cm,'volt_spires'=> $volts]);
         // $current_date_time = Carbon::now();
-        $current_date_time = date("20y_m_d_000");
+        $current_date_time = date("20y_m_d");
         $filename =$current_date_time."_". $id.".json";
         // dd($filename);
         $handle = fopen($filename, 'w+');

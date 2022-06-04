@@ -455,7 +455,10 @@ let id=name.replace('.json','');
     },
     exportjson(id) {
       let date= new Date();
-      let now_time = (date.getFullYear() + "_" + date.getMonth() + "_" + date.getDay()+"_000").toString()
+      let now_time = (date.getFullYear() + "_" + date.getMonth() + "_" + date.getDay()).toString()
+
+      console.log(new Date());
+      // let name=now_time+'_'+id;
       axios({
         url: "/json/" + id,
         method: "GET",
