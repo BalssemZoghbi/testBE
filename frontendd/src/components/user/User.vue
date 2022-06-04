@@ -162,6 +162,8 @@ import demande from "../user/demande.vue";
 import Inactive from "../user/userInactive.vue";
 import Loading from "@/components/Loading.vue";
 import axios from "axios";
+import "@/store/index";
+
 export default {
   components: {
     demande,
@@ -207,42 +209,9 @@ export default {
       password: "",
     },
   }),
-  async created() {
-    //      let user1 =  JSON.stringify(localStorage.getItem('user'));
-    //      console.log(user1.email);
-    //      this.disable=false;
-    // if (user1) {
-    //    this.disable=true;
-    // }
-
-    // let user=response.data;
-
-    //     if(!user){
-    //        console.log(user);
-    //       this.disabled=1;
-    //     }
-    //     else{
-    //       this.disabled=0;
-    //     }
-
-    //       const response=await axios.get('user');
-    //     this.$store.dispatch('user',response.data);
-
-    //     let vm=this;
-    //     vm.disable=false;
-    //   let user=response.data;
-    //  console.log(user);
-    //     if(user){
-
-    //       vm.disable=false;
-    //     }
-    //     else{
-    //       vm.disable=true;
-    //     }
-    // this.$store.state.userId == user_id;
-    console.log(this.$store.state.user.name);
-    
+   created() {
     this.getuser();
+   
   },
 
   computed: {
@@ -278,38 +247,19 @@ export default {
   },
 
   methods: {
-    async dis() {
-      this.disable = true;
-      await axios
-        .get("user")
-        .then((response) => {
-          this.$store.dispatch("user", response.data);
-          this.user = response.data;
-        })
-        .catch((error) => {
-          if (error) this.disable = false;
-          // console.log("error");
-        });
-    },
-    async getuser() {
-      await axios.get("/users/get").then((resp) => {
-        this.users = resp.data;
-        this.spinner = false;
-        // console.log(resp.data);
-      });
+ 
+     getuser() {
+        this.$store.dispatch("Users").then( () => {
+                this.user = this.$store.getters.user;
+                console.log(this.user);
+                 this.spinner = false;
+            });
+      // await axios.get("/users/get").then((resp) => {
+      //   this.users = resp.data;
+      //   this.spinner = false;
+      //   console.log(this.users);})
     },
     deleteutilisateur(id) {
-      //          const response= axios.get('user');
-      //   this.$store.dispatch('user',response.data);
-      // let user=response.data;
-
-      //   if(user.id==id){
-      //      console.log(user);
-      //     this.disable= true;
-      //   }
-      //   else{
-      //     this.disable= false;
-      //   }
       Swal.fire({
         title: "Supprimer",
         text: "Vous êtes sure de supprimer cette utilisateur?",

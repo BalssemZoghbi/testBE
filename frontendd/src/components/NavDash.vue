@@ -241,9 +241,10 @@
 </template>
 
 <script>
+import "@/store/index";
 import Footer from "@/components/Footer";
 import navbarUpdate from "@/components/navbarUpdate";
-import axios from "axios";
+// import axios from "axios";
 import { mapGetters } from "vuex";
 export default {
   components: {
@@ -282,20 +283,30 @@ export default {
       { icon: "folder_open", text: "Modele", route: "/modele" },
     ],
   }),
-  async created() {
-    const response = await axios.get("user");
-    this.$store.dispatch("user", response.data);
-    this.user = response.data;
+   created() {
+    // const response = await axios.get("user");
+    // this.$store.dispatch("user", response.data);
+    // this.user = response.data;
+    // console.log(this.user);
+    // this.$store.dispatch("fetchUser")
+      this.guser();
   },
   computed: {
     ...mapGetters(["user"]),
   },
   methods: {
+     guser() {
+            this.$store.dispatch("fetchUser").then( () => {
+                this.user = this.$store.getters.user;
+                
+            });
+     },
     logout() {
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-      this.$store.dispatch("user", null);
-      this.$router.push("/Connexion");
+       this.$store.dispatch("logout").then(() => { 
+         this.$router.push("/Connexion");
+         localStorage.removeItem("projet");
+ });
+    
     },
     onScroll(e) {
       if (typeof window === "undefined") return;
