@@ -96,11 +96,11 @@ const routes = [
     name: "NotFound",
     component: notFound,
   },
-  {
-    path: "/notfound",
-    name: "NotFound",
-    component: notFound,
-  },
+  // {
+  //   path: "/notfound",
+  //   name: "NotFound",
+  //   component: notFound,
+  // },
   {
     path: "/",
     name: "Home",
