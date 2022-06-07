@@ -51,7 +51,7 @@
                         <!-- <input type="submit" :class="{'disabled': !validateFields}"  value="Connexion"> -->
                       </div>
                     </v-col>
-                    <v-col cols="12" md="4" class="teal accent-3">
+                    <v-col cols="12" md="4" class="teal accent-3" style="margin-top: -1%;">
                       <v-card-text class="white--text mt-12">
                         <h1 class="text-center display-1">
                           Content de vous revoir!

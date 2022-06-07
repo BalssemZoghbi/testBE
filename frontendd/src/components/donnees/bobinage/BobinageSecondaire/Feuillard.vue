@@ -164,7 +164,7 @@
                       ></v-text-field>
 
                       <v-select
-                      error
+                      
                         :items="barre"
                         label="barre"
                         v-model="projet.EpbarreBT"

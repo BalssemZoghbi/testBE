@@ -72,7 +72,8 @@ class ProjetController extends Controller
         $header = $request->header('Authorization');
         $token = PersonalAccessToken::findToken($header);
         $user = $token->tokenable;
-        $filename = $id.".json";
+        $current_date_time = date("20y_m_d");
+        $filename =$current_date_time."_". $id.".json";
         $json =  file_get_contents(public_path() ."/".$filename);
         $data = json_decode($json);
         $array1 = (array) $data;
@@ -750,7 +751,7 @@ $donnebobines=DonneBobine::create([
     {
         $projet = Projet::FindOrFail($id);
         if ($projet->delete()) {
-            return new ProjetResource($projet);
+            return response()->json(['success' => 'Project deleted successfully.']);
         }
     }
 }

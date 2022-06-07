@@ -424,7 +424,7 @@ export default {
       let epaisseur = [];
       let precedent = 0;
       for (let i = 0; i < this.largeur.length; i++) {
-        epaisseur[i] = this.DeuxChiffre(
+        epaisseur[i] = (
           Math.sqrt(
             Math.pow(this.projet.diamNominale, 2) - Math.pow(this.largeur[i], 2)
           )
@@ -443,13 +443,13 @@ export default {
         i < this.largeur.length;
         i++
       ) {
-        epaisseur[i] = this.DeuxChiffre(
+        epaisseur[i] = 
           (Math.sqrt(
             Math.pow(this.projet.diamNominale, 2) - Math.pow(this.largeur[i], 2)
           ) -
             prec) *
             coeff[j]
-        );
+      
         j++;
         prec += epaisseur[i];
       }

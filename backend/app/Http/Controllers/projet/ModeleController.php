@@ -394,7 +394,7 @@ class ModeleController extends Controller
 
         $modele = Projet::FindOrFail($id);
         if ($modele->delete()) {
-            return response()->json($modele);
+            return response()->json(['success' => 'Modele deleted successfully.']);
         }
     }
     public function ModeleProjetId()

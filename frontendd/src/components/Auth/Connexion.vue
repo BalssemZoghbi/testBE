@@ -304,7 +304,7 @@ export default {
         //   this.$router.push('/Connexion');
         this.step--;
       } catch (e) {
-        this.error = "une erreur s'est produite";
+        this.error = "une erreur c'est produite";
       }
     },
   },

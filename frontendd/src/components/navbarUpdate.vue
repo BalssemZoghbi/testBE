@@ -13,14 +13,14 @@
                     <router-link
                       :to="'/projet/update/' + this.$route.params.id"
                     >
-                      Generale</router-link
+                      Générales </router-link
                     >
                   </li>
                   <li class="dropdown-link" v-if="this.show == 'true'">
                     <router-link
                       :to="'/projet/updateModele/' + this.$route.params.id"
                     >
-                      Generale</router-link
+                      Générales </router-link
                     >
                   </li>
                   <li class="dropdown-link">

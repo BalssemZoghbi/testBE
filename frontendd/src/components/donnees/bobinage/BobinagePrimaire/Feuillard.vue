@@ -315,7 +315,7 @@
               </form>
               <!-- </div> -->
             </v-card>
-            <v-btn color="primary mb-4" @click="e1 = 1"> précédent </v-btn>
+            <v-btn color="primary mb-14" @click="e1 = 1"> précédent </v-btn>
             <!-- <v-btn color="success" @click="e1 = 3"> suivant </v-btn>
           </v-stepper-content>
           <v-stepper-step :complete="e1 > 3" step="3"> Barre </v-stepper-step>
@@ -381,7 +381,7 @@
               </form>
             </v-card>
             <v-btn color="primary mb-4" @click="e1 = 2"> précédent </v-btn> -->
-            <v-btn color="success mb-4" @click="updateprojet"> Valider </v-btn>
+            <v-btn color="success mb-14" @click="updateprojet"> Valider </v-btn>
           </v-stepper-content>
         </v-stepper-items>
       </v-stepper>
