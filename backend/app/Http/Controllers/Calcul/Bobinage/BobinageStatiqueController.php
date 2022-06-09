@@ -53,7 +53,7 @@ class BobinageStatiqueController extends Controller
     public function deleteSaillie($id){
         $saillie= Saillie::FindOrFail($id);
         $saillie->delete();
-        return response()->json($saillie);
+        return response()->json('saillie deleted successfully');
      }
     public function getToles()
     {
@@ -102,7 +102,7 @@ class BobinageStatiqueController extends Controller
     public function deleteTole($id){
         $Tole= Tole::FindOrFail($id);
         $Tole->delete();
-        return response()->json($Tole);
+        return response()->json('Tole deleted successfully');
      }
     public function getHbrin()
     {
@@ -165,7 +165,7 @@ class BobinageStatiqueController extends Controller
     public function deleteHbrin($id){
         $hbrin= Hbrin::FindOrFail($id);
         $hbrin->delete();
-        return response()->json($hbrin);
+        return response()->json('Hbrin deleted successfully');
      }
     public function getBarre()
     {
@@ -213,7 +213,7 @@ class BobinageStatiqueController extends Controller
     public function deleteBarre($id){
         $Barre= Barre::FindOrFail($id);
         $Barre->delete();
-        return response()->json($Barre);
+        return response()->json('Barre deleted successfully');
      }
      public function addStatBarre(){
         $Barre=[
