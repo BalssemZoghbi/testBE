@@ -92,13 +92,13 @@ class GarantieController extends Controller
     {
         $garantie = Garantie36::FindOrFail($id);
         $garantie->delete();
-        return response()->json($garantie);
+        return 'Garantie 36 deleted successfully';
     }
     public function deletegar24($id)
     {
         $garantie = Garantie24::FindOrFail($id);
         $garantie->delete();
-        return response()->json($garantie);
+        return 'Garantie 24 deleted successfully';
     }
 
     public function calcul24($puissance)
