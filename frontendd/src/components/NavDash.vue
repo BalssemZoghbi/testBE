@@ -289,16 +289,17 @@ export default {
     // this.user = response.data;
     // console.log(this.user);
     // this.$store.dispatch("fetchUser")
-      this.guser();
+   this.guser();
+  
   },
   computed: {
     ...mapGetters(["user"]),
   },
   methods: {
-     guser() {
-            this.$store.dispatch("fetchUser").then( () => {
+    async guser() {
+          await  this.$store.dispatch("fetchUser").then( () => {
                 this.user = this.$store.getters.user;
-                
+                console.log(this.user);
             });
      },
     logout() {

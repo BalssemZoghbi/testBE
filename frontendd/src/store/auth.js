@@ -82,8 +82,8 @@ export default {
                     });
             });
         },
-        fetchUser({ commit }) {
-            return new Promise((resolve, reject) => {
+        async fetchUser({ commit }) {
+            return await new Promise((resolve, reject) => {
                 axios
                     .get("user")
                     .then((response) => {
@@ -95,9 +95,9 @@ export default {
                     });
             });
         },
-        Users({ commit }) {
-            return new Promise((resolve, reject) => {
-                axios
+      async Users({ commit }) {
+            return await new Promise((resolve, reject) => {
+              axios
                     .get("users/get")
                     .then((response) => {
                         commit("SET_USER", response.data);
@@ -121,6 +121,9 @@ export default {
         },
         isAdmin(state) {
             return state.user?.is_admin == 1;
+        },
+        users(state) {
+            return state.users;
         },
     },
 };
