@@ -256,7 +256,6 @@ header {
 .dropdown {
   position: fixed;
   top: 100%;
-  /* left: 0; */
   width: 10rem;
   transform: translateY(10px);
   opacity: 0;

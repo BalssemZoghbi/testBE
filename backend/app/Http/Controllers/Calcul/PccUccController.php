@@ -103,14 +103,14 @@ public function Ucca($pccMaj,$puissance){
          'pcc1' =>$pcc1,
          'pcc2' =>$pcc2,
         'pccMaj' =>$pccMaj,
-         'Pccg' =>$projet->Pccg,
+         'Pccgarantie' =>$projet->Pccg,
          'Uccr' =>$Uccr,
          'Ucca' =>$Ucca,
          'Ucc' =>$Ucc,
-         'Uccg' => $projet->Uccg,
+         'Uccgarantie' => $projet->Uccg,
      ]);
 
-         return response()->json($pUCC);
+     return response()->json($pUCC);
  }
 
 }

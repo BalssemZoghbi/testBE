@@ -163,11 +163,11 @@ $donnebobines=DonneBobine::create([
             'pcc1' => $array1['pcc_uccs']-> pcc1,
             'pcc2' => $array1['pcc_uccs']-> pcc2,
             'pccMaj' => $array1['pcc_uccs']-> pccMaj,
-            'Pccg' => $array1['pcc_uccs']-> Pccg,
+            'Pccgarantie' => $array1['pcc_uccs']-> Pccgarantie,
             'Uccr' => $array1['pcc_uccs']-> Uccr,
             'Ucca' => $array1['pcc_uccs']-> Ucca,
             'Ucc' => $array1['pcc_uccs']-> Ucc,
-            'Uccg' => $array1['pcc_uccs']-> Uccg,
+            'Uccgarantie' => $array1['pcc_uccs']-> Uccgarantie,
         ]);
         $Bobinage = Bobinage::create([
             'materiau' => $array1['bobinages']-> materiau,
@@ -585,11 +585,11 @@ $donnebobines=DonneBobine::create([
             'pcc1' => null,
             'pcc2' => null,
             'pccMaj' => null,
-            'Pccg' => null,
+            'Pccgarantie' => null,
             'Uccr' => null,
             'Ucca' => null,
             'Ucc' => null,
-            'Uccg' => null,
+            'Uccgarantie' => null,
         ]);
         $circuitMagnetique = Circuitmagnetique::create([
             'masseFertot' => null,

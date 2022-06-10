@@ -318,11 +318,11 @@ class ModeleController extends Controller
             'pcc1' => null,
             'pcc2' => null,
             'pccMaj' => null,
-            'Pccg' => null,
+            'Pccgarantie' => null,
             'Uccr' => null,
             'Ucca' => null,
             'Ucc' => null,
-            'Uccg' => null,
+            'Uccgarantie' => null,
         ]);
         $circuitMagnetique = Circuitmagnetique::create([
             'masseFertot' => null,
@@ -622,11 +622,11 @@ class ModeleController extends Controller
             'pcc1' => $modele->pcc1,
             'pcc2' => $modele->pcc2,
             'pccMaj' => $modele->pccMaj,
-            'Pccg' => $modele->Pccg,
+            'Pccgarantie' => $modele->Pccgarantie,
             'Uccr' => $modele->Uccr,
             'Ucca' => $modele->Ucca,
             'Ucc' => $modele->Ucc,
-            'Uccg' => $modele->Uccg,
+            'Uccgarantie' => $modele->Uccgarantie,
         ]);
         $circuitMagnetique = Circuitmagnetique::create([
             'masseFertot' => $modele->masseFertot,
@@ -906,11 +906,11 @@ class ModeleController extends Controller
             'pcc1' => $projet->pcc1,
             'pcc2' => $projet->pcc2,
             'pccMaj' => $projet->pccMaj,
-            'Pccg' => $projet->Pccg,
+            'Pccgarantie' => $projet->Pccgarantie,
             'Uccr' => $projet->Uccr,
             'Ucca' => $projet->Ucca,
             'Ucc' => $projet->Ucc,
-            'Uccg' => $projet->Uccg,
+            'Uccgarantie' => $projet->Uccgarantie,
         ]);
         $circuitMagnetique = Circuitmagnetique::create([
             'masseFertot' => $projet->masseFertot,

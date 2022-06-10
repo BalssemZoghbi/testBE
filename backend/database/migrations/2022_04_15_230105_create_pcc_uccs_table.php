@@ -19,11 +19,11 @@ class CreatePccUccsTable extends Migration
             $table->float('pcc1')->nullable();
             $table->float('pcc2')->nullable();
             $table->float('pccMaj')->nullable();
-            $table->float('Pccg')->nullable();
+            $table->float('Pccgarantie')->nullable();
             $table->float('Uccr')->nullable();
             $table->float('Ucca')->nullable();
             $table->float('Ucc')->nullable();
-            $table->float('Uccg')->nullable();
+            $table->float('Uccgarantie')->nullable();
             $table->timestamps();
         });
     }
