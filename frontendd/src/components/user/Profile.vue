@@ -129,15 +129,15 @@
         </v-card-text>
         <v-card-actions style="margin-top:-6%">
           <v-spacer></v-spacer>
-          <!-- <v-btn rounded color="blue darken-1" text @click="update">
+          <v-btn rounded color="blue darken-1" text @click="update">
            Sauvegarder
           </v-btn>
-             <v-btn
+             <!-- <v-btn
       color="blue"
       class="ma-2 white--text"
-      -->
-    <!-- >
-      Accepter -->
+     
+    >
+      Accepter
       <v-icon
         right
         dark
@@ -147,7 +147,7 @@
       >
         mdi-pencil
       </v-icon>
-    <!-- </v-btn> -->
+    </v-btn> -->
 
         </v-card-actions>
           </v-card-text>
