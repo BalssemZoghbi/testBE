@@ -47,7 +47,7 @@
           left
           style="margin-left: 53px;"
         >
-          mdi-arrow-right
+          mdi-chevron-right
         </v-icon>
         </v-btn>
       </template>
