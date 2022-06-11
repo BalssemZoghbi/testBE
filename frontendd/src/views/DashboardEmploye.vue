@@ -105,51 +105,46 @@
                   </v-card>
                 </v-hover>
               </v-col>
-               <v-col >
-              <v-hover
-        v-slot:default="{ hover }"
-        open-delay="200"
-      >
-       <v-card
-       :elevation="hover ? 16 : 2"
-        class="mx-auto"
-        max-width="300"
-        outlined
+              <v-col>
+                <v-hover v-slot:default="{ hover }" open-delay="200">
+                  <v-card
+                    :elevation="hover ? 16 : 2"
+                    class="mx-auto"
+                    max-width="300"
+                    outlined
+                  >
+                    <v-list-item three-line>
+                      <v-list-item-content>
+                        <v-list-item-title class="headline mb-1"
+                          >Modeles</v-list-item-title
+                        >
+                      </v-list-item-content>
 
-  >
-    <v-list-item three-line>
-      <v-list-item-content>
-        <v-list-item-title class="headline mb-1">Modeles</v-list-item-title>
-
-      </v-list-item-content>
-
-      <v-list-item-avatar
-        tile
-        size="80"
-       color="#009432"
-      >
-        <v-icon dark>folder_open</v-icon>
-      </v-list-item-avatar>
-    </v-list-item>
-    <v-divider></v-divider>
-    <v-card-actions>
-      <v-icon flab color="#009432">folder_open</v-icon>
-      <v-btn text >{{ModeleCount}}</v-btn>
-      <v-spacer></v-spacer>
-<router-link to="/modele" style="text-decoration:none">  <v-icon flab color="#2C3A47">mdi-chevron-right</v-icon></router-link>
-    </v-card-actions>
-  </v-card>
-      </v-hover>
-
-            </v-col>
-
+                      <v-list-item-avatar tile size="80" color="#009432">
+                        <v-icon dark>folder_open</v-icon>
+                      </v-list-item-avatar>
+                    </v-list-item>
+                    <v-divider></v-divider>
+                    <v-card-actions>
+                      <v-icon flab color="#009432">folder_open</v-icon>
+                      <v-btn text>{{ ModeleCount }}</v-btn>
+                      <v-spacer></v-spacer>
+                      <router-link to="/modele" style="text-decoration: none">
+                        <v-icon flab color="#2C3A47"
+                          >mdi-chevron-right</v-icon
+                        ></router-link
+                      >
+                    </v-card-actions>
+                  </v-card>
+                </v-hover>
+              </v-col>
             </div>
           </v-row>
         </v-container>
       </v-row>
     </v-layout>
-<br>
-<br>
+    <br />
+    <br />
     <div class="flex">
       <div>
         <LineChartGenerator
@@ -250,7 +245,7 @@ export default {
     },
   },
   data: () => ({
-    ModeleCount:"",
+    ModeleCount: "",
     NbreCuivre: "",
     NbreAlu: "",
     projetCount: "",
@@ -266,7 +261,6 @@ export default {
     }
   },
   created() {
-   
     axios
       .post("/stat")
       .then(
@@ -282,13 +276,27 @@ export default {
           (this.NbreAlu = response.data.NbreAlu),
           (this.NbreCuivre = response.data.NbreCuivre),
           (this.chartDataDonut = {
-             labels: ['Meplat Guipé Primaire', 'Rond Emaillé Primaire', 'Feuillard Primaire', 'Meplat Guipé Secondaire', 'Rond Emaillé Secondaire', 'Feuillard Secondaire'],
-        datasets: [
-          {
-            backgroundColor: ['#3358FF', '#0628C4', '#00D8FF', '#1DA1B0','#548be3', '#0f326b'],
-            data: response.data.ProjetChart
-          }
-        ]
+            labels: [
+              "Meplat Guipé Primaire",
+              "Rond Emaillé Primaire",
+              "Feuillard Primaire",
+              "Meplat Guipé Secondaire",
+              "Rond Emaillé Secondaire",
+              "Feuillard Secondaire",
+            ],
+            datasets: [
+              {
+                backgroundColor: [
+                  "#3358FF",
+                  "#0628C4",
+                  "#00D8FF",
+                  "#1DA1B0",
+                  "#548be3",
+                  "#0f326b",
+                ],
+                data: response.data.ProjetChart,
+              },
+            ],
           }),
           (this.chartOptionsDonut = {
             responsive: true,
@@ -333,8 +341,8 @@ export default {
   margin-top: 10px;
 }
 .flex3 {
-   display: grid;
-    grid-template-columns: repeat(4, 1fr);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: 5;
   margin-top: 10px;
   margin-left: 2%;
