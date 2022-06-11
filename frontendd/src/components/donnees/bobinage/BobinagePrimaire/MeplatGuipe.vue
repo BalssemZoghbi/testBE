@@ -627,6 +627,7 @@ export default {
       return Math.round((this.hbobt - this.hsfs) / 2);
     },
     poid() {
+      console.log(this.EpxMT,this.DintMT);
       let coefPoid = 0;
       if (this.projet.materiauMT == "cuivre") {
         coefPoid = 8.9;
@@ -637,8 +638,8 @@ export default {
         Math.pow(10, -6) *
         (coefPoid *
           parseFloat(this.projet.N1c) *
-          parseFloat(this.projet.scu1) *
-          (parseFloat(this.projet.DintMT) + parseFloat(this.projet.EpxMT)) *
+          parseFloat(this.scu1) *
+          (parseFloat(this.Dint) + parseFloat(this.Epx)) *
           Math.PI *
           3 *
           ((100 + parseFloat(this.projet.majPoid)) / 100))

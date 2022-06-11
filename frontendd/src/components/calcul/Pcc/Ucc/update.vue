@@ -185,7 +185,7 @@ hmoy()
  if((this.projet.conducteurMT=='feuillard')&&(this.projet.conducteurBT=='feuillard')){
    console.log(hmoy);
  hmoy=(parseFloat(this.projet.Hfeuillard)+parseFloat(this.projet.HfeuillardBT))/2;
-}else if(this.projet.conducteurBT=='feuillard'){
+}else if((this.projet.conducteurBT=='feuillard')&&(this.projet.conducteurBT=='Rond emaille')){
  hmoy=(parseFloat(this.projet.HCondMt)+parseFloat(this.projet.HfeuillardBT))/2;
 }else if((this.projet.conducteurMT=='meplat guipé')&&(this.projet.conducteurBT=='meplat guipé')){
 
@@ -196,7 +196,7 @@ else if((this.projet.conducteurMT=='Rond emaille')&&(this.projet.conducteurBT=='
  hmoy=(parseFloat(this.projet.HCondMt)+parseFloat(this.projet.HCondBt))/2;
 }
 
-else if(this.projet.conducteurMT=='meplat guipé'){
+else if((this.projet.conducteurMT=='meplat guipé')&&(this.projet.conducteurBT=='feuillard')){
  hmoy=(parseFloat(this.projet.HSFS)+parseFloat(this.projet.HfeuillardBT))/2;
 }
 else{
