@@ -237,7 +237,7 @@ router.beforeEach((to, from, next) => {
     } else {
       next();
     }
-  } else if ((to.path == '/forgot')||(to.path == '/reset')) {
+  } else if ((to.path == '/forgot')||((to.path).indexOf('/reset'))>=0) {
     if (user) {
       window.history.back();
     } else {
