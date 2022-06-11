@@ -326,8 +326,8 @@ export default {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }
 .v-application .orange--text {
-  color: #ffffff !important;
-  caret-color: #ff9800 !important;
+  color: #6791d6 !important;
+  caret-color: #063b77 !important;
 }
 
 .theme--dark.v-chip:not(.v-chip--active) {
