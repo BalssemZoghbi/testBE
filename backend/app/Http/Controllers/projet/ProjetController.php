@@ -73,7 +73,7 @@ class ProjetController extends Controller
         $token = PersonalAccessToken::findToken($header);
         $user = $token->tokenable;
         $filename = $id.".json";
-        $json =  file_get_contents(public_path() ."/".$filename);
+        $json =  file_get_contents(public_path()."/".$filename);
         $data = json_decode($json);
         $array1 = (array) $data;
        $elec = Electrique::create([
@@ -308,6 +308,7 @@ $donnebobines=DonneBobine::create([
             'masseFerCM' => $array1['circuitmagnetiques']-> masseFerCM,
             'surfaceCM' => $array1['circuitmagnetiques']-> surfaceCM,
             'Hauteurcuve' => $array1['circuitmagnetiques']-> Hauteurcuve,
+            'I0' => $array1['circuitmagnetiques']-> I0,
         ]);
 
            DB::table('projets')->insert([
