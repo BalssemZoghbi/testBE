@@ -235,7 +235,7 @@ header {
 .nav-link > a {
   line-height: 3rem;
   color: #fff;
-  background-color: rgb(5, 48, 96);
+  background-color: transparent;
   padding: 0 0.8rem;
   letter-spacing: 1px;
   font-size: 0.95rem;
