@@ -154,8 +154,9 @@ let id=name.replace('.json','');
             },
           }
         )
-      .then(response => (console.log(response.data),this.success=true,this.files=[],this.projets=[]))
-      .catch(error => (console.log(error),this.warning=true))  
+      .then(response => (console.log(response.data),this.success=true,this.files=[],this.projets=[],window.location.reload()))
+      .catch(error => (console.log(error),this.warning=true,window.location.reload()))  
+     
     },
      import(file){
       //  if(!file.type.match('json.*')){
@@ -222,7 +223,7 @@ let id=name.replace('.json','');
   }
 }
 .uploader{
-    width: 100%;
+    // width: 100%;
     height: 70%;
     background-color: rgb(5, 48, 96);
     color: #fff;
