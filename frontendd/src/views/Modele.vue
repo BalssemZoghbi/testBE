@@ -78,7 +78,7 @@
           v-on="on"
               small 
                  color="red"
-            @click="deleteModele(item.id)"
+            @click="deleteModele(item.projets_id)"
             >
               <v-icon dark> mdi-delete </v-icon>
             </v-btn>

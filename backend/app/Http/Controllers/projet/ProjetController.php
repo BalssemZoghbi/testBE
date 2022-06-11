@@ -616,6 +616,7 @@ $donnebobines=DonneBobine::create([
             'masseFerCM' => null,
             'surfaceCM' => null,
             'Hauteurcuve' => null,
+            'I0' => null,
         ]);
         $donnebobines=DonneBobine::create([
             'materiauMT' => null,
