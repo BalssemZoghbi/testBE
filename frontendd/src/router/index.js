@@ -4,13 +4,11 @@ import Home from "../views/Home.vue";
 import Modele from "../views/Modele.vue";
 import Dashboard from "../views/Dashboard.vue";
 import DashboardEmploye from "../views/DashboardEmploye.vue";
-import about from "../views/About.vue";
 import Forgot from "../components/Auth/Forgot.vue";
 import Reset from "../components/Auth/Reset.vue";
 import updateProjet from "../components/donnees/generale/update.vue";
 import updateProjetModele from "../components/donnees/generale/updateModele.vue";
 import updateElec from "../components/donnees/electrique/update.vue";
-import Uni from "../views/Untitled-1.vue";
 import notFound from "../components/NotFound.vue";
 import Connexion from "../components/Auth/Connexion.vue";
 import updateGarantie from "../components/donnees/garantie/update.vue";
@@ -37,15 +35,10 @@ import Hbrin from "../components/donnees/bobinage/hbrin.vue";
 import barre from "../components/donnees/bobinage/barre.vue";
 import updatecourcircuit from "../components/calcul/Pcc/Ucc/update.vue";
 import updatecircuitmag from "../components/calcul/circuitMagnetique/update.vue";
-import t from "../components/t.vue";
 Vue.use(VueRouter);
 
 const routes = [
-  {
-    path: "/t",
-    name: "t",
-    component: t,
-  },
+
   {
     path: "/profil",
     name: "profil",
@@ -135,17 +128,6 @@ const routes = [
     path: "/forgot",
     name: "Forgot",
     component: Forgot,
-  },
-  {
-    path: "/uni",
-    name: "Uni",
-    component: Uni,
-  },
-
-  {
-    path: "/projet/:id",
-    name: "projet.about",
-    component: about,
   },
   {
     path: "/projet/update/:id",
