@@ -1,20 +1,19 @@
 <template>
   <div>
-        <v-layout style="margin-left:4%">
+        <v-layout >
     <v-row class="clickable">
         <v-container>
-          <v-row style="margin-left:-4%">
+          <v-row style="margin-left:0.25%">
               <div class="flex4">
-            <v-col >
+            <v-col style="width:170%!important">
               <v-hover
         v-slot:default="{ hover }"
-        open-delay="200"
+        open-delay="100"
       >
        <v-card
        :elevation="hover ? 16 : 2"
         class="mx-auto item"
         max-width="300"
-        
         outlined
 
   >
@@ -44,15 +43,15 @@
 
             </v-col>
             
-             <v-col >
+             <v-col style="margin-left:-1%">
               <v-hover
         v-slot:default="{ hover }"
-        open-delay="200"
+        open-delay="100"
       >
        <v-card
        :elevation="hover ? 16 : 2"
         class="mx-auto item"
-        max-width="300"
+        max-width="270"
         outlined
 
   >
@@ -82,7 +81,7 @@
       </v-hover>
 
             </v-col>
-             <v-col  style="width:170%!important">
+             <v-col style="margin-left:-2%">
               <v-hover
         v-slot:default="{ hover }"
         open-delay="200"
@@ -123,9 +122,9 @@
             <!--  -->
             
           
-             </div>
-             <div class="grid2">
-                 <v-col >
+            
+             <!-- <div class="grid2"> -->
+                 <v-col style="margin-left:-2%">
               <v-hover
         v-slot:default="{ hover }"
         open-delay="200"
@@ -133,9 +132,9 @@
        <v-card
        :elevation="hover ? 16 : 2"
         class="mx-auto item"
-        max-width="300"
+        max-width="250"
         outlined
-        style=" margin-left: 12%;"
+        
 
   >
     <v-list-item three-line>
@@ -164,7 +163,7 @@
 
             </v-col>
             <!--  -->
-           <v-col >
+           <v-col style="margin-left:-12%">
               <v-hover
         v-slot:default="{ hover }"
         open-delay="200"
@@ -172,7 +171,7 @@
        <v-card
        :elevation="hover ? 16 : 2"
         class="mx-auto item"
-        max-width="300"
+        max-width="270"
         outlined
 
   >
@@ -203,20 +202,9 @@
             </v-col>
              </div>
           </v-row>
+          <br>
           <div class="flex">
-              <div >
-   <Pie
-    :chart-options="chartOptions"
-    :chart-data="chartData"
-    :chart-id="chartId"
-    :dataset-id-key="datasetIdKey"
-    :plugins="plugins"
-    :css-classes="cssClasses"
-    :styles="styles"
-    :width="width"
-    :height="height"
-  />
-  </div>
+
   <div >
     <Bar
     :chart-options="chartOptionsBar"
@@ -230,7 +218,21 @@
     :height="heightBar"
   />
   </div>
+                <div >
+   <Pie
+    :chart-options="chartOptions"
+    :chart-data="chartData"
+    :chart-id="chartId"
+    :dataset-id-key="datasetIdKey"
+    :plugins="plugins"
+    :css-classes="cssClasses"
+    :styles="styles"
+    :width="width"
+    :height="height"
+  />
   </div>
+  </div>
+  <br>
     <div class="flex">
    <div >
    <LineChartGenerator
@@ -481,7 +483,7 @@ import axios from "axios";
 .flex{
   display: grid;
     grid-template-columns: repeat(2, 1fr);
-    margin-top: 10px;
+    grid-gap: 6%;
 }
 .grid2{
   display: grid;
@@ -492,10 +494,10 @@ import axios from "axios";
 }
 .flex4{
   display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(5, 1fr);
      grid-gap: 10px;
   margin-top: 10px;
-  margin-left: 8%;
+  margin-left: -5%;
 }
 .item{
   width: 110%;
