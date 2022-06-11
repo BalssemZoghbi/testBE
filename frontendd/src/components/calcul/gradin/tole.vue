@@ -41,6 +41,7 @@
                   <v-col>
                     <v-row cols="12" md="8">
                       <v-text-field
+                      prepend-icon="folder_open"
                         v-model="editedItem.tole"
                         label="Nom Tole"
                       ></v-text-field>
@@ -49,6 +50,7 @@
                     <v-col cols="6" md="4">
                        <v-text-field
                         v-model="editedItem.coef0"
+                        prepend-icon="gavel"
                         label="Coefficient 0"
                       ></v-text-field>
                     </v-col>
@@ -56,12 +58,14 @@
                        <v-text-field
                         v-model="editedItem.coef1"
                         label="Coefficient 1"
+                        prepend-icon="event"
                       ></v-text-field>
                     </v-col>
                     <v-col>
                          <v-text-field
                         v-model="editedItem.coef2"
                         label="Coefficient 2"
+                        prepend-icon="widgets"
                       ></v-text-field>
                     </v-col>
                     </v-row>
@@ -70,12 +74,14 @@
                        <v-text-field
                         v-model="editedItem.coef3"
                         label="Coefficient 3"
+                         prepend-icon="reorder"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="6" >
                        <v-text-field
                         v-model="editedItem.coef4"
                         label="Coefficient 4"
+                        prepend-icon="info"
                       ></v-text-field>
                     </v-col>
                   
@@ -85,12 +91,15 @@
                          <v-text-field
                         v-model="editedItem.coef5"
                         label="Coefficient 5"
+                        prepend-icon="info"
+                        
                       ></v-text-field>
                     </v-col>
                     <v-col cols="6" >
                        <v-text-field
                         v-model="editedItem.coef6"
                         label="Coefficient 6"
+                        prepend-icon="widgets"
                       ></v-text-field>
                     </v-col>
                    

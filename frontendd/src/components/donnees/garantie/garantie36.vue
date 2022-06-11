@@ -41,6 +41,7 @@
                   <v-col>
                     <v-row cols="12" md="8">
                       <v-text-field
+                      prepend-icon="info"
                         v-model="editedItem.pn"
                         label="Pn"
                       ></v-text-field>
@@ -50,11 +51,13 @@
                         <v-text-field
                           v-model="editedItem.po"
                           label="Po"
+                          prepend-icon="widgets"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="6">
                         <v-text-field
                           v-model="editedItem.lo"
+                          prepend-icon="gavel"
                           label="lo"
                         ></v-text-field>
                       </v-col>
@@ -64,12 +67,14 @@
                         <v-text-field
                           v-model="editedItem.pcc"
                           label="Pcc"
+                          prepend-icon="folder_open"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="6">
                         <v-text-field
                           v-model="editedItem.ucc"
                           label="Ucc"
+                          prepend-icon="event"
                         ></v-text-field>
                       </v-col>
                     </v-row>
