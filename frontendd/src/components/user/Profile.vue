@@ -27,25 +27,19 @@
              </v-card>
            <br>
            <br>
-            <v-card class="mx-auto ml-14 mr-14">
+            <v-card class="mx-auto ml-2 mr-14">
              <v-tabs vertical >
       <v-tab>
         <v-icon left >
           mdi-account
         </v-icon>
-        Option 1
+        Information Profil
       </v-tab>
       <v-tab>
         <v-icon left>
           mdi-lock
         </v-icon>
-        Option 2
-      </v-tab>
-      <v-tab>
-        <v-icon left>
-          mdi-access-point
-        </v-icon>
-        Option 3
+        Mot de passe
       </v-tab>
 
       <v-tab-item>
@@ -53,7 +47,7 @@
           <v-card-text  style="width:65%;">
              <v-col >
                       <v-card-text >
-                        <h4 class="text-center blue--text " style="font-size:20px!important">
+                        <h4 class="text-center warning--text " style="font-size:20px!important">
                            Mettre à jour votre profil {{ name}}
                         </h4>
                         <v-form>
@@ -121,7 +115,6 @@
                         </v-form>
                       </v-card-text>
                       <div class="text-center mt-n5">
-                        
                       </div>
                     </v-col>
           <v-card-text>
@@ -129,33 +122,30 @@
         </v-card-text>
         <v-card-actions style="margin-top:-6%">
           <v-spacer></v-spacer>
-          <v-btn rounded color="blue darken-1" text @click="update">
-           Sauvegarder
-          </v-btn>
-             <!-- <v-btn
-      color="blue"
+          <v-btn
+      color="warning"
       class="ma-2 white--text"
-     
+     :loading="spinner"
+      :disabled="spinner"
+         @click="update"
     >
-      Accepter
       <v-icon
         right
         dark
-      :loading="spinner"
-      :disabled="spinner"
-         @click="update"
       >
         mdi-pencil
       </v-icon>
-    </v-btn> -->
-
-        </v-card-actions>
+    </v-btn>
+      </v-card-actions>
           </v-card-text>
         </v-card>
       </v-tab-item>
       <v-tab-item>
         <v-card flat>
-          <v-card-text>
+             <v-card-text  style="width:65%;">
+                        <h4  class="text-center warning--text " style="font-size:20px!important">
+                           Mettre à jour votre Mot de passe {{ name}}
+                        </h4>
        <v-text-field
                             id="password"
                             label="Mot de passe*"
@@ -165,7 +155,26 @@
                             v-model="user.password"
                             :rules="Rules"
                           />
-          </v-card-text>
+                       <v-card-actions style="margin-top:-2%">
+          <v-spacer></v-spacer>
+          <v-btn
+      color="warning"
+      class="ma-2 white--text"
+     :loading="spinner"
+      :disabled="spinner"
+         @click="update"
+    >
+      
+      <v-icon
+        right
+        dark
+      
+      >
+        mdi-pencil
+      </v-icon>
+    </v-btn>
+                       </v-card-actions>    
+                           </v-card-text>
         </v-card>
       </v-tab-item>
       <v-tab-item>
@@ -183,115 +192,7 @@
       </v-tab-item>
     </v-tabs>
      </v-card>
-                  <!-- <v-card height="80px" max-width="38%"  style="top:8%" tile> -->
-                    <!--  -->
-          <!-- <v-img height="400px" src="../assets/pres2.jpg"></v-img> -->
-         
-            <!-- <v-list-item color="rgba(0, 0, 0, .4)"> 
-              <v-col> -->
-                <!--  -->
-            <!-- <v-avatar size="100px" style="position:absolute;top:-15%">
-              <v-img src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"></v-img>
-               <v-icon  color="success"> mdi-account-circle </v-icon>
-            </v-avatar> -->
-               <!-- <v-avatar color="indigo" >
-      <v-icon dark>
-        mdi-account-circle
-      </v-icon>
-    </v-avatar>
-         </v-col>
-              <v-row>
-                <v-list-item-title class="title">{{user.numero}}</v-list-item-title>
-                <v-list-item-subtitle>{{user.type}}</v-list-item-subtitle>
-              </v-row> 
-            </v-list-item>
-      </v-card> -->
-       
-         <!-- <v-card height="650px" style=" top: -45%;width:60%;margin-left:40%;">
-        <v-card-text>
-             <v-col >
-                      <v-card-text style="margin-top: 20%!important;">
-                        <h4 class="text-center display-2 blue--text text--accent-3" style="font-size:35px!important">
-                           Mettez a jour votre profile
-                        </h4>
-                        <h4 class="text-center mt-4" >
-                        Bienvenue {{ name}}
-                        </h4>
-                        <v-form>
-                          <v-text-field
-                            label="Nom*"
-                            name="Name"
-                            prepend-icon="person"
-                            type="text"
-                            v-model="user.name"
-                            :rules="Rules"
-                             required
-                          />   
-                             <v-row no-gutters>
-                           <v-col
-                              cols="6"
-                              md="6"
-                            >
-                               <v-select
-                        :items="Poste"
-                        label="Poste"
-                        name="poste"
-                            prepend-icon="fa fa-user-tie"
-                            type="text"
-                            v-model="user.poste" 
-                            :rules="nameRules"
-                        
-                      ></v-select>
-                      </v-col> 
-                           <v-col
-                             cols="6"
-                              md="6"
-                          >
-                          <v-form ref="form">
-                             <v-text-field
-                            label="Numero de telephone*"
-                            name="numero"
-                            prepend-icon="phone"
-                            type="text"
-                            v-model="user.numero" 
-                            :rules="Rules"
-                          />
-                          </v-form> </v-col>
-                          </v-row>
-                           <v-text-field
-                            label="Email*"
-                            name="Email"
-                            prepend-icon="email"
-                            type="text"
-                             v-model="user.email"
-                             :rules="Rules"
-                          /> 
-                             <v-text-field
-                            id="password"
-                            label="Mot de passe*"
-                            name="password"
-                            prepend-icon="lock"
-                            type="password"
-                            v-model="user.password"
-                            :rules="Rules"
-                          />
-                        </v-form>
-                      </v-card-text>
-                      <div class="text-center mt-n5">
-                        
-                      </div>
-                    </v-col> -->
-            
-          <!-- </v-container> -->
-          <!-- <small >* Champ obligatoire</small>
-        </v-card-text>
-        <v-card-actions style="margin-top:-6%">
-          <v-spacer></v-spacer>
-          <v-btn rounded color="blue darken-1" text @click="update">
-           Sauvegarder
-          </v-btn>
-        </v-card-actions>
-      </v-card> -->
+                  
       </v-card>
 </template>
 
@@ -301,6 +202,8 @@ import { mapGetters } from "vuex";
 export default {
   name: "Profile",
   data: () => ({
+     spinner:false,
+    load:true,
           Poste:['Directeur','Technicien','Ingenieur'],
     id:"",
     dialog: false,
@@ -361,10 +264,11 @@ export default {
         poste: this.user.poste,
         numero: this.user.numero,
       }
+      this.spinner=true,
       axios.put('/user/updateprofile/'+this.user.id, user,{ headers: { token: localStorage.getItem('token')}})
       .then(
-        (response) => (this.id = response.data.id)
-        
+        (response) => (this.id = response.data.id),
+        this.spinner=false,
       );
   },
    close() {
