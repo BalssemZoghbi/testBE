@@ -155,7 +155,7 @@ let id=name.replace('.json','');
           }
         )
       .then(response => (console.log(response.data),this.success=true,this.files=[],this.projets=[]))
-      .catch(error => (console.log(error),this.warning=true))
+      .catch(error => (console.log(error),this.warning=true))  
     },
      import(file){
       //  if(!file.type.match('json.*')){
