@@ -95,9 +95,7 @@
                                     v-for="item in largeur"
                                     :key="item"
                                   >
-                                    <v-list-item-content>{{
-                                      item
-                                    }}</v-list-item-content>
+                                    <v-list-item-content>{{item}}</v-list-item-content>
                                     <v-list-item-content class="align-end">
                                     </v-list-item-content>
                                   </v-list-item>
@@ -227,73 +225,6 @@
                       }"
                     ></div>
                   </div>
-                  <!-- <div  :v-for="index in 3" this.largeur.length :style="{width:'30%', 'height':'30%','background-color':blue}"> -->
-                  <!-- <div
-                        :v-for="item in largeur"
-                        v-bind:style="{
-                          width: item + 'px',
-                          height: item + 'px',
-                          'background-color': 'blue',
-                        }"
-                      > -->
-                  <!-- {{ item }} -->
-                  <!-- :v-for="(item, index) in this.largeur"-->
-                  <!-- width: epaisseur[index]+'px', -->
-                  <!-- </div> -->
-                  <!-- </div> -->
-
-                  <!-- <div class="grid2">
-                          <div style="transform : rotate(-180deg)">
-                          <div>
-                        <div  v-bind:style="{'background-color':'blue', width: this.largeur[7] + 'px', height: this.epaisseur[7] + 'px'}"  > </div>
-                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[6] + 'px', height: this.epaisseur[6] + 'px'}"  > </div>
-                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[5] + 'px', height: this.epaisseur[5] + 'px'}"  > </div>
-                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[4] + 'px', height: this.epaisseur[4] + 'px'}"  > </div>
-                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[3] + 'px', height: this.epaisseur[3] + 'px'}"  > </div>
-                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[2] + 'px', height: this.epaisseur[2] + 'px'}"  > </div>
-                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[1] + 'px', height: this.epaisseur[1] + 'px'}"  > </div>
-                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[0] + 'px', height: this.epaisseur[0] + 'px'}"  > </div>
-                    
-                     </div>
-                          <div>
-                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[0] + 'px', height: this.epaisseur[0] + 'px'}"  > </div>
-                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[1] + 'px', height: this.epaisseur[1] + 'px'}"  > </div>
-                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[2] + 'px', height: this.epaisseur[2] + 'px'}"  > </div>
-                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[3] + 'px', height: this.epaisseur[3] + 'px'}"  > </div>
-                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[4] + 'px', height: this.epaisseur[4] + 'px'}"  > </div>
-                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[5] + 'px', height: this.epaisseur[5] + 'px'}"  > </div>
-                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[6] + 'px', height: this.epaisseur[6] + 'px'}"  > </div>
-                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[7] + 'px', height: this.epaisseur[7] + 'px'}"  > </div>
-                     </div>
-                      </div>
-
-
-<div>
-                          <div  >
-                        <div  v-bind:style="{'background-color':'blue', width: this.largeur[7] + 'px', height: this.epaisseur[7] + 'px'}"  > </div>
-                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[6] + 'px', height: this.epaisseur[6] + 'px'}"  > </div>
-                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[5] + 'px', height: this.epaisseur[5] + 'px'}"  > </div>
-                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[4] + 'px', height: this.epaisseur[4] + 'px'}"  > </div>
-                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[3] + 'px', height: this.epaisseur[3] + 'px'}"  > </div>
-                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[2] + 'px', height: this.epaisseur[2] + 'px'}"  > </div>
-                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[1] + 'px', height: this.epaisseur[1] + 'px'}"  > </div>
-                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[0] + 'px', height: this.epaisseur[0] + 'px'}"  > </div>
-                    
-                     </div>
-                          <div>
-                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[0] + 'px', height: this.epaisseur[0] + 'px'}"  > </div>
-                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[1] + 'px', height: this.epaisseur[1] + 'px'}"  > </div>
-                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[2] + 'px', height: this.epaisseur[2] + 'px'}"  > </div>
-                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[3] + 'px', height: this.epaisseur[3] + 'px'}"  > </div>
-                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[4] + 'px', height: this.epaisseur[4] + 'px'}"  > </div>
-                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[5] + 'px', height: this.epaisseur[5] + 'px'}"  > </div>
-                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[6] + 'px', height: this.epaisseur[6] + 'px'}"  > </div>
-                      <div  v-bind:style="{'background-color':'blue', width: this.largeur[7] + 'px', height: this.epaisseur[7] + 'px'}"  > </div>
-                     </div>
-                      </div>
-
-
-                     </div> -->
                 </div>
               </div>
             </div>

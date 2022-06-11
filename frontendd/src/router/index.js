@@ -229,21 +229,26 @@ const router = new VueRouter({
   mode: "history",
   routes,
 })
-// router.beforeEach((to, from, next) => {
-//   let user = JSON.parse(localStorage.getItem('user'));
-//   if (to.path == '/Connexion') { 
-//     if (user) {
-//       window.history.back();
-//     } else {
-//       next();
-//     }
-//   } else {
-//     if (!user) {
-//       window.history.back();
-//     } else {
-//       next();
-//     }
-//     // window.history.back();
-//   }
-// })
+router.beforeEach((to, from, next) => {
+  let user = JSON.parse(localStorage.getItem('user'));
+  if (to.path == '/Connexion') { 
+    if (user) {
+      window.history.back();
+    } else {
+      next();
+    }
+  } else if ((to.path == '/forgot')||(to.path == '/reset')) {
+    if (user) {
+      window.history.back();
+    } else {
+      next();
+    }
+  }else{
+    if (!user) {
+      window.history.back();
+    } else {
+      next();
+    }
+  }
+})
 export default router;

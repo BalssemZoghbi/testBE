@@ -45,7 +45,7 @@
                   </template>
                   <v-card>
                     <v-card-title>
-                      <span class="text-h5">
+                      <span class="text-h5" >
                         {{ formTitle }}
                       </span>
                     </v-card-title>
@@ -55,6 +55,7 @@
                         <v-col>
                           <v-row cols="12" sm="6" md="4">
                             <v-text-field
+                             prepend-icon="reorder"
                               v-model="editedItem.valeur"
                               label="Saillie"
                             ></v-text-field>

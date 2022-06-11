@@ -41,6 +41,7 @@
                   <v-col>
                     <v-row cols="12" sm="6" md="4">
                       <v-text-field
+                        prepend-icon="reorder"
                         v-model="editedItem.valeurHbrin"
                         label="Hbrin"
                       ></v-text-field>

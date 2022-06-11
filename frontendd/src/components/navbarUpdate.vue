@@ -159,7 +159,7 @@ export default {
   props: ["conducteurMT", "conducteurBT"],
   created() {
     this.show = localStorage.getItem("show");
-    console.log(this.conducteurMT, this.conducteurBT, this.show);
+    // console.log(this.conducteurMT, this.conducteurBT, this.show);
   },
 };
 </script>

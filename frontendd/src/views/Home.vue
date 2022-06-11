@@ -462,7 +462,7 @@ export default {
       };
       axios
         .post("/ProjetDevenirModele/" + this.DevenirModeleId, modeles)
-        .then((this.dialogInfo = false), this.getprojet());
+        .then((this.dialogInfo = false), this.getprojet(),this.modeles.modele="");
     },
     exportword(id) {
       axios({

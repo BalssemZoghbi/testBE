@@ -19,10 +19,10 @@ export default {
     projet:[],
   }),
 async created(){
-  const result = await axios.get("projets/"  + this.$route.params.id);
+  const result = await axios.get("/projets/"  + this.$route.params.id);
 this.$store.dispatch("projet", result.data);
     this.projet = result.data;
-    console.log(this.projet.conducteurMT,this.projet.conducteurBT);
+    console.log(result.data,this.projet.conducteurMT,this.projet.conducteurBT);
  }
   
 };

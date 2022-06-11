@@ -456,9 +456,12 @@ export default {
     }  },
   },
   async mounted() {
+    console.log(this.spinner);
     const result = await axios.get("projets/" + this.$route.params.id);
     this.projet = result.data;
      this.spinner=false;
+         console.log(this.spinner);
+ 
   },
   created() {
     axios

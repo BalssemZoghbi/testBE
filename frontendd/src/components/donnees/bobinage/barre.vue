@@ -41,12 +41,14 @@
                   <v-col>
                     <v-row cols="12" sm="6" md="4">
                       <v-text-field
+                      prepend-icon="reorder"
                         v-model="editedItem.largeur"
                         label="Largeur"
                       ></v-text-field>
                     </v-row>
                     <v-row cols="12" sm="6" md="4">
                       <v-text-field
+                      prepend-icon="reorder"
                         v-model="editedItem.epaisseur"
                         label="Epaisseur"
                       ></v-text-field>
