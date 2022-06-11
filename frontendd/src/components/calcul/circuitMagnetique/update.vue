@@ -126,6 +126,17 @@
                             v-model="longeurcuve"/>
                         </div>
           <div  class="field10">
+            <v-text-field
+            label="Majfer"
+            v-model="projet.Majfer"
+            outlined
+          ></v-text-field>
+                <v-text-field
+       
+            label="coeffPoid"
+            v-model="projet.coeffPoid"
+            outlined
+          ></v-text-field>
            <v-text-field
        
             label="Masse Fer"
@@ -147,12 +158,7 @@
             v-model="pFer"
             outlined
           ></v-text-field>
-               <v-text-field
-       
-            label="Majfer"
-            v-model="projet.Majfer"
-            outlined
-          ></v-text-field>
+               
                <v-text-field
        success
             label="pFerg"
@@ -165,12 +171,7 @@
             v-model="largeurcuve"
             outlined
           ></v-text-field>
-               <v-text-field
-       
-            label="coeffPoid"
-            v-model="projet.coeffPoid"
-            outlined
-          ></v-text-field>
+           
                <v-text-field
                success
             label="Hc"
