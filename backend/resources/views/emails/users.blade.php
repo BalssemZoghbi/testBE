@@ -1,12 +1,10 @@
 @component('mail::message')
 # SACEM INDUSTRIES
-
-On vous informe que vous etes accepté, veuillez vous connecter a notre plateforme en cliquant ici s'il vous plait.
-
+Bonjour,
+On vous informe que vous êtes accepté, veuillez vous connecter à notre plateforme en cliquant ici s'il vous plaît.
 @component('mail::button', ['url' => ' http://localhost:8081/login'])
 SACEM
 @endcomponent
 
-Merci,<br>
-{{ config('app.name') }}
+Merci<br>
 @endcomponent

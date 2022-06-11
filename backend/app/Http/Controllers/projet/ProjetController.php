@@ -73,7 +73,8 @@ class ProjetController extends Controller
         $token = PersonalAccessToken::findToken($header);
         $user = $token->tokenable;
         $current_date_time = date("20y_m_d");
-        $filename =$current_date_time."_". $id.".json";
+        // $filename =$current_date_time."_". $id.".json";
+        $filename = $id.".json";
         $json =  file_get_contents(public_path() ."/".$filename);
         $data = json_decode($json);
         $array1 = (array) $data;
