@@ -232,6 +232,22 @@ ucc(){
 };
 </script>
 <style scoped>
+.preloader {
+  position: fixed;
+  z-index: 9999999;
+  align-items: center;
+  background: #fff;
+  justify-content: center;
+  width: 100%;
+  height: 79%;
+  margin-top: 0.5%;
+}
+.logo {
+  width: 100%;
+  height: 100%;
+  margin: 16%;
+  margin-left: 39%;
+}
 .field10 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

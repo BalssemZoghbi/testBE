@@ -137,10 +137,21 @@ export default {
 };
 </script>
 <style scoped>
-/* Googlefont Poppins CDN Link */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
-
+.preloader {
+  position: fixed;
+  z-index: 9999999;
+  align-items: center;
+  background: #fff;
+  justify-content: center;
+  width: 100%;
+  height: 70%;
+}
+.logo {
+  width: 100%;
+  height: 100%;
+  margin: 16%;
+  margin-left: 39%;
+}
 h1 {
   margin: 0;
 }

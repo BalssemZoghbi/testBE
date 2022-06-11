@@ -1,11 +1,9 @@
 <template>
   <div>
-    <!-- <NavDash
-      :conducteurMT="projet.conducteurMT"
-      :conducteurBT="projet.conducteurBT"
-    /> -->
+
     <div class="body">
       <v-stepper v-model="e1" vertical>
+         <Loading v-if="spinner" />
         <v-stepper-step step=""> Données Generale </v-stepper-step>
         <v-stepper-content step="1">
           <v-card class="mb-6">
@@ -187,12 +185,15 @@
 </template>
 <script>
 import axios from "axios";
+import Loading from "@/components/Loading.vue";
 export default {
   components: {
+        Loading,
   },
   data() {
     return {
       // show:false,
+      spinner: true,
        modeles:{
       modele: "",
       },
@@ -294,6 +295,7 @@ export default {
   async mounted() {
     const result = await axios.get("projets/" + this.$route.params.id);
     this.projet = result.data;
+    this.spinner = false;
      this.modeles.modele=result.data.modele;
      console.log( result.data);
   },
@@ -367,6 +369,21 @@ export default {
 };
 </script>
 <style scoped>
+.preloader {
+  position: fixed;
+  z-index: 9999999;
+  align-items: center;
+  background: #fff;
+  justify-content: center;
+  width: 100%;
+  height: 70%;
+}
+.logo {
+  width: 100%;
+  height: 100%;
+  margin: 16%;
+  margin-left: 39%;
+}
 .grid {
   display: grid;
   grid-template-columns: repeat(4, 3fr);

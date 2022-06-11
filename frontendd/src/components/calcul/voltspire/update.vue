@@ -359,6 +359,16 @@ export default {
 };
 </script>
 <style scoped>
+.preloader {
+  position: fixed;
+  z-index: 9999999;
+  align-items: center;
+  background: #fff;
+  justify-content: center;
+  width: 100%;
+  height: 78%;
+}
+
 .l-form {
   display: flex;
   justify-content: center;
