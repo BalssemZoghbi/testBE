@@ -148,7 +148,8 @@
         </v-container>
       </v-row>
     </v-layout>
-
+<br>
+<br>
     <div class="flex">
       <div>
         <LineChartGenerator
