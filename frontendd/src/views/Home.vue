@@ -23,7 +23,7 @@
                 <v-list-item-group v-model="model" mandatory color="blue">
                   <v-list-item @click="onClick" color="blue">
                     <v-list-item-title @click="create()"
-                      >un Projet Vierge</v-list-item-title
+                      >Projet Vierge</v-list-item-title
                     >
                   </v-list-item>
        
@@ -41,7 +41,7 @@
           v-bind="attrs"
           v-on="on"
         >
-          A partir de   
+          A Partir De   
           <v-icon
           dark
           left
@@ -185,10 +185,10 @@
 <!--  -->
                   
                       <v-list-item style="width: 119%!important;margin-left: -9%;">
-                    <v-dialog v-model="dialogImp" >
+                    <v-dialog v-model="dialogImp" max-width="700px">
                       <template v-slot:activator="{ on, attrs }">
                         <v-btn class="bouton" v-bind="attrs" v-on="on" style="margin-left: -18%;">
-                          Importer un projet
+                          Importer Un Projet
                         </v-btn>
                       </template>
                       
