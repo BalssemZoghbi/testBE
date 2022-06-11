@@ -446,14 +446,9 @@ export default {
 
 .body {
   height: 100%;
-  /* display: flex; */
-  /* justify-content: center;
-  align-items: center; */
   padding: 20px;
   max-height: calc(100vh - 50px);
 
-  /* margin: 0.5%; */
-  /* background: linear-gradient(135deg,#71b7e675, #71b7e675); */
 }
 .container {
   max-width: 98%;
@@ -479,7 +474,6 @@ export default {
 .title {
   font-size: 25px;
   font-weight: 500;
-  /* margin-top:-1% ; */
   margin-bottom: 3.5%;
   position: relative;
 }
@@ -491,7 +485,6 @@ export default {
   height: 3px;
   width: 250px;
   border-radius: 5px;
-
   background: linear-gradient(135deg, #0b65a0, #71b7e6);
 }
 .content form .user-details {
@@ -520,8 +513,6 @@ form .input-box span.details {
   font-size: 16px;
   border-radius: 5px;
   padding-left: 15px;
-  /* border: 1px solid #ccc; */
-  /* border-bottom-width: 2px; */
   transition: all 0.3s ease;
 }
 
@@ -577,7 +568,6 @@ form .button input {
   background: linear-gradient(135deg, #4797d1, #4797d1);
 }
 form .button input:hover {
-  /* transform: scale(0.99); */
   background: linear-gradient(-135deg, #71b7e6, #71b7e6);
 }
 .framei {
@@ -589,7 +579,6 @@ form .button input:hover {
   justify-content: space-between;
 }
 .frameii {
-  /* width: calc(100% /1 - 2px); */
   width: 100%;
   border-color: #000;
 }

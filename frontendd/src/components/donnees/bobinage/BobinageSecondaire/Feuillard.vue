@@ -164,7 +164,7 @@
                       ></v-text-field>
 
                       <v-select
-                      error
+                      
                         :items="barre"
                         label="barre"
                         v-model="projet.EpbarreBT"
@@ -496,6 +496,7 @@ export default {
     },
     DintBT(){
         let dint=this.projet.DintBT;
+        console.log(this.projet.CMBT);
         dint=(parseFloat(this.projet.CMBT)*2)+parseFloat(this.projet.diamNominale);
         return dint;
     },
@@ -503,7 +504,7 @@ export default {
         return Math.round(this.DintBT+(2*this.EpxBT));
     },
     BextBT(){
-      console.log(Math.round(this.DintBT+(2*this.EpxBT)+this.epaisseurBarreBT));
+      console.log(this.DintBT,this.EpxBT,this.epaisseurBarreBT);
         return Math.round(this.DintBT+(2*this.EpxBT)+parseFloat(this.epaisseurBarreBT));
     },
     EpxBT(){

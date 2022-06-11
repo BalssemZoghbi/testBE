@@ -52,61 +52,84 @@
                     </v-card-title>
 
                     <v-card-text>
-                      <v-container>
-                        <v-col>
-                          <v-row cols="12" sm="6" md="4">
-                            <v-col cols="6">
-                              <v-text-field
-                                v-model="editedItem.name"
-                                label="Nom"
-                              ></v-text-field
-                            ></v-col>
-                            <v-col cols="6">
-                              <v-text-field
-                                v-model="editedItem.email"
-                                label="Email"
-                              ></v-text-field>
-                            </v-col>
-                          </v-row>
-                          <v-row cols="12" sm="6" md="4">
-                            <v-col cols="6" md="4">
-                              <v-select
+                      
+                        <v-form>
+                               <v-row no-gutters>
+                           <v-col
+                              cols="6"
+                              md="6"
+                            >
+                          <v-text-field
+                            label="Nom"
+                            name="Name"
+                            prepend-icon="person"
+                            type="text"
+                            v-model="editedItem.name"
+                             required
+                          />  </v-col> 
+                           <v-col
+                             cols="6"
+                              md="6"
+                          > 
+                            <v-select
                                 :items="types"
                                 label="Type"
                                 name="type"
                                 type="text"
+                            prepend-icon="person"
                                 v-model="editedItem.type"
                               ></v-select>
-                            </v-col>
-
-                            <v-col cols="6" md="4">
-                              <v-select
-                                :items="Poste"
-                                label="Poste"
-                                name="poste"
-                                type="text"
-                                v-model="editedItem.poste"
-                              ></v-select>
-                            </v-col>
-                            <v-col cols="6" md="4">
-                              <v-text-field
-                                v-model="editedItem.numero"
-                                label="numero"
-                              ></v-text-field
-                            ></v-col>
+                           </v-col>
+                               </v-row>
+                             <v-row no-gutters>
+                           <v-col
+                              cols="6"
+                              md="6"
+                            >
+                               <v-select
+                        :items="Poste"
+                        label="Poste"
+                        name="poste"
+                            prepend-icon="fa fa-user-tie"
+                            type="text"
+                            v-model="editedItem.poste" 
+                        
+                      ></v-select>
+                      </v-col> 
+                           <v-col
+                             cols="6"
+                              md="6"
+                          >
+                          <v-form ref="form">
+                             <v-text-field
+                            label="Numero de telephone*"
+                            name="numero"
+                            prepend-icon="phone"
+                            type="text"
+                            v-model="editedItem.numero" 
+                          />
+                          </v-form> </v-col>
                           </v-row>
-                          <v-row cols="12" sm="6" md="4"> </v-row>
-                          <v-row cols="12" sm="6" md="4"> </v-row>
-                          <v-row cols="12" sm="6" md="4">
-                            <v-text-field
-                              v-model="editedItem.password"
-                              label="Mot de passe"
-                            ></v-text-field>
-                          </v-row>
-                        </v-col>
-                      </v-container>
-                    </v-card-text>
-
+                           <v-text-field
+                            label="Email*"
+                            name="Email"
+                            prepend-icon="email"
+                            type="text"
+                             v-model="editedItem.email"
+                          /> 
+                             <v-text-field
+                            id="password"
+                            label="Mot de passe*"
+                            name="password"
+                            prepend-icon="lock"
+                            type="password"
+                            v-model="editedItem.password"
+                          />
+                        </v-form>
+                      </v-card-text>
+                      <div class="text-center mt-n5">
+                        
+                      </div>
                     <v-card-actions>
                       <v-spacer></v-spacer>
                       <v-btn color="blue darken-1" text @click="close">

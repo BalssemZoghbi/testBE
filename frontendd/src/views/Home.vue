@@ -23,12 +23,31 @@
                 <v-list-item-group v-model="model" mandatory color="blue">
                   <v-list-item @click="onClick" color="blue">
                     <v-list-item-title @click="create()"
-                      >A Partir D'un Projet Vierge</v-list-item-title
+                      >un Projet Vierge</v-list-item-title
                     >
                   </v-list-item>
        
+<!--  -->
+  <v-menu
+      v-model="menu"
+      :close-on-content-click="false"
+      :nudge-width="200"
+      offset-x
+      
+    >
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          class="bouton"
+          v-bind="attrs"
+          v-on="on"
+        >
+          A partir de
+        </v-btn>
+      </template>
 
-                  <v-list-item>
+      <v-card>
+        
+<v-list-item>
                     <v-dialog
                       v-model="dialogModele"
                       scrollable
@@ -38,7 +57,7 @@
                     >
                       <template v-slot:activator="{ on, attrs }">
                         <v-btn v-bind="attrs" v-on="on" class="bouton">
-                          A Partir D'un Modele
+                         Modèle
                         </v-btn>
                       </template>
                       <v-card class="body panel left-panel">
@@ -84,10 +103,17 @@
                     </v-dialog>
                   </v-list-item>
                   <v-list-item>
-                    <v-dialog v-model="dialog" max-width="60%">
+                      <v-dialog
+                      v-model="dialog"
+                      scrollable
+                      max-width="63%"
+                      max-heigth="30%"
+                      style="heigth: 30% !important"
+                    >
+                    <!-- <v-dialog v-model="dialog" max-width="60%"> -->
                       <template v-slot:activator="{ on, attrs }">
                         <v-btn class="bouton" v-bind="attrs" v-on="on">
-                          A Partir D'un Ancien Projet
+                        Ancien Projet
                         </v-btn>
                       </template>
                       
@@ -139,6 +165,12 @@
                       </v-card>
                     </v-dialog>
                      </v-list-item>
+       
+      </v-card>
+      
+    </v-menu>
+<!--  -->
+                  
                       <v-list-item>
                     <v-dialog v-model="dialogImp" max-width="60%">
                       <template v-slot:activator="{ on, attrs }">
@@ -677,8 +709,27 @@ export default {
   color: dodgerblue;
   border: 0px !important;
   box-shadow: 0px 0px !important;
-  background-color: white !important;
+  border-radius: 0px !important;
+  background-color: transparent ;
   text-transform: none;
-  margin-left: -10% !important;
+  /* align-items: center; */
+    display: flex;
+    flex: 1 1 100%;
+    letter-spacing: normal;
+    min-height: 48px;
+    outline: none;
+    padding: 0 16px;
+    position: relative;
+    text-decoration: none;
+    width: 100%;
+}
+.v-dialog [data-v-fae5bece] {
+    border-radius: 4px;
+    /* overflow-y: auto; */
+    pointer-events: auto;
+    transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    width: 100%;
+    z-index: inherit;
+    box-shadow: 0px 0px 0px 0px rgb(0 0 0 / 0%), 0px 0px 0px 0px rgb(0 0 0 / 0%), 0px 0px 0px 0px rgb(0 0 0 / 0%);
 }
 </style>

@@ -183,6 +183,7 @@ $largeur=$this->largeur($Gradin->largeur);
         $my_template->setValue('E4',$cm->E4);
         $my_template->setValue('Eh',$cm->Eh);
         $my_template->setValue('Ebc',$cm->Ebc);
+        $my_template->setValue('I0',$cm->I0);
         $masseFerCM=$this->masseFerCM($cm->masseFerCM);
         for($i=0;$i<count($masseFerCM);$i++){
             $my_template->setValue('masseFerCM['.$i.']',$masseFerCM[$i]);

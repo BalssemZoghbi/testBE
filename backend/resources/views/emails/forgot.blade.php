@@ -1,14 +1,13 @@
 @component('mail::message')
 # SACEM INDUSTRIES
 
-Pour changer votre mot de passee , cliquez ici.
+Pour changer votre mot de passe , cliquez ici.
 
 @component('mail::button', ['url' => 'http://localhost:8080/reset/'.$token])
-Reset your password
+Réinitialiser votre mot de passe
 @endcomponent
 
-Merci,<br>
-{{ config('app.name') }}
+Merci !
 @endcomponent
 
 

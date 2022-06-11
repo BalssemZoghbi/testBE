@@ -72,7 +72,8 @@ class ProjetController extends Controller
         $header = $request->header('Authorization');
         $token = PersonalAccessToken::findToken($header);
         $user = $token->tokenable;
-        $filename = $id.".json";
+        $current_date_time = date("20y_m_d");
+        $filename =$current_date_time."_". $id.".json";
         $json =  file_get_contents(public_path() ."/".$filename);
         $data = json_decode($json);
         $array1 = (array) $data;
@@ -162,11 +163,11 @@ $donnebobines=DonneBobine::create([
             'pcc1' => $array1['pcc_uccs']-> pcc1,
             'pcc2' => $array1['pcc_uccs']-> pcc2,
             'pccMaj' => $array1['pcc_uccs']-> pccMaj,
-            'Pccg' => $array1['pcc_uccs']-> Pccg,
+            'Pccgarantie' => $array1['pcc_uccs']-> Pccgarantie,
             'Uccr' => $array1['pcc_uccs']-> Uccr,
             'Ucca' => $array1['pcc_uccs']-> Ucca,
             'Ucc' => $array1['pcc_uccs']-> Ucc,
-            'Uccg' => $array1['pcc_uccs']-> Uccg,
+            'Uccgarantie' => $array1['pcc_uccs']-> Uccgarantie,
         ]);
         $Bobinage = Bobinage::create([
             'materiau' => $array1['bobinages']-> materiau,
@@ -585,11 +586,11 @@ $donnebobines=DonneBobine::create([
             'pcc1' => null,
             'pcc2' => null,
             'pccMaj' => null,
-            'Pccg' => null,
+            'Pccgarantie' => null,
             'Uccr' => null,
             'Ucca' => null,
             'Ucc' => null,
-            'Uccg' => null,
+            'Uccgarantie' => null,
         ]);
         $circuitMagnetique = Circuitmagnetique::create([
             'masseFertot' => null,
@@ -751,7 +752,7 @@ $donnebobines=DonneBobine::create([
     {
         $projet = Projet::FindOrFail($id);
         if ($projet->delete()) {
-            return new ProjetResource($projet);
+            return response()->json(['success' => 'Project deleted successfully.']);
         }
     }
 }

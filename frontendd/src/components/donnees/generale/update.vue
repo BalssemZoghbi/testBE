@@ -158,7 +158,7 @@
                       outlined
                     ></v-select>
                   </div>
-                  <p :disabled="true">prefs:{{prefs}}</p>
+                  <!-- <p :disabled="true">prefs:{{prefs}}</p> -->
                       <!-- <div class="form__div" v-if="this.show">
                     <input
                       type="text"

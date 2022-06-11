@@ -13,10 +13,10 @@ class PccUcc extends Model
             'pcc1',
             'pcc2',
             'pccMaj',
-            'Pccg',
+            'Pccgarantie',
             'Uccr',
             'Ucca',
             'Ucc',
-            'Uccg',
+            'Uccgarantie',
     ];
 }
