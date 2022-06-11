@@ -31,7 +31,7 @@
   <v-menu
       v-model="menu"
       :close-on-content-click="false"
-      :nudge-width="200"
+      style="text-align: left;"
       offset-x
       
     >
@@ -41,13 +41,20 @@
           v-bind="attrs"
           v-on="on"
         >
-          A partir de
+          A partir de   
+          <v-icon
+          dark
+          left
+          style="margin-left: 53px;"
+        >
+          mdi-arrow-right
+        </v-icon>
         </v-btn>
       </template>
-
-      <v-card>
+<v-hover>
+      <v-card >
         
-<v-list-item>
+<v-list-item style="width:119%!important;margin-left: -9%;">
                     <v-dialog
                       v-model="dialogModele"
                       scrollable
@@ -56,7 +63,8 @@
                       style="heigth: 30% !important"
                     >
                       <template v-slot:activator="{ on, attrs }">
-                        <v-btn v-bind="attrs" v-on="on" class="bouton">
+                        <v-btn v-bind="attrs" v-on="on" class="bouton" style="margin-left: -49%;">
+                          
                          Modèle
                         </v-btn>
                       </template>
@@ -102,17 +110,22 @@
                       </v-card>
                     </v-dialog>
                   </v-list-item>
-                  <v-list-item>
+                  <v-list-item style="width:119%!important;margin-left: -9%;">
                       <v-dialog
                       v-model="dialog"
                       scrollable
-                      max-width="63%"
+                       max-width="63%"
                       max-heigth="30%"
                       style="heigth: 30% !important"
                     >
+                    <!-- max-width="63%"
+                      max-heigth="30%"
+                      style="heigth: 30% !important" -->
                     <!-- <v-dialog v-model="dialog" max-width="60%"> -->
                       <template v-slot:activator="{ on, attrs }">
-                        <v-btn class="bouton" v-bind="attrs" v-on="on">
+                        
+                        <v-btn class="bouton" v-bind="attrs" v-on="on"    style="margin-left: -35%;" >
+                          
                         Ancien Projet
                         </v-btn>
                       </template>
@@ -167,14 +180,14 @@
                      </v-list-item>
        
       </v-card>
-      
+      </v-hover>
     </v-menu>
 <!--  -->
                   
-                      <v-list-item>
-                    <v-dialog v-model="dialogImp" max-width="60%">
+                      <v-list-item style="width: 119%!important;margin-left: -9%;">
+                    <v-dialog v-model="dialogImp" >
                       <template v-slot:activator="{ on, attrs }">
-                        <v-btn class="bouton" v-bind="attrs" v-on="on" >
+                        <v-btn class="bouton" v-bind="attrs" v-on="on" style="margin-left: -18%;">
                           Importer un projet
                         </v-btn>
                       </template>
