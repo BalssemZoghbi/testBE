@@ -147,7 +147,7 @@
               <v-btn class="mx-2" fab dark small color="primary">
                 <v-icon dark v-on:click="editItem(item)"> mdi-pencil </v-icon>
               </v-btn>
-              <template v-if="$store.state.user.name != item.name" :disabled="isdisable">
+              <template v-if="$store.state.user.email != item.email" :disabled="isdisable">
               <v-btn  class="mx-2" fab dark small color="red">
                 <v-icon dark v-on:click="deleteutilisateur(item.id)">
                   mdi-delete
