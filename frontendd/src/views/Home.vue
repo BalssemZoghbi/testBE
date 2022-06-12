@@ -193,7 +193,7 @@
                       </template>
                       
                       <v-card >
-                       <uploader/>
+                       <uploader  v-on:childToParent="onChildClick"/>
                       </v-card>
                     </v-dialog>
                       </v-list-item>
@@ -342,6 +342,7 @@ export default {
   },
   data: () => ({
     DevenirModeleId: "",
+    fromChild: false,
     dialogInfo: false,
     dialogm1: "",
     dialog: false,
@@ -452,6 +453,20 @@ export default {
   },
 
   methods: {
+      onChildClick (value) {
+      this.fromChild = value
+      this.getprojet(); 
+      // var self = this;
+    //   console.log(this.dialogImp);
+    //    setTimeout(()=> {
+    //   this.dialogImp = false;
+      
+    // }, 30);
+    
+       console.log(this.dialogImp);
+// setTimeout(function () { self.dialogImp=false } , 60)
+      // this.dialogImp=false; 
+        },
     getId(id) {
       this.dialogInfo = true;
       this.DevenirModeleId = id;

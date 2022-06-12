@@ -16,8 +16,8 @@ class CreateUserInactivesTable extends Migration
         Schema::create('user_inactives', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
-            $table->integer('numero')->unique();
+            $table->string('email');
+            $table->integer('numero');
             $table->enum('type',['employe','admin','En Attente','Décliné','Bloqué']);
             $table->string('poste');
             $table->string('password');

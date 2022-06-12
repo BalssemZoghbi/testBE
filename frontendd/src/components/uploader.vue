@@ -19,6 +19,16 @@
     <!-- ,alert("les fichiers sont importé avec succés") -->
      Le fichier est importé avec succés
     </v-alert >
+        <v-alert style="margin-top:4%"
+        v-show="warning"
+      shaped
+      dense
+      dark
+      prominent
+      type="error"
+    >
+      Une erreur s'est produite, veuillez réessayer
+    </v-alert>
     
           <!-- <v-icon dark style="font-size: 70px;" >
           mdi-cloud-upload
@@ -42,16 +52,7 @@
         </v-icon></button>
            <button @click="upload"><v-icon dark class="icon">mdi-cloud-upload</v-icon></button>
     </div>
-     <v-alert style="margin-top:4%"
-        v-show="warning"
-      shaped
-      dense
-      dark
-      prominent
-      type="error"
-    >
-      Une erreur s'est produite, veuillez réessayer
-    </v-alert>
+ 
     <div class="image-preview">
           <div class="image-wrapper" v-for="(image, index) in projets" :key="index">
             <!-- <img src="../assets/file.png" alt=""> -->
@@ -75,6 +76,7 @@ export default{
         isDragging: false,
         success: false,
         warning: false,
+        childMessage:false,
         dragCount: 0,
         files: [],
         projets: [],
@@ -135,6 +137,9 @@ let id=name.replace('.json','');
       this.files=[];
       console.log(this.files,this.projets);
     },
+    // emitToParent (event) {
+    //   this.$emit('childToParent', this.childMessage)
+    // },
     upload(){
       // const formData= new FormData();
       // this.files.forEach(file =>{
@@ -154,8 +159,8 @@ let id=name.replace('.json','');
             },
           }
         )
-      .then(response => (console.log(response.data),this.success=true,this.files=[],this.projets=[],window.location.reload()))
-      .catch(error => (console.log(error),this.warning=true,window.location.reload()))  
+      .then(response => (console.log(response.data),this.success=true,this.files=[],this.projets=[],this.childMessage=true,this.$emit('childToParent', this.childMessage)))
+      .catch(error => (console.log(error),this.warning=true,this.files=[],this.projets=[],this.childMessage=false,this.$emit('childToParent', this.childMessage)))  
      
     },
      import(file){

@@ -23,7 +23,115 @@
 
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-spacer></v-spacer>
-          
+          <v-dialog v-model="dialogup" max-width="700px">
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                      color="primary"
+                      dark
+                      class="mb-2"
+                      v-bind="attrs"
+                      v-on="on"
+                    >
+                      Ajouter utilisateur
+                    </v-btn>
+                  </template>
+                  <v-card>
+                    <v-card-title>
+                      <span class="text-h5">
+                        {{ formTitle }}
+                      </span>
+                    </v-card-title>
+
+                    <v-card-text>
+                      
+                        <v-form>
+                               <v-row no-gutters>
+                           <v-col
+                              cols="6"
+                              md="6"
+                            >
+                          <v-text-field
+                            label="Nom"
+                            name="Name"
+                            prepend-icon="person"
+                            type="text"
+                            v-model="editedItem.name"
+                             required
+                          />  </v-col> 
+                           <v-col
+                             cols="6"
+                              md="6"
+                          > 
+                            <v-select
+                                :items="types"
+                                label="Type"
+                                name="type"
+                                type="text"
+                            prepend-icon="person"
+                                v-model="editedItem.type"
+                              ></v-select>
+                           </v-col>
+                               </v-row>
+                             <v-row no-gutters>
+                           <v-col
+                              cols="6"
+                              md="6"
+                            >
+                               <v-select
+                        :items="Poste"
+                        label="Poste"
+                        name="poste"
+                            prepend-icon="fa fa-user-tie"
+                            type="text"
+                            v-model="editedItem.poste" 
+                        
+                      ></v-select>
+                      </v-col> 
+                           <v-col
+                             cols="6"
+                              md="6"
+                          >
+                          <v-form ref="form">
+                             <v-text-field
+                            label="Numero de telephone*"
+                            name="numero"
+                            prepend-icon="phone"
+                            type="text"
+                            v-model="editedItem.numero" 
+                          />
+                          </v-form> </v-col>
+                          </v-row>
+                           <v-text-field
+                            label="Email*"
+                            name="Email"
+                            prepend-icon="email"
+                            type="text"
+                             v-model="editedItem.email"
+                          /> 
+                             <v-text-field
+                            id="password"
+                            label="Mot de passe*"
+                            name="password"
+                            prepend-icon="lock"
+                            type="password"
+                            v-model="editedItem.password"
+                          />
+                        </v-form>
+                      </v-card-text>
+                      <div class="text-center mt-n5">
+                        
+                      </div>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn color="blue darken-1" text @click="close">
+                        Annuler
+                      </v-btn>
+                      <v-btn color="blue darken-1" text @click="save">
+                        Sauvegarder
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
         </v-toolbar>
       </template>
       <template v-slot:[`item.actions`]="{ item }">
@@ -53,7 +161,7 @@ export default {
     types: ["employe", "admin", "En Attente", "Décliné", "Bloqué"],
     Poste: ["Directeur", "Technicien", "Ingenieur"],
     search: "",
-    dialog: false,
+    dialogup: false,
     dialogDelete: false,
     headers: [
       { text: "Name", value: "name" },
@@ -130,11 +238,11 @@ export default {
     editItem(item) {
       this.editedIndex = this.users.indexOf(item);
       this.editedItem = Object.assign({}, item);
-      this.dialog = true;
+      this.dialogup = true;
     },
 
     close() {
-      this.dialog = false;
+      this.dialogup = false;
       this.$nextTick(() => {
         this.editedItem = Object.assign({}, this.defaultItem);
         this.editedIndex = -1;
@@ -156,7 +264,7 @@ export default {
           })
           .then(() => {
             console.log(this.editedItem);
-            this.dialog = false;
+            this.dialogup = false;
             this.editedItem = Object.assign({}, this.defaultItem);
             this.getuser();
           });
