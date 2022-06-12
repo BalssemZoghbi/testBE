@@ -14,6 +14,7 @@ class UserInactive extends Model
         'type',
         'password',
         'poste',
+        'image',
         'numero',
     ];
 }

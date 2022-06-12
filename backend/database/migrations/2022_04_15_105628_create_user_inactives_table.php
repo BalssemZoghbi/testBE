@@ -21,6 +21,8 @@ class CreateUserInactivesTable extends Migration
             $table->enum('type',['employe','admin','En Attente','Décliné','Bloqué']);
             $table->string('poste');
             $table->string('password');
+            $table->string('image');
+            
             $table->timestamps();
         });
     }

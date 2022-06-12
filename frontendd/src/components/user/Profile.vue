@@ -20,7 +20,7 @@
                 <hr>
                <v-text style="margin-left:20%"> <v-icon>mdi-email</v-icon> {{  user.email  }}</v-text>
                <v-text style="margin-top:-2%;margin-left:65%"> <v-icon>mdi-phone</v-icon> {{  user.numero  }}</v-text>
-               <v-text style="margin-left:-9%;text-align:center"> <v-icon>mdi-email</v-icon> {{  user.type  }}</v-text>
+               <v-text style="margin-left:-9%;text-align:center"> <v-icon>fa fa-user-tie</v-icon> {{  user.type  }}</v-text>
 
               </v-list-item-content>
             </v-list-item>
@@ -29,14 +29,14 @@
            <br>
             <v-card class="mx-auto ml-2 mr-14">
              <v-tabs vertical >
-      <v-tab>
+      <v-tab >
         <v-icon left >
           mdi-account
         </v-icon>
         Information Profil
       </v-tab>
       <v-tab>
-        <v-icon left>
+        <v-icon left style="margin-left: -30%;">
           mdi-lock
         </v-icon>
         Mot de passe
@@ -110,7 +110,13 @@
                           />
                           </v-form> </v-col>
                           </v-row>
-                          
+                                             <v-file-input
+                            truncate-length="15"
+                            
+                            @change="onFileChange"
+                            label="Image*"
+                          ></v-file-input>
+                          <img v-bind:src="imagePreview" width="100" height="100" v-show="showPreview"/> 
                             
                         </v-form>
                       </v-card-text>
@@ -203,12 +209,15 @@ export default {
   name: "Profile",
   data: () => ({
      spinner:false,
+       imagePreview: null,
+showPreview: false,
     load:true,
           Poste:['Directeur','Technicien','Ingenieur'],
     id:"",
     dialog: false,
     name: "",
     email: "",
+    image: "",
     type: "",
     password: "",
     user: [],
@@ -247,25 +256,78 @@ export default {
         this.name = response.data.name; 
         this.poste = response.data.poste; 
         this.numero = response.data.numero; 
+        this.image = response.data.image; 
         this.user.email = this.email;
         this.user.password = this.password;
         this.user.name = this.name; 
         this.user.poste = this.poste; 
         this.user.numero = this.numero; 
+        this.user.image = this.image; 
          })
 
   },
    methods: {
+      onFileChange(e){
+      //  this.files.push(file);
+        // const files=e.target.files;
+      // let  reader=new FileReader();
+      //   reader.onload=(e)=> this.formFields.image.push(e.target.result);
+      //   reader.readAsDataURL(file);
+    // this.formFields.image = event.target.files[0];
+       console.log(e.target.files);
+      this.user.image = event.target.files[0];
+    /*
+    Initialize a File Reader object
+    */
+    let reader  = new FileReader();
+// 
+    /*
+    Add an event listener to the reader that when the file
+    has been loaded, we flag the show preview as true and set the
+    image to be what was read from the reader.
+    */
+    reader.addEventListener("load", function () {
+        this.showPreview = true;
+        this.imagePreview = reader.result;
+    }.bind(this), false);
+
+    /*
+    Check to see if the file is not empty.
+    */
+    if( this.user.image ){
+        /*
+            Ensure the file is an image file.
+        */
+        if ( /\.(jpe?g|png|gif)$/i.test( this.user.image.name ) ) {
+
+       
+            /*
+            Fire the readAsDataURL method which will read the file in and
+            upon completion fire a 'load' event which we will listen to and
+            display the image in the preview.
+            */
+            reader.readAsDataURL( this.user.image );
+        }
+    }
+},
     update() {
-    let user = {
-        email: this.user.email,
-        name: this.user.name,
-        password: this.user.password,
-        poste: this.user.poste,
-        numero: this.user.numero,
-      }
+       let formData = new FormData();
+
+    formData.append("image", this.user.image);
+    formData.append("email", this.user.email);
+    formData.append("name", this.user.name);
+    formData.append("password", this.user.password);
+    formData.append("poste", this.user.poste);
+    formData.append("numero", this.user.numero);
+    
+        // email: this.user.email,
+        // name: this.user.name,
+        // password: this.user.password,
+        // poste: this.user.poste,
+        // numero: this.user.numero,
+      
       this.spinner=true,
-      axios.put('/user/updateprofile/'+this.user.id, user,{ headers: { token: localStorage.getItem('token')}})
+      axios.put('/user/updateprofile/'+this.user.id, formData,{ headers: { token: localStorage.getItem('token')}})
       .then(
         (response) => (this.id = response.data.id),
         this.spinner=false,
