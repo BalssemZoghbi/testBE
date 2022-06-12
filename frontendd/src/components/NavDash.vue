@@ -254,7 +254,6 @@ export default {
   data: () => ({
     search: "",
     token: null,
-    user: "",
     email: "",
     drawer: null,
     mini: false,
@@ -284,24 +283,18 @@ export default {
     ],
   }),
    created() {
-    // const response = await axios.get("user");
-    // this.$store.dispatch("user", response.data);
-    // this.user = response.data;
-    // console.log(this.user);
-    // this.$store.dispatch("fetchUser")
-   this.guser();
-  
+ 
   },
   computed: {
     ...mapGetters(["user"]),
+
+  },
+  mounted(){
+console.log(this.user);
   },
   methods: {
-    async guser() {
-          await  this.$store.dispatch("fetchUser").then( () => {
-                this.user = this.$store.getters.user;
-                console.log(this.user);
-            });
-     },
+   
+               
     logout() {
        this.$store.dispatch("logout").then(() => { 
          this.$router.push("/Connexion");

@@ -3,7 +3,7 @@ axios.defaults.baseURL = "http://127.0.0.1:8000/api";
 axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
 export default {
     state: {
-        user: localStorage.getItem("user") ?? null,
+        user: JSON.parse(localStorage.getItem("user")) ?? null,
         token: localStorage.getItem("token") ?? null,
         loggedIn:
             localStorage.getItem("user") !== null &&
