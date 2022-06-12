@@ -4,10 +4,10 @@
     <div class="body">
       <v-stepper v-model="e1" vertical>
          <Loading v-if="spinner" />
-        <v-stepper-step step=""> Données Generale </v-stepper-step>
+        <v-stepper-step step=""> Données Générales </v-stepper-step>
         <v-stepper-content step="1">
           <v-card class="mb-6">
-            <div class="title">Données Generale</div>
+            <div class="title">Données Générales</div>
             <div class="content">
               <form v-on:submit.prevent="updateprojet">
                 <!-- <div class="user-details"> -->
