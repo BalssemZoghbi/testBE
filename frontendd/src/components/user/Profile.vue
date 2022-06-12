@@ -2,12 +2,12 @@
        <v-card class="mx-auto ml-2" height="100%" tile>
 
        <v-card class="mx-auto ml-2 mr-2" max-width="100%"  style=" top: 20px" tile>
-          <v-img height="300px" src="../../assets/pres2.jpg"></v-img>
+          <v-img height="180px" src="../../assets/pres2.jpg"></v-img>
           <v-col>
             <!-- <v-avatar size="100" style="position:absolute; top: 240px">
               <v-img src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"></v-img>
             </v-avatar> -->
-            <v-avatar color="primary" size="90" style="position:absolute; top: 240px;margin-left:41%">
+            <v-avatar color="primary" size="90" style="position:absolute; top: 130px;margin-left:41%">
       <v-icon dark size="35">
         mdi-account-circle
       </v-icon>:
@@ -25,7 +25,6 @@
               </v-list-item-content>
             </v-list-item>
              </v-card>
-           <br>
            <br>
             <v-card class="mx-auto ml-2 mr-14">
              <v-tabs vertical >
@@ -120,13 +119,13 @@
                             
                         </v-form>
                       </v-card-text>
-                      <div class="text-center mt-n5">
+                      <div class="text-center" style="margin-top:-9%">
                       </div>
                     </v-col>
           <v-card-text>
            <small >* Champ obligatoire</small>
         </v-card-text>
-        <v-card-actions style="margin-top:-6%">
+        <v-card-actions style="margin-top:-9%">
           <v-spacer></v-spacer>
           <v-btn
       color="warning"
