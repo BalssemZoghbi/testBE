@@ -110,13 +110,13 @@
                           />
                           </v-form> </v-col>
                           </v-row>
-                           <v-text-field
+                           <!-- <v-text-field
                             label="Email*"
                             name="Email"
                             prepend-icon="email"
                             type="text"
                              v-model="editedItem.email"
-                          /> 
+                          />  -->
                              <v-text-field
                             id="password"
                             label="Mot de passe*"
@@ -193,6 +193,8 @@ import demande from "../user/demande.vue";
 import Inactive from "../user/userInactive.vue";
 import Loading from "@/components/Loading.vue";
 import axios from "axios";
+
+// import { mapGetters } from "vuex";
 export default {
   components: {
     demande,
@@ -214,18 +216,19 @@ export default {
     dialogDelete: false,
     headers: [
       { text: "Name", value: "name" },
-      { text: "Email", value: "email" },
+      // { text: "Email", value: "email" },
       { text: "Type", value: "type" },
       { text: "Poste", value: "poste" },
       { text: "Numero", value: "numero" },
       { text: "Operation", value: "actions", sortable: false },
     ],
     userloc: "",
-    users: [],
+    // users: [],
+    userslist: [],
     editedIndex: -1,
     editedItem: {
       name: "",
-      email: "",
+      // email: "",
       type: "",
       poste: "",
       numero: "",
@@ -234,7 +237,7 @@ export default {
     },
     defaultItem: {
       name: "",
-      email: "",
+      // email: "",
       type: "",
       poste: "",
       numero: "",
@@ -243,65 +246,20 @@ export default {
     },
   }),
   async created() {
-    //      let user1 =  JSON.stringify(localStorage.getItem('user'));
-    //      console.log(user1.email);
-    //      this.disable=false;
-    // if (user1) {
-    //    this.disable=true;
-    // }
-
-    // let user=response.data;
-
-    //     if(!user){
-    //        console.log(user);
-    //       this.disabled=1;
-    //     }
-    //     else{
-    //       this.disabled=0;
-    //     }
-
-    //       const response=await axios.get('user');
-    //     this.$store.dispatch('user',response.data);
-
-    //     let vm=this;
-    //     vm.disable=false;
-    //   let user=response.data;
-    //  console.log(user);
-    //     if(user){
-
-    //       vm.disable=false;
-    //     }
-    //     else{
-    //       vm.disable=true;
-    //     }
-    // this.$store.state.userId == user_id;
-    console.log(this.$store.state.user.name);
-    
-    this.getuser();
+   await this.getuser();
+   
   },
-
-  computed: {
-    // if(response.status===200){
-    //   vm.disable=true;
-    // }
+   computed: {
+    users(){
+      return this.userslist;
+    },
+    // ...mapGetters(["users"]),
     formTitle() {
       return this.editedIndex === -1
         ? "Ajouter un nouveau utilisateur"
         : "Editer utilisateur";
     },
-    //   validateFields:function(){
-    //      const response= axios.get('user');
-    //   this.$store.dispatch('user',response.data);
-    // let user=response.data;
-
-    //   if(user){
-    //      console.log(user);
-    //     return true;
-    //   }
-    //   else{
-    //     return false;
-    //   }
-    //   },
+  
   },
   watch: {
     dialog(val) {
@@ -311,6 +269,9 @@ export default {
       val || this.closeDelete();
     },
   },
+ mounted(){
+console.log(this.userslist);
+},
 
   methods: {
      onFileChange(e){
@@ -343,19 +304,14 @@ export default {
         });
         
     },
-     getuser() {
-      // await axios.get("/users/get").then((resp) => {
-      
-      //   this.users = resp.data;
-      //   console.log('balssem',this.users);
-      //   this.spinner = false;
-       this.$store.dispatch("Users").then(() => {
-        this.users = this.$store.getters.users;
-        this.spinner = false;
-       });
-        
-      // });
-    },
+
+   getuser() {
+    axios.get("/users/get").then((response) => {
+         this.userslist=response.data;
+                console.log("users",this.users);
+                this.spinner = false;
+            });
+        },
     deleteutilisateur(id) {
       //          const response= axios.get('user');
       //   this.$store.dispatch('user',response.data);
@@ -405,7 +361,7 @@ export default {
         Object.assign(this.users[this.editedIndex], this.editedItem);
         console.log("edit");
         let user = {
-        email: this.editedItem.email,
+        // email: this.editedItem.email,
         name: this.editedItem.name,
         password: this.editedItem.password,
         poste: this.editedItem.poste,
@@ -429,7 +385,7 @@ export default {
       let formData = new FormData();
 
     formData.append("image", this.editedItem.image);
-    formData.append("email", this.editedItem.email);
+    // formData.append("email", this.editedItem.email);
     formData.append("name", this.editedItem.name);
     formData.append("password", this.editedItem.password);
     formData.append("poste", this.editedItem.poste);

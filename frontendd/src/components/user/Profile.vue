@@ -155,7 +155,7 @@
         right
         dark
       >
-        mdi-bookmark
+        mdi-floppy-disk
       </v-icon>
     </v-btn>
     <v-snackbar
@@ -253,7 +253,8 @@
         right
         dark
       >
-        mdi-bookmark
+      <!-- <i class="fa-solid fa-floppy-disk"></i> -->
+        mdi-floppy-disk
       </v-icon>
     </v-btn>
     <v-snackbar
