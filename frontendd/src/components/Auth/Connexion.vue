@@ -175,7 +175,7 @@
                             @change="onFileChange"
                             label="Image*"
                           ></v-file-input>
-                          <img v-bind:src="imagePreview" width="100" height="100" v-show="showPreview"/> 
+                          <!-- <img v-bind:src="'../../../../backend/public/public/Image'+imagePreview" width="100" height="100" v-show="showPreview"/>  -->
                         </v-form>
                       </v-card-text>
                       <div class="text-center mt-n5">
@@ -291,44 +291,15 @@ showPreview: false,
   },
   methods: {
     onFileChange(e){
-      //  this.files.push(file);
-        // const files=e.target.files;
-      // let  reader=new FileReader();
-      //   reader.onload=(e)=> this.formFields.image.push(e.target.result);
-      //   reader.readAsDataURL(file);
-    // this.formFields.image = event.target.files[0];
       this.formFields.image = event.target.files[0];
       console.log(e.target.files);
-    /*
-    Initialize a File Reader object
-    */
     let reader  = new FileReader();
-// 
-    /*
-    Add an event listener to the reader that when the file
-    has been loaded, we flag the show preview as true and set the
-    image to be what was read from the reader.
-    */
     reader.addEventListener("load", function () {
         this.showPreview = true;
         this.imagePreview = reader.result;
     }.bind(this), false);
-
-    /*
-    Check to see if the file is not empty.
-    */
     if( this.formFields.image ){
-        /*
-            Ensure the file is an image file.
-        */
         if ( /\.(jpe?g|png|gif)$/i.test( this.formFields.image.name ) ) {
-
-       
-            /*
-            Fire the readAsDataURL method which will read the file in and
-            upon completion fire a 'load' event which we will listen to and
-            display the image in the preview.
-            */
             reader.readAsDataURL( this.formFields.image );
         }
     }

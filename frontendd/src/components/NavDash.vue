@@ -138,7 +138,9 @@
             <v-chip link>
               <v-badge dot bottom color="green" offset-y="10" offset-x="10">
                 <v-avatar size="40">
-                  <v-icon v-on="on" dark>mdi-account-circle</v-icon>
+                   <img v-bind:src="'/img/'+user.image" />
+                   <!-- <img src="../../../backend/public/public/Image/202206130057photo_2022-06-02_23-00-10.jpg" /> -->
+                  <!-- <v-icon v-on="on" dark>mdi-account-circle</v-icon> -->
                 </v-avatar>
               </v-badge>
               <span class="ml-3">{{ user.name }}</span>
@@ -286,6 +288,7 @@ export default {
     const response = await axios.get("user");
     this.$store.dispatch("user", response.data);
     this.user = response.data;
+    console.log(this.user.image);
   },
   computed: {
     ...mapGetters(["user"]),

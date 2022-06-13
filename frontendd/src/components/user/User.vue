@@ -125,6 +125,14 @@
                             type="password"
                             v-model="editedItem.password"
                           />
+                           <v-file-input
+                            truncate-length="15"
+                            
+                            @change="onFileChange"
+                            label="Image*"
+                          ></v-file-input>
+                          <img v-bind:src="'../../../../backend/public/public/Image/'+imagePreview" v-show="showPreview" width="100" height="100" /> 
+
                         </v-form>
                       </v-card-text>
                       <div class="text-center mt-n5">
@@ -201,6 +209,8 @@ export default {
     itemstab: ["Utilisateur", "Demande Inscription", "Utilisateur Inactive"],
     search: "",
     dialog: false,
+    imagePreview: null,
+    showPreview: false,
     dialogDelete: false,
     headers: [
       { text: "Name", value: "name" },
@@ -219,6 +229,7 @@ export default {
       type: "",
       poste: "",
       numero: "",
+      image: "",
       password: "",
     },
     defaultItem: {
@@ -227,6 +238,7 @@ export default {
       type: "",
       poste: "",
       numero: "",
+      image: "",
       password: "",
     },
   }),
@@ -301,6 +313,20 @@ export default {
   },
 
   methods: {
+     onFileChange(e){
+      this.editedItem.image = event.target.files[0];
+      console.log(e.target.files);
+    let reader  = new FileReader();
+    // reader.addEventListener("load", function () {
+        this.showPreview = true;
+        this.imagePreview = reader.result;
+    // }.bind(this), false);
+    if( this.editedItem.image ){
+        if ( /\.(jpe?g|png|gif)$/i.test( this.editedItem.image.name ) ) {
+            reader.readAsDataURL( this.editedItem.image );
+        }
+    }
+},
     async dis() {
       this.disable = true;
       await axios
@@ -374,8 +400,17 @@ export default {
           .then((response) => (this.id = response.data.id));
       } else {
         this.users.push(this.editedItem);
+         let formData = new FormData();
+
+    formData.append("image", this.editedItem.image);
+    formData.append("email", this.editedItem.email);
+    formData.append("name", this.editedItem.name);
+    formData.append("password", this.editedItem.password);
+    formData.append("poste", this.editedItem.poste);
+    formData.append("type", this.editedItem.type);
+    formData.append("numero", this.editedItem.numero);
         axios
-          .post("/user/create", this.editedItem, {
+          .post("/user/create", formData, {
             headers: { token: localStorage.getItem("token") },
           })
           .then(() => {
