@@ -45,18 +45,17 @@ class UserController extends Controller
         }
 public function changepassword($id,Request $request){
 $request->validate([
+    'old_password' => 'required',
     'password' => 'required|min:8',
     'password_confirm'=>'required|same:password',
 ]);
 
 $user=User::FindOrFail($id);
-$current_password=$user->password;
-// dd($current_password);
+
 $user->update([
-    'current_password' => $current_password,
     'password' =>Hash::make($request->password),
 ]);
-return response()->json($current_password,200);
+return response()->json('success');
 
 }
     public function index()

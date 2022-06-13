@@ -17,16 +17,19 @@
               <v-list-item-content>
                 <v-list-item-title class="title" style="margin-left:40%">{{  user.name  }}</v-list-item-title>
                 <v-list-item-subtitle style="margin-left:-9%;text-align:center">{{  user.poste  }}</v-list-item-subtitle>
+               <v-list-item-subtitle style="margin-left:-9%;text-align:center"> {{  user.type  }}</v-list-item-subtitle>
+
                 <hr>
-               <v-text style="margin-left:15%"> <v-icon>mdi-email</v-icon> {{  user.email  }}</v-text>
-               <v-text style="margin-top:-2%;margin-left:65%"> <v-icon>mdi-phone</v-icon> {{  user.numero  }}</v-text>
-               <v-text style="margin-left:-9%;text-align:center"> <v-icon>fa fa-user-tie</v-icon> {{  user.type  }}</v-text>
+               <v-text style="margin-left:25%"> <v-icon>mdi-email</v-icon> {{  user.email  }}</v-text>
+               <v-text style="margin-top:-2%;margin-left:49%"> <v-icon>mdi-phone</v-icon> {{  user.numero  }}</v-text>
+               <!-- <v-text style="margin-left:-9%;text-align:center"> <v-icon>fa fa-user-tie</v-icon> {{  user.type  }}</v-text> -->
 
               </v-list-item-content>
             </v-list-item>
              </v-card>
            <br>
-            <v-card class="mx-auto ml-2 mr-14">
+           <br>
+            <v-card class="mx-auto ml-2 mr-2">
              <v-tabs vertical >
       <v-tab >
         <v-icon left >
@@ -162,15 +165,22 @@
                         <h4  class="text-center warning--text " style="font-size:20px!important">
                            Mettre à jour votre Mot de passe {{ name}}
                         </h4>
+                        
                          <v-text-field
+                        
                             id="password"
                             label="Mot de passe actuel"
                             name="password"
                             prepend-icon="lock"
                             type="password"
-                            v-model="current_password"
+                            v-model="old_password"
                             :rules="Rules"
                           />
+                            <v-row no-gutters>
+                           <v-col
+                              cols="6"
+                              md="6"
+                            >
                          <v-text-field
                            :disabled="edit"
                             id="password"
@@ -181,6 +191,11 @@
                             v-model="password"
                             :rules="Rules"
                           />
+                           </v-col> 
+                           <v-col
+                             cols="6"
+                              md="6"
+                          >
                          <v-text-field
                            :disabled="edit"
                             id="password"
@@ -191,6 +206,8 @@
                             v-model="password_confirm"
                             :rules="Rules"
                           />
+                           </v-col>
+                          </v-row>
                        <v-card-actions style="margin-top:-2%">
           <v-spacer></v-spacer>
         <template v-if="edit" >
@@ -262,7 +279,7 @@ showPreview: false,
     image: "",
     type: "",
     password: "",
-    current_password: "",
+    old_password: "",
     password_confirm: "",
     user: [],
       Rules: [
@@ -319,6 +336,7 @@ console.log(this.user);
 },
 async changePass() {
       const response = await axios.put("user/changepass/"+this.user.id, {
+        old_password: this.old_password,
         password: this.password,
         password_confirm: this.password_confirm,
       });
