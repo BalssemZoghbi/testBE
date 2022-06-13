@@ -343,12 +343,18 @@ export default {
         });
         
     },
-    async getuser() {
-      await axios.get("/users/get").then((resp) => {
-        this.users = resp.data;
+     getuser() {
+      // await axios.get("/users/get").then((resp) => {
+      
+      //   this.users = resp.data;
+      //   console.log('balssem',this.users);
+      //   this.spinner = false;
+       this.$store.dispatch("Users").then(() => {
+        this.users = this.$store.getters.users;
         this.spinner = false;
-        // console.log(resp.data);
-      });
+       });
+        
+      // });
     },
     deleteutilisateur(id) {
       //          const response= axios.get('user');
