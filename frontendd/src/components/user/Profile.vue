@@ -49,7 +49,7 @@
                         <h4 class="text-center warning--text " style="font-size:20px!important">
                            Mettre à jour votre profil {{ name}}
                         </h4>
-                        <v-form>
+                        <v-form  :disabled="edit">
                             <v-row no-gutters>
                            <v-col
                               cols="6"
@@ -98,7 +98,6 @@
                              cols="6"
                               md="6"
                           >
-                          <v-form ref="form">
                              <v-text-field
                             label="Numero de telephone*"
                             name="numero"
@@ -106,8 +105,7 @@
                             type="text"
                             v-model="user.numero" 
                             :rules="Rules"
-                          />
-                          </v-form> </v-col>
+                          /> </v-col>
                           </v-row>
                                              <v-file-input
                             truncate-length="15"
@@ -127,18 +125,31 @@
         </v-card-text>
         <v-card-actions style="margin-top:-9%">
           <v-spacer></v-spacer>
+              <template v-if="edit" >
           <v-btn
       color="warning"
       class="ma-2 white--text"
-     :loading="spinner"
-      :disabled="spinner"
-         @click="update"
+         @click="innabled"
     >
       <v-icon
         right
         dark
       >
         mdi-pencil
+      </v-icon>
+    </v-btn>
+    </template>
+        <v-btn
+        v-else
+      color="success"
+      class="ma-2 white--text"
+         @click="update"
+    >
+      <v-icon
+        right
+        dark
+      >
+        mdi-bookmark
       </v-icon>
     </v-btn>
       </v-card-actions>
@@ -151,7 +162,8 @@
                         <h4  class="text-center warning--text " style="font-size:20px!important">
                            Mettre à jour votre Mot de passe {{ name}}
                         </h4>
-       <v-text-field
+                         <v-text-field
+                           :disabled="edit"
                             id="password"
                             label="Mot de passe*"
                             name="password"
@@ -162,20 +174,31 @@
                           />
                        <v-card-actions style="margin-top:-2%">
           <v-spacer></v-spacer>
-          <v-btn
-      color="warning"
-      class="ma-2 white--text"
-     :loading="spinner"
-      :disabled="spinner"
-         @click="update"
-    >
-      
+        <template v-if="edit" >
+                <v-btn
+            color="warning"
+            class="ma-2 white--text"
+              @click="innabled"
+              >
       <v-icon
         right
         dark
-      
       >
         mdi-pencil
+      </v-icon>
+    </v-btn>
+    </template>
+        <v-btn
+        v-else
+      color="success"
+      class="ma-2 white--text"
+         @click="update"
+    >
+      <v-icon
+        right
+        dark
+      >
+        mdi-bookmark
       </v-icon>
     </v-btn>
                        </v-card-actions>    
@@ -212,6 +235,7 @@ export default {
 showPreview: false,
     load:true,
           Poste:['Directeur','Technicien','Ingenieur'],
+          edit:true,
     id:"",
     dialog: false,
     name: "",
@@ -266,6 +290,14 @@ showPreview: false,
 
   },
    methods: {
+    innabled() {
+  this.edit = !this.edit
+},
+      
+      // else{
+      //   this.edit=true;
+      // }
+    
       onFileChange(e){
       //  this.files.push(file);
         // const files=e.target.files;
