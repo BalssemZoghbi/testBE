@@ -53,12 +53,16 @@ class AuthController extends Controller
             'poste' => 'required',
             'numero' => 'required',
         ]);
+        $file= $request->file('image');
+            // dd($file);
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $file-> move(public_path('public/Image'), $filename);
         $name = $request->name;
         $email    = $request->email;
         $password = $request->password;
         $poste = $request->poste;
         $numero = $request->numero;
-        $user     = User::create(['name' => $name, 'email' => $email,'type'=>'En Attente', 'password' => Hash::make($password),'poste' => $poste,'numero' => $numero,]);
+        $user     = User::create(['name' => $name, 'email' => $email,'type'=>'En Attente', 'password' => Hash::make($password),'poste' => $poste,'numero' => $numero,'image' => $filename]);
         return response()->json($user);
     }
 

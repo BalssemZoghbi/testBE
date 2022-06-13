@@ -22,6 +22,7 @@ class User extends Authenticatable
         'type',
         'password',
         'poste',
+        'image',
         'numero',
     ];
 

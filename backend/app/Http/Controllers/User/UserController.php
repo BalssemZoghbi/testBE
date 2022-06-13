@@ -14,6 +14,36 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    public function updateprofile($id,Request $request){
+        $user=User::FindOrFail($id);
+        $type = $user->getOriginal('type');
+//  dd($request);
+        $file= $request->file('image');
+        // dd($request);
+
+        $filename= date('YmdHi').$file->getClientOriginalName();
+        $file-> move(public_path('public/Image'), $filename);
+        // dd($filename);
+        $user->update([
+        'name' => $request->name,
+        'email' => $request->email,
+        'type'=>$type,
+        'password' =>Hash::make($request->password),
+        'poste' => $request->poste,
+        'numero' => $request->numero,
+        'image' => $filename
+        ]);
+    return response()->json($user);
+            // $user->update([
+            //     'name' => $request->name,
+            //     'email' =>$request->email,
+            //     'password' =>Hash::make($request->password),
+            //     'type'=>$type,
+            //     'poste' =>$request->poste,
+            //     'numero' =>$request->numero
+            // ]);
+        }
+
     public function index()
     {
         $users = User::all();
@@ -43,16 +73,42 @@ class UserController extends Controller
     }
 
     public function store(Request $request){
-       $user= User::create([
-            'name' => $request->name,
-            'email' =>$request->email,
-            'password' =>Hash::make($request->password),
-            'type' =>$request->type,
-            'poste' =>$request->poste,
-            'numero' =>$request->numero
-        ]);
-        // if($user->save){
-        return response()->json($user);
+        // $data= new User();
+
+        // if($request->file('image')){
+
+            $file= $request->file('image');
+            // dd($file);
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $file-> move(public_path('public/Image'), $filename);
+            // $data['image']= $filename;
+            // $data['name']= $request->name;
+            // $data['email']=$request->email;
+            // $data['password']=Hash::make($request->password);
+            // $data['type']=$request->type;
+            // $data['poste']=$request->poste;
+            // $data['numero']=$request->numero;
+        // }
+        $data= User::create([
+                    'name' => $request->name,
+                    'email' =>$request->email,
+                    'password' =>Hash::make($request->password),
+                    'type' =>$request->type,
+                    'poste' =>$request->poste,
+                    'image' =>$filename,
+                    'numero' =>$request->numero
+                ]);
+        $data->save();
+    //    $user= User::create([
+    //         'name' => $request->name,
+    //         'email' =>$request->email,
+    //         'password' =>Hash::make($request->password),
+    //         'type' =>$request->type,
+    //         'poste' =>$request->poste,
+    //         'numero' =>$request->numero
+    //     ]);
+    //     // if($user->save){
+    //     return response()->json($user);
     // }
     }
 
@@ -63,19 +119,6 @@ class UserController extends Controller
             'email' =>$request->email,
             'password' =>Hash::make($request->password),
             'type' =>$request->type,
-            'poste' =>$request->poste,
-            'numero' =>$request->numero
-        ]);
-            return response()->json($user);
-    }
-    public function updateprofile($id,Request $request){
-    $user=User::FindOrFail($id);
-    $type = $user->getOriginal('type');
-        $user->update([
-            'name' => $request->name,
-            'email' =>$request->email,
-            'password' =>Hash::make($request->password),
-            'type'=>$type,
             'poste' =>$request->poste,
             'numero' =>$request->numero
         ]);

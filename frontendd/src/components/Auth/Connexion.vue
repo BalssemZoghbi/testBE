@@ -16,7 +16,7 @@
                           Connecter-vous
                         </h1>
 
-                        <v-form>
+                        <v-form >
                           <error v-if="error" :error="error" />
                           <v-text-field
                             label="Email"
@@ -103,14 +103,14 @@
                         <h4 class="text-center mt-4">
                           Assurez-vous de votre email pour l'inscription
                         </h4>
-                        <v-form>
+                        <v-form >
                           <error v-if="error" :error="error" />
                           <v-text-field
                             label="Nom"
                             name="Name"
                             prepend-icon="person"
                             type="text"
-                            v-model="name"
+                            v-model="formFields.name"
                             :rules="nameRules"
                             required
                           />
@@ -122,7 +122,7 @@
                                 name="poste"
                                 prepend-icon="fa fa-user-tie"
                                 type="text"
-                                v-model="poste"
+                                v-model="formFields.poste"
                                 :rules="nameRules"
                               ></v-select>
                             </v-col>
@@ -133,7 +133,7 @@
                                   name="numero"
                                   prepend-icon="phone"
                                   type="text"
-                                  v-model="numero"
+                                  v-model="formFields.numero"
                                   :counter="max"
                                   :rules="rules"
                                 />
@@ -144,7 +144,7 @@
                             name="Email"
                             prepend-icon="email"
                             type="text"
-                            v-model="email"
+                            v-model="formFields.email"
                             :rules="EmailRules"
                           />
                           <v-row no-gutters>
@@ -155,7 +155,7 @@
                                 name="password"
                                 prepend-icon="lock"
                                 type="password"
-                                v-model="password"
+                                v-model="formFields.password"
                                 :rules="rules"
                             /></v-col>
                             <v-col cols="6">
@@ -165,17 +165,28 @@
                                 name="password_confirm"
                                 prepend-icon="lock"
                                 type="password"
-                                v-model="password_confirm"
+                                v-model="formFields.password_confirm"
                                 :rules="passwordRules" /></v-col
                           ></v-row>
+                          <!-- v-model="formData.image" -->
+                          <v-file-input
+                            truncate-length="15"
+                            
+                            @change="onFileChange"
+                            label="Image*"
+                          ></v-file-input>
+                          <img v-bind:src="imagePreview" width="100" height="100" v-show="showPreview"/> 
                         </v-form>
                       </v-card-text>
                       <div class="text-center mt-n5">
+                        <!-- @click="createAccount()" -->
+                        <!-- @submit.prevent="submitForm" -->
                         <v-btn
                           rounded
                           color="teal accent-3"
                           dark
-                          @click="createAccount()"
+                          type="submit"
+                          @click="submitForm()"
                           >Inscription</v-btn
                         >
                       </div>
@@ -226,9 +237,20 @@ export default {
     name: "",
     poste: "",
     numero: "",
+    image: "",
     max: 8,
     min: 8,
     error: "",
+    imagePreview: null,
+showPreview: false,
+    formFields: {
+              password: "",
+    password_confirm: "",
+    name: "",
+    poste: "",
+    numero: "",
+    image: "",
+            },
   }),
 
   computed: {
@@ -268,6 +290,49 @@ export default {
     ...mapState(["status"]),
   },
   methods: {
+    onFileChange(e){
+      //  this.files.push(file);
+        // const files=e.target.files;
+      // let  reader=new FileReader();
+      //   reader.onload=(e)=> this.formFields.image.push(e.target.result);
+      //   reader.readAsDataURL(file);
+    // this.formFields.image = event.target.files[0];
+      this.formFields.image = event.target.files[0];
+      console.log(e.target.files);
+    /*
+    Initialize a File Reader object
+    */
+    let reader  = new FileReader();
+// 
+    /*
+    Add an event listener to the reader that when the file
+    has been loaded, we flag the show preview as true and set the
+    image to be what was read from the reader.
+    */
+    reader.addEventListener("load", function () {
+        this.showPreview = true;
+        this.imagePreview = reader.result;
+    }.bind(this), false);
+
+    /*
+    Check to see if the file is not empty.
+    */
+    if( this.formFields.image ){
+        /*
+            Ensure the file is an image file.
+        */
+        if ( /\.(jpe?g|png|gif)$/i.test( this.formFields.image.name ) ) {
+
+       
+            /*
+            Fire the readAsDataURL method which will read the file in and
+            upon completion fire a 'load' event which we will listen to and
+            display the image in the preview.
+            */
+            reader.readAsDataURL( this.formFields.image );
+        }
+    }
+},
     async login() {
       try {
         const response = await axios.post("/login", {
@@ -290,16 +355,43 @@ export default {
           " vous n`avez pas l`accès pour connecter, Veuillez contactez L`administrateur";
       }
     },
+    submitForm(){
+    let formData = new FormData();
+//  step: ,
+    formData.append("image", this.formFields.image);
+    formData.append("name", this.formFields.name);
+    formData.append("step", this.step);
+    formData.append("email", this.formFields.email);
+    formData.append("poste", this.formFields.poste);
+    formData.append("numero", this.formFields.numero);
+    formData.append("password", this.formFields.password);
+    formData.append("password_confirm", this.formFields.password_confirm);
+ try {
+    axios.post('/register', formData)
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((error) => {
+                console.log(error);
+    });
+      this.step--;
+      } catch (e) {
+        this.error = "une erreur c'est produite";
+      }
+    },
+
     async createAccount() {
+      // console.log(e);
       try {
         await axios.post("/register", {
           step: this.step,
-          name: this.name,
-          email: this.email,
-          poste: this.poste,
-          numero: this.numero,
-          password: this.password,
-          password_confirm: this.password_confirm,
+          name: this.formData.name,
+          email: this.formData.email,
+          poste: this.formData.poste,
+          numero: this.formData.numero,
+          password: this.formData.password,
+          image: this.formData.image,
+          password_confirm: this.formData.password_confirm,
         });
         //   this.$router.push('/Connexion');
         this.step--;
