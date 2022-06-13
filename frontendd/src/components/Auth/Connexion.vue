@@ -203,9 +203,10 @@
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 import Error from "@/components/Error";
 import { mapState } from "vuex";
+import "@/store/index";
 export default {
   components: {
     Error,
@@ -304,28 +305,53 @@ showPreview: false,
         }
     }
 },
-    async login() {
+ login() {
       try {
-        const response = await axios.post("/login", {
+      this.$store.dispatch("login",{
           email: this.email,
           password: this.password,
-        });
-
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("user", JSON.stringify(response.data.user));
-        this.user = JSON.parse(localStorage.getItem("user"));
-        //  console.log(this.user);
-        this.$store.dispatch("user", response.data.user);
-        if (this.user.type == "admin") {
+        }).then(() => {
+           this.$store.getters.user
+          //  console.log(this.$store.getters.user);
+// console.log(this.$store.getters.user.type);
+           if (this.$store.getters.user.type == "admin") {
+            // console.log(this.user.type);
           this.$router.push("/dashboard");
         } else {
           this.$router.push("/dashboardEmploye");
         }
-      } catch (e) {
+                // this.$store.getters.isAdmin
+                // console.log(this.$store.getters.isAdmin);
+                    // ? this.$router.push("/dashboard")
+                    // : this.$router.push("/dashboardEmploye");
+            })
+             } catch (e) {
         this.error =
           " vous n`avez pas l`accès pour connecter, Veuillez contactez L`administrateur";
       }
     },
+    // async login() {
+    //   try {
+    //     const response = await axios.post("/login", {
+    //       email: this.email,
+    //       password: this.password,
+    //     });
+
+    //     localStorage.setItem("token", response.data.token);
+    //     localStorage.setItem("user", JSON.stringify(response.data.user));
+    //     this.user = JSON.parse(localStorage.getItem("user"));
+    //     //  console.log(this.user);
+    //     this.$store.dispatch("user", response.data.user);
+    //     if (this.user.type == "admin") {
+    //       this.$router.push("/dashboard");
+    //     } else {
+    //       this.$router.push("/dashboardEmploye");
+    //     }
+    //   } catch (e) {
+    //     this.error =
+    //       " vous n`avez pas l`accès pour connecter, Veuillez contactez L`administrateur";
+    //   }
+    // },
     submitForm(){
     let formData = new FormData();
 //  step: ,
@@ -338,23 +364,21 @@ showPreview: false,
     formData.append("password", this.formFields.password);
     formData.append("password_confirm", this.formFields.password_confirm);
  try {
-    axios.post('/register', formData)
-            .then((res) => {
-                console.log(res);
-            })
-            .catch((error) => {
-                console.log(error);
-    });
+    this.$store.dispatch("register", formData)
+            // .then((res) => {
+            //     console.log(res);
+            // })
+            // .catch((error) => {
+            //     console.log(error);
+    // });
       this.step--;
       } catch (e) {
         this.error = "une erreur c'est produite";
       }
     },
-
-    async createAccount() {
-      // console.log(e);
+   createAccount() {
       try {
-        await axios.post("/register", {
+        this.$store.dispatch("register", {
           step: this.step,
           name: this.formData.name,
           email: this.formData.email,
@@ -363,13 +387,32 @@ showPreview: false,
           password: this.formData.password,
           image: this.formData.image,
           password_confirm: this.formData.password_confirm,
-        });
+        })
         //   this.$router.push('/Connexion');
         this.step--;
       } catch (e) {
-        this.error = "une erreur c'est produite";
+        this.error = "une erreur s'est produite";
       }
     },
+    // async createAccount() {
+    //   // console.log(e);
+    //   try {
+    //     await axios.post("/register", {
+    //       step: this.step,
+    //       name: this.formData.name,
+    //       email: this.formData.email,
+    //       poste: this.formData.poste,
+    //       numero: this.formData.numero,
+    //       password: this.formData.password,
+    //       image: this.formData.image,
+    //       password_confirm: this.formData.password_confirm,
+    //     });
+    //     //   this.$router.push('/Connexion');
+    //     this.step--;
+    //   } catch (e) {
+    //     this.error = "une erreur c'est produite";
+    //   }
+    // },
   },
   // mounted() {
 
