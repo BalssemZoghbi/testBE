@@ -144,7 +144,7 @@
                       <v-select
                         :items="barre"
                         label="barre"
-                        success
+                        
                         v-model="projet.Epbarre"
                         dense
                         outlined
