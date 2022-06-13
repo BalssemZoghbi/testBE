@@ -104,16 +104,19 @@ return response()->json($current_password,200);
             // $data['poste']=$request->poste;
             // $data['numero']=$request->numero;
         // }
-        $data= User::create([
-                    'name' => $request->name,
-                    'email' =>$request->email,
-                    'password' =>Hash::make($request->password),
-                    'type' =>$request->type,
-                    'poste' =>$request->poste,
-                    'image' =>$filename,
-                    'numero' =>$request->numero
-                ]);
-        $data->save();
+        $user= User::create([
+            'image' => $filename,
+            'name' => $request->name,
+            'email' =>$request->email,
+            'password' =>Hash::make($request->password),
+            'type' =>$request->type,
+            'poste' =>$request->poste,
+            'image' =>$filename,
+            'numero' =>$request->numero
+        ]);
+        if($user->save){
+        return response()->json($user);
+        }
     //    $user= User::create([
     //         'name' => $request->name,
     //         'email' =>$request->email,
@@ -128,18 +131,22 @@ return response()->json($current_password,200);
     }
 
     public function updatestore($id,Request $request){
-    $user=User::FindOrFail($id);
-        $user->update([
-            'name' => $request->name,
-            'email' =>$request->email,
-            'password' =>Hash::make($request->password),
-            'type' =>$request->type,
-            'poste' =>$request->poste,
-            'numero' =>$request->numero
-        ]);
-            return response()->json($user);
-    }
-
+        $user=User::FindOrFail($id);
+        $file= $request->file('image');
+        // dd($request);
+        $filename= date('YmdHi').$file->getClientOriginalName();
+        $file-> move(public_path('public/Image'), $filename);
+            $user->update([
+                'name' => $request->name,
+                'email' =>$request->email,
+                'password' =>Hash::make($request->password),
+                'type' =>$request->type,
+                'poste' =>$request->poste,
+                'image' =>$filename,
+                'numero' =>$request->numero
+            ]);
+                return response()->json($user);
+        }
     public function delete($id){
         $user=User::FindOrFail($id);
         $userr = UserInactive::create(['name' => $user->name, 'email' => $user->email,'type'=>'Bloqué', 'password' => $user->password,'poste' => $user->poste,'numero' => $user->numero,]);

@@ -138,8 +138,8 @@
             <v-chip link>
               <v-badge dot bottom color="green" offset-y="10" offset-x="10">
                 <v-avatar size="40">
-                   <img v-bind:src="'/img/'+user.image" />
-                   <!-- <img src="../../../backend/public/public/Image/202206130057photo_2022-06-02_23-00-10.jpg" /> -->
+                   <img v-bind:src="'../../../backend/public/public/Image/'+user.image" />
+                   <!-- <img src="../../../backend/public/public/Image/202206121804photo_2022-06-02_23-00-101.jpg" /> -->
                   <!-- <v-icon v-on="on" dark>mdi-account-circle</v-icon> -->
                 </v-avatar>
               </v-badge>
