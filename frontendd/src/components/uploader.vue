@@ -27,8 +27,20 @@
       prominent
       type="error"
     >
-      Une erreur s'est produite, veuillez réessayer
+      <!-- Le format n'est pas compatible, veuillez réessayer -->
+      {{this.text}}
     </v-alert>
+        <!-- <v-alert style="margin-top:4%"
+        v-show="warning1"
+      shaped
+      dense
+      dark
+      prominent
+      type="error"
+    >
+    {{this.text}}
+      le format n'est pas compatible, veuillez choisir un fichier de format JSON
+    </v-alert> -->
     
           <!-- <v-icon dark style="font-size: 70px;" >
           mdi-cloud-upload
@@ -60,7 +72,7 @@
             <v-icon dark style="font-size:80px">folder_open</v-icon>
             <div class="detail">
               <span class="name" v-text="files[index].name"></span>
-              <span class="size"  v-text="files[index].size"></span>
+              <!-- <span class="size"  v-text="files[index].size"></span> -->
             </div>
             </div>
           </div>
@@ -73,9 +85,11 @@
 import axios from "axios";
 export default{
     data:()=>({
+      text:"",
         isDragging: false,
         success: false,
         warning: false,
+        warning1: false,
         childMessage:false,
         dragCount: 0,
         files: [],
@@ -150,6 +164,7 @@ let id=name.replace('.json','');
         let id=name.replace('.json','');
            console.log(id);
        let token = localStorage.getItem("token");
+       
       axios
         .get(
           "/importjson/"+id,
@@ -160,14 +175,16 @@ let id=name.replace('.json','');
           }
         )
       .then(response => (console.log(response.data),this.success=true,this.files=[],this.projets=[],this.childMessage=true,this.$emit('childToParent', this.childMessage)))
-      .catch(error => (console.log(error),this.warning=true,this.files=[],this.projets=[],this.childMessage=false,this.$emit('childToParent', this.childMessage)))  
+      .catch(error => (console.log(error),this.warning=true,this.text=this.text+"Ce format n'est pas compatible.",this.files=[],this.projets=[],this.childMessage=false,this.$emit('childToParent', this.childMessage)))  
      
     },
      import(file){
-      //  if(!file.type.match('json.*')){
-      //    console.log(`${file.name} is not json file`);
-      //    return ;
-      //  }
+      this.text="";
+       if(!file.type.match('json.*')){
+        // this.warning1=true;
+        this.text="Veuillez choisir un fichier de format JSON. "
+        console.log("file ne match pas");
+       }
        this.files.push(file);
       let  reader=new FileReader();
         reader.onload=(e)=>this.projets.push(e.target.result);
@@ -192,6 +209,11 @@ let id=name.replace('.json','');
       // .then(response => (console.log(response.data)))
         }
 },
+mounted(){
+  // if(this.warning1=true){
+  //   this.warning=false;
+  // }
+}
 }
 </script>
 <style scoped lang="scss">
@@ -201,29 +223,27 @@ let id=name.replace('.json','');
   margin-top: 20px;
 
   .image-wrapper{
-    display: flex;
-    flex-direction: column;
+    // display: flex;
+    // flex-direction: column;
     justify-content: space-between;
     margin: 10px;
     width: 160px;
     margin-left: 40%;
-    border: 1px solid #fff;
+    // border: 1px solid #fff;
     box-shadow: 5px 5px 5px 20px rgb(5, 48, 96);
     .detail{
       font-size: 12px;
       display: flex;
-      flex-direction: column;
-      align-items: self-start;
+      // flex-direction: column;
+      // align-items: self-start;
       padding: 3px 6px;
-      color: rgba(0,0,0,0.5);
-      background: #fff;
+      color: #fff;
+      background: rgb(5, 48, 96);
       .name{
-        overflow: hidden;
-        height: 20px;
+         margin-left: 6%;
+    font-size: 16px;
       }
-      .size{
-        // font-size: 10px;
-      }
+      
     }
   }
 }
