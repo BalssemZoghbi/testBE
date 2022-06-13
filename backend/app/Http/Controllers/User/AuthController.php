@@ -56,7 +56,7 @@ class AuthController extends Controller
         $file= $request->file('image');
             // dd($file);
             $filename= date('YmdHi').$file->getClientOriginalName();
-            $file-> move(public_path('public/Image'), $filename);
+            $file-> move(public_path('Image'), $filename);
         $name = $request->name;
         $email    = $request->email;
         $password = $request->password;

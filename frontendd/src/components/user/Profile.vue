@@ -8,9 +8,11 @@
               <v-img src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"></v-img>
             </v-avatar> -->
             <v-avatar color="primary" size="90" style="position:absolute; top: 130px;margin-left:41%">
-      <v-icon dark size="35">
+      <!-- <v-icon dark size="35">
         mdi-account-circle
-      </v-icon>:
+      </v-icon>: -->
+                        <img v-bind:src="'http://127.0.0.1:8000/Image/'+user.image" style="margin-left: 0%;margin-top: -1%;"/>
+
     </v-avatar>
           </v-col>
             <v-list-item color="rgba(0, 0, 0, .4)">
@@ -369,15 +371,22 @@ async changePass() {
     }
 },
     update() {
-       let formData = new FormData();
+    //    let formData = new FormData();
 
-    formData.append("image", this.user.image);
-    formData.append("email", this.user.email);
-    formData.append("name", this.user.name);
-    formData.append("password", this.user.password);
-    formData.append("poste", this.user.poste);
-    formData.append("numero", this.user.numero);
+    // formData.append("image", this.user.image);
+    // formData.append("email", this.user.email);
+    // formData.append("name", this.user.name);
+    // formData.append("password", this.user.password);
+    // formData.append("poste", this.user.poste);
+    // formData.append("numero", this.user.numero);
     
+    let user = {
+        email: this.user.email,
+        name: this.user.name,
+        password: this.user.password,
+        poste: this.user.poste,
+        numero: this.user.numero,
+      }
         // email: this.user.email,
         // name: this.user.name,
         // password: this.user.password,
@@ -385,7 +394,7 @@ async changePass() {
         // numero: this.user.numero,
       
       this.spinner=true,
-      axios.put('/user/updateprofile/'+this.user.id, formData,{ headers: { token: localStorage.getItem('token')}})
+      axios.put('/user/updateprofile/'+this.user.id, user,{ headers: { token: localStorage.getItem('token')}})
       .then(
         (response) => (this.id = response.data.id),
         this.spinner=false,

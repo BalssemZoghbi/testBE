@@ -131,7 +131,7 @@
                             @change="onFileChange"
                             label="Image*"
                           ></v-file-input>
-                          <img v-bind:src="'../../../../backend/public/public/Image/'+imagePreview" v-show="showPreview" width="100" height="100" /> 
+                          <!-- <img v-bind:src="'../../../../backend/public/public/Image/'+imagePreview" v-show="showPreview" width="100" height="100" />  -->
 
                         </v-form>
                       </v-card-text>
@@ -334,6 +334,8 @@ export default {
         .then((response) => {
           this.$store.dispatch("user", response.data);
           this.user = response.data;
+          this.user.password = "";
+
         })
         .catch((error) => {
           if (error) this.disable = false;
@@ -392,15 +394,33 @@ export default {
     },
 
     save() {
+         
       if (this.editedIndex > -1) {
         Object.assign(this.users[this.editedIndex], this.editedItem);
         console.log("edit");
+        let user = {
+        email: this.editedItem.email,
+        name: this.editedItem.name,
+        password: this.editedItem.password,
+        poste: this.editedItem.poste,
+        type: this.editedItem.type,
+        numero: this.editedItem.numero,
+      }
+    //         let formData = new FormData();
+
+    // formData.append("image", this.editedItem.image);
+    // formData.append("email", this.editedItem.email);
+    // formData.append("name", this.editedItem.name);
+    // formData.append("password", this.editedItem.password);
+    // formData.append("poste", this.editedItem.poste);
+    // formData.append("type", this.editedItem.type);
+    // formData.append("numero", this.editedItem.numero);
         axios
-          .put("/user/update/" + this.editedItem.id, this.editedItem)
+          .put("/user/update/" + this.editedItem.id, user)
           .then((response) => (this.id = response.data.id));
       } else {
         this.users.push(this.editedItem);
-         let formData = new FormData();
+      let formData = new FormData();
 
     formData.append("image", this.editedItem.image);
     formData.append("email", this.editedItem.email);
