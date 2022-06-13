@@ -28,7 +28,7 @@ class UserController extends Controller
         'name' => $request->name,
         'email' => $request->email,
         'type'=>$type,
-        'password' =>Hash::make($request->password),
+        'password' =>$request->password,
         'poste' => $request->poste,
         'numero' => $request->numero,
         'image' => $filename
@@ -43,7 +43,22 @@ class UserController extends Controller
             //     'numero' =>$request->numero
             // ]);
         }
+public function changepassword($id,Request $request){
+$request->validate([
+    'password' => 'required|min:8',
+    'password_confirm'=>'required|same:password',
+]);
 
+$user=User::FindOrFail($id);
+$current_password=$user->password;
+// dd($current_password);
+$user->update([
+    'current_password' => $current_password,
+    'password' =>Hash::make($request->password),
+]);
+return response()->json($current_password,200);
+
+}
     public function index()
     {
         $users = User::all();

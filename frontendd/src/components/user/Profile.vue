@@ -1,7 +1,7 @@
 <template>
        <v-card class="mx-auto ml-2" height="100%" tile>
 
-       <v-card class="mx-auto ml-2 mr-2" max-width="100%"  style=" top: 20px" tile>
+       <v-card class="mx-auto ml-2 mr-2" max-width="100%"  style=" top: 15px" tile>
           <v-img height="180px" src="../../assets/pres2.jpg"></v-img>
           <v-col>
             <!-- <v-avatar size="100" style="position:absolute; top: 240px">
@@ -18,7 +18,7 @@
                 <v-list-item-title class="title" style="margin-left:40%">{{  user.name  }}</v-list-item-title>
                 <v-list-item-subtitle style="margin-left:-9%;text-align:center">{{  user.poste  }}</v-list-item-subtitle>
                 <hr>
-               <v-text style="margin-left:20%"> <v-icon>mdi-email</v-icon> {{  user.email  }}</v-text>
+               <v-text style="margin-left:15%"> <v-icon>mdi-email</v-icon> {{  user.email  }}</v-text>
                <v-text style="margin-top:-2%;margin-left:65%"> <v-icon>mdi-phone</v-icon> {{  user.numero  }}</v-text>
                <v-text style="margin-left:-9%;text-align:center"> <v-icon>fa fa-user-tie</v-icon> {{  user.type  }}</v-text>
 
@@ -163,13 +163,32 @@
                            Mettre à jour votre Mot de passe {{ name}}
                         </h4>
                          <v-text-field
-                           :disabled="edit"
                             id="password"
-                            label="Mot de passe*"
+                            label="Mot de passe actuel"
                             name="password"
                             prepend-icon="lock"
                             type="password"
-                            v-model="user.password"
+                            v-model="current_password"
+                            :rules="Rules"
+                          />
+                         <v-text-field
+                           :disabled="edit"
+                            id="password"
+                            label="Nouveau mot de passe*"
+                            name="password"
+                            prepend-icon="password"
+                            type="password"
+                            v-model="password"
+                            :rules="Rules"
+                          />
+                         <v-text-field
+                           :disabled="edit"
+                            id="password"
+                            label="Confirmer mot de passe*"
+                            name="password"
+                            prepend-icon="password"
+                            type="password"
+                            v-model="password_confirm"
                             :rules="Rules"
                           />
                        <v-card-actions style="margin-top:-2%">
@@ -192,7 +211,7 @@
         v-else
       color="success"
       class="ma-2 white--text"
-         @click="update"
+         @click="changePass"
     >
       <v-icon
         right
@@ -243,6 +262,8 @@ showPreview: false,
     image: "",
     type: "",
     password: "",
+    current_password: "",
+    password_confirm: "",
     user: [],
       Rules: [
         v => !!v || 'Ce champ est obligatoire',
@@ -254,8 +275,6 @@ showPreview: false,
       val || this.close();
     },
   },
-
- 
   async created() {
     const response = await axios.get("user");
     this.$store.dispatch("user", response.data);
@@ -264,12 +283,17 @@ showPreview: false,
   },
   computed: {
     ...mapGetters(["user"]),
+    // current_password() {
+    //   console.log(this.user.password);
+    //   return this.password;
+
+    // },
   },
  async mounted() {
-   const response = await axios.get("user");
-    this.$store.dispatch("user", response.data);
-    this.user = response.data;
-
+  //  const response = await axios.get("user");
+  //   this.$store.dispatch("user", response.data);
+  //   this.user = response.data;
+console.log(this.user);
    axios.get('/user/'+this.user.id).then((response) => {
     this.$store.dispatch("user", this.user.id);
      this.user = response.data;
@@ -293,11 +317,14 @@ showPreview: false,
     innabled() {
   this.edit = !this.edit
 },
-      
-      // else{
-      //   this.edit=true;
-      // }
-    
+async changePass() {
+      const response = await axios.put("user/changepass/"+this.user.id, {
+        password: this.password,
+        password_confirm: this.password_confirm,
+      });
+            console.log(response);
+
+},
       onFileChange(e){
       //  this.files.push(file);
         // const files=e.target.files;
