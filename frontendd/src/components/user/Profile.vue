@@ -148,6 +148,7 @@
         v-else
       color="success"
       class="ma-2 white--text"
+    
          @click="update"
     >
       <v-icon
@@ -157,6 +158,22 @@
         mdi-bookmark
       </v-icon>
     </v-btn>
+    <v-snackbar
+      v-model="snackbar"
+    >
+      Profil modifié avec succès
+
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="blue"
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
       </v-card-actions>
           </v-card-text>
         </v-card>
@@ -239,6 +256,22 @@
         mdi-bookmark
       </v-icon>
     </v-btn>
+    <v-snackbar
+      v-model="snackbar"
+    >
+      Mot De Passe modifié avec succès
+
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="blue"
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
                        </v-card-actions>    
                            </v-card-text>
         </v-card>
@@ -268,6 +301,7 @@ import { mapGetters } from "vuex";
 export default {
   name: "Profile",
   data: () => ({
+          snackbar: false,
      spinner:false,
        imagePreview: null,
 showPreview: false,
@@ -342,6 +376,8 @@ async changePass() {
         password: this.password,
         password_confirm: this.password_confirm,
       });
+      
+        this.snackbar = true
             console.log(response);
 
 },
@@ -416,6 +452,7 @@ async changePass() {
       .then(
         (response) => (this.id = response.data.id),
         this.spinner=false,
+        this.snackbar = true
       );
   },
    close() {
