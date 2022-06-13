@@ -560,10 +560,10 @@ export default {
 /* .theme--light.v-text-field--outlined {
     color: #0094ff !important;
 } */
-.k[data-v-133d5f08]{
+/* .k[data-v-133d5f08]{
       color: pink !important;
 
-}
+} */
 /* .theme--light.v-text-field--outlined {
     color: #0094ff !important;
 } */
