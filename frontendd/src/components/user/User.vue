@@ -110,13 +110,13 @@
                           />
                           </v-form> </v-col>
                           </v-row>
-                           <!-- <v-text-field
-                            label="Email*"
-                            name="Email"
+                           <v-text-field
+                            label="email*"
+                            name="email"
                             prepend-icon="email"
                             type="text"
                              v-model="editedItem.email"
-                          />  -->
+                          /> 
                              <v-text-field
                             id="password"
                             label="Mot de passe*"
@@ -155,17 +155,14 @@
               <v-btn class="mx-2" fab dark small color="primary">
                 <v-icon dark v-on:click="editItem(item)"> mdi-pencil </v-icon>
               </v-btn>
-              <template v-if="$store.state.user.email != item.email" :disabled="isdisable">
+              <template v-if="$store.getters.user.email != item.email" :disabled="isdisable">
               <v-btn  class="mx-2" fab dark small color="red">
                 <v-icon dark v-on:click="deleteutilisateur(item.id)">
                   mdi-delete
                 </v-icon>
               </v-btn>
               </template>
-              <!-- :disabled="!disable" 
-       :class="{'disabled': !validateFields}"-->
-              <!-- <v-icon small color="red" @click="deleteutilisateur(item.id)"> mdi-delete </v-icon> -->
-            </template>
+        </template>
           </v-data-table>
         </v-card>
       </v-tab-item>
@@ -188,13 +185,13 @@
 </template>
 
 <script>
+import "@/store/index";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import demande from "../user/demande.vue";
 import Inactive from "../user/userInactive.vue";
 import Loading from "@/components/Loading.vue";
 import axios from "axios";
-
-// import { mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 export default {
   components: {
     demande,
@@ -216,7 +213,7 @@ export default {
     dialogDelete: false,
     headers: [
       { text: "Name", value: "name" },
-      // { text: "Email", value: "email" },
+      { text: "Email", value: "email" },
       { text: "Type", value: "type" },
       { text: "Poste", value: "poste" },
       { text: "Numero", value: "numero" },
@@ -228,7 +225,7 @@ export default {
     editedIndex: -1,
     editedItem: {
       name: "",
-      // email: "",
+      email: "",
       type: "",
       poste: "",
       numero: "",
@@ -237,7 +234,7 @@ export default {
     },
     defaultItem: {
       name: "",
-      // email: "",
+      email: "",
       type: "",
       poste: "",
       numero: "",
@@ -253,7 +250,7 @@ export default {
     users(){
       return this.userslist;
     },
-    // ...mapGetters(["users"]),
+    ...mapGetters(["user"]),
     formTitle() {
       return this.editedIndex === -1
         ? "Ajouter un nouveau utilisateur"
@@ -270,7 +267,7 @@ export default {
     },
   },
  mounted(){
-console.log(this.userslist);
+console.log("balsseemm", this.$store.getters.user.email);
 },
 
   methods: {
@@ -288,42 +285,16 @@ console.log(this.userslist);
         }
     }
 },
-    async dis() {
-      this.disable = true;
-      await axios
-        .get("user")
-        .then((response) => {
-          this.$store.dispatch("user", response.data);
-          this.user = response.data;
-          this.user.password = "";
-
-        })
-        .catch((error) => {
-          if (error) this.disable = false;
-          // console.log("error");
-        });
-        
-    },
+    
 
    getuser() {
     axios.get("/users/get").then((response) => {
          this.userslist=response.data;
-                console.log("users",this.users);
+                console.log("users",this.userslist);
                 this.spinner = false;
             });
         },
     deleteutilisateur(id) {
-      //          const response= axios.get('user');
-      //   this.$store.dispatch('user',response.data);
-      // let user=response.data;
-
-      //   if(user.id==id){
-      //      console.log(user);
-      //     this.disable= true;
-      //   }
-      //   else{
-      //     this.disable= false;
-      //   }
       Swal.fire({
         title: "Supprimer",
         text: "Vous êtes sure de supprimer cette utilisateur?",
@@ -361,7 +332,7 @@ console.log(this.userslist);
         Object.assign(this.users[this.editedIndex], this.editedItem);
         console.log("edit");
         let user = {
-        // email: this.editedItem.email,
+        email: this.editedItem.email,
         name: this.editedItem.name,
         password: this.editedItem.password,
         poste: this.editedItem.poste,
@@ -385,7 +356,7 @@ console.log(this.userslist);
       let formData = new FormData();
 
     formData.append("image", this.editedItem.image);
-    // formData.append("email", this.editedItem.email);
+    formData.append("email", this.editedItem.email);
     formData.append("name", this.editedItem.name);
     formData.append("password", this.editedItem.password);
     formData.append("poste", this.editedItem.poste);
@@ -411,19 +382,7 @@ console.log(this.userslist);
     //         });
     // },
 
-    async mounted() {
-      // console.log(JSON.stringify(localStorage.getItem("user")));
-      //  let userloc = localStorage.getItem("user");
-      // if (userloc) {
-      //    this.disable=true;
-      // }
-      // const response=await axios.get('user');
-      //   this.$store.dispatch('user',response.data);
-      //     this.userloc=response.data;
-      //   if (userloc) {
-      //      this.disable=true;
-      //   }
-    },
+ 
   },
 };
 </script>

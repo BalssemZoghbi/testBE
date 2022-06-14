@@ -3,7 +3,6 @@ axios.defaults.baseURL = "http://127.0.0.1:8000/api";
 axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
 export default {
     state: {
-        users: [],
         user: JSON.parse(localStorage.getItem("user")) ?? null,
         token: localStorage.getItem("token") ?? null,
         loggedIn:
@@ -13,9 +12,6 @@ export default {
     mutations: {
         SET_USER(state, user) {
             state.user = user;
-        },
-        SET_USERS(state, users) {
-            state.users = users;
         },
         SET_TOKEN(state, token) {
             state.token = token;
@@ -87,19 +83,7 @@ export default {
             });
         },
        
-       Users({ commit }) {
-            return new Promise((resolve, reject) => {
-              axios
-                    .get("/users/get")
-                    .then((response) => {
-                        commit("SET_USERS", response.data);
-                        resolve(response);
-                    })
-                    .catch((error) => {
-                        reject(error);
-                    });
-            });
-        },
+ 
     },
     getters: {
         user(state) {
@@ -114,8 +98,6 @@ export default {
         isAdmin(state) {
             return state.user?.is_admin == 1;
         },
-        users(state) {
-            return state.users;
-        },
+     
     },
 };
