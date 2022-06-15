@@ -155,7 +155,8 @@
         right
         dark
       >
-        mdi-floppy-disk
+        mdi-floppy
+
       </v-icon>
     </v-btn>
     <v-snackbar
@@ -236,7 +237,7 @@
               @click="innabled"
               >
       <v-icon
-        right
+        
         dark
       >
         mdi-pencil
@@ -250,11 +251,10 @@
          @click="changePass"
     >
       <v-icon
-        right
+        
         dark
       >
-      <!-- <i class="fa-solid fa-floppy-disk"></i> -->
-        mdi-floppy-disk
+        mdi-floppy
       </v-icon>
     </v-btn>
     <v-snackbar
