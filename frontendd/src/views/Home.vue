@@ -235,7 +235,7 @@
     </v-tooltip>
           </router-link>
     <v-tooltip bottom color="orange">
-      <template v-slot:activator="{ on, attrs }">
+         <template v-slot:activator="{ on, attrs }">
          <v-btn
               class="mx-2"
               fab
@@ -479,9 +479,9 @@ export default {
         .post("/ProjetDevenirModele/" + this.DevenirModeleId, modeles)
         .then((this.dialogInfo = false), this.getprojet(),this.modeles.modele="");
     },
-    exportword(id) {
+ exportword(id) {
       axios({
-        url: "http://localhost:8000/api/documents/" + id,
+        url: "documents/" + id,
         method: "GET",
         responseType: "blob",
       }).then((response) => {
