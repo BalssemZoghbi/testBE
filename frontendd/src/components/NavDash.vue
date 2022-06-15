@@ -137,10 +137,12 @@
           <span style="cursor: pointer" v-on="on">
             <v-chip link>
               <v-badge dot bottom color="green" offset-y="10" offset-x="10">
-                <v-avatar size="40">
-                  <v-icon v-on="on" dark>mdi-account-circle</v-icon>
+                <v-avatar size="70">
+                   <img v-bind:src="'http://127.0.0.1:8000/Image/'+user.image" />
+                  <!-- <v-icon v-on="on" dark>mdi-account-circle</v-icon> -->
                 </v-avatar>
               </v-badge>
+             
               <span class="ml-3">{{ user.name }}</span>
             </v-chip>
           </span>
@@ -151,7 +153,9 @@
             <v-list-item two-line>
               <v-list-item-avatar>
                 <!-- <img src="../assets/usericon.png" /> -->
-                <v-btn
+                <img v-bind:src="'http://127.0.0.1:8000/Image/'+user.image"  style="margin-left: 0% !important"
+                  class="mx-2"/>
+                <!-- <v-btn
                   style="margin-left: 0% !important"
                   class="mx-2"
                   fab
@@ -160,7 +164,7 @@
                   color="blue"
                 >
                   <v-icon dark> mdi-account </v-icon></v-btn
-                >
+                > -->
               </v-list-item-avatar>
 
               <v-list-item-content>

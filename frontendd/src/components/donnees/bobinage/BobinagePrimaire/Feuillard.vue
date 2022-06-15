@@ -498,17 +498,11 @@ export default {
     },
     routeur(){
      if (this.projet.conducteurBT == "Rond emaille") {
-        this.$router.push(
-          "/projet/bobinageSecondaireRond/" + this.$route.params.id
-        );
+        this.$router.push("/projet/bobinageSecondaireRond/" + this.$route.params.id);
       } else if (this.projet.conducteurBT == "feuillard") {
-        this.$router.push(
-          "/projet/bobinageSecondaireFeuillard/" + this.$route.params.id
-        );
+        this.$router.push("/projet/bobinageSecondaireFeuillard/" + this.$route.params.id);
       } else if (this.projet.conducteurBT == "meplat guipé") {
-        this.$router.push(
-          "/projet/bobinageSecondaireMeplat/" + this.$route.params.id
-        );
+        this.$router.push("/projet/bobinageSecondaireMeplat/" + this.$route.params.id);
     }
     }
   },
