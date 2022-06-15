@@ -17,6 +17,7 @@ class UserController extends Controller
     public function updateprofile($id,Request $request){
         $user=User::FindOrFail($id);
         $type = $user->getOriginal('type');
+        $image = $user->getOriginal('image');
 // //  dd($request);
 //         $file= $request->file('image');
 //         // dd($request);
@@ -31,7 +32,7 @@ class UserController extends Controller
         'password' =>$request->password,
         'poste' => $request->poste,
         'numero' => $request->numero,
-        'image' => null
+        'image' => $image
         ]);
     return response()->json($user);
             // $user->update([
@@ -87,22 +88,10 @@ return response()->json('success');
     }
 
     public function store(Request $request){
-        // $data= new User();
-
-        // if($request->file('image')){
-
             $file= $request->file('image');
             // dd($file);
             $filename= date('YmdHi').$file->getClientOriginalName();
             $file-> move(public_path('Image'), $filename);
-            // $data['image']= $filename;
-            // $data['name']= $request->name;
-            // $data['email']=$request->email;
-            // $data['password']=Hash::make($request->password);
-            // $data['type']=$request->type;
-            // $data['poste']=$request->poste;
-            // $data['numero']=$request->numero;
-        // }
         $user= User::create([
             'image' => $filename,
             'name' => $request->name,
@@ -131,35 +120,30 @@ return response()->json('success');
 
     public function updatestore($id,Request $request){
         $user=User::FindOrFail($id);
-
-        // if($request->password){
-        //     $pass=Hash::make($request->password);
-        // }else{
-        //     $pass=null;
-        // }
-        // if($request->file){
+        // dd($request);
         //     $file= $request->file('image');
         //     $filename= $request->file('image')->getClientOriginalName();
         //     $file-> move(public_path('Image'), $filename);
-        //     $user->update([
-        //         'name' => $request->name,
-        //         'email' =>$request->email,
-        //         'password' =>$pass,
-        //         'type' =>$request->type,
-        //         'poste' =>$request->poste,
-        //         'image' =>$filename,
-        //         'numero' =>$request->numero
-        //     ]);
-        // }else{
+        $image = $user->getOriginal('image');
             $user->update([
                 'name' => $request->name,
                 'email' =>$request->email,
                 'password' =>$request->password,
                 'type' =>$request->type,
                 'poste' =>$request->poste,
-                'numero' =>$request->numero,
-                'image' =>null
+                'image' =>$image,
+                'numero' =>$request->numero
             ]);
+        // }else{
+            // $user->update([
+            //     'name' => $request->name,
+            //     'email' =>$request->email,
+            //     'password' =>$request->password,
+            //     'type' =>$request->type,
+            //     'poste' =>$request->poste,
+            //     'numero' =>$request->numero,
+            //     'image' =>null
+            // ]);
         // }
 
                 return response()->json($user);
