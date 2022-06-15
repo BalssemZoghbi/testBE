@@ -112,13 +112,13 @@
                             :rules="Rules"
                           /> </v-col>
                           </v-row>
-                                             <v-file-input
+                                             <!-- <v-file-input
                             truncate-length="15"
                             
                             @change="onFileChange"
                             label="Image*"
                           ></v-file-input>
-                          <img v-bind:src="imagePreview" width="100" height="100" v-show="showPreview"/> 
+                          <img v-bind:src="imagePreview" width="100" height="100" v-show="showPreview"/>  -->
                             
                         </v-form>
                       </v-card-text>
@@ -304,8 +304,8 @@ export default {
   data: () => ({
           snackbar: false,
      spinner:false,
-       imagePreview: null,
-showPreview: false,
+//        imagePreview: null,
+// showPreview: false,
     load:true,
           Poste:['Directeur','Technicien','Ingenieur'],
           edit:true,
@@ -313,7 +313,7 @@ showPreview: false,
     dialog: false,
     name: "",
     email: "",
-    image: "",
+    // image: "",
     type: "",
     password: "",
     old_password: "",
@@ -357,13 +357,13 @@ console.log(this.user);
         this.name = response.data.name; 
         this.poste = response.data.poste; 
         this.numero = response.data.numero; 
-        this.image = response.data.image; 
+        // this.image = response.data.image; 
         this.user.email = this.email;
         this.user.password = this.password;
         this.user.name = this.name; 
         this.user.poste = this.poste; 
         this.user.numero = this.numero; 
-        this.user.image = this.image; 
+        // this.user.image = this.image; 
          })
 
   },
@@ -382,49 +382,28 @@ async changePass() {
             console.log(response);
 
 },
-      onFileChange(e){
+      // onFileChange(e){
       //  this.files.push(file);
         // const files=e.target.files;
       // let  reader=new FileReader();
       //   reader.onload=(e)=> this.formFields.image.push(e.target.result);
       //   reader.readAsDataURL(file);
     // this.formFields.image = event.target.files[0];
-       console.log(e.target.files);
-      this.user.image = event.target.files[0];
-    /*
-    Initialize a File Reader object
-    */
-    let reader  = new FileReader();
-// 
-    /*
-    Add an event listener to the reader that when the file
-    has been loaded, we flag the show preview as true and set the
-    image to be what was read from the reader.
-    */
-    reader.addEventListener("load", function () {
-        this.showPreview = true;
-        this.imagePreview = reader.result;
-    }.bind(this), false);
-
-    /*
-    Check to see if the file is not empty.
-    */
-    if( this.user.image ){
-        /*
-            Ensure the file is an image file.
-        */
-        if ( /\.(jpe?g|png|gif)$/i.test( this.user.image.name ) ) {
-
-       
-            /*
-            Fire the readAsDataURL method which will read the file in and
-            upon completion fire a 'load' event which we will listen to and
-            display the image in the preview.
-            */
-            reader.readAsDataURL( this.user.image );
-        }
-    }
-},
+      //  console.log(e.target.files);
+      // this.user.image = event.target.files[0];
+    
+    // let reader  = new FileReader();
+// // 
+//     reader.addEventListener("load", function () {
+//         this.showPreview = true;
+//         this.imagePreview = reader.result;
+//     }.bind(this), false);
+    // if( this.user.image ){
+    //     if ( /\.(jpe?g|png|gif)$/i.test( this.user.image.name ) ) {
+    //         reader.readAsDataURL( this.user.image );
+    //     }
+    // }
+// },
     update() {
     //    let formData = new FormData();
 

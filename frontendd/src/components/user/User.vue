@@ -125,12 +125,14 @@
                             type="password"
                             v-model="editedItem.password"
                           />
+                            <template :disabled="isimage">
                            <v-file-input
                             truncate-length="15"
                             
                             @change="onFileChange"
                             label="Image*"
                           ></v-file-input>
+                            </template>
                           <!-- <img v-bind:src="'../../../../backend/public/public/Image/'+imagePreview" v-show="showPreview" width="100" height="100" />  -->
 
                         </v-form>
@@ -201,6 +203,7 @@ export default {
   data: () => ({
     spinner: true,
     isdisable: true,
+    isimage: false,
     // disabled: 0,
     types: ["employe", "admin", "En Attente"],
     Poste: ["Directeur", "Technicien", "Ingenieur"],
@@ -331,6 +334,16 @@ console.log("balsseemm", this.$store.getters.user.email);
       if (this.editedIndex > -1) {
         Object.assign(this.users[this.editedIndex], this.editedItem);
         console.log("edit");
+        
+    // let user = {
+    //     email: this.user.email,
+    //     name: this.user.name,
+    //     password: this.user.password,
+    //     poste: this.user.poste,
+    //     numero: this.user.numero,
+    //   }
+      this.isimage=false;
+     
         let user = {
         email: this.editedItem.email,
         name: this.editedItem.name,
@@ -348,10 +361,12 @@ console.log("balsseemm", this.$store.getters.user.email);
     // formData.append("poste", this.editedItem.poste);
     // formData.append("type", this.editedItem.type);
     // formData.append("numero", this.editedItem.numero);
+    
         axios
           .put("/user/update/" + this.editedItem.id, user)
           .then((response) => (this.id = response.data.id));
       } else {
+         this.isimage=true;
         this.users.push(this.editedItem);
       let formData = new FormData();
 
