@@ -284,6 +284,18 @@ export default {
       { icon: "mdi-home", text: "Tableau de bord", route: "/dashboardEmploye" },
       { icon: "fas fa-charging-station", text: "projet", route: "/" },
       { icon: "folder_open", text: "Modele", route: "/modele" },
+      {
+        icon: "mdi-chevron-up",
+        "icon-alt": "mdi-chevron-down",
+        "icon-ctr": "fas fa-cogs",
+        text: "Parametres",
+        model: false,
+        children: [
+          { icon: "reorder", text: "Bobinages", route: "/saillie" },
+          { icon: "widgets", text: "Garanties", route: "/garantie24" },
+          { icon: "mdi-wrench", text: "Tole Magnetique", route: "/tole" },
+        ],
+      },
     ],
   }),
    created() {

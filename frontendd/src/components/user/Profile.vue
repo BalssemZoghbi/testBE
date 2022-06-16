@@ -22,7 +22,7 @@
                <v-list-item-subtitle style="margin-left:-9%;text-align:center"> {{  user.type  }}</v-list-item-subtitle>
 
                 <hr>
-               <v-text style="margin-left:25%"> <v-icon>mdi-email</v-icon> {{  user.email  }}</v-text>
+               <v-text style="margin-left:20%"> <v-icon>mdi-email</v-icon> {{  user.email  }}</v-text>
                <v-text style="margin-top:-2%;margin-left:49%"> <v-icon>mdi-phone</v-icon> {{  user.numero  }}</v-text>
                <!-- <v-text style="margin-left:-9%;text-align:center"> <v-icon>fa fa-user-tie</v-icon> {{  user.type  }}</v-text> -->
 
