@@ -211,26 +211,26 @@ const router = new VueRouter({
   mode: "history",
   routes,
 })
-router.beforeEach((to, from, next) => {
-  let user = JSON.parse(localStorage.getItem('user'));
-  if (to.path == '/Connexion') { 
-    if (user) {
-      window.history.back();
-    } else {
-      next();
-    }
-  } else if ((to.path == '/forgot')||((to.path).indexOf('/reset'))>=0) {
-    if (user) {
-      window.history.back();
-    } else {
-      next();
-    }
-  }else{
-    if (!user) {
-      window.history.back();
-    } else {
-      next();
-    }
-  }
-})
+// router.beforeEach((to, from, next) => {
+//   let user = JSON.parse(localStorage.getItem('user'));
+//   if (to.path == '/Connexion') { 
+//     if (user) {
+//       window.history.back();
+//     } else {
+//       next();
+//     }
+//   } else if ((to.path == '/forgot')||((to.path).indexOf('/reset'))>=0) {
+//     if (user) {
+//       window.history.back();
+//     } else {
+//       next();
+//     }
+//   }else{
+//     if (!user) {
+//       window.history.back();
+//     } else {
+//       next();
+//     }
+//   }
+// })
 export default router;
